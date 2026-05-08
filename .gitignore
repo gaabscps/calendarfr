@@ -1,0 +1,31 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+dist/
+build/
+coverage/
+.next/
+.swc/
+
+# Editor / OS
+.DS_Store
+.idea/
+.vscode/
+*.log
+
+# Env
+.env
+.env.local
+.env.*.local
+.env.e2e
+
+# App data (planner days)
+data/
+
+# Brainstorming companion
+.superpowers/
+
+# Test artifacts
+playwright-report/
+test-results/
