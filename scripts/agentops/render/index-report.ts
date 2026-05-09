@@ -1,11 +1,15 @@
 /**
  * AgentOps observability extractor — render/index-report.ts
  * T-013: renders the cross-flow index Markdown report (AC-002..AC-005, AC-025).
+ * BATCH-C (T-021): adds Repo health section (AC-032), cost cols (AC-031),
+ *   cost/mutation trends (AC-033), graceful degradation (AC-034).
  *
- * renderIndexReport(allMetrics, trendInsights, generatedAt) → string
+ * renderIndexReport(allMetrics, trendInsights, generatedAt, repoHealth?) → string
  */
 
-import type { Insight, Metrics, Session } from '../types';
+import type { Insight, Metrics, RepoHealth, Session } from '../types';
+
+import { renderRepoHealthSnapshot } from './flow-report/repo-health-snapshot';
 
 // ---------------------------------------------------------------------------
 // Status symbol mapping (AC-003)
@@ -49,6 +53,12 @@ function isoDate(iso: string): string {
   return iso.slice(0, 10);
 }
 
+/** Formats USD to 4 decimal places or '—' if null */
+function fmtUsd(value: number | null | undefined): string {
+  if (value === null || value === undefined) return '—';
+  return `$${value.toFixed(4)}`;
+}
+
 /** Builds a Markdown table from headers and rows */
 function mdTable(headers: string[], rows: string[][]): string {
   const sep = headers.map(() => '---');
@@ -74,11 +84,15 @@ function renderCrossFlowTable(allMetrics: { session: Session; metrics: Metrics }
     'ACs',
     'Disp/AC',
     'Esc %',
+    '$ USD',
+    '$/AC',
     'Created',
   ];
   const rows = allMetrics.map(({ metrics: m }) => {
     const symbol = statusSymbol(m.status);
     const escPct = m.totalDispatches === 0 ? '—' : fmtPct(m.escalationRate);
+    const totalUsd = fmtUsd(m.cost?.total_usd);
+    const perAcUsd = fmtUsd(m.cost?.per_ac_usd);
     return [
       `${symbol} ${m.taskId}`,
       m.featureName,
@@ -88,20 +102,62 @@ function renderCrossFlowTable(allMetrics: { session: Session; metrics: Metrics }
       String(m.acClosure.total),
       fmtRatio(m.dispatchesPerAc),
       escPct,
+      totalUsd,
+      perAcUsd,
       isoDate(m.startedAt),
     ];
   });
   return mdTable(headers, rows);
 }
 
-function renderTrends(trendInsights: Insight[], completedFlowCount: number): string {
-  if (completedFlowCount < 2) {
+function renderTrends(
+  trendInsights: Insight[],
+  completedFlowCount: number,
+  allMetrics: { session: Session; metrics: Metrics }[],
+): string {
+  const extraBullets: string[] = [];
+
+  // AC-033: cost trend (≥ 2 flows with cost data)
+  const flowsWithCost = allMetrics.filter(
+    (m) => m.metrics.cost?.per_ac_usd !== null && m.metrics.cost?.per_ac_usd !== undefined,
+  );
+  if (flowsWithCost.length >= 2) {
+    const first = flowsWithCost[0]!;
+    const last = flowsWithCost[flowsWithCost.length - 1]!;
+    const firstCost = first.metrics.cost!.per_ac_usd!;
+    const lastCost = last.metrics.cost!.per_ac_usd!;
+    const delta = firstCost !== 0 ? ((lastCost - firstCost) / firstCost) * 100 : 0;
+    const deltaStr = delta >= 0 ? `+${delta.toFixed(1)}%` : `${delta.toFixed(1)}%`;
+    extraBullets.push(
+      `Cost per AC: ${first.metrics.taskId}=${fmtUsd(firstCost)} → ${last.metrics.taskId}=${fmtUsd(lastCost)} (${deltaStr})`,
+    );
+  }
+
+  // AC-033: mutation score trend (≥ 2 flows with mutation data)
+  const flowsWithMutation = allMetrics.filter(
+    (m) => m.metrics.repoHealth?.mutation !== null && m.metrics.repoHealth?.mutation !== undefined,
+  );
+  if (flowsWithMutation.length >= 2) {
+    const first = flowsWithMutation[0]!;
+    const last = flowsWithMutation[flowsWithMutation.length - 1]!;
+    const firstScore = first.metrics.repoHealth!.mutation!.score;
+    const lastScore = last.metrics.repoHealth!.mutation!.score;
+    const delta = lastScore - firstScore;
+    const deltaStr = delta >= 0 ? `+${delta.toFixed(1)}%` : `${delta.toFixed(1)}%`;
+    extraBullets.push(
+      `Mutation score: ${first.metrics.taskId}=${firstScore.toFixed(1)}% → ${last.metrics.taskId}=${lastScore.toFixed(1)}% (${deltaStr})`,
+    );
+  }
+
+  const allBullets = [...trendInsights.map((i) => i.message), ...extraBullets];
+
+  if (completedFlowCount < 2 && allBullets.length === 0) {
     return '## Trends\n\n- (need ≥ 2 completed flows for trend analysis)';
   }
-  if (trendInsights.length === 0) {
+  if (allBullets.length === 0) {
     return '## Trends\n\n- (need ≥ 2 completed flows for trend analysis)';
   }
-  const bullets = trendInsights.map((i) => `- ${i.message}`).join('\n');
+  const bullets = allBullets.map((b) => `- ${b}`).join('\n');
   return `## Trends\n\n${bullets}`;
 }
 
@@ -111,12 +167,18 @@ function renderTrends(trendInsights: Insight[], completedFlowCount: number): str
 
 /**
  * Renders the cross-flow index Markdown report.
- * Sections: H1, header, cross-flow table (or no-flows message), trends.
+ * Sections: H1, header, repo health (AC-032), cross-flow table (AC-031), trends (AC-033).
+ *
+ * @param allMetrics   - All session+metrics pairs.
+ * @param trendInsights - Trend insights from computeTrends.
+ * @param generatedAt  - ISO timestamp string.
+ * @param repoHealth   - Optional current repo health snapshot (AC-032, AC-034).
  */
 export function renderIndexReport(
   allMetrics: { session: Session; metrics: Metrics }[],
   trendInsights: Insight[],
   generatedAt: string,
+  repoHealth?: RepoHealth | null,
 ): string {
   const sections: string[] = [];
 
@@ -126,7 +188,12 @@ export function renderIndexReport(
   // Header (AC-004)
   sections.push(`> Generated at: ${generatedAt} | Total flows: ${allMetrics.length}`);
 
-  // Cross-flow snapshot (AC-002, AC-003, AC-005)
+  // Repo health (AC-032, AC-034) — added to top after header
+  if (repoHealth !== undefined) {
+    sections.push(renderRepoHealthSnapshot(repoHealth));
+  }
+
+  // Cross-flow snapshot (AC-002, AC-003, AC-005, AC-031)
   sections.push('## Cross-flow snapshot');
   if (allMetrics.length === 0) {
     sections.push('(no flows yet)');
@@ -134,9 +201,9 @@ export function renderIndexReport(
     sections.push(renderCrossFlowTable(allMetrics));
   }
 
-  // Trends (AC-025)
+  // Trends (AC-025, AC-033)
   const completedCount = allMetrics.filter((m) => m.metrics.status === 'done').length;
-  sections.push(renderTrends(trendInsights, completedCount));
+  sections.push(renderTrends(trendInsights, completedCount, allMetrics));
 
   return sections.join('\n\n') + '\n';
 }
