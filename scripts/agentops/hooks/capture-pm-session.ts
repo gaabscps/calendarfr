@@ -6,6 +6,7 @@
  * Idempotent: rewrites the entry for (session_id × model) on each run.
  */
 
+import { spawn } from 'child_process';
 import fs from 'fs';
 import path from 'path';
 
@@ -139,6 +140,50 @@ function pickActiveTaskId(repoRoot: string): string | null {
   return best?.id ?? null;
 }
 
+function isSessionDone(sessionYmlPath: string): boolean {
+  if (!fs.existsSync(sessionYmlPath)) return false;
+  const yml = fs.readFileSync(sessionYmlPath, 'utf-8');
+  return /^\s*current_phase:\s*"?done"?\s*$/m.test(yml);
+}
+
+/**
+ * Detects done sessions whose AgentOps report is missing or older than their
+ * manifest, and triggers `npm run agentops:report` (detached, non-blocking)
+ * if any are found. Idempotent: subsequent runs after the report is up-to-date
+ * are no-ops. Disable via AGENTOPS_AUTO_REPORT=0.
+ *
+ * Independent from pickActiveTaskId because that picker skips done sessions
+ * — exactly the ones we need to regenerate for.
+ */
+function maybeRegenerateReport(repoRoot: string): void {
+  if (process.env.AGENTOPS_AUTO_REPORT === '0') return;
+  const sessionsDir = path.join(repoRoot, '.agent-session');
+  if (!fs.existsSync(sessionsDir)) return;
+  const reportsDir = path.join(repoRoot, 'docs', 'agentops');
+  const stale: string[] = [];
+  for (const name of fs.readdirSync(sessionsDir)) {
+    if (name.startsWith('.')) continue;
+    const ymlPath = path.join(sessionsDir, name, 'session.yml');
+    const manifestPath = path.join(sessionsDir, name, 'dispatch-manifest.json');
+    if (!fs.existsSync(ymlPath) || !fs.existsSync(manifestPath)) continue;
+    if (!isSessionDone(ymlPath)) continue;
+    const reportPath = path.join(reportsDir, `${name}.md`);
+    const manifestMtime = fs.statSync(manifestPath).mtimeMs;
+    const reportMtime = fs.existsSync(reportPath) ? fs.statSync(reportPath).mtimeMs : 0;
+    if (manifestMtime > reportMtime) stale.push(name);
+  }
+  if (stale.length === 0) return;
+  process.stderr.write(
+    `[capture-pm-session] stale agentops reports for ${stale.join(', ')} — regenerating (detached)\n`,
+  );
+  const child = spawn('npm', ['run', 'agentops:report'], {
+    cwd: repoRoot,
+    detached: true,
+    stdio: 'ignore',
+  });
+  child.unref();
+}
+
 function findRepoRoot(start: string): string {
   let dir = start;
   while (dir !== path.dirname(dir)) {
@@ -204,6 +249,10 @@ async function main(): Promise<void> {
     return;
   }
   const repoRoot = findRepoRoot(cwd);
+  // Run regardless of active-task lookup: this catches the case where the
+  // orchestrator just transitioned the task to current_phase=done (which
+  // pickActiveTaskId then skips, leading to early-return without report regen).
+  maybeRegenerateReport(repoRoot);
   const taskId = pickActiveTaskId(repoRoot);
   if (!taskId) {
     process.stderr.write('[capture-pm-session] no active SDD task; skipping\n');

@@ -13,8 +13,6 @@
  *   - index.md lists both FEAT-001 and FEAT-002
  */
 
-/* eslint-disable no-undef */
-
 import { existsSync } from 'fs';
 import fs from 'fs/promises';
 import os from 'os';
@@ -146,5 +144,3 @@ maybeDescribe('anchor — real FEAT-001 session validation (AC-014, AC-015)', ()
     expect(dpa).toBeLessThan(1); // sanity: < 1 dispatch per AC
   });
 });
-
-/* eslint-enable no-undef */

@@ -47,3 +47,7 @@ storybook-static/
 
 # Quality tool reports (gitignored — only docs/agentops/ aggregates are committed)
 reports/
+
+# Test tmpdir leaks (macOS os.tmpdir() inside relative cwd) and accidental package manager artifacts
+var/
+yarn.lock

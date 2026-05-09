@@ -2,7 +2,7 @@
 
 **Última atualização:** 2026-05-09
 **Macro spec:** [`docs/specs/2026-05-08-mvp-overview.md`](docs/specs/2026-05-08-mvp-overview.md)
-**Spec ativo:** [`.agent-session/FEAT-001/spec.md`](.agent-session/FEAT-001/spec.md)
+**Spec ativo:** [`.agent-session/FEAT-006/spec.md`](.agent-session/FEAT-006/spec.md)
 
 ---
 
@@ -52,7 +52,9 @@ src/features/<feature>/
   index.ts      # barrel — única superfície pública
 ```
 
-Átomos reutilizáveis ficam em `src/shared/components/` (sem domínio: sem `Priority`, `Note` etc. no nome). Tokens de tema em `src/shared/components/theme/tokens.ts`. O companion server serve apenas `GET/PUT /api/days/:date` e `GET /api/health`, armazenando JSON em `data/days/YYYY-MM-DD.json` (gitignored).
+Átomos reutilizáveis ficam em `src/shared/components/` (sem domínio: sem `Priority`, `Note` etc. no nome). Tokens de tema em `src/shared/components/theme/tokens.ts`.
+
+O companion server (FEAT-006) serve `GET /api/health`, `GET /api/days/:date` (lazy creation), e `PUT /api/days/:date` (autosave), armazenando JSON em `data/days/YYYY-MM-DD.json` (gitignored). Implementa escrita atômica via `server/src/storage/jsonStore.ts` (tmp + rename), validação zod em `server/src/schema/daySchema.ts`, sanitização HTML restrita às 4 tags (`<b><i><u><s>`) via `server/src/lib/sanitize.ts`, e tipos compartilhados via workspace `@calendarfr/shared`. Lazy creation: GET inexistente retorna esqueleto em-memória sem criar arquivo.
 
 Para detalhes de arquitetura, fluxos e modelo de dados, ver o [macro spec](docs/specs/2026-05-08-mvp-overview.md).
 
@@ -75,6 +77,11 @@ Para detalhes de arquitetura, fluxos e modelo de dados, ver o [macro spec](docs/
 2. Toda factory MSW nova exige spec E2E correspondente no mesmo PR
 3. Coverage só sobe; nunca abaixar pra passar
 4. `console.error` em testes vira falha de teste (interceptor ativo no `jest.setup.js`)
+
+### AgentOps (PM/orchestrator)
+
+1. Cada entrada de `actual_dispatches[]` no `dispatch-manifest.json` **deve** carregar `usage` (`total_tokens`, `tool_uses`, `duration_ms`, `model`) e `pm_note` (1 linha resumindo o `summary_for_reviewers` do Output Packet). Sem isso, o report consumidor mostra `—` para tokens/$ /duração e os AC closures viram `missing` — o relatório fica inconsistente (ver FEAT-006). Estimar por proxy é aceitável; deixar `null` não é.
+2. Ao encerrar a sessão de orchestrator (handoff emitido / `current_phase: done`), **rodar `npm run agentops:report`** e commitar `docs/agentops/*.{md,html}` no mesmo commit do handoff. O Stop hook tenta auto-disparar (best-effort); a obrigação de garantir o report atualizado é do PM.
 
 ---
 
@@ -109,6 +116,7 @@ Para detalhes de arquitetura, fluxos e modelo de dados, ver o [macro spec](docs/
 - `agentops` (FEAT-002) — em desenvolvimento
 - `agentops-quality` (FEAT-003) — em desenvolvimento
 - `agentops-dashboard` (FEAT-004) — em desenvolvimento
+- `server-companion` (FEAT-006) — em desenvolvimento
 
 ---
 

@@ -185,9 +185,8 @@ describe('applyBackfillToManifest', () => {
   });
 
   it('returns false and logs warning for non-existent manifest path', () => {
-    /* eslint-disable no-undef */
     const stderrSpy = jest.spyOn(process.stderr, 'write').mockImplementation(() => true);
-    /* eslint-enable no-undef */
+
     const nonExistentPath = path.join(tmpDir, 'nonexistent.json');
     const result = applyBackfillToManifest(nonExistentPath, [sampleEntry]);
     expect(result).toBe(false);
@@ -326,9 +325,8 @@ describe('runBackfill', () => {
     const backfillPath = path.join(tmpDir, 'usage-backfill.json');
     fs.writeFileSync(backfillPath, JSON.stringify({ entries: rawEntries }, null, 2));
 
-    /* eslint-disable no-undef */
     const stderrSpy = jest.spyOn(process.stderr, 'write').mockImplementation(() => true);
-    /* eslint-enable no-undef */
+
     runBackfill({ backfillJsonPath: backfillPath, agentSessionRoot: tmpDir });
     expect(stderrSpy).toHaveBeenCalledWith(expect.stringContaining('WARN'));
     stderrSpy.mockRestore();
@@ -348,9 +346,8 @@ describe('runBackfill', () => {
       },
     ]);
 
-    /* eslint-disable no-undef */
     const stderrSpy = jest.spyOn(process.stderr, 'write').mockImplementation(() => true);
-    /* eslint-enable no-undef */
+
     expect(() => {
       runBackfill({ backfillJsonPath: backfillPath, agentSessionRoot: tmpDir });
     }).not.toThrow();

@@ -9,8 +9,10 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@calendarfr/shared": "*",
     "@fastify/cors": "^10.0",
     "fastify": "^5.2",
+    "isomorphic-dompurify": "^2.16.0",
     "pino-pretty": "^11.3.0",
     "zod": "^3.24"
   },

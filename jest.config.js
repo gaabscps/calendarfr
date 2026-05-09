@@ -11,7 +11,7 @@ const config = {
     '^.+\\.mjs$': ['@swc/jest', { jsc: { transform: { react: { runtime: 'automatic' } } } }],
   },
   transformIgnorePatterns: [
-    '/node_modules/(?!(msw|@mswjs|@bundled-es-modules|@open-draft|outvariant|strict-event-emitter|until-async|cookie|rettime|headers-polyfill|lens-list)/)',
+    '/node_modules/(?!(msw|@mswjs|@bundled-es-modules|@open-draft|outvariant|strict-event-emitter|until-async|cookie|rettime|headers-polyfill|lens-list|@exodus)/)',
   ],
   moduleNameMapper: {
     // Plain CSS/SCSS imports in React components use identity-obj-proxy.
@@ -21,6 +21,15 @@ const config = {
     '^@/test-utils$': '<rootDir>/test-utils/index',
     '^@/test-utils/(.*)$': '<rootDir>/test-utils/$1',
     '^@/(.*)$': '<rootDir>/web/src/$1',
+    // ESM source files use .js extensions (required for Node ESM runtime).
+    // Jest/swc resolver needs to strip the .js to find the .ts source.
+    '^(\\.{1,2}/.*)\\.js$': '$1',
+    // Resolve @calendarfr/shared to the workspace src directly
+    '^@calendarfr/shared$': '<rootDir>/shared/src/index',
+    // Redirect isomorphic-dompurify to a Jest-compatible shim.
+    // The real package's bundled jsdom v28 pulls ESM-only deps (@asamuzakjp/css-color,
+    // @exodus/bytes) that Jest cannot transform; the shim uses root-level dompurify+jsdom.
+    '^isomorphic-dompurify$': '<rootDir>/__mocks__/isomorphic-dompurify.js',
   },
   testPathIgnorePatterns: [
     '/node_modules/',
@@ -29,6 +38,8 @@ const config = {
     '/e2e/',
     '/storybook-static/',
     '/scripts/agentops/__fixtures__/',
+    // Shared helper modules placed inside __tests__/ — not test suites themselves.
+    '/__tests__/helpers\\.ts$',
   ],
   collectCoverageFrom: [
     'web/src/shared/**/*.{ts,tsx}',
@@ -43,10 +54,10 @@ const config = {
   coverageDirectory: 'coverage',
   coverageThreshold: {
     global: {
-      statements: 70,
-      branches: 60,
+      branches: 70,
       functions: 70,
       lines: 70,
+      statements: 70,
     },
     './test-utils/': {
       statements: 90,
@@ -59,6 +70,32 @@ const config = {
       branches: 85,
       functions: 90,
       lines: 90,
+    },
+    'server/src/storage/**/*.ts': {
+      branches: 95,
+      functions: 95,
+      lines: 95,
+      statements: 95,
+    },
+    'server/src/schema/**/*.ts': {
+      branches: 95,
+      functions: 95,
+      lines: 95,
+      statements: 95,
+    },
+    // Note: 'server/src/routes/*.ts' (not **) — intentionally excludes __tests__/ helpers
+    // which are test fixtures, not production code.
+    'server/src/routes/*.ts': {
+      branches: 95,
+      functions: 95,
+      lines: 95,
+      statements: 95,
+    },
+    'server/src/lib/**/*.ts': {
+      branches: 95,
+      functions: 95,
+      lines: 95,
+      statements: 95,
     },
   },
 };

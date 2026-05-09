@@ -25,6 +25,7 @@ export default [
       'data/**',
       '.agent-session/**',
       '.superpowers/**',
+      '__mocks__/**',
     ],
   },
 
@@ -137,6 +138,8 @@ export default [
         afterAll: 'readonly',
         beforeEach: 'readonly',
         afterEach: 'readonly',
+        process: 'readonly',
+        console: 'readonly',
       },
     },
     rules: {
