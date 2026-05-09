@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renderPerDispatchTable — Fixture A matches snapshot 1`] = `
+"## Per-dispatch breakdown
+
+| ID | Role | Status | Loop | Tokens | $ | Duration | PM note |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| dev-1 | dev | done | — | — | — | — | — |
+| code-revi... | code-reviewer | done | — | — | — | — | — |
+| qa-1 | qa | done | — | — | — | — | — |
+| audit-agent | audit-agent | done | — | — | — | — | — |"
+`;

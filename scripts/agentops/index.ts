@@ -12,9 +12,11 @@ import { applyInsightRules, computeTrends } from './insights';
 import { measure } from './measure';
 import { parse } from './parse';
 import { renderFlowReport } from './render/flow-report';
+import { renderFlowHtml, renderIndexHtml } from './render/html';
 import { renderIndexReport } from './render/index-report';
+import { readRepoHealth } from './repo-health';
 import { scan } from './scan';
-import type { Metrics, Session } from './types';
+import type { Metrics, RepoHealth, Session } from './types';
 
 // ---------------------------------------------------------------------------
 // Markdown formatting helpers (NFR-003: output must pass prettier --check).
@@ -100,12 +102,17 @@ export async function main(): Promise<void> {
   const startMs = Date.now();
   const root = process.env.AGENTOPS_ROOT ?? path.join(process.cwd(), '.agent-session');
   const outDir = process.env.AGENTOPS_OUT ?? path.join(process.cwd(), 'docs/agentops');
+  const htmlDir = process.env.AGENTOPS_HTML_DIR ?? outDir;
+  const reportsDir = process.env.AGENTOPS_REPORTS ?? path.join(process.cwd(), 'reports');
   const relRoot = path.relative(process.cwd(), root) || root;
   // eslint-disable-next-line no-console
   console.log(`[agentops] scanning ${relRoot}/...`);
 
   try {
     await fsp.mkdir(outDir, { recursive: true });
+    if (htmlDir !== outDir) {
+      await fsp.mkdir(htmlDir, { recursive: true });
+    }
   } catch (err) {
     const msg = err instanceof Error ? err.message : String(err);
     process.stderr.write(`[agentops] fatal: cannot create output dir ${outDir}: ${msg}\n`);
@@ -149,25 +156,62 @@ export async function main(): Promise<void> {
   const generatedAt = new Date().toISOString();
   const relOut = path.relative(process.cwd(), outDir) || outDir;
 
-  for (const { metrics } of processed) {
+  // AC-028, AC-032: read repo health from reports/; graceful degradation if absent (AC-034)
+  const relReports = path.relative(process.cwd(), reportsDir) || reportsDir;
+  // eslint-disable-next-line no-console
+  console.log(`[agentops] reading repo health from ${relReports}/...`);
+  const repoHealth: RepoHealth | null = await readRepoHealth(reportsDir);
+  if (repoHealth === null) {
+    // eslint-disable-next-line no-console
+    console.log('[agentops] repo health not measured — skipping section');
+  }
+
+  // eslint-disable-next-line no-console
+  console.log(`[agentops] rendering HTML for ${processed.length} flows...`);
+
+  const flowMdContents = new Map<string, string>();
+
+  for (const { session, metrics } of processed) {
     const md = renderFlowReport(
       metrics,
       metrics.insights,
       generatedAt,
       metrics.featureName,
       metrics.currentPhase,
+      session,
+      repoHealth,
     );
     const outFile = path.join(outDir, `${metrics.taskId}.md`);
     await atomicWrite(outFile, md);
+    flowMdContents.set(metrics.taskId, md);
     // eslint-disable-next-line no-console
     console.log(`[agentops] wrote ${path.join(relOut, `${metrics.taskId}.md`)}`);
   }
 
   const trendInsights = computeTrends(processed.map((p) => p.metrics));
-  const indexMd = renderIndexReport(processed, trendInsights, generatedAt);
+  const indexMd = renderIndexReport(processed, trendInsights, generatedAt, repoHealth);
   await atomicWrite(path.join(outDir, 'index.md'), indexMd);
   // eslint-disable-next-line no-console
   console.log(`[agentops] wrote ${path.join(relOut, 'index.md')}`);
+
+  // Render HTML pages (AC-001, AC-011, AC-012, NFR-006)
+  for (const { session, metrics } of processed) {
+    const mdContent = flowMdContents.get(metrics.taskId) ?? '';
+    const cost = metrics.cost ?? null;
+    const html = renderFlowHtml(session, repoHealth, cost, mdContent);
+    const htmlFile = path.join(htmlDir, `${metrics.taskId}.html`);
+    await fsp.writeFile(htmlFile, html, 'utf-8');
+  }
+
+  const allSessions = processed.map((p) => p.session);
+  const indexHtml = renderIndexHtml(allSessions, repoHealth);
+  await fsp.writeFile(path.join(htmlDir, 'index.html'), indexHtml, 'utf-8');
+
+  const relHtml = path.relative(process.cwd(), htmlDir) || htmlDir;
+  // eslint-disable-next-line no-console
+  console.log(
+    `[agentops] HTML written: ${path.join(relHtml, 'index.html')} + ${processed.length} flow pages`,
+  );
   // eslint-disable-next-line no-console
   console.log(`[agentops] done in ${((Date.now() - startMs) / 1000).toFixed(2)}s`);
 }

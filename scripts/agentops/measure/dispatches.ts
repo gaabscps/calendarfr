@@ -12,6 +12,7 @@ const ALL_ROLES: Role[] = [
   'qa',
   'blocker-specialist',
   'audit-agent',
+  'pm-orchestrator',
 ];
 
 /**

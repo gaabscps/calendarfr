@@ -7,7 +7,7 @@
  * to keep each file < 250 lines.
  */
 
-import { computeTokenCost } from './measure/cost';
+import { computeTokenCost, computeCostUsd } from './measure/cost';
 import {
   computeDispatchesByRole,
   computeDispatchesPerAc,
@@ -32,7 +32,7 @@ export { computePhaseDurations } from './measure/timing';
 
 export { computeAcClosureSummary, computeReviewerFindings } from './measure/findings';
 
-export { computeTokenCost } from './measure/cost';
+export { computeTokenCost, computeCostUsd } from './measure/cost';
 
 const ALL_ROLES: Role[] = [
   'dev',
@@ -41,6 +41,7 @@ const ALL_ROLES: Role[] = [
   'qa',
   'blocker-specialist',
   'audit-agent',
+  'pm-orchestrator',
 ];
 
 /**
@@ -69,6 +70,7 @@ export function measure(session: Session): Metrics {
     reviewerFindings: computeReviewerFindings(session),
     dispatchesPerAc: computeDispatchesPerAc(session),
     tokenCost: computeTokenCost(session),
+    cost: computeCostUsd(session),
     reworkRate: null,
     insights: [], // populated by insights.ts
   };

@@ -2,16 +2,115 @@
  * Dispatch normalisation, QA results aggregation, and output packet attachment.
  */
 
-import type { RawSession, Session } from '../types';
+import { ANTHROPIC_PRICING_2026 } from '../constants';
+import { computeUsageCost } from '../measure/cost';
+import type { RawSession, Session, Usage } from '../types';
 
-import { isRecord, isArray, isRole, isDispatchStatus, isQaStatus } from './guards';
+import { isRecord, isArray, isRole, isDispatchStatus, isQaStatus, isUsage } from './guards';
+
+const INPUT_RATIO = 0.7;
+const OUTPUT_RATIO = 0.3;
+
+/** Attach cost_usd to a Usage object if not already set and model is known. */
+function attachCostUsd(usage: Usage): Usage {
+  if (usage.cost_usd !== undefined) return usage;
+  if (usage.model === 'unknown') return usage;
+  const pricing = ANTHROPIC_PRICING_2026[usage.model];
+  if (!pricing) return usage;
+  const cost = computeUsageCost(usage, pricing, INPUT_RATIO, OUTPUT_RATIO);
+  return { ...usage, cost_usd: Number(cost.toFixed(6)) };
+}
+
+/**
+ * Synthesize virtual `pm-orchestrator` dispatches from `pm_orchestrator_sessions[]`.
+ * Each entry from the Stop hook becomes one dispatch row with role='pm-orchestrator',
+ * carrying real (non-70/30) input/output/cache usage in `usage.breakdown`.
+ */
+function synthesizePmDispatches(manifest: Record<string, unknown>): Session['dispatches'] {
+  const raw = manifest.pm_orchestrator_sessions;
+  if (!isArray(raw)) return [];
+  const out: Session['dispatches'] = [];
+  for (const entry of raw) {
+    if (!isRecord(entry)) continue;
+    const sessionId = typeof entry.session_id === 'string' ? entry.session_id : null;
+    const startedAt = typeof entry.started_at === 'string' ? entry.started_at : null;
+    if (!sessionId || !startedAt) continue;
+    const completedAt = typeof entry.completed_at === 'string' ? entry.completed_at : null;
+    const model = typeof entry.model === 'string' ? entry.model : 'unknown';
+    const u = isRecord(entry.usage) ? entry.usage : {};
+    const inputTokens = typeof u.input_tokens === 'number' ? u.input_tokens : 0;
+    const outputTokens = typeof u.output_tokens === 'number' ? u.output_tokens : 0;
+    const cacheCreate =
+      typeof u.cache_creation_input_tokens === 'number' ? u.cache_creation_input_tokens : 0;
+    const cacheRead = typeof u.cache_read_input_tokens === 'number' ? u.cache_read_input_tokens : 0;
+    const toolUses = typeof u.tool_uses === 'number' ? u.tool_uses : 0;
+    const totalTokens = inputTokens + outputTokens + cacheCreate + cacheRead;
+    const durationMs =
+      completedAt && startedAt
+        ? new Date(completedAt).getTime() - new Date(startedAt).getTime()
+        : 0;
+    const usage: Usage = {
+      total_tokens: totalTokens,
+      tool_uses: toolUses,
+      duration_ms: durationMs,
+      model:
+        model === 'opus-4-7' || model === 'sonnet-4-6' || model === 'haiku-4-5' ? model : 'unknown',
+      breakdown: {
+        input_tokens: inputTokens,
+        output_tokens: outputTokens,
+        cache_creation_input_tokens: cacheCreate,
+        cache_read_input_tokens: cacheRead,
+      },
+    };
+    out.push({
+      dispatchId: `pm-orchestrator-${sessionId.slice(0, 8)}`,
+      role: 'pm-orchestrator',
+      status: 'done',
+      startedAt,
+      completedAt,
+      outputPacket: null,
+      loop: null,
+      pmNote:
+        typeof entry.note === 'string' ? entry.note : 'PM/orchestrator session (Stop hook capture)',
+      usage: attachCostUsd(usage),
+    });
+  }
+  return out;
+}
+
+/**
+ * Build a Map<dispatch_id, Usage> from all backfill sections in the manifest.
+ * Matches any top-level key matching /^pre_feat_\d+_backfilled_usage$/.
+ * Real capture (actual_dispatches[].usage) takes precedence over backfill.
+ */
+function buildBackfillLookup(manifest: Record<string, unknown>): Map<string, Usage> {
+  const lookup = new Map<string, Usage>();
+  const backfillKeyPattern = /^pre_feat_\d+_backfilled_usage$/;
+  for (const key of Object.keys(manifest)) {
+    if (!backfillKeyPattern.test(key)) continue;
+    const entries = manifest[key];
+    if (!isArray(entries)) continue;
+    for (const entry of entries) {
+      if (!isRecord(entry)) continue;
+      const dispatchId = entry.dispatch_id;
+      if (typeof dispatchId !== 'string') continue;
+      if (isUsage(entry)) {
+        lookup.set(dispatchId, entry);
+      }
+    }
+  }
+  return lookup;
+}
 
 export function normaliseDispatches(manifest: unknown): Session['dispatches'] {
   if (!isRecord(manifest)) return [];
   const actualDispatches = manifest.actual_dispatches;
   if (!isArray(actualDispatches)) return [];
 
-  return actualDispatches.flatMap((raw): Session['dispatches'] => {
+  // AC-022: build backfill lookup so dispatches without real usage can fall back
+  const backfillLookup = buildBackfillLookup(manifest);
+
+  const subagentDispatches = actualDispatches.flatMap((raw): Session['dispatches'] => {
     if (!isRecord(raw)) return [];
     const role = raw.role;
     const status = raw.status;
@@ -31,20 +130,32 @@ export function normaliseDispatches(manifest: unknown): Session['dispatches'] {
           ? raw.review_loop
           : null;
     const pmNote = typeof raw.pm_note === 'string' ? raw.pm_note : null;
+    // FEAT-003: real capture takes precedence; backfill is fallback (AC-017, AC-022)
+    let usage: Usage | undefined;
+    if (isUsage(raw.usage)) {
+      usage = raw.usage;
+    } else {
+      usage = backfillLookup.get(dispatchId);
+    }
 
-    return [
-      {
-        dispatchId,
-        role,
-        status,
-        startedAt,
-        completedAt,
-        outputPacket: null, // resolved later by caller if needed
-        loop,
-        pmNote,
-      },
-    ];
+    const dispatchEntry: Session['dispatches'][number] = {
+      dispatchId,
+      role,
+      status,
+      startedAt,
+      completedAt,
+      outputPacket: null, // resolved later by caller if needed
+      loop,
+      pmNote,
+    };
+    if (usage !== undefined) {
+      dispatchEntry.usage = attachCostUsd(usage);
+    }
+
+    return [dispatchEntry];
   });
+
+  return [...subagentDispatches, ...synthesizePmDispatches(manifest)];
 }
 
 export function aggregateQaResults(outputs: RawSession['outputs']): Session['qaResults'] {

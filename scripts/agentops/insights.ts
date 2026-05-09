@@ -136,6 +136,7 @@ export function computeTrends(allMetrics: Metrics[]): Insight[] {
 
   const prev = completed[completed.length - 2];
   const curr = completed[completed.length - 1];
+  if (!prev || !curr) return [];
   const insights: Insight[] = [];
 
   // dispatches_per_ac_trend

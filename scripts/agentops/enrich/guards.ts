@@ -3,7 +3,7 @@
  * No `as` casts on uncertain shapes.
  */
 
-import type { Role, DispatchStatus, PhaseName, Session } from '../types';
+import type { Role, DispatchStatus, PhaseName, Session, Usage } from '../types';
 
 export function isRecord(o: unknown): o is Record<string, unknown> {
   return typeof o === 'object' && o !== null && !Array.isArray(o);
@@ -20,6 +20,7 @@ export const VALID_ROLES: Role[] = [
   'qa',
   'blocker-specialist',
   'audit-agent',
+  'pm-orchestrator',
 ];
 
 export const VALID_STATUSES: DispatchStatus[] = [
@@ -62,4 +63,19 @@ export function isQaStatus(v: unknown): v is 'pass' | 'partial' | 'fail' {
 
 export function isPhaseName(v: unknown): v is PhaseName {
   return typeof v === 'string' && (VALID_PHASE_NAMES as string[]).includes(v);
+}
+
+/**
+ * FEAT-003 DM-1 — isUsage type guard.
+ * Validates that an unknown value has the shape of a Usage object.
+ * Requires: total_tokens, tool_uses, duration_ms are numbers; model is a string.
+ */
+export function isUsage(o: unknown): o is Usage {
+  if (!isRecord(o)) return false;
+  return (
+    typeof o.total_tokens === 'number' &&
+    typeof o.tool_uses === 'number' &&
+    typeof o.duration_ms === 'number' &&
+    typeof o.model === 'string'
+  );
 }
