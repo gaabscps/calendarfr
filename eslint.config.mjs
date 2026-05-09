@@ -31,9 +31,15 @@ export default [
   // Block 2: JavaScript files (non-type-checked) — covers .mjs config files
   js.configs.recommended,
 
-  // Block 3: CJS config files (jest.config.js, jest.polyfills.js, jest.setup.js)
+  // Block 3: CJS config files (jest.config.js, jest.polyfills.js, jest.setup.js, *.cjs)
   {
-    files: ['jest.config.js', 'jest.polyfills.js', 'jest.setup.js'],
+    files: [
+      'jest.config.js',
+      'jest.polyfills.js',
+      'jest.setup.js',
+      '*.cjs',
+      'stryker.jest.config.cjs',
+    ],
     languageOptions: {
       globals: {
         require: 'readonly',

@@ -44,3 +44,6 @@ storybook-static/
 **/.cache/
 **/.vite/
 **/.swc/
+
+# Quality tool reports (gitignored — only docs/agentops/ aggregates are committed)
+reports/

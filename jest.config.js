@@ -14,7 +14,10 @@ const config = {
     '/node_modules/(?!(msw|@mswjs|@bundled-es-modules|@open-draft|outvariant|strict-event-emitter|until-async|cookie|rettime|headers-polyfill|lens-list)/)',
   ],
   moduleNameMapper: {
-    '\\.(css|less|scss)$': 'identity-obj-proxy',
+    // Plain CSS/SCSS imports in React components use identity-obj-proxy.
+    // Exclude paths ending in /shared/tokens.css or /shared/styles.css
+    // (those are .css.ts TypeScript modules, not stylesheet imports).
+    '^(?!.*(?:tokens|styles)\\.css$).*\\.(css|less|scss)$': 'identity-obj-proxy',
     '^@/test-utils$': '<rootDir>/test-utils/index',
     '^@/test-utils/(.*)$': '<rootDir>/test-utils/$1',
     '^@/(.*)$': '<rootDir>/web/src/$1',
@@ -31,8 +34,10 @@ const config = {
     'web/src/shared/**/*.{ts,tsx}',
     'server/src/**/*.ts',
     'scripts/agentops/**/*.ts',
+    'scripts/agentops/render/html/**/*.ts',
     '!**/*.d.ts',
     '!**/*.stories.tsx',
+    '!scripts/agentops/__fixtures__/**',
   ],
   coverageReporters: ['text', 'html', 'lcov'],
   coverageDirectory: 'coverage',

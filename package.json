@@ -12,6 +12,13 @@
   ],
   "scripts": {
     "agentops:report": "tsx scripts/agentops/index.ts",
+    "agentops:backfill": "tsx scripts/agentops/backfill-usage.ts",
+    "agentops:capture-pm": "tsx scripts/agentops/hooks/capture-pm-session.ts",
+    "mutation": "STRYKER_RUN=1 stryker run",
+    "type-coverage": "type-coverage --strict --detail --at-least 95 --reportSemanticError",
+    "type-coverage:json": "tsx scripts/agentops/type-coverage-json.ts",
+    "arch:check": "depcruise --config .dependency-cruiser.cjs --output-type err scripts/ web/src/ server/src/ test-utils/",
+    "arch:graph": "depcruise --config .dependency-cruiser.cjs --output-type mermaid scripts/ web/src/ server/src/ test-utils/ > docs/architecture/dependency-graph.md",
     "dev": "concurrently --kill-others-on-fail --prefix \"[{name}]\" --names \"WEB,API\" \"npm:dev:web\" \"npm:dev:server\"",
     "dev:web": "npm --workspace web run dev",
     "dev:server": "npm --workspace server run dev",
@@ -29,11 +36,22 @@
     "storybook": "npm --workspace web run storybook",
     "prepare": "husky"
   },
+  "typeCoverage": {
+    "atLeast": 95,
+    "strict": true,
+    "ignoreFiles": [
+      "**/*.test.ts",
+      "**/__fixtures__/**"
+    ]
+  },
   "devDependencies": {
     "@commitlint/cli": "^19.8",
     "@commitlint/config-conventional": "^19.8",
     "@eslint/js": "^9.16",
     "@playwright/test": "^1.49",
+    "@stryker-mutator/core": "^8.5",
+    "@stryker-mutator/jest-runner": "^8.5",
+    "@stryker-mutator/typescript-checker": "^8.5",
     "@swc/core": "^1.10",
     "@swc/jest": "^0.2",
     "@testing-library/jest-dom": "^6.6",
@@ -43,6 +61,7 @@
     "@types/js-yaml": "^4.0.9",
     "@types/node": "^20.17",
     "concurrently": "^9.2",
+    "dependency-cruiser": "^16.6",
     "eslint": "^9.16",
     "eslint-import-resolver-typescript": "^3.7",
     "eslint-plugin-import": "^2.31",
@@ -56,9 +75,12 @@
     "jest-environment-jsdom": "^29.7",
     "js-yaml": "^4.1.1",
     "lint-staged": "^15.2",
+    "marked": "^14.1.4",
     "msw": "^2.7",
     "prettier": "^3.4",
+    "ts-jest": "^29.2",
     "tsx": "^4.19",
+    "type-coverage": "^2.29",
     "typescript": "^5.6",
     "typescript-eslint": "^8.18",
     "undici": "^7.3"
