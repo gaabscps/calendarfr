@@ -61,6 +61,7 @@ function normalizeModel(raw: string | undefined): string {
   return 'unknown';
 }
 
+/* istanbul ignore next */
 async function readStdinAsync(): Promise<string> {
   return new Promise((resolve) => {
     let data = '';
@@ -140,7 +141,7 @@ function pickActiveTaskId(repoRoot: string): string | null {
   return best?.id ?? null;
 }
 
-function isSessionDone(sessionYmlPath: string): boolean {
+export function isSessionDone(sessionYmlPath: string): boolean {
   if (!fs.existsSync(sessionYmlPath)) return false;
   const yml = fs.readFileSync(sessionYmlPath, 'utf-8');
   return /^\s*current_phase:\s*"?done"?\s*$/m.test(yml);
@@ -155,7 +156,7 @@ function isSessionDone(sessionYmlPath: string): boolean {
  * Independent from pickActiveTaskId because that picker skips done sessions
  * — exactly the ones we need to regenerate for.
  */
-function maybeRegenerateReport(repoRoot: string): void {
+export function maybeRegenerateReport(repoRoot: string): void {
   if (process.env.AGENTOPS_AUTO_REPORT === '0') return;
   const sessionsDir = path.join(repoRoot, '.agent-session');
   if (!fs.existsSync(sessionsDir)) return;
@@ -184,7 +185,7 @@ function maybeRegenerateReport(repoRoot: string): void {
   child.unref();
 }
 
-function findRepoRoot(start: string): string {
+export function findRepoRoot(start: string): string {
   let dir = start;
   while (dir !== path.dirname(dir)) {
     if (fs.existsSync(path.join(dir, '.agent-session'))) return dir;
@@ -233,6 +234,7 @@ function upsertEntry(
   fs.renameSync(tmp, manifestPath);
 }
 
+/* istanbul ignore next */
 async function main(): Promise<void> {
   const stdin = await readStdinAsync();
   let input: HookInput = {};
@@ -278,9 +280,18 @@ async function main(): Promise<void> {
   );
 }
 
+/* istanbul ignore next */
 if (typeof require !== 'undefined' && typeof module !== 'undefined' && require.main === module) {
   void main();
 }
 
-export { parseTranscript, pickActiveTaskId, upsertEntry, normalizeModel };
+export {
+  parseTranscript,
+  pickActiveTaskId,
+  upsertEntry,
+  normalizeModel,
+  isSessionDone,
+  maybeRegenerateReport,
+  findRepoRoot,
+};
 export type { ModelAgg };

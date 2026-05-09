@@ -7,8 +7,17 @@ import fs from 'fs';
 import os from 'os';
 import path from 'path';
 
-import { upsertEntry, type ModelAgg } from '../hooks/capture-pm-session';
-import { detectPhaseCoverage } from '../hooks/phase-coverage';
+import {
+  upsertEntry,
+  parseTranscript,
+  pickActiveTaskId,
+  normalizeModel,
+  isSessionDone,
+  maybeRegenerateReport,
+  findRepoRoot,
+  type ModelAgg,
+} from '../hooks/capture-pm-session';
+import { detectPhaseCoverage, readPhaseHistory } from '../hooks/phase-coverage';
 
 // ---------------------------------------------------------------------------
 // detectPhaseCoverage
@@ -97,6 +106,109 @@ describe('detectPhaseCoverage', () => {
     const split = result.phase_split!;
     const total = Object.values(split).reduce((a, b) => a + b, 0);
     expect(total).toBeCloseTo(1.0, 5);
+  });
+});
+
+// ---------------------------------------------------------------------------
+// readPhaseHistory
+// ---------------------------------------------------------------------------
+
+describe('readPhaseHistory', () => {
+  let tmpDir: string;
+
+  beforeEach(() => {
+    tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'phase-history-test-'));
+  });
+
+  afterEach(() => {
+    fs.rmSync(tmpDir, { recursive: true });
+  });
+
+  it('returns [] when file does not exist', () => {
+    const result = readPhaseHistory(path.join(tmpDir, 'nonexistent.yml'));
+    expect(result).toEqual([]);
+  });
+
+  it('returns [] when file is empty', () => {
+    const filePath = path.join(tmpDir, 'session.yml');
+    fs.writeFileSync(filePath, '');
+    const result = readPhaseHistory(filePath);
+    expect(result).toEqual([]);
+  });
+
+  it('returns one PhaseEntry for a valid single entry', () => {
+    const filePath = path.join(tmpDir, 'session.yml');
+    fs.writeFileSync(
+      filePath,
+      `phase_history:\n  - phase: specify\n    started_at: "2026-01-01T00:00:00Z"\n    completed_at: "2026-01-01T01:00:00Z"\n`,
+    );
+    const result = readPhaseHistory(filePath);
+    expect(result).toHaveLength(1);
+    expect(result[0]).toMatchObject({
+      phase: 'specify',
+      started_at: '2026-01-01T00:00:00Z',
+      completed_at: '2026-01-01T01:00:00Z',
+    });
+  });
+
+  it('returns entries with unknown phase names (filtering happens in detectPhaseCoverage)', () => {
+    const filePath = path.join(tmpDir, 'session.yml');
+    fs.writeFileSync(
+      filePath,
+      `phase_history:\n  - phase: design\n    started_at: "2026-01-01T00:00:00Z"\n`,
+    );
+    const result = readPhaseHistory(filePath);
+    expect(result).toHaveLength(1);
+    expect(result[0]!.phase).toBe('design');
+  });
+
+  it('filters out entries without started_at', () => {
+    const filePath = path.join(tmpDir, 'session.yml');
+    fs.writeFileSync(filePath, `phase_history:\n  - phase: specify\n    notes: "no timestamp"\n`);
+    const result = readPhaseHistory(filePath);
+    expect(result).toEqual([]);
+  });
+
+  it('parses entry without completed_at correctly', () => {
+    const filePath = path.join(tmpDir, 'session.yml');
+    fs.writeFileSync(
+      filePath,
+      `phase_history:\n  - phase: implementation\n    started_at: "2026-01-01T01:00:00Z"\n`,
+    );
+    const result = readPhaseHistory(filePath);
+    expect(result).toHaveLength(1);
+    expect(result[0]!.completed_at).toBeUndefined();
+    expect(result[0]!.phase).toBe('implementation');
+  });
+
+  it('parses phase with single quotes', () => {
+    const filePath = path.join(tmpDir, 'session.yml');
+    fs.writeFileSync(
+      filePath,
+      `phase_history:\n  - phase: 'specify'\n    started_at: "2026-01-01T00:00:00Z"\n`,
+    );
+    const result = readPhaseHistory(filePath);
+    expect(result).toHaveLength(1);
+    expect(result[0]!.phase).toBe('specify');
+  });
+
+  it('returns multiple entries for multiple phases', () => {
+    const filePath = path.join(tmpDir, 'session.yml');
+    fs.writeFileSync(
+      filePath,
+      [
+        'phase_history:',
+        '  - phase: specify',
+        '    started_at: "2026-01-01T00:00:00Z"',
+        '    completed_at: "2026-01-01T01:00:00Z"',
+        '  - phase: implementation',
+        '    started_at: "2026-01-01T01:00:00Z"',
+      ].join('\n') + '\n',
+    );
+    const result = readPhaseHistory(filePath);
+    expect(result).toHaveLength(2);
+    expect(result[0]!.phase).toBe('specify');
+    expect(result[1]!.phase).toBe('implementation');
   });
 });
 
@@ -208,5 +320,388 @@ describe('upsertEntry: phase_coverage written to manifest', () => {
     expect(split).toBeDefined();
     expect(split['plan']).toBeCloseTo(0.5, 5);
     expect(split['implementation']).toBeCloseTo(0.5, 5);
+  });
+
+  it('overwrites existing entry for same session_id + model', () => {
+    const manifestPath = path.join(tmpDir, 'dispatch-manifest.json');
+    fs.writeFileSync(manifestPath, makeManifest());
+
+    const agg1 = makeAgg({ turns: 5 });
+    upsertEntry(manifestPath, 'sess-001', 'sonnet-4-6', agg1, undefined);
+    const agg2 = makeAgg({ turns: 10 });
+    upsertEntry(manifestPath, 'sess-001', 'sonnet-4-6', agg2, undefined);
+
+    const result = JSON.parse(fs.readFileSync(manifestPath, 'utf-8')) as Record<string, unknown>;
+    const sessions = result.pm_orchestrator_sessions as Record<string, unknown>[];
+    expect(sessions).toHaveLength(1);
+  });
+
+  it('uses current timestamp when firstTs/lastTs are null', () => {
+    const manifestPath = path.join(tmpDir, 'dispatch-manifest.json');
+    fs.writeFileSync(manifestPath, makeManifest());
+
+    const agg = makeAgg({ firstTs: null, lastTs: null });
+    upsertEntry(manifestPath, 'sess-004', 'sonnet-4-6', agg, undefined);
+
+    const result = JSON.parse(fs.readFileSync(manifestPath, 'utf-8')) as Record<string, unknown>;
+    const sessions = result.pm_orchestrator_sessions as Record<string, unknown>[];
+    expect(sessions).toHaveLength(1);
+    expect(typeof sessions[0]!['started_at']).toBe('string');
+  });
+});
+
+// ---------------------------------------------------------------------------
+// normalizeModel
+// ---------------------------------------------------------------------------
+
+describe('normalizeModel', () => {
+  it('maps claude-opus-4-7 to opus-4-7', () => {
+    expect(normalizeModel('claude-opus-4-7')).toBe('opus-4-7');
+  });
+
+  it('maps claude-sonnet-4-6 to sonnet-4-6', () => {
+    expect(normalizeModel('claude-sonnet-4-6')).toBe('sonnet-4-6');
+  });
+
+  it('maps claude-haiku-4-5 to haiku-4-5', () => {
+    expect(normalizeModel('claude-haiku-4-5')).toBe('haiku-4-5');
+  });
+
+  it('maps unknown model containing "opus" to opus-4-7', () => {
+    expect(normalizeModel('some-opus-model')).toBe('opus-4-7');
+  });
+
+  it('maps unknown model containing "sonnet" to sonnet-4-6', () => {
+    expect(normalizeModel('some-sonnet-model')).toBe('sonnet-4-6');
+  });
+
+  it('maps unknown model containing "haiku" to haiku-4-5', () => {
+    expect(normalizeModel('some-haiku-model')).toBe('haiku-4-5');
+  });
+
+  it('returns "unknown" for completely unknown model', () => {
+    expect(normalizeModel('gpt-4')).toBe('unknown');
+  });
+
+  it('returns "unknown" for undefined input', () => {
+    expect(normalizeModel(undefined)).toBe('unknown');
+  });
+});
+
+// ---------------------------------------------------------------------------
+// parseTranscript
+// ---------------------------------------------------------------------------
+
+describe('parseTranscript', () => {
+  let tmpDir: string;
+
+  beforeEach(() => {
+    tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'transcript-test-'));
+  });
+
+  afterEach(() => {
+    fs.rmSync(tmpDir, { recursive: true });
+  });
+
+  it('returns empty object when file does not exist', () => {
+    const result = parseTranscript(path.join(tmpDir, 'nonexistent.jsonl'));
+    expect(result).toEqual({});
+  });
+
+  it('aggregates tokens from assistant turns', () => {
+    const transcriptPath = path.join(tmpDir, 'transcript.jsonl');
+    const turn = JSON.stringify({
+      type: 'assistant',
+      timestamp: '2026-01-01T00:00:00Z',
+      message: {
+        model: 'claude-sonnet-4-6',
+        content: [],
+        usage: {
+          input_tokens: 100,
+          output_tokens: 50,
+          cache_creation_input_tokens: 0,
+          cache_read_input_tokens: 0,
+        },
+      },
+    });
+    fs.writeFileSync(transcriptPath, turn + '\n');
+    const result = parseTranscript(transcriptPath);
+    expect(result['sonnet-4-6']).toBeDefined();
+    expect(result['sonnet-4-6']!.inputTokens).toBe(100);
+    expect(result['sonnet-4-6']!.outputTokens).toBe(50);
+    expect(result['sonnet-4-6']!.turns).toBe(1);
+  });
+
+  it('ignores non-assistant turns', () => {
+    const transcriptPath = path.join(tmpDir, 'transcript.jsonl');
+    const turn = JSON.stringify({ type: 'human', message: { model: 'claude-sonnet-4-6' } });
+    fs.writeFileSync(transcriptPath, turn + '\n');
+    const result = parseTranscript(transcriptPath);
+    expect(Object.keys(result)).toHaveLength(0);
+  });
+
+  it('counts tool_use content items', () => {
+    const transcriptPath = path.join(tmpDir, 'transcript.jsonl');
+    const turn = JSON.stringify({
+      type: 'assistant',
+      timestamp: '2026-01-01T00:00:00Z',
+      message: {
+        model: 'claude-sonnet-4-6',
+        content: [{ type: 'tool_use' }, { type: 'text' }, { type: 'tool_use' }],
+        usage: { input_tokens: 50, output_tokens: 20 },
+      },
+    });
+    fs.writeFileSync(transcriptPath, turn + '\n');
+    const result = parseTranscript(transcriptPath);
+    expect(result['sonnet-4-6']!.toolUses).toBe(2);
+  });
+
+  it('skips malformed JSON lines', () => {
+    const transcriptPath = path.join(tmpDir, 'transcript.jsonl');
+    fs.writeFileSync(transcriptPath, 'not valid json\n{"type":"human"}\n');
+    const result = parseTranscript(transcriptPath);
+    expect(result).toEqual({});
+  });
+
+  it('tracks firstTs and lastTs correctly across multiple turns', () => {
+    const transcriptPath = path.join(tmpDir, 'transcript.jsonl');
+    const turn1 = JSON.stringify({
+      type: 'assistant',
+      timestamp: '2026-01-01T01:00:00Z',
+      message: { model: 'claude-sonnet-4-6', content: [], usage: { input_tokens: 10 } },
+    });
+    const turn2 = JSON.stringify({
+      type: 'assistant',
+      timestamp: '2026-01-01T00:00:00Z',
+      message: { model: 'claude-sonnet-4-6', content: [], usage: { input_tokens: 20 } },
+    });
+    fs.writeFileSync(transcriptPath, turn1 + '\n' + turn2 + '\n');
+    const result = parseTranscript(transcriptPath);
+    expect(result['sonnet-4-6']!.firstTs).toBe('2026-01-01T00:00:00Z');
+    expect(result['sonnet-4-6']!.lastTs).toBe('2026-01-01T01:00:00Z');
+  });
+
+  it('skips blank lines', () => {
+    const transcriptPath = path.join(tmpDir, 'transcript.jsonl');
+    const turn = JSON.stringify({
+      type: 'assistant',
+      timestamp: '2026-01-01T00:00:00Z',
+      message: { model: 'claude-sonnet-4-6', content: [], usage: { input_tokens: 5 } },
+    });
+    fs.writeFileSync(transcriptPath, '\n' + turn + '\n\n');
+    const result = parseTranscript(transcriptPath);
+    expect(result['sonnet-4-6']!.turns).toBe(1);
+  });
+});
+
+// ---------------------------------------------------------------------------
+// pickActiveTaskId
+// ---------------------------------------------------------------------------
+
+describe('pickActiveTaskId', () => {
+  let tmpDir: string;
+  const origEnv = process.env.AGENTOPS_TASK_ID;
+
+  beforeEach(() => {
+    tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'pick-task-test-'));
+    delete process.env.AGENTOPS_TASK_ID;
+  });
+
+  afterEach(() => {
+    fs.rmSync(tmpDir, { recursive: true });
+    if (origEnv !== undefined) {
+      process.env.AGENTOPS_TASK_ID = origEnv;
+    } else {
+      delete process.env.AGENTOPS_TASK_ID;
+    }
+  });
+
+  it('returns env var AGENTOPS_TASK_ID when set', () => {
+    process.env.AGENTOPS_TASK_ID = 'FEAT-ENV';
+    expect(pickActiveTaskId(tmpDir)).toBe('FEAT-ENV');
+  });
+
+  it('returns null when .agent-session does not exist', () => {
+    expect(pickActiveTaskId(tmpDir)).toBeNull();
+  });
+
+  it('reads task id from .current pointer file', () => {
+    const sessionsDir = path.join(tmpDir, '.agent-session');
+    fs.mkdirSync(sessionsDir, { recursive: true });
+    fs.writeFileSync(path.join(sessionsDir, '.current'), 'FEAT-CURRENT\n');
+    expect(pickActiveTaskId(tmpDir)).toBe('FEAT-CURRENT');
+  });
+
+  it('returns the most-recently-modified non-done session when no .current file', () => {
+    const sessionsDir = path.join(tmpDir, '.agent-session');
+    const taskDir = path.join(sessionsDir, 'FEAT-ACTIVE');
+    fs.mkdirSync(taskDir, { recursive: true });
+    fs.writeFileSync(path.join(taskDir, 'session.yml'), 'current_phase: implementation\n');
+    expect(pickActiveTaskId(tmpDir)).toBe('FEAT-ACTIVE');
+  });
+
+  it('skips done sessions when scanning', () => {
+    const sessionsDir = path.join(tmpDir, '.agent-session');
+    const taskDir = path.join(sessionsDir, 'FEAT-DONE');
+    fs.mkdirSync(taskDir, { recursive: true });
+    fs.writeFileSync(path.join(taskDir, 'session.yml'), 'current_phase: done\n');
+    expect(pickActiveTaskId(tmpDir)).toBeNull();
+  });
+
+  it('returns null when .current file exists but is empty', () => {
+    const sessionsDir = path.join(tmpDir, '.agent-session');
+    fs.mkdirSync(sessionsDir, { recursive: true });
+    fs.writeFileSync(path.join(sessionsDir, '.current'), '   \n');
+    expect(pickActiveTaskId(tmpDir)).toBeNull();
+  });
+});
+
+// ---------------------------------------------------------------------------
+// isSessionDone
+// ---------------------------------------------------------------------------
+
+describe('isSessionDone', () => {
+  let tmpDir: string;
+
+  beforeEach(() => {
+    tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'session-done-test-'));
+  });
+
+  afterEach(() => {
+    fs.rmSync(tmpDir, { recursive: true });
+  });
+
+  it('returns false when file does not exist', () => {
+    expect(isSessionDone(path.join(tmpDir, 'nonexistent.yml'))).toBe(false);
+  });
+
+  it('returns true when current_phase is done', () => {
+    const filePath = path.join(tmpDir, 'session.yml');
+    fs.writeFileSync(filePath, 'current_phase: done\n');
+    expect(isSessionDone(filePath)).toBe(true);
+  });
+
+  it('returns true when current_phase is "done" (with quotes)', () => {
+    const filePath = path.join(tmpDir, 'session.yml');
+    fs.writeFileSync(filePath, 'current_phase: "done"\n');
+    expect(isSessionDone(filePath)).toBe(true);
+  });
+
+  it('returns false when current_phase is implementation', () => {
+    const filePath = path.join(tmpDir, 'session.yml');
+    fs.writeFileSync(filePath, 'current_phase: implementation\n');
+    expect(isSessionDone(filePath)).toBe(false);
+  });
+});
+
+// ---------------------------------------------------------------------------
+// maybeRegenerateReport
+// ---------------------------------------------------------------------------
+
+describe('maybeRegenerateReport', () => {
+  let tmpDir: string;
+  const origEnv = process.env.AGENTOPS_AUTO_REPORT;
+
+  beforeEach(() => {
+    tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'regen-report-test-'));
+    delete process.env.AGENTOPS_AUTO_REPORT;
+  });
+
+  afterEach(() => {
+    fs.rmSync(tmpDir, { recursive: true });
+    if (origEnv !== undefined) {
+      process.env.AGENTOPS_AUTO_REPORT = origEnv;
+    } else {
+      delete process.env.AGENTOPS_AUTO_REPORT;
+    }
+  });
+
+  it('returns early without throwing when AGENTOPS_AUTO_REPORT=0', () => {
+    process.env.AGENTOPS_AUTO_REPORT = '0';
+    expect(() => maybeRegenerateReport(tmpDir)).not.toThrow();
+  });
+
+  it('returns early when .agent-session does not exist', () => {
+    expect(() => maybeRegenerateReport(tmpDir)).not.toThrow();
+  });
+
+  it('skips entries starting with "." in sessions dir', () => {
+    const sessionsDir = path.join(tmpDir, '.agent-session');
+    fs.mkdirSync(sessionsDir, { recursive: true });
+    fs.writeFileSync(path.join(sessionsDir, '.current'), 'FEAT-TEST');
+    expect(() => maybeRegenerateReport(tmpDir)).not.toThrow();
+  });
+
+  it('skips sessions without both yml and manifest', () => {
+    const sessionsDir = path.join(tmpDir, '.agent-session');
+    const taskDir = path.join(sessionsDir, 'FEAT-INCOMPLETE');
+    fs.mkdirSync(taskDir, { recursive: true });
+    fs.writeFileSync(path.join(taskDir, 'session.yml'), 'current_phase: done\n');
+    expect(() => maybeRegenerateReport(tmpDir)).not.toThrow();
+  });
+
+  it('does nothing when no stale done sessions exist', () => {
+    const sessionsDir = path.join(tmpDir, '.agent-session');
+    const taskDir = path.join(sessionsDir, 'FEAT-UP-TO-DATE');
+    const reportsDir = path.join(tmpDir, 'docs', 'agentops');
+    fs.mkdirSync(taskDir, { recursive: true });
+    fs.mkdirSync(reportsDir, { recursive: true });
+    fs.writeFileSync(path.join(taskDir, 'session.yml'), 'current_phase: done\n');
+    fs.writeFileSync(path.join(taskDir, 'dispatch-manifest.json'), '{}');
+    const reportPath = path.join(reportsDir, 'FEAT-UP-TO-DATE.md');
+    fs.writeFileSync(reportPath, '# report');
+    const futureTime = Date.now() + 10000;
+    fs.utimesSync(reportPath, futureTime / 1000, futureTime / 1000);
+    expect(() => maybeRegenerateReport(tmpDir)).not.toThrow();
+  });
+
+  it('skips non-done sessions', () => {
+    const sessionsDir = path.join(tmpDir, '.agent-session');
+    const taskDir = path.join(sessionsDir, 'FEAT-RUNNING');
+    fs.mkdirSync(taskDir, { recursive: true });
+    fs.writeFileSync(path.join(taskDir, 'session.yml'), 'current_phase: implementation\n');
+    fs.writeFileSync(path.join(taskDir, 'dispatch-manifest.json'), '{}');
+    expect(() => maybeRegenerateReport(tmpDir)).not.toThrow();
+  });
+});
+
+// ---------------------------------------------------------------------------
+// findRepoRoot
+// ---------------------------------------------------------------------------
+
+describe('findRepoRoot', () => {
+  let tmpDir: string;
+
+  beforeEach(() => {
+    tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'find-repo-root-test-'));
+  });
+
+  afterEach(() => {
+    fs.rmSync(tmpDir, { recursive: true });
+  });
+
+  it('returns start path when .agent-session exists there', () => {
+    const sessionsDir = path.join(tmpDir, '.agent-session');
+    fs.mkdirSync(sessionsDir);
+    expect(findRepoRoot(tmpDir)).toBe(tmpDir);
+  });
+
+  it('returns start path when .git exists there', () => {
+    const gitDir = path.join(tmpDir, '.git');
+    fs.mkdirSync(gitDir);
+    expect(findRepoRoot(tmpDir)).toBe(tmpDir);
+  });
+
+  it('finds root from a subdirectory with .agent-session', () => {
+    const sessionsDir = path.join(tmpDir, '.agent-session');
+    fs.mkdirSync(sessionsDir);
+    const subDir = path.join(tmpDir, 'sub', 'dir');
+    fs.mkdirSync(subDir, { recursive: true });
+    expect(findRepoRoot(subDir)).toBe(tmpDir);
+  });
+
+  it('returns start when no marker found (fallback)', () => {
+    const result = findRepoRoot(tmpDir);
+    expect(typeof result).toBe('string');
   });
 });

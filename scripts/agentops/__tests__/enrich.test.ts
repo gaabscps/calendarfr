@@ -1142,4 +1142,144 @@ describe('enrich', () => {
     expect(session.qaResults[1]!.ac).toBe('AC-011');
     expect(session.qaResults[1]!.status).toBe('fail');
   });
+
+  it('normalizeModel: fuzzy matches model strings containing "opus"', () => {
+    const raw: RawSession = {
+      taskId: 'FEAT-FUZZY-OPUS',
+      sessionYml: {
+        task_id: 'FEAT-FUZZY-OPUS',
+        feature_name: 'FuzzyOpus',
+        current_phase: 'done',
+        started_at: '2026-01-01T00:00:00Z',
+      },
+      manifest: {
+        expected_pipeline: [],
+        actual_dispatches: [
+          {
+            dispatch_id: 'd1',
+            role: 'dev',
+            status: 'done',
+            started_at: '2026-01-01T00:00:00Z',
+            usage: {
+              total_tokens: 1000,
+              tool_uses: 1,
+              duration_ms: 1000,
+              model: 'anthropic-opus-model',
+            },
+          },
+        ],
+      },
+      outputs: [],
+      specMd: null,
+      sessionDirPath: '/tmp/fake',
+    };
+    const session = enrich(raw);
+    expect(session.dispatches[0]!.usage!.model).toBe('opus-4-7');
+  });
+
+  it('normalizeModel: fuzzy matches model strings containing "haiku"', () => {
+    const raw: RawSession = {
+      taskId: 'FEAT-FUZZY-HAIKU',
+      sessionYml: {
+        task_id: 'FEAT-FUZZY-HAIKU',
+        feature_name: 'FuzzyHaiku',
+        current_phase: 'done',
+        started_at: '2026-01-01T00:00:00Z',
+      },
+      manifest: {
+        expected_pipeline: [],
+        actual_dispatches: [
+          {
+            dispatch_id: 'd1',
+            role: 'dev',
+            status: 'done',
+            started_at: '2026-01-01T00:00:00Z',
+            usage: {
+              total_tokens: 1000,
+              tool_uses: 1,
+              duration_ms: 1000,
+              model: 'anthropic-haiku-model',
+            },
+          },
+        ],
+      },
+      outputs: [],
+      specMd: null,
+      sessionDirPath: '/tmp/fake',
+    };
+    const session = enrich(raw);
+    expect(session.dispatches[0]!.usage!.model).toBe('haiku-4-5');
+  });
+
+  it('buildBackfillLookup: skips backfill entries with non-array value', () => {
+    const raw: RawSession = {
+      taskId: 'FEAT-BF-NONARR',
+      sessionYml: {
+        task_id: 'FEAT-BF-NONARR',
+        feature_name: 'BfNonArr',
+        current_phase: 'done',
+        started_at: '2026-01-01T00:00:00Z',
+      },
+      manifest: {
+        expected_pipeline: [],
+        actual_dispatches: [
+          { dispatch_id: 'd1', role: 'dev', status: 'done', started_at: '2026-01-01T00:00:00Z' },
+        ],
+        pre_feat_001_backfilled_usage: 'not-an-array',
+      },
+      outputs: [],
+      specMd: null,
+      sessionDirPath: '/tmp/fake',
+    };
+    const session = enrich(raw);
+    expect(session.dispatches[0]!.usage).toBeUndefined();
+  });
+
+  it('buildBackfillLookup: skips backfill entries that are not records', () => {
+    const raw: RawSession = {
+      taskId: 'FEAT-BF-NONREC',
+      sessionYml: {
+        task_id: 'FEAT-BF-NONREC',
+        feature_name: 'BfNonRec',
+        current_phase: 'done',
+        started_at: '2026-01-01T00:00:00Z',
+      },
+      manifest: {
+        expected_pipeline: [],
+        actual_dispatches: [
+          { dispatch_id: 'd1', role: 'dev', status: 'done', started_at: '2026-01-01T00:00:00Z' },
+        ],
+        pre_feat_001_backfilled_usage: ['not-a-record', 42, null],
+      },
+      outputs: [],
+      specMd: null,
+      sessionDirPath: '/tmp/fake',
+    };
+    const session = enrich(raw);
+    expect(session.dispatches[0]!.usage).toBeUndefined();
+  });
+
+  it('buildBackfillLookup: skips backfill entries without string dispatch_id', () => {
+    const raw: RawSession = {
+      taskId: 'FEAT-BF-NOID',
+      sessionYml: {
+        task_id: 'FEAT-BF-NOID',
+        feature_name: 'BfNoId',
+        current_phase: 'done',
+        started_at: '2026-01-01T00:00:00Z',
+      },
+      manifest: {
+        expected_pipeline: [],
+        actual_dispatches: [
+          { dispatch_id: 'd1', role: 'dev', status: 'done', started_at: '2026-01-01T00:00:00Z' },
+        ],
+        pre_feat_001_backfilled_usage: [{ dispatch_id: 123, total_tokens: 1000 }],
+      },
+      outputs: [],
+      specMd: null,
+      sessionDirPath: '/tmp/fake',
+    };
+    const session = enrich(raw);
+    expect(session.dispatches[0]!.usage).toBeUndefined();
+  });
 });

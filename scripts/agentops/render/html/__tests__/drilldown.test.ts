@@ -143,4 +143,57 @@ describe('drilldown', () => {
     expect(result).toContain('<th>');
     expect(result).toContain('<td>');
   });
+
+  it('shows "(no ACs defined)" when session has no ACs', () => {
+    const session = makeSession({ acs: [], qaResults: [] });
+    const result = drilldown(session, makeRepoHealth());
+    expect(result).toContain('(no ACs defined)');
+  });
+
+  it('shows "(no dispatches)" when session has no dispatches', () => {
+    const session = makeSession({ dispatches: [] });
+    const result = drilldown(session, makeRepoHealth());
+    expect(result).toContain('(no dispatches)');
+  });
+
+  it('shows "(no phase data available)" when session has no phases with startedAt', () => {
+    const session = makeSession({ phases: [] });
+    const result = drilldown(session, makeRepoHealth());
+    expect(result).toContain('(no phase data available)');
+  });
+
+  it('shows null mutation/typeCoverage as dashes in repo health section', () => {
+    const nullHealth: RepoHealth = {
+      mutation: null,
+      typeCoverage: null,
+      depViolations: { error: 0, warn: 0 },
+      measuredAt: '2026-01-01T00:00:00Z',
+    };
+    const result = drilldown(makeSession(), nullHealth);
+    expect(result).toContain('—');
+  });
+
+  it('renders reviewer findings as list when dispatches have findings', () => {
+    const session = makeSession({
+      dispatches: [
+        {
+          dispatchId: 'rev-1',
+          role: 'code-reviewer',
+          status: 'done',
+          startedAt: '2026-01-01T10:00:00Z',
+          completedAt: '2026-01-01T11:00:00Z',
+          outputPacket: {
+            findings: ['Critical: fix this bug', { message: 'Minor: improve naming' }],
+          },
+          loop: null,
+          pmNote: null,
+        },
+      ],
+    });
+    const result = drilldown(session, makeRepoHealth());
+    expect(result).toContain('Critical: fix this bug');
+    expect(result).toContain('Minor: improve naming');
+    expect(result).toContain('<ul>');
+    expect(result).toContain('<li>');
+  });
 });

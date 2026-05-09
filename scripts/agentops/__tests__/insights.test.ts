@@ -325,4 +325,46 @@ describe('computeTrends', () => {
     const ruleIds = trends.map((t) => t.ruleId);
     expect(ruleIds).toContain('trust_score_trend');
   });
+
+  it('dispatches_per_ac_trend shows "—" when prevDpa is 0', () => {
+    const m1 = makeMetrics({ taskId: 'FEAT-001', status: 'done', dispatchesPerAc: 0 });
+    const m2 = makeMetrics({ taskId: 'FEAT-002', status: 'done', dispatchesPerAc: 0.5 });
+    const trends = computeTrends([m1, m2]);
+    const dpa = trends.find((t) => t.ruleId === 'dispatches_per_ac_trend');
+    expect(dpa).toBeDefined();
+    expect(dpa!.message).toContain('—');
+  });
+
+  it('trust_score_trend shows "—" when prevDev is 0', () => {
+    const m1 = makeMetrics({
+      taskId: 'FEAT-001',
+      status: 'done',
+      dispatchesPerAc: 0.5,
+      taskSuccessRate: {
+        ...(Object.fromEntries(ALL_ROLES.map((r) => [r, null])) as Record<Role, number | null>),
+        dev: 0,
+      },
+    });
+    const m2 = makeMetrics({
+      taskId: 'FEAT-002',
+      status: 'done',
+      dispatchesPerAc: 0.5,
+      taskSuccessRate: {
+        ...(Object.fromEntries(ALL_ROLES.map((r) => [r, null])) as Record<Role, number | null>),
+        dev: 0.5,
+      },
+    });
+    const trends = computeTrends([m1, m2]);
+    const trust = trends.find((t) => t.ruleId === 'trust_score_trend');
+    expect(trust).toBeDefined();
+    expect(trust!.message).toContain('—');
+  });
+
+  it('trust_score_trend omitted when either dev rate is null', () => {
+    const m1 = makeMetrics({ taskId: 'FEAT-001', status: 'done', dispatchesPerAc: 0.5 });
+    const m2 = makeMetrics({ taskId: 'FEAT-002', status: 'done', dispatchesPerAc: 0.5 });
+    const trends = computeTrends([m1, m2]);
+    const trust = trends.find((t) => t.ruleId === 'trust_score_trend');
+    expect(trust).toBeUndefined();
+  });
 });

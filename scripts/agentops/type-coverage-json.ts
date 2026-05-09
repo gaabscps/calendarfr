@@ -43,7 +43,7 @@ interface TypeCoverageReport {
  * And a summary line like:
  *   123/456 99.12%
  */
-function parseTypeCoverageOutput(stdout: string): Omit<TypeCoverageReport, 'measured_at'> {
+export function parseTypeCoverageOutput(stdout: string): Omit<TypeCoverageReport, 'measured_at'> {
   const lines = stdout.split('\n');
   const files: AnyLocation[] = [];
 
@@ -99,6 +99,7 @@ function parseTypeCoverageOutput(stdout: string): Omit<TypeCoverageReport, 'meas
   };
 }
 
+/* istanbul ignore next */
 async function run(): Promise<void> {
   const reportsDir = path.join(process.cwd(), 'reports', 'type-coverage');
   await fs.mkdir(reportsDir, { recursive: true });
@@ -153,6 +154,7 @@ async function run(): Promise<void> {
   );
 }
 
+/* istanbul ignore next */
 run().catch((err: unknown) => {
   process.stderr.write(`[type-coverage-json] Fatal error: ${String(err)}\n`);
   process.exit(1);

@@ -156,6 +156,68 @@ describe('renderCostBreakdownFull — full data', () => {
   });
 });
 
+describe('renderCostBreakdown — cost with null total_usd', () => {
+  it('shows coverage line when cost object present but total_usd is null', () => {
+    const metrics = makeMinimalMetrics({
+      cost: makeCostMetric({ total_usd: null }),
+    });
+    const output = renderCostBreakdown(metrics);
+    expect(output).toContain('Coverage:');
+    expect(output).toContain('dispatches included');
+  });
+
+  it('shows per_ac_usd as n/a when null', () => {
+    const metrics = makeMinimalMetrics({
+      cost: makeCostMetric({ per_ac_usd: null }),
+    });
+    const output = renderCostBreakdown(metrics);
+    expect(output).toContain('n/a (no ACs defined)');
+  });
+
+  it('shows per_dispatch_avg_usd as n/a when null', () => {
+    const metrics = makeMinimalMetrics({
+      cost: makeCostMetric({ per_dispatch_avg_usd: null }),
+    });
+    const output = renderCostBreakdown(metrics);
+    expect(output).toContain('n/a');
+  });
+});
+
+describe('renderCostBreakdownFull — formatMs branches', () => {
+  it('formats exactly 60s as "1m" (no remainder)', () => {
+    const metrics = makeMinimalMetrics({ cost: makeCostMetric() });
+    const dispatches = [
+      {
+        usage: {
+          total_tokens: 100,
+          tool_uses: 1,
+          duration_ms: 60_000,
+          model: 'sonnet-4-6' as const,
+        },
+      },
+    ];
+    const output = renderCostBreakdownFull(metrics, dispatches);
+    expect(output).toContain('1m');
+    expect(output).not.toContain('1m 0s');
+  });
+
+  it('formats sub-1000ms duration', () => {
+    const metrics = makeMinimalMetrics({ cost: makeCostMetric() });
+    const dispatches = [
+      {
+        usage: {
+          total_tokens: 100,
+          tool_uses: 1,
+          duration_ms: 500,
+          model: 'sonnet-4-6' as const,
+        },
+      },
+    ];
+    const output = renderCostBreakdownFull(metrics, dispatches);
+    expect(output).toContain('500ms');
+  });
+});
+
 describe('renderCostBreakdownFull — no data', () => {
   it('matches snapshot for no usage data with dispatches (no usage field)', () => {
     const metrics = makeMinimalMetrics();
@@ -235,6 +297,34 @@ describe('renderCostBreakdownFull — by phase subsection', () => {
     const metrics = makeMinimalMetrics({ cost });
     const output = renderCostBreakdownFull(metrics, dispatchesWithPhase);
     expect(output).toMatchSnapshot();
+  });
+
+  it('handles "mixed" phase_coverage with phase_split', () => {
+    const cost: CostMetric = {
+      total_usd: 6.6,
+      per_ac_usd: 3.3,
+      per_dispatch_avg_usd: 3.3,
+      coverage: { included: 1, total: 1 },
+      assumption_note: 'test note',
+    };
+    const dispatchesMixed = [
+      {
+        usage: {
+          total_tokens: 500_000,
+          tool_uses: 5,
+          duration_ms: 30_000,
+          model: 'sonnet-4-6' as const,
+          cost_usd: 4.0,
+          phase_coverage: 'mixed' as const,
+          phase_split: { specify: 0.5, implementation: 0.5 },
+        },
+      },
+    ];
+    const metrics = makeMinimalMetrics({ cost });
+    const output = renderCostBreakdownFull(metrics, dispatchesMixed);
+    expect(output).toContain('### Cost by phase');
+    expect(output).toContain('specify');
+    expect(output).toContain('implementation');
   });
 
   it('omits "By phase" section when no dispatch has phase_coverage', () => {

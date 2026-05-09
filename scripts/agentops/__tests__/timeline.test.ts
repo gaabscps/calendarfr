@@ -84,6 +84,14 @@ describe('renderTimeline — no phases', () => {
     const output = renderTimeline(makeMinimalSession());
     expect(output).toContain('## Timeline');
   });
+
+  it('shows "(no phase data available)" when all phases have null startedAt', () => {
+    const session = makeMinimalSession({
+      phases: [{ name: 'specify', startedAt: null, completedAt: null, status: 'not_started' }],
+    });
+    const output = renderTimeline(session);
+    expect(output).toContain('(no phase data available)');
+  });
 });
 
 // ---------------------------------------------------------------------------

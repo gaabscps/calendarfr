@@ -148,3 +148,115 @@ describe('renderPerDispatchTable — pm note truncation', () => {
     expect(output).not.toContain('A'.repeat(100));
   });
 });
+
+// ---------------------------------------------------------------------------
+// fmtMs via duration_ms in dispatches
+// ---------------------------------------------------------------------------
+
+function makeDispatch(duration_ms: number) {
+  return {
+    dispatchId: 'd1',
+    role: 'dev' as const,
+    status: 'done' as const,
+    startedAt: '2026-01-01T00:00:00Z',
+    completedAt: null,
+    outputPacket: null,
+    loop: null,
+    pmNote: null,
+    usage: {
+      total_tokens: 100,
+      tool_uses: 2,
+      duration_ms,
+      model: 'sonnet-4-6' as const,
+    },
+  };
+}
+
+describe('renderPerDispatchTable — fmtMs formatting', () => {
+  it('formats 500ms as "500ms"', () => {
+    const session = makeMinimalSession({ dispatches: [makeDispatch(500)] });
+    const output = renderPerDispatchTable(session);
+    expect(output).toContain('500ms');
+  });
+
+  it('formats 30000ms as "30s"', () => {
+    const session = makeMinimalSession({ dispatches: [makeDispatch(30000)] });
+    const output = renderPerDispatchTable(session);
+    expect(output).toContain('30s');
+  });
+
+  it('formats 90000ms as "1m 30s"', () => {
+    const session = makeMinimalSession({ dispatches: [makeDispatch(90000)] });
+    const output = renderPerDispatchTable(session);
+    expect(output).toContain('1m 30s');
+  });
+
+  it('formats 120000ms as "2m" (no remainder)', () => {
+    const session = makeMinimalSession({ dispatches: [makeDispatch(120000)] });
+    const output = renderPerDispatchTable(session);
+    expect(output).toContain('2m');
+    expect(output).not.toContain('2m 0s');
+  });
+});
+
+// ---------------------------------------------------------------------------
+// dispatchCostUsd via model
+// ---------------------------------------------------------------------------
+
+describe('renderPerDispatchTable — dispatchCostUsd by model', () => {
+  it('computes non-zero cost for opus-4-7', () => {
+    const dispatch = {
+      ...makeDispatch(60000),
+      usage: { ...makeDispatch(60000).usage, model: 'opus-4-7' as const },
+    };
+    const session = makeMinimalSession({ dispatches: [dispatch] });
+    const output = renderPerDispatchTable(session);
+    expect(output).toMatch(/\$0\./);
+  });
+
+  it('computes non-zero cost for sonnet-4-6', () => {
+    const session = makeMinimalSession({ dispatches: [makeDispatch(60000)] });
+    const output = renderPerDispatchTable(session);
+    expect(output).toMatch(/\$0\./);
+  });
+
+  it('computes non-zero cost for haiku-4-5', () => {
+    const dispatch = {
+      ...makeDispatch(60000),
+      usage: { ...makeDispatch(60000).usage, model: 'haiku-4-5' as const },
+    };
+    const session = makeMinimalSession({ dispatches: [dispatch] });
+    const output = renderPerDispatchTable(session);
+    expect(output).toMatch(/\$0\./);
+  });
+
+  it('shows "—" for unknown model', () => {
+    const dispatch = {
+      ...makeDispatch(60000),
+      usage: { ...makeDispatch(60000).usage, model: 'unknown' as const },
+    };
+    const session = makeMinimalSession({ dispatches: [dispatch] });
+    const output = renderPerDispatchTable(session);
+    expect(output).toContain('—');
+  });
+
+  it('shows "—" for tokens, $, and duration when usage is undefined', () => {
+    const session = makeMinimalSession({
+      dispatches: [
+        {
+          dispatchId: 'd1',
+          role: 'dev',
+          status: 'done',
+          startedAt: '2026-01-01T00:00:00Z',
+          completedAt: null,
+          outputPacket: null,
+          loop: null,
+          pmNote: null,
+        },
+      ],
+    });
+    const output = renderPerDispatchTable(session);
+    const dashes = (output.match(/—/g) ?? []).length;
+    expect(dashes).toBeGreaterThanOrEqual(3);
+  });
+});

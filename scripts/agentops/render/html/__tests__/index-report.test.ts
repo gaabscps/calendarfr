@@ -150,6 +150,17 @@ describe('renderIndexHtml', () => {
     expect(out).toContain('not available');
   });
 
+  it('repo health with all null metrics → shows "No health metrics available"', () => {
+    const emptyHealth: RepoHealth = {
+      mutation: null,
+      typeCoverage: null,
+      depViolations: null,
+      measuredAt: '2026-01-01T00:00:00Z',
+    };
+    const out = renderIndexHtml([SESSION_1], emptyHealth);
+    expect(out).toContain('No health metrics available');
+  });
+
   it('contains flow-grid section (AC-014)', () => {
     expect(result).toContain('class="flow-grid"');
   });
@@ -233,5 +244,67 @@ describe('renderIndexHtml', () => {
 
   it('snapshot matches (update with npm test -- -u if HTML changes intentionally)', () => {
     expect(result).toMatchSnapshot();
+  });
+
+  it('badgeGrid mutation score warn branch (63-69%)', () => {
+    const warnHealth: RepoHealth = {
+      mutation: { score: 65.0, killed: 130, total: 200 },
+      typeCoverage: null,
+      depViolations: null,
+      measuredAt: '2026-01-01T00:00:00Z',
+    };
+    const out = renderIndexHtml([SESSION_1], warnHealth);
+    expect(out).toContain('65.0');
+  });
+
+  it('badgeGrid mutation score fail branch (< 63%)', () => {
+    const failHealth: RepoHealth = {
+      mutation: { score: 50.0, killed: 100, total: 200 },
+      typeCoverage: null,
+      depViolations: null,
+      measuredAt: '2026-01-01T00:00:00Z',
+    };
+    const out = renderIndexHtml([SESSION_1], failHealth);
+    expect(out).toContain('50.0');
+  });
+
+  it('badgeGrid typeCoverage warn branch (85.5-94.9%)', () => {
+    const warnHealth: RepoHealth = {
+      mutation: null,
+      typeCoverage: { percent: 90.0, anyCount: 10 },
+      depViolations: null,
+      measuredAt: '2026-01-01T00:00:00Z',
+    };
+    const out = renderIndexHtml([SESSION_1], warnHealth);
+    expect(out).toContain('90.0');
+  });
+
+  it('badgeGrid depViolations error > 0 shows err count', () => {
+    const errHealth: RepoHealth = {
+      mutation: null,
+      typeCoverage: null,
+      depViolations: { error: 3, warn: 0 },
+      measuredAt: '2026-01-01T00:00:00Z',
+    };
+    const out = renderIndexHtml([SESSION_1], errHealth);
+    expect(out).toContain('3 err');
+  });
+
+  it('formatWallClock shows sub-minute wall time from session start/end', () => {
+    const shortSession = makeSession({
+      startedAt: '2026-01-01T09:00:00Z',
+      completedAt: '2026-01-01T09:00:30Z',
+    });
+    const out = renderIndexHtml([shortSession], makeRepoHealth());
+    expect(out).toContain('30s');
+  });
+
+  it('formatWallClock shows minutes for session over 1 minute', () => {
+    const minuteSession = makeSession({
+      startedAt: '2026-01-01T09:00:00Z',
+      completedAt: '2026-01-01T09:02:00Z',
+    });
+    const out = renderIndexHtml([minuteSession], makeRepoHealth());
+    expect(out).toContain('2m');
   });
 });
