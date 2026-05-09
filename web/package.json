@@ -1,0 +1,32 @@
+{
+  "name": "@calendarfr/web",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit",
+    "storybook": "storybook dev -p 6006 --no-open",
+    "build-storybook": "storybook build"
+  },
+  "dependencies": {
+    "@fontsource/caveat": "^5.1",
+    "@fontsource/inter": "^5.1",
+    "framer-motion": "^11.15",
+    "react": "^19.0",
+    "react-dom": "^19.0",
+    "react-router-dom": "^6.28"
+  },
+  "devDependencies": {
+    "@storybook/addon-essentials": "^8.4",
+    "@storybook/react-vite": "^8.4",
+    "@types/react": "^19.0",
+    "@types/react-dom": "^19.0",
+    "@vitejs/plugin-react": "^4.3",
+    "storybook": "^8.4",
+    "vite": "^5.4",
+    "vite-tsconfig-paths": "^5.1"
+  }
+}

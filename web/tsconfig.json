@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "extends": "../tsconfig.base.json",
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "types": ["vite/client", "@testing-library/jest-dom", "jest"],
+    "paths": {
+      "@/*": ["./src/*"],
+      "@/test-utils": ["../test-utils/index"],
+      "@/test-utils/*": ["../test-utils/*"]
+    }
+  },
+  "include": ["src", "../test-utils"]
+}

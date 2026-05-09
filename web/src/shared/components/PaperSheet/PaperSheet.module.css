@@ -1,0 +1,14 @@
+.sheet {
+  background: var(--color-paper);
+  box-shadow: var(--shadow-paper);
+  border-radius: var(--radius-md);
+}
+
+.padded {
+  padding: 24px;
+}
+
+.ruled {
+  background-image: var(--paper-rule);
+  background-size: 100% 18px;
+}

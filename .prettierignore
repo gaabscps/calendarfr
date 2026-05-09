@@ -1,0 +1,19 @@
+node_modules
+# Fixtures contain intentionally malformed JSON (FEAT-FIXTURE-C corrupted manifest);
+# excluding so Prettier does not auto-fix it and break the test case.
+scripts/agentops/__fixtures__/
+web/dist
+server/dist
+coverage
+storybook-static
+playwright-report
+test-results
+data
+*.min.*
+.agent-session
+.superpowers
+**/.cache/
+**/.vite/
+**/.swc/
+.husky/_/
+.claude/

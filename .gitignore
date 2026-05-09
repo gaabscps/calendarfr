@@ -26,6 +26,21 @@ data/
 # Brainstorming companion
 .superpowers/
 
+# SDD pipeline state (per-feature; framework-internal)
+.agent-session/
+
 # Test artifacts
 playwright-report/
 test-results/
+
+# Workspace build outputs (workspace-scoped to avoid matching root dist/ twice)
+web/dist/
+server/dist/
+
+# Storybook static build
+storybook-static/
+
+# Bundler / tool caches
+**/.cache/
+**/.vite/
+**/.swc/
