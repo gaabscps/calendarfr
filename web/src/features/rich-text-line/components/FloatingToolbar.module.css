@@ -37,7 +37,9 @@
   cursor: pointer;
   color: var(--ink);
   /* Smooth hover transition. */
-  transition: background 100ms ease, color 100ms ease;
+  transition:
+    background 100ms ease,
+    color 100ms ease;
 }
 
 .button:hover {

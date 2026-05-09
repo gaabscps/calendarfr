@@ -74,7 +74,7 @@ _Measured at: 2026-05-09_
 | AC-013 | partial | qa        | Config has all 5 strict flags; both workspace tsconfigs extend base; runtime exit 2 (TS18003) bec...  |
 | AC-014 | pass    | qa        | After dev loop 3: recommendedTypeChecked scoped via tseslint.config({ files: ['**/\*.{ts,tsx}'], e... |
 | AC-015 | pass    | qa        | After dev loop 3: own files formatted, .claude/ added to .prettierignore. PM independently ran 'n...  |
-| AC-016 | pass    | qa        | web/tsconfig.json has @/*, @/test-utils, @/test-utils/*; server/tsconfig.json has @/* (legitimate...  |
+| AC-016 | pass    | qa        | web/tsconfig.json has @/_, @/test-utils, @/test-utils/_; server/tsconfig.json has @/\* (legitimate... |
 | AC-017 | pass    | qa        | /Users/gabrielandrade/Developer/calendarfr/CLAUDE.md exists at repo root                              |
 | AC-018 | pass    | qa        | CLAUDE.md contains 5+ sections in expected order: Comandos (table with 15 scripts), Arquitetura, ...  |
 | AC-019 | pass    | qa        | CLAUDE.md header has 'Macro spec' link to docs/specs/2026-05-08-mvp-overview.md and 'Spec ativo' ...  |

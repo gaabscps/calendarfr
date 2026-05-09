@@ -27,10 +27,7 @@ const ALLOWED_TAGS = ['b', 'i', 'u', 's'] as const;
  * Sanitise an HTML string, keeping only the 4 allowed tags with no
  * attributes. Idempotent: sanitizeHtml(sanitizeHtml(x)) === sanitizeHtml(x).
  */
-export function sanitizeHtml(
-  input: string,
-  opts: SanitizeHtmlOptions = {},
-): string {
+export function sanitizeHtml(input: string, opts: SanitizeHtmlOptions = {}): string {
   let html = input;
 
   if (opts.collapseToSingleLine) {

@@ -37,9 +37,7 @@ describe('RichTextLine — null editor guard (line 62)', () => {
     //   - useEffect line 51: `autoFocus && editor` → false (editor=null) exercised
     // The component renders only the wrapper div without FloatingToolbar.
     expect(() => {
-      renderWithProviders(
-        <RichTextLine value="" onChange={jest.fn()} ariaLabel="test-label" />,
-      );
+      renderWithProviders(<RichTextLine value="" onChange={jest.fn()} ariaLabel="test-label" />);
     }).not.toThrow();
   });
 
@@ -47,9 +45,7 @@ describe('RichTextLine — null editor guard (line 62)', () => {
     // autoFocus=true but editor=null → `autoFocus && editor` is false → no focus() call.
     // This exercises the false branch of the first useEffect's condition.
     expect(() => {
-      renderWithProviders(
-        <RichTextLine value="" onChange={jest.fn()} autoFocus />,
-      );
+      renderWithProviders(<RichTextLine value="" onChange={jest.fn()} autoFocus />);
     }).not.toThrow();
   });
 });

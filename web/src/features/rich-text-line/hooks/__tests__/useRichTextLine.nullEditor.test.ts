@@ -23,9 +23,7 @@ describe('useRichTextLine — null editor guard (line 104)', () => {
     // When useEditor returns null, the hook returns null and the useEffect
     // `if (!editor) return` branch (line 104) fires with its true path.
     const onChange = jest.fn();
-    const { result } = renderHook(() =>
-      useRichTextLine({ value: '', onChange }),
-    );
+    const { result } = renderHook(() => useRichTextLine({ value: '', onChange }));
     // The hook returns null (editor not initialised).
     expect(result.current).toBeNull();
     // onChange must not have been called (no editor, no onUpdate).
@@ -37,9 +35,7 @@ describe('useRichTextLine — null editor guard (line 104)', () => {
     // again and hits the `if (!editor) return` true branch on each render.
     const onChange = jest.fn();
     let value = '';
-    const { rerender, result } = renderHook(() =>
-      useRichTextLine({ value, onChange }),
-    );
+    const { rerender, result } = renderHook(() => useRichTextLine({ value, onChange }));
     expect(result.current).toBeNull();
     value = 'new value';
     rerender();

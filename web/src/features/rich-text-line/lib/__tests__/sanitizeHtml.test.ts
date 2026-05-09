@@ -54,9 +54,7 @@ describe('sanitizeHtml — attribute stripping', () => {
 
   it('strips href from <a> (disallowed tag) and keeps text', () => {
     // <a> is disallowed; href is also disallowed attribute — text survives via KEEP_CONTENT
-    expect(sanitizeHtml('<a href="https://evil.com">link text</a>')).toBe(
-      'link text',
-    );
+    expect(sanitizeHtml('<a href="https://evil.com">link text</a>')).toBe('link text');
   });
 });
 
@@ -116,9 +114,7 @@ describe('sanitizeHtml — plain text', () => {
   });
 
   it('handles text with numbers and punctuation', () => {
-    expect(sanitizeHtml('Price: $9.99 — 20% off!')).toBe(
-      'Price: $9.99 — 20% off!',
-    );
+    expect(sanitizeHtml('Price: $9.99 — 20% off!')).toBe('Price: $9.99 — 20% off!');
   });
 });
 

@@ -75,7 +75,7 @@ _Measured at: 2026-05-09_
 | AC-018 | pass    | qa        | Zero JS em todos componentes. Loop expansion + drilldown via <details> nativo. Funciona offline.     |
 | AC-019 | pass    | qa        | T-003 paleta GitHub Primer-inspired (AA contrast). CSS standard (grid, custom properties, prefers... |
 | AC-020 | pass    | qa        | T-003 TOKENS_CSS contém @media (prefers-color-scheme: dark); test verifica ambas paletas com mesm... |
-| AC-021 | pass    | qa        | Diretório scripts/agentops/render/html/{shared,components,__tests__}/ criado conforme D2 mirror d... |
+| AC-021 | pass    | qa        | Diretório scripts/agentops/render/html/{shared,components,**tests**}/ criado conforme D2 mirror d... |
 | AC-022 | partial | qa        | DD-1: split data-builder skipped (preserve MD existente). HTML drilldown recomputa direto da Sess... |
 | AC-023 | pass    | qa        | T-016 SKIPPED (DD-1 confirmed): drilldown HTML recompute inline da Session em vez de split data-b... |
 | AC-024 | partial | qa        | Pages prontas para GH Pages serve. Verificação real: T-020 BATCH-D smoke.                            |

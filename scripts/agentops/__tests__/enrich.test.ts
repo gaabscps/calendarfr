@@ -979,21 +979,36 @@ describe('enrich', () => {
             role: 'dev',
             status: 'done',
             started_at: '2026-01-01T00:00:00Z',
-            usage: { total_tokens: 100000, tool_uses: 10, duration_ms: 60000, model: 'claude-sonnet-4-6' },
+            usage: {
+              total_tokens: 100000,
+              tool_uses: 10,
+              duration_ms: 60000,
+              model: 'claude-sonnet-4-6',
+            },
           },
           {
             dispatch_id: 'd-haiku',
             role: 'qa',
             status: 'done',
             started_at: '2026-01-01T01:00:00Z',
-            usage: { total_tokens: 50000, tool_uses: 5, duration_ms: 30000, model: 'claude-haiku-4-5' },
+            usage: {
+              total_tokens: 50000,
+              tool_uses: 5,
+              duration_ms: 30000,
+              model: 'claude-haiku-4-5',
+            },
           },
           {
             dispatch_id: 'd-opus',
             role: 'code-reviewer',
             status: 'done',
             started_at: '2026-01-01T02:00:00Z',
-            usage: { total_tokens: 80000, tool_uses: 8, duration_ms: 45000, model: 'claude-opus-4-7' },
+            usage: {
+              total_tokens: 80000,
+              tool_uses: 8,
+              duration_ms: 45000,
+              model: 'claude-opus-4-7',
+            },
           },
         ],
       },
@@ -1041,7 +1056,7 @@ describe('enrich', () => {
               'AC-002': 'fail',
               'AC-003': 'partial',
               'AC-004': 'deferred', // maps to 'partial'
-              'AC-005': '',          // empty string → skip
+              'AC-005': '', // empty string → skip
             },
           },
         },
@@ -1077,8 +1092,8 @@ describe('enrich', () => {
             role: 'qa',
             ac_coverage: {
               'AC-002': ['ev-001', 'ev-002'], // non-empty array → 'pass'
-              'AC-003': ['ev-001'],            // non-empty array → 'pass'
-              'AC-099': [],                    // empty array → skip
+              'AC-003': ['ev-001'], // non-empty array → 'pass'
+              'AC-099': [], // empty array → skip
             },
           },
         },

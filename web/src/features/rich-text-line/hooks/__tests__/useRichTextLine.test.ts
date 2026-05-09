@@ -18,7 +18,9 @@ import { useRichTextLine } from '../useRichTextLine.js';
 
 /** Waits for the editor instance to be non-null. */
 async function waitForEditor(
-  result: ReturnType<typeof renderHook<ReturnType<typeof useRichTextLine>, Parameters<typeof useRichTextLine>[0]>>['result'],
+  result: ReturnType<
+    typeof renderHook<ReturnType<typeof useRichTextLine>, Parameters<typeof useRichTextLine>[0]>
+  >['result'],
 ) {
   await waitFor(() => {
     expect(result.current).not.toBeNull();
@@ -29,9 +31,7 @@ async function waitForEditor(
 
 describe('useRichTextLine — initial value', () => {
   it('returns an editor instance after mount', async () => {
-    const { result } = renderHook(() =>
-      useRichTextLine({ value: '', onChange: jest.fn() }),
-    );
+    const { result } = renderHook(() => useRichTextLine({ value: '', onChange: jest.fn() }));
 
     await waitForEditor(result);
     expect(result.current).not.toBeNull();
@@ -50,9 +50,7 @@ describe('useRichTextLine — initial value', () => {
   });
 
   it('initialises with empty string when value is ""', async () => {
-    const { result } = renderHook(() =>
-      useRichTextLine({ value: '', onChange: jest.fn() }),
-    );
+    const { result } = renderHook(() => useRichTextLine({ value: '', onChange: jest.fn() }));
 
     await waitForEditor(result);
     // Editor is empty — getHTML returns the empty paragraph representation
@@ -67,9 +65,7 @@ describe('useRichTextLine — initial value', () => {
 describe('useRichTextLine — onUpdate / onChange', () => {
   it('emits normalised HTML via onChange when content is inserted programmatically', async () => {
     const onChange = jest.fn();
-    const { result } = renderHook(() =>
-      useRichTextLine({ value: '', onChange }),
-    );
+    const { result } = renderHook(() => useRichTextLine({ value: '', onChange }));
 
     await waitForEditor(result);
 
@@ -86,9 +82,7 @@ describe('useRichTextLine — onUpdate / onChange', () => {
 
   it('emits "" (not "<p></p>") for an empty editor after clearing content', async () => {
     const onChange = jest.fn();
-    const { result } = renderHook(() =>
-      useRichTextLine({ value: '<p>text</p>', onChange }),
-    );
+    const { result } = renderHook(() => useRichTextLine({ value: '<p>text</p>', onChange }));
 
     await waitForEditor(result);
 
@@ -109,9 +103,7 @@ describe('useRichTextLine — external value sync', () => {
     const onChange = jest.fn();
     let value = '<p>initial</p>';
 
-    const { result, rerender } = renderHook(() =>
-      useRichTextLine({ value, onChange }),
-    );
+    const { result, rerender } = renderHook(() => useRichTextLine({ value, onChange }));
 
     await waitForEditor(result);
 
@@ -133,9 +125,7 @@ describe('useRichTextLine — external value sync', () => {
     // Start with empty value
     let value = '';
 
-    const { result, rerender } = renderHook(() =>
-      useRichTextLine({ value, onChange }),
-    );
+    const { result, rerender } = renderHook(() => useRichTextLine({ value, onChange }));
 
     await waitForEditor(result);
 
@@ -144,10 +134,7 @@ describe('useRichTextLine — external value sync', () => {
       expect(result.current).not.toBeNull();
     });
 
-    const setContentSpy = jest.spyOn(
-      result.current!.commands,
-      'setContent',
-    );
+    const setContentSpy = jest.spyOn(result.current!.commands, 'setContent');
 
     // Pass the same empty value again — normalised form matches
     value = '';
@@ -166,9 +153,7 @@ describe('useRichTextLine — external value sync', () => {
     const onChange = jest.fn();
     let value = '<p>first</p>';
 
-    const { result, rerender } = renderHook(() =>
-      useRichTextLine({ value, onChange }),
-    );
+    const { result, rerender } = renderHook(() => useRichTextLine({ value, onChange }));
 
     await waitForEditor(result);
 
@@ -229,9 +214,7 @@ describe('useRichTextLine — disabled prop', () => {
   });
 
   it('creates editor with editable=true when disabled is not set', async () => {
-    const { result } = renderHook(() =>
-      useRichTextLine({ value: '', onChange: jest.fn() }),
-    );
+    const { result } = renderHook(() => useRichTextLine({ value: '', onChange: jest.fn() }));
 
     await waitForEditor(result);
     expect(result.current!.isEditable).toBe(true);
@@ -252,9 +235,7 @@ describe('useRichTextLine — onEnter', () => {
     await waitForEditor(result);
 
     // Verify the editor has the extensions configured (indirect check)
-    const extensionNames = result.current!.extensionManager.extensions.map(
-      (e) => e.name,
-    );
+    const extensionNames = result.current!.extensionManager.extensions.map((e) => e.name);
     expect(extensionNames).toContain('paragraph');
     expect(extensionNames).toContain('bold');
     expect(extensionNames).toContain('italic');
