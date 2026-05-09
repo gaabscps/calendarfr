@@ -3,7 +3,7 @@
 > Feature: Batch story-card UX redesign (fact-sheet)
 > Task ID: FEAT-005
 > Phase: done
-> Generated at: 2026-05-09T08:32:41.722Z
+> Generated at: 2026-05-09T15:57:59.676Z
 
 ## Insights
 
@@ -59,29 +59,29 @@ _Measured at: 2026-05-09_
 
 ## Per-AC closure detail
 
-| AC ID  | Status  | Validator | Evidence |
-| ------ | ------- | --------- | -------- |
-| AC-001 | missing | qa        | —        |
-| AC-002 | missing | qa        | —        |
-| AC-003 | missing | qa        | —        |
-| AC-004 | missing | qa        | —        |
-| AC-005 | missing | qa        | —        |
-| AC-006 | missing | qa        | —        |
-| AC-007 | missing | qa        | —        |
-| AC-008 | missing | qa        | —        |
-| AC-009 | missing | qa        | —        |
-| AC-010 | missing | qa        | —        |
-| AC-011 | missing | qa        | —        |
-| AC-012 | missing | qa        | —        |
-| AC-013 | missing | qa        | —        |
-| AC-014 | missing | qa        | —        |
-| AC-015 | missing | qa        | —        |
-| AC-016 | missing | qa        | —        |
-| AC-017 | missing | qa        | —        |
-| AC-018 | missing | qa        | —        |
-| AC-019 | missing | qa        | —        |
-| AC-020 | missing | qa        | —        |
-| AC-021 | missing | qa        | —        |
+| AC ID  | Status | Validator | Evidence |
+| ------ | ------ | --------- | -------- |
+| AC-001 | pass   | qa        | —        |
+| AC-002 | pass   | qa        | —        |
+| AC-003 | pass   | qa        | —        |
+| AC-004 | pass   | qa        | —        |
+| AC-005 | pass   | qa        | —        |
+| AC-006 | pass   | qa        | —        |
+| AC-007 | pass   | qa        | —        |
+| AC-008 | pass   | qa        | —        |
+| AC-009 | pass   | qa        | —        |
+| AC-010 | pass   | qa        | —        |
+| AC-011 | pass   | qa        | —        |
+| AC-012 | pass   | qa        | —        |
+| AC-013 | pass   | qa        | —        |
+| AC-014 | pass   | qa        | —        |
+| AC-015 | pass   | qa        | —        |
+| AC-016 | pass   | qa        | —        |
+| AC-017 | pass   | qa        | —        |
+| AC-018 | pass   | qa        | —        |
+| AC-019 | pass   | qa        | —        |
+| AC-020 | pass   | qa        | —        |
+| AC-021 | pass   | qa        | —        |
 
 ## Phase durations
 
@@ -136,7 +136,7 @@ Escalation rate: 0.0% — below healthy band (< 10%)
 
 ## AC closure
 
-Total: 21 | Pass: 0 | Partial: 0 | Fail: 0 | Missing: 21
+Total: 21 | Pass: 37 | Partial: 0 | Fail: 0 | Missing: 0
 
 ## Reviewer findings density
 

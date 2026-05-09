@@ -956,4 +956,175 @@ describe('enrich', () => {
     expect(pmDispatch!.usage!.cost_usd).toBeDefined();
     expect(pmDispatch!.usage!.cost_usd).toBeGreaterThan(0);
   });
+
+  // ---------------------------------------------------------------------------
+  // FEAT-007 regression fixes
+  // ---------------------------------------------------------------------------
+
+  it('normaliseDispatches: normalizes long-form model "claude-sonnet-4-6" and populates cost_usd', () => {
+    // Regression: manifest entries emit "claude-sonnet-4-6" but pricing table uses "sonnet-4-6"
+    const raw: RawSession = {
+      taskId: 'FEAT-MODEL-NORMALIZE',
+      sessionYml: {
+        task_id: 'FEAT-MODEL-NORMALIZE',
+        feature_name: 'ModelNormalize',
+        current_phase: 'done',
+        started_at: '2026-01-01T00:00:00Z',
+      },
+      manifest: {
+        expected_pipeline: [],
+        actual_dispatches: [
+          {
+            dispatch_id: 'd-sonnet',
+            role: 'dev',
+            status: 'done',
+            started_at: '2026-01-01T00:00:00Z',
+            usage: { total_tokens: 100000, tool_uses: 10, duration_ms: 60000, model: 'claude-sonnet-4-6' },
+          },
+          {
+            dispatch_id: 'd-haiku',
+            role: 'qa',
+            status: 'done',
+            started_at: '2026-01-01T01:00:00Z',
+            usage: { total_tokens: 50000, tool_uses: 5, duration_ms: 30000, model: 'claude-haiku-4-5' },
+          },
+          {
+            dispatch_id: 'd-opus',
+            role: 'code-reviewer',
+            status: 'done',
+            started_at: '2026-01-01T02:00:00Z',
+            usage: { total_tokens: 80000, tool_uses: 8, duration_ms: 45000, model: 'claude-opus-4-7' },
+          },
+        ],
+      },
+      outputs: [],
+      specMd: null,
+      sessionDirPath: '/tmp/fake',
+    };
+    const session = enrich(raw);
+    expect(session.dispatches).toHaveLength(3);
+
+    const sonnet = session.dispatches.find((d) => d.dispatchId === 'd-sonnet');
+    expect(sonnet!.usage!.model).toBe('sonnet-4-6');
+    expect(sonnet!.usage!.cost_usd).toBeDefined();
+    expect(sonnet!.usage!.cost_usd).toBeGreaterThan(0);
+
+    const haiku = session.dispatches.find((d) => d.dispatchId === 'd-haiku');
+    expect(haiku!.usage!.model).toBe('haiku-4-5');
+    expect(haiku!.usage!.cost_usd).toBeDefined();
+    expect(haiku!.usage!.cost_usd).toBeGreaterThan(0);
+
+    const opus = session.dispatches.find((d) => d.dispatchId === 'd-opus');
+    expect(opus!.usage!.model).toBe('opus-4-7');
+    expect(opus!.usage!.cost_usd).toBeDefined();
+    expect(opus!.usage!.cost_usd).toBeGreaterThan(0);
+  });
+
+  it('aggregateQaResults: handles object-map shape with status strings (FEAT-007 regression)', () => {
+    // Regression: QA output packets emit ac_coverage as { "AC-001": "pass", "AC-002": "deferred" }
+    const raw: RawSession = {
+      taskId: 'FEAT-QA-OBJMAP',
+      sessionYml: {
+        task_id: 'FEAT-QA-OBJMAP',
+        feature_name: 'QaObjMap',
+        current_phase: 'done',
+        started_at: '2026-01-01T00:00:00Z',
+      },
+      manifest: null,
+      outputs: [
+        {
+          filename: 'qa-obj.json',
+          data: {
+            role: 'qa',
+            ac_coverage: {
+              'AC-001': 'pass',
+              'AC-002': 'fail',
+              'AC-003': 'partial',
+              'AC-004': 'deferred', // maps to 'partial'
+              'AC-005': '',          // empty string → skip
+            },
+          },
+        },
+      ],
+      specMd: null,
+      sessionDirPath: '/tmp/fake',
+    };
+    const session = enrich(raw);
+    expect(session.qaResults).toHaveLength(4);
+    const byAc = Object.fromEntries(session.qaResults.map((r) => [r.ac, r.status]));
+    expect(byAc['AC-001']).toBe('pass');
+    expect(byAc['AC-002']).toBe('fail');
+    expect(byAc['AC-003']).toBe('partial');
+    expect(byAc['AC-004']).toBe('partial'); // deferred → partial
+    expect(byAc['AC-005']).toBeUndefined(); // empty string skipped
+  });
+
+  it('aggregateQaResults: handles object-map shape with evidence-ID arrays (FEAT-007 regression)', () => {
+    // Regression: QA output packets emit ac_coverage as { "AC-002": ["ev-001", "ev-002"] }
+    const raw: RawSession = {
+      taskId: 'FEAT-QA-EVARRAY',
+      sessionYml: {
+        task_id: 'FEAT-QA-EVARRAY',
+        feature_name: 'QaEvArray',
+        current_phase: 'done',
+        started_at: '2026-01-01T00:00:00Z',
+      },
+      manifest: null,
+      outputs: [
+        {
+          filename: 'qa-ev.json',
+          data: {
+            role: 'qa',
+            ac_coverage: {
+              'AC-002': ['ev-001', 'ev-002'], // non-empty array → 'pass'
+              'AC-003': ['ev-001'],            // non-empty array → 'pass'
+              'AC-099': [],                    // empty array → skip
+            },
+          },
+        },
+      ],
+      specMd: null,
+      sessionDirPath: '/tmp/fake',
+    };
+    const session = enrich(raw);
+    expect(session.qaResults).toHaveLength(2);
+    const byAc = Object.fromEntries(session.qaResults.map((r) => [r.ac, r.status]));
+    expect(byAc['AC-002']).toBe('pass');
+    expect(byAc['AC-003']).toBe('pass');
+    expect(byAc['AC-099']).toBeUndefined(); // empty array skipped
+  });
+
+  it('aggregateQaResults: legacy array shape still works alongside new object-map support', () => {
+    // Ensure the old format (array of {ac, status}) is not broken
+    const raw: RawSession = {
+      taskId: 'FEAT-QA-LEGACY',
+      sessionYml: {
+        task_id: 'FEAT-QA-LEGACY',
+        feature_name: 'QaLegacy',
+        current_phase: 'done',
+        started_at: '2026-01-01T00:00:00Z',
+      },
+      manifest: null,
+      outputs: [
+        {
+          filename: 'qa-legacy.json',
+          data: {
+            role: 'qa',
+            ac_coverage: [
+              { ac: 'AC-010', status: 'pass' },
+              { ac: 'AC-011', status: 'fail' },
+            ],
+          },
+        },
+      ],
+      specMd: null,
+      sessionDirPath: '/tmp/fake',
+    };
+    const session = enrich(raw);
+    expect(session.qaResults).toHaveLength(2);
+    expect(session.qaResults[0]!.ac).toBe('AC-010');
+    expect(session.qaResults[0]!.status).toBe('pass');
+    expect(session.qaResults[1]!.ac).toBe('AC-011');
+    expect(session.qaResults[1]!.status).toBe('fail');
+  });
 });

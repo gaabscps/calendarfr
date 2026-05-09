@@ -1,0 +1,47 @@
+/**
+ * RichTextLine styles — CSS Module.
+ *
+ * Minimal wrapper that ensures the editor area:
+ *  - Does not show a default browser outline (we control focus indication).
+ *  - Shows a clear 2px focus ring on keyboard navigation via :focus-visible.
+ *  - Renders the Tiptap Placeholder extension hint text via the standard
+ *    selector: p.is-editor-empty:first-child::before with data-placeholder.
+ *
+ * Tokens reference: CSS custom properties defined by GlobalStyles (FEAT-001).
+ */
+
+.wrapper {
+  /* Container is intentionally unstyled — consumers apply their own layout. */
+  display: block;
+}
+
+/* Strip the default outline from the ProseMirror container itself. */
+.wrapper :global(.ProseMirror) {
+  outline: none;
+}
+
+/* Focus ring — keyboard-accessible only, not pointer-focus (WCAG 2.1 AA). */
+.wrapper :global(.ProseMirror:focus-visible) {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/**
+ * Placeholder text rendered by Tiptap's Placeholder extension.
+ *
+ * The extension marks the first paragraph as "is-editor-empty" and attaches
+ * the placeholder string as a data-placeholder attribute on the <p>. We use
+ * ::before to render it as decorative text (not in the DOM / accessible tree).
+ *
+ * pointer-events: none prevents accidental selection of the pseudo-content.
+ * user-select: none ensures the placeholder is not selectable.
+ */
+.wrapper :global(.tiptap p.is-editor-empty:first-child::before) {
+  content: attr(data-placeholder);
+  color: var(--ink-muted);
+  pointer-events: none;
+  /* float + height keep the placeholder inline without disturbing layout. */
+  float: left;
+  height: 0;
+}

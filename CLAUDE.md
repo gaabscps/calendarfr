@@ -2,7 +2,7 @@
 
 **Última atualização:** 2026-05-09
 **Macro spec:** [`docs/specs/2026-05-08-mvp-overview.md`](docs/specs/2026-05-08-mvp-overview.md)
-**Spec ativo:** [`.agent-session/FEAT-006/spec.md`](.agent-session/FEAT-006/spec.md)
+**Spec ativo:** [`.agent-session/FEAT-007/spec.md`](.agent-session/FEAT-007/spec.md)
 
 ---
 
@@ -117,6 +117,7 @@ Para detalhes de arquitetura, fluxos e modelo de dados, ver o [macro spec](docs/
 - `agentops-quality` (FEAT-003) — em desenvolvimento
 - `agentops-dashboard` (FEAT-004) — em desenvolvimento
 - `server-companion` (FEAT-006) — em desenvolvimento
+- `rich-text-line` (FEAT-007) — em desenvolvimento
 
 ---
 

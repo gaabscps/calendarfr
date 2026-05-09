@@ -1,0 +1,91 @@
+/**
+ * FloatingToolbar styles — CSS Module.
+ *
+ * Implements the visual spec for the floating format toolbar:
+ *  - Paper background with subtle shadow and rounded corners.
+ *  - Fade transition handled by BubbleMenu/tippy.js (via tippyOptions duration).
+ *  - 28×28px buttons with transparent background; hover/active state via
+ *    opacity-based ink color (respects dark mode via CSS custom properties).
+ *  - Focus ring for keyboard navigation (WAI-ARIA APG — AC-011, NFR-005).
+ *
+ * Tokens reference: CSS custom properties defined by GlobalStyles (FEAT-001).
+ */
+
+.toolbar {
+  display: flex;
+  gap: 2px;
+  padding: 4px;
+  background: var(--paper);
+  border: 1px solid var(--paper-line);
+  border-radius: 8px;
+  box-shadow: 0 2px 8px var(--shadow);
+  /* Fade in/out — BubbleMenu (tippy.js) controls opacity via its own animation;
+     this provides a CSS fallback for the opacity transition (AC-006, AC-007). */
+  transition: opacity 150ms ease;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  background: transparent;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  color: var(--ink);
+  /* Smooth hover transition. */
+  transition: background 100ms ease, color 100ms ease;
+}
+
+.button:hover {
+  background: rgba(42, 77, 58, 0.08);
+}
+
+/* Active state: when aria-pressed="true" (mark is applied to selection). */
+.button[aria-pressed='true'] {
+  background: rgba(42, 77, 58, 0.16);
+  color: var(--ink);
+}
+
+/* Focus ring for keyboard-only navigation. */
+.button:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 1px;
+}
+
+/* Strip browser default focus ring to rely on our custom one. */
+.button:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Icon typography — each mark rendered as its letter with appropriate style. */
+.icon {
+  display: inline-block;
+  font-size: 14px;
+  line-height: 1;
+  font-weight: 700; /* B — bold icon */
+  font-style: normal;
+  user-select: none;
+  pointer-events: none;
+}
+
+/* Italic button icon — visually italicised. */
+[aria-label='Itálico'] .icon {
+  font-style: italic;
+  font-weight: 400;
+}
+
+/* Underline button icon. */
+[aria-label='Sublinhado'] .icon {
+  text-decoration: underline;
+  font-weight: 400;
+}
+
+/* Strikethrough button icon. */
+[aria-label='Riscado'] .icon {
+  text-decoration: line-through;
+  font-weight: 400;
+}

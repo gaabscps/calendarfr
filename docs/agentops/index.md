@@ -1,6 +1,6 @@
 # AgentOps observability — overview
 
-> Generated at: 2026-05-09T08:32:41.722Z | Total flows: 6
+> Generated at: 2026-05-09T15:57:59.676Z | Total flows: 7
 
 ## Repo health snapshot
 
@@ -23,9 +23,10 @@ _Measured at: 2026-05-09_
 | ✓ FEAT-004 | Narrative HTML dashboard for AgentOps reports                                        | done  | done   | 11         | 26  | 0.42    | 0.0%  | $3.8903  | $0.1496 | 2026-05-09 |
 | ✓ FEAT-005 | Batch story-card UX redesign (fact-sheet)                                            | done  | done   | 17         | 21  | 0.81    | 0.0%  | $24.0331 | $1.1444 | 2026-05-09 |
 | ✓ FEAT-006 | Server companion — Fastify + JSON store (rotas /api/days/:date)                      | done  | done   | 16         | 30  | 0.53    | 0.0%  | $13.8704 | $0.4623 | 2026-05-09 |
+| ✓ FEAT-007 | rich-text-line — editor Tiptap de uma linha (núcleo de escrita)                      | done  | done   | 19         | 35  | 0.54    | 0.0%  | $22.9994 | $0.6571 | 2026-05-09 |
 
 ## Trends
 
-- Dispatches/AC: FEAT-005=0.81 → FEAT-006=0.53 (-34.1%)
-- Dev task success rate: FEAT-005=100.0% → FEAT-006=100.0% (0.0%)
-- Cost per AC: FEAT-001=$0.0873 → FEAT-006=$0.4623 (+429.3%)
+- Dispatches/AC: FEAT-006=0.53 → FEAT-007=0.54 (+1.8%)
+- Dev task success rate: FEAT-006=100.0% → FEAT-007=85.7% (-14.3%)
+- Cost per AC: FEAT-001=$0.0873 → FEAT-007=$0.6571 (+652.3%)

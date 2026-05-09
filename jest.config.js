@@ -43,11 +43,13 @@ const config = {
   ],
   collectCoverageFrom: [
     'web/src/shared/**/*.{ts,tsx}',
+    'web/src/features/rich-text-line/**/*.{ts,tsx}',
     'server/src/**/*.ts',
     'scripts/agentops/**/*.ts',
     'scripts/agentops/render/html/**/*.ts',
     '!**/*.d.ts',
     '!**/*.stories.tsx',
+    '!**/__tests__/**',
     '!scripts/agentops/__fixtures__/**',
   ],
   coverageReporters: ['text', 'html', 'lcov'],
@@ -92,6 +94,12 @@ const config = {
       statements: 95,
     },
     'server/src/lib/**/*.ts': {
+      branches: 95,
+      functions: 95,
+      lines: 95,
+      statements: 95,
+    },
+    'web/src/features/rich-text-line/': {
       branches: 95,
       functions: 95,
       lines: 95,

@@ -3,7 +3,7 @@
 > Feature: Server companion — Fastify + JSON store (rotas /api/days/:date)
 > Task ID: FEAT-006
 > Phase: done
-> Generated at: 2026-05-09T08:32:41.722Z
+> Generated at: 2026-05-09T15:57:59.676Z
 
 ## Insights
 
@@ -62,21 +62,21 @@ _Measured at: 2026-05-09_
 | ------ | ------- | --------- | -------- |
 | AC-001 | missing | qa        | —        |
 | AC-002 | missing | qa        | —        |
-| AC-003 | missing | qa        | —        |
-| AC-004 | missing | qa        | —        |
-| AC-005 | missing | qa        | —        |
-| AC-006 | missing | qa        | —        |
-| AC-007 | missing | qa        | —        |
+| AC-003 | pass    | qa        | —        |
+| AC-004 | partial | qa        | —        |
+| AC-005 | pass    | qa        | —        |
+| AC-006 | pass    | qa        | —        |
+| AC-007 | pass    | qa        | —        |
 | AC-008 | missing | qa        | —        |
 | AC-009 | missing | qa        | —        |
 | AC-010 | missing | qa        | —        |
 | AC-011 | missing | qa        | —        |
 | AC-012 | missing | qa        | —        |
 | AC-013 | missing | qa        | —        |
-| AC-014 | missing | qa        | —        |
-| AC-015 | missing | qa        | —        |
+| AC-014 | pass    | qa        | —        |
+| AC-015 | pass    | qa        | —        |
 | AC-016 | missing | qa        | —        |
-| AC-017 | missing | qa        | —        |
+| AC-017 | pass    | qa        | —        |
 | AC-018 | missing | qa        | —        |
 | AC-019 | missing | qa        | —        |
 | AC-020 | missing | qa        | —        |
@@ -85,11 +85,11 @@ _Measured at: 2026-05-09_
 | AC-023 | missing | qa        | —        |
 | AC-024 | missing | qa        | —        |
 | AC-025 | missing | qa        | —        |
-| AC-026 | missing | qa        | —        |
+| AC-026 | pass    | qa        | —        |
 | AC-027 | missing | qa        | —        |
 | AC-028 | missing | qa        | —        |
-| AC-029 | missing | qa        | —        |
-| AC-030 | missing | qa        | —        |
+| AC-029 | pass    | qa        | —        |
+| AC-030 | pass    | qa        | —        |
 
 ## Phase durations
 
@@ -139,7 +139,7 @@ Escalation rate: 0.0% — below healthy band (< 10%)
 
 ## AC closure
 
-Total: 30 | Pass: 0 | Partial: 0 | Fail: 0 | Missing: 30
+Total: 30 | Pass: 10 | Partial: 1 | Fail: 0 | Missing: 19
 
 ## Reviewer findings density
 
