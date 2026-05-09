@@ -6,6 +6,7 @@
 
 import path from 'path';
 
+import { ANTHROPIC_PRICING_2026 } from '../constants';
 import { enrich } from '../enrich';
 import {
   measure,
@@ -18,6 +19,7 @@ import {
   computeAcClosureSummary,
   computeReviewerFindings,
   computeTokenCost,
+  computeCostUsd,
 } from '../measure';
 import { parse } from '../parse';
 import type { Session } from '../types';
@@ -82,7 +84,7 @@ describe('computeDispatchesByRole', () => {
     const counts = computeDispatchesByRole(session);
     const total = Object.values(counts).reduce((a, b) => a + b, 0);
     expect(total).toBe(0);
-    expect(Object.keys(counts)).toHaveLength(6);
+    expect(Object.keys(counts)).toHaveLength(7);
   });
 
   it('counts correctly with multiple dispatches of the same role', () => {
@@ -746,6 +748,148 @@ describe('computeTokenCost', () => {
     const cost = computeTokenCost(session);
     expect(cost.total).toBeNull();
     expect(cost.perAc).toBeNull();
+  });
+});
+
+// ---------------------------------------------------------------------------
+// computeCostUsd (FEAT-003 AC-020..AC-023)
+// ---------------------------------------------------------------------------
+
+describe('computeCostUsd', () => {
+  /** Helper: dispatch with usage */
+  function makeDispatchWithUsage(
+    id: string,
+    model: 'opus-4-7' | 'sonnet-4-6' | 'haiku-4-5' | 'unknown',
+    total_tokens: number,
+  ): Session['dispatches'][0] {
+    return {
+      dispatchId: id,
+      role: 'dev',
+      status: 'done',
+      startedAt: '2026-01-01T00:00:00Z',
+      completedAt: null,
+      outputPacket: null,
+      loop: null,
+      pmNote: null,
+      usage: { total_tokens, tool_uses: 5, duration_ms: 10000, model },
+    };
+  }
+
+  it('AC-023: returns total_usd=null when no dispatches have usage', () => {
+    const session = makeSession({
+      acs: ['AC-001'],
+      dispatches: [
+        {
+          dispatchId: 'd1',
+          role: 'dev',
+          status: 'done',
+          startedAt: '2026-01-01T00:00:00Z',
+          completedAt: null,
+          outputPacket: null,
+          loop: null,
+          pmNote: null,
+          // no usage field
+        },
+      ],
+    });
+    const result = computeCostUsd(session, ANTHROPIC_PRICING_2026);
+    expect(result.total_usd).toBeNull();
+    expect(result.per_ac_usd).toBeNull();
+    expect(result.per_dispatch_avg_usd).toBeNull();
+    expect(result.coverage).toEqual({ included: 0, total: 1 });
+    expect(result.assumption_note).toContain('no usage data available');
+    expect(result.assumption_note).toContain('1 dispatches');
+  });
+
+  it('AC-023: returns total_usd=null with correct fallback count when session has zero dispatches', () => {
+    const session = makeSession({ acs: ['AC-001'], dispatches: [] });
+    const result = computeCostUsd(session, ANTHROPIC_PRICING_2026);
+    expect(result.total_usd).toBeNull();
+    expect(result.coverage).toEqual({ included: 0, total: 0 });
+    expect(result.assumption_note).toContain('0 dispatches');
+  });
+
+  it('AC-020 + AC-021: computes USD for all sonnet-4-6 dispatches with 70/30 split', () => {
+    // sonnet-4-6: input=$3/Mtok, output=$15/Mtok
+    // 1,000,000 tokens → 700k input + 300k output
+    // cost = (0.7 × 3) + (0.3 × 15) = 2.1 + 4.5 = $6.60
+    const session = makeSession({
+      acs: ['AC-001', 'AC-002'],
+      dispatches: [makeDispatchWithUsage('d1', 'sonnet-4-6', 1_000_000)],
+    });
+    const result = computeCostUsd(session, ANTHROPIC_PRICING_2026);
+    expect(result.total_usd).toBeCloseTo(6.6, 5);
+    expect(result.per_ac_usd).toBeCloseTo(6.6 / 2, 5);
+    expect(result.per_dispatch_avg_usd).toBeCloseTo(6.6, 5);
+    expect(result.coverage).toEqual({ included: 1, total: 1 });
+    expect(result.assumption_note).toContain('70/30 input/output split assumed');
+  });
+
+  it('AC-022: excludes dispatches with model=unknown from cost calculation', () => {
+    const session = makeSession({
+      acs: ['AC-001'],
+      dispatches: [
+        makeDispatchWithUsage('d1', 'sonnet-4-6', 1_000_000),
+        makeDispatchWithUsage('d2', 'unknown', 999_999), // should be excluded
+      ],
+    });
+    const result = computeCostUsd(session, ANTHROPIC_PRICING_2026);
+    // only d1 included: cost = $6.60
+    expect(result.total_usd).toBeCloseTo(6.6, 5);
+    expect(result.coverage).toEqual({ included: 1, total: 2 });
+    expect(result.assumption_note).toContain('1 of 2 dispatches included in cost');
+  });
+
+  it('AC-022: all dispatches have unknown model → total_usd=null', () => {
+    const session = makeSession({
+      acs: ['AC-001'],
+      dispatches: [
+        makeDispatchWithUsage('d1', 'unknown', 500_000),
+        makeDispatchWithUsage('d2', 'unknown', 300_000),
+      ],
+    });
+    const result = computeCostUsd(session, ANTHROPIC_PRICING_2026);
+    expect(result.total_usd).toBeNull();
+    expect(result.coverage).toEqual({ included: 0, total: 2 });
+    expect(result.assumption_note).toContain('no usage data available');
+  });
+
+  it('AC-021: uses haiku-4-5 pricing correctly ($1/$5 per Mtok)', () => {
+    // haiku-4-5: input=$1/Mtok, output=$5/Mtok
+    // 1,000,000 tokens → 700k input + 300k output
+    // cost = (0.7 × 1) + (0.3 × 5) = 0.7 + 1.5 = $2.20
+    const session = makeSession({
+      acs: ['AC-001'],
+      dispatches: [makeDispatchWithUsage('d1', 'haiku-4-5', 1_000_000)],
+    });
+    const result = computeCostUsd(session, ANTHROPIC_PRICING_2026);
+    expect(result.total_usd).toBeCloseTo(2.2, 5);
+  });
+
+  it('AC-020: per_ac_usd is null when acs list is empty (avoid division by zero)', () => {
+    const session = makeSession({
+      acs: [],
+      dispatches: [makeDispatchWithUsage('d1', 'sonnet-4-6', 100_000)],
+    });
+    const result = computeCostUsd(session, ANTHROPIC_PRICING_2026);
+    expect(result.per_ac_usd).toBeNull();
+    expect(result.total_usd).not.toBeNull();
+  });
+
+  it('sums costs across multiple dispatches with different models', () => {
+    // opus-4-7: $5/$25 → 1Mtok = (0.7×5) + (0.3×25) = 3.5 + 7.5 = $11.00
+    // haiku-4-5: $1/$5 → 1Mtok = (0.7×1) + (0.3×5) = 0.7 + 1.5 = $2.20
+    const session = makeSession({
+      acs: ['AC-001', 'AC-002'],
+      dispatches: [
+        makeDispatchWithUsage('d1', 'opus-4-7', 1_000_000),
+        makeDispatchWithUsage('d2', 'haiku-4-5', 1_000_000),
+      ],
+    });
+    const result = computeCostUsd(session, ANTHROPIC_PRICING_2026);
+    expect(result.total_usd).toBeCloseTo(13.2, 5);
+    expect(result.coverage).toEqual({ included: 2, total: 2 });
+    expect(result.per_dispatch_avg_usd).toBeCloseTo(6.6, 5);
   });
 });
 

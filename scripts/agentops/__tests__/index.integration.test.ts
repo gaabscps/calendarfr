@@ -236,9 +236,9 @@ describe('agentops index.ts integration', () => {
       expect(content).toContain('(no flows yet)');
     });
 
-    it('does not generate any flow-specific .md files', async () => {
+    it('does not generate any flow-specific files (only index.md + index.html)', async () => {
       const files = await fs.readdir(outDir);
-      const flowFiles = files.filter((f) => f !== 'index.md');
+      const flowFiles = files.filter((f) => f !== 'index.md' && f !== 'index.html');
       expect(flowFiles).toHaveLength(0);
     });
   });
@@ -354,6 +354,223 @@ describe('agentops index.ts integration', () => {
     it('masks elapsed time in log output', () => {
       const log = '[agentops] done in 0.42s';
       expect(maskElapsed(log)).toBe('[agentops] done in <ELAPSED>s');
+    });
+  });
+
+  // -------------------------------------------------------------------------
+  // T-022: RepoHealth integration — reports/ absent → "not measured" sections
+  // AC-028, AC-032, AC-034
+  // -------------------------------------------------------------------------
+
+  describe('T-022: repo health absent — no reports/ dir', () => {
+    let outDir: string;
+    let capturedLog: string;
+
+    beforeAll(async () => {
+      outDir = path.join(tmpDir, 'no-reports-run');
+      const logLines: string[] = [];
+      const ls = jest
+        .spyOn(console, 'log')
+        .mockImplementation((...args: unknown[]) => logLines.push(args.join(' ')));
+      const ws = jest.spyOn(console, 'warn').mockImplementation(() => undefined);
+      process.env.AGENTOPS_ROOT = FIXTURES_ROOT;
+      process.env.AGENTOPS_OUT = outDir;
+      process.env.AGENTOPS_REPORTS = path.join(os.tmpdir(), '__does_not_exist_reports__');
+      const { main } = await import('../index');
+      await main();
+      capturedLog = logLines.join('\n');
+      ls.mockRestore();
+      ws.mockRestore();
+      delete process.env.AGENTOPS_ROOT;
+      delete process.env.AGENTOPS_OUT;
+      delete process.env.AGENTOPS_REPORTS;
+    });
+
+    it('still generates index.md', async () => {
+      const stat = await fs.stat(path.join(outDir, 'index.md'));
+      expect(stat.isFile()).toBe(true);
+    });
+
+    it('index.md contains "not measured" when no reports dir', async () => {
+      const content = await fs.readFile(path.join(outDir, 'index.md'), 'utf-8');
+      expect(content).toMatch(/not measured/i);
+    });
+
+    it('logs "repo health not measured" when reports dir absent', () => {
+      expect(capturedLog).toMatch(/repo health not measured/i);
+    });
+
+    it('flow report contains "not measured" for repo health section', async () => {
+      const content = await fs.readFile(path.join(outDir, 'FEAT-FIXTURE-A.md'), 'utf-8');
+      expect(content).toMatch(/not measured/i);
+    });
+  });
+
+  // -------------------------------------------------------------------------
+  // T-017: HTML generation — index.html + FEAT-NNN.html produced (AC-001, AC-011, AC-012)
+  // -------------------------------------------------------------------------
+
+  describe('T-017: HTML files generated alongside MD files (AC-001, AC-011, AC-012)', () => {
+    let outDir: string;
+
+    beforeAll(async () => {
+      outDir = path.join(tmpDir, 'html-run1');
+      const ls = jest.spyOn(console, 'log').mockImplementation(() => undefined);
+      const ws = jest.spyOn(console, 'warn').mockImplementation(() => undefined);
+      process.env.AGENTOPS_ROOT = FIXTURES_ROOT;
+      process.env.AGENTOPS_OUT = outDir;
+      const { main } = await import('../index');
+      await main();
+      ls.mockRestore();
+      ws.mockRestore();
+      delete process.env.AGENTOPS_ROOT;
+      delete process.env.AGENTOPS_OUT;
+    });
+
+    it('generates index.html', async () => {
+      const stat = await fs.stat(path.join(outDir, 'index.html'));
+      expect(stat.isFile()).toBe(true);
+    });
+
+    it('generates FEAT-FIXTURE-A.html', async () => {
+      const stat = await fs.stat(path.join(outDir, 'FEAT-FIXTURE-A.html'));
+      expect(stat.isFile()).toBe(true);
+    });
+
+    it('index.md still exists alongside index.html (AC-011 — MD not deleted)', async () => {
+      const stat = await fs.stat(path.join(outDir, 'index.md'));
+      expect(stat.isFile()).toBe(true);
+    });
+
+    it('FEAT-FIXTURE-A.md still exists alongside FEAT-FIXTURE-A.html (AC-011)', async () => {
+      const stat = await fs.stat(path.join(outDir, 'FEAT-FIXTURE-A.md'));
+      expect(stat.isFile()).toBe(true);
+    });
+
+    it('index.html is a valid HTML document', async () => {
+      const content = await fs.readFile(path.join(outDir, 'index.html'), 'utf-8');
+      expect(content).toContain('<!DOCTYPE html>');
+      expect(content).toContain('<html');
+      expect(content).toContain('</html>');
+    });
+
+    it('FEAT-FIXTURE-A.html is a valid HTML document', async () => {
+      const content = await fs.readFile(path.join(outDir, 'FEAT-FIXTURE-A.html'), 'utf-8');
+      expect(content).toContain('<!DOCTYPE html>');
+      expect(content).toContain('<html');
+      expect(content).toContain('</html>');
+    });
+
+    it('FEAT-FIXTURE-A.html contains MD content from the same run (AC-012)', async () => {
+      const content = await fs.readFile(path.join(outDir, 'FEAT-FIXTURE-A.html'), 'utf-8');
+      // MD content is embedded in the html raw-data section
+      expect(content).toContain('md-embed');
+    });
+  });
+
+  // -------------------------------------------------------------------------
+  // T-017: AGENTOPS_HTML_DIR env var override (NFR-006)
+  // -------------------------------------------------------------------------
+
+  describe('T-017: AGENTOPS_HTML_DIR env var overrides HTML output dir (NFR-006)', () => {
+    let outDir: string;
+    let htmlDir: string;
+
+    beforeAll(async () => {
+      outDir = path.join(tmpDir, 'html-dir-md');
+      htmlDir = path.join(tmpDir, 'html-dir-html');
+      const ls = jest.spyOn(console, 'log').mockImplementation(() => undefined);
+      const ws = jest.spyOn(console, 'warn').mockImplementation(() => undefined);
+      process.env.AGENTOPS_ROOT = FIXTURES_ROOT;
+      process.env.AGENTOPS_OUT = outDir;
+      process.env.AGENTOPS_HTML_DIR = htmlDir;
+      const { main } = await import('../index');
+      await main();
+      ls.mockRestore();
+      ws.mockRestore();
+      delete process.env.AGENTOPS_ROOT;
+      delete process.env.AGENTOPS_OUT;
+      delete process.env.AGENTOPS_HTML_DIR;
+    });
+
+    it('MD files go to AGENTOPS_OUT', async () => {
+      const stat = await fs.stat(path.join(outDir, 'index.md'));
+      expect(stat.isFile()).toBe(true);
+    });
+
+    it('HTML files go to AGENTOPS_HTML_DIR', async () => {
+      const stat = await fs.stat(path.join(htmlDir, 'index.html'));
+      expect(stat.isFile()).toBe(true);
+    });
+
+    it('HTML does not appear in AGENTOPS_OUT when AGENTOPS_HTML_DIR is set', async () => {
+      await expect(fs.stat(path.join(outDir, 'index.html'))).rejects.toThrow();
+    });
+
+    it('MD does not appear in AGENTOPS_HTML_DIR', async () => {
+      await expect(fs.stat(path.join(htmlDir, 'index.md'))).rejects.toThrow();
+    });
+  });
+
+  // -------------------------------------------------------------------------
+  // T-022: RepoHealth integration — partial reports/ (mutation + type-cov only)
+  // AC-028, AC-034
+  // -------------------------------------------------------------------------
+
+  describe('T-022: repo health partial — mutation + type-cov present, no dep-cruiser', () => {
+    let outDir: string;
+    let partialReportsDir: string;
+
+    beforeAll(async () => {
+      outDir = path.join(tmpDir, 'partial-reports-run');
+      // Build a partial reports dir: mutation + type-coverage only
+      partialReportsDir = await fs.mkdtemp(path.join(os.tmpdir(), 'agentops-partial-reports-'));
+      const FIXTURES_REPORTS = path.resolve(__dirname, 'repo-health-fixtures');
+      await fs.mkdir(path.join(partialReportsDir, 'mutation'), { recursive: true });
+      await fs.copyFile(
+        path.join(FIXTURES_REPORTS, 'mutation', 'mutation.json'),
+        path.join(partialReportsDir, 'mutation', 'mutation.json'),
+      );
+      await fs.mkdir(path.join(partialReportsDir, 'type-coverage'), { recursive: true });
+      await fs.copyFile(
+        path.join(FIXTURES_REPORTS, 'type-coverage', 'type-coverage.json'),
+        path.join(partialReportsDir, 'type-coverage', 'type-coverage.json'),
+      );
+      // No dep-cruiser dir — intentionally absent
+
+      const ls = jest.spyOn(console, 'log').mockImplementation(() => undefined);
+      const ws = jest.spyOn(console, 'warn').mockImplementation(() => undefined);
+      process.env.AGENTOPS_ROOT = FIXTURES_ROOT;
+      process.env.AGENTOPS_OUT = outDir;
+      process.env.AGENTOPS_REPORTS = partialReportsDir;
+      const { main } = await import('../index');
+      await main();
+      ls.mockRestore();
+      ws.mockRestore();
+      delete process.env.AGENTOPS_ROOT;
+      delete process.env.AGENTOPS_OUT;
+      delete process.env.AGENTOPS_REPORTS;
+    });
+
+    afterAll(async () => {
+      await fs.rm(partialReportsDir, { recursive: true, force: true });
+    });
+
+    it('generates index.md with repo health section (partial data)', async () => {
+      const content = await fs.readFile(path.join(outDir, 'index.md'), 'utf-8');
+      // Should have repo health section with real mutation score
+      expect(content).toContain('## Repo health');
+    });
+
+    it('index.md shows mutation score from partial data', async () => {
+      const content = await fs.readFile(path.join(outDir, 'index.md'), 'utf-8');
+      // Fixture mutation score is 75.5%
+      expect(content).toContain('75.5');
+    });
+
+    it('flow report shows repo health section with partial data', async () => {
+      const content = await fs.readFile(path.join(outDir, 'FEAT-FIXTURE-A.md'), 'utf-8');
+      expect(content).toContain('## Repo health');
     });
   });
 });
