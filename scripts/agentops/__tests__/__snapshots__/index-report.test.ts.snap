@@ -7,10 +7,10 @@ exports[`renderIndexReport — 2 flows (A + B) matches snapshot (timestamp maske
 
 ## Cross-flow snapshot
 
-| ID | Feature | Phase | Status | Dispatches | ACs | Disp/AC | Esc % | Created |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| ✓ FEAT-FIXTURE-A | Fixture A — happy path complete | done | done | 4 | 5 | 0.80 | 0.0% | 2026-05-01 |
-| … FEAT-FIXTURE-B | Fixture B — spec-only, no dispatches | specify | specify-only | 0 | 3 | — | — | 2026-05-02 |
+| ID | Feature | Phase | Status | Dispatches | ACs | Disp/AC | Esc % | $ USD | $/AC | Created |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| ✓ FEAT-FIXTURE-A | Fixture A — happy path complete | done | done | 4 | 5 | 0.80 | 0.0% | — | — | 2026-05-01 |
+| … FEAT-FIXTURE-B | Fixture B — spec-only, no dispatches | specify | specify-only | 0 | 3 | — | — | — | — | 2026-05-02 |
 
 ## Trends
 
@@ -25,11 +25,11 @@ exports[`renderIndexReport — 3 flows with 2 completed → trends matches snaps
 
 ## Cross-flow snapshot
 
-| ID | Feature | Phase | Status | Dispatches | ACs | Disp/AC | Esc % | Created |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| ✓ FEAT-FIXTURE-A | Fixture A — happy path complete | done | done | 4 | 5 | 0.80 | 0.0% | 2026-05-01 |
-| ✓ FEAT-FIXTURE-A2 | Fixture A2 | done | done | 4 | 5 | 0.60 | 0.0% | 2026-05-01 |
-| … FEAT-FIXTURE-B | Fixture B — spec-only, no dispatches | specify | specify-only | 0 | 3 | — | — | 2026-05-02 |
+| ID | Feature | Phase | Status | Dispatches | ACs | Disp/AC | Esc % | $ USD | $/AC | Created |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| ✓ FEAT-FIXTURE-A | Fixture A — happy path complete | done | done | 4 | 5 | 0.80 | 0.0% | — | — | 2026-05-01 |
+| ✓ FEAT-FIXTURE-A2 | Fixture A2 | done | done | 4 | 5 | 0.60 | 0.0% | — | — | 2026-05-01 |
+| … FEAT-FIXTURE-B | Fixture B — spec-only, no dispatches | specify | specify-only | 0 | 3 | — | — | — | — | 2026-05-02 |
 
 ## Trends
 

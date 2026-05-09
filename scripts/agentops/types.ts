@@ -1,7 +1,56 @@
 /**
  * AgentOps observability extractor — shared type definitions.
- * All types correspond to Plan DM-1..DM-5.
+ * All types correspond to Plan DM-1..DM-5 (FEAT-002) and DM-1..DM-4 (FEAT-003).
  */
+
+// FEAT-003 DM-1 — Usage: per-dispatch token usage captured from <usage> annotation
+export interface Usage {
+  total_tokens: number;
+  tool_uses: number;
+  duration_ms: number;
+  /** Model identifier; 'unknown' when not determinable */
+  model: 'opus-4-7' | 'sonnet-4-6' | 'haiku-4-5' | 'unknown';
+  /**
+   * Optional fine-grained breakdown (FEAT-005 — PM session capture via Stop hook).
+   * When present, cost computation uses these values + cache pricing instead of
+   * the 70/30 split assumption applied to total_tokens.
+   */
+  breakdown?: {
+    input_tokens: number;
+    output_tokens: number;
+    cache_creation_input_tokens: number;
+    cache_read_input_tokens: number;
+  };
+  /** Pre-computed USD cost for this dispatch (FEAT-005+; may be absent). */
+  cost_usd?: number;
+}
+
+// FEAT-003 DM-4 — BackfillEntry: retroactive usage estimate from conversation log
+export interface BackfillEntry {
+  dispatch_id: string;
+  total_tokens: number;
+  tool_uses: number;
+  duration_ms: number;
+  model: string;
+  backfill_source: 'conversation_log_estimate' | 'manual';
+}
+
+// FEAT-003 DM-2 — RepoHealth: snapshot of quality metrics from reports/
+export interface RepoHealth {
+  mutation: { score: number; killed: number; total: number } | null;
+  typeCoverage: { percent: number; anyCount: number } | null;
+  depViolations: { error: number; warn: number } | null;
+  measuredAt: string;
+}
+
+// FEAT-003 DM-3 — CostMetric: USD cost estimate for a session
+export interface CostMetric {
+  total_usd: number | null;
+  per_ac_usd: number | null;
+  per_dispatch_avg_usd: number | null;
+  coverage: { included: number; total: number };
+  assumption_note: string;
+}
 
 // DM-5 — Role: all known dispatch roles in the SDD framework
 export type Role =
@@ -10,7 +59,9 @@ export type Role =
   | 'logic-reviewer'
   | 'qa'
   | 'blocker-specialist'
-  | 'audit-agent';
+  | 'audit-agent'
+  /** PM/orchestrator session — populated from Stop hook (FEAT-005). Virtual dispatch. */
+  | 'pm-orchestrator';
 
 // DM-5 — DispatchStatus: possible status values for a dispatch
 export type DispatchStatus = 'done' | 'needs_review' | 'blocked' | 'escalate' | 'partial';
@@ -58,6 +109,8 @@ export interface Session {
     outputPacket: Record<string, unknown> | null;
     loop: number | null;
     pmNote: string | null;
+    /** Per-dispatch token usage from <usage> annotation (FEAT-003+). Optional for back-compat. */
+    usage?: Usage;
   }[];
   /** AC identifiers extracted from spec.md via regex (e.g. 'AC-001') */
   acs: string[];
@@ -65,6 +118,12 @@ export interface Session {
   expectedPipeline: {
     batchId?: string;
     taskId?: string;
+    /** Human-readable title from dispatch-manifest.json (FEAT-005 T-003). */
+    title?: string;
+    /** AC identifiers this batch covers, from dispatch-manifest.json (FEAT-005 T-003). */
+    acScope?: string[];
+    /** Task IDs covered by this batch, from dispatch-manifest.json (FEAT-005 T-003). */
+    tasksCovered?: string[];
     requiredRoles: Role[];
   }[];
   escalationMetrics: {
@@ -95,6 +154,10 @@ export interface Metrics {
   reviewerFindings: { critical: number; major: number; minor: number } | null;
   dispatchesPerAc: number;
   tokenCost: { total: number | null; perAc: number | null };
+  /** FEAT-003: USD cost estimate derived from usage data + pricing constants */
+  cost?: CostMetric;
+  /** FEAT-003: Repo health snapshot from reports/ (mutation, type-coverage, dep-violations) */
+  repoHealth?: RepoHealth | null;
   /** Reserved hook for future rework-rate metric; null in MVP */
   reworkRate: null;
   insights: Insight[];

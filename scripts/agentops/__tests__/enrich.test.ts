@@ -555,6 +555,90 @@ describe('enrich', () => {
     expect(session.escalationMetrics).toBeNull();
   });
 
+  it('normaliseDispatches: reads usage field from manifest entry when valid (FEAT-003 AC-017)', () => {
+    const raw: RawSession = {
+      taskId: 'FEAT-USAGE',
+      sessionYml: {
+        task_id: 'FEAT-USAGE',
+        feature_name: 'Usage',
+        current_phase: 'done',
+        started_at: '2026-01-01T00:00:00Z',
+      },
+      manifest: {
+        expected_pipeline: [],
+        actual_dispatches: [
+          {
+            dispatch_id: 'd1',
+            role: 'dev',
+            status: 'done',
+            started_at: '2026-01-01T00:00:00Z',
+            usage: {
+              total_tokens: 42000,
+              tool_uses: 15,
+              duration_ms: 120000,
+              model: 'sonnet-4-6',
+            },
+          },
+          // dispatch without usage — should still parse fine
+          {
+            dispatch_id: 'd2',
+            role: 'qa',
+            status: 'done',
+            started_at: '2026-01-01T01:00:00Z',
+          },
+        ],
+      },
+      outputs: [],
+      specMd: null,
+      sessionDirPath: '/tmp/fake',
+    };
+    const session = enrich(raw);
+    expect(session.dispatches).toHaveLength(2);
+    const d1 = session.dispatches.find((d) => d.dispatchId === 'd1');
+    expect(d1).toBeDefined();
+    expect(d1!.usage).toBeDefined();
+    expect(d1!.usage!.total_tokens).toBe(42000);
+    expect(d1!.usage!.tool_uses).toBe(15);
+    expect(d1!.usage!.duration_ms).toBe(120000);
+    expect(d1!.usage!.model).toBe('sonnet-4-6');
+    const d2 = session.dispatches.find((d) => d.dispatchId === 'd2');
+    expect(d2!.usage).toBeUndefined();
+  });
+
+  it('normaliseDispatches: skips invalid usage shape (non-number total_tokens)', () => {
+    const raw: RawSession = {
+      taskId: 'FEAT-BADUSAGE',
+      sessionYml: {
+        task_id: 'FEAT-BADUSAGE',
+        feature_name: 'BadUsage',
+        current_phase: 'done',
+        started_at: '2026-01-01T00:00:00Z',
+      },
+      manifest: {
+        expected_pipeline: [],
+        actual_dispatches: [
+          {
+            dispatch_id: 'd1',
+            role: 'dev',
+            status: 'done',
+            started_at: '2026-01-01T00:00:00Z',
+            usage: {
+              total_tokens: 'not-a-number', // invalid
+              tool_uses: 15,
+              duration_ms: 120000,
+              model: 'sonnet-4-6',
+            },
+          },
+        ],
+      },
+      outputs: [],
+      specMd: null,
+      sessionDirPath: '/tmp/fake',
+    };
+    const session = enrich(raw);
+    expect(session.dispatches[0]!.usage).toBeUndefined();
+  });
+
   it('attachOutputPackets: output data that is not a record is skipped', () => {
     const raw: RawSession = {
       taskId: 'FEAT-ATTACH',
@@ -579,5 +663,297 @@ describe('enrich', () => {
     };
     const session = enrich(raw);
     expect(session.dispatches[0]!.outputPacket).toBeNull();
+  });
+
+  // AC-022 backfill merge tests
+  it('normaliseDispatches: backfill usage applied when actual_dispatches entry has no usage (AC-022)', () => {
+    const raw: RawSession = {
+      taskId: 'FEAT-BACKFILL',
+      sessionYml: {
+        task_id: 'FEAT-BACKFILL',
+        feature_name: 'Backfill',
+        current_phase: 'done',
+        started_at: '2026-01-01T00:00:00Z',
+      },
+      manifest: {
+        expected_pipeline: [],
+        actual_dispatches: [
+          // no usage field — should be filled by backfill
+          {
+            dispatch_id: 'batch-a-dev',
+            role: 'dev',
+            status: 'done',
+            started_at: '2026-01-01T00:00:00Z',
+          },
+        ],
+        pre_feat_001_backfilled_usage: [
+          {
+            dispatch_id: 'batch-a-dev',
+            total_tokens: 46175,
+            tool_uses: 24,
+            duration_ms: 123173,
+            model: 'sonnet-4-6',
+            backfill_source: 'conversation_log_estimate',
+          },
+        ],
+      },
+      outputs: [],
+      specMd: null,
+      sessionDirPath: '/tmp/fake',
+    };
+    const session = enrich(raw);
+    expect(session.dispatches).toHaveLength(1);
+    const d = session.dispatches[0]!;
+    expect(d.usage).toBeDefined();
+    expect(d.usage!.total_tokens).toBe(46175);
+    expect(d.usage!.tool_uses).toBe(24);
+    expect(d.usage!.duration_ms).toBe(123173);
+    expect(d.usage!.model).toBe('sonnet-4-6');
+  });
+
+  it('normaliseDispatches: real capture wins over backfill when both present (AC-022)', () => {
+    const raw: RawSession = {
+      taskId: 'FEAT-BACKFILL2',
+      sessionYml: {
+        task_id: 'FEAT-BACKFILL2',
+        feature_name: 'Backfill2',
+        current_phase: 'done',
+        started_at: '2026-01-01T00:00:00Z',
+      },
+      manifest: {
+        expected_pipeline: [],
+        actual_dispatches: [
+          // has real usage — should NOT be overridden by backfill
+          {
+            dispatch_id: 'feat-003-batch-x-dev',
+            role: 'dev',
+            status: 'done',
+            started_at: '2026-01-01T00:00:00Z',
+            usage: {
+              total_tokens: 99999,
+              tool_uses: 50,
+              duration_ms: 999999,
+              model: 'opus-4-7',
+            },
+          },
+        ],
+        pre_feat_003_backfilled_usage: [
+          {
+            dispatch_id: 'feat-003-batch-x-dev',
+            total_tokens: 11111,
+            tool_uses: 5,
+            duration_ms: 11111,
+            model: 'haiku-4-5',
+            backfill_source: 'conversation_log_estimate',
+          },
+        ],
+      },
+      outputs: [],
+      specMd: null,
+      sessionDirPath: '/tmp/fake',
+    };
+    const session = enrich(raw);
+    expect(session.dispatches).toHaveLength(1);
+    const d = session.dispatches[0]!;
+    // real capture must win
+    expect(d.usage!.total_tokens).toBe(99999);
+    expect(d.usage!.model).toBe('opus-4-7');
+  });
+
+  it('normaliseDispatches: backfill entry with no matching actual dispatch is ignored (AC-022)', () => {
+    const raw: RawSession = {
+      taskId: 'FEAT-BACKFILL3',
+      sessionYml: {
+        task_id: 'FEAT-BACKFILL3',
+        feature_name: 'Backfill3',
+        current_phase: 'done',
+        started_at: '2026-01-01T00:00:00Z',
+      },
+      manifest: {
+        expected_pipeline: [],
+        actual_dispatches: [
+          {
+            dispatch_id: 'real-dispatch',
+            role: 'dev',
+            status: 'done',
+            started_at: '2026-01-01T00:00:00Z',
+          },
+        ],
+        pre_feat_001_backfilled_usage: [
+          {
+            dispatch_id: 'some-other-dispatch', // no matching actual dispatch
+            total_tokens: 5000,
+            tool_uses: 3,
+            duration_ms: 15000,
+            model: 'sonnet-4-6',
+            backfill_source: 'conversation_log_estimate',
+          },
+        ],
+      },
+      outputs: [],
+      specMd: null,
+      sessionDirPath: '/tmp/fake',
+    };
+    const session = enrich(raw);
+    expect(session.dispatches).toHaveLength(1);
+    // the actual dispatch has no usage (backfill was for a different dispatch_id)
+    expect(session.dispatches[0]!.usage).toBeUndefined();
+  });
+
+  // ---------------------------------------------------------------------------
+  // cost_usd auto-population (agentops-cost-tracking-patch)
+  // ---------------------------------------------------------------------------
+
+  it('enricher auto-populates cost_usd for dispatch with known model and no prior cost_usd', () => {
+    const raw: RawSession = {
+      taskId: 'FEAT-COST-AUTO',
+      sessionYml: {
+        task_id: 'FEAT-COST-AUTO',
+        feature_name: 'CostAuto',
+        current_phase: 'done',
+        started_at: '2026-01-01T00:00:00Z',
+      },
+      manifest: {
+        expected_pipeline: [],
+        actual_dispatches: [
+          {
+            dispatch_id: 'd1',
+            role: 'dev',
+            status: 'done',
+            started_at: '2026-01-01T00:00:00Z',
+            usage: {
+              total_tokens: 100000,
+              tool_uses: 5,
+              duration_ms: 60000,
+              model: 'sonnet-4-6',
+            },
+          },
+        ],
+      },
+      outputs: [],
+      specMd: null,
+      sessionDirPath: '/tmp/fake',
+    };
+    const session = enrich(raw);
+    const d1 = session.dispatches.find((d) => d.dispatchId === 'd1');
+    expect(d1).toBeDefined();
+    expect(d1!.usage).toBeDefined();
+    // cost_usd must be populated (positive number, sonnet-4-6 = $3/$15 per MTok)
+    expect(d1!.usage!.cost_usd).toBeDefined();
+    expect(typeof d1!.usage!.cost_usd).toBe('number');
+    expect(d1!.usage!.cost_usd).toBeGreaterThan(0);
+  });
+
+  it('enricher preserves manually-set cost_usd when already present', () => {
+    const raw: RawSession = {
+      taskId: 'FEAT-COST-MANUAL',
+      sessionYml: {
+        task_id: 'FEAT-COST-MANUAL',
+        feature_name: 'CostManual',
+        current_phase: 'done',
+        started_at: '2026-01-01T00:00:00Z',
+      },
+      manifest: {
+        expected_pipeline: [],
+        actual_dispatches: [
+          {
+            dispatch_id: 'd1',
+            role: 'dev',
+            status: 'done',
+            started_at: '2026-01-01T00:00:00Z',
+            usage: {
+              total_tokens: 100000,
+              tool_uses: 5,
+              duration_ms: 60000,
+              model: 'sonnet-4-6',
+              cost_usd: 9.99,
+            },
+          },
+        ],
+      },
+      outputs: [],
+      specMd: null,
+      sessionDirPath: '/tmp/fake',
+    };
+    const session = enrich(raw);
+    const d1 = session.dispatches.find((d) => d.dispatchId === 'd1');
+    expect(d1!.usage!.cost_usd).toBe(9.99);
+  });
+
+  it('enricher does not populate cost_usd when model is unknown', () => {
+    const raw: RawSession = {
+      taskId: 'FEAT-COST-UNKNOWN',
+      sessionYml: {
+        task_id: 'FEAT-COST-UNKNOWN',
+        feature_name: 'CostUnknown',
+        current_phase: 'done',
+        started_at: '2026-01-01T00:00:00Z',
+      },
+      manifest: {
+        expected_pipeline: [],
+        actual_dispatches: [
+          {
+            dispatch_id: 'd1',
+            role: 'dev',
+            status: 'done',
+            started_at: '2026-01-01T00:00:00Z',
+            usage: {
+              total_tokens: 100000,
+              tool_uses: 5,
+              duration_ms: 60000,
+              model: 'unknown',
+            },
+          },
+        ],
+      },
+      outputs: [],
+      specMd: null,
+      sessionDirPath: '/tmp/fake',
+    };
+    const session = enrich(raw);
+    const d1 = session.dispatches.find((d) => d.dispatchId === 'd1');
+    expect(d1!.usage!.cost_usd).toBeUndefined();
+  });
+
+  it('enricher auto-populates cost_usd for pm-orchestrator synthesized dispatch', () => {
+    const raw: RawSession = {
+      taskId: 'FEAT-COST-PM',
+      sessionYml: {
+        task_id: 'FEAT-COST-PM',
+        feature_name: 'CostPm',
+        current_phase: 'done',
+        started_at: '2026-01-01T00:00:00Z',
+      },
+      manifest: {
+        expected_pipeline: [],
+        actual_dispatches: [],
+        pm_orchestrator_sessions: [
+          {
+            session_id: 'abc12345-0000-0000-0000-000000000000',
+            model: 'opus-4-7',
+            started_at: '2026-01-01T00:00:00Z',
+            completed_at: '2026-01-01T01:00:00Z',
+            note: 'PM session test',
+            usage: {
+              input_tokens: 10000,
+              output_tokens: 5000,
+              cache_creation_input_tokens: 0,
+              cache_read_input_tokens: 0,
+              tool_uses: 3,
+            },
+          },
+        ],
+      },
+      outputs: [],
+      specMd: null,
+      sessionDirPath: '/tmp/fake',
+    };
+    const session = enrich(raw);
+    const pmDispatch = session.dispatches.find((d) => d.role === 'pm-orchestrator');
+    expect(pmDispatch).toBeDefined();
+    expect(pmDispatch!.usage).toBeDefined();
+    // opus-4-7 = $5/$25 per MTok; 10k input = $0.05, 5k output = $0.125 → ~$0.175
+    expect(pmDispatch!.usage!.cost_usd).toBeDefined();
+    expect(pmDispatch!.usage!.cost_usd).toBeGreaterThan(0);
   });
 });

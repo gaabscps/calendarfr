@@ -13,6 +13,24 @@ exports[`renderFlowReport — Fixture A (happy path) matches snapshot (timestamp
 - ℹ Escalation rate 0.0% is below the Galileo healthy band (< 10%) — low escalation, agents resolving autonomously. _(Galileo healthy band)_
 - ℹ Dev task success rate 100.0% is at or above 80% — healthy first-try rate.
 
+## Cost breakdown
+
+_no usage data available — dispatch count fallback: 4 dispatches_
+
+- Total tokens: n/a
+  - Estimated input (70%): n/a
+  - Estimated output (30%): n/a
+- Estimated cost USD: n/a
+- Cost per AC: n/a
+- Cost per dispatch (avg): n/a
+- Wall-clock duration: n/a
+- Tool uses total: n/a
+- Coverage: 0 of 4 dispatches included in cost calculation
+
+## Repo health snapshot
+
+Repo health: not measured (run \`npm run mutation && npm run type-coverage && npm run arch:check\` first)
+
 ## Phase durations
 
 | Phase | Duration |
@@ -31,6 +49,7 @@ exports[`renderFlowReport — Fixture A (happy path) matches snapshot (timestamp
 | code-reviewer | 1 |
 | dev | 1 |
 | logic-reviewer | 0 |
+| pm-orchestrator | 0 |
 | qa | 1 |
 | **Total** | 4 |
 
@@ -43,6 +62,7 @@ exports[`renderFlowReport — Fixture A (happy path) matches snapshot (timestamp
 | code-reviewer | 100.0% |
 | dev | 100.0% |
 | logic-reviewer | n/a |
+| pm-orchestrator | n/a |
 | qa | 100.0% |
 
 ## Loop rate
@@ -83,6 +103,24 @@ exports[`renderFlowReport — Fixture B (spec-only) matches snapshot (timestamp 
 
 No insights triggered.
 
+## Cost breakdown
+
+_no usage data available — dispatch count fallback: 0 dispatches_
+
+- Total tokens: n/a
+  - Estimated input (70%): n/a
+  - Estimated output (30%): n/a
+- Estimated cost USD: n/a
+- Cost per AC: n/a
+- Cost per dispatch (avg): n/a
+- Wall-clock duration: n/a
+- Tool uses total: n/a
+- Coverage: 0 of 0 dispatches included in cost calculation
+
+## Repo health snapshot
+
+Repo health: not measured (run \`npm run mutation && npm run type-coverage && npm run arch:check\` first)
+
 ## Phase durations
 
 | Phase | Duration |
@@ -101,6 +139,7 @@ No insights triggered.
 | code-reviewer | 0 |
 | dev | 0 |
 | logic-reviewer | 0 |
+| pm-orchestrator | 0 |
 | qa | 0 |
 | **Total** | 0 |
 
@@ -113,6 +152,7 @@ No insights triggered.
 | code-reviewer | n/a |
 | dev | n/a |
 | logic-reviewer | n/a |
+| pm-orchestrator | n/a |
 | qa | n/a |
 
 ## Loop rate

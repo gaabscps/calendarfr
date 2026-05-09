@@ -3,6 +3,33 @@
  * Each constant cites its source reference.
  */
 
+/**
+ * Anthropic model pricing for 2026 (verified Apr 2026).
+ * Source: https://platform.claude.com/docs/en/about-claude/pricing
+ * Units: USD per million tokens (input / output).
+ * Review quarterly — pricing may change.
+ *
+ * Covers AC-019 (FEAT-003).
+ */
+export const ANTHROPIC_PRICING_2026 = {
+  'opus-4-7': { input_per_mtok_usd: 5, output_per_mtok_usd: 25 },
+  'sonnet-4-6': { input_per_mtok_usd: 3, output_per_mtok_usd: 15 },
+  'haiku-4-5': { input_per_mtok_usd: 1, output_per_mtok_usd: 5 },
+} as const;
+
+/**
+ * Cache pricing multipliers (vs base input rate).
+ * Source: https://docs.claude.com/en/docs/build-with-claude/prompt-caching
+ *   - cache write (5m TTL): 1.25x base input
+ *   - cache write (1h TTL): 2x base input
+ *   - cache read: 0.1x base input
+ * For mixed/unknown TTL we use 1.25x (conservative, matches Anthropic's default 5m).
+ */
+export const CACHE_PRICING_MULTIPLIERS = {
+  cache_write: 1.25,
+  cache_read: 0.1,
+} as const;
+
 // Galileo healthy escalation band (ref: Galileo blog, 2026 — "10–15% escalation rate is healthy")
 export const GALILEO_HEALTHY_ESCALATION_BAND = { lower: 0.1, upper: 0.15 } as const;
 
