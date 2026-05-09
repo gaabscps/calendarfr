@@ -9,6 +9,7 @@ import { renderHook, act, waitFor } from '@testing-library/react';
 
 import { useRichTextLine } from '../../hooks/useRichTextLine.js';
 import { buildExtensions } from '../extensions.js';
+import { SingleLineParagraph } from '../singleLineParagraph.js';
 
 // ─── buildExtensions — default param branch ──────────────────────────────────
 
@@ -48,8 +49,6 @@ describe('buildExtensions — default argument (line 57)', () => {
 
 // ─── SingleLineParagraph — Shift-Enter handler ────────────────────────────────
 
-import { SingleLineParagraph } from '../singleLineParagraph.js';
-
 describe('SingleLineParagraph — Shift-Enter blocked (line 25)', () => {
   it('addKeyboardShortcuts returns an object with Enter and Shift-Enter handlers', () => {
     // Call addKeyboardShortcuts on the SingleLineParagraph extension to get the
@@ -57,22 +56,20 @@ describe('SingleLineParagraph — Shift-Enter blocked (line 25)', () => {
     // The extension's addKeyboardShortcuts method is available on the prototype.
     const ext = SingleLineParagraph;
     // addKeyboardShortcuts is defined on the extension config; access it via .config.
-     
+
     const shortcuts = (ext as any).config?.addKeyboardShortcuts?.call({ parent: null });
     expect(shortcuts).toBeDefined();
     expect(typeof shortcuts?.['Enter']).toBe('function');
     expect(typeof shortcuts?.['Shift-Enter']).toBe('function');
     // Exercise both handler bodies — they return true (line 24 and line 25).
     expect(shortcuts?.['Enter']()).toBe(true);
-    expect(shortcuts?.['Shift-Enter']()).toBe(true);  // line 25 exercised here
+    expect(shortcuts?.['Shift-Enter']()).toBe(true); // line 25 exercised here
   });
 
   it('Shift+Enter does not insert line break via useRichTextLine', async () => {
     // Belt-and-suspenders: verify the hook-level Enter prevention also blocks Shift+Enter.
     const onChange = jest.fn();
-    const { result } = renderHook(() =>
-      useRichTextLine({ value: '<p>abc</p>', onChange }),
-    );
+    const { result } = renderHook(() => useRichTextLine({ value: '<p>abc</p>', onChange }));
 
     await waitFor(() => expect(result.current).not.toBeNull());
     onChange.mockClear();
@@ -86,7 +83,9 @@ describe('SingleLineParagraph — Shift-Enter blocked (line 25)', () => {
       );
     });
 
-    await act(async () => { await new Promise((r) => setTimeout(r, 30)); });
+    await act(async () => {
+      await new Promise((r) => setTimeout(r, 30));
+    });
 
     // HTML must remain unchanged.
     const html = result.current!.getHTML();

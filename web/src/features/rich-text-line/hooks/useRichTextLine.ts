@@ -66,9 +66,7 @@ export function useRichTextLine(opts: UseRichTextLineOptions) {
         role: 'textbox',
         spellcheck: 'true',
       },
-      // Second arg `_view` is required by ProseMirror's type but unused here.
-      transformPastedHTML: (html: string, _view: unknown) =>
-        sanitizeHtml(html, { collapseToSingleLine: true }),
+      transformPastedHTML: (html: string) => sanitizeHtml(html, { collapseToSingleLine: true }),
       handleKeyDown: (_view: unknown, event: KeyboardEvent) => {
         // IME guard: CJK (and other IME) composition sends a synthetic Enter
         // (keyCode 229) to confirm the composition — we must NOT intercept it

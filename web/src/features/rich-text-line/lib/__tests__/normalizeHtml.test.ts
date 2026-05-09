@@ -32,12 +32,14 @@ describe('normalizeHtml — empty cases map to ""', () => {
   });
 
   // AC-023: Tiptap Placeholder extension adds class="is-editor-empty"
-  it('maps "<p class=\"is-editor-empty\"></p>" to "" (placeholder class variant)', () => {
+  it("maps '<p class=\"is-editor-empty\"></p>' to '' (placeholder class variant)", () => {
     expect(normalizeHtml('<p class="is-editor-empty"></p>')).toBe('');
   });
 
-  it('maps "<p class=\"is-editor-empty\"><br class=\"ProseMirror-trailingBreak\"></p>" to ""', () => {
-    expect(normalizeHtml('<p class="is-editor-empty"><br class="ProseMirror-trailingBreak"></p>')).toBe('');
+  it('maps \'<p class="is-editor-empty"><br class="ProseMirror-trailingBreak"></p>\' to \'\'', () => {
+    expect(
+      normalizeHtml('<p class="is-editor-empty"><br class="ProseMirror-trailingBreak"></p>'),
+    ).toBe('');
   });
 });
 
@@ -109,12 +111,9 @@ describe('normalizeHtml — idempotency', () => {
     '<p class="is-editor-empty"></p>',
   ] as const;
 
-  it.each(cases)(
-    'normalizeHtml(normalizeHtml(x)) === normalizeHtml(x) for: %s',
-    (input) => {
-      const once = normalizeHtml(input);
-      const twice = normalizeHtml(once);
-      expect(twice).toBe(once);
-    },
-  );
+  it.each(cases)('normalizeHtml(normalizeHtml(x)) === normalizeHtml(x) for: %s', (input) => {
+    const once = normalizeHtml(input);
+    const twice = normalizeHtml(once);
+    expect(twice).toBe(once);
+  });
 });

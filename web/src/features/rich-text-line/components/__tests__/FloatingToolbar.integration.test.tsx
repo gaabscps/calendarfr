@@ -20,6 +20,7 @@ import { act, fireEvent, screen, waitFor } from '@testing-library/react';
 import type { Editor } from '@tiptap/core';
 import { useState } from 'react';
 
+import { useRichTextLine } from '../../hooks/useRichTextLine.js';
 import { RichTextLine } from '../RichTextLine.js';
 
 import { renderWithProviders } from '@/test-utils';
@@ -44,75 +45,9 @@ jest.mock('@tiptap/react', () => {
 // ---------------------------------------------------------------------------
 type Ref = React.MutableRefObject<Editor | null>;
 
-function W(p: {
-  initialValue?: string;
-  onChangeSpy?: (h: string) => void;
-  editorRef?: Ref;
-}) {
-  // We expose the editor via a separate useRichTextLine hook call so tests
-  // can command the editor directly. We need a different approach: pull the
-  // editor reference out via a ref callback on the component.
-  const [value, setValue] = useState(p.initialValue ?? '');
-  const onChange = (h: string) => {
-    setValue(h);
-    p.onChangeSpy?.(h);
-  };
-  return (
-    <RichTextLine
-      value={value}
-      onChange={onChange}
-    />
-  );
-}
-
-async function setupWithEditor(initialValue = '') {
-  const onChange = jest.fn();
-  let capturedEditor: Editor | null = null;
-
-  // We use a custom wrapper that captures the editor via a cheated approach:
-  // render RichTextLine and retrieve editor from the ProseMirror view attached to DOM.
-  function Wrapper() {
-    const [value, setValue] = useState(initialValue);
-    return (
-      <RichTextLine
-        value={value}
-        onChange={(h) => {
-          setValue(h);
-          onChange(h);
-        }}
-      />
-    );
-  }
-
-  renderWithProviders(<Wrapper />);
-  // Wait for editor to mount (textbox role is the contenteditable).
-  const editorEl = await waitFor(() => screen.getByRole('textbox'));
-  // Capture the editor from ProseMirror's internal state attached to the DOM element.
-  // ProseMirror sets __prosemirror on the node.
-  await waitFor(() => {
-     
-    const pm = (editorEl as any)._tiptapEditor ?? (editorEl.parentElement as any)?._tiptapEditor;
-    // We can't easily get the tiptap Editor from the DOM in jsdom, so we
-    // retrieve it from the ProseMirror view — try multiple approaches.
-    const view = (editorEl as any).pmViewDesc?.view ?? (editorEl as any).__pm;
-    if (!capturedEditor && view) {
-       
-      capturedEditor = (view as any).editor as Editor;
-    }
-    if (!capturedEditor && pm) capturedEditor = pm as Editor;
-  }).catch(() => {
-    // Fallback: the test will use DOM querying directly.
-  });
-
-  return { onChange, editorEl, capturedEditor };
-}
-
-// Simpler setup that uses useRichTextLine inside a wrapper component to expose editor.
-import { useRichTextLine } from '../../hooks/useRichTextLine.js';
-
 function RichTextLineWithRef(p: {
   initialValue?: string;
-  onChangeSpy?: (h: string) => void;
+  onChangeSpy?: (_h: string) => void;
   editorRef: Ref;
 }) {
   const [value, setValue] = useState(p.initialValue ?? '');
@@ -245,7 +180,9 @@ describe('FloatingToolbar — click applies mark + focus (AC-010)', () => {
     renderWithProviders(<Standalone />);
     await waitFor(() => screen.getByRole('textbox'));
     // Small delay to let Tiptap initialise fully.
-    await act(async () => { await new Promise((r) => setTimeout(r, 50)); });
+    await act(async () => {
+      await new Promise((r) => setTimeout(r, 50));
+    });
 
     const toolbar = screen.getByRole('toolbar');
     const boldBtn = toolbar.querySelector('[aria-label="Negrito"]') as HTMLElement;
@@ -275,7 +212,9 @@ describe('FloatingToolbar — click applies mark + focus (AC-010)', () => {
     }
     renderWithProviders(<Standalone />);
     await waitFor(() => screen.getByRole('textbox'));
-    await act(async () => { await new Promise((r) => setTimeout(r, 30)); });
+    await act(async () => {
+      await new Promise((r) => setTimeout(r, 30));
+    });
 
     const toolbar = screen.getByRole('toolbar');
     const boldBtn = toolbar.querySelector('[aria-label="Negrito"]') as HTMLElement;
@@ -284,13 +223,17 @@ describe('FloatingToolbar — click applies mark + focus (AC-010)', () => {
     let preventDefaultCalled = false;
     const originalDispatch = boldBtn.dispatchEvent.bind(boldBtn);
     // We intercept via a capturing listener before React's synthetic handler.
-    boldBtn.addEventListener('mousedown', (e) => {
-      const origPreventDefault = e.preventDefault.bind(e);
-      e.preventDefault = () => {
-        preventDefaultCalled = true;
-        origPreventDefault();
-      };
-    }, { capture: true });
+    boldBtn.addEventListener(
+      'mousedown',
+      (e) => {
+        const origPreventDefault = e.preventDefault.bind(e);
+        e.preventDefault = () => {
+          preventDefaultCalled = true;
+          origPreventDefault();
+        };
+      },
+      { capture: true },
+    );
 
     await act(async () => {
       fireEvent.mouseDown(boldBtn);
@@ -316,7 +259,9 @@ describe('FloatingToolbar — toggle functions coverage (AC-010)', () => {
     }
     renderWithProviders(<Standalone />);
     await waitFor(() => screen.getByRole('textbox'));
-    await act(async () => { await new Promise((r) => setTimeout(r, 50)); });
+    await act(async () => {
+      await new Promise((r) => setTimeout(r, 50));
+    });
     return screen.getByRole('toolbar');
   }
 
@@ -363,10 +308,17 @@ describe('FloatingToolbar — toggle functions coverage (AC-010)', () => {
     const toolbar = await setupStandalone();
     const btn = toolbar.querySelector('[aria-label="Negrito"]') as HTMLElement;
     let preventDefaultCalled = false;
-    btn.addEventListener('click', (e) => {
-      const orig = e.preventDefault.bind(e);
-      e.preventDefault = () => { preventDefaultCalled = true; orig(); };
-    }, { capture: true });
+    btn.addEventListener(
+      'click',
+      (e) => {
+        const orig = e.preventDefault.bind(e);
+        e.preventDefault = () => {
+          preventDefaultCalled = true;
+          orig();
+        };
+      },
+      { capture: true },
+    );
     await act(async () => {
       fireEvent.click(btn);
       await new Promise((r) => setTimeout(r, 30));
@@ -391,7 +343,9 @@ describe('FloatingToolbar — keyboard navigation (AC-011)', () => {
     const [b0, b1] = [buttons[0]!, buttons[1]!];
 
     // Focus the first button.
-    act(() => { b0.focus(); });
+    act(() => {
+      b0.focus();
+    });
     expect(document.activeElement).toBe(b0);
 
     // Dispatch ArrowRight on the toolbar container.
@@ -405,7 +359,9 @@ describe('FloatingToolbar — keyboard navigation (AC-011)', () => {
     const buttons = getButtons();
     const [b0, b3] = [buttons[0]!, buttons[3]!];
 
-    act(() => { b3.focus(); });
+    act(() => {
+      b3.focus();
+    });
     fireEvent.keyDown(toolbar, { key: 'ArrowRight' });
     expect(document.activeElement).toBe(b0);
   });
@@ -416,7 +372,9 @@ describe('FloatingToolbar — keyboard navigation (AC-011)', () => {
     const buttons = getButtons();
     const [b0, b1] = [buttons[0]!, buttons[1]!];
 
-    act(() => { b1.focus(); });
+    act(() => {
+      b1.focus();
+    });
     fireEvent.keyDown(toolbar, { key: 'ArrowLeft' });
     expect(document.activeElement).toBe(b0);
   });
@@ -427,7 +385,9 @@ describe('FloatingToolbar — keyboard navigation (AC-011)', () => {
     const buttons = getButtons();
     const [b0, b3] = [buttons[0]!, buttons[3]!];
 
-    act(() => { b0.focus(); });
+    act(() => {
+      b0.focus();
+    });
     fireEvent.keyDown(toolbar, { key: 'ArrowLeft' });
     expect(document.activeElement).toBe(b3);
   });
@@ -438,7 +398,9 @@ describe('FloatingToolbar — keyboard navigation (AC-011)', () => {
     const buttons = getButtons();
     const [b0, b2] = [buttons[0]!, buttons[2]!];
 
-    act(() => { b2.focus(); });
+    act(() => {
+      b2.focus();
+    });
     fireEvent.keyDown(toolbar, { key: 'Home' });
     expect(document.activeElement).toBe(b0);
   });
@@ -449,7 +411,9 @@ describe('FloatingToolbar — keyboard navigation (AC-011)', () => {
     const buttons = getButtons();
     const [b0, b3] = [buttons[0]!, buttons[3]!];
 
-    act(() => { b0.focus(); });
+    act(() => {
+      b0.focus();
+    });
     fireEvent.keyDown(toolbar, { key: 'End' });
     expect(document.activeElement).toBe(b3);
   });
@@ -463,7 +427,9 @@ describe('FloatingToolbar — keyboard navigation (AC-011)', () => {
     const b0 = buttons[0]!;
 
     // Ensure no button is focused (focus the toolbar container itself, not a button).
-    act(() => { toolbar.focus(); });
+    act(() => {
+      toolbar.focus();
+    });
     // findIndex returns -1 because none of the buttons is activeElement.
     fireEvent.keyDown(toolbar, { key: 'ArrowRight' });
     expect(document.activeElement).toBe(b0);

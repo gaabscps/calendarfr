@@ -15,7 +15,7 @@ const meta = {
   component: RichTextLine,
   tags: ['autodocs'],
   args: {
-    onChange: () => {},
+    onChange: () => undefined,
   },
 } satisfies Meta<typeof RichTextLine>;
 

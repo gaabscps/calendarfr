@@ -14,15 +14,27 @@ const waitForEditor = () => waitFor(() => screen.getByRole('textbox'));
 
 /** Controlled wrapper exposing the Tiptap editor instance via ref. */
 function W(p: {
-  initialValue?: string; placeholder?: string; onEnter?: () => void;
-  onChangeSpy?: (h: string) => void; editorRef?: Ref;
+  initialValue?: string;
+  placeholder?: string;
+  onEnter?: () => void;
+  onChangeSpy?: (_h: string) => void;
+  editorRef?: Ref;
 }) {
   const [value, setValue] = useState(p.initialValue ?? '');
-  const onChange = (h: string) => { setValue(h); p.onChangeSpy?.(h); };
+  const onChange = (h: string) => {
+    setValue(h);
+    p.onChangeSpy?.(h);
+  };
   const rtl: Parameters<typeof RichTextLine>[0] = { value, onChange };
   const hook: Parameters<typeof useRichTextLine>[0] = { value, onChange };
-  if (p.placeholder !== undefined) { rtl.placeholder = p.placeholder; hook.placeholder = p.placeholder; }
-  if (p.onEnter !== undefined) { rtl.onEnter = p.onEnter; hook.onEnter = p.onEnter; }
+  if (p.placeholder !== undefined) {
+    rtl.placeholder = p.placeholder;
+    hook.placeholder = p.placeholder;
+  }
+  if (p.onEnter !== undefined) {
+    rtl.onEnter = p.onEnter;
+    hook.onEnter = p.onEnter;
+  }
   const ed = useRichTextLine(hook);
   if (p.editorRef) p.editorRef.current = ed;
   return <RichTextLine {...rtl} />;
@@ -40,13 +52,19 @@ async function setup(init = '') {
 describe('RichTextLine — onChange (AC-001, AC-027)', () => {
   it('emits HTML on content insert', async () => {
     const { onChange, ref } = await setup();
-    act(() => { ref.current!.commands.setContent('<p>hello world</p>', true); });
-    await waitFor(() => expect(onChange).toHaveBeenCalledWith(expect.stringContaining('hello world')));
+    act(() => {
+      ref.current!.commands.setContent('<p>hello world</p>', true);
+    });
+    await waitFor(() =>
+      expect(onChange).toHaveBeenCalledWith(expect.stringContaining('hello world')),
+    );
   });
 
   it('emits "" on clear (AC-023)', async () => {
     const { onChange, ref } = await setup('<b>x</b>');
-    act(() => { ref.current!.commands.clearContent(true); });
+    act(() => {
+      ref.current!.commands.clearContent(true);
+    });
     await waitFor(() => expect(onChange).toHaveBeenCalledWith(''));
   });
 
@@ -76,18 +94,28 @@ describe('RichTextLine — onChange (AC-001, AC-027)', () => {
 describe('RichTextLine — marks (AC-002, AC-003, AC-004)', () => {
   it('toggleBold applies <b> (not <strong>), second call removes it (AC-002, AC-005)', async () => {
     const { onChange, ref } = await setup('hello');
-    act(() => { ref.current!.chain().selectAll().toggleBold().run(); });
+    act(() => {
+      ref.current!.chain().selectAll().toggleBold().run();
+    });
     // AC-005: strictly <b>, never <strong> — BoldAsB extension enforces this.
     await waitFor(() => expect(onChange).toHaveBeenCalledWith(expect.stringMatching(/<b[^>]*>/)));
-    await waitFor(() => expect(onChange.mock.calls.at(-1)?.[0] as string).not.toContain('<strong>'));
+    await waitFor(() =>
+      expect(onChange.mock.calls.at(-1)?.[0] as string).not.toContain('<strong>'),
+    );
     onChange.mockClear();
-    act(() => { ref.current!.chain().selectAll().toggleBold().run(); });
-    await waitFor(() => { expect((onChange.mock.calls.at(-1)?.[0] as string)).not.toMatch(/<b[^>]*>/); });
+    act(() => {
+      ref.current!.chain().selectAll().toggleBold().run();
+    });
+    await waitFor(() => {
+      expect(onChange.mock.calls.at(-1)?.[0] as string).not.toMatch(/<b[^>]*>/);
+    });
   });
 
   it('toggleItalic applies <i> (not <em>) (AC-003, AC-005)', async () => {
     const { onChange, ref } = await setup('hello');
-    act(() => { ref.current!.chain().selectAll().toggleItalic().run(); });
+    act(() => {
+      ref.current!.chain().selectAll().toggleItalic().run();
+    });
     // AC-005: strictly <i>, never <em> — ItalicAsI extension enforces this.
     await waitFor(() => expect(onChange).toHaveBeenCalledWith(expect.stringMatching(/<i[^>]*>/)));
     await waitFor(() => expect(onChange.mock.calls.at(-1)?.[0] as string).not.toContain('<em>'));
@@ -95,19 +123,26 @@ describe('RichTextLine — marks (AC-002, AC-003, AC-004)', () => {
 
   it('toggleUnderline applies <u> (AC-003)', async () => {
     const { onChange, ref } = await setup('hello');
-    act(() => { ref.current!.chain().selectAll().toggleUnderline().run(); });
+    act(() => {
+      ref.current!.chain().selectAll().toggleUnderline().run();
+    });
     await waitFor(() => expect(onChange).toHaveBeenCalledWith(expect.stringContaining('<u>')));
   });
 
   it('toggleStrike applies <s> (AC-003)', async () => {
     const { onChange, ref } = await setup('hello');
-    act(() => { ref.current!.chain().selectAll().toggleStrike().run(); });
+    act(() => {
+      ref.current!.chain().selectAll().toggleStrike().run();
+    });
     await waitFor(() => expect(onChange).toHaveBeenCalledWith(expect.stringContaining('<s>')));
   });
 
   it('mark without selection applies to next char as <b> (AC-004, AC-005)', async () => {
     const { onChange, ref } = await setup();
-    act(() => { ref.current!.commands.toggleBold(); ref.current!.commands.insertContent('x'); });
+    act(() => {
+      ref.current!.commands.toggleBold();
+      ref.current!.commands.insertContent('x');
+    });
     // AC-005: strictly <b>, not <strong>.
     await waitFor(() => expect(onChange).toHaveBeenCalledWith(expect.stringMatching(/<b[^>]*>/)));
     expect(onChange.mock.calls.some(([h]: [string]) => h.includes('<strong>'))).toBe(false);
@@ -125,7 +160,9 @@ describe('RichTextLine — Ctrl+B shortcut plumbing (AC-002)', () => {
       );
     });
     // AC-005: result must be <b>, not <strong>.
-    await waitFor(() => expect(onChange.mock.calls.some(([h]: [string]) => /<b[^>]*>/.test(h))).toBe(true));
+    await waitFor(() =>
+      expect(onChange.mock.calls.some(([h]: [string]) => /<b[^>]*>/.test(h))).toBe(true),
+    );
     // Belt-and-suspenders: none of the calls should contain <strong>.
     expect(onChange.mock.calls.every(([h]: [string]) => !h.includes('<strong>'))).toBe(true);
   });
@@ -138,23 +175,35 @@ describe('RichTextLine — Enter key (AC-012, AC-013)', () => {
       f(ed.view, new KeyboardEvent('keydown', { key: 'Enter', bubbles: true })),
     );
   }
-  const flush = () => act(async () => { await new Promise((r) => setTimeout(r, 50)); });
+  const flush = () =>
+    act(async () => {
+      await new Promise((r) => setTimeout(r, 50));
+    });
 
   it('without onEnter: no-op, no <br>', async () => {
     const { onChange, ref } = await setup('abc');
     onChange.mockClear();
-    act(() => { fireEnter(ref); });
+    act(() => {
+      fireEnter(ref);
+    });
     await flush();
     expect(onChange).not.toHaveBeenCalled();
     expect(document.querySelector('.ProseMirror')?.innerHTML).not.toContain('<br>');
   });
 
   it('with onEnter: callback once, no <br>, no onChange (AC-013)', async () => {
-    const onEnter = jest.fn(); const onChange = jest.fn(); const ref: Ref = { current: null };
-    renderWithProviders(<W initialValue="abc" onEnter={onEnter} onChangeSpy={onChange} editorRef={ref} />);
-    await waitForEditor(); await waitFor(() => expect(ref.current).not.toBeNull());
+    const onEnter = jest.fn();
+    const onChange = jest.fn();
+    const ref: Ref = { current: null };
+    renderWithProviders(
+      <W initialValue="abc" onEnter={onEnter} onChangeSpy={onChange} editorRef={ref} />,
+    );
+    await waitForEditor();
+    await waitFor(() => expect(ref.current).not.toBeNull());
     onChange.mockClear();
-    act(() => { fireEnter(ref); });
+    act(() => {
+      fireEnter(ref);
+    });
     await flush();
     expect(onEnter).toHaveBeenCalledTimes(1);
     expect(onChange).not.toHaveBeenCalled();
@@ -164,9 +213,14 @@ describe('RichTextLine — Enter key (AC-012, AC-013)', () => {
   it('Shift+Enter: no line break, does NOT call onEnter (AC-014)', async () => {
     // AC-014: Shift+Enter is treated the same as Enter — "invariant single-line is absolute".
     // Spec says: same rule as Enter, also does not break line. onEnter is NOT called.
-    const onEnter = jest.fn(); const onChange = jest.fn(); const ref: Ref = { current: null };
-    renderWithProviders(<W initialValue="abc" onEnter={onEnter} onChangeSpy={onChange} editorRef={ref} />);
-    await waitForEditor(); await waitFor(() => expect(ref.current).not.toBeNull());
+    const onEnter = jest.fn();
+    const onChange = jest.fn();
+    const ref: Ref = { current: null };
+    renderWithProviders(
+      <W initialValue="abc" onEnter={onEnter} onChangeSpy={onChange} editorRef={ref} />,
+    );
+    await waitForEditor();
+    await waitFor(() => expect(ref.current).not.toBeNull());
     onChange.mockClear();
     act(() => {
       const ed = ref.current!;
@@ -187,7 +241,9 @@ describe('RichTextLine — Enter key (AC-012, AC-013)', () => {
 
 describe('RichTextLine — placeholder (AC-021, AC-022, AC-024)', () => {
   it('data-placeholder set when empty (AC-021)', async () => {
-    renderWithProviders(<RichTextLine value="" onChange={jest.fn()} placeholder="O que importa hoje?" />);
+    renderWithProviders(
+      <RichTextLine value="" onChange={jest.fn()} placeholder="O que importa hoje?" />,
+    );
     await waitForEditor();
     await waitFor(() => {
       const p = document.querySelector('.ProseMirror p.is-editor-empty');
@@ -198,18 +254,31 @@ describe('RichTextLine — placeholder (AC-021, AC-022, AC-024)', () => {
   it('is-editor-empty removed after typing, reappears after clear (AC-022)', async () => {
     const ref: Ref = { current: null };
     renderWithProviders(<W placeholder="hint" editorRef={ref} />);
-    await waitForEditor(); await waitFor(() => expect(ref.current).not.toBeNull());
-    await waitFor(() => expect(document.querySelector('.ProseMirror p.is-editor-empty')).not.toBeNull());
-    act(() => { ref.current!.commands.setContent('<p>x</p>', true); });
-    await waitFor(() => expect(document.querySelector('.ProseMirror p.is-editor-empty')).toBeNull());
-    act(() => { ref.current!.commands.clearContent(true); });
-    await waitFor(() => expect(document.querySelector('.ProseMirror p.is-editor-empty')).not.toBeNull());
+    await waitForEditor();
+    await waitFor(() => expect(ref.current).not.toBeNull());
+    await waitFor(() =>
+      expect(document.querySelector('.ProseMirror p.is-editor-empty')).not.toBeNull(),
+    );
+    act(() => {
+      ref.current!.commands.setContent('<p>x</p>', true);
+    });
+    await waitFor(() =>
+      expect(document.querySelector('.ProseMirror p.is-editor-empty')).toBeNull(),
+    );
+    act(() => {
+      ref.current!.commands.clearContent(true);
+    });
+    await waitFor(() =>
+      expect(document.querySelector('.ProseMirror p.is-editor-empty')).not.toBeNull(),
+    );
   });
 
   it('no placeholder when prop absent (AC-024)', async () => {
     renderWithProviders(<RichTextLine value="" onChange={jest.fn()} />);
     await waitForEditor();
-    await act(async () => { await new Promise((r) => setTimeout(r, 50)); });
+    await act(async () => {
+      await new Promise((r) => setTimeout(r, 50));
+    });
     const p = document.querySelector('.ProseMirror p.is-editor-empty');
     if (p) expect(['', null]).toContain(p.getAttribute('data-placeholder'));
   });
@@ -217,13 +286,20 @@ describe('RichTextLine — placeholder (AC-021, AC-022, AC-024)', () => {
 
 describe('RichTextLine — controlled sync (AC-025)', () => {
   it('external value change reflects without onChange call', async () => {
-    const onChange = jest.fn(); let set: (v: string) => void = () => undefined;
-    function T() { const [v, sv] = useState('init'); set = sv; return <RichTextLine value={v} onChange={onChange} />; }
+    const onChange = jest.fn();
+    let set: (_v: string) => void = () => undefined;
+    function T() {
+      const [v, sv] = useState('init');
+      set = sv;
+      return <RichTextLine value={v} onChange={onChange} />;
+    }
     renderWithProviders(<T />);
     const el = await waitForEditor();
     await waitFor(() => expect(el.textContent).toContain('init'));
     onChange.mockClear();
-    act(() => { set('updated'); });
+    act(() => {
+      set('updated');
+    });
     await waitFor(() => expect(el.textContent).toContain('updated'));
     expect(onChange).not.toHaveBeenCalled();
   });
@@ -266,7 +342,7 @@ describe('RichTextLine — paste pipeline (AC-016..019, AC-020)', () => {
     // Stub getClientRects on Element.prototype for the duration of the paste.
     // ProseMirror calls this in scrollToSelection after inserting content.
     const originalGetClientRects = Element.prototype.getClientRects;
-     
+
     (Element.prototype as any).getClientRects = () =>
       Object.assign([], { item: () => null, [Symbol.iterator]: [][Symbol.iterator] });
 
@@ -281,7 +357,6 @@ describe('RichTextLine — paste pipeline (AC-016..019, AC-020)', () => {
         await new Promise((r) => setTimeout(r, 50));
       });
     } finally {
-       
       (Element.prototype as any).getClientRects = originalGetClientRects;
     }
   }
@@ -325,7 +400,8 @@ describe('RichTextLine — paste pipeline (AC-016..019, AC-020)', () => {
     // Verify the wiring: two sequential passes through transformPastedHTML equal the first.
     const ref: Ref = { current: null };
     renderWithProviders(<W editorRef={ref} />);
-    await waitForEditor(); await waitFor(() => expect(ref.current).not.toBeNull());
+    await waitForEditor();
+    await waitFor(() => expect(ref.current).not.toBeNull());
     const fn = ref.current!.options.editorProps?.transformPastedHTML!;
     const view = ref.current!.view;
     const input = '<b>x</b> <i>y</i>';
@@ -337,7 +413,9 @@ describe('RichTextLine — paste pipeline (AC-016..019, AC-020)', () => {
 
 describe('RichTextLine — component props (AC-034)', () => {
   it('className merged on wrapper', async () => {
-    const { container } = renderWithProviders(<RichTextLine value="" onChange={jest.fn()} className="z" />);
+    const { container } = renderWithProviders(
+      <RichTextLine value="" onChange={jest.fn()} className="z" />,
+    );
     await waitForEditor();
     expect(container.querySelector('.z')).not.toBeNull();
   });
@@ -358,7 +436,9 @@ describe('RichTextLine — component props (AC-034)', () => {
     renderWithProviders(<RichTextLine value="" onChange={jest.fn()} autoFocus />);
     const el = await waitForEditor();
     // Allow the useEffect to run.
-    await act(async () => { await new Promise((r) => setTimeout(r, 50)); });
+    await act(async () => {
+      await new Promise((r) => setTimeout(r, 50));
+    });
     // The editor should be the active element (or a descendant) after autoFocus.
     // At minimum, the editor element must exist (branch exercised without error).
     expect(el).toBeInTheDocument();
@@ -376,7 +456,9 @@ describe('RichTextLine — component props (AC-034)', () => {
     }).not.toThrow();
     const el = await waitForEditor();
     // Allow the useEffect to run.
-    await act(async () => { await new Promise((r) => setTimeout(r, 80)); });
+    await act(async () => {
+      await new Promise((r) => setTimeout(r, 80));
+    });
     // Branch executed: element is in the DOM.
     expect(el).toBeInTheDocument();
   });
@@ -385,9 +467,10 @@ describe('RichTextLine — component props (AC-034)', () => {
     // Exercises the false path of `if (ariaLabel !== undefined)` (branch coverage).
     renderWithProviders(<RichTextLine value="" onChange={jest.fn()} />);
     const el = await waitForEditor();
-    await act(async () => { await new Promise((r) => setTimeout(r, 50)); });
+    await act(async () => {
+      await new Promise((r) => setTimeout(r, 50));
+    });
     // No aria-label should be set (only aria-multiline etc from editorProps.attributes).
     expect(el.getAttribute('aria-label')).toBeNull();
   });
 });
-
