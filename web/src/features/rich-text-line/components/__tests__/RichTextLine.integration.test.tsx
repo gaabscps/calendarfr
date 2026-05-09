@@ -4,9 +4,10 @@ import { act, screen, waitFor } from '@testing-library/react';
 import type { Editor } from '@tiptap/core';
 import { useState } from 'react';
 
-import { renderWithProviders } from '@/test-utils';
 import { useRichTextLine } from '../../hooks/useRichTextLine.js';
 import { RichTextLine } from '../RichTextLine.js';
+
+import { renderWithProviders } from '@/test-utils';
 
 type Ref = React.MutableRefObject<Editor | null>;
 const waitForEditor = () => waitFor(() => screen.getByRole('textbox'));
@@ -265,7 +266,7 @@ describe('RichTextLine — paste pipeline (AC-016..019, AC-020)', () => {
     // Stub getClientRects on Element.prototype for the duration of the paste.
     // ProseMirror calls this in scrollToSelection after inserting content.
     const originalGetClientRects = Element.prototype.getClientRects;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+     
     (Element.prototype as any).getClientRects = () =>
       Object.assign([], { item: () => null, [Symbol.iterator]: [][Symbol.iterator] });
 
@@ -280,7 +281,7 @@ describe('RichTextLine — paste pipeline (AC-016..019, AC-020)', () => {
         await new Promise((r) => setTimeout(r, 50));
       });
     } finally {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+       
       (Element.prototype as any).getClientRects = originalGetClientRects;
     }
   }

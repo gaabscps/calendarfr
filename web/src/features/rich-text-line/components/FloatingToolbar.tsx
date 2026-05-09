@@ -9,8 +9,8 @@
  * Covers: AC-006, AC-007, AC-008, AC-009, AC-010, AC-011.
  */
 
-import { BubbleMenu } from '@tiptap/react';
 import type { Editor } from '@tiptap/core';
+import { BubbleMenu } from '@tiptap/react';
 import { useRef, useCallback } from 'react';
 
 import styles from './FloatingToolbar.module.css';
@@ -94,7 +94,7 @@ export function FloatingToolbar({ editor }: FloatingToolbarProps) {
     const container = containerRef.current;
     if (!container) return;
 
-    const buttons = Array.from(container.querySelectorAll('button')) as HTMLButtonElement[];
+    const buttons = Array.from(container.querySelectorAll('button'));
     const currentIdx = buttons.findIndex((b) => b === document.activeElement);
 
     let nextIdx: number | null = null;

@@ -23,7 +23,7 @@ const MODEL_NORMALIZE: Record<string, Usage['model']> = {
  * Falls back to fuzzy matching on model family, then 'unknown'.
  */
 function normalizeModel(raw: string): Usage['model'] {
-  if (MODEL_NORMALIZE[raw]) return MODEL_NORMALIZE[raw]!;
+  if (MODEL_NORMALIZE[raw]) return MODEL_NORMALIZE[raw];
   if (raw === 'opus-4-7' || raw === 'sonnet-4-6' || raw === 'haiku-4-5') return raw;
   if (raw.includes('opus')) return 'opus-4-7';
   if (raw.includes('sonnet')) return 'sonnet-4-6';

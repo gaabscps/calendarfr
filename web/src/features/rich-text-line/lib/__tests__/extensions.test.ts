@@ -7,8 +7,8 @@
 
 import { renderHook, act, waitFor } from '@testing-library/react';
 
-import { buildExtensions } from '../extensions.js';
 import { useRichTextLine } from '../../hooks/useRichTextLine.js';
+import { buildExtensions } from '../extensions.js';
 
 // ─── buildExtensions — default param branch ──────────────────────────────────
 
@@ -57,7 +57,7 @@ describe('SingleLineParagraph — Shift-Enter blocked (line 25)', () => {
     // The extension's addKeyboardShortcuts method is available on the prototype.
     const ext = SingleLineParagraph;
     // addKeyboardShortcuts is defined on the extension config; access it via .config.
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+     
     const shortcuts = (ext as any).config?.addKeyboardShortcuts?.call({ parent: null });
     expect(shortcuts).toBeDefined();
     expect(typeof shortcuts?.['Enter']).toBe('function');

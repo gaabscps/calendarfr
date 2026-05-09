@@ -11,8 +11,9 @@
  * integration file would break all other tests that need a real editor.
  */
 
-import { renderWithProviders } from '@/test-utils';
 import { RichTextLine } from '../RichTextLine.js';
+
+import { renderWithProviders } from '@/test-utils';
 
 // Mock useRichTextLine to return null — simulates pre-init state of editor.
 // This is intentional: it exercises the defensive `if (!editor) return;` guard.

@@ -10,6 +10,8 @@
  * the 4-set {<b>,<i>,<u>,<s>}.
  */
 
+import { mergeAttributes } from '@tiptap/core';
+import type { Extensions } from '@tiptap/core';
 import Bold from '@tiptap/extension-bold';
 import Document from '@tiptap/extension-document';
 import History from '@tiptap/extension-history';
@@ -18,8 +20,6 @@ import Placeholder from '@tiptap/extension-placeholder';
 import Strike from '@tiptap/extension-strike';
 import Text from '@tiptap/extension-text';
 import Underline from '@tiptap/extension-underline';
-import { mergeAttributes } from '@tiptap/core';
-import type { Extensions } from '@tiptap/core';
 
 import { SingleLineParagraph } from './singleLineParagraph.js';
 

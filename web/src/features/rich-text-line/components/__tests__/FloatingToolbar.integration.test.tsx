@@ -20,8 +20,9 @@ import { act, fireEvent, screen, waitFor } from '@testing-library/react';
 import type { Editor } from '@tiptap/core';
 import { useState } from 'react';
 
-import { renderWithProviders } from '@/test-utils';
 import { RichTextLine } from '../RichTextLine.js';
+
+import { renderWithProviders } from '@/test-utils';
 
 // ---------------------------------------------------------------------------
 // Mock @tiptap/react BubbleMenu — renders children unconditionally so ARIA
@@ -89,13 +90,13 @@ async function setupWithEditor(initialValue = '') {
   // Capture the editor from ProseMirror's internal state attached to the DOM element.
   // ProseMirror sets __prosemirror on the node.
   await waitFor(() => {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+     
     const pm = (editorEl as any)._tiptapEditor ?? (editorEl.parentElement as any)?._tiptapEditor;
     // We can't easily get the tiptap Editor from the DOM in jsdom, so we
     // retrieve it from the ProseMirror view — try multiple approaches.
     const view = (editorEl as any).pmViewDesc?.view ?? (editorEl as any).__pm;
     if (!capturedEditor && view) {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+       
       capturedEditor = (view as any).editor as Editor;
     }
     if (!capturedEditor && pm) capturedEditor = pm as Editor;

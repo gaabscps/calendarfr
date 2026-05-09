@@ -10,7 +10,7 @@
 export type RichTextValue = string;
 
 /** Props for the RichTextLine controlled component. */
-export type RichTextLineProps = {
+export interface RichTextLineProps {
   /** Current HTML value — controlled. */
   value: RichTextValue;
   /** Called with normalised HTML on every editor change. */
@@ -27,4 +27,4 @@ export type RichTextLineProps = {
   disabled?: boolean;
   /** CSS class forwarded to the wrapper element. */
   className?: string;
-};
+}
