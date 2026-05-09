@@ -21,6 +21,7 @@ Construir do zero um planner/agenda web cuja interface simule a experiência tá
 ## Escopo do MVP (IN / OUT)
 
 **IN:**
+
 - Página única "Daily Page" com data atual e navegação para dias anteriores/futuros
 - Layout Moleskine: Top (data + 3 prioridades + humor) + Agenda 06–23h (esquerda) + Notas/Lista livre (direita)
 - Linha como editor de texto rico (bold/italic/underline/strikethrough) — texto puro, sem categorização semântica
@@ -32,6 +33,7 @@ Construir do zero um planner/agenda web cuja interface simule a experiência tá
 - Testes: unit (Jest), integration (Jest + RTL + MSW), e2e (Playwright real)
 
 **OUT (fases futuras):**
+
 - Visualização semanal/mensal/anual
 - Streaks, gamificação com pontos, sons, hábitos persistentes
 - Sync com Google Calendar / iCal / Notion
@@ -127,6 +129,7 @@ calendarfr/
 ```
 
 **Regras invioláveis (vão pro CLAUDE.md):**
+
 1. Nenhuma feature importa de outra `features/*/internals` — só do `index.ts` (barrel)
 2. `shared/components/*` não conhece domínio (sem `Priority`, `Note`, etc no nome)
 3. `rich-text-line` é a única abstração sobre Tiptap — ninguém mais importa Tiptap direto
@@ -147,13 +150,13 @@ calendarfr/
   "mood": { "emoji": "🙂", "label": "tranquilo", "color": "#a3c4a8" },
   "priorities": [
     { "id": "p_01H...", "text": "<b>Revisar</b> contrato", "done": false },
-    { "id": "p_01H...", "text": "Enviar deck",                "done": true  },
-    { "id": "p_01H...", "text": "",                            "done": false }
+    { "id": "p_01H...", "text": "Enviar deck", "done": true },
+    { "id": "p_01H...", "text": "", "done": false }
   ],
   "agenda": [
-    { "hour": 6,  "text": "" },
-    { "hour": 7,  "text": "<i>caminhada</i>" },
-    { "hour": 8,  "text": "" }
+    { "hour": 6, "text": "" },
+    { "hour": 7, "text": "<i>caminhada</i>" },
+    { "hour": 8, "text": "" }
     /* ... até hour 23 */
   ],
   "notes": [
@@ -216,15 +219,15 @@ GET  /api/health               → 200 { status: "ok", version }
 export const colors = {
   paper: '#fff9f0',
   paperLine: '#e0d4b8',
-  ink: '#2a4d3a',         // verde-musgo
+  ink: '#2a4d3a', // verde-musgo
   inkSecondary: '#6b8a78',
   inkMuted: '#a8b8ad',
-  accent: '#c2410c',      // tinta vermelha (prioridades)
+  accent: '#c2410c', // tinta vermelha (prioridades)
   shadow: 'rgba(60, 40, 20, 0.12)',
 };
 export const fonts = {
-  hand: '"Caveat", "Comic Sans MS", cursive',  // headings + datas
-  body: '"Inter", system-ui, sans-serif',       // corpo (legibilidade)
+  hand: '"Caveat", "Comic Sans MS", cursive', // headings + datas
+  body: '"Inter", system-ui, sans-serif', // corpo (legibilidade)
 };
 export const paper = {
   rule: 'repeating-linear-gradient(0deg, transparent 0 17px, var(--paper-line) 17px 18px)',
@@ -241,23 +244,25 @@ export const paper = {
 
 **Adaptações do `Admin_companies_payments`:**
 
-| Item | Origem (referência) | Adaptação aqui |
-|---|---|---|
-| Jest config | `next/jest` | `babel-jest` + `@swc/jest` (mais rápido) com presets manuais. `testEnvironment: jsdom`, `setupFiles`, `setupFilesAfterEach`, `moduleNameMapper` (`@/*` → `src/*`, `@/test-utils/*` → `test-utils/*`) |
-| Polyfills | undici, TextEncoder, etc | Mesmo `jest.polyfills.js` (file copia 1:1 — Vite não muda jsdom) |
-| Setup | MSW lifecycle, console.error→throw, mocks globais | Igual; mocks de `next/router` viram mocks de `react-router-dom` (`useNavigate`, `useParams`). Router escolhido: `react-router-dom@6` |
-| Test utils | `renderWithProviders` (ThemeProvider + UserContext) | `renderWithProviders` (ThemeProvider + Router só) |
-| MSW factories | `test-utils/msw/factories/auth.ts` | `test-utils/msw/factories/dayFactories.ts` (mockGetDaySuccess, mockPutDayCapture, mockGetDayNotFound) |
-| Coverage thresholds | Por arquivo crítico + global baixo | `shared/api/`, `shared/utils/date/`, `features/rich-text-line/` em 95%; global em 70% (projeto novo) |
-| E2E | `e2e/real/` contra staging real | `e2e/real/` contra companion server local + MSW desligado. Sem mocks. (`PLAYWRIGHT_BASE_URL=http://localhost:3003`) |
-| Smoke | Pós-deploy nightly | Boot test (`npm run dev` sobe, `/` responde, primeiro dia carrega) |
+| Item                | Origem (referência)                                 | Adaptação aqui                                                                                                                                                                                       |
+| ------------------- | --------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Jest config         | `next/jest`                                         | `babel-jest` + `@swc/jest` (mais rápido) com presets manuais. `testEnvironment: jsdom`, `setupFiles`, `setupFilesAfterEach`, `moduleNameMapper` (`@/*` → `src/*`, `@/test-utils/*` → `test-utils/*`) |
+| Polyfills           | undici, TextEncoder, etc                            | Mesmo `jest.polyfills.js` (file copia 1:1 — Vite não muda jsdom)                                                                                                                                     |
+| Setup               | MSW lifecycle, console.error→throw, mocks globais   | Igual; mocks de `next/router` viram mocks de `react-router-dom` (`useNavigate`, `useParams`). Router escolhido: `react-router-dom@6`                                                                 |
+| Test utils          | `renderWithProviders` (ThemeProvider + UserContext) | `renderWithProviders` (ThemeProvider + Router só)                                                                                                                                                    |
+| MSW factories       | `test-utils/msw/factories/auth.ts`                  | `test-utils/msw/factories/dayFactories.ts` (mockGetDaySuccess, mockPutDayCapture, mockGetDayNotFound)                                                                                                |
+| Coverage thresholds | Por arquivo crítico + global baixo                  | `shared/api/`, `shared/utils/date/`, `features/rich-text-line/` em 95%; global em 70% (projeto novo)                                                                                                 |
+| E2E                 | `e2e/real/` contra staging real                     | `e2e/real/` contra companion server local + MSW desligado. Sem mocks. (`PLAYWRIGHT_BASE_URL=http://localhost:3003`)                                                                                  |
+| Smoke               | Pós-deploy nightly                                  | Boot test (`npm run dev` sobe, `/` responde, primeiro dia carrega)                                                                                                                                   |
 
 **Naming (idêntico ao referência):**
+
 - Unit: `**/__tests__/*.test.{ts,tsx}`
 - Integration: `**/__tests__/*.integration.test.{ts,tsx}`
 - E2E: `e2e/real/*.spec.ts`, `e2e/smoke/*.spec.ts`
 
 **Regras invioláveis (vão pro CLAUDE.md):**
+
 1. E2E real não mocka backend — bate no companion server de verdade
 2. Toda factory MSW nova exige spec E2E correspondente no mesmo PR
 3. Coverage só sobe; nunca abaixar pra passar
@@ -308,18 +313,22 @@ Em vez de um único plano monolítico, este projeto é executado como **N ciclos
 ### Sequência de SDD flows (ordem de dependência)
 
 **Flow 1 — Foundation (sequencial, bloqueia tudo)**
+
 - Escopo: scaffolding do monorepo (workspaces front + server), Vite + TS config, ESLint/Prettier, Jest+SWC config, Playwright config, `test-utils/` esqueleto, CI minimal, CLAUDE.md raiz, design system tokens (`shared/components/theme/`), `PaperSheet` átomo
 - Por que sozinho: define convenções que todas as outras features herdam; mexer aqui depois quebra muito
 
 **Flow 2 — Server companion (paralelizável com Flow 3)**
+
 - Escopo: Fastify boot, rota `GET/PUT /api/days/:date`, `jsonStore` com escrita atômica, validação zod, testes unit + integration do server
 - Independente do front
 
 **Flow 3 — `rich-text-line` feature (paralelizável com Flow 2)**
+
 - Escopo: editor Tiptap embutido, FloatingToolbar, atalhos de teclado, sanitização, testes unit + integration
 - Bloqueia Flows 4–7 (todas as features de domínio dependem)
 
 **Flow 4 — Features de domínio (paralelizáveis entre si após Flows 1–3)**
+
 - 4a) `priorities` (Top 3 com checkbox)
 - 4b) `mood` (picker de humor/clima)
 - 4c) `agenda` (timeline 06–23h, 18 slots)
@@ -327,19 +336,109 @@ Em vez de um único plano monolítico, este projeto é executado como **N ciclos
 - Não se conhecem entre si; podem rodar em até 4 worktrees/sessões paralelas
 
 **Flow 5 — `daily-page` orquestrador (sequencial, depende de Flow 4 inteiro)**
+
 - Escopo: composição das 4 features no layout Moleskine, `useDailyPage` (load/save), `usePageNavigation`, swipe + atalhos teclado, animação de virada, autosave debounced
 
 **Flow 6 — E2E real + smoke (sequencial, depende de Flow 5)**
+
 - Escopo: specs Playwright em `e2e/real/` cobrindo escrita, persistência, navegação, atalhos. Smoke test de boot. Fecha o MVP.
 
 ### Critério "abrir um novo SDD flow"
 
 Se SIM aos três:
+
 - Escopo coeso e independente (revisável isoladamente)?
-- >3 arquivos a criar/editar?
+- > 3 arquivos a criar/editar?
 - Critérios de aceitação testáveis em UI ou API?
 
 Caso contrário, vira task dentro do flow do feature pai.
+
+---
+
+## Observabilidade & métricas
+
+Como o projeto é desenvolvido majoritariamente via sessões SDD/vibecoding com agentes, observabilidade tem **três frentes distintas** com nomenclatura industrial estabelecida. Esta seção é o catálogo canônico das opções e ferramentas a considerar; prioridades concretas e flow de execução são decididas em flow próprio.
+
+### Frente 1 — AgentOps (observabilidade de agentes; única do AI-driven)
+
+**AgentOps** é a disciplina industrial (paralelo a DevOps/MLOps) que cobre o ciclo de vida de agentes autônomos em produção. Coined pelo AgentOps SDK e adotado por OpenTelemetry, N-iX, XenonStack, Datadog em 2025–2026. Esta é a frente **única** do AI-driven dev — não tem equivalente em dev tradicional.
+
+**5 pilares (XenonStack / N-iX 2026 framework):**
+
+| Pilar             | O que é                                                                           | Aplicação a este projeto                                                                                                  |
+| ----------------- | --------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| **Observability** | Captura de traces, telemetria, tool calls, fluxo de contexto, execução end-to-end | Extrator de `.agent-session/<id>/` (manifest + outputs); idealmente alinhado com OpenTelemetry GenAI Semantic Conventions |
+| **Evaluation**    | Mede qualidade de output, latency, hallucination, task-level performance          | Trust score do dev agent (first-try success), AC closure latency, dispatches/AC, reviewer findings rate                   |
+| **Governance**    | Guardrails, policy compliance, auditability, safe execution boundaries            | `audit-agent` skill + `dispatch-manifest.json` reconciliation; PreToolUse hooks (guard-session-scope, block-git-write)    |
+| **Feedback**      | Incorporação de user signals, approvals, corrections                              | `pm_note` em manifest; loop iterations; PM intervention count                                                             |
+| **Resilience**    | Failures graciosas via retries, fallbacks, degradation                            | `blocker-specialist` cascade; per-task budget caps (`review_loops_max`, `qa_loops_max`, `blocker_calls_max`)              |
+
+**Padrão de instrumentação:** [OpenTelemetry GenAI Semantic Conventions](https://opentelemetry.io/docs/specs/semconv/gen-ai/) (status experimental em 2026, mas é o de facto da indústria; mantido pelo GenAI SIG desde Apr/2024). Spans relevantes: `invoke_agent {agent_name}`, `create_agent`, `execute_tool`. Atributos: `gen_ai.operation.name`, `gen_ai.agent.name`, `gen_ai.usage.input_tokens`, `gen_ai.usage.output_tokens`.
+
+**Métricas-alvo (extraíveis de `.agent-session/*` hoje):**
+
+| Métrica                   | Definição                            | Como extrair                                           |
+| ------------------------- | ------------------------------------ | ------------------------------------------------------ |
+| Dispatches por AC         | Custo real por requisito             | `count(actual_dispatches) / count(spec.ac_scope)`      |
+| Trust score (per role)    | First-try `status: done` rate        | `done_first_try / total_dispatches_for_role`           |
+| Loop rate                 | % tasks com retry loop               | `tasks_with_loops > 0 / total_tasks`                   |
+| Escalation rate           | Galileo healthy band: 10–15%         | `pending_human / total_tasks`                          |
+| AC closure latency        | Spec aprovado → primeiro qa pass     | `phase_history[specify].completed_at` → `qa.timestamp` |
+| Phase duration            | Tempo por fase SDD                   | `phase_history[].started_at..completed_at`             |
+| Reviewer findings density | Findings critical+major por dispatch | aggregate `severity` em outputs/\*-reviewer.json       |
+| Rework rate               | Linhas mexidas 2× em ≤ N dias        | `git log --numstat` heurística                         |
+| Token cost (best-effort)  | Custo por dispatch / por AC          | `usage.total_tokens` retornado pelo Task tool          |
+
+**Ferramentas de mercado (referência, não obrigatório adotar):** [AgentOps SDK](https://github.com/agentops-ai/agentops), [Langfuse](https://langfuse.com), [Arize Phoenix](https://phoenix.arize.com), [Helicone](https://helicone.ai), [LangSmith](https://smith.langchain.com), [Datadog LLM Observability](https://www.datadoghq.com/blog/llm-otel-semantic-convention/). Para o MVP, geração de Markdown estático local é suficiente — adoção de plataforma fica para escala.
+
+### Frente 2 — Static analysis & architecture fitness (qualidade do código gerado)
+
+Padrão da indústria para qualquer codebase, **não específico de AI-driven**. Importa aqui porque agentes podem produzir código sintaticamente válido mas semanticamente fraco (testes que tocam linha sem assertar; `any` implícito; deps gigantes).
+
+**Software quality metrics (ISO/IEC 25010 — maintainability + reliability):**
+
+| Ferramenta                                                                    | O que mede                                                                             |
+| ----------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| [Stryker Mutator](https://stryker-mutator.io/)                                | Mutation testing — % de mutantes que os testes matam (sinal mais honesto que coverage) |
+| [type-coverage](https://github.com/plantain-00/type-coverage)                 | % de identificadores tipados sem `any`                                                 |
+| [Knip](https://knip.dev/)                                                     | Exports/files mortos, deps não usadas, types órfãos                                    |
+| [rollup-plugin-visualizer](https://github.com/btd/rollup-plugin-visualizer)   | Bundle composition por chunk                                                           |
+| [eslint-plugin-sonarjs](https://github.com/SonarSource/eslint-plugin-sonarjs) | Cognitive complexity + code smells                                                     |
+
+**Architecture fitness functions** (termo de Ford/Parsons/Kua, _Building Evolutionary Architectures_, O'Reilly): testes automatizados que falham se a arquitetura é violada. Aplicação:
+
+| Ferramenta                                                                         | Fitness function que enforça                                            |
+| ---------------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+| [dependency-cruiser](https://github.com/sverweij/dependency-cruiser)               | "Feature A não importa internals de Feature B" — quebra build se violar |
+| [Madge](https://github.com/pahen/madge)                                            | "Sem ciclos no grafo de import"                                         |
+| [eslint-plugin-boundaries](https://github.com/javierbrea/eslint-plugin-boundaries) | Same as dependency-cruiser, integrado ao ESLint                         |
+| [size-limit](https://github.com/ai/size-limit)                                     | "Bundle de feature X ≤ 30 KB"                                           |
+
+### Frente 3 — APM / RUM (observabilidade de runtime, pós-MVP)
+
+Padrão da indústria para qualquer app em produção. Cobre os **three pillars of observability** (logs / metrics / traces — Charity Majors et al.). Aplicável quando o app rodar em ambiente de usuário, ou seja, pós-Flow 6.
+
+| Categoria                                    | Ferramenta                                                                                  | Mede                                        |
+| -------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------- |
+| **APM** (Application Performance Monitoring) | [Sentry](https://sentry.io), [OpenTelemetry](https://opentelemetry.io)                      | Erros runtime, latência, traces server-side |
+| **RUM** (Real User Monitoring)               | [Web Vitals](https://web.dev/vitals/) + analytics, [Sentry RUM](https://sentry.io/for/rum/) | LCP, INP, CLS reais em browser              |
+| **Synthetic / CI checks**                    | [Lighthouse CI](https://github.com/GoogleChrome/lighthouse-ci)                              | Performance/a11y/seo scores em PR           |
+
+### Onde isso entra no projeto
+
+- **Catálogo aqui (este doc):** referência canônica das três frentes com nomenclatura industrial.
+- **Decisão de prioridades:** vai num **Flow 1.5** (a brainstormar; não bloqueia Flow 2). Recomendação inicial: começar pela **Frente 1 (AgentOps)** porque dados já existem em `.agent-session/<id>/` e ROI compounding com cada flow novo.
+- **CLAUDE.md raiz:** ganha um link pra esta seção quando primeiro flow de observabilidade landar.
+- **CI:** workflow extra que roda métricas em PR (idealmente comenta no PR).
+
+### Princípios
+
+1. **Industry terminology first.** Pesquisar nomenclatura padrão antes de criar termos próprios (regra de processo deste projeto).
+2. **Métrica primeiro, automação depois.** Antes de adotar plataforma SaaS (Langfuse, AgentOps SaaS, Sentry), gerar Markdown estático local — o sinal vale, o ferramental vem.
+3. **Não otimizar pra métrica errada.** Mutation score 100% pode ser caro demais; budget realista é melhor que ditadura matemática.
+4. **AgentOps é o diferencial competitivo.** Static analysis e APM são commodity da indústria; séries temporais AgentOps em SDD são inéditas e onde mora a vantagem deste projeto.
+5. **Comparar entre sessões > absoluto numa sessão.** "Dispatches/AC caiu 40%" é insight; "0.36 dispatches/AC" sozinho não.
+6. **Nada bloqueia o build sem budget aprovado.** Antes de quebrar PR por mutation score / fitness function, definir thresholds em PR explícito (mesmo princípio de coverage thresholds).
 
 ---
 
@@ -355,11 +454,13 @@ Caso contrário, vira task dentro do flow do feature pai.
 8. Inspecionar `data/days/` → arquivos JSON com schema esperado
 
 **Testes:**
+
 - `npm test` passa (unit + integration), coverage ≥ thresholds
 - `npm run test:e2e:real` roda contra companion local e passa em todos os specs
 - `npm run typecheck` sem erros
 
 **Regressões a verificar manualmente:**
+
 - Editor não permite pegar `Enter` (linha única — `Enter` muda foco pra próxima)
 - Autosave não dispara em loop
 - Swipe rápido entre dias não causa flash de dado errado
