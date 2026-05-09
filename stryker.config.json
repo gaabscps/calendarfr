@@ -1,0 +1,33 @@
+{
+  "$schema": "https://stryker-mutator.io/schemas/stryker-schema.json",
+  "testRunner": "jest",
+  "mutate": [
+    "scripts/agentops/**/*.ts",
+    "!scripts/agentops/**/*.test.ts",
+    "!scripts/agentops/__fixtures__/**",
+    "!scripts/agentops/__tests__/**",
+    "!scripts/agentops/type-coverage-json.ts",
+    "!scripts/agentops/backfill-usage.ts"
+  ],
+  "concurrency": 4,
+  "thresholds": {
+    "high": 90,
+    "low": 60,
+    "break": 60
+  },
+  "coverageAnalysis": "perTest",
+  "plugins": ["@stryker-mutator/jest-runner", "@stryker-mutator/typescript-checker"],
+  "checkers": ["typescript"],
+  "tsconfigFile": "tsconfig.scripts.json",
+  "reporters": ["html", "json", "progress"],
+  "htmlReporter": {
+    "fileName": "reports/mutation/index.html"
+  },
+  "jsonReporter": {
+    "fileName": "reports/mutation/mutation.json"
+  },
+  "jest": {
+    "configFile": "stryker.jest.config.cjs",
+    "projectType": "custom"
+  }
+}
