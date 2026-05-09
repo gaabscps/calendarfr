@@ -1,6 +1,6 @@
 # AgentOps observability — overview
 
-> Generated at: 2026-05-09T08:14:25.027Z | Total flows: 6
+> Generated at: 2026-05-09T08:32:41.722Z | Total flows: 6
 
 ## Repo health snapshot
 
