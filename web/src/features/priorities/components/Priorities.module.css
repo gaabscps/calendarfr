@@ -1,0 +1,12 @@
+/**
+ * Priorities styles — CSS Module.
+ *
+ * Vertical list of 3 PriorityItem rows. Gap via token-compatible value.
+ */
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px; /* ~var(--spacing-sm) */
+  width: 100%;
+}
