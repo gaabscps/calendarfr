@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>priorities — Top 3 prioridades do dia (checkbox + RichTextLine) — AgentOps</title>
+    <title>agenda — timeline 06–23h, 18 slots de 1h (RichTextLine inline) — AgentOps</title>
     <style>
       :root {
         --bg: #fff;
@@ -565,39 +565,35 @@
   <body>
     <header class="kpi-bar">
       <h1>
-        priorities — Top 3 prioridades do dia (checkbox + RichTextLine)
+        agenda — timeline 06–23h, 18 slots de 1h (RichTextLine inline)
         <span class="badge badge-pass">✓</span>
       </h1>
       <div class="kpis">
-        <span>37m 10s</span>
-        <span>$3.21</span>
-        <span class="kpi-sub">$0.123/AC</span>
-        <span>0/26 ACs</span>
+        <span>52m 40s</span>
+        <span>$3.01</span>
+        <span class="kpi-sub">$0.108/AC</span>
+        <span>0/28 ACs</span>
         <span>mut —</span>
         <span>type —</span>
         <span>0 loops</span>
       </div>
     </header>
-    <div class="compliance-notice compliance-pm-bypass" role="note">
-      <strong>PM-bypass:</strong> PM autônomo skipou parte do pipeline canônico do ai-squad (decisão
-      documentada em <code>handoff.md</code>); dispatches registrados no manifest sem persistência
-      em <code>outputs/</code>. Excluído de trends e health metrics.
-    </div>
+
     <main>
       <section class="story">
         <h2>Story</h2>
-        <article class="story-card story-card--done" aria-label="batch FEAT008-BATCHA">
+        <article class="story-card story-card--done" aria-label="batch FEAT009-BATCHA">
           <header>
-            <h3>FEAT008-BATCHA</h3>
+            <h3>FEAT009-BATCHA</h3>
             <span class="badge badge-pass" aria-label="status: done">✓ done</span>
           </header>
           <div class="story-card__stats">
             <span class="story-card__stat"
               ><span class="story-card__stat-label">time</span>
-              <span class="story-card__stat-value">33m</span></span
+              <span class="story-card__stat-value">13m 10s</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">cost</span>
-              <span class="story-card__stat-value">$1.15</span></span
+              <span class="story-card__stat-value">$1.25</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">tasks</span>
               <span class="story-card__stat-value">0</span></span
@@ -610,8 +606,8 @@
             ><span class="story-card__pipeline">dev → code-reviewer ‖ logic-reviewer → qa</span>
           </div>
           <p class="story-card__summary">
-            Fix do logic-review blocker: AC-002 invariant — onChangeItem agora preserva id existente
-            mesmo com partial. id=&#39;&#39;; +2 regression tests; 28/28 tests pass.
+            15/15 ACs pass; 1 lint blocker (no-unused-vars no _h em type annotation) —
+            false-positive do code-reviewer earlier; PM reverteu para _h, lint clean.
           </p>
           <div class="story-card__drilldowns">
             <details>
@@ -647,42 +643,42 @@
                 <tbody>
                   <tr>
                     <td>dev</td>
-                    <td>feat008-batchA-dev-01</td>
+                    <td>feat009-batchA-dev-01</td>
                     <td>—</td>
-                    <td>6m 55s</td>
-                    <td>74798</td>
+                    <td>5m 36s</td>
+                    <td>64659</td>
                     <td>done</td>
                   </tr>
                   <tr>
                     <td>code-reviewer</td>
-                    <td>feat008-batchA-coderevi…</td>
+                    <td>feat009-batchA-coderevi…</td>
                     <td>—</td>
-                    <td>1m 1s</td>
-                    <td>25750</td>
+                    <td>1m 18s</td>
+                    <td>30199</td>
                     <td>done</td>
                   </tr>
                   <tr>
                     <td>logic-reviewer</td>
-                    <td>feat008-batchA-logicrev…</td>
+                    <td>feat009-batchA-logicrev…</td>
                     <td>—</td>
-                    <td>1m 13s</td>
-                    <td>32187</td>
-                    <td>done</td>
-                  </tr>
-                  <tr>
-                    <td>qa</td>
-                    <td>feat008-batchA-qa-01</td>
-                    <td>—</td>
-                    <td>49s</td>
-                    <td>34367</td>
+                    <td>2m 11s</td>
+                    <td>34308</td>
                     <td>done</td>
                   </tr>
                   <tr>
                     <td>dev</td>
-                    <td>feat008-batchA-fix-01</td>
+                    <td>feat009-batchA-fix-01</td>
                     <td>—</td>
-                    <td>1m</td>
-                    <td>4000</td>
+                    <td>1m 20s</td>
+                    <td>5000</td>
+                    <td>done</td>
+                  </tr>
+                  <tr>
+                    <td>qa</td>
+                    <td>feat009-batchA-qa-01</td>
+                    <td>—</td>
+                    <td>3m 41s</td>
+                    <td>51534</td>
                     <td>done</td>
                   </tr>
                 </tbody>
@@ -691,24 +687,24 @@
             <details>
               <summary>PM note</summary>
               <p class="story-card__pmnote">
-                Fix do logic-review blocker: AC-002 invariant — onChangeItem agora preserva id
-                existente mesmo com partial.id=&#39;&#39;; +2 regression tests; 28/28 tests pass.
+                15/15 ACs pass; 1 lint blocker (no-unused-vars no _h em type annotation) —
+                false-positive do code-reviewer earlier; PM reverteu para _h, lint clean.
               </p>
             </details>
           </div>
         </article>
-        <article class="story-card story-card--done" aria-label="batch FEAT008-BATCHB">
+        <article class="story-card story-card--done" aria-label="batch FEAT009-BATCHB">
           <header>
-            <h3>FEAT008-BATCHB</h3>
+            <h3>FEAT009-BATCHB</h3>
             <span class="badge badge-pass" aria-label="status: done">✓ done</span>
           </header>
           <div class="story-card__stats">
             <span class="story-card__stat"
               ><span class="story-card__stat-label">time</span>
-              <span class="story-card__stat-value">24m 13s</span></span
+              <span class="story-card__stat-value">14m</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">cost</span>
-              <span class="story-card__stat-value">$1.34</span></span
+              <span class="story-card__stat-value">$1.28</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">tasks</span>
               <span class="story-card__stat-value">0</span></span
@@ -721,8 +717,8 @@
             ><span class="story-card__pipeline">dev → code-reviewer ‖ logic-reviewer → qa</span>
           </div>
           <p class="story-card__summary">
-            ready_for_done — 12/12 ACs com test passando, 32/32 testes green, sem @tiptap em
-            produção.
+            ready_for_done — 13/13 ACs pass; 27 suites, 384 testes green; typecheck+lint clean;
+            barrel exports completo; sem violações de boundary.
           </p>
           <div class="story-card__drilldowns">
             <details>
@@ -743,7 +739,7 @@
               <ul class="story-card__acs"></ul>
             </details>
             <details>
-              <summary>Pipeline trace (4 dispatches)</summary>
+              <summary>Pipeline trace (5 dispatches)</summary>
               <table class="story-card__pipeline-trace">
                 <thead>
                   <tr>
@@ -758,34 +754,42 @@
                 <tbody>
                   <tr>
                     <td>dev</td>
-                    <td>feat008-batchB-dev-01</td>
+                    <td>feat009-batchB-dev-01</td>
                     <td>—</td>
-                    <td>14m 48s</td>
-                    <td>113893</td>
+                    <td>7m 22s</td>
+                    <td>72106</td>
                     <td>done</td>
                   </tr>
                   <tr>
                     <td>code-reviewer</td>
-                    <td>feat008-batchB-coderevi…</td>
+                    <td>feat009-batchB-coderevi…</td>
                     <td>—</td>
-                    <td>1m 2s</td>
-                    <td>22486</td>
+                    <td>1m 33s</td>
+                    <td>34503</td>
                     <td>done</td>
                   </tr>
                   <tr>
                     <td>logic-reviewer</td>
-                    <td>feat008-batchB-logicrev…</td>
+                    <td>feat009-batchB-logicrev…</td>
                     <td>—</td>
-                    <td>1m 14s</td>
-                    <td>35515</td>
+                    <td>1m 56s</td>
+                    <td>29135</td>
+                    <td>done</td>
+                  </tr>
+                  <tr>
+                    <td>dev</td>
+                    <td>feat009-batchB-fix-01</td>
+                    <td>—</td>
+                    <td>3m 10s</td>
+                    <td>12000</td>
                     <td>done</td>
                   </tr>
                   <tr>
                     <td>qa</td>
-                    <td>feat008-batchB-qa-01</td>
+                    <td>feat009-batchB-qa-01</td>
                     <td>—</td>
-                    <td>1m 13s</td>
-                    <td>31167</td>
+                    <td>1m 34s</td>
+                    <td>37568</td>
                     <td>done</td>
                   </tr>
                 </tbody>
@@ -794,24 +798,24 @@
             <details>
               <summary>PM note</summary>
               <p class="story-card__pmnote">
-                ready_for_done — 12/12 ACs com test passando, 32/32 testes green, sem @tiptap em
-                produção.
+                ready_for_done — 13/13 ACs pass; 27 suites, 384 testes green; typecheck+lint clean;
+                barrel exports completo; sem violações de boundary.
               </p>
             </details>
           </div>
         </article>
-        <article class="story-card story-card--done" aria-label="batch FEAT008-BATCHC">
+        <article class="story-card story-card--done" aria-label="batch FEAT009-BATCHC">
           <header>
-            <h3>FEAT008-BATCHC</h3>
+            <h3>FEAT009-BATCHC</h3>
             <span class="badge badge-pass" aria-label="status: done">✓ done</span>
           </header>
           <div class="story-card__stats">
             <span class="story-card__stat"
               ><span class="story-card__stat-label">time</span>
-              <span class="story-card__stat-value">13m 48s</span></span
+              <span class="story-card__stat-value">5m 10s</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">cost</span>
-              <span class="story-card__stat-value">$0.72</span></span
+              <span class="story-card__stat-value">$0.49</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">tasks</span>
               <span class="story-card__stat-value">0</span></span
@@ -821,10 +825,11 @@
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">files</span>
               <span class="story-card__stat-value">0</span></span
-            ><span class="story-card__pipeline">dev → code-reviewer ‖ logic-reviewer → qa</span>
+            ><span class="story-card__pipeline">dev → qa</span>
           </div>
           <p class="story-card__summary">
-            ready_for_done — 4/4 ACs pass, build-storybook clean, coverage 100% &gt; threshold 90%.
+            FEAT_009_FINAL_STATUS: ready_to_ship — 4/4 ACs BATCH-C pass; coverage agenda 100/95.
+            45/100/100; build-storybook clean; arch:check pre-existing only; 384 testes total green.
           </p>
           <div class="story-card__drilldowns">
             <details>
@@ -845,7 +850,7 @@
               <ul class="story-card__acs"></ul>
             </details>
             <details>
-              <summary>Pipeline trace (4 dispatches)</summary>
+              <summary>Pipeline trace (2 dispatches)</summary>
               <table class="story-card__pipeline-trace">
                 <thead>
                   <tr>
@@ -860,34 +865,18 @@
                 <tbody>
                   <tr>
                     <td>dev</td>
-                    <td>feat008-batchC-dev-01</td>
+                    <td>feat009-batchC-dev-01</td>
                     <td>—</td>
-                    <td>1m 57s</td>
-                    <td>42554</td>
-                    <td>done</td>
-                  </tr>
-                  <tr>
-                    <td>code-reviewer</td>
-                    <td>feat008-batchC-coderevi…</td>
-                    <td>—</td>
-                    <td>35s</td>
-                    <td>15721</td>
-                    <td>done</td>
-                  </tr>
-                  <tr>
-                    <td>logic-reviewer</td>
-                    <td>feat008-batchC-logicrev…</td>
-                    <td>—</td>
-                    <td>53s</td>
-                    <td>22778</td>
+                    <td>3m 40s</td>
+                    <td>53716</td>
                     <td>done</td>
                   </tr>
                   <tr>
                     <td>qa</td>
-                    <td>feat008-batchC-qa-01</td>
+                    <td>feat009-batchC-qa-01</td>
                     <td>—</td>
-                    <td>1m 48s</td>
-                    <td>27985</td>
+                    <td>1m 29s</td>
+                    <td>20736</td>
                     <td>done</td>
                   </tr>
                 </tbody>
@@ -896,8 +885,9 @@
             <details>
               <summary>PM note</summary>
               <p class="story-card__pmnote">
-                ready_for_done — 4/4 ACs pass, build-storybook clean, coverage 100% &gt; threshold
-                90%.
+                FEAT_009_FINAL_STATUS: ready_to_ship — 4/4 ACs BATCH-C pass; coverage agenda
+                100/95.45/100/100; build-storybook clean; arch:check pre-existing only; 384 testes
+                total green.
               </p>
             </details>
           </div>
@@ -906,38 +896,38 @@
       <section class="cost-section">
         <header class="cost-header">
           <h2>Cost</h2>
-          <span class="badge badge-pass">coverage 13/13 (100%)</span>
+          <span class="badge badge-pass">coverage 12/12 (100%)</span>
         </header>
         <div class="cost-grid">
           <div class="cost-card">
             <span class="cost-label">Total cost</span>
-            <span class="cost-value">$3.21</span>
-            <small>$3.2067</small>
+            <span class="cost-value">$3.01</span>
+            <small>$3.0149</small>
           </div>
           <div class="cost-card">
             <span class="cost-label">$ / AC</span>
-            <span class="cost-value">$0.1233</span>
-            <small>26 ACs</small>
+            <span class="cost-value">$0.1077</span>
+            <small>28 ACs</small>
           </div>
           <div class="cost-card">
             <span class="cost-label">$ / dispatch</span>
-            <span class="cost-value">$0.2467</span>
-            <small>avg of 13</small>
+            <span class="cost-value">$0.2512</span>
+            <small>avg of 12</small>
           </div>
           <div class="cost-card">
             <span class="cost-label">Tokens</span>
-            <span class="cost-value">483,201</span>
-            <small>338,241 in / 144,960 out (70/30)</small>
+            <span class="cost-value">445,464</span>
+            <small>311,825 in / 133,639 out (70/30)</small>
           </div>
           <div class="cost-card">
             <span class="cost-label">Wall-clock</span>
-            <span class="cost-value">34m 27s</span>
-            <small>13 dispatches with usage</small>
+            <span class="cost-value">34m 50s</span>
+            <small>12 dispatches with usage</small>
           </div>
           <div class="cost-card">
             <span class="cost-label">Tool uses</span>
             <span class="cost-value">305</span>
-            <small>~23.5 per dispatch</small>
+            <small>~25.4 per dispatch</small>
           </div>
         </div>
         <table class="cost-models">
@@ -955,21 +945,21 @@
           <tbody>
             <tr>
               <td><code>sonnet-4-6</code></td>
-              <td>12</td>
-              <td>479,201</td>
-              <td>33m 27s</td>
-              <td>300</td>
-              <td>$3.1627</td>
-              <td>98.6%</td>
+              <td>10</td>
+              <td>428,464</td>
+              <td>30m 20s</td>
+              <td>268</td>
+              <td>$2.8279</td>
+              <td>93.8%</td>
             </tr>
             <tr>
               <td><code>opus-4-7</code></td>
-              <td>1</td>
-              <td>4,000</td>
-              <td>1m</td>
-              <td>5</td>
-              <td>$0.0440</td>
-              <td>1.4%</td>
+              <td>2</td>
+              <td>17,000</td>
+              <td>4m 30s</td>
+              <td>37</td>
+              <td>$0.1870</td>
+              <td>6.2%</td>
             </tr>
           </tbody>
         </table>
@@ -989,35 +979,35 @@
             <tbody>
               <tr>
                 <td><code>dev</code></td>
-                <td>4</td>
-                <td>235,245</td>
-                <td>24m 40s</td>
-                <td>$1.5702</td>
-                <td>49.0%</td>
+                <td>5</td>
+                <td>207,481</td>
+                <td>21m 8s</td>
+                <td>$1.4442</td>
+                <td>47.9%</td>
               </tr>
               <tr>
                 <td><code>qa</code></td>
                 <td>3</td>
-                <td>93,519</td>
-                <td>3m 49s</td>
-                <td>$0.6172</td>
-                <td>19.2%</td>
-              </tr>
-              <tr>
-                <td><code>logic-reviewer</code></td>
-                <td>3</td>
-                <td>90,480</td>
-                <td>3m 20s</td>
-                <td>$0.5972</td>
-                <td>18.6%</td>
+                <td>109,838</td>
+                <td>6m 44s</td>
+                <td>$0.7249</td>
+                <td>24.0%</td>
               </tr>
               <tr>
                 <td><code>code-reviewer</code></td>
-                <td>3</td>
-                <td>63,957</td>
-                <td>2m 38s</td>
-                <td>$0.4221</td>
-                <td>13.2%</td>
+                <td>2</td>
+                <td>64,702</td>
+                <td>2m 51s</td>
+                <td>$0.4270</td>
+                <td>14.2%</td>
+              </tr>
+              <tr>
+                <td><code>logic-reviewer</code></td>
+                <td>2</td>
+                <td>63,443</td>
+                <td>4m 7s</td>
+                <td>$0.4187</td>
+                <td>13.9%</td>
               </tr>
             </tbody>
           </table>
@@ -1038,10 +1028,10 @@
             <tbody>
               <tr>
                 <td><code>unattributed</code></td>
-                <td>13</td>
-                <td>483,201</td>
-                <td>34m 27s</td>
-                <td>$3.2067</td>
+                <td>12</td>
+                <td>445,464</td>
+                <td>34m 50s</td>
+                <td>$3.0149</td>
                 <td>100.0%</td>
               </tr>
             </tbody>
@@ -1049,7 +1039,7 @@
         </details>
         <p class="cost-note">
           <em
-            >70/30 input/output split assumed; harness reports only total_tokens; 13 of 13
+            >70/30 input/output split assumed; harness reports only total_tokens; 12 of 12
             dispatches included in cost</em
           >
         </p>
@@ -1225,6 +1215,18 @@
                   <td>qa</td>
                   <td>—</td>
                 </tr>
+                <tr>
+                  <td>AC-027</td>
+                  <td>missing</td>
+                  <td>qa</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>AC-028</td>
+                  <td>missing</td>
+                  <td>qa</td>
+                  <td>—</td>
+                </tr>
               </tbody>
             </table>
           </div>
@@ -1246,121 +1248,112 @@
               </thead>
               <tbody>
                 <tr>
-                  <td>feat008-batchA-de...</td>
+                  <td>feat009-batchA-de...</td>
                   <td>dev</td>
                   <td>done</td>
                   <td>—</td>
-                  <td>74798</td>
-                  <td>6m 55s</td>
-                  <td>Types + hook usePriorities + normalize util + 38 unit tes...</td>
+                  <td>64659</td>
+                  <td>5m 36s</td>
+                  <td>Tipos + lib (normalizeAgenda single-warn, currentHour, fo...</td>
                 </tr>
                 <tr>
-                  <td>feat008-batchB-de...</td>
-                  <td>dev</td>
-                  <td>done</td>
-                  <td>—</td>
-                  <td>113893</td>
-                  <td>14m 48s</td>
-                  <td>PriorityItem + Priorities controlled c/ React.memo, check...</td>
-                </tr>
-                <tr>
-                  <td>feat008-batchC-de...</td>
-                  <td>dev</td>
-                  <td>done</td>
-                  <td>—</td>
-                  <td>42554</td>
-                  <td>1m 57s</td>
-                  <td>4 Storybook stories CSF3, threshold 90% no jest.config, C...</td>
-                </tr>
-                <tr>
-                  <td>feat008-batchA-co...</td>
+                  <td>feat009-batchA-co...</td>
                   <td>code-reviewer</td>
                   <td>done</td>
                   <td>—</td>
-                  <td>25750</td>
-                  <td>1m 1s</td>
-                  <td>Concerns: 1 falso-blocker (barrel exports BATCH-B já land...</td>
+                  <td>30199</td>
+                  <td>1m 18s</td>
+                  <td>11 minor findings (sem blockers/majors); aplicado AGENDA_...</td>
                 </tr>
                 <tr>
-                  <td>feat008-batchA-lo...</td>
+                  <td>feat009-batchA-lo...</td>
                   <td>logic-reviewer</td>
                   <td>done</td>
                   <td>—</td>
-                  <td>32187</td>
-                  <td>1m 13s</td>
-                  <td>Concerns: 1 BLOCKER REAL — onChangeItem regenera ULID com...</td>
+                  <td>34308</td>
+                  <td>2m 11s</td>
+                  <td>5 minor findings (sem blockers); aplicado guard out-of-ra...</td>
                 </tr>
                 <tr>
-                  <td>feat008-batchB-co...</td>
-                  <td>code-reviewer</td>
-                  <td>done</td>
-                  <td>—</td>
-                  <td>22486</td>
-                  <td>1m 2s</td>
-                  <td>Concerns: 2 majors (6 useCallback boilerplate, 3 Priority...</td>
-                </tr>
-                <tr>
-                  <td>feat008-batchB-lo...</td>
-                  <td>logic-reviewer</td>
-                  <td>done</td>
-                  <td>—</td>
-                  <td>35515</td>
-                  <td>1m 14s</td>
-                  <td>Concerns: AC-006 não verifica innerHTML intacto; AC-016 n...</td>
-                </tr>
-                <tr>
-                  <td>feat008-batchC-co...</td>
-                  <td>code-reviewer</td>
-                  <td>done</td>
-                  <td>—</td>
-                  <td>15721</td>
-                  <td>35s</td>
-                  <td>Concerns minor: cast as unknown as PrioritiesTuple sem co...</td>
-                </tr>
-                <tr>
-                  <td>feat008-batchC-lo...</td>
-                  <td>logic-reviewer</td>
-                  <td>done</td>
-                  <td>—</td>
-                  <td>22778</td>
-                  <td>53s</td>
-                  <td>Concerns minors: &lt;u&gt; ausente do AllDone story; falsos-pos...</td>
-                </tr>
-                <tr>
-                  <td>feat008-batchA-qa-01</td>
-                  <td>qa</td>
-                  <td>done</td>
-                  <td>—</td>
-                  <td>34367</td>
-                  <td>49s</td>
-                  <td>ready_for_done — 10/10 ACs pass, 38 testes green, boundar...</td>
-                </tr>
-                <tr>
-                  <td>feat008-batchB-qa-01</td>
-                  <td>qa</td>
-                  <td>done</td>
-                  <td>—</td>
-                  <td>31167</td>
-                  <td>1m 13s</td>
-                  <td>ready_for_done — 12/12 ACs com test passando, 32/32 teste...</td>
-                </tr>
-                <tr>
-                  <td>feat008-batchA-fi...</td>
+                  <td>feat009-batchA-fi...</td>
                   <td>dev</td>
                   <td>done</td>
                   <td>—</td>
-                  <td>4000</td>
-                  <td>1m</td>
-                  <td>Fix do logic-review blocker: AC-002 invariant — onChangeI...</td>
+                  <td>5000</td>
+                  <td>1m 20s</td>
+                  <td>PM aplicou fixes dos reviewers: AGENDA_HOURS exportado de...</td>
                 </tr>
                 <tr>
-                  <td>feat008-batchC-qa-01</td>
+                  <td>feat009-batchA-qa-01</td>
                   <td>qa</td>
                   <td>done</td>
                   <td>—</td>
-                  <td>27985</td>
-                  <td>1m 48s</td>
-                  <td>ready_for_done — 4/4 ACs pass, build-storybook clean, cov...</td>
+                  <td>51534</td>
+                  <td>3m 41s</td>
+                  <td>15/15 ACs pass; 1 lint blocker (no-unused-vars no _h em t...</td>
+                </tr>
+                <tr>
+                  <td>feat009-batchB-de...</td>
+                  <td>dev</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>72106</td>
+                  <td>7m 22s</td>
+                  <td>AgendaSlot (memo&#39;d) + Agenda (controlled, defensive norma...</td>
+                </tr>
+                <tr>
+                  <td>feat009-batchB-co...</td>
+                  <td>code-reviewer</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>34503</td>
+                  <td>1m 33s</td>
+                  <td>0 blockers, 2 majors (rename type AgendaSlot→AgendaSlotDa...</td>
+                </tr>
+                <tr>
+                  <td>feat009-batchB-lo...</td>
+                  <td>logic-reviewer</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>29135</td>
+                  <td>1m 56s</td>
+                  <td>2 majors REAIS: stale-closure race no useEffect ref-updat...</td>
+                </tr>
+                <tr>
+                  <td>feat009-batchB-fi...</td>
+                  <td>dev</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>12000</td>
+                  <td>3m 10s</td>
+                  <td>PM aplicou fixes: (a) useAgenda agora usa valueRef + onCh...</td>
+                </tr>
+                <tr>
+                  <td>feat009-batchB-qa-01</td>
+                  <td>qa</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>37568</td>
+                  <td>1m 34s</td>
+                  <td>ready_for_done — 13/13 ACs pass; 27 suites, 384 testes gr...</td>
+                </tr>
+                <tr>
+                  <td>feat009-batchC-de...</td>
+                  <td>dev</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>53716</td>
+                  <td>3m 40s</td>
+                  <td>5 Storybook stories CSF3 (Empty/Typical/Full/WithCurrentH...</td>
+                </tr>
+                <tr>
+                  <td>feat009-batchC-qa-01</td>
+                  <td>qa</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>20736</td>
+                  <td>1m 29s</td>
+                  <td>FEAT_009_FINAL_STATUS: ready_to_ship — 4/4 ACs BATCH-C pa...</td>
                 </tr>
               </tbody>
             </table>
@@ -1393,19 +1386,11 @@
         <details>
           <summary>View raw Markdown report</summary>
           <div class="md-embed">
-            <h1>priorities — Top 3 prioridades do dia (checkbox + RichTextLine) — FEAT-008</h1>
+            <h1>agenda — timeline 06–23h, 18 slots de 1h (RichTextLine inline) — FEAT-009</h1>
             <blockquote>
               <p>
-                ⚠ <strong>PM-bypass</strong> — PM autônomo skipou parte do pipeline canônico do
-                ai-squad (decisão documentada em <code>handoff.md</code>); dispatches registrados no
-                manifest sem persistência em <code>outputs/</code>. Excluído de trends e health
-                metrics.
-              </p>
-            </blockquote>
-            <blockquote>
-              <p>
-                Feature: priorities — Top 3 prioridades do dia (checkbox + RichTextLine) Task ID:
-                FEAT-008 Phase: done Generated at: 2026-05-10T09:01:55.016Z
+                Feature: agenda — timeline 06–23h, 18 slots de 1h (RichTextLine inline) Task ID:
+                FEAT-009 Phase: done Generated at: 2026-05-10T09:01:55.016Z
               </p>
             </blockquote>
             <h2>Insights</h2>
@@ -1419,24 +1404,24 @@
             <h2>Cost breakdown</h2>
             <p>
               <em
-                >70/30 input/output split assumed; harness reports only total_tokens; 13 of 13
+                >70/30 input/output split assumed; harness reports only total_tokens; 12 of 12
                 dispatches included in cost</em
               >
             </p>
             <ul>
               <li>
-                Total tokens: 483201
+                Total tokens: 445464
                 <ul>
-                  <li>Estimated input (70%): 338241</li>
-                  <li>Estimated output (30%): 144960</li>
+                  <li>Estimated input (70%): 311825</li>
+                  <li>Estimated output (30%): 133639</li>
                 </ul>
               </li>
-              <li>Estimated cost USD total: $3.2067</li>
-              <li>Cost per AC: $0.1233</li>
-              <li>Cost per dispatch (avg): $0.2467</li>
-              <li>Wall-clock duration: 34m 27s</li>
+              <li>Estimated cost USD total: $3.0149</li>
+              <li>Cost per AC: $0.1077</li>
+              <li>Cost per dispatch (avg): $0.2512</li>
+              <li>Wall-clock duration: 34m 50s</li>
               <li>Tool uses total: 305</li>
-              <li>Coverage: 13 of 13 dispatches included in cost calculation</li>
+              <li>Coverage: 12 of 12 dispatches included in cost calculation</li>
             </ul>
             <h2>Repo health snapshot</h2>
             <p>
@@ -1463,162 +1448,148 @@
               </thead>
               <tbody>
                 <tr>
-                  <td>feat008-b...</td>
+                  <td>feat009-b...</td>
                   <td>dev</td>
                   <td>done</td>
                   <td>—</td>
-                  <td>74798</td>
-                  <td>$0.4937</td>
-                  <td>6m 55s</td>
+                  <td>64659</td>
+                  <td>$0.4267</td>
+                  <td>5m 36s</td>
                   <td>
-                    Types + hook usePriorities + normalize util + 38 unit tests; ulid adicionado ...
+                    Tipos + lib (normalizeAgenda single-warn, currentHour, formatHour) + hook use...
                   </td>
                 </tr>
                 <tr>
-                  <td>feat008-b...</td>
-                  <td>dev</td>
-                  <td>done</td>
-                  <td>—</td>
-                  <td>113893</td>
-                  <td>$0.7517</td>
-                  <td>14m 48s</td>
-                  <td>
-                    PriorityItem + Priorities controlled c/ React.memo, checkbox custom acessível...
-                  </td>
-                </tr>
-                <tr>
-                  <td>feat008-b...</td>
-                  <td>dev</td>
-                  <td>done</td>
-                  <td>—</td>
-                  <td>42554</td>
-                  <td>$0.2809</td>
-                  <td>1m 57s</td>
-                  <td>
-                    4 Storybook stories CSF3, threshold 90% no jest.config, CLAUDE.md atualizado,...
-                  </td>
-                </tr>
-                <tr>
-                  <td>feat008-b...</td>
+                  <td>feat009-b...</td>
                   <td>code-reviewer</td>
                   <td>done</td>
                   <td>—</td>
-                  <td>25750</td>
-                  <td>$0.1699</td>
-                  <td>1m 1s</td>
+                  <td>30199</td>
+                  <td>$0.1993</td>
+                  <td>1m 18s</td>
                   <td>
-                    Concerns: 1 falso-blocker (barrel exports BATCH-B já landed) + minors (EMPTY_...
+                    11 minor findings (sem blockers/majors); aplicado AGENDA_HOURS dedup, current...
                   </td>
                 </tr>
                 <tr>
-                  <td>feat008-b...</td>
+                  <td>feat009-b...</td>
                   <td>logic-reviewer</td>
                   <td>done</td>
                   <td>—</td>
-                  <td>32187</td>
-                  <td>$0.2124</td>
-                  <td>1m 13s</td>
+                  <td>34308</td>
+                  <td>$0.2264</td>
+                  <td>2m 11s</td>
                   <td>
-                    Concerns: 1 BLOCKER REAL — onChangeItem regenera ULID com partial.id=&#39;&#39;
-                    explí...
+                    5 minor findings (sem blockers); aplicado guard out-of-range em useAgenda + 5...
                   </td>
                 </tr>
                 <tr>
-                  <td>feat008-b...</td>
-                  <td>code-reviewer</td>
-                  <td>done</td>
-                  <td>—</td>
-                  <td>22486</td>
-                  <td>$0.1484</td>
-                  <td>1m 2s</td>
-                  <td>
-                    Concerns: 2 majors (6 useCallback boilerplate, 3 PriorityItem hardcoded vs ma...
-                  </td>
-                </tr>
-                <tr>
-                  <td>feat008-b...</td>
-                  <td>logic-reviewer</td>
-                  <td>done</td>
-                  <td>—</td>
-                  <td>35515</td>
-                  <td>$0.2344</td>
-                  <td>1m 14s</td>
-                  <td>
-                    Concerns: AC-006 não verifica innerHTML intacto; AC-016 não lê aria-label rea...
-                  </td>
-                </tr>
-                <tr>
-                  <td>feat008-b...</td>
-                  <td>code-reviewer</td>
-                  <td>done</td>
-                  <td>—</td>
-                  <td>15721</td>
-                  <td>$0.1038</td>
-                  <td>35s</td>
-                  <td>
-                    Concerns minor: cast as unknown as PrioritiesTuple sem comentário, threshold ...
-                  </td>
-                </tr>
-                <tr>
-                  <td>feat008-b...</td>
-                  <td>logic-reviewer</td>
-                  <td>done</td>
-                  <td>—</td>
-                  <td>22778</td>
-                  <td>$0.1503</td>
-                  <td>53s</td>
-                  <td>
-                    Concerns minors: &lt;u&gt; ausente do AllDone story; falsos-positivos (.js
-                    imports ...
-                  </td>
-                </tr>
-                <tr>
-                  <td>feat008-b...</td>
-                  <td>qa</td>
-                  <td>done</td>
-                  <td>—</td>
-                  <td>34367</td>
-                  <td>$0.2268</td>
-                  <td>49s</td>
-                  <td>
-                    ready_for_done — 10/10 ACs pass, 38 testes green, boundary AC-018 limpa, barr...
-                  </td>
-                </tr>
-                <tr>
-                  <td>feat008-b...</td>
-                  <td>qa</td>
-                  <td>done</td>
-                  <td>—</td>
-                  <td>31167</td>
-                  <td>$0.2057</td>
-                  <td>1m 13s</td>
-                  <td>
-                    ready_for_done — 12/12 ACs com test passando, 32/32 testes green, sem @tiptap...
-                  </td>
-                </tr>
-                <tr>
-                  <td>feat008-b...</td>
+                  <td>feat009-b...</td>
                   <td>dev</td>
                   <td>done</td>
                   <td>—</td>
-                  <td>4000</td>
-                  <td>$0.0440</td>
-                  <td>1m</td>
+                  <td>5000</td>
+                  <td>$0.0550</td>
+                  <td>1m 20s</td>
                   <td>
-                    Fix do logic-review blocker: AC-002 invariant — onChangeItem agora preserva i...
+                    PM aplicou fixes dos reviewers: AGENDA_HOURS exportado de types.ts (dedup); c...
                   </td>
                 </tr>
                 <tr>
-                  <td>feat008-b...</td>
+                  <td>feat009-b...</td>
                   <td>qa</td>
                   <td>done</td>
                   <td>—</td>
-                  <td>27985</td>
-                  <td>$0.1847</td>
-                  <td>1m 48s</td>
+                  <td>51534</td>
+                  <td>$0.3401</td>
+                  <td>3m 41s</td>
                   <td>
-                    ready_for_done — 4/4 ACs pass, build-storybook clean, coverage 100% &gt;
-                    thresho...
+                    15/15 ACs pass; 1 lint blocker (no-unused-vars no _h em type annotation) — fa...
+                  </td>
+                </tr>
+                <tr>
+                  <td>feat009-b...</td>
+                  <td>dev</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>72106</td>
+                  <td>$0.4759</td>
+                  <td>7m 22s</td>
+                  <td>
+                    AgendaSlot (memo&#39;d) + Agenda (controlled, defensive normalize, useMemo
+                    curren...
+                  </td>
+                </tr>
+                <tr>
+                  <td>feat009-b...</td>
+                  <td>code-reviewer</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>34503</td>
+                  <td>$0.2277</td>
+                  <td>1m 33s</td>
+                  <td>
+                    0 blockers, 2 majors (rename type AgendaSlot→AgendaSlotData mantém componente...
+                  </td>
+                </tr>
+                <tr>
+                  <td>feat009-b...</td>
+                  <td>logic-reviewer</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>29135</td>
+                  <td>$0.1923</td>
+                  <td>1m 56s</td>
+                  <td>
+                    2 majors REAIS: stale-closure race no useEffect ref-update + missing sequenti...
+                  </td>
+                </tr>
+                <tr>
+                  <td>feat009-b...</td>
+                  <td>dev</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>12000</td>
+                  <td>$0.1320</td>
+                  <td>3m 10s</td>
+                  <td>
+                    PM aplicou fixes: (a) useAgenda agora usa valueRef + onChangeRef síncronos no...
+                  </td>
+                </tr>
+                <tr>
+                  <td>feat009-b...</td>
+                  <td>qa</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>37568</td>
+                  <td>$0.2479</td>
+                  <td>1m 34s</td>
+                  <td>
+                    ready_for_done — 13/13 ACs pass; 27 suites, 384 testes green; typecheck+lint ...
+                  </td>
+                </tr>
+                <tr>
+                  <td>feat009-b...</td>
+                  <td>dev</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>53716</td>
+                  <td>$0.3545</td>
+                  <td>3m 40s</td>
+                  <td>
+                    5 Storybook stories CSF3 (Empty/Typical/Full/WithCurrentHour/Controlled); jes...
+                  </td>
+                </tr>
+                <tr>
+                  <td>feat009-b...</td>
+                  <td>qa</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>20736</td>
+                  <td>$0.1369</td>
+                  <td>1m 29s</td>
+                  <td>
+                    FEAT_009_FINAL_STATUS: ready_to_ship — 4/4 ACs BATCH-C pass; coverage agenda ...
                   </td>
                 </tr>
               </tbody>
@@ -1790,6 +1761,18 @@
                   <td>qa</td>
                   <td>—</td>
                 </tr>
+                <tr>
+                  <td>AC-027</td>
+                  <td>missing</td>
+                  <td>qa</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>AC-028</td>
+                  <td>missing</td>
+                  <td>qa</td>
+                  <td>—</td>
+                </tr>
               </tbody>
             </table>
             <h2>Phase durations</h2>
@@ -1840,15 +1823,15 @@
                 </tr>
                 <tr>
                   <td>code-reviewer</td>
-                  <td>3</td>
+                  <td>2</td>
                 </tr>
                 <tr>
                   <td>dev</td>
-                  <td>4</td>
+                  <td>5</td>
                 </tr>
                 <tr>
                   <td>logic-reviewer</td>
-                  <td>3</td>
+                  <td>2</td>
                 </tr>
                 <tr>
                   <td>pm-orchestrator</td>
@@ -1860,7 +1843,7 @@
                 </tr>
                 <tr>
                   <td><strong>Total</strong></td>
-                  <td>13</td>
+                  <td>12</td>
                 </tr>
               </tbody>
             </table>
@@ -1908,7 +1891,7 @@
             <h2>Escalation rate</h2>
             <p>Escalation rate: 0.0% — below healthy band (&lt; 10%)</p>
             <h2>AC closure</h2>
-            <p>Total: 26 | Pass: 0 | Partial: 0 | Fail: 0 | Missing: 26</p>
+            <p>Total: 28 | Pass: 0 | Partial: 0 | Fail: 0 | Missing: 28</p>
             <h2>Reviewer findings density</h2>
             <table>
               <thead>
@@ -1935,65 +1918,71 @@
             <h2>PM notes log</h2>
             <ul>
               <li>
-                [2026-05-09 17:30 dev] Types + hook usePriorities + normalize util + 38 unit tests;
-                ulid adicionado às deps web; coverage 100%.
+                [2026-05-10 00:20 dev] Tipos + lib (normalizeAgenda single-warn, currentHour,
+                formatHour) + hook useAgenda com referential preservation; 71 unit tests; 355 totais
+                green.
               </li>
               <li>
-                [2026-05-09 17:38 dev] PriorityItem + Priorities controlled c/ React.memo, checkbox
-                custom acessível, 32 integration tests; coverage 100%.
+                [2026-05-10 00:26 code-reviewer] 11 minor findings (sem blockers/majors); aplicado
+                AGENDA_HOURS dedup, currentHour return type AgendaHour|null, early-return em
+                normalize, comentário/underscore fixes.
               </li>
               <li>
-                [2026-05-09 17:50 dev] 4 Storybook stories CSF3, threshold 90% no jest.config,
-                CLAUDE.md atualizado, boundary greps PASS.
+                [2026-05-10 00:26 logic-reviewer] 5 minor findings (sem blockers); aplicado guard
+                out-of-range em useAgenda + 5 testes (it.each para
+                text:undefined/null/boolean/number, 5 hours fora de range), dedup hour test pinado
+                em last-write-w... (see manifest entry feat009-batchA-logicreview-01)
               </li>
               <li>
-                [2026-05-09 18:00 code-reviewer] Concerns: 1 falso-blocker (barrel exports BATCH-B
-                já landed) + minors (EMPTY_PRIORITY duplicado, TARGET_LENGTH inline, double-cast).
+                [2026-05-10 00:28 dev] PM aplicou fixes dos reviewers: AGENDA_HOURS exportado de
+                types.ts (dedup); currentHour return AgendaHour|null; early-return em
+                normalizeAgenda; guard out-of-range em useAgenda; +9 tests novos (4 i... (see
+                manifest entry feat009-batchA-fix-01)
               </li>
               <li>
-                [2026-05-09 18:00 logic-reviewer] Concerns: 1 BLOCKER REAL — onChangeItem regenera
-                ULID com partial.id=&#39;&#39; explícito (viola AC-002). PM aplicou fix + regression
-                test.
+                [2026-05-10 00:29 qa] 15/15 ACs pass; 1 lint blocker (no-unused-vars no _h em type
+                annotation) — false-positive do code-reviewer earlier; PM reverteu para _h, lint
+                clean.
               </li>
               <li>
-                [2026-05-09 18:00 code-reviewer] Concerns: 2 majors (6 useCallback boilerplate, 3
-                PriorityItem hardcoded vs map) + minors (CSS tokens c/ fallback hex, dead
-                .focusRing).
+                [2026-05-10 00:33 dev] AgendaSlot (memo&#39;d) + Agenda (controlled, defensive
+                normalize, useMemo currentHour) + 16 integration tests; latest-ref pattern para
+                handlers permanentemente estáveis. 380 totais green.
               </li>
               <li>
-                [2026-05-09 18:00 logic-reviewer] Concerns: AC-006 não verifica innerHTML intacto;
-                AC-016 não lê aria-label real; AC-009 usa toBeGreaterThanOrEqual(3) em vez de
-                toBe(3) — gaps de teste, não de produção.
+                [2026-05-10 00:40 code-reviewer] 0 blockers, 2 majors (rename type
+                AgendaSlot→AgendaSlotData mantém componente clean; ESLint exhaustive-deps
+                suppression), 4 minors. M-1 aplicado.
               </li>
               <li>
-                [2026-05-09 18:00 code-reviewer] Concerns minor: cast as unknown as PrioritiesTuple
-                sem comentário, threshold 90% vs 95% RTL sem justificativa inline.
+                [2026-05-10 00:40 logic-reviewer] 2 majors REAIS: stale-closure race no useEffect
+                ref-update + missing sequential-edit test (paired gap). 3 minors. PM aplicou
+                refactor para valueRef + onChangeRef em useAgenda.
               </li>
               <li>
-                [2026-05-09 18:00 logic-reviewer] Concerns minors: &lt;u&gt; ausente do AllDone
-                story; falsos-positivos (.js imports + threshold sem ./ — precedente RTL idêntico
-                funciona em CI).
+                [2026-05-10 00:42 dev] PM aplicou fixes: (a) useAgenda agora usa valueRef +
+                onChangeRef síncronos no render — handler permanentemente estável e race-free contra
+                batched updates do React 19; (b) Agenda.tsx simplificado re... (see manifest entry
+                feat009-batchB-fix-01)
               </li>
               <li>
-                [2026-05-09 18:01 qa] ready_for_done — 10/10 ACs pass, 38 testes green, boundary
-                AC-018 limpa, barrel AC-019 completo.
+                [2026-05-10 00:46 qa] ready_for_done — 13/13 ACs pass; 27 suites, 384 testes green;
+                typecheck+lint clean; barrel exports completo; sem violações de boundary.
               </li>
               <li>
-                [2026-05-09 18:01 qa] ready_for_done — 12/12 ACs com test passando, 32/32 testes
-                green, sem @tiptap em produção.
+                [2026-05-10 00:47 dev] 5 Storybook stories CSF3
+                (Empty/Typical/Full/WithCurrentHour/Controlled); jest threshold por path 90% em
+                web/src/features/agenda/**; CLAUDE.md atualizado. PM removeu defensive guard
+                inalcançável em... (see manifest entry feat009-batchC-dev-01)
               </li>
               <li>
-                [2026-05-09 18:02 dev] Fix do logic-review blocker: AC-002 invariant — onChangeItem
-                agora preserva id existente mesmo com partial.id=&#39;&#39;; +2 regression tests;
-                28/28 tests pass.
-              </li>
-              <li>
-                [2026-05-09 18:02 qa] ready_for_done — 4/4 ACs pass, build-storybook clean, coverage
-                100% &gt; threshold 90%.
+                [2026-05-10 00:51 qa] FEAT_009_FINAL_STATUS: ready_to_ship — 4/4 ACs BATCH-C pass;
+                coverage agenda 100/95.45/100/100; build-storybook clean; arch:check pre-existing
+                only; 384 testes total green.
               </li>
             </ul>
             <h2>Token cost</h2>
-            <p>Token cost not available — using dispatch count as cost proxy: 13 dispatches</p>
+            <p>Token cost not available — using dispatch count as cost proxy: 12 dispatches</p>
           </div>
         </details>
       </section>

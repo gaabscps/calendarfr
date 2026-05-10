@@ -44,6 +44,7 @@ const config = {
     'web/src/shared/**/*.{ts,tsx}',
     'web/src/features/rich-text-line/**/*.{ts,tsx}',
     'web/src/features/priorities/**/*.{ts,tsx}',
+    'web/src/features/agenda/**/*.{ts,tsx}',
     'server/src/**/*.ts',
     'test-utils/**/*.ts',
     '!**/*.d.ts',
@@ -100,6 +101,12 @@ const config = {
       statements: 95,
     },
     'web/src/features/priorities/': {
+      branches: 90,
+      functions: 90,
+      lines: 90,
+      statements: 90,
+    },
+    'web/src/features/agenda/': {
       branches: 90,
       functions: 90,
       lines: 90,
