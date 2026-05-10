@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>rich-text-line — editor Tiptap de uma linha (núcleo de escrita) — AgentOps</title>
+    <title>notes — Bullets livres com prefix (•/→/—/★) e lista dinâmica — AgentOps</title>
     <style>
       :root {
         --bg: #fff;
@@ -565,35 +565,35 @@
   <body>
     <header class="kpi-bar">
       <h1>
-        rich-text-line — editor Tiptap de uma linha (núcleo de escrita)
-        <span class="badge badge-warn">⚠</span>
+        notes — Bullets livres com prefix (•/→/—/★) e lista dinâmica
+        <span class="badge badge-pass">✓</span>
       </h1>
       <div class="kpis">
-        <span>2h5m</span>
-        <span>$23.00</span>
-        <span class="kpi-sub">$0.657/AC</span>
-        <span>36/35 ACs</span>
+        <span>54m</span>
+        <span>$3.00</span>
+        <span class="kpi-sub">$0.111/AC</span>
+        <span>0/27 ACs</span>
         <span>mut —</span>
         <span>type —</span>
-        <span>3 loops</span>
+        <span>0 loops</span>
       </div>
     </header>
 
     <main>
       <section class="story">
         <h2>Story</h2>
-        <article class="story-card story-card--done" aria-label="batch PM-ORCHESTRATOR">
+        <article class="story-card story-card--done" aria-label="batch FEAT011-BATCHA">
           <header>
-            <h3>PM-ORCHESTRATOR</h3>
+            <h3>FEAT011-BATCHA</h3>
             <span class="badge badge-pass" aria-label="status: done">✓ done</span>
           </header>
           <div class="story-card__stats">
             <span class="story-card__stat"
               ><span class="story-card__stat-label">time</span>
-              <span class="story-card__stat-value">1h49m</span></span
+              <span class="story-card__stat-value">11m 30s</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">cost</span>
-              <span class="story-card__stat-value">$16.98</span></span
+              <span class="story-card__stat-value">$1.03</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">tasks</span>
               <span class="story-card__stat-value">0</span></span
@@ -603,258 +603,11 @@
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">files</span>
               <span class="story-card__stat-value">0</span></span
-            ><span class="story-card__pipeline">pm-orchestrator</span>
-          </div>
-          <p class="story-card__summary">PM/orchestrator session (Stop hook): 118 turns</p>
-          <div class="story-card__drilldowns">
-            <details>
-              <summary>Files changed (0)</summary>
-              <table class="story-card__files">
-                <thead>
-                  <tr>
-                    <th>path</th>
-                    <th>action</th>
-                    <th>tasks</th>
-                  </tr>
-                </thead>
-                <tbody></tbody>
-              </table>
-            </details>
-            <details>
-              <summary>ACs covered (0)</summary>
-              <ul class="story-card__acs"></ul>
-            </details>
-            <details>
-              <summary>Pipeline trace (1 dispatches)</summary>
-              <table class="story-card__pipeline-trace">
-                <thead>
-                  <tr>
-                    <th>role</th>
-                    <th>dispatch_id</th>
-                    <th>loop</th>
-                    <th>duration</th>
-                    <th>tokens</th>
-                    <th>status</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>pm-orchestrator</td>
-                    <td>pm-orchestrator-e5f02569</td>
-                    <td>—</td>
-                    <td>1h49m</td>
-                    <td>15765530</td>
-                    <td>done</td>
-                  </tr>
-                </tbody>
-              </table>
-            </details>
-            <details>
-              <summary>PM note</summary>
-              <p class="story-card__pmnote">PM/orchestrator session (Stop hook): 118 turns</p>
-            </details>
-          </div>
-        </article>
-        <article class="story-card story-card--done-retried" aria-label="batch FEAT007-BATCHA">
-          <header>
-            <h3>FEAT007-BATCHA</h3>
-            <span class="badge badge-warn" aria-label="status: done with retries"
-              >↻ done (retried)</span
-            >
-          </header>
-          <div class="story-card__stats">
-            <span class="story-card__stat"
-              ><span class="story-card__stat-label">time</span>
-              <span class="story-card__stat-value">19m</span></span
-            ><span class="story-card__stat"
-              ><span class="story-card__stat-label">cost</span>
-              <span class="story-card__stat-value">$1.59</span></span
-            ><span class="story-card__stat"
-              ><span class="story-card__stat-label">tasks</span>
-              <span class="story-card__stat-value">0</span></span
-            ><span class="story-card__stat"
-              ><span class="story-card__stat-label">ACs</span>
-              <span class="story-card__stat-value">0</span></span
-            ><span class="story-card__stat"
-              ><span class="story-card__stat-label">files</span>
-              <span class="story-card__stat-value">11</span></span
             ><span class="story-card__pipeline">dev → code-reviewer ‖ logic-reviewer → qa</span>
           </div>
           <p class="story-card__summary">
-            All MUST-FIX blockers and majors addressed: normalizeHtml strips &lt;p&gt; wrapper
-            (AC-028 fixed, &#39;texto&#39;===normalizeHtml(&#39;&lt;p&gt;texto&lt;/p&gt;&#39;));
-            stale closure eliminated via onEnterRef/onChangeRef; IME guard added
-            (isComposing||keyCode===229); onChange test updated to expect unwrapped HTML;
-            adversarial XSS+idempotency tests added; semver fixed; premature barrel export removed.
-            89/89 tests pass, typecheck clean.
-          </p>
-          <div class="story-card__drilldowns">
-            <details>
-              <summary>Files changed (11)</summary>
-              <table class="story-card__files">
-                <thead>
-                  <tr>
-                    <th>path</th>
-                    <th>action</th>
-                    <th>tasks</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>web/package.json</td>
-                    <td>changed</td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td>web/src/features/rich-text-line/types.ts</td>
-                    <td>changed</td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td>web/src/features/rich-text-line/index.ts</td>
-                    <td>changed</td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td>web/src/features/rich-text-line/lib/extensions.ts</td>
-                    <td>changed</td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td>web/src/features/rich-text-line/lib/singleLineParagraph.ts</td>
-                    <td>changed</td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td>web/src/features/rich-text-line/lib/sanitizeHtml.ts</td>
-                    <td>changed</td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td>web/src/features/rich-text-line/lib/normalizeHtml.ts</td>
-                    <td>changed</td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td>web/src/features/rich-text-line/hooks/useRichTextLine.ts</td>
-                    <td>changed</td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td>web/src/features/rich-text-line/lib/__tests__/sanitizeHtml.…</td>
-                    <td>changed</td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td>web/src/features/rich-text-line/lib/__tests__/normalizeHtml…</td>
-                    <td>changed</td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td>web/src/features/rich-text-line/hooks/__tests__/useRichText…</td>
-                    <td>changed</td>
-                    <td></td>
-                  </tr>
-                </tbody>
-              </table>
-            </details>
-            <details>
-              <summary>ACs covered (0)</summary>
-              <ul class="story-card__acs"></ul>
-            </details>
-            <details>
-              <summary>Pipeline trace (5 dispatches)</summary>
-              <table class="story-card__pipeline-trace">
-                <thead>
-                  <tr>
-                    <th>role</th>
-                    <th>dispatch_id</th>
-                    <th>loop</th>
-                    <th>duration</th>
-                    <th>tokens</th>
-                    <th>status</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>dev</td>
-                    <td>feat007-batchA-dev-01</td>
-                    <td>—</td>
-                    <td>6m 46s</td>
-                    <td>63251</td>
-                    <td>done</td>
-                  </tr>
-                  <tr>
-                    <td>code-reviewer</td>
-                    <td>feat007-batchA-coderevi…</td>
-                    <td>—</td>
-                    <td>1m 53s</td>
-                    <td>37350</td>
-                    <td>needs_review</td>
-                  </tr>
-                  <tr>
-                    <td>logic-reviewer</td>
-                    <td>feat007-batchA-logicrev…</td>
-                    <td>—</td>
-                    <td>2m 16s</td>
-                    <td>41448</td>
-                    <td>needs_review</td>
-                  </tr>
-                  <tr>
-                    <td>dev</td>
-                    <td>feat007-batchA-dev-02</td>
-                    <td>1</td>
-                    <td>4m 34s</td>
-                    <td>56734</td>
-                    <td>done</td>
-                  </tr>
-                  <tr>
-                    <td>qa</td>
-                    <td>feat007-batchA-qa-01</td>
-                    <td>—</td>
-                    <td>2m 36s</td>
-                    <td>42222</td>
-                    <td>done</td>
-                  </tr>
-                </tbody>
-              </table>
-            </details>
-            <details>
-              <summary>PM note</summary>
-              <p class="story-card__pmnote">
-                89/89 tests verdes; 15 ACs pass, AC-020+AC-025 deferred to BATCH-B integration.
-              </p>
-            </details>
-          </div>
-        </article>
-        <article class="story-card story-card--done-retried" aria-label="batch FEAT007-BATCHB">
-          <header>
-            <h3>FEAT007-BATCHB</h3>
-            <span class="badge badge-warn" aria-label="status: done with retries"
-              >↻ done (retried)</span
-            >
-          </header>
-          <div class="story-card__stats">
-            <span class="story-card__stat"
-              ><span class="story-card__stat-label">time</span>
-              <span class="story-card__stat-value">1h11m</span></span
-            ><span class="story-card__stat"
-              ><span class="story-card__stat-label">cost</span>
-              <span class="story-card__stat-value">$2.06</span></span
-            ><span class="story-card__stat"
-              ><span class="story-card__stat-label">tasks</span>
-              <span class="story-card__stat-value">0</span></span
-            ><span class="story-card__stat"
-              ><span class="story-card__stat-label">ACs</span>
-              <span class="story-card__stat-value">0</span></span
-            ><span class="story-card__stat"
-              ><span class="story-card__stat-label">files</span>
-              <span class="story-card__stat-value">0</span></span
-            ><span class="story-card__pipeline">dev → logic-reviewer → qa → code-reviewer</span>
-          </div>
-          <p class="story-card__summary">
-            RichTextLine component implemented (80 lines, ≤250 limit). CSS module with placeholder
-            ::before, focus-visible ring.
+            ready_for_done — 12/12 ACs pass; 43 unit tests + 100% coverage em notes lib+hooks;
+            barrel completo; 0 violações de boundary.
           </p>
           <div class="story-card__drilldowns">
             <details>
@@ -890,43 +643,43 @@
                 <tbody>
                   <tr>
                     <td>dev</td>
-                    <td>feat007-batchB-dev-01</td>
+                    <td>feat011-batchA-dev-01</td>
                     <td>—</td>
-                    <td>16m 28s</td>
-                    <td>121599</td>
-                    <td>done</td>
-                  </tr>
-                  <tr>
-                    <td>logic-reviewer</td>
-                    <td>feat007-batchB-logicrev…</td>
-                    <td>—</td>
-                    <td>2m 6s</td>
-                    <td>42691</td>
-                    <td>needs_review</td>
-                  </tr>
-                  <tr>
-                    <td>qa</td>
-                    <td>feat007-batchB-qa-01</td>
-                    <td>—</td>
-                    <td>2m 30s</td>
-                    <td>45000</td>
-                    <td>done</td>
-                  </tr>
-                  <tr>
-                    <td>dev</td>
-                    <td>feat007-batchB-dev-02</td>
-                    <td>1</td>
-                    <td>9m 38s</td>
-                    <td>91293</td>
+                    <td>4m 43s</td>
+                    <td>57215</td>
                     <td>done</td>
                   </tr>
                   <tr>
                     <td>code-reviewer</td>
-                    <td>feat007-batchB-coderevi…</td>
+                    <td>feat011-batchA-coderevi…</td>
                     <td>—</td>
-                    <td>49s</td>
-                    <td>33791</td>
-                    <td>needs_review</td>
+                    <td>54s</td>
+                    <td>25671</td>
+                    <td>done</td>
+                  </tr>
+                  <tr>
+                    <td>logic-reviewer</td>
+                    <td>feat011-batchA-logicrev…</td>
+                    <td>—</td>
+                    <td>1m 22s</td>
+                    <td>26638</td>
+                    <td>done</td>
+                  </tr>
+                  <tr>
+                    <td>dev</td>
+                    <td>feat011-batchA-fix-01</td>
+                    <td>—</td>
+                    <td>3m 30s</td>
+                    <td>8000</td>
+                    <td>done</td>
+                  </tr>
+                  <tr>
+                    <td>qa</td>
+                    <td>feat011-batchA-qa-01</td>
+                    <td>—</td>
+                    <td>1m 33s</td>
+                    <td>33276</td>
+                    <td>done</td>
                   </tr>
                 </tbody>
               </table>
@@ -934,23 +687,24 @@
             <details>
               <summary>PM note</summary>
               <p class="story-card__pmnote">
-                Test file 393L &gt; 250L (split como follow-up); restante limpo.
+                ready_for_done — 12/12 ACs pass; 43 unit tests + 100% coverage em notes lib+hooks;
+                barrel completo; 0 violações de boundary.
               </p>
             </details>
           </div>
         </article>
-        <article class="story-card story-card--done" aria-label="batch FEAT007-BATCHC">
+        <article class="story-card story-card--done" aria-label="batch FEAT011-BATCHB">
           <header>
-            <h3>FEAT007-BATCHC</h3>
+            <h3>FEAT011-BATCHB</h3>
             <span class="badge badge-pass" aria-label="status: done">✓ done</span>
           </header>
           <div class="story-card__stats">
             <span class="story-card__stat"
               ><span class="story-card__stat-label">time</span>
-              <span class="story-card__stat-value">40m</span></span
+              <span class="story-card__stat-value">16m 30s</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">cost</span>
-              <span class="story-card__stat-value">$0.75</span></span
+              <span class="story-card__stat-value">$1.36</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">tasks</span>
               <span class="story-card__stat-value">0</span></span
@@ -960,12 +714,11 @@
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">files</span>
               <span class="story-card__stat-value">0</span></span
-            ><span class="story-card__pipeline">dev → qa → code-reviewer</span>
+            ><span class="story-card__pipeline">dev → code-reviewer ‖ logic-reviewer → qa</span>
           </div>
           <p class="story-card__summary">
-            Implemented FloatingToolbar. tsx (BubbleMenu-based, role=toolbar, aria-label PT-BR, 4
-            buttons with aria-pressed reflecting live mark state, onMouseDown+preventDefault keeps
-            editor focus, ArrowLeft/Right/Home/End WAI-ARIA APG nav, roving tabindex).
+            Split adicional do integration test em 3 arquivos (todos &lt; 250L); mock duplicado por
+            arquivo (jest. mock per-file hoisting).
           </p>
           <div class="story-card__drilldowns">
             <details>
@@ -986,7 +739,7 @@
               <ul class="story-card__acs"></ul>
             </details>
             <details>
-              <summary>Pipeline trace (3 dispatches)</summary>
+              <summary>Pipeline trace (6 dispatches)</summary>
               <table class="story-card__pipeline-trace">
                 <thead>
                   <tr>
@@ -1001,27 +754,51 @@
                 <tbody>
                   <tr>
                     <td>dev</td>
-                    <td>feat007-batchC-dev-01</td>
+                    <td>feat011-batchB-dev-01</td>
                     <td>—</td>
-                    <td>6m 28s</td>
-                    <td>70962</td>
-                    <td>done</td>
-                  </tr>
-                  <tr>
-                    <td>qa</td>
-                    <td>feat007-batchC-qa-01</td>
-                    <td>—</td>
-                    <td>1m 36s</td>
-                    <td>34183</td>
+                    <td>4m 36s</td>
+                    <td>61070</td>
                     <td>done</td>
                   </tr>
                   <tr>
                     <td>code-reviewer</td>
-                    <td>feat007-batchC-coderevi…</td>
+                    <td>feat011-batchB-coderevi…</td>
                     <td>—</td>
-                    <td>27s</td>
-                    <td>24514</td>
-                    <td>needs_review</td>
+                    <td>1m 57s</td>
+                    <td>32770</td>
+                    <td>done</td>
+                  </tr>
+                  <tr>
+                    <td>logic-reviewer</td>
+                    <td>feat011-batchB-logicrev…</td>
+                    <td>—</td>
+                    <td>1m 30s</td>
+                    <td>30281</td>
+                    <td>done</td>
+                  </tr>
+                  <tr>
+                    <td>dev</td>
+                    <td>feat011-batchB-fix-01</td>
+                    <td>—</td>
+                    <td>5m 50s</td>
+                    <td>18000</td>
+                    <td>done</td>
+                  </tr>
+                  <tr>
+                    <td>qa</td>
+                    <td>feat011-batchB-qa-01</td>
+                    <td>—</td>
+                    <td>2m 40s</td>
+                    <td>37040</td>
+                    <td>done</td>
+                  </tr>
+                  <tr>
+                    <td>dev</td>
+                    <td>feat011-batchB-fix-02</td>
+                    <td>—</td>
+                    <td>2m 30s</td>
+                    <td>9000</td>
+                    <td>done</td>
                   </tr>
                 </tbody>
               </table>
@@ -1029,25 +806,24 @@
             <details>
               <summary>PM note</summary>
               <p class="story-card__pmnote">
-                Test file 481L; CSS tokens hard-coded + aria-label coupling (5 minors). Follow-ups.
+                Split adicional do integration test em 3 arquivos (todos &lt; 250L); mock duplicado
+                por arquivo (jest.mock per-file hoisting). 346 testes green.
               </p>
             </details>
           </div>
         </article>
-        <article class="story-card story-card--done-retried" aria-label="batch FEAT007-BATCHD">
+        <article class="story-card story-card--done" aria-label="batch FEAT011-BATCHC">
           <header>
-            <h3>FEAT007-BATCHD</h3>
-            <span class="badge badge-warn" aria-label="status: done with retries"
-              >↻ done (retried)</span
-            >
+            <h3>FEAT011-BATCHC</h3>
+            <span class="badge badge-pass" aria-label="status: done">✓ done</span>
           </header>
           <div class="story-card__stats">
             <span class="story-card__stat"
               ><span class="story-card__stat-label">time</span>
-              <span class="story-card__stat-value">25m</span></span
+              <span class="story-card__stat-value">8m</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">cost</span>
-              <span class="story-card__stat-value">$1.34</span></span
+              <span class="story-card__stat-value">$0.61</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">tasks</span>
               <span class="story-card__stat-value">0</span></span
@@ -1060,8 +836,8 @@
             ><span class="story-card__pipeline">dev → qa</span>
           </div>
           <p class="story-card__summary">
-            Storybook stories created (CSF3, 4 stories: Empty/WithPlaceholder/Prefilled/Controlled).
-            build-storybook exits 0.
+            FEAT_011_FINAL_STATUS: ready_to_ship — todos arquivos &lt; 250L; coverage
+            100/100/100/100; barrel completo; CLAUDE. md+jest.
           </p>
           <div class="story-card__drilldowns">
             <details>
@@ -1082,7 +858,7 @@
               <ul class="story-card__acs"></ul>
             </details>
             <details>
-              <summary>Pipeline trace (3 dispatches)</summary>
+              <summary>Pipeline trace (4 dispatches)</summary>
               <table class="story-card__pipeline-trace">
                 <thead>
                   <tr>
@@ -1097,26 +873,34 @@
                 <tbody>
                   <tr>
                     <td>dev</td>
-                    <td>feat007-batchD-dev-01</td>
+                    <td>feat011-batchC-dev-01</td>
                     <td>—</td>
-                    <td>3m 47s</td>
-                    <td>53826</td>
-                    <td>needs_review</td>
-                  </tr>
-                  <tr>
-                    <td>dev</td>
-                    <td>feat007-batchD-dev-02</td>
-                    <td>1</td>
-                    <td>13m 58s</td>
-                    <td>106014</td>
+                    <td>2m 15s</td>
+                    <td>37821</td>
                     <td>done</td>
                   </tr>
                   <tr>
                     <td>qa</td>
-                    <td>feat007-batchD-qa-01</td>
+                    <td>feat011-batchC-qa-01</td>
                     <td>—</td>
-                    <td>5m 38s</td>
-                    <td>43372</td>
+                    <td>2m 7s</td>
+                    <td>26188</td>
+                    <td>done</td>
+                  </tr>
+                  <tr>
+                    <td>dev</td>
+                    <td>feat011-batchC-fix-01</td>
+                    <td>—</td>
+                    <td>2m 30s</td>
+                    <td>7000</td>
+                    <td>done</td>
+                  </tr>
+                  <tr>
+                    <td>qa</td>
+                    <td>feat011-batchC-qa-02</td>
+                    <td>—</td>
+                    <td>1m 1s</td>
+                    <td>16316</td>
                     <td>done</td>
                   </tr>
                 </tbody>
@@ -1125,97 +909,8 @@
             <details>
               <summary>PM note</summary>
               <p class="story-card__pmnote">
-                4/4 ACs pass; 897 tests verdes; coverage threshold ok; storybook build verde; SC-005
-                (regra #3) verificado.
-              </p>
-            </details>
-          </div>
-        </article>
-        <article class="story-card story-card--done-retried" aria-label="batch FEAT007-AUDIT">
-          <header>
-            <h3>FEAT007-AUDIT</h3>
-            <span class="badge badge-warn" aria-label="status: done with retries"
-              >↻ done (retried)</span
-            >
-          </header>
-          <div class="story-card__stats">
-            <span class="story-card__stat"
-              ><span class="story-card__stat-label">time</span>
-              <span class="story-card__stat-value">10m</span></span
-            ><span class="story-card__stat"
-              ><span class="story-card__stat-label">cost</span>
-              <span class="story-card__stat-value">$0.28</span></span
-            ><span class="story-card__stat"
-              ><span class="story-card__stat-label">tasks</span>
-              <span class="story-card__stat-value">0</span></span
-            ><span class="story-card__stat"
-              ><span class="story-card__stat-label">ACs</span>
-              <span class="story-card__stat-value">0</span></span
-            ><span class="story-card__stat"
-              ><span class="story-card__stat-label">files</span>
-              <span class="story-card__stat-value">0</span></span
-            ><span class="story-card__pipeline">audit-agent</span>
-          </div>
-          <p class="story-card__summary">
-            Re-audit clean: 4/4 batches roles completos; 35/35 ACs cobertos; 3 reviewers escalated
-            (quota) PM-aceitos.
-          </p>
-          <div class="story-card__drilldowns">
-            <details>
-              <summary>Files changed (0)</summary>
-              <table class="story-card__files">
-                <thead>
-                  <tr>
-                    <th>path</th>
-                    <th>action</th>
-                    <th>tasks</th>
-                  </tr>
-                </thead>
-                <tbody></tbody>
-              </table>
-            </details>
-            <details>
-              <summary>ACs covered (0)</summary>
-              <ul class="story-card__acs"></ul>
-            </details>
-            <details>
-              <summary>Pipeline trace (2 dispatches)</summary>
-              <table class="story-card__pipeline-trace">
-                <thead>
-                  <tr>
-                    <th>role</th>
-                    <th>dispatch_id</th>
-                    <th>loop</th>
-                    <th>duration</th>
-                    <th>tokens</th>
-                    <th>status</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>audit-agent</td>
-                    <td>feat007-audit-01</td>
-                    <td>—</td>
-                    <td>1m 56s</td>
-                    <td>60311</td>
-                    <td>blocked</td>
-                  </tr>
-                  <tr>
-                    <td>audit-agent</td>
-                    <td>feat007-audit-02</td>
-                    <td>—</td>
-                    <td>2m 40s</td>
-                    <td>68668</td>
-                    <td>done</td>
-                  </tr>
-                </tbody>
-              </table>
-            </details>
-            <details>
-              <summary>PM note</summary>
-              <p class="story-card__pmnote">
-                Re-audit clean: 4/4 batches roles completos; 35/35 ACs cobertos; 3 reviewers
-                escalated (quota) PM-aceitos.
+                FEAT_011_FINAL_STATUS: ready_to_ship — todos arquivos &lt; 250L; coverage
+                100/100/100/100; barrel completo; CLAUDE.md+jest.config OK.
               </p>
             </details>
           </div>
@@ -1224,38 +919,38 @@
       <section class="cost-section">
         <header class="cost-header">
           <h2>Cost</h2>
-          <span class="badge badge-pass">coverage 19/19 (100%)</span>
+          <span class="badge badge-pass">coverage 15/15 (100%)</span>
         </header>
         <div class="cost-grid">
           <div class="cost-card">
             <span class="cost-label">Total cost</span>
-            <span class="cost-value">$23.00</span>
-            <small>$22.9994</small>
+            <span class="cost-value">$3.00</span>
+            <small>$2.9983</small>
           </div>
           <div class="cost-card">
             <span class="cost-label">$ / AC</span>
-            <span class="cost-value">$0.6571</span>
-            <small>35 ACs</small>
+            <span class="cost-value">$0.1110</span>
+            <small>27 ACs</small>
           </div>
           <div class="cost-card">
             <span class="cost-label">$ / dispatch</span>
-            <span class="cost-value">$1.2105</span>
-            <small>avg of 19</small>
+            <span class="cost-value">$0.1999</span>
+            <small>avg of 15</small>
           </div>
           <div class="cost-card">
             <span class="cost-label">Tokens</span>
-            <span class="cost-value">16,802,759</span>
-            <small>11,761,931 in / 5,040,828 out (70/30)</small>
+            <span class="cost-value">426,286</span>
+            <small>298,400 in / 127,886 out (70/30)</small>
           </div>
           <div class="cost-card">
             <span class="cost-label">Wall-clock</span>
-            <span class="cost-value">3h15m</span>
-            <small>19 dispatches with usage</small>
+            <span class="cost-value">38m 58s</span>
+            <small>15 dispatches with usage</small>
           </div>
           <div class="cost-card">
             <span class="cost-label">Tool uses</span>
-            <span class="cost-value">698</span>
-            <small>~36.7 per dispatch</small>
+            <span class="cost-value">377</span>
+            <small>~25.1 per dispatch</small>
           </div>
         </div>
         <table class="cost-models">
@@ -1272,31 +967,22 @@
           </thead>
           <tbody>
             <tr>
-              <td><code>opus-4-7</code></td>
-              <td>1</td>
-              <td>15,765,530</td>
-              <td>1h49m</td>
-              <td>63</td>
-              <td>$16.9778</td>
-              <td>73.8%</td>
-            </tr>
-            <tr>
               <td><code>sonnet-4-6</code></td>
-              <td>14</td>
-              <td>849,945</td>
-              <td>1h20m</td>
-              <td>546</td>
-              <td>$5.6096</td>
-              <td>24.4%</td>
+              <td>11</td>
+              <td>384,286</td>
+              <td>24m 38s</td>
+              <td>303</td>
+              <td>$2.5363</td>
+              <td>84.6%</td>
             </tr>
             <tr>
-              <td><code>haiku-4-5</code></td>
+              <td><code>opus-4-7</code></td>
               <td>4</td>
-              <td>187,284</td>
-              <td>5m 53s</td>
-              <td>89</td>
-              <td>$0.4120</td>
-              <td>1.8%</td>
+              <td>42,000</td>
+              <td>14m 20s</td>
+              <td>74</td>
+              <td>$0.4620</td>
+              <td>15.4%</td>
             </tr>
           </tbody>
         </table>
@@ -1315,52 +1001,36 @@
             </thead>
             <tbody>
               <tr>
-                <td><code>pm-orchestrator</code></td>
-                <td>1</td>
-                <td>15,765,530</td>
-                <td>1h49m</td>
-                <td>$16.9778</td>
-                <td>73.8%</td>
-              </tr>
-              <tr>
                 <td><code>dev</code></td>
                 <td>7</td>
-                <td>563,679</td>
-                <td>1h1m</td>
-                <td>$3.7203</td>
-                <td>16.2%</td>
+                <td>198,106</td>
+                <td>25m 54s</td>
+                <td>$1.4923</td>
+                <td>49.8%</td>
               </tr>
               <tr>
                 <td><code>qa</code></td>
                 <td>4</td>
-                <td>164,777</td>
-                <td>12m 21s</td>
-                <td>$1.0875</td>
-                <td>4.7%</td>
+                <td>112,820</td>
+                <td>7m 21s</td>
+                <td>$0.7446</td>
+                <td>24.8%</td>
+              </tr>
+              <tr>
+                <td><code>code-reviewer</code></td>
+                <td>2</td>
+                <td>58,441</td>
+                <td>2m 50s</td>
+                <td>$0.3857</td>
+                <td>12.9%</td>
               </tr>
               <tr>
                 <td><code>logic-reviewer</code></td>
                 <td>2</td>
-                <td>84,139</td>
-                <td>4m 22s</td>
-                <td>$0.5553</td>
-                <td>2.4%</td>
-              </tr>
-              <tr>
-                <td><code>code-reviewer</code></td>
-                <td>3</td>
-                <td>95,655</td>
-                <td>3m 10s</td>
-                <td>$0.3748</td>
-                <td>1.6%</td>
-              </tr>
-              <tr>
-                <td><code>audit-agent</code></td>
-                <td>2</td>
-                <td>128,979</td>
-                <td>4m 36s</td>
-                <td>$0.2838</td>
-                <td>1.2%</td>
+                <td>56,919</td>
+                <td>2m 53s</td>
+                <td>$0.3757</td>
+                <td>12.5%</td>
               </tr>
             </tbody>
           </table>
@@ -1381,10 +1051,10 @@
             <tbody>
               <tr>
                 <td><code>unattributed</code></td>
-                <td>19</td>
-                <td>16,802,759</td>
-                <td>3h15m</td>
-                <td>$22.9994</td>
+                <td>15</td>
+                <td>426,286</td>
+                <td>38m 58s</td>
+                <td>$2.9983</td>
                 <td>100.0%</td>
               </tr>
             </tbody>
@@ -1392,7 +1062,7 @@
         </details>
         <p class="cost-note">
           <em
-            >70/30 input/output split assumed; harness reports only total_tokens; 19 of 19
+            >70/30 input/output split assumed; harness reports only total_tokens; 15 of 15
             dispatches included in cost</em
           >
         </p>
@@ -1414,211 +1084,163 @@
               <tbody>
                 <tr>
                   <td>AC-001</td>
-                  <td>pass</td>
+                  <td>missing</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-002</td>
-                  <td>pass</td>
+                  <td>missing</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-003</td>
-                  <td>pass</td>
+                  <td>missing</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-004</td>
-                  <td>pass</td>
+                  <td>missing</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-005</td>
-                  <td>pass</td>
+                  <td>missing</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-006</td>
-                  <td>pass</td>
+                  <td>missing</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-007</td>
-                  <td>pass</td>
+                  <td>missing</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-008</td>
-                  <td>pass</td>
+                  <td>missing</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-009</td>
-                  <td>pass</td>
+                  <td>missing</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-010</td>
-                  <td>pass</td>
+                  <td>missing</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-011</td>
-                  <td>pass</td>
+                  <td>missing</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-012</td>
-                  <td>pass</td>
+                  <td>missing</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-013</td>
-                  <td>pass</td>
+                  <td>missing</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-014</td>
-                  <td>pass</td>
+                  <td>missing</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-015</td>
-                  <td>pass</td>
+                  <td>missing</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-016</td>
-                  <td>pass</td>
+                  <td>missing</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-017</td>
-                  <td>pass</td>
+                  <td>missing</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-018</td>
-                  <td>pass</td>
+                  <td>missing</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-019</td>
-                  <td>pass</td>
+                  <td>missing</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-020</td>
-                  <td>partial</td>
+                  <td>missing</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-021</td>
-                  <td>pass</td>
+                  <td>missing</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-022</td>
-                  <td>pass</td>
+                  <td>missing</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-023</td>
-                  <td>pass</td>
+                  <td>missing</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-024</td>
-                  <td>pass</td>
+                  <td>missing</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-025</td>
-                  <td>partial</td>
+                  <td>missing</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-026</td>
-                  <td>pass</td>
+                  <td>missing</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-027</td>
-                  <td>pass</td>
-                  <td>qa</td>
-                  <td>—</td>
-                </tr>
-                <tr>
-                  <td>AC-028</td>
-                  <td>pass</td>
-                  <td>qa</td>
-                  <td>—</td>
-                </tr>
-                <tr>
-                  <td>AC-029</td>
-                  <td>pass</td>
-                  <td>qa</td>
-                  <td>—</td>
-                </tr>
-                <tr>
-                  <td>AC-030</td>
-                  <td>pass</td>
-                  <td>qa</td>
-                  <td>—</td>
-                </tr>
-                <tr>
-                  <td>AC-031</td>
-                  <td>pass</td>
-                  <td>qa</td>
-                  <td>—</td>
-                </tr>
-                <tr>
-                  <td>AC-032</td>
-                  <td>pass</td>
-                  <td>qa</td>
-                  <td>—</td>
-                </tr>
-                <tr>
-                  <td>AC-033</td>
-                  <td>pass</td>
-                  <td>qa</td>
-                  <td>—</td>
-                </tr>
-                <tr>
-                  <td>AC-034</td>
-                  <td>pass</td>
-                  <td>qa</td>
-                  <td>—</td>
-                </tr>
-                <tr>
-                  <td>AC-035</td>
-                  <td>pass</td>
+                  <td>missing</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
@@ -1643,175 +1265,139 @@
               </thead>
               <tbody>
                 <tr>
-                  <td>pm-orchestrator-e...</td>
-                  <td>pm-orchestrator</td>
-                  <td>done</td>
-                  <td>—</td>
-                  <td>15765530</td>
-                  <td>109m 37s</td>
-                  <td>PM/orchestrator session (Stop hook): 118 turns</td>
-                </tr>
-                <tr>
-                  <td>feat007-batchA-de...</td>
+                  <td>feat011-batchA-de...</td>
                   <td>dev</td>
                   <td>done</td>
                   <td>—</td>
-                  <td>63251</td>
-                  <td>6m 46s</td>
-                  <td>Setup deps + libs (sanitize/normalize) + useRichTextLine ...</td>
+                  <td>57215</td>
+                  <td>4m 43s</td>
+                  <td>Types + barrel + lib prefixCycle (PREFIX_ORDER frozen + n...</td>
                 </tr>
                 <tr>
-                  <td>feat007-batchA-co...</td>
+                  <td>feat011-batchA-co...</td>
                   <td>code-reviewer</td>
-                  <td>needs_review</td>
+                  <td>done</td>
                   <td>—</td>
-                  <td>37350</td>
-                  <td>1m 53s</td>
-                  <td>2 blockers (jest config) escopo BATCH-D; 1 major in-scope...</td>
+                  <td>25671</td>
+                  <td>54s</td>
+                  <td>READY_FOR_QA, 4 minors apenas: NotesValue inline import, ...</td>
                 </tr>
                 <tr>
-                  <td>feat007-batchA-lo...</td>
+                  <td>feat011-batchA-lo...</td>
                   <td>logic-reviewer</td>
-                  <td>needs_review</td>
+                  <td>done</td>
                   <td>—</td>
-                  <td>41448</td>
-                  <td>2m 16s</td>
-                  <td>3 blockers reais (AC-028 cursor-jump, stale closure, test...</td>
+                  <td>26638</td>
+                  <td>1m 22s</td>
+                  <td>1 major + 4 minors (todos test gaps): justAddedIdRef no-a...</td>
                 </tr>
                 <tr>
-                  <td>feat007-batchA-de...</td>
+                  <td>feat011-batchA-fi...</td>
                   <td>dev</td>
                   <td>done</td>
-                  <td>1</td>
-                  <td>56734</td>
-                  <td>4m 34s</td>
-                  <td>Fix loop 1: AC-028 strip &lt;p&gt;, useRef stale closure fix, I...</td>
+                  <td>—</td>
+                  <td>8000</td>
+                  <td>3m 30s</td>
+                  <td>PM aplicou todos minors + 1 major: NotesValue agora plain...</td>
                 </tr>
                 <tr>
-                  <td>feat007-batchA-qa-01</td>
+                  <td>feat011-batchA-qa-01</td>
                   <td>qa</td>
                   <td>done</td>
                   <td>—</td>
-                  <td>42222</td>
-                  <td>2m 36s</td>
-                  <td>89/89 tests verdes; 15 ACs pass, AC-020+AC-025 deferred t...</td>
+                  <td>33276</td>
+                  <td>1m 33s</td>
+                  <td>ready_for_done — 12/12 ACs pass; 43 unit tests + 100% cov...</td>
                 </tr>
                 <tr>
-                  <td>feat007-batchB-de...</td>
+                  <td>feat011-batchB-de...</td>
                   <td>dev</td>
                   <td>done</td>
                   <td>—</td>
-                  <td>121599</td>
-                  <td>16m 28s</td>
-                  <td>RichTextLine component + 25 integration tests; 111/111 ve...</td>
+                  <td>61070</td>
+                  <td>4m 36s</td>
+                  <td>NoteItem (memo + per-id binding via useMemo) + Notes (con...</td>
                 </tr>
                 <tr>
-                  <td>feat007-batchB-lo...</td>
+                  <td>feat011-batchB-co...</td>
+                  <td>code-reviewer</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>32770</td>
+                  <td>1m 57s</td>
+                  <td>2 BLOCKERS: file size 484 &gt; 250 (split obrigatório), Tipt...</td>
+                </tr>
+                <tr>
+                  <td>feat011-batchB-lo...</td>
                   <td>logic-reviewer</td>
-                  <td>needs_review</td>
+                  <td>done</td>
                   <td>—</td>
-                  <td>42691</td>
-                  <td>2m 6s</td>
-                  <td>1 blocker (paste bypass), 3 majors (mark regex, rapid typ...</td>
+                  <td>30281</td>
+                  <td>1m 30s</td>
+                  <td>1 BLOCKER (AC-003 sem document.activeElement assertion) +...</td>
                 </tr>
                 <tr>
-                  <td>feat007-batchB-qa-01</td>
+                  <td>feat011-batchB-fi...</td>
+                  <td>dev</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>18000</td>
+                  <td>5m 50s</td>
+                  <td>PM aplicou: (a) NoteItem useMemo→useCallback; (b) Notes.i...</td>
+                </tr>
+                <tr>
+                  <td>feat011-batchB-qa-01</td>
                   <td>qa</td>
                   <td>done</td>
                   <td>—</td>
-                  <td>45000</td>
-                  <td>2m 30s</td>
-                  <td>111/111 tests verdes; 11 ACs pass; rapid typing test frac...</td>
-                </tr>
-                <tr>
-                  <td>feat007-batchB-de...</td>
-                  <td>dev</td>
-                  <td>done</td>
-                  <td>1</td>
-                  <td>91293</td>
-                  <td>9m 38s</td>
-                  <td>Fix loop 1: BoldAsB/ItalicAsI custom renderHTML, real pas...</td>
-                </tr>
-                <tr>
-                  <td>feat007-batchC-de...</td>
-                  <td>dev</td>
-                  <td>done</td>
-                  <td>—</td>
-                  <td>70962</td>
-                  <td>6m 28s</td>
-                  <td>FloatingToolbar a11y (BubbleMenu, role=toolbar, aria-pres...</td>
-                </tr>
-                <tr>
-                  <td>feat007-batchC-qa-01</td>
-                  <td>qa</td>
-                  <td>done</td>
-                  <td>—</td>
-                  <td>34183</td>
-                  <td>1m 36s</td>
-                  <td>128/128 verdes; 6 ACs pass; AC-006/007 show/hide deferido...</td>
-                </tr>
-                <tr>
-                  <td>feat007-batchD-de...</td>
-                  <td>dev</td>
-                  <td>needs_review</td>
-                  <td>—</td>
-                  <td>53826</td>
-                  <td>3m 47s</td>
-                  <td>Stories+jest config+CLAUDE.md done. Storybook build verde...</td>
-                </tr>
-                <tr>
-                  <td>feat007-batchD-de...</td>
-                  <td>dev</td>
-                  <td>done</td>
-                  <td>1</td>
-                  <td>106014</td>
-                  <td>13m 58s</td>
-                  <td>Coverage fix: tests adicionais para FloatingToolbar funcs...</td>
-                </tr>
-                <tr>
-                  <td>feat007-batchD-qa-01</td>
-                  <td>qa</td>
-                  <td>done</td>
-                  <td>—</td>
-                  <td>43372</td>
-                  <td>5m 38s</td>
-                  <td>4/4 ACs pass; 897 tests verdes; coverage threshold ok; st...</td>
-                </tr>
-                <tr>
-                  <td>feat007-audit-01</td>
-                  <td>audit-agent</td>
-                  <td>blocked</td>
-                  <td>—</td>
-                  <td>60311</td>
-                  <td>1m 56s</td>
-                  <td>Initial audit retornou bypass_detected (reviewers ausente...</td>
-                </tr>
-                <tr>
-                  <td>feat007-batchB-co...</td>
-                  <td>code-reviewer</td>
-                  <td>needs_review</td>
-                  <td>—</td>
-                  <td>33791</td>
-                  <td>49s</td>
-                  <td>Test file 393L &gt; 250L (split como follow-up); restante li...</td>
-                </tr>
-                <tr>
-                  <td>feat007-batchC-co...</td>
-                  <td>code-reviewer</td>
-                  <td>needs_review</td>
-                  <td>—</td>
-                  <td>24514</td>
-                  <td>27s</td>
-                  <td>Test file 481L; CSS tokens hard-coded + aria-label coupli...</td>
-                </tr>
-                <tr>
-                  <td>feat007-audit-02</td>
-                  <td>audit-agent</td>
-                  <td>done</td>
-                  <td>—</td>
-                  <td>68668</td>
+                  <td>37040</td>
                   <td>2m 40s</td>
-                  <td>Re-audit clean: 4/4 batches roles completos; 35/35 ACs co...</td>
+                  <td>needs_fixes — 1 blocker remanescente: integration test 31...</td>
+                </tr>
+                <tr>
+                  <td>feat011-batchB-fi...</td>
+                  <td>dev</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>9000</td>
+                  <td>2m 30s</td>
+                  <td>Split adicional do integration test em 3 arquivos (todos ...</td>
+                </tr>
+                <tr>
+                  <td>feat011-batchC-de...</td>
+                  <td>dev</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>37821</td>
+                  <td>2m 15s</td>
+                  <td>4 Storybook stories CSF3 (Empty/Single/Mixed/Many); jest ...</td>
+                </tr>
+                <tr>
+                  <td>feat011-batchC-qa-01</td>
+                  <td>qa</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>26188</td>
+                  <td>2m 7s</td>
+                  <td>needs_fixes — useNotes.test.ts 533L &gt; 250. PM splitou em ...</td>
+                </tr>
+                <tr>
+                  <td>feat011-batchC-fi...</td>
+                  <td>dev</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>7000</td>
+                  <td>2m 30s</td>
+                  <td>useNotes test split: basics + mutations + stability, todo...</td>
+                </tr>
+                <tr>
+                  <td>feat011-batchC-qa-02</td>
+                  <td>qa</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>16316</td>
+                  <td>1m 1s</td>
+                  <td>FEAT_011_FINAL_STATUS: ready_to_ship — todos arquivos &lt; 2...</td>
                 </tr>
               </tbody>
             </table>
@@ -1832,109 +1418,7 @@
         </details>
         <details>
           <summary>Reviewer findings</summary>
-          <div>
-            <ul>
-              <li>
-                collectCoverageFrom excludes web/src/features/rich-text-line/**; feature invisible
-                to coverage tool. NOTE PM: AC-035 está em BATCH-D, não BATCH-A — jest config será
-                endereçado em BATCH-D.
-              </li>
-              <li>
-                coverageThreshold has no entry for web/src/features/rich-text-line/. NOTE PM: idem —
-                AC-035 → BATCH-D.
-              </li>
-              <li>
-                isomorphic-dompurify version &#39;^2.x&#39; is non-standard semver; use
-                &#39;^2.0.0&#39;.
-              </li>
-              <li>
-                waitForEditor param type is deeply inlined ReturnType chain; extract a named alias.
-              </li>
-              <li>&#39;Order matters&#39; comment is misleading; Array.includes is unordered.</li>
-              <li>
-                RichTextLineProps exported from barrel before component exists; premature surface.
-              </li>
-              <li>
-                normalizeHtml(&#39;texto&#39;) !==
-                normalizeHtml(&#39;&lt;p&gt;texto&lt;/p&gt;&#39;); cursor jump em re-render quando
-                parent guarda &#39;texto&#39; mas Tiptap retorna &#39;&lt;p&gt;texto&lt;/p&gt;&#39;.
-                Strip &lt;p&gt; wrapper na normalização.
-              </li>
-              <li>
-                handleKeyDown e onUpdate capturam onEnter/onChange no init de useEditor. Tiptap não
-                re-inicia em props change → stale closure. Usar refs (useRef + useEffect sync) para
-                chamadas latest.
-              </li>
-              <li>
-                Teste de onEnter só checa nomes de extensões; nunca dispara keydown nem assert
-                callback chamado. Adicionar teste real com keydown event.
-              </li>
-              <li>
-                IME composition end (CJK) dispara Enter para confirmar — onEnter chamado
-                spuriamente. Adicionar guard `event.isComposing` no handleKeyDown.
-              </li>
-              <li>
-                EMPTY_PATTERNS é allowlist exato. Tiptap Placeholder adiciona
-                class=&#39;is-editor-empty&#39; → &#39;&lt;p
-                class=&quot;is-editor-empty&quot;&gt;&lt;/p&gt;&#39; não normaliza. Usar
-                regex/parser para detectar p vazio independente de clas...
-              </li>
-              <li>
-                onUpdate emite getHTML() sem strip de &lt;br&gt; ou multi-&lt;p&gt;. Programmatic
-                insertContent(&#39;\n&#39;) quebra invariante. Chamar normalizeHtml com strip de
-                tags estruturais.
-              </li>
-              <li>
-                Faltam casos adversariais: SVG dentro de tag permitida, data: URLs, javascript:
-                URLs.
-              </li>
-              <li>
-                Idempotência com collapseToSingleLine só testa caso simples. Faltam tags permitidas
-                dentro de blocos:
-                &#39;&lt;p&gt;&lt;b&gt;x&lt;/b&gt;&lt;/p&gt;&lt;p&gt;&lt;i&gt;y&lt;/i&gt;&lt;/p&gt;&#39;.
-              </li>
-              <li>
-                Nenhum teste dispara paste real via transformPastedHTML. NOTA PM: integration test
-                virá em BATCH-B/C; pode aceitar deferir.
-              </li>
-              <li>
-                useEffect roda após render; user pode digitar entre re-render e effect flush. NOTA
-                PM: defesa razoável é controlled mode bem-comportado; deferir teste para integration
-                BATCH-B.
-              </li>
-              <li>
-                Paste test extrai transformPastedHTML de editor.options.editorProps e invoca como
-                função pura — não traversa pipeline real do Tiptap. Usar userEvent.paste().
-              </li>
-              <li>
-                toggleBold assert usa regex /&lt;b&gt;|&lt;strong&gt;/ — passa com &lt;strong&gt;.
-                AC-005 exige estritamente &lt;b&gt;.
-              </li>
-              <li>
-                toggleItalic regex /&lt;em&gt;|&lt;i&gt;/ — passa com &lt;em&gt;. AC-005 exige
-                &lt;i&gt;.
-              </li>
-              <li>
-                Rapid typing usa setContent batch, não userEvent.type sequencial. AC-027 exige 10+
-                chars/s sequencial.
-              </li>
-              <li>Sem integration test de Shift+Enter — covered apenas no extension level.</li>
-              <li>
-                useEffect [editor, value]: se value muda múltiplas vezes antes de editor settle,
-                intermediates silenciosamente droppados (last-write-wins, mas pode mascarar bugs).
-              </li>
-              <li>File size 393L exceeds 250L cap (regra inviolável #6). Split before PR.</li>
-              <li>Test file 481L &gt; 250L (regra #6). Split antes do PR.</li>
-              <li>
-                Hard-coded RGBA rgba(42,77,58,0.08); usar CSS custom property do token system.
-              </li>
-              <li>Hard-coded RGBA rgba(42,77,58,0.16); idem.</li>
-              <li>
-                Seletores [aria-label=&#39;...&#39;] acoplam CSS a a11y text; usar class .iconItalic
-                etc.
-              </li>
-            </ul>
-          </div>
+          <div><p>(none)</p></div>
         </details>
         <details>
           <summary>Phase durations</summary>
@@ -1946,11 +1430,11 @@
         <details>
           <summary>View raw Markdown report</summary>
           <div class="md-embed">
-            <h1>rich-text-line — editor Tiptap de uma linha (núcleo de escrita) — FEAT-007</h1>
+            <h1>notes — Bullets livres com prefix (•/→/—/★) e lista dinâmica — FEAT-011</h1>
             <blockquote>
               <p>
-                Feature: rich-text-line — editor Tiptap de uma linha (núcleo de escrita) Task ID:
-                FEAT-007 Phase: done Generated at: 2026-05-10T10:26:59.712Z
+                Feature: notes — Bullets livres com prefix (•/→/—/★) e lista dinâmica Task ID:
+                FEAT-011 Phase: done Generated at: 2026-05-10T10:26:59.712Z
               </p>
             </blockquote>
             <h2>Insights</h2>
@@ -1959,29 +1443,29 @@
                 ℹ Escalation rate 0.0% is below the Galileo healthy band (&lt; 10%) — low
                 escalation, agents resolving autonomously. <em>(Galileo healthy band)</em>
               </li>
-              <li>ℹ Dev task success rate 85.7% is at or above 80% — healthy first-try rate.</li>
+              <li>ℹ Dev task success rate 100.0% is at or above 80% — healthy first-try rate.</li>
             </ul>
             <h2>Cost breakdown</h2>
             <p>
               <em
-                >70/30 input/output split assumed; harness reports only total_tokens; 19 of 19
+                >70/30 input/output split assumed; harness reports only total_tokens; 15 of 15
                 dispatches included in cost</em
               >
             </p>
             <ul>
               <li>
-                Total tokens: 16802759
+                Total tokens: 426286
                 <ul>
-                  <li>Estimated input (70%): 11761931</li>
-                  <li>Estimated output (30%): 5040828</li>
+                  <li>Estimated input (70%): 298400</li>
+                  <li>Estimated output (30%): 127886</li>
                 </ul>
               </li>
-              <li>Estimated cost USD total: $22.9994</li>
-              <li>Cost per AC: $0.6571</li>
-              <li>Cost per dispatch (avg): $1.2105</li>
-              <li>Wall-clock duration: 195m 44s</li>
-              <li>Tool uses total: 698</li>
-              <li>Coverage: 19 of 19 dispatches included in cost calculation</li>
+              <li>Estimated cost USD total: $2.9983</li>
+              <li>Cost per AC: $0.1110</li>
+              <li>Cost per dispatch (avg): $0.1999</li>
+              <li>Wall-clock duration: 38m 58s</li>
+              <li>Tool uses total: 377</li>
+              <li>Coverage: 15 of 15 dispatches included in cost calculation</li>
             </ul>
             <h2>Repo health snapshot</h2>
             <p>
@@ -2008,228 +1492,189 @@
               </thead>
               <tbody>
                 <tr>
-                  <td>pm-orches...</td>
-                  <td>pm-orchestrator</td>
-                  <td>done</td>
-                  <td>—</td>
-                  <td>15765530</td>
-                  <td>$173.4208</td>
-                  <td>109m 37s</td>
-                  <td>PM/orchestrator session (Stop hook): 118 turns</td>
-                </tr>
-                <tr>
-                  <td>feat007-b...</td>
+                  <td>feat011-b...</td>
                   <td>dev</td>
                   <td>done</td>
                   <td>—</td>
-                  <td>63251</td>
-                  <td>$0.4175</td>
-                  <td>6m 46s</td>
+                  <td>57215</td>
+                  <td>$0.3776</td>
+                  <td>4m 43s</td>
                   <td>
-                    Setup deps + libs (sanitize/normalize) + useRichTextLine hook + 63 unit tests...
+                    Types + barrel + lib prefixCycle (PREFIX_ORDER frozen + nextPrefix wrap-aroun...
                   </td>
                 </tr>
                 <tr>
-                  <td>feat007-b...</td>
+                  <td>feat011-b...</td>
                   <td>code-reviewer</td>
-                  <td>needs_review</td>
+                  <td>done</td>
                   <td>—</td>
-                  <td>37350</td>
-                  <td>$0.2465</td>
-                  <td>1m 53s</td>
+                  <td>25671</td>
+                  <td>$0.1694</td>
+                  <td>54s</td>
                   <td>
-                    2 blockers (jest config) escopo BATCH-D; 1 major in-scope (semver); 3 minor.
+                    READY_FOR_QA, 4 minors apenas: NotesValue inline import, blank line, prefix-t...
                   </td>
                 </tr>
                 <tr>
-                  <td>feat007-b...</td>
+                  <td>feat011-b...</td>
                   <td>logic-reviewer</td>
-                  <td>needs_review</td>
+                  <td>done</td>
                   <td>—</td>
-                  <td>41448</td>
-                  <td>$0.2736</td>
-                  <td>2m 16s</td>
+                  <td>26638</td>
+                  <td>$0.1758</td>
+                  <td>1m 22s</td>
                   <td>
-                    3 blockers reais (AC-028 cursor-jump, stale closure, teste placeholder); 4 ma...
+                    1 major + 4 minors (todos test gaps): justAddedIdRef no-auto-clear contract, ...
                   </td>
                 </tr>
                 <tr>
-                  <td>feat007-b...</td>
+                  <td>feat011-b...</td>
                   <td>dev</td>
                   <td>done</td>
-                  <td>1</td>
-                  <td>56734</td>
-                  <td>$0.3744</td>
-                  <td>4m 34s</td>
+                  <td>—</td>
+                  <td>8000</td>
+                  <td>$0.0880</td>
+                  <td>3m 30s</td>
                   <td>
-                    Fix loop 1: AC-028 strip &lt;p&gt;, useRef stale closure fix, IME guard, real
-                    Enter...
+                    PM aplicou todos minors + 1 major: NotesValue agora plain Note[]; comment ULI...
                   </td>
                 </tr>
                 <tr>
-                  <td>feat007-b...</td>
+                  <td>feat011-b...</td>
                   <td>qa</td>
                   <td>done</td>
                   <td>—</td>
-                  <td>42222</td>
-                  <td>$0.2787</td>
-                  <td>2m 36s</td>
+                  <td>33276</td>
+                  <td>$0.2196</td>
+                  <td>1m 33s</td>
                   <td>
-                    89/89 tests verdes; 15 ACs pass, AC-020+AC-025 deferred to BATCH-B integration.
+                    ready_for_done — 12/12 ACs pass; 43 unit tests + 100% coverage em notes lib+h...
                   </td>
                 </tr>
                 <tr>
-                  <td>feat007-b...</td>
+                  <td>feat011-b...</td>
                   <td>dev</td>
                   <td>done</td>
                   <td>—</td>
-                  <td>121599</td>
-                  <td>$0.8026</td>
-                  <td>16m 28s</td>
+                  <td>61070</td>
+                  <td>$0.4031</td>
+                  <td>4m 36s</td>
                   <td>
-                    RichTextLine component + 25 integration tests; 111/111 verdes; typecheck clean.
+                    NoteItem (memo + per-id binding via useMemo) + Notes (consume justAddedIdRef ...
                   </td>
                 </tr>
                 <tr>
-                  <td>feat007-b...</td>
+                  <td>feat011-b...</td>
+                  <td>code-reviewer</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>32770</td>
+                  <td>$0.2163</td>
+                  <td>1m 57s</td>
+                  <td>
+                    2 BLOCKERS: file size 484 &gt; 250 (split obrigatório), Tiptap import em test
+                    (r...
+                  </td>
+                </tr>
+                <tr>
+                  <td>feat011-b...</td>
                   <td>logic-reviewer</td>
-                  <td>needs_review</td>
+                  <td>done</td>
                   <td>—</td>
-                  <td>42691</td>
-                  <td>$0.2818</td>
-                  <td>2m 6s</td>
+                  <td>30281</td>
+                  <td>$0.1999</td>
+                  <td>1m 30s</td>
                   <td>
-                    1 blocker (paste bypass), 3 majors (mark regex, rapid typing batched), 2 mino...
+                    1 BLOCKER (AC-003 sem document.activeElement assertion) + 4 majors (silent-sk...
                   </td>
                 </tr>
                 <tr>
-                  <td>feat007-b...</td>
+                  <td>feat011-b...</td>
+                  <td>dev</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>18000</td>
+                  <td>$0.1980</td>
+                  <td>5m 50s</td>
+                  <td>
+                    PM aplicou: (a) NoteItem useMemo→useCallback; (b) Notes.integration.test.tsx ...
+                  </td>
+                </tr>
+                <tr>
+                  <td>feat011-b...</td>
                   <td>qa</td>
                   <td>done</td>
                   <td>—</td>
-                  <td>45000</td>
-                  <td>$0.2970</td>
-                  <td>2m 30s</td>
-                  <td>
-                    111/111 tests verdes; 11 ACs pass; rapid typing test fraco mas passa intent —...
-                  </td>
-                </tr>
-                <tr>
-                  <td>feat007-b...</td>
-                  <td>dev</td>
-                  <td>done</td>
-                  <td>1</td>
-                  <td>91293</td>
-                  <td>$0.6025</td>
-                  <td>9m 38s</td>
-                  <td>
-                    Fix loop 1: BoldAsB/ItalicAsI custom renderHTML, real paste via clipboardData...
-                  </td>
-                </tr>
-                <tr>
-                  <td>feat007-b...</td>
-                  <td>dev</td>
-                  <td>done</td>
-                  <td>—</td>
-                  <td>70962</td>
-                  <td>$0.4683</td>
-                  <td>6m 28s</td>
-                  <td>
-                    FloatingToolbar a11y (BubbleMenu, role=toolbar, aria-pressed, arrow nav) + 16...
-                  </td>
-                </tr>
-                <tr>
-                  <td>feat007-b...</td>
-                  <td>qa</td>
-                  <td>done</td>
-                  <td>—</td>
-                  <td>34183</td>
-                  <td>$0.2256</td>
-                  <td>1m 36s</td>
-                  <td>
-                    128/128 verdes; 6 ACs pass; AC-006/007 show/hide deferidos a Storybook+e2e (j...
-                  </td>
-                </tr>
-                <tr>
-                  <td>feat007-b...</td>
-                  <td>dev</td>
-                  <td>needs_review</td>
-                  <td>—</td>
-                  <td>53826</td>
-                  <td>$0.3553</td>
-                  <td>3m 47s</td>
-                  <td>
-                    Stories+jest config+CLAUDE.md done. Storybook build verde. Gap: FloatingToolb...
-                  </td>
-                </tr>
-                <tr>
-                  <td>feat007-b...</td>
-                  <td>dev</td>
-                  <td>done</td>
-                  <td>1</td>
-                  <td>106014</td>
-                  <td>$0.6997</td>
-                  <td>13m 58s</td>
-                  <td>
-                    Coverage fix: tests adicionais para FloatingToolbar funcs/branches, RichTextL...
-                  </td>
-                </tr>
-                <tr>
-                  <td>feat007-b...</td>
-                  <td>qa</td>
-                  <td>done</td>
-                  <td>—</td>
-                  <td>43372</td>
-                  <td>$0.2863</td>
-                  <td>5m 38s</td>
-                  <td>
-                    4/4 ACs pass; 897 tests verdes; coverage threshold ok; storybook build verde;...
-                  </td>
-                </tr>
-                <tr>
-                  <td>feat007-a...</td>
-                  <td>audit-agent</td>
-                  <td>blocked</td>
-                  <td>—</td>
-                  <td>60311</td>
-                  <td>$0.1327</td>
-                  <td>1m 56s</td>
-                  <td>
-                    Initial audit retornou bypass_detected (reviewers ausentes em B/C/D). Reviewe...
-                  </td>
-                </tr>
-                <tr>
-                  <td>feat007-b...</td>
-                  <td>code-reviewer</td>
-                  <td>needs_review</td>
-                  <td>—</td>
-                  <td>33791</td>
-                  <td>$0.0743</td>
-                  <td>49s</td>
-                  <td>Test file 393L &gt; 250L (split como follow-up); restante limpo.</td>
-                </tr>
-                <tr>
-                  <td>feat007-b...</td>
-                  <td>code-reviewer</td>
-                  <td>needs_review</td>
-                  <td>—</td>
-                  <td>24514</td>
-                  <td>$0.0539</td>
-                  <td>27s</td>
-                  <td>
-                    Test file 481L; CSS tokens hard-coded + aria-label coupling (5 minors). Follo...
-                  </td>
-                </tr>
-                <tr>
-                  <td>feat007-a...</td>
-                  <td>audit-agent</td>
-                  <td>done</td>
-                  <td>—</td>
-                  <td>68668</td>
-                  <td>$0.1511</td>
+                  <td>37040</td>
+                  <td>$0.2445</td>
                   <td>2m 40s</td>
                   <td>
-                    Re-audit clean: 4/4 batches roles completos; 35/35 ACs cobertos; 3 reviewers ...
+                    needs_fixes — 1 blocker remanescente: integration test 312 linhas &gt; 250. PM
+                    s...
+                  </td>
+                </tr>
+                <tr>
+                  <td>feat011-b...</td>
+                  <td>dev</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>9000</td>
+                  <td>$0.0990</td>
+                  <td>2m 30s</td>
+                  <td>
+                    Split adicional do integration test em 3 arquivos (todos &lt; 250L); mock
+                    duplic...
+                  </td>
+                </tr>
+                <tr>
+                  <td>feat011-b...</td>
+                  <td>dev</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>37821</td>
+                  <td>$0.2496</td>
+                  <td>2m 15s</td>
+                  <td>
+                    4 Storybook stories CSF3 (Empty/Single/Mixed/Many); jest threshold 90% por pa...
+                  </td>
+                </tr>
+                <tr>
+                  <td>feat011-b...</td>
+                  <td>qa</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>26188</td>
+                  <td>$0.1728</td>
+                  <td>2m 7s</td>
+                  <td>
+                    needs_fixes — useNotes.test.ts 533L &gt; 250. PM splitou em 3 arquivos: basics
+                    (...
+                  </td>
+                </tr>
+                <tr>
+                  <td>feat011-b...</td>
+                  <td>dev</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>7000</td>
+                  <td>$0.0770</td>
+                  <td>2m 30s</td>
+                  <td>
+                    useNotes test split: basics + mutations + stability, todos &lt; 250L; cleanup
+                    un...
+                  </td>
+                </tr>
+                <tr>
+                  <td>feat011-b...</td>
+                  <td>qa</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>16316</td>
+                  <td>$0.1077</td>
+                  <td>1m 1s</td>
+                  <td>
+                    FEAT_011_FINAL_STATUS: ready_to_ship — todos arquivos &lt; 250L; coverage
+                    100/10...
                   </td>
                 </tr>
               </tbody>
@@ -2247,211 +1692,163 @@
               <tbody>
                 <tr>
                   <td>AC-001</td>
-                  <td>pass</td>
+                  <td>missing</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-002</td>
-                  <td>pass</td>
+                  <td>missing</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-003</td>
-                  <td>pass</td>
+                  <td>missing</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-004</td>
-                  <td>pass</td>
+                  <td>missing</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-005</td>
-                  <td>pass</td>
+                  <td>missing</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-006</td>
-                  <td>pass</td>
+                  <td>missing</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-007</td>
-                  <td>pass</td>
+                  <td>missing</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-008</td>
-                  <td>pass</td>
+                  <td>missing</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-009</td>
-                  <td>pass</td>
+                  <td>missing</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-010</td>
-                  <td>pass</td>
+                  <td>missing</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-011</td>
-                  <td>pass</td>
+                  <td>missing</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-012</td>
-                  <td>pass</td>
+                  <td>missing</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-013</td>
-                  <td>pass</td>
+                  <td>missing</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-014</td>
-                  <td>pass</td>
+                  <td>missing</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-015</td>
-                  <td>pass</td>
+                  <td>missing</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-016</td>
-                  <td>pass</td>
+                  <td>missing</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-017</td>
-                  <td>pass</td>
+                  <td>missing</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-018</td>
-                  <td>pass</td>
+                  <td>missing</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-019</td>
-                  <td>pass</td>
+                  <td>missing</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-020</td>
-                  <td>partial</td>
+                  <td>missing</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-021</td>
-                  <td>pass</td>
+                  <td>missing</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-022</td>
-                  <td>pass</td>
+                  <td>missing</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-023</td>
-                  <td>pass</td>
+                  <td>missing</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-024</td>
-                  <td>pass</td>
+                  <td>missing</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-025</td>
-                  <td>partial</td>
+                  <td>missing</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-026</td>
-                  <td>pass</td>
+                  <td>missing</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-027</td>
-                  <td>pass</td>
-                  <td>qa</td>
-                  <td>—</td>
-                </tr>
-                <tr>
-                  <td>AC-028</td>
-                  <td>pass</td>
-                  <td>qa</td>
-                  <td>—</td>
-                </tr>
-                <tr>
-                  <td>AC-029</td>
-                  <td>pass</td>
-                  <td>qa</td>
-                  <td>—</td>
-                </tr>
-                <tr>
-                  <td>AC-030</td>
-                  <td>pass</td>
-                  <td>qa</td>
-                  <td>—</td>
-                </tr>
-                <tr>
-                  <td>AC-031</td>
-                  <td>pass</td>
-                  <td>qa</td>
-                  <td>—</td>
-                </tr>
-                <tr>
-                  <td>AC-032</td>
-                  <td>pass</td>
-                  <td>qa</td>
-                  <td>—</td>
-                </tr>
-                <tr>
-                  <td>AC-033</td>
-                  <td>pass</td>
-                  <td>qa</td>
-                  <td>—</td>
-                </tr>
-                <tr>
-                  <td>AC-034</td>
-                  <td>pass</td>
-                  <td>qa</td>
-                  <td>—</td>
-                </tr>
-                <tr>
-                  <td>AC-035</td>
-                  <td>pass</td>
+                  <td>missing</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
@@ -2497,7 +1894,7 @@
               <tbody>
                 <tr>
                   <td>audit-agent</td>
-                  <td>2</td>
+                  <td>0</td>
                 </tr>
                 <tr>
                   <td>blocker-specialist</td>
@@ -2505,7 +1902,7 @@
                 </tr>
                 <tr>
                   <td>code-reviewer</td>
-                  <td>3</td>
+                  <td>2</td>
                 </tr>
                 <tr>
                   <td>dev</td>
@@ -2517,7 +1914,7 @@
                 </tr>
                 <tr>
                   <td>pm-orchestrator</td>
-                  <td>1</td>
+                  <td>0</td>
                 </tr>
                 <tr>
                   <td>qa</td>
@@ -2525,7 +1922,7 @@
                 </tr>
                 <tr>
                   <td><strong>Total</strong></td>
-                  <td>19</td>
+                  <td>15</td>
                 </tr>
               </tbody>
             </table>
@@ -2540,7 +1937,7 @@
               <tbody>
                 <tr>
                   <td>audit-agent</td>
-                  <td>50.0%</td>
+                  <td>n/a</td>
                 </tr>
                 <tr>
                   <td>blocker-specialist</td>
@@ -2548,19 +1945,19 @@
                 </tr>
                 <tr>
                   <td>code-reviewer</td>
-                  <td>0.0%</td>
+                  <td>100.0%</td>
                 </tr>
                 <tr>
                   <td>dev</td>
-                  <td>85.7%</td>
+                  <td>100.0%</td>
                 </tr>
                 <tr>
                   <td>logic-reviewer</td>
-                  <td>0.0%</td>
+                  <td>100.0%</td>
                 </tr>
                 <tr>
                   <td>pm-orchestrator</td>
-                  <td>100.0%</td>
+                  <td>n/a</td>
                 </tr>
                 <tr>
                   <td>qa</td>
@@ -2569,11 +1966,11 @@
               </tbody>
             </table>
             <h2>Loop rate</h2>
-            <p>Loop rate: 15.8%</p>
+            <p>Loop rate: 0.0%</p>
             <h2>Escalation rate</h2>
             <p>Escalation rate: 0.0% — below healthy band (&lt; 10%)</p>
             <h2>AC closure</h2>
-            <p>Total: 35 | Pass: 36 | Partial: 2 | Fail: 0 | Missing: 0</p>
+            <p>Total: 27 | Pass: 0 | Partial: 0 | Fail: 0 | Missing: 27</p>
             <h2>Reviewer findings density</h2>
             <table>
               <thead>
@@ -2589,97 +1986,94 @@
                 </tr>
                 <tr>
                   <td>major</td>
-                  <td>10</td>
+                  <td>0</td>
                 </tr>
                 <tr>
                   <td>minor</td>
-                  <td>11</td>
+                  <td>0</td>
                 </tr>
               </tbody>
             </table>
             <h2>PM notes log</h2>
             <ul>
               <li>
-                [2026-05-09 08:36 pm-orchestrator] PM/orchestrator session (Stop hook): 118 turns
+                [2026-05-10 02:08 dev] Types + barrel + lib prefixCycle (PREFIX_ORDER frozen +
+                nextPrefix wrap-around) + useNotes (valueRef+onChangeRef + onAdd com ULID +
+                justAddedIdRef + onRemove/onChangeText/onCyclePrefix); 38 unit te... (see manifest
+                entry feat011-batchA-dev-01)
               </li>
               <li>
-                [2026-05-09 18:30 dev] Setup deps + libs (sanitize/normalize) + useRichTextLine hook
-                + 63 unit tests; typecheck+tests verdes.
+                [2026-05-10 02:13 code-reviewer] READY_FOR_QA, 4 minors apenas: NotesValue inline
+                import, blank line, prefix-type test trivial assertion, ULID source comment.
+                Aplicados.
               </li>
               <li>
-                [2026-05-09 18:37 code-reviewer] 2 blockers (jest config) escopo BATCH-D; 1 major
-                in-scope (semver); 3 minor.
+                [2026-05-10 02:13 logic-reviewer] 1 major + 4 minors (todos test gaps):
+                justAddedIdRef no-auto-clear contract, second-add ref check, AC-013 mistag, onChange
+                call-count assertion, freeze mutation test. Aplicados.
               </li>
               <li>
-                [2026-05-09 18:37 logic-reviewer] 3 blockers reais (AC-028 cursor-jump, stale
-                closure, teste placeholder); 4 majors; 2 minors deferíveis.
+                [2026-05-10 02:14 dev] PM aplicou todos minors + 1 major: NotesValue agora plain
+                Note[]; comment ULID source no useNotes; +1 teste justAddedIdRef no-auto-clear; +1
+                teste second-add ref==id2; AC-013 tag corrigido; onRemov... (see manifest entry
+                feat011-batchA-fix-01)
               </li>
               <li>
-                [2026-05-09 18:40 dev] Fix loop 1: AC-028 strip &lt;p&gt;, useRef stale closure fix,
-                IME guard, real Enter keydown tests, adversarial XSS tests, semver. 89/89 tests
-                verdes.
+                [2026-05-10 02:18 qa] ready_for_done — 12/12 ACs pass; 43 unit tests + 100% coverage
+                em notes lib+hooks; barrel completo; 0 violações de boundary.
               </li>
               <li>
-                [2026-05-09 18:46 qa] 89/89 tests verdes; 15 ACs pass, AC-020+AC-025 deferred to
-                BATCH-B integration.
+                [2026-05-10 02:19 dev] NoteItem (memo + per-id binding via useMemo) + Notes (consume
+                justAddedIdRef + clear via useEffect) + 22 integration tests; 349 totais green.
               </li>
               <li>
-                [2026-05-09 18:50 dev] RichTextLine component + 25 integration tests; 111/111
-                verdes; typecheck clean.
+                [2026-05-10 02:24 code-reviewer] 2 BLOCKERS: file size 484 &gt; 250 (split
+                obrigatório), Tiptap import em test (regra inviolável #3); 4 majors:
+                useMemo→useCallback, NFR-002 sem render-counter, silent-skip guards. Todos
+                resolvidos via... (see manifest entry feat011-batchB-codereview-01)
               </li>
               <li>
-                [2026-05-09 19:06 logic-reviewer] 1 blocker (paste bypass), 3 majors (mark regex,
-                rapid typing batched), 2 minors deferíveis.
+                [2026-05-10 02:24 logic-reviewer] 1 BLOCKER (AC-003 sem document.activeElement
+                assertion) + 4 majors (silent-skip in if(ed), AC-013 focus orphan untested, AC-018
+                aria-label values not asserted, NFR-002 vacuous) + 2 minors (AC-014 d... (see
+                manifest entry feat011-batchB-logicreview-01)
               </li>
               <li>
-                [2026-05-09 19:06 qa] 111/111 tests verdes; 11 ACs pass; rapid typing test fraco mas
-                passa intent — refletido no logic-review.
+                [2026-05-10 02:25 dev] PM aplicou: (a) NoteItem useMemo→useCallback; (b)
+                Notes.integration.test.tsx reescrito com mock RichTextLine eliminando Tiptap import
+                + silent-skip guards; (c) split em Notes.memo.test.tsx (render-... (see manifest
+                entry feat011-batchB-fix-01)
               </li>
               <li>
-                [2026-05-09 19:10 dev] Fix loop 1: BoldAsB/ItalicAsI custom renderHTML, real paste
-                via clipboardData, sequential typing, Shift+Enter test. 112/112 verdes.
+                [2026-05-10 02:32 qa] needs_fixes — 1 blocker remanescente: integration test 312
+                linhas &gt; 250. PM splitou em Notes.integration.test.tsx (153L) +
+                Notes.interactions.test.tsx (185L) + Notes.memo.test.tsx (103L). 346 teste... (see
+                manifest entry feat011-batchB-qa-01)
               </li>
               <li>
-                [2026-05-09 19:21 dev] FloatingToolbar a11y (BubbleMenu, role=toolbar, aria-pressed,
-                arrow nav) + 16 integration tests; 128/128 verdes.
+                [2026-05-10 02:33 dev] Split adicional do integration test em 3 arquivos (todos &lt;
+                250L); mock duplicado por arquivo (jest.mock per-file hoisting). 346 testes green.
               </li>
               <li>
-                [2026-05-09 19:28 qa] 128/128 verdes; 6 ACs pass; AC-006/007 show/hide deferidos a
-                Storybook+e2e (jsdom não testa tippy.js).
+                [2026-05-10 02:36 dev] 4 Storybook stories CSF3 (Empty/Single/Mixed/Many); jest
+                threshold 90% por path em web/src/features/notes/**; CLAUDE.md atualizado. Coverage
+                real 100/100/100/100.
               </li>
               <li>
-                [2026-05-09 19:30 dev] Stories+jest config+CLAUDE.md done. Storybook build verde.
-                Gap: FloatingToolbar funcs 60%, RichTextLine branches 60% — precisa tests
-                adicionais.
+                [2026-05-10 02:38 qa] needs_fixes — useNotes.test.ts 533L &gt; 250. PM splitou em 3
+                arquivos: basics (214L) + mutations (215L) + stability (134L).
               </li>
               <li>
-                [2026-05-09 19:35 dev] Coverage fix: tests adicionais para FloatingToolbar
-                funcs/branches, RichTextLine null editor + autoFocus + ariaLabel, extensions, hook
-                null editor. Threshold 95%+ atingido. Total 897 tests passando.
+                [2026-05-10 02:40 dev] useNotes test split: basics + mutations + stability, todos
+                &lt; 250L; cleanup unused imports. 29 suites, 346 testes green.
               </li>
               <li>
-                [2026-05-09 19:50 qa] 4/4 ACs pass; 897 tests verdes; coverage threshold ok;
-                storybook build verde; SC-005 (regra #3) verificado.
-              </li>
-              <li>
-                [2026-05-09 19:55 audit-agent] Initial audit retornou bypass_detected (reviewers
-                ausentes em B/C/D). Reviewers retroativos dispatchados após — re-audit segue.
-              </li>
-              <li>
-                [2026-05-09 20:00 code-reviewer] Test file 393L &gt; 250L (split como follow-up);
-                restante limpo.
-              </li>
-              <li>
-                [2026-05-09 20:00 code-reviewer] Test file 481L; CSS tokens hard-coded + aria-label
-                coupling (5 minors). Follow-ups.
-              </li>
-              <li>
-                [2026-05-09 20:02 audit-agent] Re-audit clean: 4/4 batches roles completos; 35/35
-                ACs cobertos; 3 reviewers escalated (quota) PM-aceitos.
+                [2026-05-10 02:43 qa] FEAT_011_FINAL_STATUS: ready_to_ship — todos arquivos &lt;
+                250L; coverage 100/100/100/100; barrel completo; CLAUDE.md+jest.config OK.
               </li>
             </ul>
             <h2>Token cost</h2>
-            <p>Total tokens: 276294 | Tokens/AC: 7894</p>
+            <p>Token cost not available — using dispatch count as cost proxy: 15 dispatches</p>
           </div>
         </details>
       </section>
