@@ -1,0 +1,13 @@
+/**
+ * Agenda styles — CSS Module.
+ *
+ * Vertical timeline of 18 AgendaSlot rows.
+ * Gap kept tight so all 18 hours fit comfortably on screen.
+ */
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 4px; /* tight rows, distinguishable without excessive spacing */
+  width: 100%;
+}

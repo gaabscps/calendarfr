@@ -1,0 +1,50 @@
+/**
+ * AgendaSlot styles — CSS Module.
+ *
+ * Each slot is a flex row: fixed-width hour label + flex-grow editor.
+ * Current-hour highlight uses a left border with accent color at low opacity —
+ * subtle, does not compete with focus ring (AC-013 NFR visual).
+ *
+ * AC-017: focus ring present on all focusable elements — no outline:none.
+ */
+
+/* ── Slot wrapper ── */
+.slot {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 8px;
+  width: 100%;
+  padding: 2px 0;
+  border-left: 3px solid transparent;
+  transition: border-color 120ms ease;
+}
+
+/* Current-hour highlight: subtle accent border-left (AC-010, AC-013).
+   Low-opacity accent colour — visible but does not compete with foco ring. */
+.slot.currentHour {
+  border-left-color: var(--color-accent, #c0392b);
+  background: color-mix(in srgb, var(--color-accent, #c0392b) 6%, transparent);
+}
+
+/* ── Hour label ── */
+.label {
+  /* Fixed-width column so all labels align across 18 slots */
+  flex-shrink: 0;
+  width: 36px;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.75rem;
+  color: var(--color-ink-muted, #8a7a65);
+  line-height: 1.6;
+  /* Vertically align with first line of editor text */
+  padding-top: 2px;
+  text-align: right;
+  user-select: none;
+}
+
+/* ── Editor area ── */
+.editor {
+  flex: 1;
+  min-width: 0;
+  font-family: var(--font-hand, 'Caveat', cursive);
+}
