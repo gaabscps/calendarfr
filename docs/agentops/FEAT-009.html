@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Server companion — Fastify + JSON store (rotas /api/days/:date) — AgentOps</title>
+    <title>agenda — timeline 06–23h, 18 slots de 1h (RichTextLine inline) — AgentOps</title>
     <style>
       :root {
         --bg: #fff;
@@ -565,40 +565,35 @@
   <body>
     <header class="kpi-bar">
       <h1>
-        Server companion — Fastify + JSON store (rotas /api/days/:date)
-        <span class="badge badge-warn">⚠</span>
+        agenda — timeline 06–23h, 18 slots de 1h (RichTextLine inline)
+        <span class="badge badge-pass">✓</span>
       </h1>
       <div class="kpis">
-        <span>2h44m</span>
-        <span>$13.87</span>
-        <span class="kpi-sub">$0.462/AC</span>
-        <span>10/30 ACs</span>
+        <span>52m 40s</span>
+        <span>$3.01</span>
+        <span class="kpi-sub">$0.108/AC</span>
+        <span>0/28 ACs</span>
         <span>mut —</span>
         <span>type —</span>
-        <span>2 loops</span>
+        <span>0 loops</span>
       </div>
     </header>
-    <div class="compliance-notice compliance-pre-standard" role="note">
-      <strong>Pré-padrão:</strong> flow rodou antes do contrato de observabilidade ser estabilizado
-      (sem <code>usage</code> por dispatch / <code>pm_note</code> /
-      <code>summary_for_reviewers</code>
-      consistentes). Mantido visível como audit trail; excluído de trends e health metrics.
-    </div>
+
     <main>
       <section class="story">
         <h2>Story</h2>
-        <article class="story-card story-card--done" aria-label="batch PM-ORCHESTRATOR">
+        <article class="story-card story-card--done" aria-label="batch FEAT009-BATCHA">
           <header>
-            <h3>PM-ORCHESTRATOR</h3>
+            <h3>FEAT009-BATCHA</h3>
             <span class="badge badge-pass" aria-label="status: done">✓ done</span>
           </header>
           <div class="story-card__stats">
             <span class="story-card__stat"
               ><span class="story-card__stat-label">time</span>
-              <span class="story-card__stat-value">25m 8s</span></span
+              <span class="story-card__stat-value">13m 10s</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">cost</span>
-              <span class="story-card__stat-value">$13.87</span></span
+              <span class="story-card__stat-value">$1.25</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">tasks</span>
               <span class="story-card__stat-value">0</span></span
@@ -608,9 +603,12 @@
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">files</span>
               <span class="story-card__stat-value">0</span></span
-            ><span class="story-card__pipeline">pm-orchestrator</span>
+            ><span class="story-card__pipeline">dev → code-reviewer ‖ logic-reviewer → qa</span>
           </div>
-          <p class="story-card__summary">PM/orchestrator session (Stop hook): 98 turns</p>
+          <p class="story-card__summary">
+            15/15 ACs pass; 1 lint blocker (no-unused-vars no _h em type annotation) —
+            false-positive do code-reviewer earlier; PM reverteu para _h, lint clean.
+          </p>
           <div class="story-card__drilldowns">
             <details>
               <summary>Files changed (0)</summary>
@@ -630,196 +628,7 @@
               <ul class="story-card__acs"></ul>
             </details>
             <details>
-              <summary>Pipeline trace (1 dispatches)</summary>
-              <table class="story-card__pipeline-trace">
-                <thead>
-                  <tr>
-                    <th>role</th>
-                    <th>dispatch_id</th>
-                    <th>loop</th>
-                    <th>duration</th>
-                    <th>tokens</th>
-                    <th>status</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>pm-orchestrator</td>
-                    <td>pm-orchestrator-adaf13f7</td>
-                    <td>—</td>
-                    <td>25m 8s</td>
-                    <td>10176266</td>
-                    <td>done</td>
-                  </tr>
-                </tbody>
-              </table>
-            </details>
-            <details>
-              <summary>PM note</summary>
-              <p class="story-card__pmnote">PM/orchestrator session (Stop hook): 98 turns</p>
-            </details>
-          </div>
-        </article>
-        <article class="story-card story-card--done" aria-label="batch BATCH-A">
-          <header>
-            <h3>
-              BATCH-A<span class="dot">·</span>Setup @calendarfr/shared workspace + jsonStore atomic
-              write layer
-            </h3>
-            <span class="badge badge-pass" aria-label="status: done">✓ done</span>
-          </header>
-          <div class="story-card__stats">
-            <span class="story-card__stat"
-              ><span class="story-card__stat-label">time</span>
-              <span class="story-card__stat-value">28m</span></span
-            ><span class="story-card__stat"
-              ><span class="story-card__stat-label">cost</span>
-              <span class="story-card__stat-value">—</span></span
-            ><span class="story-card__stat"
-              ><span class="story-card__stat-label">tasks</span>
-              <span class="story-card__stat-value">5</span></span
-            ><span class="story-card__stat"
-              ><span class="story-card__stat-label">ACs</span>
-              <span class="story-card__stat-value">9/11</span></span
-            ><span class="story-card__stat"
-              ><span class="story-card__stat-label">files</span>
-              <span class="story-card__stat-value">15</span></span
-            ><span class="story-card__pipeline">dev → code-reviewer ‖ logic-reviewer → qa</span>
-          </div>
-          <p class="story-card__summary">
-            Created @calendarfr/shared workspace (types + newId ULID factory) and wired it into
-            root/web/server package. jsons.
-          </p>
-          <div class="story-card__drilldowns">
-            <details>
-              <summary>Files changed (15)</summary>
-              <table class="story-card__files">
-                <thead>
-                  <tr>
-                    <th>path</th>
-                    <th>action</th>
-                    <th>tasks</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>shared/package.json</td>
-                    <td>create</td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td>shared/tsconfig.json</td>
-                    <td>create</td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td>shared/src/api/types.ts</td>
-                    <td>create</td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td>shared/src/api/ids.ts</td>
-                    <td>create</td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td>shared/src/index.ts</td>
-                    <td>create</td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td>package.json</td>
-                    <td>edit</td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td>web/package.json</td>
-                    <td>edit</td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td>server/package.json</td>
-                    <td>edit</td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td>server/tsconfig.json</td>
-                    <td>edit</td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td>server/src/lib/errors.ts</td>
-                    <td>create-stub</td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td>server/src/schema/daySchema.ts</td>
-                    <td>create-stub</td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td>server/src/storage/jsonStore.ts</td>
-                    <td>create</td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td>server/src/storage/__tests__/jsonStore.test.ts</td>
-                    <td>create</td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td>jest.config.js</td>
-                    <td>edit</td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td>eslint.config.mjs</td>
-                    <td>edit</td>
-                    <td></td>
-                  </tr>
-                </tbody>
-              </table>
-            </details>
-            <details>
-              <summary>ACs covered (9)</summary>
-              <ul class="story-card__acs">
-                <li>
-                  <strong>AC-003</strong> — server/src/storage/jsonStore.ts:44-70 (readDay reads
-                  file, validates, returns DailyPageData)
-                </li>
-                <li>
-                  <strong>AC-004</strong> — server/src/storage/jsonStore.ts:55 and 62 and 67
-                  (StorageCorruptError thrown on ENOENT-other / JSON parse fail / zod fail)
-                </li>
-                <li>
-                  <strong>AC-005</strong> — server/src/storage/jsonStore.ts:82-100 (writeDay:
-                  ensureDataDir → writeFile tmpPath → rename(tmp, final))
-                </li>
-                <li>
-                  <strong>AC-006</strong> — server/src/storage/jsonStore.ts:32-37 (ensureDataDir:
-                  fs.mkdir recursive)
-                </li>
-                <li>
-                  <strong>AC-007</strong> — server/src/storage/jsonStore.ts:92-97 (writeFile catch:
-                  throws StorageWriteError, rename NOT called)
-                </li>
-                <li>
-                  <strong>AC-014</strong> — shared/src/api/types.ts:1 (DailyPageData, Mood,
-                  Priority, AgendaSlot, Note, NotePrefix exported)
-                </li>
-                <li>
-                  <strong>AC-015</strong> — shared/package.json:8 (exports: { &#39;.&#39;:
-                  &#39;./src/index.ts&#39; }); package.json:12 (shared in workspaces)
-                </li>
-                <li>
-                  <strong>AC-016</strong> — deferred to T-008 (stub daySchema is permissive; real
-                  schema with satisfies z.ZodType&lt;DailyPageData&gt; in BATCH-B)
-                </li>
-                <li><strong>AC-017</strong> — shared/src/api/ids.ts:4 (newId() via ulid export)</li>
-              </ul>
-            </details>
-            <details>
-              <summary>Pipeline trace (4 dispatches)</summary>
+              <summary>Pipeline trace (5 dispatches)</summary>
               <table class="story-card__pipeline-trace">
                 <thead>
                   <tr>
@@ -834,34 +643,42 @@
                 <tbody>
                   <tr>
                     <td>dev</td>
-                    <td>batch-a-dev</td>
+                    <td>feat009-batchA-dev-01</td>
                     <td>—</td>
-                    <td>—</td>
-                    <td>—</td>
+                    <td>5m 36s</td>
+                    <td>64659</td>
                     <td>done</td>
                   </tr>
                   <tr>
                     <td>code-reviewer</td>
-                    <td>batch-a-code-reviewer</td>
+                    <td>feat009-batchA-coderevi…</td>
                     <td>—</td>
-                    <td>—</td>
-                    <td>—</td>
+                    <td>1m 18s</td>
+                    <td>30199</td>
                     <td>done</td>
                   </tr>
                   <tr>
                     <td>logic-reviewer</td>
-                    <td>batch-a-logic-reviewer</td>
+                    <td>feat009-batchA-logicrev…</td>
                     <td>—</td>
+                    <td>2m 11s</td>
+                    <td>34308</td>
+                    <td>done</td>
+                  </tr>
+                  <tr>
+                    <td>dev</td>
+                    <td>feat009-batchA-fix-01</td>
                     <td>—</td>
-                    <td>—</td>
-                    <td>needs_review</td>
+                    <td>1m 20s</td>
+                    <td>5000</td>
+                    <td>done</td>
                   </tr>
                   <tr>
                     <td>qa</td>
-                    <td>batch-a-qa</td>
+                    <td>feat009-batchA-qa-01</td>
                     <td>—</td>
-                    <td>—</td>
-                    <td>—</td>
+                    <td>3m 41s</td>
+                    <td>51534</td>
                     <td>done</td>
                   </tr>
                 </tbody>
@@ -869,50 +686,43 @@
             </details>
             <details>
               <summary>PM note</summary>
-              <p class="story-card__pmnote">(no PM note)</p>
+              <p class="story-card__pmnote">
+                15/15 ACs pass; 1 lint blocker (no-unused-vars no _h em type annotation) —
+                false-positive do code-reviewer earlier; PM reverteu para _h, lint clean.
+              </p>
             </details>
           </div>
         </article>
-        <article class="story-card story-card--done-retried" aria-label="batch BATCH-B">
+        <article class="story-card story-card--done" aria-label="batch FEAT009-BATCHB">
           <header>
-            <h3>
-              BATCH-B<span class="dot">·</span>Errors + sanitize + zod + createEmptyDay +
-              errorHandler + routes + app + integration tests
-            </h3>
-            <span class="badge badge-warn" aria-label="status: done with retries"
-              >↻ done (retried)</span
-            >
+            <h3>FEAT009-BATCHB</h3>
+            <span class="badge badge-pass" aria-label="status: done">✓ done</span>
           </header>
           <div class="story-card__stats">
             <span class="story-card__stat"
               ><span class="story-card__stat-label">time</span>
-              <span class="story-card__stat-value">42m</span></span
+              <span class="story-card__stat-value">14m</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">cost</span>
-              <span class="story-card__stat-value">—</span></span
+              <span class="story-card__stat-value">$1.28</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">tasks</span>
-              <span class="story-card__stat-value">8</span></span
+              <span class="story-card__stat-value">0</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">ACs</span>
-              <span class="story-card__stat-value">18/18</span></span
+              <span class="story-card__stat-value">0</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">files</span>
-              <span class="story-card__stat-value">19</span></span
+              <span class="story-card__stat-value">0</span></span
             ><span class="story-card__pipeline">dev → code-reviewer ‖ logic-reviewer → qa</span>
           </div>
-          <aside class="story-card__retry" role="status">
-            ⚠ dev retried 1× — loop 2: (no PM note)
-          </aside>
           <p class="story-card__summary">
-            All 8 tasks completed in one shot. Key architectural decisions: (1)
-            isomorphic-dompurify&#39;s bundled jsdom v28 has ESM-only deps (@asamuzakjp/css-color,
-            @exodus/bytes) incompatible with Jest; solved via a Jest manual mock
-            (__mocks__/isomorphic-dompurify.
+            ready_for_done — 13/13 ACs pass; 27 suites, 384 testes green; typecheck+lint clean;
+            barrel exports completo; sem violações de boundary.
           </p>
           <div class="story-card__drilldowns">
             <details>
-              <summary>Files changed (19)</summary>
+              <summary>Files changed (0)</summary>
               <table class="story-card__files">
                 <thead>
                   <tr>
@@ -921,185 +731,12 @@
                     <th>tasks</th>
                   </tr>
                 </thead>
-                <tbody>
-                  <tr>
-                    <td>server/src/storage/jsonStore.ts</td>
-                    <td>edit</td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td>server/src/storage/__tests__/jsonStore.test.ts</td>
-                    <td>edit</td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td>server/src/lib/errors.ts</td>
-                    <td>rewrite</td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td>server/src/lib/sanitize.ts</td>
-                    <td>create</td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td>server/src/lib/__tests__/sanitize.test.ts</td>
-                    <td>create</td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td>server/src/lib/errorHandler.ts</td>
-                    <td>create</td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td>server/src/lib/app.ts</td>
-                    <td>edit</td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td>server/src/schema/daySchema.ts</td>
-                    <td>rewrite</td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td>server/src/schema/__tests__/daySchema.test.ts</td>
-                    <td>create</td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td>server/src/schema/createEmptyDay.ts</td>
-                    <td>edit</td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td>server/src/schema/__tests__/createEmptyDay.test.ts</td>
-                    <td>create</td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td>server/src/routes/days.ts</td>
-                    <td>create</td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td>server/src/routes/__tests__/days.integration.test.ts</td>
-                    <td>delete</td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td>jest.config.js</td>
-                    <td>edit</td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td>__mocks__/isomorphic-dompurify.js</td>
-                    <td>create</td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td>eslint.config.mjs</td>
-                    <td>edit</td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td>server/src/routes/__tests__/helpers.ts</td>
-                    <td>create</td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td>server/src/routes/__tests__/days.get.integration.test.ts</td>
-                    <td>create</td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td>server/src/routes/__tests__/days.put.integration.test.ts</td>
-                    <td>create</td>
-                    <td></td>
-                  </tr>
-                </tbody>
+                <tbody></tbody>
               </table>
             </details>
             <details>
-              <summary>ACs covered (18)</summary>
-              <ul class="story-card__acs">
-                <li>
-                  <strong>AC-001</strong> — server/src/routes/days.ts:41-50 (GET returns
-                  createEmptyDay when readDay returns null)
-                </li>
-                <li>
-                  <strong>AC-002</strong> — server/src/routes/days.ts:48 (returns createEmptyDay
-                  inline — no writeDay call); days.integration.test.ts:71-74 (asserts ENOENT on
-                  dayPath)
-                </li>
-                <li>
-                  <strong>AC-008</strong> — server/src/routes/days.ts:86-92 (preserves
-                  previous?.createdAt ?? now); days.integration.test.ts:238-261 (createdAt
-                  preserved, updatedAt updated)
-                </li>
-                <li>
-                  <strong>AC-009</strong> — server/src/schema/daySchema.ts:45-57 (daySchema with all
-                  required fields)
-                </li>
-                <li>
-                  <strong>AC-010</strong> — server/src/routes/days.ts:55-67 (safeParse → badRequest
-                  VALIDATION_FAILED with details); days.integration.test.ts:158-179
-                </li>
-                <li>
-                  <strong>AC-011</strong> — server/src/schema/daySchema.ts:27-31 (prioritySchema:
-                  id, text, done)
-                </li>
-                <li>
-                  <strong>AC-012</strong> — server/src/schema/daySchema.ts:33-40 (agendaSlotSchema
-                  hour min(6).max(23); noteSchema prefix enum)
-                </li>
-                <li>
-                  <strong>AC-013</strong> — server/src/routes/days.ts:69-73 (DATE_MISMATCH check);
-                  days.integration.test.ts:183-198
-                </li>
-                <li>
-                  <strong>AC-018</strong> — server/src/routes/days.ts:76 (sanitizeDayHtml applied
-                  after parse, before writeDay); days.integration.test.ts:202-232
-                </li>
-                <li>
-                  <strong>AC-019</strong> — server/src/lib/__tests__/sanitize.test.ts:14-16 (plain
-                  text preserved)
-                </li>
-                <li>
-                  <strong>AC-020</strong> — server/src/lib/__tests__/sanitize.test.ts:20-38
-                  (script/a/onclick/style all stripped)
-                </li>
-                <li>
-                  <strong>AC-021</strong> — server/src/lib/sanitize.ts:30-43 (pure function);
-                  server/src/lib/__tests__/sanitize.test.ts:44-113 (7 scenarios)
-                </li>
-                <li>
-                  <strong>AC-022</strong> — server/src/lib/errors.ts:14-23 (ErrorCode const with 6
-                  codes)
-                </li>
-                <li>
-                  <strong>AC-023</strong> — server/src/routes/days.ts:43-47 and 53-57 (DATE_RE.test
-                  → INVALID_DATE_FORMAT)
-                </li>
-                <li>
-                  <strong>AC-024</strong> — server/src/lib/errorHandler.ts:89-95 (default catch-all
-                  logs stack, returns INTERNAL_ERROR no leak); server/src/lib/app.ts:23
-                  (setErrorHandler before routes)
-                </li>
-                <li>
-                  <strong>AC-025</strong> — server/src/lib/errorHandler.ts:38-44
-                  (reply.code(...).send({error:{...}}) — Fastify default CT: application/json)
-                </li>
-                <li>
-                  <strong>AC-027</strong> — server/src/schema/__tests__/daySchema.test.ts:1-176 (11
-                  scenarios); server/src/schema/__tests__/createEmptyDay.test.ts:1-64 (5 scenarios)
-                </li>
-                <li>
-                  <strong>AC-028</strong> —
-                  server/src/routes/__tests__/days.integration.test.ts:1-300 (10 scenarios via
-                  app.inject)
-                </li>
-              </ul>
+              <summary>ACs covered (0)</summary>
+              <ul class="story-card__acs"></ul>
             </details>
             <details>
               <summary>Pipeline trace (5 dispatches)</summary>
@@ -1117,42 +754,42 @@
                 <tbody>
                   <tr>
                     <td>dev</td>
-                    <td>batch-b-dev</td>
+                    <td>feat009-batchB-dev-01</td>
                     <td>—</td>
-                    <td>—</td>
-                    <td>—</td>
+                    <td>7m 22s</td>
+                    <td>72106</td>
                     <td>done</td>
                   </tr>
                   <tr>
                     <td>code-reviewer</td>
-                    <td>batch-b-code-reviewer</td>
+                    <td>feat009-batchB-coderevi…</td>
                     <td>—</td>
-                    <td>—</td>
-                    <td>—</td>
-                    <td>needs_review</td>
+                    <td>1m 33s</td>
+                    <td>34503</td>
+                    <td>done</td>
                   </tr>
                   <tr>
                     <td>logic-reviewer</td>
-                    <td>batch-b-logic-reviewer</td>
+                    <td>feat009-batchB-logicrev…</td>
                     <td>—</td>
-                    <td>—</td>
-                    <td>—</td>
-                    <td>needs_review</td>
+                    <td>1m 56s</td>
+                    <td>29135</td>
+                    <td>done</td>
                   </tr>
                   <tr>
                     <td>dev</td>
-                    <td>batch-b-dev-loop2</td>
-                    <td>2</td>
+                    <td>feat009-batchB-fix-01</td>
                     <td>—</td>
-                    <td>—</td>
+                    <td>3m 10s</td>
+                    <td>12000</td>
                     <td>done</td>
                   </tr>
                   <tr>
                     <td>qa</td>
-                    <td>batch-b-qa</td>
+                    <td>feat009-batchB-qa-01</td>
                     <td>—</td>
-                    <td>—</td>
-                    <td>—</td>
+                    <td>1m 34s</td>
+                    <td>37568</td>
                     <td>done</td>
                   </tr>
                 </tbody>
@@ -1160,134 +797,40 @@
             </details>
             <details>
               <summary>PM note</summary>
-              <p class="story-card__pmnote">(no PM note)</p>
+              <p class="story-card__pmnote">
+                ready_for_done — 13/13 ACs pass; 27 suites, 384 testes green; typecheck+lint clean;
+                barrel exports completo; sem violações de boundary.
+              </p>
             </details>
           </div>
         </article>
-        <article class="story-card story-card--done-retried" aria-label="batch BATCH-C">
+        <article class="story-card story-card--done" aria-label="batch FEAT009-BATCHC">
           <header>
-            <h3>
-              BATCH-C<span class="dot">·</span>Jest coverage threshold per path + e2e smoke
-              roundtrip
-            </h3>
-            <span class="badge badge-warn" aria-label="status: done with retries"
-              >↻ done (retried)</span
-            >
-          </header>
-          <div class="story-card__stats">
-            <span class="story-card__stat"
-              ><span class="story-card__stat-label">time</span>
-              <span class="story-card__stat-value">36m</span></span
-            ><span class="story-card__stat"
-              ><span class="story-card__stat-label">cost</span>
-              <span class="story-card__stat-value">—</span></span
-            ><span class="story-card__stat"
-              ><span class="story-card__stat-label">tasks</span>
-              <span class="story-card__stat-value">0</span></span
-            ><span class="story-card__stat"
-              ><span class="story-card__stat-label">ACs</span>
-              <span class="story-card__stat-value">2/2</span></span
-            ><span class="story-card__stat"
-              ><span class="story-card__stat-label">files</span>
-              <span class="story-card__stat-value">0</span></span
-            ><span class="story-card__pipeline">dev → qa</span>
-          </div>
-          <aside class="story-card__retry" role="status">
-            ⚠ dev retried 1× — loop 2: (no PM note)
-          </aside>
-          <p class="story-card__summary">T-014 (jest. config.</p>
-          <div class="story-card__drilldowns">
-            <details>
-              <summary>Files changed (0)</summary>
-              <table class="story-card__files">
-                <thead>
-                  <tr>
-                    <th>path</th>
-                    <th>action</th>
-                    <th>tasks</th>
-                  </tr>
-                </thead>
-                <tbody></tbody>
-              </table>
-            </details>
-            <details>
-              <summary>ACs covered (2)</summary>
-              <ul class="story-card__acs">
-                <li><strong>AC-029</strong> —</li>
-                <li><strong>AC-030</strong> —</li>
-              </ul>
-            </details>
-            <details>
-              <summary>Pipeline trace (3 dispatches)</summary>
-              <table class="story-card__pipeline-trace">
-                <thead>
-                  <tr>
-                    <th>role</th>
-                    <th>dispatch_id</th>
-                    <th>loop</th>
-                    <th>duration</th>
-                    <th>tokens</th>
-                    <th>status</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>dev</td>
-                    <td>batch-c-dev</td>
-                    <td>—</td>
-                    <td>—</td>
-                    <td>—</td>
-                    <td>done</td>
-                  </tr>
-                  <tr>
-                    <td>dev</td>
-                    <td>batch-c-dev-loop2-tlfix</td>
-                    <td>2</td>
-                    <td>—</td>
-                    <td>—</td>
-                    <td>done</td>
-                  </tr>
-                  <tr>
-                    <td>qa</td>
-                    <td>batch-c-qa</td>
-                    <td>—</td>
-                    <td>—</td>
-                    <td>—</td>
-                    <td>done</td>
-                  </tr>
-                </tbody>
-              </table>
-            </details>
-            <details>
-              <summary>PM note</summary>
-              <p class="story-card__pmnote">(no PM note)</p>
-            </details>
-          </div>
-        </article>
-        <article class="story-card story-card--done" aria-label="batch BATCH-D">
-          <header>
-            <h3>BATCH-D<span class="dot">·</span>CLAUDE.md update + PM smoke fim-a-fim</h3>
+            <h3>FEAT009-BATCHC</h3>
             <span class="badge badge-pass" aria-label="status: done">✓ done</span>
           </header>
           <div class="story-card__stats">
             <span class="story-card__stat"
               ><span class="story-card__stat-label">time</span>
-              <span class="story-card__stat-value">7m</span></span
+              <span class="story-card__stat-value">5m 10s</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">cost</span>
-              <span class="story-card__stat-value">—</span></span
+              <span class="story-card__stat-value">$0.49</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">tasks</span>
               <span class="story-card__stat-value">0</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">ACs</span>
-              <span class="story-card__stat-value">0/0</span></span
+              <span class="story-card__stat-value">0</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">files</span>
               <span class="story-card__stat-value">0</span></span
             ><span class="story-card__pipeline">dev → qa</span>
           </div>
-          <p class="story-card__summary story-card__summary--empty">(no summary)</p>
+          <p class="story-card__summary">
+            FEAT_009_FINAL_STATUS: ready_to_ship — 4/4 ACs BATCH-C pass; coverage agenda 100/95.
+            45/100/100; build-storybook clean; arch:check pre-existing only; 384 testes total green.
+          </p>
           <div class="story-card__drilldowns">
             <details>
               <summary>Files changed (0)</summary>
@@ -1322,18 +865,18 @@
                 <tbody>
                   <tr>
                     <td>dev</td>
-                    <td>batch-d-dev</td>
+                    <td>feat009-batchC-dev-01</td>
                     <td>—</td>
-                    <td>—</td>
-                    <td>—</td>
+                    <td>3m 40s</td>
+                    <td>53716</td>
                     <td>done</td>
                   </tr>
                   <tr>
                     <td>qa</td>
-                    <td>batch-d-qa</td>
+                    <td>feat009-batchC-qa-01</td>
                     <td>—</td>
-                    <td>—</td>
-                    <td>—</td>
+                    <td>1m 29s</td>
+                    <td>20736</td>
                     <td>done</td>
                   </tr>
                 </tbody>
@@ -1341,80 +884,11 @@
             </details>
             <details>
               <summary>PM note</summary>
-              <p class="story-card__pmnote">(no PM note)</p>
-            </details>
-          </div>
-        </article>
-        <article class="story-card story-card--done" aria-label="batch AUDIT-AGENT">
-          <header>
-            <h3>AUDIT-AGENT</h3>
-            <span class="badge badge-pass" aria-label="status: done">✓ done</span>
-          </header>
-          <div class="story-card__stats">
-            <span class="story-card__stat"
-              ><span class="story-card__stat-label">time</span>
-              <span class="story-card__stat-value">1m</span></span
-            ><span class="story-card__stat"
-              ><span class="story-card__stat-label">cost</span>
-              <span class="story-card__stat-value">—</span></span
-            ><span class="story-card__stat"
-              ><span class="story-card__stat-label">tasks</span>
-              <span class="story-card__stat-value">0</span></span
-            ><span class="story-card__stat"
-              ><span class="story-card__stat-label">ACs</span>
-              <span class="story-card__stat-value">0</span></span
-            ><span class="story-card__stat"
-              ><span class="story-card__stat-label">files</span>
-              <span class="story-card__stat-value">0</span></span
-            ><span class="story-card__pipeline">audit-agent</span>
-          </div>
-          <p class="story-card__summary story-card__summary--empty">(no summary)</p>
-          <div class="story-card__drilldowns">
-            <details>
-              <summary>Files changed (0)</summary>
-              <table class="story-card__files">
-                <thead>
-                  <tr>
-                    <th>path</th>
-                    <th>action</th>
-                    <th>tasks</th>
-                  </tr>
-                </thead>
-                <tbody></tbody>
-              </table>
-            </details>
-            <details>
-              <summary>ACs covered (0)</summary>
-              <ul class="story-card__acs"></ul>
-            </details>
-            <details>
-              <summary>Pipeline trace (1 dispatches)</summary>
-              <table class="story-card__pipeline-trace">
-                <thead>
-                  <tr>
-                    <th>role</th>
-                    <th>dispatch_id</th>
-                    <th>loop</th>
-                    <th>duration</th>
-                    <th>tokens</th>
-                    <th>status</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>audit-agent</td>
-                    <td>audit-agent</td>
-                    <td>—</td>
-                    <td>—</td>
-                    <td>—</td>
-                    <td>done</td>
-                  </tr>
-                </tbody>
-              </table>
-            </details>
-            <details>
-              <summary>PM note</summary>
-              <p class="story-card__pmnote">(no PM note)</p>
+              <p class="story-card__pmnote">
+                FEAT_009_FINAL_STATUS: ready_to_ship — 4/4 ACs BATCH-C pass; coverage agenda
+                100/95.45/100/100; build-storybook clean; arch:check pre-existing only; 384 testes
+                total green.
+              </p>
             </details>
           </div>
         </article>
@@ -1422,38 +896,38 @@
       <section class="cost-section">
         <header class="cost-header">
           <h2>Cost</h2>
-          <span class="badge badge-fail">coverage 1/16 (6%)</span>
+          <span class="badge badge-pass">coverage 12/12 (100%)</span>
         </header>
         <div class="cost-grid">
           <div class="cost-card">
             <span class="cost-label">Total cost</span>
-            <span class="cost-value">$13.87</span>
-            <small>$13.8704</small>
+            <span class="cost-value">$3.01</span>
+            <small>$3.0149</small>
           </div>
           <div class="cost-card">
             <span class="cost-label">$ / AC</span>
-            <span class="cost-value">$0.4623</span>
-            <small>30 ACs</small>
+            <span class="cost-value">$0.1077</span>
+            <small>28 ACs</small>
           </div>
           <div class="cost-card">
             <span class="cost-label">$ / dispatch</span>
-            <span class="cost-value">$13.8704</span>
-            <small>avg of 1</small>
+            <span class="cost-value">$0.2512</span>
+            <small>avg of 12</small>
           </div>
           <div class="cost-card">
             <span class="cost-label">Tokens</span>
-            <span class="cost-value">10,176,266</span>
-            <small>7,123,386 in / 3,052,880 out (70/30)</small>
+            <span class="cost-value">445,464</span>
+            <small>311,825 in / 133,639 out (70/30)</small>
           </div>
           <div class="cost-card">
             <span class="cost-label">Wall-clock</span>
-            <span class="cost-value">25m 8s</span>
-            <small>1 dispatches with usage</small>
+            <span class="cost-value">34m 50s</span>
+            <small>12 dispatches with usage</small>
           </div>
           <div class="cost-card">
             <span class="cost-label">Tool uses</span>
-            <span class="cost-value">61</span>
-            <small>~61.0 per dispatch</small>
+            <span class="cost-value">305</span>
+            <small>~25.4 per dispatch</small>
           </div>
         </div>
         <table class="cost-models">
@@ -1470,13 +944,22 @@
           </thead>
           <tbody>
             <tr>
+              <td><code>sonnet-4-6</code></td>
+              <td>10</td>
+              <td>428,464</td>
+              <td>30m 20s</td>
+              <td>268</td>
+              <td>$2.8279</td>
+              <td>93.8%</td>
+            </tr>
+            <tr>
               <td><code>opus-4-7</code></td>
-              <td>1</td>
-              <td>10,176,266</td>
-              <td>25m 8s</td>
-              <td>61</td>
-              <td>$13.8704</td>
-              <td>100.0%</td>
+              <td>2</td>
+              <td>17,000</td>
+              <td>4m 30s</td>
+              <td>37</td>
+              <td>$0.1870</td>
+              <td>6.2%</td>
             </tr>
           </tbody>
         </table>
@@ -1495,12 +978,36 @@
             </thead>
             <tbody>
               <tr>
-                <td><code>pm-orchestrator</code></td>
-                <td>1</td>
-                <td>10,176,266</td>
-                <td>25m 8s</td>
-                <td>$13.8704</td>
-                <td>100.0%</td>
+                <td><code>dev</code></td>
+                <td>5</td>
+                <td>207,481</td>
+                <td>21m 8s</td>
+                <td>$1.4442</td>
+                <td>47.9%</td>
+              </tr>
+              <tr>
+                <td><code>qa</code></td>
+                <td>3</td>
+                <td>109,838</td>
+                <td>6m 44s</td>
+                <td>$0.7249</td>
+                <td>24.0%</td>
+              </tr>
+              <tr>
+                <td><code>code-reviewer</code></td>
+                <td>2</td>
+                <td>64,702</td>
+                <td>2m 51s</td>
+                <td>$0.4270</td>
+                <td>14.2%</td>
+              </tr>
+              <tr>
+                <td><code>logic-reviewer</code></td>
+                <td>2</td>
+                <td>63,443</td>
+                <td>4m 7s</td>
+                <td>$0.4187</td>
+                <td>13.9%</td>
               </tr>
             </tbody>
           </table>
@@ -1521,10 +1028,10 @@
             <tbody>
               <tr>
                 <td><code>unattributed</code></td>
-                <td>1</td>
-                <td>10,176,266</td>
-                <td>25m 8s</td>
-                <td>$13.8704</td>
+                <td>12</td>
+                <td>445,464</td>
+                <td>34m 50s</td>
+                <td>$3.0149</td>
                 <td>100.0%</td>
               </tr>
             </tbody>
@@ -1532,8 +1039,8 @@
         </details>
         <p class="cost-note">
           <em
-            >70/30 input/output split assumed; harness reports only total_tokens; 1 of 16 dispatches
-            included in cost</em
+            >70/30 input/output split assumed; harness reports only total_tokens; 12 of 12
+            dispatches included in cost</em
           >
         </p>
       </section>
@@ -1566,31 +1073,31 @@
                 </tr>
                 <tr>
                   <td>AC-003</td>
-                  <td>pass</td>
+                  <td>missing</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-004</td>
-                  <td>partial</td>
+                  <td>missing</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-005</td>
-                  <td>pass</td>
+                  <td>missing</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-006</td>
-                  <td>pass</td>
+                  <td>missing</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-007</td>
-                  <td>pass</td>
+                  <td>missing</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
@@ -1632,13 +1139,13 @@
                 </tr>
                 <tr>
                   <td>AC-014</td>
-                  <td>pass</td>
+                  <td>missing</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-015</td>
-                  <td>pass</td>
+                  <td>missing</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
@@ -1650,7 +1157,7 @@
                 </tr>
                 <tr>
                   <td>AC-017</td>
-                  <td>pass</td>
+                  <td>missing</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
@@ -1704,7 +1211,7 @@
                 </tr>
                 <tr>
                   <td>AC-026</td>
-                  <td>pass</td>
+                  <td>missing</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
@@ -1717,18 +1224,6 @@
                 <tr>
                   <td>AC-028</td>
                   <td>missing</td>
-                  <td>qa</td>
-                  <td>—</td>
-                </tr>
-                <tr>
-                  <td>AC-029</td>
-                  <td>pass</td>
-                  <td>qa</td>
-                  <td>—</td>
-                </tr>
-                <tr>
-                  <td>AC-030</td>
-                  <td>pass</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
@@ -1753,148 +1248,112 @@
               </thead>
               <tbody>
                 <tr>
-                  <td>pm-orchestrator-a...</td>
-                  <td>pm-orchestrator</td>
-                  <td>done</td>
-                  <td>—</td>
-                  <td>10176266</td>
-                  <td>25m 8s</td>
-                  <td>PM/orchestrator session (Stop hook): 98 turns</td>
-                </tr>
-                <tr>
-                  <td>batch-a-dev</td>
+                  <td>feat009-batchA-de...</td>
                   <td>dev</td>
                   <td>done</td>
                   <td>—</td>
-                  <td>—</td>
-                  <td>—</td>
-                  <td>—</td>
+                  <td>64659</td>
+                  <td>5m 36s</td>
+                  <td>Tipos + lib (normalizeAgenda single-warn, currentHour, fo...</td>
                 </tr>
                 <tr>
-                  <td>batch-a-code-revi...</td>
+                  <td>feat009-batchA-co...</td>
                   <td>code-reviewer</td>
                   <td>done</td>
                   <td>—</td>
-                  <td>—</td>
-                  <td>—</td>
-                  <td>—</td>
+                  <td>30199</td>
+                  <td>1m 18s</td>
+                  <td>11 minor findings (sem blockers/majors); aplicado AGENDA_...</td>
                 </tr>
                 <tr>
-                  <td>batch-a-logic-rev...</td>
+                  <td>feat009-batchA-lo...</td>
                   <td>logic-reviewer</td>
-                  <td>needs_review</td>
-                  <td>—</td>
-                  <td>—</td>
-                  <td>—</td>
-                  <td>—</td>
-                </tr>
-                <tr>
-                  <td>batch-a-qa</td>
-                  <td>qa</td>
                   <td>done</td>
                   <td>—</td>
-                  <td>—</td>
-                  <td>—</td>
-                  <td>—</td>
+                  <td>34308</td>
+                  <td>2m 11s</td>
+                  <td>5 minor findings (sem blockers); aplicado guard out-of-ra...</td>
                 </tr>
                 <tr>
-                  <td>batch-b-dev</td>
+                  <td>feat009-batchA-fi...</td>
                   <td>dev</td>
                   <td>done</td>
                   <td>—</td>
-                  <td>—</td>
-                  <td>—</td>
-                  <td>—</td>
+                  <td>5000</td>
+                  <td>1m 20s</td>
+                  <td>PM aplicou fixes dos reviewers: AGENDA_HOURS exportado de...</td>
                 </tr>
                 <tr>
-                  <td>batch-b-code-revi...</td>
+                  <td>feat009-batchA-qa-01</td>
+                  <td>qa</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>51534</td>
+                  <td>3m 41s</td>
+                  <td>15/15 ACs pass; 1 lint blocker (no-unused-vars no _h em t...</td>
+                </tr>
+                <tr>
+                  <td>feat009-batchB-de...</td>
+                  <td>dev</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>72106</td>
+                  <td>7m 22s</td>
+                  <td>AgendaSlot (memo&#39;d) + Agenda (controlled, defensive norma...</td>
+                </tr>
+                <tr>
+                  <td>feat009-batchB-co...</td>
                   <td>code-reviewer</td>
-                  <td>needs_review</td>
+                  <td>done</td>
                   <td>—</td>
-                  <td>—</td>
-                  <td>—</td>
-                  <td>—</td>
+                  <td>34503</td>
+                  <td>1m 33s</td>
+                  <td>0 blockers, 2 majors (rename type AgendaSlot→AgendaSlotDa...</td>
                 </tr>
                 <tr>
-                  <td>batch-b-logic-rev...</td>
+                  <td>feat009-batchB-lo...</td>
                   <td>logic-reviewer</td>
-                  <td>needs_review</td>
+                  <td>done</td>
                   <td>—</td>
-                  <td>—</td>
-                  <td>—</td>
-                  <td>—</td>
+                  <td>29135</td>
+                  <td>1m 56s</td>
+                  <td>2 majors REAIS: stale-closure race no useEffect ref-updat...</td>
                 </tr>
                 <tr>
-                  <td>batch-b-dev-loop2</td>
+                  <td>feat009-batchB-fi...</td>
                   <td>dev</td>
                   <td>done</td>
-                  <td>2</td>
                   <td>—</td>
-                  <td>—</td>
-                  <td>—</td>
+                  <td>12000</td>
+                  <td>3m 10s</td>
+                  <td>PM aplicou fixes: (a) useAgenda agora usa valueRef + onCh...</td>
                 </tr>
                 <tr>
-                  <td>batch-b-qa</td>
+                  <td>feat009-batchB-qa-01</td>
                   <td>qa</td>
                   <td>done</td>
                   <td>—</td>
-                  <td>—</td>
-                  <td>—</td>
-                  <td>—</td>
+                  <td>37568</td>
+                  <td>1m 34s</td>
+                  <td>ready_for_done — 13/13 ACs pass; 27 suites, 384 testes gr...</td>
                 </tr>
                 <tr>
-                  <td>batch-c-dev</td>
+                  <td>feat009-batchC-de...</td>
                   <td>dev</td>
                   <td>done</td>
                   <td>—</td>
-                  <td>—</td>
-                  <td>—</td>
-                  <td>—</td>
+                  <td>53716</td>
+                  <td>3m 40s</td>
+                  <td>5 Storybook stories CSF3 (Empty/Typical/Full/WithCurrentH...</td>
                 </tr>
                 <tr>
-                  <td>batch-c-dev-loop2...</td>
-                  <td>dev</td>
-                  <td>done</td>
-                  <td>2</td>
-                  <td>—</td>
-                  <td>—</td>
-                  <td>—</td>
-                </tr>
-                <tr>
-                  <td>batch-c-qa</td>
+                  <td>feat009-batchC-qa-01</td>
                   <td>qa</td>
                   <td>done</td>
                   <td>—</td>
-                  <td>—</td>
-                  <td>—</td>
-                  <td>—</td>
-                </tr>
-                <tr>
-                  <td>batch-d-dev</td>
-                  <td>dev</td>
-                  <td>done</td>
-                  <td>—</td>
-                  <td>—</td>
-                  <td>—</td>
-                  <td>—</td>
-                </tr>
-                <tr>
-                  <td>batch-d-qa</td>
-                  <td>qa</td>
-                  <td>done</td>
-                  <td>—</td>
-                  <td>—</td>
-                  <td>—</td>
-                  <td>—</td>
-                </tr>
-                <tr>
-                  <td>audit-agent</td>
-                  <td>audit-agent</td>
-                  <td>done</td>
-                  <td>—</td>
-                  <td>—</td>
-                  <td>—</td>
-                  <td>—</td>
+                  <td>20736</td>
+                  <td>1m 29s</td>
+                  <td>FEAT_009_FINAL_STATUS: ready_to_ship — 4/4 ACs BATCH-C pa...</td>
                 </tr>
               </tbody>
             </table>
@@ -1927,19 +1386,11 @@
         <details>
           <summary>View raw Markdown report</summary>
           <div class="md-embed">
-            <h1>Server companion — Fastify + JSON store (rotas /api/days/:date) — FEAT-006</h1>
+            <h1>agenda — timeline 06–23h, 18 slots de 1h (RichTextLine inline) — FEAT-009</h1>
             <blockquote>
               <p>
-                ⚠ <strong>Pré-padrão</strong> — flow rodou antes do contrato de observabilidade ser
-                estabilizado (sem <code>usage</code> por dispatch / <code>pm_note</code> /
-                <code>summary_for_reviewers</code> consistentes). Excluído de trends e health
-                metrics.
-              </p>
-            </blockquote>
-            <blockquote>
-              <p>
-                Feature: Server companion — Fastify + JSON store (rotas /api/days/:date) Task ID:
-                FEAT-006 Phase: done Generated at: 2026-05-10T09:41:05.987Z
+                Feature: agenda — timeline 06–23h, 18 slots de 1h (RichTextLine inline) Task ID:
+                FEAT-009 Phase: done Generated at: 2026-05-10T09:41:05.987Z
               </p>
             </blockquote>
             <h2>Insights</h2>
@@ -1953,24 +1404,24 @@
             <h2>Cost breakdown</h2>
             <p>
               <em
-                >70/30 input/output split assumed; harness reports only total_tokens; 1 of 16
+                >70/30 input/output split assumed; harness reports only total_tokens; 12 of 12
                 dispatches included in cost</em
               >
             </p>
             <ul>
               <li>
-                Total tokens: 10176266
+                Total tokens: 445464
                 <ul>
-                  <li>Estimated input (70%): 7123386</li>
-                  <li>Estimated output (30%): 3052880</li>
+                  <li>Estimated input (70%): 311825</li>
+                  <li>Estimated output (30%): 133639</li>
                 </ul>
               </li>
-              <li>Estimated cost USD total: $13.8704</li>
-              <li>Cost per AC: $0.4623</li>
-              <li>Cost per dispatch (avg): $13.8704</li>
-              <li>Wall-clock duration: 25m 8s</li>
-              <li>Tool uses total: 61</li>
-              <li>Coverage: 1 of 16 dispatches included in cost calculation</li>
+              <li>Estimated cost USD total: $3.0149</li>
+              <li>Cost per AC: $0.1077</li>
+              <li>Cost per dispatch (avg): $0.2512</li>
+              <li>Wall-clock duration: 34m 50s</li>
+              <li>Tool uses total: 305</li>
+              <li>Coverage: 12 of 12 dispatches included in cost calculation</li>
             </ul>
             <h2>Repo health snapshot</h2>
             <p>
@@ -1997,164 +1448,149 @@
               </thead>
               <tbody>
                 <tr>
-                  <td>pm-orches...</td>
-                  <td>pm-orchestrator</td>
-                  <td>done</td>
-                  <td>—</td>
-                  <td>10176266</td>
-                  <td>$111.9389</td>
-                  <td>25m 8s</td>
-                  <td>PM/orchestrator session (Stop hook): 98 turns</td>
-                </tr>
-                <tr>
-                  <td>batch-a-dev</td>
+                  <td>feat009-b...</td>
                   <td>dev</td>
                   <td>done</td>
                   <td>—</td>
-                  <td>—</td>
-                  <td>—</td>
-                  <td>12m</td>
-                  <td>—</td>
+                  <td>64659</td>
+                  <td>$0.4267</td>
+                  <td>5m 36s</td>
+                  <td>
+                    Tipos + lib (normalizeAgenda single-warn, currentHour, formatHour) + hook use...
+                  </td>
                 </tr>
                 <tr>
-                  <td>batch-a-c...</td>
+                  <td>feat009-b...</td>
                   <td>code-reviewer</td>
                   <td>done</td>
                   <td>—</td>
-                  <td>—</td>
-                  <td>—</td>
-                  <td>12m</td>
-                  <td>—</td>
+                  <td>30199</td>
+                  <td>$0.1993</td>
+                  <td>1m 18s</td>
+                  <td>
+                    11 minor findings (sem blockers/majors); aplicado AGENDA_HOURS dedup, current...
+                  </td>
                 </tr>
                 <tr>
-                  <td>batch-a-l...</td>
+                  <td>feat009-b...</td>
                   <td>logic-reviewer</td>
-                  <td>needs_review</td>
-                  <td>—</td>
-                  <td>—</td>
-                  <td>—</td>
-                  <td>11m</td>
-                  <td>—</td>
-                </tr>
-                <tr>
-                  <td>batch-a-qa</td>
-                  <td>qa</td>
                   <td>done</td>
                   <td>—</td>
-                  <td>—</td>
-                  <td>—</td>
-                  <td>4m</td>
-                  <td>—</td>
+                  <td>34308</td>
+                  <td>$0.2264</td>
+                  <td>2m 11s</td>
+                  <td>
+                    5 minor findings (sem blockers); aplicado guard out-of-range em useAgenda + 5...
+                  </td>
                 </tr>
                 <tr>
-                  <td>batch-b-dev</td>
+                  <td>feat009-b...</td>
                   <td>dev</td>
                   <td>done</td>
                   <td>—</td>
-                  <td>—</td>
-                  <td>—</td>
-                  <td>20m</td>
-                  <td>—</td>
+                  <td>5000</td>
+                  <td>$0.0550</td>
+                  <td>1m 20s</td>
+                  <td>
+                    PM aplicou fixes dos reviewers: AGENDA_HOURS exportado de types.ts (dedup); c...
+                  </td>
                 </tr>
                 <tr>
-                  <td>batch-b-c...</td>
+                  <td>feat009-b...</td>
+                  <td>qa</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>51534</td>
+                  <td>$0.3401</td>
+                  <td>3m 41s</td>
+                  <td>
+                    15/15 ACs pass; 1 lint blocker (no-unused-vars no _h em type annotation) — fa...
+                  </td>
+                </tr>
+                <tr>
+                  <td>feat009-b...</td>
+                  <td>dev</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>72106</td>
+                  <td>$0.4759</td>
+                  <td>7m 22s</td>
+                  <td>
+                    AgendaSlot (memo&#39;d) + Agenda (controlled, defensive normalize, useMemo
+                    curren...
+                  </td>
+                </tr>
+                <tr>
+                  <td>feat009-b...</td>
                   <td>code-reviewer</td>
-                  <td>needs_review</td>
+                  <td>done</td>
                   <td>—</td>
-                  <td>—</td>
-                  <td>—</td>
-                  <td>12m</td>
-                  <td>—</td>
+                  <td>34503</td>
+                  <td>$0.2277</td>
+                  <td>1m 33s</td>
+                  <td>
+                    0 blockers, 2 majors (rename type AgendaSlot→AgendaSlotData mantém componente...
+                  </td>
                 </tr>
                 <tr>
-                  <td>batch-b-l...</td>
+                  <td>feat009-b...</td>
                   <td>logic-reviewer</td>
-                  <td>needs_review</td>
+                  <td>done</td>
                   <td>—</td>
-                  <td>—</td>
-                  <td>—</td>
-                  <td>13m</td>
-                  <td>—</td>
+                  <td>29135</td>
+                  <td>$0.1923</td>
+                  <td>1m 56s</td>
+                  <td>
+                    2 majors REAIS: stale-closure race no useEffect ref-update + missing sequenti...
+                  </td>
                 </tr>
                 <tr>
-                  <td>batch-b-d...</td>
+                  <td>feat009-b...</td>
                   <td>dev</td>
                   <td>done</td>
-                  <td>2</td>
                   <td>—</td>
-                  <td>—</td>
-                  <td>4m</td>
-                  <td>—</td>
+                  <td>12000</td>
+                  <td>$0.1320</td>
+                  <td>3m 10s</td>
+                  <td>
+                    PM aplicou fixes: (a) useAgenda agora usa valueRef + onChangeRef síncronos no...
+                  </td>
                 </tr>
                 <tr>
-                  <td>batch-b-qa</td>
+                  <td>feat009-b...</td>
                   <td>qa</td>
                   <td>done</td>
                   <td>—</td>
-                  <td>—</td>
-                  <td>—</td>
-                  <td>5m</td>
-                  <td>—</td>
+                  <td>37568</td>
+                  <td>$0.2479</td>
+                  <td>1m 34s</td>
+                  <td>
+                    ready_for_done — 13/13 ACs pass; 27 suites, 384 testes green; typecheck+lint ...
+                  </td>
                 </tr>
                 <tr>
-                  <td>batch-c-dev</td>
+                  <td>feat009-b...</td>
                   <td>dev</td>
                   <td>done</td>
                   <td>—</td>
-                  <td>—</td>
-                  <td>—</td>
-                  <td>32m</td>
-                  <td>—</td>
+                  <td>53716</td>
+                  <td>$0.3545</td>
+                  <td>3m 40s</td>
+                  <td>
+                    5 Storybook stories CSF3 (Empty/Typical/Full/WithCurrentHour/Controlled); jes...
+                  </td>
                 </tr>
                 <tr>
-                  <td>batch-c-d...</td>
-                  <td>dev</td>
-                  <td>done</td>
-                  <td>2</td>
-                  <td>—</td>
-                  <td>—</td>
-                  <td>2m</td>
-                  <td>—</td>
-                </tr>
-                <tr>
-                  <td>batch-c-qa</td>
+                  <td>feat009-b...</td>
                   <td>qa</td>
                   <td>done</td>
                   <td>—</td>
-                  <td>—</td>
-                  <td>—</td>
-                  <td>2m</td>
-                  <td>—</td>
-                </tr>
-                <tr>
-                  <td>batch-d-dev</td>
-                  <td>dev</td>
-                  <td>done</td>
-                  <td>—</td>
-                  <td>—</td>
-                  <td>—</td>
-                  <td>6m</td>
-                  <td>—</td>
-                </tr>
-                <tr>
-                  <td>batch-d-qa</td>
-                  <td>qa</td>
-                  <td>done</td>
-                  <td>—</td>
-                  <td>—</td>
-                  <td>—</td>
-                  <td>1m</td>
-                  <td>—</td>
-                </tr>
-                <tr>
-                  <td>audit-agent</td>
-                  <td>audit-agent</td>
-                  <td>done</td>
-                  <td>—</td>
-                  <td>—</td>
-                  <td>—</td>
-                  <td>1m</td>
-                  <td>—</td>
+                  <td>20736</td>
+                  <td>$0.1369</td>
+                  <td>1m 29s</td>
+                  <td>
+                    FEAT_009_FINAL_STATUS: ready_to_ship — 4/4 ACs BATCH-C pass; coverage agenda ...
+                  </td>
                 </tr>
               </tbody>
             </table>
@@ -2183,31 +1619,31 @@
                 </tr>
                 <tr>
                   <td>AC-003</td>
-                  <td>pass</td>
+                  <td>missing</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-004</td>
-                  <td>partial</td>
+                  <td>missing</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-005</td>
-                  <td>pass</td>
+                  <td>missing</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-006</td>
-                  <td>pass</td>
+                  <td>missing</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-007</td>
-                  <td>pass</td>
+                  <td>missing</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
@@ -2249,13 +1685,13 @@
                 </tr>
                 <tr>
                   <td>AC-014</td>
-                  <td>pass</td>
+                  <td>missing</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-015</td>
-                  <td>pass</td>
+                  <td>missing</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
@@ -2267,7 +1703,7 @@
                 </tr>
                 <tr>
                   <td>AC-017</td>
-                  <td>pass</td>
+                  <td>missing</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
@@ -2321,7 +1757,7 @@
                 </tr>
                 <tr>
                   <td>AC-026</td>
-                  <td>pass</td>
+                  <td>missing</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
@@ -2334,18 +1770,6 @@
                 <tr>
                   <td>AC-028</td>
                   <td>missing</td>
-                  <td>qa</td>
-                  <td>—</td>
-                </tr>
-                <tr>
-                  <td>AC-029</td>
-                  <td>pass</td>
-                  <td>qa</td>
-                  <td>—</td>
-                </tr>
-                <tr>
-                  <td>AC-030</td>
-                  <td>pass</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
@@ -2391,7 +1815,7 @@
               <tbody>
                 <tr>
                   <td>audit-agent</td>
-                  <td>1</td>
+                  <td>0</td>
                 </tr>
                 <tr>
                   <td>blocker-specialist</td>
@@ -2403,7 +1827,7 @@
                 </tr>
                 <tr>
                   <td>dev</td>
-                  <td>6</td>
+                  <td>5</td>
                 </tr>
                 <tr>
                   <td>logic-reviewer</td>
@@ -2411,15 +1835,15 @@
                 </tr>
                 <tr>
                   <td>pm-orchestrator</td>
-                  <td>1</td>
+                  <td>0</td>
                 </tr>
                 <tr>
                   <td>qa</td>
-                  <td>4</td>
+                  <td>3</td>
                 </tr>
                 <tr>
                   <td><strong>Total</strong></td>
-                  <td>16</td>
+                  <td>12</td>
                 </tr>
               </tbody>
             </table>
@@ -2434,7 +1858,7 @@
               <tbody>
                 <tr>
                   <td>audit-agent</td>
-                  <td>100.0%</td>
+                  <td>n/a</td>
                 </tr>
                 <tr>
                   <td>blocker-specialist</td>
@@ -2442,7 +1866,7 @@
                 </tr>
                 <tr>
                   <td>code-reviewer</td>
-                  <td>50.0%</td>
+                  <td>100.0%</td>
                 </tr>
                 <tr>
                   <td>dev</td>
@@ -2450,11 +1874,11 @@
                 </tr>
                 <tr>
                   <td>logic-reviewer</td>
-                  <td>0.0%</td>
+                  <td>100.0%</td>
                 </tr>
                 <tr>
                   <td>pm-orchestrator</td>
-                  <td>100.0%</td>
+                  <td>n/a</td>
                 </tr>
                 <tr>
                   <td>qa</td>
@@ -2463,11 +1887,11 @@
               </tbody>
             </table>
             <h2>Loop rate</h2>
-            <p>Loop rate: 12.5%</p>
+            <p>Loop rate: 0.0%</p>
             <h2>Escalation rate</h2>
             <p>Escalation rate: 0.0% — below healthy band (&lt; 10%)</p>
             <h2>AC closure</h2>
-            <p>Total: 30 | Pass: 10 | Partial: 1 | Fail: 0 | Missing: 19</p>
+            <p>Total: 28 | Pass: 0 | Partial: 0 | Fail: 0 | Missing: 28</p>
             <h2>Reviewer findings density</h2>
             <table>
               <thead>
@@ -2487,18 +1911,78 @@
                 </tr>
                 <tr>
                   <td>minor</td>
-                  <td>13</td>
+                  <td>0</td>
                 </tr>
               </tbody>
             </table>
             <h2>PM notes log</h2>
             <ul>
               <li>
-                [2026-05-09 06:33 pm-orchestrator] PM/orchestrator session (Stop hook): 98 turns
+                [2026-05-10 00:20 dev] Tipos + lib (normalizeAgenda single-warn, currentHour,
+                formatHour) + hook useAgenda com referential preservation; 71 unit tests; 355 totais
+                green.
+              </li>
+              <li>
+                [2026-05-10 00:26 code-reviewer] 11 minor findings (sem blockers/majors); aplicado
+                AGENDA_HOURS dedup, currentHour return type AgendaHour|null, early-return em
+                normalize, comentário/underscore fixes.
+              </li>
+              <li>
+                [2026-05-10 00:26 logic-reviewer] 5 minor findings (sem blockers); aplicado guard
+                out-of-range em useAgenda + 5 testes (it.each para
+                text:undefined/null/boolean/number, 5 hours fora de range), dedup hour test pinado
+                em last-write-w... (see manifest entry feat009-batchA-logicreview-01)
+              </li>
+              <li>
+                [2026-05-10 00:28 dev] PM aplicou fixes dos reviewers: AGENDA_HOURS exportado de
+                types.ts (dedup); currentHour return AgendaHour|null; early-return em
+                normalizeAgenda; guard out-of-range em useAgenda; +9 tests novos (4 i... (see
+                manifest entry feat009-batchA-fix-01)
+              </li>
+              <li>
+                [2026-05-10 00:29 qa] 15/15 ACs pass; 1 lint blocker (no-unused-vars no _h em type
+                annotation) — false-positive do code-reviewer earlier; PM reverteu para _h, lint
+                clean.
+              </li>
+              <li>
+                [2026-05-10 00:33 dev] AgendaSlot (memo&#39;d) + Agenda (controlled, defensive
+                normalize, useMemo currentHour) + 16 integration tests; latest-ref pattern para
+                handlers permanentemente estáveis. 380 totais green.
+              </li>
+              <li>
+                [2026-05-10 00:40 code-reviewer] 0 blockers, 2 majors (rename type
+                AgendaSlot→AgendaSlotData mantém componente clean; ESLint exhaustive-deps
+                suppression), 4 minors. M-1 aplicado.
+              </li>
+              <li>
+                [2026-05-10 00:40 logic-reviewer] 2 majors REAIS: stale-closure race no useEffect
+                ref-update + missing sequential-edit test (paired gap). 3 minors. PM aplicou
+                refactor para valueRef + onChangeRef em useAgenda.
+              </li>
+              <li>
+                [2026-05-10 00:42 dev] PM aplicou fixes: (a) useAgenda agora usa valueRef +
+                onChangeRef síncronos no render — handler permanentemente estável e race-free contra
+                batched updates do React 19; (b) Agenda.tsx simplificado re... (see manifest entry
+                feat009-batchB-fix-01)
+              </li>
+              <li>
+                [2026-05-10 00:46 qa] ready_for_done — 13/13 ACs pass; 27 suites, 384 testes green;
+                typecheck+lint clean; barrel exports completo; sem violações de boundary.
+              </li>
+              <li>
+                [2026-05-10 00:47 dev] 5 Storybook stories CSF3
+                (Empty/Typical/Full/WithCurrentHour/Controlled); jest threshold por path 90% em
+                web/src/features/agenda/**; CLAUDE.md atualizado. PM removeu defensive guard
+                inalcançável em... (see manifest entry feat009-batchC-dev-01)
+              </li>
+              <li>
+                [2026-05-10 00:51 qa] FEAT_009_FINAL_STATUS: ready_to_ship — 4/4 ACs BATCH-C pass;
+                coverage agenda 100/95.45/100/100; build-storybook clean; arch:check pre-existing
+                only; 384 testes total green.
               </li>
             </ul>
             <h2>Token cost</h2>
-            <p>Token cost not available — using dispatch count as cost proxy: 16 dispatches</p>
+            <p>Token cost not available — using dispatch count as cost proxy: 12 dispatches</p>
           </div>
         </details>
       </section>

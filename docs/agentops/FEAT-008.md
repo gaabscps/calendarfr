@@ -5,7 +5,7 @@
 > Feature: priorities — Top 3 prioridades do dia (checkbox + RichTextLine)
 > Task ID: FEAT-008
 > Phase: done
-> Generated at: 2026-05-10T07:46:49.320Z
+> Generated at: 2026-05-10T09:41:05.987Z
 
 ## Insights
 
@@ -28,14 +28,7 @@ _70/30 input/output split assumed; harness reports only total_tokens; 13 of 13 d
 
 ## Repo health snapshot
 
-_Measured at: 2026-05-10_
-
-| Métrica        | Valor | Threshold | Status |
-| -------------- | ----- | --------- | ------ |
-| Mutation score | 70.7% | ≥ 70%     | ✓      |
-| Type coverage  | 97.7% | ≥ 95%     | ✓      |
-| `any` count    | 67    | —         | —      |
-| Dep violations | —     | = 0       | —      |
+Repo health: not measured (run `npm run mutation && npm run type-coverage && npm run arch:check` first)
 
 ## Per-dispatch breakdown
 

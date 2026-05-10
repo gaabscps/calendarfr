@@ -1,17 +1,10 @@
 # AgentOps observability — overview
 
-> Generated at: 2026-05-10T07:46:49.320Z | Total flows: 8
+> Generated at: 2026-05-10T09:41:05.987Z | Total flows: 10
 
 ## Repo health snapshot
 
-_Measured at: 2026-05-10_
-
-| Métrica        | Valor | Threshold | Status |
-| -------------- | ----- | --------- | ------ |
-| Mutation score | 70.7% | ≥ 70%     | ✓      |
-| Type coverage  | 97.7% | ≥ 95%     | ✓      |
-| `any` count    | 67    | —         | —      |
-| Dep violations | —     | = 0       | —      |
+Repo health: not measured (run `npm run mutation && npm run type-coverage && npm run arch:check` first)
 
 ## Cross-flow snapshot
 
@@ -25,9 +18,13 @@ _Measured at: 2026-05-10_
 | ✓ FEAT-006 | ◐      | Server companion — Fastify + JSON store (rotas /api/days/:date)                      | done  | done   | 16         | 30  | 0.53    | 0.0%  | $13.8704 | $0.4623 | 2026-05-09 |
 | ✓ FEAT-007 | ✓      | rich-text-line — editor Tiptap de uma linha (núcleo de escrita)                      | done  | done   | 19         | 35  | 0.54    | 0.0%  | $22.9994 | $0.6571 | 2026-05-09 |
 | ✓ FEAT-008 | ⊘      | priorities — Top 3 prioridades do dia (checkbox + RichTextLine)                      | done  | done   | 13         | 26  | 0.50    | 0.0%  | $3.2067  | $0.1233 | 2026-05-09 |
+| ✓ FEAT-009 | ✓      | agenda — timeline 06–23h, 18 slots de 1h (RichTextLine inline)                       | done  | done   | 12         | 28  | 0.43    | 0.0%  | $3.0149  | $0.1077 | 2026-05-10 |
+| ✓ FEAT-010 | ✓      | mood — Picker de humor do dia (lista curada Mood = {emoji, label, color})            | done  | done   | 12         | 21  | 0.57    | 0.0%  | $2.6017  | $0.1239 | 2026-05-10 |
 
 _Compl. legend:_ ✓ standard · ◐ pré-padrão (excluído de trends/health) · ⊘ pm-bypass (excluído de trends/health)
 
 ## Trends
 
-- (need ≥ 2 completed flows for trend analysis)
+- Dispatches/AC: FEAT-009=0.43 → FEAT-010=0.57 (+33.3%)
+- Dev task success rate: FEAT-009=100.0% → FEAT-010=100.0% (0.0%)
+- Cost per AC: FEAT-007=$0.6571 → FEAT-010=$0.1239 (-81.1%)

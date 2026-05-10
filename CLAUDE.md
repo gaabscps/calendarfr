@@ -118,6 +118,7 @@ Para detalhes de arquitetura, fluxos e modelo de dados, ver o [macro spec](docs/
 - `server-companion` (FEAT-006) — em desenvolvimento
 - `rich-text-line` (FEAT-007) — em desenvolvimento
 - `priorities` (FEAT-008) — em desenvolvimento
+- `mood` (FEAT-010) — em desenvolvimento
 
 ---
 
