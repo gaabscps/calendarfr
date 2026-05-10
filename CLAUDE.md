@@ -120,6 +120,7 @@ Para detalhes de arquitetura, fluxos e modelo de dados, ver o [macro spec](docs/
 - `priorities` (FEAT-008) — em desenvolvimento
 - `agenda` (FEAT-009) — em desenvolvimento
 - `mood` (FEAT-010) — em desenvolvimento
+- `notes` (FEAT-011) — em desenvolvimento
 
 ---
 

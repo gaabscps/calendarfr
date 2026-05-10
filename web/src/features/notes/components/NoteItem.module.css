@@ -1,0 +1,84 @@
+/**
+ * NoteItem styles — CSS Module.
+ *
+ * Single note row: prefix button | editor (flex 1) | remove button (hover/focus).
+ * Tokens use CSS custom properties from GlobalStyles (FEAT-001).
+ *
+ * AC-019: focus ring via :focus-visible on all interactive elements.
+ * NFR-004: WCAG 2.1 AA — opacity-0 × button is revealed on hover AND focus-within.
+ */
+
+/* ── Note row wrapper ── */
+.note {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 4px; /* --spacing-xs */
+  padding-block: 2px;
+  width: 100%;
+}
+
+/* Reveal remove button on hover or keyboard focus-within (a11y: AC-019) */
+.note:hover .removeButton,
+.note:focus-within .removeButton {
+  opacity: 1;
+}
+
+/* ── Prefix button ── */
+.prefixButton {
+  flex-shrink: 0;
+  font-size: 1.1em;
+  line-height: 1;
+  color: var(--color-ink, #2c2416);
+  background: transparent;
+  border: 0;
+  padding: 4px; /* --spacing-xs */
+  border-radius: 2px; /* --radius-sm */
+  cursor: pointer;
+  /* Minimum tap target */
+  min-width: 24px;
+  min-height: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.prefixButton:focus-visible {
+  outline: 2px solid var(--color-ink, #2c2416);
+  outline-offset: 2px;
+}
+
+/* ── Editor area ── */
+.editor {
+  flex: 1;
+  min-width: 0;
+  font-family: var(--font-hand, 'Caveat', cursive);
+}
+
+/* ── Remove button ── */
+.removeButton {
+  flex-shrink: 0;
+  opacity: 0;
+  transition: opacity 120ms ease;
+  color: var(--color-ink-muted, #9a8a72);
+  background: transparent;
+  border: 0;
+  padding: 4px; /* --spacing-xs */
+  cursor: pointer;
+  font-size: 1rem;
+  line-height: 1;
+  /* Minimum tap target */
+  min-width: 24px;
+  min-height: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 2px; /* --radius-sm */
+}
+
+/* Keyboard focus always shows the remove button (AC-019) */
+.removeButton:focus-visible {
+  opacity: 1;
+  outline: 2px solid var(--color-ink, #2c2416);
+  outline-offset: 2px;
+}
