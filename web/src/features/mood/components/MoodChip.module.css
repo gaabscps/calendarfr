@@ -1,0 +1,65 @@
+/**
+ * MoodChip styles — CSS Module.
+ *
+ * Covers: AC-004 (selected chip background), AC-012 (focus ring via accent token),
+ *         AC-013 (WCAG AA contrast maintained — paleta validated in moodOptions.ts).
+ *
+ * Token references use CSS custom properties set in GlobalStyles (FEAT-001).
+ */
+
+/* ── Base chip ── */
+.chip {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 4px; /* var(--spacing-xs) */
+  padding: 6px 10px; /* between xs(4) and sm(8) */
+  border-radius: 4px; /* var(--radius-md) */
+  border: 1px solid var(--color-paper-line, #e8e0d0);
+  background: var(--color-paper, #fff9f0);
+  cursor: pointer;
+  transition: all 120ms ease; /* motion.fast */
+  /* Reset button defaults */
+  font-family: inherit;
+  font-size: inherit;
+  line-height: 1.2;
+  text-align: left;
+}
+
+/* ── Hover ── */
+.chip:hover {
+  background: var(--color-paper-line, #e8e0d0);
+}
+
+/* ── Focus visible ring (AC-012) ── */
+.chip:focus-visible {
+  outline: 2px solid var(--color-accent, #c0392b);
+  outline-offset: 2px;
+}
+
+/* ── Selected state (AC-004) ──
+   backgroundColor is applied via inline style (dynamic color from option.color).
+   Border color subtly matches background to blend. */
+.chip.selected {
+  border-color: transparent;
+  /* Hover on selected: slight brightness via filter — no color override needed */
+}
+
+.chip.selected:hover {
+  filter: brightness(0.95);
+}
+
+/* ── Emoji span ── */
+.emoji {
+  font-size: 1.4em;
+  line-height: 1;
+  /* Prevent emoji from shifting layout */
+  flex-shrink: 0;
+}
+
+/* ── Label span ── */
+.label {
+  font-size: 0.85em;
+  color: var(--color-ink, #2c2416);
+  white-space: nowrap;
+}

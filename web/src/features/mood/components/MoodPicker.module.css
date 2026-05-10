@@ -1,0 +1,43 @@
+/**
+ * MoodPicker styles — CSS Module.
+ *
+ * Covers: AC-006 (legend visible + styled), AC-008 (fieldset resets),
+ *         AC-012 (focus ring delegated to MoodChip.module.css).
+ *
+ * Token references use CSS custom properties set in GlobalStyles (FEAT-001).
+ */
+
+/* ── Fieldset reset (AC-008) ── */
+.picker {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  min-width: 0;
+}
+
+/* ── Legend (AC-006) ── */
+.legend {
+  font-family: var(--font-hand, 'Caveat', cursive);
+  color: var(--color-ink, #2c2416);
+  font-size: 1rem;
+  margin-bottom: 8px; /* var(--spacing-sm) */
+  padding: 0;
+  /* Float reset — legend positioning can be quirky in fieldsets */
+  float: left;
+  width: 100%;
+}
+
+/* Clearfix after legend so the flex row starts fresh */
+.legend + * {
+  clear: both;
+}
+
+/* ── Row of chips ── */
+.row {
+  display: flex;
+  flex-direction: row;
+  gap: 8px; /* var(--spacing-sm) */
+  flex-wrap: wrap;
+  /* Clear any float from legend */
+  clear: both;
+}
