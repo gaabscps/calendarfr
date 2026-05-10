@@ -12,12 +12,9 @@
     "shared"
   ],
   "scripts": {
-    "agentops:report": "tsx scripts/agentops/index.ts",
-    "agentops:backfill": "tsx scripts/agentops/backfill-usage.ts",
-    "agentops:capture-pm": "tsx scripts/agentops/hooks/capture-pm-session.ts",
+    "agentops:report": "npx agentops report",
     "mutation": "STRYKER_RUN=1 stryker run",
     "type-coverage": "type-coverage --strict --detail --at-least 95 --reportSemanticError",
-    "type-coverage:json": "tsx scripts/agentops/type-coverage-json.ts",
     "arch:check": "depcruise --config .dependency-cruiser.cjs --output-type err scripts/ web/src/ server/src/ test-utils/",
     "arch:graph": "depcruise --config .dependency-cruiser.cjs --output-type mermaid scripts/ web/src/ server/src/ test-utils/ > docs/architecture/dependency-graph.md",
     "dev": "concurrently --kill-others-on-fail --prefix \"[{name}]\" --names \"WEB,API\" \"npm:dev:web\" \"npm:dev:server\"",
@@ -46,6 +43,7 @@
     ]
   },
   "devDependencies": {
+    "@ai-squad/agentops": "^0.1.0",
     "@commitlint/cli": "^19.8",
     "@commitlint/config-conventional": "^19.8",
     "@eslint/js": "^9.16",

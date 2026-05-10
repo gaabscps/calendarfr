@@ -1,9 +1,20 @@
 # Issue: ai-squad orchestrator does not capture `<usage>` annotation
 
-**Status:** open
+**Status:** ✅ resolved upstream (2026-05-10)
 **Affects:** ai-squad orchestrator skill (upstream)
-**Local workaround:** FEAT-003 D4/D5/D6 (see below)
+**Local workaround:** FEAT-003 D4/D5/D6 (see below) — no longer needed
 **Created:** 2026-05-08
+**Resolved by:** ai-squad commit `d86ed96` — feat(agentops): full report population.
+Two new hooks ship with `@ai-squad/cli@0.1.0`:
+
+- `stamp-session-id.py` (PostToolUse Write|Edit) injects `_session_id` into
+  every Output Packet so the Stop hook can correlate exactly.
+- `capture-subagent-usage.py` (Stop) reads the subagent transcript JSONL,
+  sums per-turn token usage, and writes `usage{}` into the matching
+  `actual_dispatches[]` entry of `dispatch-manifest.json`.
+
+To pick up the fix on this machine: `ai-squad deploy --force`. Subsequent
+Phase 4 dispatches will carry real token / cost / duration data.
 
 ---
 
