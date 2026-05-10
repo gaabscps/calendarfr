@@ -1,9 +1,11 @@
 # Quality baseline + cost telemetry + AgentOps dashboard enrichment — FEAT-003
 
+> ⚠ \*\*Pré-padrão\*\* — flow rodou antes do contrato de observabilidade ser estabilizado (sem `usage` por dispatch / `pm_note` / `summary_for_reviewers` consistentes). Excluído de trends e health metrics.
+
 > Feature: Quality baseline + cost telemetry + AgentOps dashboard enrichment
 > Task ID: FEAT-003
 > Phase: done
-> Generated at: 2026-05-09T15:57:59.676Z
+> Generated at: 2026-05-10T07:46:49.320Z
 
 ## Insights
 
@@ -26,7 +28,7 @@ _70/30 input/output split assumed; harness reports only total_tokens; 6 of 10 di
 
 ## Repo health snapshot
 
-_Measured at: 2026-05-09_
+_Measured at: 2026-05-10_
 
 | Métrica        | Valor | Threshold | Status |
 | -------------- | ----- | --------- | ------ |
@@ -40,14 +42,14 @@ _Measured at: 2026-05-09_
 | ID           | Role        | Status | Loop | Tokens | $       | Duration | PM note                                                                          |
 | ------------ | ----------- | ------ | ---- | ------ | ------- | -------- | -------------------------------------------------------------------------------- |
 | feat-003-... | dev         | done   | —    | 80729  | $0.5328 | 9m 10s   | First-try success. Mutation 71.21% (break adj. to 60), type-cov 97.67%, arch ... |
-| feat-003-... | qa          | done   | —    | —      | —       | —        | PM-conducted QA. 13/13 ACs pass.                                                 |
+| feat-003-... | qa          | done   | —    | —      | —       | 5m       | PM-conducted QA. 13/13 ACs pass.                                                 |
 | feat-003-... | dev         | done   | —    | 109845 | $0.7250 | 9m 15s   | 7/7 preflight first-try. 205 tests (was 179, +26 novos). Backfill aplicado em... |
-| feat-003-... | qa          | done   | —    | —      | —       | —        | PM-conducted QA. 10/10 ACs pass. Independent verification: lint+format+typech... |
+| feat-003-... | qa          | done   | —    | —      | —       | 5m       | PM-conducted QA. 10/10 ACs pass. Independent verification: lint+format+typech... |
 | feat-003-... | dev         | done   | —    | 140383 | $0.9265 | 11m 27s  | First-try success. T-012 repo-health module + T-013 split puro (snapshots ina... |
-| feat-003-... | qa          | done   | —    | —      | —       | —        | PM-conducted QA. 11/11 ACs pass. Independent verification: lint+format+typech... |
+| feat-003-... | qa          | done   | —    | —      | —       | 5m       | PM-conducted QA. 11/11 ACs pass. Independent verification: lint+format+typech... |
 | feat-003-... | dev         | done   | 1    | 97502  | $0.6435 | 8m 24s   | T-022 CLI integration + T-023 issue doc + T-024 CLAUDE.md + T-025 smoke. 297 ... |
 | feat-003-... | dev         | done   | 2    | 79497  | $0.5247 | 6m 3s    | Loop 2 fix: buildBackfillLookup() runtime merge + computeCostUsd() wired em m... |
-| feat-003-... | qa          | done   | —    | —      | —       | —        | PM-conducted QA. 6/6 ACs pass (loops 1+2 combinados). Independent verificatio... |
+| feat-003-... | qa          | done   | —    | —      | —       | 5m       | PM-conducted QA. 6/6 ACs pass (loops 1+2 combinados). Independent verificatio... |
 | feat-003-... | audit-agent | done   | —    | 52336  | $0.1151 | 2m 15s   | All 6 reconciliation checks pass. Pipeline integrity verified. Cleared for ha... |
 
 ## Per-AC closure detail

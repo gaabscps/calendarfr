@@ -2,12 +2,10 @@
   "$schema": "https://stryker-mutator.io/schemas/stryker-schema.json",
   "testRunner": "jest",
   "mutate": [
-    "scripts/agentops/**/*.ts",
-    "!scripts/agentops/**/*.test.ts",
-    "!scripts/agentops/__fixtures__/**",
-    "!scripts/agentops/__tests__/**",
-    "!scripts/agentops/type-coverage-json.ts",
-    "!scripts/agentops/backfill-usage.ts"
+    "server/src/**/*.ts",
+    "!server/src/**/*.test.ts",
+    "!server/src/**/__tests__/**",
+    "!server/src/index.ts"
   ],
   "concurrency": 4,
   "thresholds": {

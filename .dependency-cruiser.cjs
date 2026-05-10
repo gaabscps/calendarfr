@@ -106,12 +106,6 @@ module.exports = {
           '\\.config\\.(ts|js|cjs|mjs)$',
           // Test-utils entry point
           'test-utils/index\\.ts$',
-          // AgentOps scripts — standalone CLI tools, not imported
-          'scripts/agentops/index\\.ts$',
-          'scripts/agentops/type-coverage-json\\.ts$',
-          'scripts/agentops/backfill-usage\\.ts$',
-          // Type-only modules — only imported via "import type" which dep-cruiser may skip
-          'scripts/agentops/types\\.ts$',
         ],
       },
       to: {},

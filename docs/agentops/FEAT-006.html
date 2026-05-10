@@ -467,6 +467,29 @@
         background: var(--border);
         color: var(--fg);
       }
+      .compliance-notice {
+        margin: 12px 0;
+        padding: 10px 14px;
+        border-radius: 6px;
+        border-left: 4px solid var(--status-warn);
+        background: color-mix(in srgb, var(--status-warn) 10%, transparent);
+        color: var(--fg);
+        font-size: 14px;
+        line-height: 1.5;
+      }
+      .compliance-notice strong {
+        font-weight: 600;
+      }
+      .compliance-notice code {
+        background: color-mix(in srgb, var(--fg) 10%, transparent);
+        padding: 1px 4px;
+        border-radius: 3px;
+        font-size: 12px;
+      }
+      .compliance-pre-standard {
+        border-left-color: var(--border);
+        background: color-mix(in srgb, var(--border) 30%, transparent);
+      }
       details > summary {
         cursor: pointer;
         padding: 0.5rem 0.75rem;
@@ -555,6 +578,12 @@
         <span>2 loops</span>
       </div>
     </header>
+    <div class="compliance-notice compliance-pre-standard" role="note">
+      <strong>Pré-padrão:</strong> flow rodou antes do contrato de observabilidade ser estabilizado
+      (sem <code>usage</code> por dispatch / <code>pm_note</code> /
+      <code>summary_for_reviewers</code>
+      consistentes). Mantido visível como audit trail; excluído de trends e health metrics.
+    </div>
     <main>
       <section class="story">
         <h2>Story</h2>
@@ -1874,7 +1903,7 @@
         <details>
           <summary>Repo health snapshot</summary>
           <div>
-            <p><em>Measured at: 2026-05-09</em></p>
+            <p><em>Measured at: 2026-05-10</em></p>
             <table>
               <thead>
                 <tr>
@@ -1930,8 +1959,16 @@
             <h1>Server companion — Fastify + JSON store (rotas /api/days/:date) — FEAT-006</h1>
             <blockquote>
               <p>
+                ⚠ <strong>Pré-padrão</strong> — flow rodou antes do contrato de observabilidade ser
+                estabilizado (sem <code>usage</code> por dispatch / <code>pm_note</code> /
+                <code>summary_for_reviewers</code> consistentes). Excluído de trends e health
+                metrics.
+              </p>
+            </blockquote>
+            <blockquote>
+              <p>
                 Feature: Server companion — Fastify + JSON store (rotas /api/days/:date) Task ID:
-                FEAT-006 Phase: done Generated at: 2026-05-09T15:57:59.676Z
+                FEAT-006 Phase: done Generated at: 2026-05-10T07:46:49.320Z
               </p>
             </blockquote>
             <h2>Insights</h2>
@@ -1965,7 +2002,7 @@
               <li>Coverage: 1 of 16 dispatches included in cost calculation</li>
             </ul>
             <h2>Repo health snapshot</h2>
-            <p><em>Measured at: 2026-05-09</em></p>
+            <p><em>Measured at: 2026-05-10</em></p>
             <table>
               <thead>
                 <tr>
@@ -2034,7 +2071,7 @@
                   <td>—</td>
                   <td>—</td>
                   <td>—</td>
-                  <td>—</td>
+                  <td>12m</td>
                   <td>—</td>
                 </tr>
                 <tr>
@@ -2044,7 +2081,7 @@
                   <td>—</td>
                   <td>—</td>
                   <td>—</td>
-                  <td>—</td>
+                  <td>12m</td>
                   <td>—</td>
                 </tr>
                 <tr>
@@ -2054,7 +2091,7 @@
                   <td>—</td>
                   <td>—</td>
                   <td>—</td>
-                  <td>—</td>
+                  <td>11m</td>
                   <td>—</td>
                 </tr>
                 <tr>
@@ -2064,7 +2101,7 @@
                   <td>—</td>
                   <td>—</td>
                   <td>—</td>
-                  <td>—</td>
+                  <td>4m</td>
                   <td>—</td>
                 </tr>
                 <tr>
@@ -2074,7 +2111,7 @@
                   <td>—</td>
                   <td>—</td>
                   <td>—</td>
-                  <td>—</td>
+                  <td>20m</td>
                   <td>—</td>
                 </tr>
                 <tr>
@@ -2084,7 +2121,7 @@
                   <td>—</td>
                   <td>—</td>
                   <td>—</td>
-                  <td>—</td>
+                  <td>12m</td>
                   <td>—</td>
                 </tr>
                 <tr>
@@ -2094,7 +2131,7 @@
                   <td>—</td>
                   <td>—</td>
                   <td>—</td>
-                  <td>—</td>
+                  <td>13m</td>
                   <td>—</td>
                 </tr>
                 <tr>
@@ -2104,7 +2141,7 @@
                   <td>2</td>
                   <td>—</td>
                   <td>—</td>
-                  <td>—</td>
+                  <td>4m</td>
                   <td>—</td>
                 </tr>
                 <tr>
@@ -2114,7 +2151,7 @@
                   <td>—</td>
                   <td>—</td>
                   <td>—</td>
-                  <td>—</td>
+                  <td>5m</td>
                   <td>—</td>
                 </tr>
                 <tr>
@@ -2124,7 +2161,7 @@
                   <td>—</td>
                   <td>—</td>
                   <td>—</td>
-                  <td>—</td>
+                  <td>32m</td>
                   <td>—</td>
                 </tr>
                 <tr>
@@ -2134,7 +2171,7 @@
                   <td>2</td>
                   <td>—</td>
                   <td>—</td>
-                  <td>—</td>
+                  <td>2m</td>
                   <td>—</td>
                 </tr>
                 <tr>
@@ -2144,7 +2181,7 @@
                   <td>—</td>
                   <td>—</td>
                   <td>—</td>
-                  <td>—</td>
+                  <td>2m</td>
                   <td>—</td>
                 </tr>
                 <tr>
@@ -2154,7 +2191,7 @@
                   <td>—</td>
                   <td>—</td>
                   <td>—</td>
-                  <td>—</td>
+                  <td>6m</td>
                   <td>—</td>
                 </tr>
                 <tr>
@@ -2164,7 +2201,7 @@
                   <td>—</td>
                   <td>—</td>
                   <td>—</td>
-                  <td>—</td>
+                  <td>1m</td>
                   <td>—</td>
                 </tr>
                 <tr>
@@ -2174,7 +2211,7 @@
                   <td>—</td>
                   <td>—</td>
                   <td>—</td>
-                  <td>—</td>
+                  <td>1m</td>
                   <td>—</td>
                 </tr>
               </tbody>

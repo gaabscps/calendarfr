@@ -467,6 +467,29 @@
         background: var(--border);
         color: var(--fg);
       }
+      .compliance-notice {
+        margin: 12px 0;
+        padding: 10px 14px;
+        border-radius: 6px;
+        border-left: 4px solid var(--status-warn);
+        background: color-mix(in srgb, var(--status-warn) 10%, transparent);
+        color: var(--fg);
+        font-size: 14px;
+        line-height: 1.5;
+      }
+      .compliance-notice strong {
+        font-weight: 600;
+      }
+      .compliance-notice code {
+        background: color-mix(in srgb, var(--fg) 10%, transparent);
+        padding: 1px 4px;
+        border-radius: 3px;
+        font-size: 12px;
+      }
+      .compliance-pre-standard {
+        border-left-color: var(--border);
+        background: color-mix(in srgb, var(--border) 30%, transparent);
+      }
       details > summary {
         cursor: pointer;
         padding: 0.5rem 0.75rem;
@@ -555,6 +578,7 @@
         <span>3 loops</span>
       </div>
     </header>
+
     <main>
       <section class="story">
         <h2>Story</h2>
@@ -1796,7 +1820,7 @@
         <details>
           <summary>Repo health snapshot</summary>
           <div>
-            <p><em>Measured at: 2026-05-09</em></p>
+            <p><em>Measured at: 2026-05-10</em></p>
             <table>
               <thead>
                 <tr>
@@ -1955,7 +1979,7 @@
             <blockquote>
               <p>
                 Feature: rich-text-line — editor Tiptap de uma linha (núcleo de escrita) Task ID:
-                FEAT-007 Phase: done Generated at: 2026-05-09T15:57:59.676Z
+                FEAT-007 Phase: done Generated at: 2026-05-10T07:46:49.320Z
               </p>
             </blockquote>
             <h2>Insights</h2>
@@ -1989,7 +2013,7 @@
               <li>Coverage: 19 of 19 dispatches included in cost calculation</li>
             </ul>
             <h2>Repo health snapshot</h2>
-            <p><em>Measured at: 2026-05-09</em></p>
+            <p><em>Measured at: 2026-05-10</em></p>
             <table>
               <thead>
                 <tr>

@@ -1,9 +1,11 @@
 # AgentOps observability extractor — relatórios Markdown a partir de .agent-session/\* — FEAT-002
 
+> ⚠ \*\*Pré-padrão\*\* — flow rodou antes do contrato de observabilidade ser estabilizado (sem `usage` por dispatch / `pm_note` / `summary_for_reviewers` consistentes). Excluído de trends e health metrics.
+
 > Feature: AgentOps observability extractor — relatórios Markdown a partir de .agent-session/\*
 > Task ID: FEAT-002
 > Phase: done
-> Generated at: 2026-05-09T15:57:59.676Z
+> Generated at: 2026-05-10T07:46:49.320Z
 
 ## Insights
 
@@ -26,7 +28,7 @@ _70/30 input/output split assumed; harness reports only total_tokens; 7 of 11 di
 
 ## Repo health snapshot
 
-_Measured at: 2026-05-09_
+_Measured at: 2026-05-10_
 
 | Métrica        | Valor | Threshold | Status |
 | -------------- | ----- | --------- | ------ |
@@ -40,14 +42,14 @@ _Measured at: 2026-05-09_
 | ID           | Role        | Status  | Loop | Tokens | $       | Duration | PM note                                                                          |
 | ------------ | ----------- | ------- | ---- | ------ | ------- | -------- | -------------------------------------------------------------------------------- |
 | feat-002-... | dev         | done    | —    | 66093  | $0.4362 | 5m 36s   | First-try success. PM-verified independently.                                    |
-| feat-002-... | qa          | done    | —    | —      | —       | —        | PM-conducted QA.                                                                 |
+| feat-002-... | qa          | done    | —    | —      | —       | 5m       | PM-conducted QA.                                                                 |
 | feat-002-... | dev         | done    | 1    | 140134 | $0.9249 | 14m 20s  | 5/5 preflight first try; 95 tests, 97-100% coverage. Bounce loop2 needed for ... |
 | feat-002-... | dev         | done    | 2    | 34618  | $0.2285 | 2m 33s   | Split enrich.ts (314→94) into enrich/{guards,dispatches,phases,status}.ts. Al... |
-| feat-002-... | qa          | done    | —    | —      | —       | —        | PM-conducted QA.                                                                 |
+| feat-002-... | qa          | done    | —    | —      | —       | 5m       | PM-conducted QA.                                                                 |
 | feat-002-... | dev         | done    | —    | 89695  | $0.5920 | 8m 40s   | 6/6 preflight first-try. 152 tests, 5 snapshots, all files ≤250.                 |
-| feat-002-... | qa          | done    | —    | —      | —       | —        | PM-conducted QA.                                                                 |
+| feat-002-... | qa          | done    | —    | —      | —       | 5m       | PM-conducted QA.                                                                 |
 | feat-002-... | dev         | done    | —    | 150273 | $0.9918 | 26m 24s  | All 7 preflight checks first-try. First real `npm run agentops:report` genera... |
-| feat-002-... | qa          | done    | —    | —      | —       | —        | PM-conducted QA. 5/5 ACs pass.                                                   |
+| feat-002-... | qa          | done    | —    | —      | —       | 5m       | PM-conducted QA. 5/5 ACs pass.                                                   |
 | feat-002-... | audit-agent | blocked | —    | 47421  | $0.1043 | 51s      | False positive: pre-FEAT-002 unstaged work flagged. Resolved via documentatio... |
 | feat-002-... | audit-agent | done    | —    | 30493  | $0.0671 | 41s      | All 6 checks pass. Cleared for handoff.                                          |
 

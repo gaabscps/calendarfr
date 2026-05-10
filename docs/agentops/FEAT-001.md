@@ -1,9 +1,11 @@
 # Foundation — scaffolding, infra de testes, design tokens, PaperSheet — FEAT-001
 
+> ⚠ \*\*Pré-padrão\*\* — flow rodou antes do contrato de observabilidade ser estabilizado (sem `usage` por dispatch / `pm_note` / `summary_for_reviewers` consistentes). Excluído de trends e health metrics.
+
 > Feature: Foundation — scaffolding, infra de testes, design tokens, PaperSheet
 > Task ID: FEAT-001
 > Phase: done
-> Generated at: 2026-05-09T15:57:59.676Z
+> Generated at: 2026-05-10T07:46:49.320Z
 
 ## Insights
 
@@ -26,7 +28,7 @@ _70/30 input/output split assumed; harness reports only total_tokens; 15 of 15 d
 
 ## Repo health snapshot
 
-_Measured at: 2026-05-09_
+_Measured at: 2026-05-10_
 
 | Métrica        | Valor | Threshold | Status |
 | -------------- | ----- | --------- | ------ |

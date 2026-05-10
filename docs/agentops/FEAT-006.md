@@ -1,9 +1,11 @@
 # Server companion — Fastify + JSON store (rotas /api/days/:date) — FEAT-006
 
+> ⚠ \*\*Pré-padrão\*\* — flow rodou antes do contrato de observabilidade ser estabilizado (sem `usage` por dispatch / `pm_note` / `summary_for_reviewers` consistentes). Excluído de trends e health metrics.
+
 > Feature: Server companion — Fastify + JSON store (rotas /api/days/:date)
 > Task ID: FEAT-006
 > Phase: done
-> Generated at: 2026-05-09T15:57:59.676Z
+> Generated at: 2026-05-10T07:46:49.320Z
 
 ## Insights
 
@@ -26,7 +28,7 @@ _70/30 input/output split assumed; harness reports only total_tokens; 1 of 16 di
 
 ## Repo health snapshot
 
-_Measured at: 2026-05-09_
+_Measured at: 2026-05-10_
 
 | Métrica        | Valor | Threshold | Status |
 | -------------- | ----- | --------- | ------ |
@@ -40,21 +42,21 @@ _Measured at: 2026-05-09_
 | ID           | Role            | Status       | Loop | Tokens   | $         | Duration | PM note                                       |
 | ------------ | --------------- | ------------ | ---- | -------- | --------- | -------- | --------------------------------------------- |
 | pm-orches... | pm-orchestrator | done         | —    | 10176266 | $111.9389 | 25m 8s   | PM/orchestrator session (Stop hook): 98 turns |
-| batch-a-dev  | dev             | done         | —    | —        | —         | —        | —                                             |
-| batch-a-c... | code-reviewer   | done         | —    | —        | —         | —        | —                                             |
-| batch-a-l... | logic-reviewer  | needs_review | —    | —        | —         | —        | —                                             |
-| batch-a-qa   | qa              | done         | —    | —        | —         | —        | —                                             |
-| batch-b-dev  | dev             | done         | —    | —        | —         | —        | —                                             |
-| batch-b-c... | code-reviewer   | needs_review | —    | —        | —         | —        | —                                             |
-| batch-b-l... | logic-reviewer  | needs_review | —    | —        | —         | —        | —                                             |
-| batch-b-d... | dev             | done         | 2    | —        | —         | —        | —                                             |
-| batch-b-qa   | qa              | done         | —    | —        | —         | —        | —                                             |
-| batch-c-dev  | dev             | done         | —    | —        | —         | —        | —                                             |
-| batch-c-d... | dev             | done         | 2    | —        | —         | —        | —                                             |
-| batch-c-qa   | qa              | done         | —    | —        | —         | —        | —                                             |
-| batch-d-dev  | dev             | done         | —    | —        | —         | —        | —                                             |
-| batch-d-qa   | qa              | done         | —    | —        | —         | —        | —                                             |
-| audit-agent  | audit-agent     | done         | —    | —        | —         | —        | —                                             |
+| batch-a-dev  | dev             | done         | —    | —        | —         | 12m      | —                                             |
+| batch-a-c... | code-reviewer   | done         | —    | —        | —         | 12m      | —                                             |
+| batch-a-l... | logic-reviewer  | needs_review | —    | —        | —         | 11m      | —                                             |
+| batch-a-qa   | qa              | done         | —    | —        | —         | 4m       | —                                             |
+| batch-b-dev  | dev             | done         | —    | —        | —         | 20m      | —                                             |
+| batch-b-c... | code-reviewer   | needs_review | —    | —        | —         | 12m      | —                                             |
+| batch-b-l... | logic-reviewer  | needs_review | —    | —        | —         | 13m      | —                                             |
+| batch-b-d... | dev             | done         | 2    | —        | —         | 4m       | —                                             |
+| batch-b-qa   | qa              | done         | —    | —        | —         | 5m       | —                                             |
+| batch-c-dev  | dev             | done         | —    | —        | —         | 32m      | —                                             |
+| batch-c-d... | dev             | done         | 2    | —        | —         | 2m       | —                                             |
+| batch-c-qa   | qa              | done         | —    | —        | —         | 2m       | —                                             |
+| batch-d-dev  | dev             | done         | —    | —        | —         | 6m       | —                                             |
+| batch-d-qa   | qa              | done         | —    | —        | —         | 1m       | —                                             |
+| audit-agent  | audit-agent     | done         | —    | —        | —         | 1m       | —                                             |
 
 ## Per-AC closure detail
 

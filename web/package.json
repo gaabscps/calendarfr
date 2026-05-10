@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@calendarfr/shared": "*",
+    "ulid": "^2.3",
     "@fontsource/caveat": "^5.1",
     "@fontsource/inter": "^5.1",
     "@tiptap/core": "^2.10",

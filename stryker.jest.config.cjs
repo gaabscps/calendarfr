@@ -24,7 +24,7 @@ if (process.env.STRYKER_RUN === '1') {
     setupFiles: [],
     setupFilesAfterEnv: [],
     testEnvironment: 'node',
-    testPathPattern: 'scripts/agentops/__tests__/',
+    testPathPattern: 'server/src/',
   };
 } else {
   module.exports = baseConfig;

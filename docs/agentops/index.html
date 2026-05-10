@@ -467,6 +467,29 @@
         background: var(--border);
         color: var(--fg);
       }
+      .compliance-notice {
+        margin: 12px 0;
+        padding: 10px 14px;
+        border-radius: 6px;
+        border-left: 4px solid var(--status-warn);
+        background: color-mix(in srgb, var(--status-warn) 10%, transparent);
+        color: var(--fg);
+        font-size: 14px;
+        line-height: 1.5;
+      }
+      .compliance-notice strong {
+        font-weight: 600;
+      }
+      .compliance-notice code {
+        background: color-mix(in srgb, var(--fg) 10%, transparent);
+        padding: 1px 4px;
+        border-radius: 3px;
+        font-size: 12px;
+      }
+      .compliance-pre-standard {
+        border-left-color: var(--border);
+        background: color-mix(in srgb, var(--border) 30%, transparent);
+      }
       details > summary {
         cursor: pointer;
         padding: 0.5rem 0.75rem;
@@ -543,8 +566,8 @@
     <header>
       <h1>AgentOps · CalendárioFR</h1>
       <div class="kpis">
-        <span>7 flows</span><span style="color: var(--fg-muted)">233/212 ACs</span
-        ><span style="color: var(--fg-muted)">27h59m</span>
+        <span>8 flows</span><span style="color: var(--fg-muted)">233/238 ACs</span
+        ><span style="color: var(--fg-muted)">28h36m</span>
       </div>
     </header>
     <main>
@@ -568,31 +591,22 @@
               <span>36/35 ACs</span>
               <span>2h5m</span>
             </div>
-            <div class="trends">
-              <span
-                >cost
-                <svg width="60" height="20" viewBox="0 0 60 20" aria-label="trend">
-                  <polyline
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.5"
-                    points="0.0,20.0 10.0,20.0 20.0,20.0 30.0,20.0 40.0,20.0 50.0,20.0 60.0,20.0"
-                  /></svg></span
-              ><span
-                >mut
-                <svg width="60" height="20" viewBox="0 0 60 20" aria-label="trend">
-                  <polyline
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.5"
-                    points="0.0,20.0 10.0,20.0 20.0,20.0 30.0,20.0 40.0,20.0 50.0,20.0 60.0,20.0"
-                  /></svg
-              ></span>
+          </a>
+          <a class="flow-card" href="./FEAT-008.html">
+            <header>
+              <span class="badge badge-pass">✓</span><span class="badge badge-warn">pm-bypass</span>
+              <h3>priorities — Top 3 prioridades do dia (checkbox + RichTextLine)</h3>
+            </header>
+            <div class="flow-meta">
+              <span>—</span>
+              <span>0/26 ACs</span>
+              <span>37m 10s</span>
             </div>
           </a>
           <a class="flow-card" href="./FEAT-006.html">
             <header>
-              <span class="badge badge-warn">⚠</span>
+              <span class="badge badge-warn">⚠</span
+              ><span class="badge badge-neutral">pré-padrão</span>
               <h3>Server companion — Fastify + JSON store (rotas /api/days/:date)</h3>
             </header>
             <div class="flow-meta">
@@ -600,31 +614,11 @@
               <span>10/30 ACs</span>
               <span>2h44m</span>
             </div>
-            <div class="trends">
-              <span
-                >cost
-                <svg width="60" height="20" viewBox="0 0 60 20" aria-label="trend">
-                  <polyline
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.5"
-                    points="0.0,20.0 12.0,20.0 24.0,20.0 36.0,20.0 48.0,20.0 60.0,20.0"
-                  /></svg></span
-              ><span
-                >mut
-                <svg width="60" height="20" viewBox="0 0 60 20" aria-label="trend">
-                  <polyline
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.5"
-                    points="0.0,20.0 12.0,20.0 24.0,20.0 36.0,20.0 48.0,20.0 60.0,20.0"
-                  /></svg
-              ></span>
-            </div>
           </a>
           <a class="flow-card" href="./FEAT-005.html">
             <header>
-              <span class="badge badge-warn">⚠</span>
+              <span class="badge badge-warn">⚠</span
+              ><span class="badge badge-neutral">pré-padrão</span>
               <h3>Batch story-card UX redesign (fact-sheet)</h3>
             </header>
             <div class="flow-meta">
@@ -632,31 +626,11 @@
               <span>37/21 ACs</span>
               <span>1h42m</span>
             </div>
-            <div class="trends">
-              <span
-                >cost
-                <svg width="60" height="20" viewBox="0 0 60 20" aria-label="trend">
-                  <polyline
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.5"
-                    points="0.0,20.0 15.0,20.0 30.0,20.0 45.0,20.0 60.0,20.0"
-                  /></svg></span
-              ><span
-                >mut
-                <svg width="60" height="20" viewBox="0 0 60 20" aria-label="trend">
-                  <polyline
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.5"
-                    points="0.0,20.0 15.0,20.0 30.0,20.0 45.0,20.0 60.0,20.0"
-                  /></svg
-              ></span>
-            </div>
           </a>
           <a class="flow-card" href="./FEAT-004.html">
             <header>
-              <span class="badge badge-warn">⚠</span>
+              <span class="badge badge-warn">⚠</span
+              ><span class="badge badge-neutral">pré-padrão</span>
               <h3>Narrative HTML dashboard for AgentOps reports</h3>
             </header>
             <div class="flow-meta">
@@ -664,31 +638,11 @@
               <span>38/26 ACs</span>
               <span>1h40m</span>
             </div>
-            <div class="trends">
-              <span
-                >cost
-                <svg width="60" height="20" viewBox="0 0 60 20" aria-label="trend">
-                  <polyline
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.5"
-                    points="0.0,20.0 20.0,20.0 40.0,20.0 60.0,20.0"
-                  /></svg></span
-              ><span
-                >mut
-                <svg width="60" height="20" viewBox="0 0 60 20" aria-label="trend">
-                  <polyline
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.5"
-                    points="0.0,20.0 20.0,20.0 40.0,20.0 60.0,20.0"
-                  /></svg
-              ></span>
-            </div>
           </a>
           <a class="flow-card" href="./FEAT-003.html">
             <header>
-              <span class="badge badge-warn">⚠</span>
+              <span class="badge badge-warn">⚠</span
+              ><span class="badge badge-neutral">pré-padrão</span>
               <h3>Quality baseline + cost telemetry + AgentOps dashboard enrichment</h3>
             </header>
             <div class="flow-meta">
@@ -696,31 +650,11 @@
               <span>40/36 ACs</span>
               <span>5h53m</span>
             </div>
-            <div class="trends">
-              <span
-                >cost
-                <svg width="60" height="20" viewBox="0 0 60 20" aria-label="trend">
-                  <polyline
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.5"
-                    points="0.0,20.0 30.0,20.0 60.0,20.0"
-                  /></svg></span
-              ><span
-                >mut
-                <svg width="60" height="20" viewBox="0 0 60 20" aria-label="trend">
-                  <polyline
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.5"
-                    points="0.0,20.0 30.0,20.0 60.0,20.0"
-                  /></svg
-              ></span>
-            </div>
           </a>
           <a class="flow-card" href="./FEAT-002.html">
             <header>
-              <span class="badge badge-warn">⚠</span>
+              <span class="badge badge-warn">⚠</span
+              ><span class="badge badge-neutral">pré-padrão</span>
               <h3>
                 AgentOps observability extractor — relatórios Markdown a partir de .agent-session/*
               </h3>
@@ -730,31 +664,11 @@
               <span>33/25 ACs</span>
               <span>6h10m</span>
             </div>
-            <div class="trends">
-              <span
-                >cost
-                <svg width="60" height="20" viewBox="0 0 60 20" aria-label="trend">
-                  <polyline
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.5"
-                    points="0.0,20.0 60.0,20.0"
-                  /></svg></span
-              ><span
-                >mut
-                <svg width="60" height="20" viewBox="0 0 60 20" aria-label="trend">
-                  <polyline
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.5"
-                    points="0.0,20.0 60.0,20.0"
-                  /></svg
-              ></span>
-            </div>
           </a>
           <a class="flow-card" href="./FEAT-001.html">
             <header>
-              <span class="badge badge-warn">⚠</span>
+              <span class="badge badge-warn">⚠</span
+              ><span class="badge badge-neutral">pré-padrão</span>
               <h3>Foundation — scaffolding, infra de testes, design tokens, PaperSheet</h3>
             </header>
             <div class="flow-meta">

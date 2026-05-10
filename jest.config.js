@@ -37,21 +37,18 @@ const config = {
     '/server/dist/',
     '/e2e/',
     '/storybook-static/',
-    '/scripts/agentops/__fixtures__/',
     // Shared helper modules placed inside __tests__/ — not test suites themselves.
     '/__tests__/helpers\\.ts$',
   ],
   collectCoverageFrom: [
     'web/src/shared/**/*.{ts,tsx}',
     'web/src/features/rich-text-line/**/*.{ts,tsx}',
+    'web/src/features/priorities/**/*.{ts,tsx}',
     'server/src/**/*.ts',
-    'scripts/agentops/**/*.ts',
-    'scripts/agentops/render/html/**/*.ts',
     'test-utils/**/*.ts',
     '!**/*.d.ts',
     '!**/*.stories.tsx',
     '!**/__tests__/**',
-    '!scripts/agentops/__fixtures__/**',
     '!server/src/index.ts',
     '!test-utils/msw/index.ts',
   ],
@@ -67,12 +64,6 @@ const config = {
     './test-utils/': {
       statements: 90,
       branches: 80,
-      functions: 90,
-      lines: 90,
-    },
-    './scripts/agentops/': {
-      statements: 90,
-      branches: 85,
       functions: 90,
       lines: 90,
     },
@@ -107,6 +98,12 @@ const config = {
       functions: 95,
       lines: 95,
       statements: 95,
+    },
+    'web/src/features/priorities/': {
+      branches: 90,
+      functions: 90,
+      lines: 90,
+      statements: 90,
     },
   },
 };

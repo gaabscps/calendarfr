@@ -3,7 +3,7 @@
 > Feature: rich-text-line — editor Tiptap de uma linha (núcleo de escrita)
 > Task ID: FEAT-007
 > Phase: done
-> Generated at: 2026-05-09T15:57:59.676Z
+> Generated at: 2026-05-10T07:46:49.320Z
 
 ## Insights
 
@@ -26,7 +26,7 @@ _70/30 input/output split assumed; harness reports only total_tokens; 19 of 19 d
 
 ## Repo health snapshot
 
-_Measured at: 2026-05-09_
+_Measured at: 2026-05-10_
 
 | Métrica        | Valor | Threshold | Status |
 | -------------- | ----- | --------- | ------ |

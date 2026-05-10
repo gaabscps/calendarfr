@@ -1,9 +1,11 @@
 # Batch story-card UX redesign (fact-sheet) — FEAT-005
 
+> ⚠ \*\*Pré-padrão\*\* — flow rodou antes do contrato de observabilidade ser estabilizado (sem `usage` por dispatch / `pm_note` / `summary_for_reviewers` consistentes). Excluído de trends e health metrics.
+
 > Feature: Batch story-card UX redesign (fact-sheet)
 > Task ID: FEAT-005
 > Phase: done
-> Generated at: 2026-05-09T15:57:59.676Z
+> Generated at: 2026-05-10T07:46:49.320Z
 
 ## Insights
 
@@ -26,7 +28,7 @@ _70/30 input/output split assumed; harness reports only total_tokens; 17 of 17 d
 
 ## Repo health snapshot
 
-_Measured at: 2026-05-09_
+_Measured at: 2026-05-10_
 
 | Métrica        | Valor | Threshold | Status |
 | -------------- | ----- | --------- | ------ |
