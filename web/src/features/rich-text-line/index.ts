@@ -6,4 +6,5 @@
  */
 
 export { RichTextLine } from './components/RichTextLine.js';
-export type { RichTextLineProps, RichTextValue } from './types.js';
+export type { RichTextLineProps, RichTextBlockProps, RichTextValue } from './types.js';
+export { RichTextBlock } from './components/RichTextBlock.js';

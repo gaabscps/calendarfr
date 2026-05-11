@@ -19,6 +19,11 @@ export interface SanitizeHtmlOptions {
    * result fits on a single line (paste invariant — AC-017).
    */
   collapseToSingleLine?: boolean;
+  /**
+   * When true, <p> and <br> tags are added to the allowed list so that
+   * paragraph structure is preserved on paste (AC-033).
+   */
+  allowParagraphs?: boolean;
 }
 
 const ALLOWED_TAGS = ['b', 'i', 'u', 's'] as const;
@@ -39,8 +44,13 @@ export function sanitizeHtml(input: string, opts: SanitizeHtmlOptions = {}): str
       .replace(/<br\s*\/?>/gi, ' ');
   }
 
+  const allowedTags: string[] = [...ALLOWED_TAGS];
+  if (opts.allowParagraphs) {
+    allowedTags.push('p', 'br');
+  }
+
   const clean = DOMPurify.sanitize(html, {
-    ALLOWED_TAGS: [...ALLOWED_TAGS],
+    ALLOWED_TAGS: allowedTags,
     ALLOWED_ATTR: [],
     KEEP_CONTENT: true,
   });

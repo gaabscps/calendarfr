@@ -5,7 +5,7 @@
 > Feature: priorities — Top 3 prioridades do dia (checkbox + RichTextLine)
 > Task ID: FEAT-008
 > Phase: done
-> Generated at: 2026-05-11T14:53:19.339Z
+> Generated at: 2026-05-11T21:24:10.172Z
 
 ## Insights
 

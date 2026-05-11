@@ -20,6 +20,14 @@
   outline: none;
   overflow-wrap: break-word;
   word-break: break-word;
+  line-height: 24px;
+  font-size: 18px;
+}
+
+/* Reset browser UA stylesheet margins on <p> inside ProseMirror. */
+.wrapper :global(.ProseMirror p) {
+  margin: 0;
+  padding: 0;
 }
 
 /* Focus ring — keyboard-accessible only, not pointer-focus (WCAG 2.1 AA). */

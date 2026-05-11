@@ -69,3 +69,21 @@
     gap: var(--spacing-md, 12px);
   }
 }
+
+/* ── Section labels and column wrappers (AC-022–AC-025) ─────────────────────── */
+
+.sectionLabel {
+  font-family: var(--font-hand, 'Caveat', cursive);
+  font-size: 0.875rem;
+  font-weight: normal;
+  color: var(--color-ink-muted, #9a8a72);
+  margin: 0 0 4px 0;
+  padding: 0;
+  line-height: 24px;
+}
+
+.prioritiesCol {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}

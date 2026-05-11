@@ -7,6 +7,6 @@
 .section {
   display: flex;
   flex-direction: column;
-  gap: 8px; /* ~var(--spacing-sm) */
+  gap: 0;
   width: 100%;
 }

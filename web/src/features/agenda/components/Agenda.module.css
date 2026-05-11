@@ -8,6 +8,6 @@
 .section {
   display: flex;
   flex-direction: column;
-  gap: 4px; /* tight rows, distinguishable without excessive spacing */
+  gap: 0; /* AC-004: no gap between slot rows */
   width: 100%;
 }

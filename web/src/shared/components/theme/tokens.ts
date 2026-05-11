@@ -13,15 +13,16 @@ export const colors = {
 export const fonts = {
   hand: "'Caveat', cursive",
   body: "'Inter', sans-serif",
+  mono: "'Courier New', Courier, monospace",
 } as const;
 
 export const paper = {
   rule: `repeating-linear-gradient(
     to bottom,
     transparent,
-    transparent 17px,
-    #e8e0d0 17px,
-    #e8e0d0 18px
+    transparent 23px,
+    #e8e0d0 23px,
+    #e8e0d0 24px
   )`,
 } as const;
 

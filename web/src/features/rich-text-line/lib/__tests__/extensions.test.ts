@@ -8,7 +8,7 @@
 import { renderHook, act, waitFor } from '@testing-library/react';
 
 import { useRichTextLine } from '../../hooks/useRichTextLine.js';
-import { buildExtensions } from '../extensions.js';
+import { buildExtensions, buildExtensionsBlock } from '../extensions.js';
 import { SingleLineParagraph } from '../singleLineParagraph.js';
 
 // ─── buildExtensions — default param branch ──────────────────────────────────
@@ -44,6 +44,32 @@ describe('buildExtensions — default argument (line 57)', () => {
     expect(ph).toBeDefined();
     // The placeholder extension exists with the given text.
     // options may be stored differently by Tiptap; existence check is sufficient.
+  });
+});
+
+// ─── buildExtensionsBlock — does NOT include SingleLineParagraph ─────────────
+
+describe('buildExtensionsBlock — AC-031', () => {
+  it('returns an array that does NOT contain SingleLineParagraph', () => {
+    const exts = buildExtensionsBlock();
+    expect(exts).not.toContain(SingleLineParagraph);
+  });
+
+  it('returns extensions including paragraph, bold, italic, underline, strike, history', () => {
+    const exts = buildExtensionsBlock();
+    const names = exts.map((e) => e.name);
+    expect(names).toContain('paragraph');
+    expect(names).toContain('bold');
+    expect(names).toContain('italic');
+    expect(names).toContain('underline');
+    expect(names).toContain('strike');
+    expect(names).toContain('history');
+  });
+
+  it('returns extensions with placeholder configured (empty placeholder when no opts)', () => {
+    const exts = buildExtensionsBlock();
+    const ph = exts.find((e) => e.name === 'placeholder');
+    expect(ph).toBeDefined();
   });
 });
 

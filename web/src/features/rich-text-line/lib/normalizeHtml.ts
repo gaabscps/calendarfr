@@ -57,3 +57,36 @@ export function normalizeHtml(html: string): string {
 
   return trimmed;
 }
+
+/**
+ * Normalise an HTML string for block (multi-paragraph) content:
+ *
+ * 1. Trim surrounding whitespace.
+ * 2. If the trimmed value is the empty string, return "".
+ * 3. If the value is wrapped in a single outer <p …>…</p>:
+ *    a. Extract the inner content.
+ *    b. If the inner content is empty/whitespace/<br>, return "" (AC-023).
+ *    c. Otherwise return the full <p>…</p> as-is (unlike normalizeHtml, the
+ *       outer <p> is preserved so that multi-paragraph round-trips are stable).
+ * 4. For anything else (multi-paragraph, plain text, etc.), return trimmed as-is.
+ *
+ * AC-032: block normaliser keeps <p> structure for non-empty content.
+ */
+export function normalizeBlockHtml(html: string): string {
+  const trimmed = html.trim();
+
+  if (trimmed === '') {
+    return '';
+  }
+
+  // Strip all empty paragraph variants (<p></p>, <p><br></p>, etc.).
+  // After stripping, if nothing remains the whole input was empty (AC-039-e).
+  const stripped = trimmed.replace(/<p[^>]*>\s*(<br\s*\/?>\s*)?<\/p>/g, '').trim();
+
+  if (!stripped) {
+    return '';
+  }
+
+  // Non-empty content: keep outer <p> wrapper (block semantics — AC-032).
+  return trimmed;
+}

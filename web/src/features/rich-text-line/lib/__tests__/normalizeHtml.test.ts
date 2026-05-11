@@ -1,8 +1,9 @@
 /**
  * Unit tests for normalizeHtml — AC-023, AC-026, AC-028.
+ * Unit tests for normalizeBlockHtml — AC-032.
  */
 
-import { normalizeHtml } from '../normalizeHtml.js';
+import { normalizeHtml, normalizeBlockHtml } from '../normalizeHtml.js';
 
 // ─── Empty representations → "" ──────────────────────────────────────────────
 
@@ -93,6 +94,38 @@ describe('normalizeHtml — non-empty values preserved after normalisation', () 
 
   it('returns a non-empty paragraph with leading/trailing whitespace trimmed', () => {
     expect(normalizeHtml('  <p>text</p>  ')).toBe('text');
+  });
+});
+
+// ─── AC-032: normalizeBlockHtml — keeps <p> structure for non-empty content ──
+
+describe('normalizeBlockHtml — AC-032', () => {
+  it('maps empty string to ""', () => {
+    expect(normalizeBlockHtml('')).toBe('');
+  });
+
+  it('maps "<p></p>" to ""', () => {
+    expect(normalizeBlockHtml('<p></p>')).toBe('');
+  });
+
+  it('maps "<p><br></p>" to ""', () => {
+    expect(normalizeBlockHtml('<p><br></p>')).toBe('');
+  });
+
+  it('keeps outer <p> for non-empty single paragraph', () => {
+    expect(normalizeBlockHtml('<p>texto</p>')).toBe('<p>texto</p>');
+  });
+
+  it('keeps multiple paragraphs as-is', () => {
+    expect(normalizeBlockHtml('<p>a</p><p>b</p>')).toBe('<p>a</p><p>b</p>');
+  });
+
+  it('maps "<p></p><p></p>" (multiple empty paragraphs) to ""', () => {
+    expect(normalizeBlockHtml('<p></p><p></p>')).toBe('');
+  });
+
+  it('maps "<p><br></p><p><br></p>" to ""', () => {
+    expect(normalizeBlockHtml('<p><br></p><p><br></p>')).toBe('');
   });
 });
 

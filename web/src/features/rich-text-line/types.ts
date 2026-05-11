@@ -9,6 +9,25 @@
 /** HTML string restricted to the allowed tag set: <b>, <i>, <u>, <s>. */
 export type RichTextValue = string;
 
+/** Props for the RichTextBlock controlled multi-paragraph component. */
+export interface RichTextBlockProps {
+  /** Current HTML value — controlled. */
+  value: RichTextValue;
+  /** Called with normalised block HTML on every editor change. */
+  onChange: (html: RichTextValue) => void;
+  /** Optional placeholder shown when editor is empty. */
+  placeholder?: string;
+  /** aria-label applied to the contenteditable element. */
+  ariaLabel?: string;
+  /** Whether to focus the editor on mount. Default: false. */
+  autoFocus?: boolean;
+  /** When true the editor is read-only. Default: false. */
+  disabled?: boolean;
+  /** CSS class forwarded to the wrapper element. */
+  className?: string;
+  // No onEnter — Enter is functional in block editor
+}
+
 /** Props for the RichTextLine controlled component. */
 export interface RichTextLineProps {
   /** Current HTML value — controlled. */

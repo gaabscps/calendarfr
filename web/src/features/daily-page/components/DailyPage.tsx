@@ -144,19 +144,26 @@ export function DailyPage({ initialDate }: DailyPageProps = {}) {
             {/* Header row: priorities + mood — full width on desktop, stacked on mobile */}
             <div className={styles.topRow}>
               {/* AC-003: Priorities via barrel only */}
-              <Priorities value={toPrioritiesTuple(data)} onChange={setPriorities} />
+              <div className={styles.prioritiesCol}>
+                <h2 className={styles.sectionLabel}>Prioridades</h2>
+                <Priorities value={toPrioritiesTuple(data)} onChange={setPriorities} />
+              </div>
               {/* AC-003: MoodPicker via barrel only */}
               <MoodPicker value={data.mood} onChange={setMood} />
             </div>
 
             {/* Left column: Agenda */}
             <div className={styles.agendaCol}>
+              {/* AC-023: visible section label */}
+              <h2 className={styles.sectionLabel}>Agenda</h2>
               {/* AC-003: Agenda via barrel only */}
               <Agenda value={toAgendaSlots(data)} onChange={setAgenda} />
             </div>
 
             {/* Right column: Notes */}
             <div className={styles.notesCol}>
+              {/* AC-024: visible section label */}
+              <h2 className={styles.sectionLabel}>Notas</h2>
               {/* AC-003: Notes via barrel only */}
               <Notes value={data.notes} onChange={setNotes} />
             </div>

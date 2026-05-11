@@ -12,9 +12,8 @@
 .note {
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: flex-start;
   gap: 4px; /* --spacing-xs */
-  padding-block: 2px;
   width: 100%;
 }
 

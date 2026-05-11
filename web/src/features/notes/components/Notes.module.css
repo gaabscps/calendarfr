@@ -12,7 +12,7 @@
 .list {
   display: flex;
   flex-direction: column;
-  gap: 2px; /* tight vertical spacing between note rows */
+  gap: 0; /* AC-014: no gap between note rows */
   width: 100%;
 }
 

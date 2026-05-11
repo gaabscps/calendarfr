@@ -4,7 +4,7 @@
  * Covers: AC-006, AC-008, AC-009, AC-011, AC-013, AC-014, AC-017.
  *
  * Sister files: Notes.integration.test.tsx (structure/ARIA), Notes.memo.test.tsx
- * (NFR-002 render-counter). RichTextLine mocked to <input> per file (regra
+ * (NFR-002 render-counter). RichTextBlock mocked to <input> per file (regra
  * inviolável #3 + jest.mock per-file hoisting).
  */
 
@@ -16,8 +16,8 @@ import { Notes } from '../Notes.js';
 
 import { renderWithProviders, userEvent } from '@/test-utils';
 
-jest.mock('@/features/rich-text-line', () => ({
-  RichTextLine: ({
+jest.mock('@/features/rich-text-line', () => {
+  const Editor = ({
     value,
     onChange,
     ariaLabel,
@@ -39,8 +39,9 @@ jest.mock('@/features/rich-text-line', () => ({
       autoFocus={autoFocus}
       onChange={(e) => onChange(e.target.value)}
     />
-  ),
-}));
+  );
+  return { RichTextLine: Editor, RichTextBlock: Editor };
+});
 
 function Container({ initial, spy }: { initial?: Note[]; spy?: (_n: Note[]) => void }) {
   const [value, setValue] = useState<Note[]>(initial ?? []);

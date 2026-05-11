@@ -10,5 +10,5 @@
 
 .ruled {
   background-image: var(--paper-rule);
-  background-size: 100% 18px;
+  background-size: 100% 24px;
 }

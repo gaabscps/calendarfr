@@ -1,5 +1,5 @@
 /**
- * NoteItem — single note row: prefix button + RichTextLine editor + remove button.
+ * NoteItem — single note row: prefix button + RichTextBlock editor + remove button.
  *
  * Wrapped in React.memo with default shallow comparator (NFR-002).
  * Receives stable unbound handlers (onChangeText/onCyclePrefix/onRemove accept `id`)
@@ -16,7 +16,7 @@
 
 import React, { useCallback } from 'react';
 
-import { RichTextLine } from '@/features/rich-text-line';
+import { RichTextBlock } from '@/features/rich-text-line';
 
 import type { Note } from '../types.js';
 
@@ -79,7 +79,7 @@ function NoteItemBase({
 
       {/* Editor fills remaining width */}
       <div className={styles.editor}>
-        <RichTextLine
+        <RichTextBlock
           value={note.text}
           onChange={handleChangeText}
           ariaLabel={editorAriaLabel}

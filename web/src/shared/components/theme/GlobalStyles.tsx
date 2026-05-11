@@ -32,6 +32,7 @@ const css = `
     --paper-rule: ${paper.rule};
     --font-hand: ${fonts.hand};
     --font-body: ${fonts.body};
+    --font-mono: ${fonts.mono};
     --shadow-paper: ${shadows.paper};
     --shadow-floating: ${shadows.floating};
     --radius-sm: ${radii.sm}px;

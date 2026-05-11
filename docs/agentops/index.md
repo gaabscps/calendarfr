@@ -1,6 +1,6 @@
 # AgentOps observability — overview
 
-> Generated at: 2026-05-11T14:53:19.339Z | Total flows: 10
+> Generated at: 2026-05-11T21:24:10.172Z | Total flows: 11
 
 ## Repo health snapshot
 
@@ -27,11 +27,12 @@ _Measured at: 2026-05-11_
 | ✓ FEAT-008 | ⊘      | priorities — Top 3 prioridades do dia (checkbox + RichTextLine)                      | done  | done   | 13         | 26  | 0.50    | 0.0%  | $3.2067  | $0.1233 | 2026-05-09 |
 | ✓ FEAT-012 | ✓      | daily-page — orquestrador do dia (composição, navegação, autosave)                   | done  | done   | 38         | 54  | 0.70    | 0.0%  | $71.1441 | $1.3175 | 2026-05-11 |
 | ✓ FEAT-013 | ✓      | e2e-mvp-closer                                                                       | done  | done   | 11         | 7   | 1.57    | 0.0%  | $1.9545  | $0.2792 |            |
+| ✓ FEAT-014 | ✓      | ux-mvp-polish — alinhamento de linhas, notas multi-linha e polimento visual          | done  | done   | 68         | 44  | 1.55    | 0.0%  | —        | —       | 2026-05-11 |
 
 _Compl. legend:_ ✓ standard · ◐ pré-padrão (excluído de trends/health) · ⊘ pm-bypass (excluído de trends/health)
 
 ## Trends
 
-- Dispatches/AC: FEAT-012=0.70 → FEAT-013=1.57 (+123.3%)
-- Dev task success rate: FEAT-012=100.0% → FEAT-013=100.0% (0.0%)
+- Dispatches/AC: FEAT-013=1.57 → FEAT-014=1.55 (-1.7%)
+- Dev task success rate: FEAT-013=100.0% → FEAT-014=100.0% (0.0%)
 - Cost per AC: FEAT-007=$0.6571 → FEAT-013=$0.2792 (-57.5%)

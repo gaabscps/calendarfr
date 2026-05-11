@@ -19,8 +19,8 @@ import { renderWithProviders } from '@/test-utils';
 
 const renderCounts: Record<string, number> = {};
 
-jest.mock('@/features/rich-text-line', () => ({
-  RichTextLine: ({
+jest.mock('@/features/rich-text-line', () => {
+  const Editor = ({
     value,
     onChange,
     ariaLabel,
@@ -44,8 +44,9 @@ jest.mock('@/features/rich-text-line', () => ({
         onChange={(e) => onChange(e.target.value)}
       />
     );
-  },
-}));
+  };
+  return { RichTextLine: Editor, RichTextBlock: Editor };
+});
 
 beforeEach(() => {
   for (const k of Object.keys(renderCounts)) {
