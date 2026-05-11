@@ -1,0 +1,54 @@
+/**
+ * RichTextBlock styles — CSS Module.
+ *
+ * Multi-paragraph variant of RichTextLine. Same ProseMirror rules applied,
+ * with an added min-height so an empty note does not collapse to 0px.
+ *
+ * Tokens reference: CSS custom properties defined by GlobalStyles (FEAT-001).
+ */
+
+.wrapper {
+  /* Container is intentionally unstyled — consumers apply their own layout. */
+  display: block;
+  min-height: 24px;
+}
+
+/* Strip the default outline from the ProseMirror container itself. */
+.wrapper :global(.ProseMirror) {
+  outline: none;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  line-height: 24px;
+  font-size: 18px;
+}
+
+/* Reset browser UA stylesheet margins on <p> inside ProseMirror. */
+.wrapper :global(.ProseMirror p) {
+  margin: 0;
+  padding: 0;
+}
+
+/* Focus ring — keyboard-accessible only, not pointer-focus (WCAG 2.1 AA). */
+.wrapper :global(.ProseMirror:focus-visible) {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/**
+ * Placeholder text rendered by Tiptap's Placeholder extension.
+ *
+ * The extension marks the first paragraph as "is-editor-empty" and attaches
+ * the placeholder string as a data-placeholder attribute on the <p>. We use
+ * ::before to render it as decorative text (not in the DOM / accessible tree).
+ *
+ * pointer-events: none prevents accidental selection of the pseudo-content.
+ */
+.wrapper :global(.tiptap p.is-editor-empty:first-child::before) {
+  content: attr(data-placeholder);
+  color: var(--ink-muted);
+  pointer-events: none;
+  /* float + height keep the placeholder inline without disturbing layout. */
+  float: left;
+  height: 0;
+}

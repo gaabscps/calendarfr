@@ -1,5 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
+import { RichTextLine } from '@/features/rich-text-line';
+
 import { PaperSheet } from './PaperSheet';
 
 const meta = {
@@ -57,5 +59,31 @@ export const WithoutRules: Story = {
   args: {
     ruled: false,
     children: 'Sem linhas pautadas',
+  },
+};
+
+/**
+ * RuledWithEditor — visual inspection story for 24px grid alignment.
+ * Renders 3 rows of RichTextLine inside a ruled+padded PaperSheet so
+ * that reviewers can confirm text sits on the paper lines after the
+ * background-size: 100% 24px change (AC-015).
+ */
+export const RuledWithEditor: Story = {
+  args: {
+    ruled: true,
+    padded: true,
+    children: (
+      <div>
+        <div>
+          <RichTextLine value="Texto de exemplo na linha do papel" onChange={() => undefined} />
+        </div>
+        <div>
+          <RichTextLine value="Segunda linha — alinhamento verificado" onChange={() => undefined} />
+        </div>
+        <div>
+          <RichTextLine value="Terceira linha — grid de 24px" onChange={() => undefined} />
+        </div>
+      </div>
+    ),
   },
 };
