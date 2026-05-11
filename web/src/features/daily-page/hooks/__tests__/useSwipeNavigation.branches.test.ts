@@ -263,6 +263,95 @@ describe('useSwipeNavigation — pointerCancel inactive branch (line 133)', () =
 });
 
 // ---------------------------------------------------------------------------
+// Guard: pointer capture NÃO é chamado quando target é elemento interativo
+// ---------------------------------------------------------------------------
+
+describe('useSwipeNavigation — onPointerDown skip para elementos interativos', () => {
+  it('não chama setPointerCapture quando target é <button>', () => {
+    const goToPrev = jest.fn().mockResolvedValue(undefined);
+    const goToNext = jest.fn().mockResolvedValue(undefined);
+    const { result } = renderHook(() => useSwipeNavigation({ goToPrev, goToNext }));
+
+    const container = makeContainer();
+    const button = document.createElement('button');
+    container.appendChild(button);
+
+    const downEvent = makePointerEvent('pointerdown', { pointerId: 1, clientX: 200 });
+    Object.defineProperty(downEvent, 'currentTarget', { value: container });
+    Object.defineProperty(downEvent, 'target', { value: button });
+
+    result.current.swipeProps.onPointerDown?.(
+      downEvent as unknown as React.PointerEvent<HTMLElement>,
+    );
+
+    expect(container.setPointerCapture).not.toHaveBeenCalled();
+  });
+
+  it('não chama setPointerCapture quando target é span DENTRO de <button>', () => {
+    const goToPrev = jest.fn().mockResolvedValue(undefined);
+    const goToNext = jest.fn().mockResolvedValue(undefined);
+    const { result } = renderHook(() => useSwipeNavigation({ goToPrev, goToNext }));
+
+    const container = makeContainer();
+    const button = document.createElement('button');
+    const span = document.createElement('span');
+    button.appendChild(span);
+    container.appendChild(button);
+
+    const downEvent = makePointerEvent('pointerdown', { pointerId: 1, clientX: 200 });
+    Object.defineProperty(downEvent, 'currentTarget', { value: container });
+    Object.defineProperty(downEvent, 'target', { value: span }); // span é o target real do click
+
+    result.current.swipeProps.onPointerDown?.(
+      downEvent as unknown as React.PointerEvent<HTMLElement>,
+    );
+
+    expect(container.setPointerCapture).not.toHaveBeenCalled();
+  });
+
+  it('não chama setPointerCapture quando target é <input type="checkbox">', () => {
+    const goToPrev = jest.fn().mockResolvedValue(undefined);
+    const goToNext = jest.fn().mockResolvedValue(undefined);
+    const { result } = renderHook(() => useSwipeNavigation({ goToPrev, goToNext }));
+
+    const container = makeContainer();
+    const checkbox = document.createElement('input');
+    checkbox.type = 'checkbox';
+    container.appendChild(checkbox);
+
+    const downEvent = makePointerEvent('pointerdown', { pointerId: 1, clientX: 200 });
+    Object.defineProperty(downEvent, 'currentTarget', { value: container });
+    Object.defineProperty(downEvent, 'target', { value: checkbox });
+
+    result.current.swipeProps.onPointerDown?.(
+      downEvent as unknown as React.PointerEvent<HTMLElement>,
+    );
+
+    expect(container.setPointerCapture).not.toHaveBeenCalled();
+  });
+
+  it('AINDA chama setPointerCapture quando target é div (área de swipe)', () => {
+    const goToPrev = jest.fn().mockResolvedValue(undefined);
+    const goToNext = jest.fn().mockResolvedValue(undefined);
+    const { result } = renderHook(() => useSwipeNavigation({ goToPrev, goToNext }));
+
+    const container = makeContainer();
+    const innerDiv = document.createElement('div');
+    container.appendChild(innerDiv);
+
+    const downEvent = makePointerEvent('pointerdown', { pointerId: 1, clientX: 200 });
+    Object.defineProperty(downEvent, 'currentTarget', { value: container });
+    Object.defineProperty(downEvent, 'target', { value: innerDiv });
+
+    result.current.swipeProps.onPointerDown?.(
+      downEvent as unknown as React.PointerEvent<HTMLElement>,
+    );
+
+    expect(container.setPointerCapture).toHaveBeenCalledWith(1);
+  });
+});
+
+// ---------------------------------------------------------------------------
 // Confirm: small deltaX does NOT navigate (below 80px threshold)
 // This covers the else branch in detectSwipe via the hook
 // ---------------------------------------------------------------------------

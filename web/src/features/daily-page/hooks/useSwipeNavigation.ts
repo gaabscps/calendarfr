@@ -64,6 +64,12 @@ export function useSwipeNavigation({
     if (isEditableTarget(e.target)) {
       return;
     }
+    // Skip capture for interactive elements so their onClick handlers fire normally.
+    // setPointerCapture would redirect pointerup to this container, causing click
+    // to be dispatched here instead of on the button/checkbox/link.
+    if (e.target instanceof Element && e.target.closest('button, a, input, select, label')) {
+      return;
+    }
 
     // Capture pointer so move/up still fire even if pointer leaves the element
     e.currentTarget.setPointerCapture(e.pointerId);
