@@ -566,16 +566,16 @@
     <header class="kpi-bar">
       <h1>
         daily-page — orquestrador do dia (composição, navegação, autosave)
-        <span class="badge badge-neutral">…</span>
+        <span class="badge badge-warn">⚠</span>
       </h1>
       <div class="kpis">
-        <span>—</span>
-        <span>$31.33</span>
-        <span class="kpi-sub">$0.580/AC</span>
-        <span>0/54 ACs</span>
+        <span>8h9m</span>
+        <span>$71.14</span>
+        <span class="kpi-sub">$1.317/AC</span>
+        <span>54/54 ACs</span>
         <span>mut 70.7%</span>
         <span>type 97.7%</span>
-        <span>0 loops</span>
+        <span>19 loops</span>
       </div>
     </header>
 
@@ -590,10 +590,10 @@
           <div class="story-card__stats">
             <span class="story-card__stat"
               ><span class="story-card__stat-label">time</span>
-              <span class="story-card__stat-value">8h11m</span></span
+              <span class="story-card__stat-value">9h55m</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">cost</span>
-              <span class="story-card__stat-value">$31.33</span></span
+              <span class="story-card__stat-value">$57.67</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">tasks</span>
               <span class="story-card__stat-value">0</span></span
@@ -605,7 +605,7 @@
               <span class="story-card__stat-value">0</span></span
             ><span class="story-card__pipeline">pm-orchestrator</span>
           </div>
-          <p class="story-card__summary">PM/orchestrator session (Stop hook): 253 turns</p>
+          <p class="story-card__summary">PM/orchestrator session (Stop hook): 466 turns</p>
           <div class="story-card__drilldowns">
             <details>
               <summary>Files changed (0)</summary>
@@ -642,8 +642,8 @@
                     <td>pm-orchestrator</td>
                     <td>pm-orchestrator-dcab8b2e</td>
                     <td>—</td>
-                    <td>8h11m</td>
-                    <td>33472479</td>
+                    <td>9h55m</td>
+                    <td>68062724</td>
                     <td>done</td>
                   </tr>
                 </tbody>
@@ -651,7 +651,766 @@
             </details>
             <details>
               <summary>PM note</summary>
-              <p class="story-card__pmnote">PM/orchestrator session (Stop hook): 253 turns</p>
+              <p class="story-card__pmnote">PM/orchestrator session (Stop hook): 466 turns</p>
+            </details>
+          </div>
+        </article>
+        <article class="story-card story-card--done-retried" aria-label="batch BATCH-A">
+          <header>
+            <h3>BATCH-A</h3>
+            <span class="badge badge-warn" aria-label="status: done with retries"
+              >↻ done (retried)</span
+            >
+          </header>
+          <div class="story-card__stats">
+            <span class="story-card__stat"
+              ><span class="story-card__stat-label">time</span>
+              <span class="story-card__stat-value">0ms</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">cost</span>
+              <span class="story-card__stat-value">$1.67</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">tasks</span>
+              <span class="story-card__stat-value">0</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">ACs</span>
+              <span class="story-card__stat-value">0</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">files</span>
+              <span class="story-card__stat-value">0</span></span
+            ><span class="story-card__pipeline">dev → code-reviewer ‖ logic-reviewer</span>
+          </div>
+          <aside class="story-card__retry" role="status">
+            ⚠ dev retried 1× — loop 2: Dev L2: todos 5 findings fixed (allow-list text-inputs, clamp
+            [0,2], contentedi…
+          </aside>
+          <aside class="story-card__retry" role="status">
+            ⚠ code-reviewer retried 1× — loop 2: Approve L2.
+          </aside>
+          <aside class="story-card__retry" role="status">
+            ⚠ logic-reviewer retried 1× — loop 2: Approve L2 — todos findings closed.
+          </aside>
+          <p class="story-card__summary">Approve L2 — todos findings closed.</p>
+          <div class="story-card__drilldowns">
+            <details>
+              <summary>Files changed (0)</summary>
+              <table class="story-card__files">
+                <thead>
+                  <tr>
+                    <th>path</th>
+                    <th>action</th>
+                    <th>tasks</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </details>
+            <details>
+              <summary>ACs covered (0)</summary>
+              <ul class="story-card__acs"></ul>
+            </details>
+            <details>
+              <summary>Pipeline trace (6 dispatches)</summary>
+              <table class="story-card__pipeline-trace">
+                <thead>
+                  <tr>
+                    <th>role</th>
+                    <th>dispatch_id</th>
+                    <th>loop</th>
+                    <th>duration</th>
+                    <th>tokens</th>
+                    <th>status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>dev</td>
+                    <td>FEAT-012-BATCH-A-dev-L1</td>
+                    <td>—</td>
+                    <td>16m 21s</td>
+                    <td>113011</td>
+                    <td>done</td>
+                  </tr>
+                  <tr>
+                    <td>code-reviewer</td>
+                    <td>FEAT-012-BATCH-A-code-r…</td>
+                    <td>—</td>
+                    <td>1m 5s</td>
+                    <td>14500</td>
+                    <td>done</td>
+                  </tr>
+                  <tr>
+                    <td>logic-reviewer</td>
+                    <td>FEAT-012-BATCH-A-logic-…</td>
+                    <td>—</td>
+                    <td>3m</td>
+                    <td>48000</td>
+                    <td>done</td>
+                  </tr>
+                  <tr>
+                    <td>dev</td>
+                    <td>FEAT-012-BATCH-A-dev-L2</td>
+                    <td>2</td>
+                    <td>4m 40s</td>
+                    <td>62000</td>
+                    <td>done</td>
+                  </tr>
+                  <tr>
+                    <td>code-reviewer</td>
+                    <td>FEAT-012-BATCH-A-code-r…</td>
+                    <td>2</td>
+                    <td>50s</td>
+                    <td>9000</td>
+                    <td>done</td>
+                  </tr>
+                  <tr>
+                    <td>logic-reviewer</td>
+                    <td>FEAT-012-BATCH-A-logic-…</td>
+                    <td>2</td>
+                    <td>1m 50s</td>
+                    <td>22000</td>
+                    <td>done</td>
+                  </tr>
+                </tbody>
+              </table>
+            </details>
+            <details>
+              <summary>PM note</summary>
+              <p class="story-card__pmnote">Approve L2 — todos findings closed.</p>
+            </details>
+          </div>
+        </article>
+        <article class="story-card story-card--done-retried" aria-label="batch BATCH-B">
+          <header>
+            <h3>BATCH-B</h3>
+            <span class="badge badge-warn" aria-label="status: done with retries"
+              >↻ done (retried)</span
+            >
+          </header>
+          <div class="story-card__stats">
+            <span class="story-card__stat"
+              ><span class="story-card__stat-label">time</span>
+              <span class="story-card__stat-value">0ms</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">cost</span>
+              <span class="story-card__stat-value">$1.86</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">tasks</span>
+              <span class="story-card__stat-value">0</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">ACs</span>
+              <span class="story-card__stat-value">0</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">files</span>
+              <span class="story-card__stat-value">0</span></span
+            ><span class="story-card__pipeline">dev → code-reviewer ‖ logic-reviewer</span>
+          </div>
+          <aside class="story-card__retry" role="status">
+            ⚠ dev retried 2× — loop 2: Split 342→201+153+63 LOC; .catch(console.error) keyboard;
+            round-trip Date.UTC v…; loop 3: L3 final: swipe .catch consistency.
+          </aside>
+          <aside class="story-card__retry" role="status">
+            ⚠ code-reviewer retried 1× — loop 2: Approve L2.
+          </aside>
+          <aside class="story-card__retry" role="status">
+            ⚠ logic-reviewer retried 1× — loop 2: L2: 1 minor — swipe path void mirrored same issue
+            → L3 consistency fix.
+          </aside>
+          <p class="story-card__summary">L3 final: swipe . catch consistency.</p>
+          <div class="story-card__drilldowns">
+            <details>
+              <summary>Files changed (0)</summary>
+              <table class="story-card__files">
+                <thead>
+                  <tr>
+                    <th>path</th>
+                    <th>action</th>
+                    <th>tasks</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </details>
+            <details>
+              <summary>ACs covered (0)</summary>
+              <ul class="story-card__acs"></ul>
+            </details>
+            <details>
+              <summary>Pipeline trace (7 dispatches)</summary>
+              <table class="story-card__pipeline-trace">
+                <thead>
+                  <tr>
+                    <th>role</th>
+                    <th>dispatch_id</th>
+                    <th>loop</th>
+                    <th>duration</th>
+                    <th>tokens</th>
+                    <th>status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>dev</td>
+                    <td>FEAT-012-BATCH-B-dev-L1</td>
+                    <td>—</td>
+                    <td>10m 20s</td>
+                    <td>95000</td>
+                    <td>done</td>
+                  </tr>
+                  <tr>
+                    <td>code-reviewer</td>
+                    <td>FEAT-012-BATCH-B-code-r…</td>
+                    <td>—</td>
+                    <td>1m 10s</td>
+                    <td>11000</td>
+                    <td>done</td>
+                  </tr>
+                  <tr>
+                    <td>logic-reviewer</td>
+                    <td>FEAT-012-BATCH-B-logic-…</td>
+                    <td>—</td>
+                    <td>3m 40s</td>
+                    <td>55000</td>
+                    <td>done</td>
+                  </tr>
+                  <tr>
+                    <td>dev</td>
+                    <td>FEAT-012-BATCH-B-dev-L2</td>
+                    <td>2</td>
+                    <td>6m 20s</td>
+                    <td>78000</td>
+                    <td>done</td>
+                  </tr>
+                  <tr>
+                    <td>code-reviewer</td>
+                    <td>FEAT-012-BATCH-B-code-r…</td>
+                    <td>2</td>
+                    <td>45s</td>
+                    <td>8000</td>
+                    <td>done</td>
+                  </tr>
+                  <tr>
+                    <td>logic-reviewer</td>
+                    <td>FEAT-012-BATCH-B-logic-…</td>
+                    <td>2</td>
+                    <td>2m 30s</td>
+                    <td>30000</td>
+                    <td>done</td>
+                  </tr>
+                  <tr>
+                    <td>dev</td>
+                    <td>FEAT-012-BATCH-B-dev-L3</td>
+                    <td>3</td>
+                    <td>1m 20s</td>
+                    <td>18000</td>
+                    <td>done</td>
+                  </tr>
+                </tbody>
+              </table>
+            </details>
+            <details>
+              <summary>PM note</summary>
+              <p class="story-card__pmnote">L3 final: swipe .catch consistency.</p>
+            </details>
+          </div>
+        </article>
+        <article class="story-card story-card--done-retried" aria-label="batch BATCH-C">
+          <header>
+            <h3>BATCH-C</h3>
+            <span class="badge badge-warn" aria-label="status: done with retries"
+              >↻ done (retried)</span
+            >
+          </header>
+          <div class="story-card__stats">
+            <span class="story-card__stat"
+              ><span class="story-card__stat-label">time</span>
+              <span class="story-card__stat-value">0ms</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">cost</span>
+              <span class="story-card__stat-value">$4.49</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">tasks</span>
+              <span class="story-card__stat-value">0</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">ACs</span>
+              <span class="story-card__stat-value">0</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">files</span>
+              <span class="story-card__stat-value">0</span></span
+            ><span class="story-card__pipeline">dev → code-reviewer ‖ logic-reviewer</span>
+          </div>
+          <aside class="story-card__retry" role="status">
+            ⚠ dev retried 2× — loop 2: L2: retryRejectRef + AbortError catch; debounce drop fix;
+            beforeunload &#39;dirty&#39; …; loop 3: L3 escalado para opus high (matriz nota²: núcleo
+            complexo, última chance). Redu…
+          </aside>
+          <aside class="story-card__retry" role="status">
+            ⚠ code-reviewer retried 1× — loop 2: Approve L2.
+          </aside>
+          <aside class="story-card__retry" role="status">
+            ⚠ logic-reviewer retried 2× — loop 2: L2: MAJOR-F2 not-fixed — Effect 2 cleanup ordering
+            torna fire-and-forget unreac…; loop 3: Approve L3 — todos findings closed.
+          </aside>
+          <p class="story-card__summary">Approve L3 — todos findings closed.</p>
+          <div class="story-card__drilldowns">
+            <details>
+              <summary>Files changed (0)</summary>
+              <table class="story-card__files">
+                <thead>
+                  <tr>
+                    <th>path</th>
+                    <th>action</th>
+                    <th>tasks</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </details>
+            <details>
+              <summary>ACs covered (0)</summary>
+              <ul class="story-card__acs"></ul>
+            </details>
+            <details>
+              <summary>Pipeline trace (8 dispatches)</summary>
+              <table class="story-card__pipeline-trace">
+                <thead>
+                  <tr>
+                    <th>role</th>
+                    <th>dispatch_id</th>
+                    <th>loop</th>
+                    <th>duration</th>
+                    <th>tokens</th>
+                    <th>status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>dev</td>
+                    <td>FEAT-012-BATCH-C-dev-L1</td>
+                    <td>—</td>
+                    <td>15m 20s</td>
+                    <td>145000</td>
+                    <td>done</td>
+                  </tr>
+                  <tr>
+                    <td>code-reviewer</td>
+                    <td>FEAT-012-BATCH-C-code-r…</td>
+                    <td>—</td>
+                    <td>2m 45s</td>
+                    <td>79682</td>
+                    <td>done</td>
+                  </tr>
+                  <tr>
+                    <td>logic-reviewer</td>
+                    <td>FEAT-012-BATCH-C-logic-…</td>
+                    <td>—</td>
+                    <td>4m 12s</td>
+                    <td>81622</td>
+                    <td>done</td>
+                  </tr>
+                  <tr>
+                    <td>dev</td>
+                    <td>FEAT-012-BATCH-C-dev-L2</td>
+                    <td>2</td>
+                    <td>9m</td>
+                    <td>105000</td>
+                    <td>done</td>
+                  </tr>
+                  <tr>
+                    <td>code-reviewer</td>
+                    <td>FEAT-012-BATCH-C-code-r…</td>
+                    <td>2</td>
+                    <td>2m 9s</td>
+                    <td>35499</td>
+                    <td>done</td>
+                  </tr>
+                  <tr>
+                    <td>logic-reviewer</td>
+                    <td>FEAT-012-BATCH-C-logic-…</td>
+                    <td>2</td>
+                    <td>4m 3s</td>
+                    <td>56768</td>
+                    <td>done</td>
+                  </tr>
+                  <tr>
+                    <td>dev</td>
+                    <td>FEAT-012-BATCH-C-dev-L3</td>
+                    <td>3</td>
+                    <td>8m</td>
+                    <td>92000</td>
+                    <td>done</td>
+                  </tr>
+                  <tr>
+                    <td>logic-reviewer</td>
+                    <td>FEAT-012-BATCH-C-logic-…</td>
+                    <td>3</td>
+                    <td>52s</td>
+                    <td>23382</td>
+                    <td>done</td>
+                  </tr>
+                </tbody>
+              </table>
+            </details>
+            <details>
+              <summary>PM note</summary>
+              <p class="story-card__pmnote">Approve L3 — todos findings closed.</p>
+            </details>
+          </div>
+        </article>
+        <article class="story-card story-card--done-retried" aria-label="batch BATCH-D">
+          <header>
+            <h3>BATCH-D</h3>
+            <span class="badge badge-warn" aria-label="status: done with retries"
+              >↻ done (retried)</span
+            >
+          </header>
+          <div class="story-card__stats">
+            <span class="story-card__stat"
+              ><span class="story-card__stat-label">time</span>
+              <span class="story-card__stat-value">0ms</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">cost</span>
+              <span class="story-card__stat-value">$3.38</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">tasks</span>
+              <span class="story-card__stat-value">0</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">ACs</span>
+              <span class="story-card__stat-value">0</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">files</span>
+              <span class="story-card__stat-value">0</span></span
+            ><span class="story-card__pipeline">dev → code-reviewer ‖ logic-reviewer</span>
+          </div>
+          <aside class="story-card__retry" role="status">
+            ⚠ dev retried 2× — loop 2: L2: shared types fixed (tuple priorities/agenda); barrel
+            scrubbed; isAnimatingR…; loop 3: L3 final: 3 guard tests + skeleton-in-incoming with
+            within() + remove review co…
+          </aside>
+          <aside class="story-card__retry" role="status">
+            ⚠ code-reviewer retried 1× — loop 2: Approve L2 (1 minor novo: review-artifact comment).
+          </aside>
+          <aside class="story-card__retry" role="status">
+            ⚠ logic-reviewer retried 2× — loop 2: L2: 2 test rigor gaps remain (guard assertion
+            ausente; skeleton-in-incoming ver…; loop 3: Approve L3.
+          </aside>
+          <p class="story-card__summary">Approve L3.</p>
+          <div class="story-card__drilldowns">
+            <details>
+              <summary>Files changed (0)</summary>
+              <table class="story-card__files">
+                <thead>
+                  <tr>
+                    <th>path</th>
+                    <th>action</th>
+                    <th>tasks</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </details>
+            <details>
+              <summary>ACs covered (0)</summary>
+              <ul class="story-card__acs"></ul>
+            </details>
+            <details>
+              <summary>Pipeline trace (8 dispatches)</summary>
+              <table class="story-card__pipeline-trace">
+                <thead>
+                  <tr>
+                    <th>role</th>
+                    <th>dispatch_id</th>
+                    <th>loop</th>
+                    <th>duration</th>
+                    <th>tokens</th>
+                    <th>status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>dev</td>
+                    <td>FEAT-012-BATCH-D-dev-L1</td>
+                    <td>—</td>
+                    <td>12m</td>
+                    <td>110000</td>
+                    <td>done</td>
+                  </tr>
+                  <tr>
+                    <td>code-reviewer</td>
+                    <td>FEAT-012-BATCH-D-code-r…</td>
+                    <td>—</td>
+                    <td>2m 31s</td>
+                    <td>56286</td>
+                    <td>done</td>
+                  </tr>
+                  <tr>
+                    <td>logic-reviewer</td>
+                    <td>FEAT-012-BATCH-D-logic-…</td>
+                    <td>—</td>
+                    <td>2m 34s</td>
+                    <td>79553</td>
+                    <td>done</td>
+                  </tr>
+                  <tr>
+                    <td>dev</td>
+                    <td>FEAT-012-BATCH-D-dev-L2</td>
+                    <td>2</td>
+                    <td>10m 57s</td>
+                    <td>102037</td>
+                    <td>done</td>
+                  </tr>
+                  <tr>
+                    <td>code-reviewer</td>
+                    <td>FEAT-012-BATCH-D-code-r…</td>
+                    <td>2</td>
+                    <td>2m 8s</td>
+                    <td>38767</td>
+                    <td>done</td>
+                  </tr>
+                  <tr>
+                    <td>logic-reviewer</td>
+                    <td>FEAT-012-BATCH-D-logic-…</td>
+                    <td>2</td>
+                    <td>2m 4s</td>
+                    <td>50848</td>
+                    <td>done</td>
+                  </tr>
+                  <tr>
+                    <td>dev</td>
+                    <td>FEAT-012-BATCH-D-dev-L3</td>
+                    <td>3</td>
+                    <td>2m 40s</td>
+                    <td>55314</td>
+                    <td>done</td>
+                  </tr>
+                  <tr>
+                    <td>logic-reviewer</td>
+                    <td>FEAT-012-BATCH-D-logic-…</td>
+                    <td>3</td>
+                    <td>21s</td>
+                    <td>19108</td>
+                    <td>done</td>
+                  </tr>
+                </tbody>
+              </table>
+            </details>
+            <details>
+              <summary>PM note</summary>
+              <p class="story-card__pmnote">Approve L3.</p>
+            </details>
+          </div>
+        </article>
+        <article class="story-card story-card--done-retried" aria-label="batch BATCH-E">
+          <header>
+            <h3>BATCH-E</h3>
+            <span class="badge badge-warn" aria-label="status: done with retries"
+              >↻ done (retried)</span
+            >
+          </header>
+          <div class="story-card__stats">
+            <span class="story-card__stat"
+              ><span class="story-card__stat-label">time</span>
+              <span class="story-card__stat-value">0ms</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">cost</span>
+              <span class="story-card__stat-value">$1.42</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">tasks</span>
+              <span class="story-card__stat-value">0</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">ACs</span>
+              <span class="story-card__stat-value">0</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">files</span>
+              <span class="story-card__stat-value">0</span></span
+            ><span class="story-card__pipeline">dev → code-reviewer ‖ logic-reviewer</span>
+          </div>
+          <aside class="story-card__retry" role="status">
+            ⚠ code-reviewer retried 1× — loop 2: Approve L2 — PM aplicou os 4 fixes diretamente
+            (jest.spyOn, gitignore *.config.…
+          </aside>
+          <aside class="story-card__retry" role="status">
+            ⚠ logic-reviewer retried 1× — loop 2: Approve L2 — NFR-003 fechado via vite.config.ts
+            manualChunks. Chunk daily-page …
+          </aside>
+          <p class="story-card__summary">Approve L2 — NFR-003 fechado via vite. config.</p>
+          <div class="story-card__drilldowns">
+            <details>
+              <summary>Files changed (0)</summary>
+              <table class="story-card__files">
+                <thead>
+                  <tr>
+                    <th>path</th>
+                    <th>action</th>
+                    <th>tasks</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </details>
+            <details>
+              <summary>ACs covered (0)</summary>
+              <ul class="story-card__acs"></ul>
+            </details>
+            <details>
+              <summary>Pipeline trace (6 dispatches)</summary>
+              <table class="story-card__pipeline-trace">
+                <thead>
+                  <tr>
+                    <th>role</th>
+                    <th>dispatch_id</th>
+                    <th>loop</th>
+                    <th>duration</th>
+                    <th>tokens</th>
+                    <th>status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>dev</td>
+                    <td>FEAT-012-BATCH-E-dev-L1</td>
+                    <td>—</td>
+                    <td>8m 15s</td>
+                    <td>62212</td>
+                    <td>done</td>
+                  </tr>
+                  <tr>
+                    <td>dev</td>
+                    <td>FEAT-012-BATCH-E-COV-de…</td>
+                    <td>—</td>
+                    <td>35m 27s</td>
+                    <td>76186</td>
+                    <td>done</td>
+                  </tr>
+                  <tr>
+                    <td>code-reviewer</td>
+                    <td>FEAT-012-BATCH-E-code-r…</td>
+                    <td>—</td>
+                    <td>1m 47s</td>
+                    <td>57981</td>
+                    <td>done</td>
+                  </tr>
+                  <tr>
+                    <td>logic-reviewer</td>
+                    <td>FEAT-012-BATCH-E-logic-…</td>
+                    <td>—</td>
+                    <td>1m 41s</td>
+                    <td>57344</td>
+                    <td>done</td>
+                  </tr>
+                  <tr>
+                    <td>code-reviewer</td>
+                    <td>FEAT-012-BATCH-E-code-r…</td>
+                    <td>2</td>
+                    <td>0ms</td>
+                    <td>0</td>
+                    <td>done</td>
+                  </tr>
+                  <tr>
+                    <td>logic-reviewer</td>
+                    <td>FEAT-012-BATCH-E-logic-…</td>
+                    <td>2</td>
+                    <td>0ms</td>
+                    <td>0</td>
+                    <td>done</td>
+                  </tr>
+                </tbody>
+              </table>
+            </details>
+            <details>
+              <summary>PM note</summary>
+              <p class="story-card__pmnote">
+                Approve L2 — NFR-003 fechado via vite.config.ts manualChunks. Chunk daily-page =
+                6.00 KB gzip (&lt;18 KB).
+              </p>
+            </details>
+          </div>
+        </article>
+        <article class="story-card story-card--done" aria-label="batch FEAT-012">
+          <header>
+            <h3>FEAT-012</h3>
+            <span class="badge badge-pass" aria-label="status: done">✓ done</span>
+          </header>
+          <div class="story-card__stats">
+            <span class="story-card__stat"
+              ><span class="story-card__stat-label">time</span>
+              <span class="story-card__stat-value">0ms</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">cost</span>
+              <span class="story-card__stat-value">$0.66</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">tasks</span>
+              <span class="story-card__stat-value">0</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">ACs</span>
+              <span class="story-card__stat-value">0</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">files</span>
+              <span class="story-card__stat-value">0</span></span
+            ><span class="story-card__pipeline">qa → audit-agent</span>
+          </div>
+          <p class="story-card__summary">
+            Audit identificou manifesto desincronizado durante execução (L1 inicial). PM reconciliou
+            o manifest pós-audit com todos 36 dispatches efetivos.
+          </p>
+          <div class="story-card__drilldowns">
+            <details>
+              <summary>Files changed (0)</summary>
+              <table class="story-card__files">
+                <thead>
+                  <tr>
+                    <th>path</th>
+                    <th>action</th>
+                    <th>tasks</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </details>
+            <details>
+              <summary>ACs covered (0)</summary>
+              <ul class="story-card__acs"></ul>
+            </details>
+            <details>
+              <summary>Pipeline trace (2 dispatches)</summary>
+              <table class="story-card__pipeline-trace">
+                <thead>
+                  <tr>
+                    <th>role</th>
+                    <th>dispatch_id</th>
+                    <th>loop</th>
+                    <th>duration</th>
+                    <th>tokens</th>
+                    <th>status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>qa</td>
+                    <td>FEAT-012-FEAT-012-qa-L1</td>
+                    <td>—</td>
+                    <td>5m 24s</td>
+                    <td>83073</td>
+                    <td>done</td>
+                  </tr>
+                  <tr>
+                    <td>audit-agent</td>
+                    <td>FEAT-012-FEAT-012-audit…</td>
+                    <td>—</td>
+                    <td>1m 6s</td>
+                    <td>49805</td>
+                    <td>done</td>
+                  </tr>
+                </tbody>
+              </table>
+            </details>
+            <details>
+              <summary>PM note</summary>
+              <p class="story-card__pmnote">
+                Audit identificou manifesto desincronizado durante execução (L1 inicial). PM
+                reconciliou o manifest pós-audit com todos 36 dispatches efetivos. Estado
+                pós-reconcile espelha realidade.
+              </p>
             </details>
           </div>
         </article>
@@ -659,38 +1418,38 @@
       <section class="cost-section">
         <header class="cost-header">
           <h2>Cost</h2>
-          <span class="badge badge-pass">coverage 1/1 (100%)</span>
+          <span class="badge badge-pass">coverage 38/38 (100%)</span>
         </header>
         <div class="cost-grid">
           <div class="cost-card">
             <span class="cost-label">Total cost</span>
-            <span class="cost-value">$31.33</span>
-            <small>$31.3269</small>
+            <span class="cost-value">$71.14</span>
+            <small>$71.1441</small>
           </div>
           <div class="cost-card">
             <span class="cost-label">$ / AC</span>
-            <span class="cost-value">$0.5801</span>
+            <span class="cost-value">$1.3175</span>
             <small>54 ACs</small>
           </div>
           <div class="cost-card">
             <span class="cost-label">$ / dispatch</span>
-            <span class="cost-value">$31.3269</span>
-            <small>avg of 1</small>
+            <span class="cost-value">$1.8722</span>
+            <small>avg of 38</small>
           </div>
           <div class="cost-card">
             <span class="cost-label">Tokens</span>
-            <span class="cost-value">33,472,479</span>
-            <small>23,430,735 in / 10,041,744 out (70/30)</small>
+            <span class="cost-value">70,143,702</span>
+            <small>49,100,591 in / 21,043,111 out (70/30)</small>
           </div>
           <div class="cost-card">
             <span class="cost-label">Wall-clock</span>
-            <span class="cost-value">8h11m</span>
-            <small>1 dispatches with usage</small>
+            <span class="cost-value">13h4m</span>
+            <small>38 dispatches with usage</small>
           </div>
           <div class="cost-card">
             <span class="cost-label">Tool uses</span>
-            <span class="cost-value">144</span>
-            <small>~144.0 per dispatch</small>
+            <span class="cost-value">1,750</span>
+            <small>~46.1 per dispatch</small>
           </div>
         </div>
         <table class="cost-models">
@@ -708,12 +1467,30 @@
           <tbody>
             <tr>
               <td><code>opus-4-7</code></td>
-              <td>1</td>
-              <td>33,472,479</td>
-              <td>8h11m</td>
-              <td>144</td>
-              <td>$31.3269</td>
-              <td>100.0%</td>
+              <td>2</td>
+              <td>68,154,724</td>
+              <td>10h3m</td>
+              <td>346</td>
+              <td>$58.6781</td>
+              <td>82.5%</td>
+            </tr>
+            <tr>
+              <td><code>sonnet-4-6</code></td>
+              <td>29</td>
+              <td>1,838,692</td>
+              <td>2h54m</td>
+              <td>1306</td>
+              <td>$12.1354</td>
+              <td>17.1%</td>
+            </tr>
+            <tr>
+              <td><code>haiku-4-5</code></td>
+              <td>7</td>
+              <td>150,286</td>
+              <td>6m 44s</td>
+              <td>98</td>
+              <td>$0.3306</td>
+              <td>0.5%</td>
             </tr>
           </tbody>
         </table>
@@ -734,10 +1511,50 @@
               <tr>
                 <td><code>pm-orchestrator</code></td>
                 <td>1</td>
-                <td>33,472,479</td>
-                <td>8h11m</td>
-                <td>$31.3269</td>
-                <td>100.0%</td>
+                <td>68,062,724</td>
+                <td>9h55m</td>
+                <td>$57.6661</td>
+                <td>81.1%</td>
+              </tr>
+              <tr>
+                <td><code>dev</code></td>
+                <td>13</td>
+                <td>1,113,760</td>
+                <td>2h20m</td>
+                <td>$7.7556</td>
+                <td>10.9%</td>
+              </tr>
+              <tr>
+                <td><code>logic-reviewer</code></td>
+                <td>12</td>
+                <td>523,625</td>
+                <td>26m 47s</td>
+                <td>$3.4559</td>
+                <td>4.9%</td>
+              </tr>
+              <tr>
+                <td><code>code-reviewer</code></td>
+                <td>10</td>
+                <td>310,715</td>
+                <td>15m 11s</td>
+                <td>$1.6086</td>
+                <td>2.3%</td>
+              </tr>
+              <tr>
+                <td><code>qa</code></td>
+                <td>1</td>
+                <td>83,073</td>
+                <td>5m 24s</td>
+                <td>$0.5483</td>
+                <td>0.8%</td>
+              </tr>
+              <tr>
+                <td><code>audit-agent</code></td>
+                <td>1</td>
+                <td>49,805</td>
+                <td>1m 6s</td>
+                <td>$0.1096</td>
+                <td>0.2%</td>
               </tr>
             </tbody>
           </table>
@@ -758,10 +1575,10 @@
             <tbody>
               <tr>
                 <td><code>unattributed</code></td>
-                <td>1</td>
-                <td>33,472,479</td>
-                <td>8h11m</td>
-                <td>$31.3269</td>
+                <td>38</td>
+                <td>70,143,702</td>
+                <td>13h4m</td>
+                <td>$71.1441</td>
                 <td>100.0%</td>
               </tr>
             </tbody>
@@ -769,8 +1586,8 @@
         </details>
         <p class="cost-note">
           <em
-            >70/30 input/output split assumed; harness reports only total_tokens; 1 of 1 dispatches
-            included in cost</em
+            >70/30 input/output split assumed; harness reports only total_tokens; 38 of 38
+            dispatches included in cost</em
           >
         </p>
       </section>
@@ -791,326 +1608,326 @@
               <tbody>
                 <tr>
                   <td>AC-001</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-002</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-003</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-004</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-005</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-006</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-007</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-008</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-009</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-010</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-011</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-012</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-013</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-014</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-015</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-016</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-017</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-018</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-019</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-020</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-021</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-022</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-023</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-024</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-025</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-026</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-027</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-028</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-029</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-030</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-031</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-032</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-033</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-034</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-035</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-036</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-037</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-038</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-039</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-040</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-041</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-042</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-043</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-044</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-045</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-046</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-047</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-048</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-049</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-050</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-051</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-052</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-053</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-054</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
               </tbody>
@@ -1138,9 +1955,342 @@
                   <td>pm-orchestrator</td>
                   <td>done</td>
                   <td>—</td>
-                  <td>33472479</td>
-                  <td>491m 5s</td>
-                  <td>PM/orchestrator session (Stop hook): 253 turns</td>
+                  <td>68062724</td>
+                  <td>595m 18s</td>
+                  <td>PM/orchestrator session (Stop hook): 466 turns</td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-BATCH-A-...</td>
+                  <td>dev</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>113011</td>
+                  <td>16m 21s</td>
+                  <td>BATCH-A entregue: api/dailyPageApi (AbortController+HttpE...</td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-BATCH-A-...</td>
+                  <td>code-reviewer</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>14500</td>
+                  <td>1m 5s</td>
+                  <td>Code review L1: 1 finding (Content-Type GET preflight risk).</td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-BATCH-A-...</td>
+                  <td>logic-reviewer</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>48000</td>
+                  <td>3m</td>
+                  <td>Logic L1: 5 findings (isEditableTarget allow-list, backof...</td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-BATCH-A-...</td>
+                  <td>dev</td>
+                  <td>done</td>
+                  <td>2</td>
+                  <td>62000</td>
+                  <td>4m 40s</td>
+                  <td>Dev L2: todos 5 findings fixed (allow-list text-inputs, c...</td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-BATCH-A-...</td>
+                  <td>code-reviewer</td>
+                  <td>done</td>
+                  <td>2</td>
+                  <td>9000</td>
+                  <td>50s</td>
+                  <td>Approve L2.</td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-BATCH-A-...</td>
+                  <td>logic-reviewer</td>
+                  <td>done</td>
+                  <td>2</td>
+                  <td>22000</td>
+                  <td>1m 50s</td>
+                  <td>Approve L2 — todos findings closed.</td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-BATCH-B-...</td>
+                  <td>dev</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>95000</td>
+                  <td>10m 20s</td>
+                  <td>BATCH-B: usePageNavigation+useReducedMotion+swipeDetector...</td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-BATCH-B-...</td>
+                  <td>code-reviewer</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>11000</td>
+                  <td>1m 10s</td>
+                  <td>L1: blocker — usePageNavigation 342 LOC &gt; 250 inviolável.</td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-BATCH-B-...</td>
+                  <td>logic-reviewer</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>55000</td>
+                  <td>3m 40s</td>
+                  <td>L1: keyboard handler void dropped; out-of-range regex pas...</td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-BATCH-B-...</td>
+                  <td>dev</td>
+                  <td>done</td>
+                  <td>2</td>
+                  <td>78000</td>
+                  <td>6m 20s</td>
+                  <td>Split 342→201+153+63 LOC; .catch(console.error) keyboard;...</td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-BATCH-B-...</td>
+                  <td>code-reviewer</td>
+                  <td>done</td>
+                  <td>2</td>
+                  <td>8000</td>
+                  <td>45s</td>
+                  <td>Approve L2.</td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-BATCH-B-...</td>
+                  <td>logic-reviewer</td>
+                  <td>done</td>
+                  <td>2</td>
+                  <td>30000</td>
+                  <td>2m 30s</td>
+                  <td>L2: 1 minor — swipe path void mirrored same issue → L3 co...</td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-BATCH-B-...</td>
+                  <td>dev</td>
+                  <td>done</td>
+                  <td>3</td>
+                  <td>18000</td>
+                  <td>1m 20s</td>
+                  <td>L3 final: swipe .catch consistency.</td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-BATCH-C-...</td>
+                  <td>dev</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>145000</td>
+                  <td>15m 20s</td>
+                  <td>BATCH-C: useDailyPage useReducer+autosave debounced+retry...</td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-BATCH-C-...</td>
+                  <td>code-reviewer</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>79682</td>
+                  <td>2m 45s</td>
+                  <td>L1: pendingFlushResolveRef dead code + finally branch unr...</td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-BATCH-C-...</td>
+                  <td>logic-reviewer</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>81622</td>
+                  <td>4m 12s</td>
+                  <td>L1 BLOCKER: retry-wait Promise hang (clearTimeout cancels...</td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-BATCH-C-...</td>
+                  <td>dev</td>
+                  <td>done</td>
+                  <td>2</td>
+                  <td>105000</td>
+                  <td>9m</td>
+                  <td>L2: retryRejectRef + AbortError catch; debounce drop fix;...</td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-BATCH-C-...</td>
+                  <td>code-reviewer</td>
+                  <td>done</td>
+                  <td>2</td>
+                  <td>35499</td>
+                  <td>2m 9s</td>
+                  <td>Approve L2.</td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-BATCH-C-...</td>
+                  <td>logic-reviewer</td>
+                  <td>done</td>
+                  <td>2</td>
+                  <td>56768</td>
+                  <td>4m 3s</td>
+                  <td>L2: MAJOR-F2 not-fixed — Effect 2 cleanup ordering torna ...</td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-BATCH-C-...</td>
+                  <td>dev</td>
+                  <td>done</td>
+                  <td>3</td>
+                  <td>92000</td>
+                  <td>8m</td>
+                  <td>L3 escalado para opus high (matriz nota²: núcleo complexo...</td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-BATCH-C-...</td>
+                  <td>logic-reviewer</td>
+                  <td>done</td>
+                  <td>3</td>
+                  <td>23382</td>
+                  <td>52s</td>
+                  <td>Approve L3 — todos findings closed.</td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-BATCH-D-...</td>
+                  <td>dev</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>110000</td>
+                  <td>12m</td>
+                  <td>BATCH-D: 6 componentes + CSS modules + integration tests....</td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-BATCH-D-...</td>
+                  <td>code-reviewer</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>56286</td>
+                  <td>2m 31s</td>
+                  <td>L1: 2 majors (double-cast Agenda + barrel leaks utils/API...</td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-BATCH-D-...</td>
+                  <td>logic-reviewer</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>79553</td>
+                  <td>2m 34s</td>
+                  <td>L1: 4 majors (isAnimating guard ausente, animationend aus...</td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-BATCH-D-...</td>
+                  <td>dev</td>
+                  <td>done</td>
+                  <td>2</td>
+                  <td>102037</td>
+                  <td>10m 57s</td>
+                  <td>L2: shared types fixed (tuple priorities/agenda); barrel ...</td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-BATCH-D-...</td>
+                  <td>code-reviewer</td>
+                  <td>done</td>
+                  <td>2</td>
+                  <td>38767</td>
+                  <td>2m 8s</td>
+                  <td>Approve L2 (1 minor novo: review-artifact comment).</td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-BATCH-D-...</td>
+                  <td>logic-reviewer</td>
+                  <td>done</td>
+                  <td>2</td>
+                  <td>50848</td>
+                  <td>2m 4s</td>
+                  <td>L2: 2 test rigor gaps remain (guard assertion ausente; sk...</td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-BATCH-D-...</td>
+                  <td>dev</td>
+                  <td>done</td>
+                  <td>3</td>
+                  <td>55314</td>
+                  <td>2m 40s</td>
+                  <td>L3 final: 3 guard tests + skeleton-in-incoming with withi...</td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-BATCH-D-...</td>
+                  <td>logic-reviewer</td>
+                  <td>done</td>
+                  <td>3</td>
+                  <td>19108</td>
+                  <td>21s</td>
+                  <td>Approve L3.</td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-BATCH-E-...</td>
+                  <td>dev</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>62212</td>
+                  <td>8m 15s</td>
+                  <td>BATCH-E wiring: App.tsx + jest threshold path-specific + ...</td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-BATCH-E-...</td>
+                  <td>dev</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>76186</td>
+                  <td>35m 27s</td>
+                  <td>Secondary dispatch: subir branch coverage daily-page 80.3...</td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-BATCH-E-...</td>
+                  <td>code-reviewer</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>57981</td>
+                  <td>1m 47s</td>
+                  <td>L1: 1 major (console.error reassignment viola interceptor...</td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-BATCH-E-...</td>
+                  <td>logic-reviewer</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>57344</td>
+                  <td>1m 41s</td>
+                  <td>L1: 1 real concern — NFR-003 18KB chunk gzip não autoriza...</td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-BATCH-E-...</td>
+                  <td>code-reviewer</td>
+                  <td>done</td>
+                  <td>2</td>
+                  <td>0</td>
+                  <td>0ms</td>
+                  <td>Approve L2 — PM aplicou os 4 fixes diretamente (jest.spyO...</td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-BATCH-E-...</td>
+                  <td>logic-reviewer</td>
+                  <td>done</td>
+                  <td>2</td>
+                  <td>0</td>
+                  <td>0ms</td>
+                  <td>Approve L2 — NFR-003 fechado via vite.config.ts manualChu...</td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-FEAT-012...</td>
+                  <td>qa</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>83073</td>
+                  <td>5m 24s</td>
+                  <td>QA gate full: 54/54 AC pass, NFR-001/002/003 pass, SC-001...</td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-FEAT-012...</td>
+                  <td>audit-agent</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>49805</td>
+                  <td>1m 6s</td>
+                  <td>Audit identificou manifesto desincronizado durante execuç...</td>
                 </tr>
               </tbody>
             </table>
@@ -1206,7 +2356,7 @@
             <blockquote>
               <p>
                 Feature: daily-page — orquestrador do dia (composição, navegação, autosave) Task ID:
-                FEAT-012 Phase: specify Generated at: 2026-05-11T14:44:22.797Z
+                FEAT-012 Phase: done Generated at: 2026-05-11T14:53:19.339Z
               </p>
             </blockquote>
             <h2>Insights</h2>
@@ -1215,28 +2365,29 @@
                 ℹ Escalation rate 0.0% is below the Galileo healthy band (&lt; 10%) — low
                 escalation, agents resolving autonomously. <em>(Galileo healthy band)</em>
               </li>
+              <li>ℹ Dev task success rate 100.0% is at or above 80% — healthy first-try rate.</li>
             </ul>
             <h2>Cost breakdown</h2>
             <p>
               <em
-                >70/30 input/output split assumed; harness reports only total_tokens; 1 of 1
+                >70/30 input/output split assumed; harness reports only total_tokens; 38 of 38
                 dispatches included in cost</em
               >
             </p>
             <ul>
               <li>
-                Total tokens: 33472479
+                Total tokens: 70143702
                 <ul>
-                  <li>Estimated input (70%): 23430735</li>
-                  <li>Estimated output (30%): 10041744</li>
+                  <li>Estimated input (70%): 49100591</li>
+                  <li>Estimated output (30%): 21043111</li>
                 </ul>
               </li>
-              <li>Estimated cost USD total: $31.3269</li>
-              <li>Cost per AC: $0.5801</li>
-              <li>Cost per dispatch (avg): $31.3269</li>
-              <li>Wall-clock duration: 491m 5s</li>
-              <li>Tool uses total: 144</li>
-              <li>Coverage: 1 of 1 dispatches included in cost calculation</li>
+              <li>Estimated cost USD total: $71.1441</li>
+              <li>Cost per AC: $1.3175</li>
+              <li>Cost per dispatch (avg): $1.8722</li>
+              <li>Wall-clock duration: 784m 26s</li>
+              <li>Tool uses total: 1750</li>
+              <li>Coverage: 38 of 38 dispatches included in cost calculation</li>
             </ul>
             <h2>Repo health snapshot</h2>
             <p><em>Measured at: 2026-05-11</em></p>
@@ -1296,10 +2447,430 @@
                   <td>pm-orchestrator</td>
                   <td>done</td>
                   <td>—</td>
-                  <td>33472479</td>
-                  <td>$368.1973</td>
-                  <td>491m 5s</td>
-                  <td>PM/orchestrator session (Stop hook): 253 turns</td>
+                  <td>68062724</td>
+                  <td>$748.6900</td>
+                  <td>595m 18s</td>
+                  <td>PM/orchestrator session (Stop hook): 466 turns</td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-...</td>
+                  <td>dev</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>113011</td>
+                  <td>$0.7459</td>
+                  <td>16m 21s</td>
+                  <td>
+                    BATCH-A entregue: api/dailyPageApi (AbortController+HttpError+keepalive) + li...
+                  </td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-...</td>
+                  <td>code-reviewer</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>14500</td>
+                  <td>$0.0319</td>
+                  <td>1m 5s</td>
+                  <td>Code review L1: 1 finding (Content-Type GET preflight risk).</td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-...</td>
+                  <td>logic-reviewer</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>48000</td>
+                  <td>$0.3168</td>
+                  <td>3m</td>
+                  <td>
+                    Logic L1: 5 findings (isEditableTarget allow-list, backoff clamp, contentedit...
+                  </td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-...</td>
+                  <td>dev</td>
+                  <td>done</td>
+                  <td>2</td>
+                  <td>62000</td>
+                  <td>$0.4092</td>
+                  <td>4m 40s</td>
+                  <td>
+                    Dev L2: todos 5 findings fixed (allow-list text-inputs, clamp [0,2], contente...
+                  </td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-...</td>
+                  <td>code-reviewer</td>
+                  <td>done</td>
+                  <td>2</td>
+                  <td>9000</td>
+                  <td>$0.0198</td>
+                  <td>50s</td>
+                  <td>Approve L2.</td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-...</td>
+                  <td>logic-reviewer</td>
+                  <td>done</td>
+                  <td>2</td>
+                  <td>22000</td>
+                  <td>$0.1452</td>
+                  <td>1m 50s</td>
+                  <td>Approve L2 — todos findings closed.</td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-...</td>
+                  <td>dev</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>95000</td>
+                  <td>$0.6270</td>
+                  <td>10m 20s</td>
+                  <td>
+                    BATCH-B: usePageNavigation+useReducedMotion+swipeDetector+useSwipeNavigation....
+                  </td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-...</td>
+                  <td>code-reviewer</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>11000</td>
+                  <td>$0.0242</td>
+                  <td>1m 10s</td>
+                  <td>L1: blocker — usePageNavigation 342 LOC &gt; 250 inviolável.</td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-...</td>
+                  <td>logic-reviewer</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>55000</td>
+                  <td>$0.3630</td>
+                  <td>3m 40s</td>
+                  <td>
+                    L1: keyboard handler void dropped; out-of-range regex passed
+                    &#39;2026-13-99&#39;; mi...
+                  </td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-...</td>
+                  <td>dev</td>
+                  <td>done</td>
+                  <td>2</td>
+                  <td>78000</td>
+                  <td>$0.5148</td>
+                  <td>6m 20s</td>
+                  <td>
+                    Split 342→201+153+63 LOC; .catch(console.error) keyboard; round-trip Date.UTC...
+                  </td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-...</td>
+                  <td>code-reviewer</td>
+                  <td>done</td>
+                  <td>2</td>
+                  <td>8000</td>
+                  <td>$0.0176</td>
+                  <td>45s</td>
+                  <td>Approve L2.</td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-...</td>
+                  <td>logic-reviewer</td>
+                  <td>done</td>
+                  <td>2</td>
+                  <td>30000</td>
+                  <td>$0.1980</td>
+                  <td>2m 30s</td>
+                  <td>L2: 1 minor — swipe path void mirrored same issue → L3 consistency fix.</td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-...</td>
+                  <td>dev</td>
+                  <td>done</td>
+                  <td>3</td>
+                  <td>18000</td>
+                  <td>$0.1188</td>
+                  <td>1m 20s</td>
+                  <td>L3 final: swipe .catch consistency.</td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-...</td>
+                  <td>dev</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>145000</td>
+                  <td>$0.9570</td>
+                  <td>15m 20s</td>
+                  <td>
+                    BATCH-C: useDailyPage useReducer+autosave debounced+retry/backoff+beforeunloa...
+                  </td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-...</td>
+                  <td>code-reviewer</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>79682</td>
+                  <td>$0.5259</td>
+                  <td>2m 45s</td>
+                  <td>
+                    L1: pendingFlushResolveRef dead code + finally branch unreachable + console.e...
+                  </td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-...</td>
+                  <td>logic-reviewer</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>81622</td>
+                  <td>$0.5387</td>
+                  <td>4m 12s</td>
+                  <td>
+                    L1 BLOCKER: retry-wait Promise hang (clearTimeout cancels resolver) deadlocks...
+                  </td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-...</td>
+                  <td>dev</td>
+                  <td>done</td>
+                  <td>2</td>
+                  <td>105000</td>
+                  <td>$0.6930</td>
+                  <td>9m</td>
+                  <td>
+                    L2: retryRejectRef + AbortError catch; debounce drop fix; beforeunload
+                    &#39;dirty...
+                  </td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-...</td>
+                  <td>code-reviewer</td>
+                  <td>done</td>
+                  <td>2</td>
+                  <td>35499</td>
+                  <td>$0.2343</td>
+                  <td>2m 9s</td>
+                  <td>Approve L2.</td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-...</td>
+                  <td>logic-reviewer</td>
+                  <td>done</td>
+                  <td>2</td>
+                  <td>56768</td>
+                  <td>$0.3747</td>
+                  <td>4m 3s</td>
+                  <td>
+                    L2: MAJOR-F2 not-fixed — Effect 2 cleanup ordering torna fire-and-forget unre...
+                  </td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-...</td>
+                  <td>dev</td>
+                  <td>done</td>
+                  <td>3</td>
+                  <td>92000</td>
+                  <td>$1.0120</td>
+                  <td>8m</td>
+                  <td>
+                    L3 escalado para opus high (matriz nota²: núcleo complexo, última chance). Re...
+                  </td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-...</td>
+                  <td>logic-reviewer</td>
+                  <td>done</td>
+                  <td>3</td>
+                  <td>23382</td>
+                  <td>$0.1543</td>
+                  <td>52s</td>
+                  <td>Approve L3 — todos findings closed.</td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-...</td>
+                  <td>dev</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>110000</td>
+                  <td>$0.7260</td>
+                  <td>12m</td>
+                  <td>
+                    BATCH-D: 6 componentes + CSS modules + integration tests. Strategy B two-laye...
+                  </td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-...</td>
+                  <td>code-reviewer</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>56286</td>
+                  <td>$0.3715</td>
+                  <td>2m 31s</td>
+                  <td>L1: 2 majors (double-cast Agenda + barrel leaks utils/API) + 5 minors.</td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-...</td>
+                  <td>logic-reviewer</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>79553</td>
+                  <td>$0.5250</td>
+                  <td>2m 34s</td>
+                  <td>
+                    L1: 4 majors (isAnimating guard ausente, animationend ausente, 2 test gaps) +...
+                  </td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-...</td>
+                  <td>dev</td>
+                  <td>done</td>
+                  <td>2</td>
+                  <td>102037</td>
+                  <td>$0.6734</td>
+                  <td>10m 57s</td>
+                  <td>
+                    L2: shared types fixed (tuple priorities/agenda); barrel scrubbed; isAnimatin...
+                  </td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-...</td>
+                  <td>code-reviewer</td>
+                  <td>done</td>
+                  <td>2</td>
+                  <td>38767</td>
+                  <td>$0.2559</td>
+                  <td>2m 8s</td>
+                  <td>Approve L2 (1 minor novo: review-artifact comment).</td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-...</td>
+                  <td>logic-reviewer</td>
+                  <td>done</td>
+                  <td>2</td>
+                  <td>50848</td>
+                  <td>$0.3356</td>
+                  <td>2m 4s</td>
+                  <td>
+                    L2: 2 test rigor gaps remain (guard assertion ausente; skeleton-in-incoming v...
+                  </td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-...</td>
+                  <td>dev</td>
+                  <td>done</td>
+                  <td>3</td>
+                  <td>55314</td>
+                  <td>$0.3651</td>
+                  <td>2m 40s</td>
+                  <td>
+                    L3 final: 3 guard tests + skeleton-in-incoming with within() + remove review ...
+                  </td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-...</td>
+                  <td>logic-reviewer</td>
+                  <td>done</td>
+                  <td>3</td>
+                  <td>19108</td>
+                  <td>$0.1261</td>
+                  <td>21s</td>
+                  <td>Approve L3.</td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-...</td>
+                  <td>dev</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>62212</td>
+                  <td>$0.4106</td>
+                  <td>8m 15s</td>
+                  <td>
+                    BATCH-E wiring: App.tsx + jest threshold path-specific + CLAUDE.md. Identifou...
+                  </td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-...</td>
+                  <td>dev</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>76186</td>
+                  <td>$0.5028</td>
+                  <td>35m 27s</td>
+                  <td>
+                    Secondary dispatch: subir branch coverage daily-page 80.34%→91.33%. +45 teste...
+                  </td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-...</td>
+                  <td>code-reviewer</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>57981</td>
+                  <td>$0.1276</td>
+                  <td>1m 47s</td>
+                  <td>L1: 1 major (console.error reassignment viola interceptor) + 3 minors.</td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-...</td>
+                  <td>logic-reviewer</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>57344</td>
+                  <td>$0.3785</td>
+                  <td>1m 41s</td>
+                  <td>
+                    L1: 1 real concern — NFR-003 18KB chunk gzip não autorizado para diferimento ...
+                  </td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-...</td>
+                  <td>code-reviewer</td>
+                  <td>done</td>
+                  <td>2</td>
+                  <td>0</td>
+                  <td>$0.0000</td>
+                  <td>0ms</td>
+                  <td>
+                    Approve L2 — PM aplicou os 4 fixes diretamente (jest.spyOn, gitignore *.confi...
+                  </td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-...</td>
+                  <td>logic-reviewer</td>
+                  <td>done</td>
+                  <td>2</td>
+                  <td>0</td>
+                  <td>$0.0000</td>
+                  <td>0ms</td>
+                  <td>
+                    Approve L2 — NFR-003 fechado via vite.config.ts manualChunks. Chunk daily-pag...
+                  </td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-...</td>
+                  <td>qa</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>83073</td>
+                  <td>$0.5483</td>
+                  <td>5m 24s</td>
+                  <td>
+                    QA gate full: 54/54 AC pass, NFR-001/002/003 pass, SC-001..006 pass. 892 test...
+                  </td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-...</td>
+                  <td>audit-agent</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>49805</td>
+                  <td>$0.1096</td>
+                  <td>1m 6s</td>
+                  <td>
+                    Audit identificou manifesto desincronizado durante execução (L1 inicial). PM ...
+                  </td>
                 </tr>
               </tbody>
             </table>
@@ -1316,326 +2887,326 @@
               <tbody>
                 <tr>
                   <td>AC-001</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-002</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-003</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-004</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-005</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-006</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-007</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-008</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-009</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-010</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-011</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-012</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-013</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-014</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-015</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-016</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-017</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-018</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-019</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-020</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-021</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-022</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-023</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-024</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-025</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-026</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-027</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-028</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-029</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-030</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-031</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-032</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-033</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-034</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-035</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-036</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-037</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-038</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-039</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-040</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-041</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-042</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-043</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-044</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-045</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-046</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-047</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-048</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-049</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-050</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-051</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-052</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-053</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-054</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
               </tbody>
@@ -1680,7 +3251,7 @@
               <tbody>
                 <tr>
                   <td>audit-agent</td>
-                  <td>0</td>
+                  <td>1</td>
                 </tr>
                 <tr>
                   <td>blocker-specialist</td>
@@ -1688,15 +3259,15 @@
                 </tr>
                 <tr>
                   <td>code-reviewer</td>
-                  <td>0</td>
+                  <td>10</td>
                 </tr>
                 <tr>
                   <td>dev</td>
-                  <td>0</td>
+                  <td>13</td>
                 </tr>
                 <tr>
                   <td>logic-reviewer</td>
-                  <td>0</td>
+                  <td>12</td>
                 </tr>
                 <tr>
                   <td>pm-orchestrator</td>
@@ -1704,11 +3275,11 @@
                 </tr>
                 <tr>
                   <td>qa</td>
-                  <td>0</td>
+                  <td>1</td>
                 </tr>
                 <tr>
                   <td><strong>Total</strong></td>
-                  <td>1</td>
+                  <td>38</td>
                 </tr>
               </tbody>
             </table>
@@ -1723,7 +3294,7 @@
               <tbody>
                 <tr>
                   <td>audit-agent</td>
-                  <td>n/a</td>
+                  <td>100.0%</td>
                 </tr>
                 <tr>
                   <td>blocker-specialist</td>
@@ -1731,15 +3302,15 @@
                 </tr>
                 <tr>
                   <td>code-reviewer</td>
-                  <td>n/a</td>
+                  <td>100.0%</td>
                 </tr>
                 <tr>
                   <td>dev</td>
-                  <td>n/a</td>
+                  <td>100.0%</td>
                 </tr>
                 <tr>
                   <td>logic-reviewer</td>
-                  <td>n/a</td>
+                  <td>100.0%</td>
                 </tr>
                 <tr>
                   <td>pm-orchestrator</td>
@@ -1747,24 +3318,184 @@
                 </tr>
                 <tr>
                   <td>qa</td>
-                  <td>n/a</td>
+                  <td>100.0%</td>
                 </tr>
               </tbody>
             </table>
             <h2>Loop rate</h2>
-            <p>Loop rate: 0.0%</p>
+            <p>Loop rate: 50.0%</p>
             <h2>Escalation rate</h2>
             <p>Escalation rate: 0.0% — below healthy band (&lt; 10%)</p>
             <h2>AC closure</h2>
-            <p>Total: 54 | Pass: 0 | Partial: 0 | Fail: 0 | Missing: 54</p>
+            <p>Total: 54 | Pass: 54 | Partial: 0 | Fail: 0 | Missing: 0</p>
+            <h2>Reviewer findings density</h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>Severity</th>
+                  <th>Count</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>critical</td>
+                  <td>0</td>
+                </tr>
+                <tr>
+                  <td>major</td>
+                  <td>0</td>
+                </tr>
+                <tr>
+                  <td>minor</td>
+                  <td>0</td>
+                </tr>
+              </tbody>
+            </table>
             <h2>PM notes log</h2>
             <ul>
               <li>
-                [2026-05-11 04:49 pm-orchestrator] PM/orchestrator session (Stop hook): 253 turns
+                [2026-05-11 04:49 pm-orchestrator] PM/orchestrator session (Stop hook): 466 turns
+              </li>
+              <li>
+                [2026-05-11 05:10 dev] BATCH-A entregue: api/dailyPageApi
+                (AbortController+HttpError+keepalive) + lib
+                (formatDate/dateMath/backoff/isEditableTarget). 92 testes verdes.
+              </li>
+              <li>
+                [2026-05-11 05:10 code-reviewer] Code review L1: 1 finding (Content-Type GET
+                preflight risk).
+              </li>
+              <li>
+                [2026-05-11 05:10 logic-reviewer] Logic L1: 5 findings (isEditableTarget allow-list,
+                backoff clamp, contenteditable barrier, JSON trust boundary, Content-Type).
+              </li>
+              <li>
+                [2026-05-11 05:10 dev] Dev L2: todos 5 findings fixed (allow-list text-inputs, clamp
+                [0,2], contenteditable barrier via closest+&#39;true&#39;, JSDoc SyntaxError,
+                removed Content-Type GET).
+              </li>
+              <li>[2026-05-11 05:10 code-reviewer] Approve L2.</li>
+              <li>[2026-05-11 05:10 logic-reviewer] Approve L2 — todos findings closed.</li>
+              <li>
+                [2026-05-11 05:10 dev] BATCH-B:
+                usePageNavigation+useReducedMotion+swipeDetector+useSwipeNavigation. 1 file&gt;250
+                LOC → split required em L2.
+              </li>
+              <li>
+                [2026-05-11 05:10 code-reviewer] L1: blocker — usePageNavigation 342 LOC &gt; 250
+                inviolável.
+              </li>
+              <li>
+                [2026-05-11 05:10 logic-reviewer] L1: keyboard handler void dropped; out-of-range
+                regex passed &#39;2026-13-99&#39;; missing swipe combined-boundary test.
+              </li>
+              <li>
+                [2026-05-11 05:10 dev] Split 342→201+153+63 LOC; .catch(console.error) keyboard;
+                round-trip Date.UTC validation; novos swipe tests.
+              </li>
+              <li>[2026-05-11 05:10 code-reviewer] Approve L2.</li>
+              <li>
+                [2026-05-11 05:10 logic-reviewer] L2: 1 minor — swipe path void mirrored same issue
+                → L3 consistency fix.
+              </li>
+              <li>[2026-05-11 05:10 dev] L3 final: swipe .catch consistency.</li>
+              <li>
+                [2026-05-11 05:10 dev] BATCH-C: useDailyPage useReducer+autosave
+                debounced+retry/backoff+beforeunload+localStorage life-raft. Snapshot-then-fire race
+                protection.
+              </li>
+              <li>
+                [2026-05-11 05:10 code-reviewer] L1: pendingFlushResolveRef dead code + finally
+                branch unreachable + console.error module-level patch leak.
+              </li>
+              <li>
+                [2026-05-11 05:10 logic-reviewer] L1 BLOCKER: retry-wait Promise hang (clearTimeout
+                cancels resolver) deadlocks flushSavePending. +3 majors.
+              </li>
+              <li>
+                [2026-05-11 05:10 dev] L2: retryRejectRef + AbortError catch; debounce drop fix;
+                beforeunload &#39;dirty&#39; guard; immutability test; dead code removed.
+              </li>
+              <li>[2026-05-11 05:10 code-reviewer] Approve L2.</li>
+              <li>
+                [2026-05-11 05:10 logic-reviewer] L2: MAJOR-F2 not-fixed — Effect 2 cleanup ordering
+                torna fire-and-forget unreachable. Dev L3 obrigatório.
+              </li>
+              <li>
+                [2026-05-11 05:10 dev] L3 escalado para opus high (matriz nota²: núcleo complexo,
+                última chance). Reducer-derived dirty signal substitui debounceTimerRef check —
+                imune a Effect cleanup ordering. +tests retry cancellation... (see manifest entry
+                FEAT-012-BATCH-C-dev-L3)
+              </li>
+              <li>[2026-05-11 05:10 logic-reviewer] Approve L3 — todos findings closed.</li>
+              <li>
+                [2026-05-11 05:10 dev] BATCH-D: 6 componentes + CSS modules + integration tests.
+                Strategy B two-layer crossing animation. 305 tests.
+              </li>
+              <li>
+                [2026-05-11 05:10 code-reviewer] L1: 2 majors (double-cast Agenda + barrel leaks
+                utils/API) + 5 minors.
+              </li>
+              <li>
+                [2026-05-11 05:10 logic-reviewer] L1: 4 majors (isAnimating guard ausente,
+                animationend ausente, 2 test gaps) + 5 minors.
+              </li>
+              <li>
+                [2026-05-11 05:10 dev] L2: shared types fixed (tuple priorities/agenda); barrel
+                scrubbed; isAnimatingRef guard; onAnimationEnd; reduced-motion tests; todos 16
+                findings fixed.
+              </li>
+              <li>
+                [2026-05-11 05:10 code-reviewer] Approve L2 (1 minor novo: review-artifact comment).
+              </li>
+              <li>
+                [2026-05-11 05:10 logic-reviewer] L2: 2 test rigor gaps remain (guard assertion
+                ausente; skeleton-in-incoming verifica post não during).
+              </li>
+              <li>
+                [2026-05-11 05:10 dev] L3 final: 3 guard tests + skeleton-in-incoming with within()
+                + remove review comment. 315 tests.
+              </li>
+              <li>[2026-05-11 05:10 logic-reviewer] Approve L3.</li>
+              <li>
+                [2026-05-11 05:10 dev] BATCH-E wiring: App.tsx + jest threshold path-specific +
+                CLAUDE.md. Identifou 2 débitos pré-existentes (build script stale emits, coverage
+                gap).
+              </li>
+              <li>
+                [2026-05-11 05:10 dev] Secondary dispatch: subir branch coverage daily-page
+                80.34%→91.33%. +45 testes em arquivos *.branches.test.{ts,tsx} sem tocar
+                implementação.
+              </li>
+              <li>
+                [2026-05-11 05:10 code-reviewer] L1: 1 major (console.error reassignment viola
+                interceptor) + 3 minors.
+              </li>
+              <li>
+                [2026-05-11 05:10 logic-reviewer] L1: 1 real concern — NFR-003 18KB chunk gzip não
+                autorizado para diferimento no spec.
+              </li>
+              <li>
+                [2026-05-11 05:10 code-reviewer] Approve L2 — PM aplicou os 4 fixes diretamente
+                (jest.spyOn, gitignore *.config.mjs, type FetchStub, vite manualChunks).
+              </li>
+              <li>
+                [2026-05-11 05:10 logic-reviewer] Approve L2 — NFR-003 fechado via vite.config.ts
+                manualChunks. Chunk daily-page = 6.00 KB gzip (&lt;18 KB).
+              </li>
+              <li>
+                [2026-05-11 05:10 qa] QA gate full: 54/54 AC pass, NFR-001/002/003 pass, SC-001..006
+                pass. 892 testes verdes. Coverage 91.33% &gt; 90%. Build chunk daily-page 6 KB gzip
+                &lt; 18 KB.
+              </li>
+              <li>
+                [2026-05-11 05:10 audit-agent] Audit identificou manifesto desincronizado durante
+                execução (L1 inicial). PM reconciliou o manifest pós-audit com todos 36 dispatches
+                efetivos. Estado pós-reconcile espelha realidade.
               </li>
             </ul>
             <h2>Token cost</h2>
-            <p>Token cost not available — using dispatch count as cost proxy: 1 dispatches</p>
+            <p>Token cost not available — using dispatch count as cost proxy: 38 dispatches</p>
           </div>
         </details>
       </section>

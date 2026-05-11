@@ -564,59 +564,420 @@
   </head>
   <body>
     <header class="kpi-bar">
-      <h1>e2e-mvp-closer <span class="badge badge-pass">✓</span></h1>
+      <h1>e2e-mvp-closer <span class="badge badge-warn">⚠</span></h1>
       <div class="kpis">
         <span>—</span>
-        <span>—</span>
-
+        <span>$1.95</span>
+        <span class="kpi-sub">$0.279/AC</span>
         <span>10/7 ACs</span>
         <span>mut 70.7%</span>
         <span>type 97.7%</span>
-        <span>0 loops</span>
+        <span>8 loops</span>
       </div>
     </header>
 
     <main>
       <section class="story">
         <h2>Story</h2>
+        <article class="story-card story-card--done-retried" aria-label="batch BATCH-A">
+          <header>
+            <h3>BATCH-A</h3>
+            <span class="badge badge-warn" aria-label="status: done with retries"
+              >↻ done (retried)</span
+            >
+          </header>
+          <div class="story-card__stats">
+            <span class="story-card__stat"
+              ><span class="story-card__stat-label">time</span>
+              <span class="story-card__stat-value">0ms</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">cost</span>
+              <span class="story-card__stat-value">$1.66</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">tasks</span>
+              <span class="story-card__stat-value">0</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">ACs</span>
+              <span class="story-card__stat-value">0</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">files</span>
+              <span class="story-card__stat-value">0</span></span
+            ><span class="story-card__pipeline">dev → code-reviewer ‖ logic-reviewer</span>
+          </div>
+          <aside class="story-card__retry" role="status">
+            ⚠ dev retried 2× — loop 2: L2: 16 findings endereçados; DailyPage hotfix
+            flushSavePendingRef + onBeforeCha…; loop 3: L3 runtime fixes: locator role=status
+            ambíguo (header region scope), isAnimatin…
+          </aside>
+          <aside class="story-card__retry" role="status">
+            ⚠ code-reviewer retried 2× — loop 2: L2: majors fixed; 2 minors carry-over. Approve.;
+            loop 3: L3: 3 fixes corretos; 2 minors carry-over resolvidos via PM housekeeping.
+          </aside>
+          <aside class="story-card__retry" role="status">
+            ⚠ logic-reviewer retried 2× — loop 2: L2: todos 9 findings fixed. Approve.; loop 3: L3:
+            race coverage intacto, header scope safe, path canonicity verificada. Appro…
+          </aside>
+          <p class="story-card__summary">
+            L3: race coverage intacto, header scope safe, path canonicity verificada. Approve.
+          </p>
+          <div class="story-card__drilldowns">
+            <details>
+              <summary>Files changed (0)</summary>
+              <table class="story-card__files">
+                <thead>
+                  <tr>
+                    <th>path</th>
+                    <th>action</th>
+                    <th>tasks</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </details>
+            <details>
+              <summary>ACs covered (0)</summary>
+              <ul class="story-card__acs"></ul>
+            </details>
+            <details>
+              <summary>Pipeline trace (9 dispatches)</summary>
+              <table class="story-card__pipeline-trace">
+                <thead>
+                  <tr>
+                    <th>role</th>
+                    <th>dispatch_id</th>
+                    <th>loop</th>
+                    <th>duration</th>
+                    <th>tokens</th>
+                    <th>status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>dev</td>
+                    <td>FEAT-013-BATCH-A-dev-L1</td>
+                    <td>—</td>
+                    <td>5m 40s</td>
+                    <td>48000</td>
+                    <td>done</td>
+                  </tr>
+                  <tr>
+                    <td>code-reviewer</td>
+                    <td>FEAT-013-BATCH-A-code-r…</td>
+                    <td>1</td>
+                    <td>1m 2s</td>
+                    <td>16800</td>
+                    <td>done</td>
+                  </tr>
+                  <tr>
+                    <td>logic-reviewer</td>
+                    <td>FEAT-013-BATCH-A-logic-…</td>
+                    <td>1</td>
+                    <td>4m 40s</td>
+                    <td>36500</td>
+                    <td>done</td>
+                  </tr>
+                  <tr>
+                    <td>dev</td>
+                    <td>FEAT-013-BATCH-A-dev-L2</td>
+                    <td>2</td>
+                    <td>7m</td>
+                    <td>62000</td>
+                    <td>done</td>
+                  </tr>
+                  <tr>
+                    <td>code-reviewer</td>
+                    <td>FEAT-013-BATCH-A-code-r…</td>
+                    <td>2</td>
+                    <td>55s</td>
+                    <td>14200</td>
+                    <td>done</td>
+                  </tr>
+                  <tr>
+                    <td>logic-reviewer</td>
+                    <td>FEAT-013-BATCH-A-logic-…</td>
+                    <td>2</td>
+                    <td>6m</td>
+                    <td>38000</td>
+                    <td>done</td>
+                  </tr>
+                  <tr>
+                    <td>dev</td>
+                    <td>FEAT-013-BATCH-A-dev-L3</td>
+                    <td>3</td>
+                    <td>7m</td>
+                    <td>32000</td>
+                    <td>done</td>
+                  </tr>
+                  <tr>
+                    <td>code-reviewer</td>
+                    <td>FEAT-013-BATCH-A-code-r…</td>
+                    <td>3</td>
+                    <td>3m</td>
+                    <td>18500</td>
+                    <td>done</td>
+                  </tr>
+                  <tr>
+                    <td>logic-reviewer</td>
+                    <td>FEAT-013-BATCH-A-logic-…</td>
+                    <td>3</td>
+                    <td>4m</td>
+                    <td>18500</td>
+                    <td>done</td>
+                  </tr>
+                </tbody>
+              </table>
+            </details>
+            <details>
+              <summary>PM note</summary>
+              <p class="story-card__pmnote">
+                L3: race coverage intacto, header scope safe, path canonicity verificada. Approve.
+              </p>
+            </details>
+          </div>
+        </article>
+        <article class="story-card story-card--done" aria-label="batch FEAT-013">
+          <header>
+            <h3>FEAT-013</h3>
+            <span class="badge badge-pass" aria-label="status: done">✓ done</span>
+          </header>
+          <div class="story-card__stats">
+            <span class="story-card__stat"
+              ><span class="story-card__stat-label">time</span>
+              <span class="story-card__stat-value">0ms</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">cost</span>
+              <span class="story-card__stat-value">$0.29</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">tasks</span>
+              <span class="story-card__stat-value">0</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">ACs</span>
+              <span class="story-card__stat-value">0</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">files</span>
+              <span class="story-card__stat-value">0</span></span
+            ><span class="story-card__pipeline">qa → audit-agent</span>
+          </div>
+          <p class="story-card__summary">
+            Pass: 6 checks ok, housekeeping fixes PM documentados, zero bypass.
+          </p>
+          <div class="story-card__drilldowns">
+            <details>
+              <summary>Files changed (0)</summary>
+              <table class="story-card__files">
+                <thead>
+                  <tr>
+                    <th>path</th>
+                    <th>action</th>
+                    <th>tasks</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </details>
+            <details>
+              <summary>ACs covered (0)</summary>
+              <ul class="story-card__acs"></ul>
+            </details>
+            <details>
+              <summary>Pipeline trace (2 dispatches)</summary>
+              <table class="story-card__pipeline-trace">
+                <thead>
+                  <tr>
+                    <th>role</th>
+                    <th>dispatch_id</th>
+                    <th>loop</th>
+                    <th>duration</th>
+                    <th>tokens</th>
+                    <th>status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>qa</td>
+                    <td>FEAT-013-FEAT-013-qa-L1</td>
+                    <td>—</td>
+                    <td>2m 2s</td>
+                    <td>31093</td>
+                    <td>done</td>
+                  </tr>
+                  <tr>
+                    <td>audit-agent</td>
+                    <td>FEAT-013-FEAT-013-audit…</td>
+                    <td>—</td>
+                    <td>1m 51s</td>
+                    <td>40637</td>
+                    <td>done</td>
+                  </tr>
+                </tbody>
+              </table>
+            </details>
+            <details>
+              <summary>PM note</summary>
+              <p class="story-card__pmnote">
+                Pass: 6 checks ok, housekeeping fixes PM documentados, zero bypass.
+              </p>
+            </details>
+          </div>
+        </article>
       </section>
       <section class="cost-section">
         <header class="cost-header">
           <h2>Cost</h2>
-          <span class="badge badge-fail">coverage 0/0 (0%)</span>
+          <span class="badge badge-pass">coverage 11/11 (100%)</span>
         </header>
         <div class="cost-grid">
           <div class="cost-card">
             <span class="cost-label">Total cost</span>
-            <span class="cost-value">—</span>
+            <span class="cost-value">$1.95</span>
+            <small>$1.9545</small>
           </div>
           <div class="cost-card">
             <span class="cost-label">$ / AC</span>
-            <span class="cost-value">—</span>
+            <span class="cost-value">$0.2792</span>
             <small>7 ACs</small>
           </div>
           <div class="cost-card">
             <span class="cost-label">$ / dispatch</span>
-            <span class="cost-value">—</span>
-            <small>avg of 0</small>
+            <span class="cost-value">$0.1777</span>
+            <small>avg of 11</small>
           </div>
           <div class="cost-card">
             <span class="cost-label">Tokens</span>
-            <span class="cost-value">—</span>
+            <span class="cost-value">356,230</span>
+            <small>249,361 in / 106,869 out (70/30)</small>
           </div>
           <div class="cost-card">
             <span class="cost-label">Wall-clock</span>
-            <span class="cost-value">—</span>
-            <small>0 dispatches with usage</small>
+            <span class="cost-value">43m 9s</span>
+            <small>11 dispatches with usage</small>
           </div>
           <div class="cost-card">
             <span class="cost-label">Tool uses</span>
-            <span class="cost-value">—</span>
+            <span class="cost-value">213</span>
+            <small>~19.4 per dispatch</small>
           </div>
         </div>
-
+        <table class="cost-models">
+          <thead>
+            <tr>
+              <th>Model</th>
+              <th>Dispatches</th>
+              <th>Tokens</th>
+              <th>Duration</th>
+              <th>Tool uses</th>
+              <th>USD</th>
+              <th>Share</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>sonnet-4-6</code></td>
+              <td>7</td>
+              <td>266,093</td>
+              <td>36m 22s</td>
+              <td>158</td>
+              <td>$1.7562</td>
+              <td>89.9%</td>
+            </tr>
+            <tr>
+              <td><code>haiku-4-5</code></td>
+              <td>4</td>
+              <td>90,137</td>
+              <td>6m 48s</td>
+              <td>55</td>
+              <td>$0.1983</td>
+              <td>10.1%</td>
+            </tr>
+          </tbody>
+        </table>
+        <details class="cost-breakdown">
+          <summary>Cost by role (subagent type)</summary>
+          <table class="cost-models">
+            <thead>
+              <tr>
+                <th>Role</th>
+                <th>Dispatches</th>
+                <th>Tokens</th>
+                <th>Duration</th>
+                <th>USD</th>
+                <th>Share</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>dev</code></td>
+                <td>3</td>
+                <td>142,000</td>
+                <td>19m 40s</td>
+                <td>$0.9372</td>
+                <td>48.0%</td>
+              </tr>
+              <tr>
+                <td><code>logic-reviewer</code></td>
+                <td>3</td>
+                <td>93,000</td>
+                <td>14m 40s</td>
+                <td>$0.6138</td>
+                <td>31.4%</td>
+              </tr>
+              <tr>
+                <td><code>qa</code></td>
+                <td>1</td>
+                <td>31,093</td>
+                <td>2m 2s</td>
+                <td>$0.2052</td>
+                <td>10.5%</td>
+              </tr>
+              <tr>
+                <td><code>code-reviewer</code></td>
+                <td>3</td>
+                <td>49,500</td>
+                <td>4m 57s</td>
+                <td>$0.1089</td>
+                <td>5.6%</td>
+              </tr>
+              <tr>
+                <td><code>audit-agent</code></td>
+                <td>1</td>
+                <td>40,637</td>
+                <td>1m 51s</td>
+                <td>$0.0894</td>
+                <td>4.6%</td>
+              </tr>
+            </tbody>
+          </table>
+        </details>
+        <details class="cost-breakdown">
+          <summary>Cost by SDD phase</summary>
+          <table class="cost-models">
+            <thead>
+              <tr>
+                <th>Phase</th>
+                <th>Dispatches</th>
+                <th>Tokens</th>
+                <th>Duration</th>
+                <th>USD</th>
+                <th>Share</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>unattributed</code></td>
+                <td>11</td>
+                <td>356,230</td>
+                <td>43m 9s</td>
+                <td>$1.9545</td>
+                <td>100.0%</td>
+              </tr>
+            </tbody>
+          </table>
+        </details>
         <p class="cost-note">
-          <em>no usage data available — dispatch count fallback: 0 dispatches</em>
+          <em
+            >70/30 input/output split assumed; harness reports only total_tokens; 11 of 11
+            dispatches included in cost</em
+          >
         </p>
       </section>
       <section class="drilldown">
@@ -636,44 +997,44 @@
               <tbody>
                 <tr>
                   <td>AC-001</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-002</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-003</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-004</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-005</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-006</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-007</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
               </tbody>
@@ -682,7 +1043,122 @@
         </details>
         <details>
           <summary>Per-dispatch breakdown</summary>
-          <div><p>(no dispatches)</p></div>
+          <div>
+            <table>
+              <thead>
+                <tr>
+                  <th>Dispatch ID</th>
+                  <th>Role</th>
+                  <th>Status</th>
+                  <th>Loop</th>
+                  <th>Tokens</th>
+                  <th>Duration</th>
+                  <th>PM note</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>FEAT-013-BATCH-A-...</td>
+                  <td>dev</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>48000</td>
+                  <td>5m 40s</td>
+                  <td>L1: 5 specs E2E real + helpers (cleanup, payload, server-...</td>
+                </tr>
+                <tr>
+                  <td>FEAT-013-BATCH-A-...</td>
+                  <td>code-reviewer</td>
+                  <td>done</td>
+                  <td>1</td>
+                  <td>16800</td>
+                  <td>1m 2s</td>
+                  <td>L1: 3 majors (helpers DRY) + 4 minors. Request-changes.</td>
+                </tr>
+                <tr>
+                  <td>FEAT-013-BATCH-A-...</td>
+                  <td>logic-reviewer</td>
+                  <td>done</td>
+                  <td>1</td>
+                  <td>36500</td>
+                  <td>4m 40s</td>
+                  <td>L1: 2 blockers (DailyPage onBeforeChange wiring latente d...</td>
+                </tr>
+                <tr>
+                  <td>FEAT-013-BATCH-A-...</td>
+                  <td>dev</td>
+                  <td>done</td>
+                  <td>2</td>
+                  <td>62000</td>
+                  <td>7m</td>
+                  <td>L2: 16 findings endereçados; DailyPage hotfix flushSavePe...</td>
+                </tr>
+                <tr>
+                  <td>FEAT-013-BATCH-A-...</td>
+                  <td>code-reviewer</td>
+                  <td>done</td>
+                  <td>2</td>
+                  <td>14200</td>
+                  <td>55s</td>
+                  <td>L2: majors fixed; 2 minors carry-over. Approve.</td>
+                </tr>
+                <tr>
+                  <td>FEAT-013-BATCH-A-...</td>
+                  <td>logic-reviewer</td>
+                  <td>done</td>
+                  <td>2</td>
+                  <td>38000</td>
+                  <td>6m</td>
+                  <td>L2: todos 9 findings fixed. Approve.</td>
+                </tr>
+                <tr>
+                  <td>FEAT-013-BATCH-A-...</td>
+                  <td>dev</td>
+                  <td>done</td>
+                  <td>3</td>
+                  <td>32000</td>
+                  <td>7m</td>
+                  <td>L3 runtime fixes: locator role=status ambíguo (header reg...</td>
+                </tr>
+                <tr>
+                  <td>FEAT-013-BATCH-A-...</td>
+                  <td>code-reviewer</td>
+                  <td>done</td>
+                  <td>3</td>
+                  <td>18500</td>
+                  <td>3m</td>
+                  <td>L3: 3 fixes corretos; 2 minors carry-over resolvidos via ...</td>
+                </tr>
+                <tr>
+                  <td>FEAT-013-BATCH-A-...</td>
+                  <td>logic-reviewer</td>
+                  <td>done</td>
+                  <td>3</td>
+                  <td>18500</td>
+                  <td>4m</td>
+                  <td>L3: race coverage intacto, header scope safe, path canoni...</td>
+                </tr>
+                <tr>
+                  <td>FEAT-013-FEAT-013...</td>
+                  <td>qa</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>31093</td>
+                  <td>2m 2s</td>
+                  <td>Pass: AC-001..AC-007 + SC-003 + SC-004 + NFR-002. 7/7 e2e...</td>
+                </tr>
+                <tr>
+                  <td>FEAT-013-FEAT-013...</td>
+                  <td>audit-agent</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>40637</td>
+                  <td>1m 51s</td>
+                  <td>Pass: 6 checks ok, housekeeping fixes PM documentados, ze...</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </details>
         <details>
           <summary>Repo health snapshot</summary>
@@ -744,7 +1220,7 @@
             <blockquote>
               <p>
                 Feature: e2e-mvp-closer Task ID: FEAT-013 Phase: done Generated at:
-                2026-05-11T14:44:22.797Z
+                2026-05-11T14:53:19.339Z
               </p>
             </blockquote>
             <h2>Insights</h2>
@@ -753,23 +1229,33 @@
                 ℹ Escalation rate 0.0% is below the Galileo healthy band (&lt; 10%) — low
                 escalation, agents resolving autonomously. <em>(Galileo healthy band)</em>
               </li>
+              <li>ℹ Dev task success rate 100.0% is at or above 80% — healthy first-try rate.</li>
+              <li>
+                ⚠ Loop rate 72.7% exceeds 50% — more than half of dispatches needed loops. Consider
+                strengthening the preflight contract.
+              </li>
             </ul>
             <h2>Cost breakdown</h2>
-            <p><em>no usage data available — dispatch count fallback: 0 dispatches</em></p>
+            <p>
+              <em
+                >70/30 input/output split assumed; harness reports only total_tokens; 11 of 11
+                dispatches included in cost</em
+              >
+            </p>
             <ul>
               <li>
-                Total tokens: n/a
+                Total tokens: 356230
                 <ul>
-                  <li>Estimated input (70%): n/a</li>
-                  <li>Estimated output (30%): n/a</li>
+                  <li>Estimated input (70%): 249361</li>
+                  <li>Estimated output (30%): 106869</li>
                 </ul>
               </li>
-              <li>Estimated cost USD: n/a</li>
-              <li>Cost per AC: n/a</li>
-              <li>Cost per dispatch (avg): n/a</li>
-              <li>Wall-clock duration: n/a</li>
-              <li>Tool uses total: n/a</li>
-              <li>Coverage: 0 of 0 dispatches included in cost calculation</li>
+              <li>Estimated cost USD total: $1.9545</li>
+              <li>Cost per AC: $0.2792</li>
+              <li>Cost per dispatch (avg): $0.1777</li>
+              <li>Wall-clock duration: 43m 9s</li>
+              <li>Tool uses total: 213</li>
+              <li>Coverage: 11 of 11 dispatches included in cost calculation</li>
             </ul>
             <h2>Repo health snapshot</h2>
             <p><em>Measured at: 2026-05-11</em></p>
@@ -810,7 +1296,144 @@
               </tbody>
             </table>
             <h2>Per-dispatch breakdown</h2>
-            <p><em>(no dispatches)</em></p>
+            <table>
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Role</th>
+                  <th>Status</th>
+                  <th>Loop</th>
+                  <th>Tokens</th>
+                  <th>$</th>
+                  <th>Duration</th>
+                  <th>PM note</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>FEAT-013-...</td>
+                  <td>dev</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>48000</td>
+                  <td>$0.3168</td>
+                  <td>5m 40s</td>
+                  <td>
+                    L1: 5 specs E2E real + helpers (cleanup, payload, server-ready, dates, consol...
+                  </td>
+                </tr>
+                <tr>
+                  <td>FEAT-013-...</td>
+                  <td>code-reviewer</td>
+                  <td>done</td>
+                  <td>1</td>
+                  <td>16800</td>
+                  <td>$0.0370</td>
+                  <td>1m 2s</td>
+                  <td>L1: 3 majors (helpers DRY) + 4 minors. Request-changes.</td>
+                </tr>
+                <tr>
+                  <td>FEAT-013-...</td>
+                  <td>logic-reviewer</td>
+                  <td>done</td>
+                  <td>1</td>
+                  <td>36500</td>
+                  <td>$0.2409</td>
+                  <td>4m 40s</td>
+                  <td>
+                    L1: 2 blockers (DailyPage onBeforeChange wiring latente do FEAT-012, race spe...
+                  </td>
+                </tr>
+                <tr>
+                  <td>FEAT-013-...</td>
+                  <td>dev</td>
+                  <td>done</td>
+                  <td>2</td>
+                  <td>62000</td>
+                  <td>$0.4092</td>
+                  <td>7m</td>
+                  <td>
+                    L2: 16 findings endereçados; DailyPage hotfix flushSavePendingRef + onBeforeC...
+                  </td>
+                </tr>
+                <tr>
+                  <td>FEAT-013-...</td>
+                  <td>code-reviewer</td>
+                  <td>done</td>
+                  <td>2</td>
+                  <td>14200</td>
+                  <td>$0.0312</td>
+                  <td>55s</td>
+                  <td>L2: majors fixed; 2 minors carry-over. Approve.</td>
+                </tr>
+                <tr>
+                  <td>FEAT-013-...</td>
+                  <td>logic-reviewer</td>
+                  <td>done</td>
+                  <td>2</td>
+                  <td>38000</td>
+                  <td>$0.2508</td>
+                  <td>6m</td>
+                  <td>L2: todos 9 findings fixed. Approve.</td>
+                </tr>
+                <tr>
+                  <td>FEAT-013-...</td>
+                  <td>dev</td>
+                  <td>done</td>
+                  <td>3</td>
+                  <td>32000</td>
+                  <td>$0.2112</td>
+                  <td>7m</td>
+                  <td>
+                    L3 runtime fixes: locator role=status ambíguo (header region scope), isAnimat...
+                  </td>
+                </tr>
+                <tr>
+                  <td>FEAT-013-...</td>
+                  <td>code-reviewer</td>
+                  <td>done</td>
+                  <td>3</td>
+                  <td>18500</td>
+                  <td>$0.0407</td>
+                  <td>3m</td>
+                  <td>L3: 3 fixes corretos; 2 minors carry-over resolvidos via PM housekeeping.</td>
+                </tr>
+                <tr>
+                  <td>FEAT-013-...</td>
+                  <td>logic-reviewer</td>
+                  <td>done</td>
+                  <td>3</td>
+                  <td>18500</td>
+                  <td>$0.1221</td>
+                  <td>4m</td>
+                  <td>
+                    L3: race coverage intacto, header scope safe, path canonicity verificada. App...
+                  </td>
+                </tr>
+                <tr>
+                  <td>FEAT-013-...</td>
+                  <td>qa</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>31093</td>
+                  <td>$0.2052</td>
+                  <td>2m 2s</td>
+                  <td>
+                    Pass: AC-001..AC-007 + SC-003 + SC-004 + NFR-002. 7/7 e2e real + 2/2 smoke + ...
+                  </td>
+                </tr>
+                <tr>
+                  <td>FEAT-013-...</td>
+                  <td>audit-agent</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>40637</td>
+                  <td>$0.0894</td>
+                  <td>1m 51s</td>
+                  <td>Pass: 6 checks ok, housekeeping fixes PM documentados, zero bypass.</td>
+                </tr>
+              </tbody>
+            </table>
             <h2>Per-AC closure detail</h2>
             <table>
               <thead>
@@ -824,44 +1447,44 @@
               <tbody>
                 <tr>
                   <td>AC-001</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-002</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-003</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-004</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-005</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-006</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-007</td>
-                  <td>missing</td>
-                  <td>—</td>
+                  <td>pass</td>
+                  <td>qa</td>
                   <td>—</td>
                 </tr>
               </tbody>
@@ -906,7 +1529,7 @@
               <tbody>
                 <tr>
                   <td>audit-agent</td>
-                  <td>0</td>
+                  <td>1</td>
                 </tr>
                 <tr>
                   <td>blocker-specialist</td>
@@ -914,15 +1537,15 @@
                 </tr>
                 <tr>
                   <td>code-reviewer</td>
-                  <td>0</td>
+                  <td>3</td>
                 </tr>
                 <tr>
                   <td>dev</td>
-                  <td>0</td>
+                  <td>3</td>
                 </tr>
                 <tr>
                   <td>logic-reviewer</td>
-                  <td>0</td>
+                  <td>3</td>
                 </tr>
                 <tr>
                   <td>pm-orchestrator</td>
@@ -930,11 +1553,11 @@
                 </tr>
                 <tr>
                   <td>qa</td>
-                  <td>0</td>
+                  <td>1</td>
                 </tr>
                 <tr>
                   <td><strong>Total</strong></td>
-                  <td>0</td>
+                  <td>11</td>
                 </tr>
               </tbody>
             </table>
@@ -949,7 +1572,7 @@
               <tbody>
                 <tr>
                   <td>audit-agent</td>
-                  <td>n/a</td>
+                  <td>100.0%</td>
                 </tr>
                 <tr>
                   <td>blocker-specialist</td>
@@ -957,15 +1580,15 @@
                 </tr>
                 <tr>
                   <td>code-reviewer</td>
-                  <td>n/a</td>
+                  <td>100.0%</td>
                 </tr>
                 <tr>
                   <td>dev</td>
-                  <td>n/a</td>
+                  <td>100.0%</td>
                 </tr>
                 <tr>
                   <td>logic-reviewer</td>
-                  <td>n/a</td>
+                  <td>100.0%</td>
                 </tr>
                 <tr>
                   <td>pm-orchestrator</td>
@@ -973,20 +1596,86 @@
                 </tr>
                 <tr>
                   <td>qa</td>
-                  <td>n/a</td>
+                  <td>100.0%</td>
                 </tr>
               </tbody>
             </table>
             <h2>Loop rate</h2>
-            <p>Loop rate: 0.0%</p>
+            <p>Loop rate: 72.7%</p>
             <h2>Escalation rate</h2>
             <p>Escalation rate: 0.0% — below healthy band (&lt; 10%)</p>
             <h2>AC closure</h2>
-            <p>Total: 7 | Pass: 10 | Partial: 0 | Fail: 0 | Missing: 7</p>
+            <p>Total: 7 | Pass: 10 | Partial: 0 | Fail: 0 | Missing: 0</p>
+            <h2>Reviewer findings density</h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>Severity</th>
+                  <th>Count</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>critical</td>
+                  <td>0</td>
+                </tr>
+                <tr>
+                  <td>major</td>
+                  <td>0</td>
+                </tr>
+                <tr>
+                  <td>minor</td>
+                  <td>0</td>
+                </tr>
+              </tbody>
+            </table>
             <h2>PM notes log</h2>
-            <p><em>(no PM notes recorded)</em></p>
+            <ul>
+              <li>
+                [2026-05-11 13:30 dev] L1: 5 specs E2E real + helpers (cleanup, payload,
+                server-ready, dates, console-errors). Ready-for-review.
+              </li>
+              <li>
+                [2026-05-11 13:30 code-reviewer] L1: 3 majors (helpers DRY) + 4 minors.
+                Request-changes.
+              </li>
+              <li>
+                [2026-05-11 13:30 logic-reviewer] L1: 2 blockers (DailyPage onBeforeChange wiring
+                latente do FEAT-012, race spec keyboard swallow) + 4 majors + 3 minors.
+                Request-changes.
+              </li>
+              <li>
+                [2026-05-11 13:30 dev] L2: 16 findings endereçados; DailyPage hotfix
+                flushSavePendingRef + onBeforeChange; race blur via page.evaluate; helpers DRY.
+              </li>
+              <li>
+                [2026-05-11 13:30 code-reviewer] L2: majors fixed; 2 minors carry-over. Approve.
+              </li>
+              <li>[2026-05-11 13:30 logic-reviewer] L2: todos 9 findings fixed. Approve.</li>
+              <li>
+                [2026-05-11 13:30 dev] L3 runtime fixes: locator role=status ambíguo (header region
+                scope), isAnimating race (wait button enabled), cleanup path (server/data/days). 7/7
+                e2e real passing.
+              </li>
+              <li>
+                [2026-05-11 13:30 code-reviewer] L3: 3 fixes corretos; 2 minors carry-over
+                resolvidos via PM housekeeping.
+              </li>
+              <li>
+                [2026-05-11 13:30 logic-reviewer] L3: race coverage intacto, header scope safe, path
+                canonicity verificada. Approve.
+              </li>
+              <li>
+                [2026-05-11 13:30 qa] Pass: AC-001..AC-007 + SC-003 + SC-004 + NFR-002. 7/7 e2e real
+                + 2/2 smoke + lint + typecheck clean.
+              </li>
+              <li>
+                [2026-05-11 13:30 audit-agent] Pass: 6 checks ok, housekeeping fixes PM
+                documentados, zero bypass.
+              </li>
+            </ul>
             <h2>Token cost</h2>
-            <p>Token cost not available — using dispatch count as cost proxy: 0 dispatches</p>
+            <p>Token cost not available — using dispatch count as cost proxy: 11 dispatches</p>
           </div>
         </details>
       </section>
