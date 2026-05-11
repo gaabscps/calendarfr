@@ -266,8 +266,8 @@ describe('useSwipeNavigation — pointerCancel inactive branch (line 133)', () =
 // Guard: pointer capture NÃO é chamado quando target é elemento interativo
 // ---------------------------------------------------------------------------
 
-describe('useSwipeNavigation — onPointerDown skip para elementos interativos', () => {
-  it('não chama setPointerCapture quando target é <button>', () => {
+describe('useSwipeNavigation — onPointerDown skips capture for interactive elements', () => {
+  it('does not capture pointer when target is a <button>', () => {
     const goToPrev = jest.fn().mockResolvedValue(undefined);
     const goToNext = jest.fn().mockResolvedValue(undefined);
     const { result } = renderHook(() => useSwipeNavigation({ goToPrev, goToNext }));
@@ -287,7 +287,7 @@ describe('useSwipeNavigation — onPointerDown skip para elementos interativos',
     expect(container.setPointerCapture).not.toHaveBeenCalled();
   });
 
-  it('não chama setPointerCapture quando target é span DENTRO de <button>', () => {
+  it('does not capture pointer when target is a span inside a <button>', () => {
     const goToPrev = jest.fn().mockResolvedValue(undefined);
     const goToNext = jest.fn().mockResolvedValue(undefined);
     const { result } = renderHook(() => useSwipeNavigation({ goToPrev, goToNext }));
@@ -309,7 +309,7 @@ describe('useSwipeNavigation — onPointerDown skip para elementos interativos',
     expect(container.setPointerCapture).not.toHaveBeenCalled();
   });
 
-  it('não chama setPointerCapture quando target é <input type="checkbox">', () => {
+  it('does not capture pointer when target is an <input type="checkbox">', () => {
     const goToPrev = jest.fn().mockResolvedValue(undefined);
     const goToNext = jest.fn().mockResolvedValue(undefined);
     const { result } = renderHook(() => useSwipeNavigation({ goToPrev, goToNext }));
@@ -330,7 +330,7 @@ describe('useSwipeNavigation — onPointerDown skip para elementos interativos',
     expect(container.setPointerCapture).not.toHaveBeenCalled();
   });
 
-  it('AINDA chama setPointerCapture quando target é div (área de swipe)', () => {
+  it('still captures pointer when target is a plain div (swipe area)', () => {
     const goToPrev = jest.fn().mockResolvedValue(undefined);
     const goToNext = jest.fn().mockResolvedValue(undefined);
     const { result } = renderHook(() => useSwipeNavigation({ goToPrev, goToNext }));

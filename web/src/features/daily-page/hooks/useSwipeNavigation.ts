@@ -67,7 +67,10 @@ export function useSwipeNavigation({
     // Skip capture for interactive elements so their onClick handlers fire normally.
     // setPointerCapture would redirect pointerup to this container, causing click
     // to be dispatched here instead of on the button/checkbox/link.
-    if (e.target instanceof Element && e.target.closest('button, a, input, select, label')) {
+    if (
+      e.target instanceof Element &&
+      e.target.closest('button, a, input, select, label, [role="button"]')
+    ) {
       return;
     }
 
