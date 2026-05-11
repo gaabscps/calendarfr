@@ -263,7 +263,7 @@ describe('useSwipeNavigation — pointerCancel inactive branch (line 133)', () =
 });
 
 // ---------------------------------------------------------------------------
-// Guard: pointer capture NÃO é chamado quando target é elemento interativo
+// Guard: pointer capture is NOT called when target is an interactive element
 // ---------------------------------------------------------------------------
 
 describe('useSwipeNavigation — onPointerDown skips capture for interactive elements', () => {
@@ -300,7 +300,7 @@ describe('useSwipeNavigation — onPointerDown skips capture for interactive ele
 
     const downEvent = makePointerEvent('pointerdown', { pointerId: 1, clientX: 200 });
     Object.defineProperty(downEvent, 'currentTarget', { value: container });
-    Object.defineProperty(downEvent, 'target', { value: span }); // span é o target real do click
+    Object.defineProperty(downEvent, 'target', { value: span }); // span is the actual event target (child of button)
 
     result.current.swipeProps.onPointerDown?.(
       downEvent as unknown as React.PointerEvent<HTMLElement>,
