@@ -13,27 +13,7 @@
 
 import { expect, test } from '@playwright/test';
 
-// ---------------------------------------------------------------------------
-// Inline minimal valid payload (mirrors helpers.ts validPayload shape,
-// but Playwright tests cannot share Jest imports)
-// ---------------------------------------------------------------------------
-
-function validPayload(date: string) {
-  return {
-    schemaVersion: 1 as const,
-    date,
-    mood: null,
-    priorities: [
-      { id: '01HZZZZZZZZZZZZZZZZZZZZZZA', text: '', done: false },
-      { id: '01HZZZZZZZZZZZZZZZZZZZZZZB', text: '', done: false },
-      { id: '01HZZZZZZZZZZZZZZZZZZZZZZC', text: '', done: false },
-    ],
-    agenda: Array.from({ length: 18 }, (_, i) => ({ hour: i + 6, text: '' })),
-    notes: [],
-    createdAt: null,
-    updatedAt: null,
-  };
-}
+import { validPayload } from '../_helpers/payload.js';
 
 const TEST_DATE = '2099-12-31';
 
@@ -44,7 +24,9 @@ test('PUT + GET /api/days/:date roundtrip matches payload (AC-030)', async ({ re
   const putRes = await request.put(`/api/days/${TEST_DATE}`, { data: payload });
   expect(putRes.status()).toBe(200);
 
-  const putBody = (await putRes.json()) as typeof payload & {
+  // Server fills createdAt/updatedAt (overriding the null from the payload).
+  // Use Omit to drop conflicting nullable fields before intersecting.
+  const putBody = (await putRes.json()) as Omit<typeof payload, 'createdAt' | 'updatedAt'> & {
     createdAt: string;
     updatedAt: string;
   };

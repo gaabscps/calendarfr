@@ -5,7 +5,7 @@
 > Feature: Narrative HTML dashboard for AgentOps reports
 > Task ID: FEAT-004
 > Phase: done
-> Generated at: 2026-05-11T14:02:36.087Z
+> Generated at: 2026-05-11T14:44:22.797Z
 
 ## Insights
 

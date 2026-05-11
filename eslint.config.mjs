@@ -196,6 +196,9 @@ export default [
       globals: {
         process: 'readonly',
         console: 'readonly',
+        // Browser globals referenced inside page.evaluate() callbacks
+        document: 'readonly',
+        HTMLElement: 'readonly',
       },
     },
     rules: {

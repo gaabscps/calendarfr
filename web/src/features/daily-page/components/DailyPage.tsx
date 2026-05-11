@@ -18,6 +18,7 @@
  */
 
 import type { DailyPageData } from '@calendarfr/shared';
+import { useEffect, useRef } from 'react';
 
 import { Agenda } from '@/features/agenda';
 import type { AgendaSlots } from '@/features/agenda';
@@ -65,17 +66,28 @@ function toAgendaSlots(data: DailyPageData): AgendaSlots {
   return data.agenda;
 }
 
-export function DailyPage() {
-  const today = getTodayLocal();
+export interface DailyPageProps {
+  /**
+   * Optional initial date in YYYY-MM-DD format. Defaults to today (local TZ).
+   * Used for E2E test fixture isolation (e.g., 2099-12-31 in Playwright real specs).
+   */
+  initialDate?: string;
+}
+
+export function DailyPage({ initialDate }: DailyPageProps = {}) {
+  const today = initialDate ?? getTodayLocal();
   const reducedMotion = useReducedMotion();
 
-  // Navigation state (date, direction, isAnimating, goTo*, swipeProps)
+  // flushSavePending is captured via ref since it's defined AFTER usePageNavigation.
+  // onBeforeChange must fire on EVERY nav path (buttons, keyboard, swipe) so the
+  // snapshot-then-fire save lands on the OUTGOING date, not the incoming one.
+  const flushSavePendingRef = useRef<(() => Promise<void>) | null>(null);
+
   const { date, direction, isAnimating, goToPrev, goToNext, swipeProps } = usePageNavigation({
     initialDate: today,
-    // flushSavePending is wired as onBeforeChange after useDailyPage is called below
+    onBeforeChange: () => flushSavePendingRef.current?.() ?? Promise.resolve(),
   });
 
-  // Load/save state for current date
   const {
     data,
     loadError,
@@ -89,18 +101,15 @@ export function DailyPage() {
     reload,
   } = useDailyPage(date);
 
-  // Wire flushSavePending into navigation (usePageNavigation onBeforeChange is a ref,
-  // so we can't pass it directly at construction. We call it via the goTo* wrappers
-  // by using the swipeProps pattern — but the hook already manages this via useEffect.
-  // For the nav buttons, we wrap the handlers to flush before navigating.)
+  useEffect(() => {
+    flushSavePendingRef.current = flushSavePending;
+  }, [flushSavePending]);
 
   const handlePrev = async () => {
-    await flushSavePending();
     await goToPrev();
   };
 
   const handleNext = async () => {
-    await flushSavePending();
     await goToNext();
   };
 

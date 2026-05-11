@@ -1,6 +1,6 @@
 # AgentOps observability — overview
 
-> Generated at: 2026-05-11T14:02:36.087Z | Total flows: 9
+> Generated at: 2026-05-11T14:44:22.797Z | Total flows: 10
 
 ## Repo health snapshot
 
@@ -26,9 +26,11 @@ _Measured at: 2026-05-11_
 | ✓ FEAT-007 | ✓      | rich-text-line — editor Tiptap de uma linha (núcleo de escrita)                      | done    | done    | 19         | 35  | 0.54    | 0.0%  | $22.9994 | $0.6571 | 2026-05-09 |
 | ✓ FEAT-008 | ⊘      | priorities — Top 3 prioridades do dia (checkbox + RichTextLine)                      | done    | done    | 13         | 26  | 0.50    | 0.0%  | $3.2067  | $0.1233 | 2026-05-09 |
 | … FEAT-012 | ✓      | daily-page — orquestrador do dia (composição, navegação, autosave)                   | specify | running | 1          | 54  | 0.02    | 0.0%  | $31.3269 | $0.5801 | 2026-05-11 |
+| ✓ FEAT-013 | ✓      | e2e-mvp-closer                                                                       | done    | done    | 0          | 7   | —       | —     | —        | —       |            |
 
 _Compl. legend:_ ✓ standard · ◐ pré-padrão (excluído de trends/health) · ⊘ pm-bypass (excluído de trends/health)
 
 ## Trends
 
+- Dispatches/AC: FEAT-007=0.54 → FEAT-013=0.00 (-100.0%)
 - Cost per AC: FEAT-007=$0.6571 → FEAT-012=$0.5801 (-11.7%)

@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>AgentOps · CalendárioFR</title>
+    <title>e2e-mvp-closer — AgentOps</title>
     <style>
       :root {
         --bg: #fff;
@@ -563,185 +563,432 @@
     </style>
   </head>
   <body>
-    <header>
-      <h1>AgentOps · CalendárioFR</h1>
+    <header class="kpi-bar">
+      <h1>e2e-mvp-closer <span class="badge badge-pass">✓</span></h1>
       <div class="kpis">
-        <span>10 flows</span><span style="color: var(--fg-muted)">243/299 ACs</span
-        ><span style="color: var(--fg-muted)">28h36m</span>
+        <span>—</span>
+        <span>—</span>
+
+        <span>10/7 ACs</span>
+        <span>mut 70.7%</span>
+        <span>type 97.7%</span>
+        <span>0 loops</span>
       </div>
     </header>
+
     <main>
-      <section class="repo-health-current">
-        <h2>Repo health (current)</h2>
-        <div class="badge-grid">
-          <span class="badge badge-pass">mut 70.7%</span>
-          <span class="badge badge-pass">type 97.7%</span>
-        </div>
+      <section class="story">
+        <h2>Story</h2>
       </section>
-      <section>
-        <h2>Flows</h2>
-        <div class="flow-grid">
-          <a class="flow-card" href="./FEAT-012.html">
-            <header>
-              <span class="badge badge-neutral">…</span>
-              <h3>daily-page — orquestrador do dia (composição, navegação, autosave)</h3>
-            </header>
-            <div class="flow-meta">
-              <span>—</span>
-              <span>0/54 ACs</span>
-              <span>—</span>
-            </div>
-            <div class="trends">
-              <span
-                >cost
-                <svg width="60" height="20" viewBox="0 0 60 20" aria-label="trend">
-                  <polyline
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.5"
-                    points="0.0,20.0 30.0,20.0 60.0,20.0"
-                  /></svg></span
-              ><span
-                >mut
-                <svg width="60" height="20" viewBox="0 0 60 20" aria-label="trend">
-                  <polyline
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.5"
-                    points="0.0,20.0 30.0,20.0 60.0,20.0"
-                  /></svg
-              ></span>
-            </div>
-          </a>
-          <a class="flow-card" href="./FEAT-007.html">
-            <header>
-              <span class="badge badge-warn">⚠</span>
-              <h3>rich-text-line — editor Tiptap de uma linha (núcleo de escrita)</h3>
-            </header>
-            <div class="flow-meta">
-              <span>—</span>
-              <span>36/35 ACs</span>
-              <span>2h5m</span>
-            </div>
-            <div class="trends">
-              <span
-                >cost
-                <svg width="60" height="20" viewBox="0 0 60 20" aria-label="trend">
-                  <polyline
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.5"
-                    points="0.0,20.0 60.0,20.0"
-                  /></svg></span
-              ><span
-                >mut
-                <svg width="60" height="20" viewBox="0 0 60 20" aria-label="trend">
-                  <polyline
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.5"
-                    points="0.0,20.0 60.0,20.0"
-                  /></svg
-              ></span>
-            </div>
-          </a>
-          <a class="flow-card" href="./FEAT-008.html">
-            <header>
-              <span class="badge badge-pass">✓</span><span class="badge badge-warn">pm-bypass</span>
-              <h3>priorities — Top 3 prioridades do dia (checkbox + RichTextLine)</h3>
-            </header>
-            <div class="flow-meta">
-              <span>—</span>
-              <span>0/26 ACs</span>
-              <span>37m 10s</span>
-            </div>
-          </a>
-          <a class="flow-card" href="./FEAT-006.html">
-            <header>
-              <span class="badge badge-warn">⚠</span
-              ><span class="badge badge-neutral">pré-padrão</span>
-              <h3>Server companion — Fastify + JSON store (rotas /api/days/:date)</h3>
-            </header>
-            <div class="flow-meta">
-              <span>—</span>
-              <span>10/30 ACs</span>
-              <span>2h44m</span>
-            </div>
-          </a>
-          <a class="flow-card" href="./FEAT-005.html">
-            <header>
-              <span class="badge badge-warn">⚠</span
-              ><span class="badge badge-neutral">pré-padrão</span>
-              <h3>Batch story-card UX redesign (fact-sheet)</h3>
-            </header>
-            <div class="flow-meta">
-              <span>—</span>
-              <span>37/21 ACs</span>
-              <span>1h42m</span>
-            </div>
-          </a>
-          <a class="flow-card" href="./FEAT-004.html">
-            <header>
-              <span class="badge badge-warn">⚠</span
-              ><span class="badge badge-neutral">pré-padrão</span>
-              <h3>Narrative HTML dashboard for AgentOps reports</h3>
-            </header>
-            <div class="flow-meta">
-              <span>—</span>
-              <span>38/26 ACs</span>
-              <span>1h40m</span>
-            </div>
-          </a>
-          <a class="flow-card" href="./FEAT-003.html">
-            <header>
-              <span class="badge badge-warn">⚠</span
-              ><span class="badge badge-neutral">pré-padrão</span>
-              <h3>Quality baseline + cost telemetry + AgentOps dashboard enrichment</h3>
-            </header>
-            <div class="flow-meta">
-              <span>—</span>
-              <span>40/36 ACs</span>
-              <span>5h53m</span>
-            </div>
-          </a>
-          <a class="flow-card" href="./FEAT-002.html">
-            <header>
-              <span class="badge badge-warn">⚠</span
-              ><span class="badge badge-neutral">pré-padrão</span>
-              <h3>
-                AgentOps observability extractor — relatórios Markdown a partir de .agent-session/*
-              </h3>
-            </header>
-            <div class="flow-meta">
-              <span>—</span>
-              <span>33/25 ACs</span>
-              <span>6h10m</span>
-            </div>
-          </a>
-          <a class="flow-card" href="./FEAT-001.html">
-            <header>
-              <span class="badge badge-warn">⚠</span
-              ><span class="badge badge-neutral">pré-padrão</span>
-              <h3>Foundation — scaffolding, infra de testes, design tokens, PaperSheet</h3>
-            </header>
-            <div class="flow-meta">
-              <span>—</span>
-              <span>39/39 ACs</span>
-              <span>7h45m</span>
-            </div>
-          </a>
-          <a class="flow-card" href="./FEAT-013.html">
-            <header>
-              <span class="badge badge-pass">✓</span>
-              <h3>e2e-mvp-closer</h3>
-            </header>
-            <div class="flow-meta">
-              <span>—</span>
-              <span>10/7 ACs</span>
-              <span>—</span>
-            </div>
-          </a>
+      <section class="cost-section">
+        <header class="cost-header">
+          <h2>Cost</h2>
+          <span class="badge badge-fail">coverage 0/0 (0%)</span>
+        </header>
+        <div class="cost-grid">
+          <div class="cost-card">
+            <span class="cost-label">Total cost</span>
+            <span class="cost-value">—</span>
+          </div>
+          <div class="cost-card">
+            <span class="cost-label">$ / AC</span>
+            <span class="cost-value">—</span>
+            <small>7 ACs</small>
+          </div>
+          <div class="cost-card">
+            <span class="cost-label">$ / dispatch</span>
+            <span class="cost-value">—</span>
+            <small>avg of 0</small>
+          </div>
+          <div class="cost-card">
+            <span class="cost-label">Tokens</span>
+            <span class="cost-value">—</span>
+          </div>
+          <div class="cost-card">
+            <span class="cost-label">Wall-clock</span>
+            <span class="cost-value">—</span>
+            <small>0 dispatches with usage</small>
+          </div>
+          <div class="cost-card">
+            <span class="cost-label">Tool uses</span>
+            <span class="cost-value">—</span>
+          </div>
         </div>
+
+        <p class="cost-note">
+          <em>no usage data available — dispatch count fallback: 0 dispatches</em>
+        </p>
+      </section>
+      <section class="drilldown">
+        <h2>Drilldown</h2>
+        <details>
+          <summary>Per-AC closure detail</summary>
+          <div>
+            <table>
+              <thead>
+                <tr>
+                  <th>AC ID</th>
+                  <th>Status</th>
+                  <th>Validator</th>
+                  <th>Evidence</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>AC-001</td>
+                  <td>missing</td>
+                  <td>—</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>AC-002</td>
+                  <td>missing</td>
+                  <td>—</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>AC-003</td>
+                  <td>missing</td>
+                  <td>—</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>AC-004</td>
+                  <td>missing</td>
+                  <td>—</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>AC-005</td>
+                  <td>missing</td>
+                  <td>—</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>AC-006</td>
+                  <td>missing</td>
+                  <td>—</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>AC-007</td>
+                  <td>missing</td>
+                  <td>—</td>
+                  <td>—</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </details>
+        <details>
+          <summary>Per-dispatch breakdown</summary>
+          <div><p>(no dispatches)</p></div>
+        </details>
+        <details>
+          <summary>Repo health snapshot</summary>
+          <div>
+            <p><em>Measured at: 2026-05-11</em></p>
+            <table>
+              <thead>
+                <tr>
+                  <th>Métrica</th>
+                  <th>Valor</th>
+                  <th>Threshold</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Mutation score</td>
+                  <td>70.7%</td>
+                  <td>≥ 70%</td>
+                  <td>✓</td>
+                </tr>
+                <tr>
+                  <td>Type coverage</td>
+                  <td>97.7%</td>
+                  <td>≥ 95%</td>
+                  <td>✓</td>
+                </tr>
+                <tr>
+                  <td>`any` count</td>
+                  <td>67</td>
+                  <td>—</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>Dep violations</td>
+                  <td>—</td>
+                  <td>= 0</td>
+                  <td>—</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </details>
+        <details>
+          <summary>Reviewer findings</summary>
+          <div><p>(none)</p></div>
+        </details>
+        <details>
+          <summary>Phase durations</summary>
+          <div><p>(no phase data available)</p></div>
+        </details>
+      </section>
+      <section class="raw-data">
+        <h2>Raw data</h2>
+        <details>
+          <summary>View raw Markdown report</summary>
+          <div class="md-embed">
+            <h1>e2e-mvp-closer — FEAT-013</h1>
+            <blockquote>
+              <p>
+                Feature: e2e-mvp-closer Task ID: FEAT-013 Phase: done Generated at:
+                2026-05-11T14:44:22.797Z
+              </p>
+            </blockquote>
+            <h2>Insights</h2>
+            <ul>
+              <li>
+                ℹ Escalation rate 0.0% is below the Galileo healthy band (&lt; 10%) — low
+                escalation, agents resolving autonomously. <em>(Galileo healthy band)</em>
+              </li>
+            </ul>
+            <h2>Cost breakdown</h2>
+            <p><em>no usage data available — dispatch count fallback: 0 dispatches</em></p>
+            <ul>
+              <li>
+                Total tokens: n/a
+                <ul>
+                  <li>Estimated input (70%): n/a</li>
+                  <li>Estimated output (30%): n/a</li>
+                </ul>
+              </li>
+              <li>Estimated cost USD: n/a</li>
+              <li>Cost per AC: n/a</li>
+              <li>Cost per dispatch (avg): n/a</li>
+              <li>Wall-clock duration: n/a</li>
+              <li>Tool uses total: n/a</li>
+              <li>Coverage: 0 of 0 dispatches included in cost calculation</li>
+            </ul>
+            <h2>Repo health snapshot</h2>
+            <p><em>Measured at: 2026-05-11</em></p>
+            <table>
+              <thead>
+                <tr>
+                  <th>Métrica</th>
+                  <th>Valor</th>
+                  <th>Threshold</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Mutation score</td>
+                  <td>70.7%</td>
+                  <td>≥ 70%</td>
+                  <td>✓</td>
+                </tr>
+                <tr>
+                  <td>Type coverage</td>
+                  <td>97.7%</td>
+                  <td>≥ 95%</td>
+                  <td>✓</td>
+                </tr>
+                <tr>
+                  <td><code>any</code> count</td>
+                  <td>67</td>
+                  <td>—</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>Dep violations</td>
+                  <td>—</td>
+                  <td>= 0</td>
+                  <td>—</td>
+                </tr>
+              </tbody>
+            </table>
+            <h2>Per-dispatch breakdown</h2>
+            <p><em>(no dispatches)</em></p>
+            <h2>Per-AC closure detail</h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>AC ID</th>
+                  <th>Status</th>
+                  <th>Validator</th>
+                  <th>Evidence</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>AC-001</td>
+                  <td>missing</td>
+                  <td>—</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>AC-002</td>
+                  <td>missing</td>
+                  <td>—</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>AC-003</td>
+                  <td>missing</td>
+                  <td>—</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>AC-004</td>
+                  <td>missing</td>
+                  <td>—</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>AC-005</td>
+                  <td>missing</td>
+                  <td>—</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>AC-006</td>
+                  <td>missing</td>
+                  <td>—</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>AC-007</td>
+                  <td>missing</td>
+                  <td>—</td>
+                  <td>—</td>
+                </tr>
+              </tbody>
+            </table>
+            <h2>Phase durations</h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>Phase</th>
+                  <th>Duration</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>specify</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>plan</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>tasks</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>implementation</td>
+                  <td>—</td>
+                </tr>
+              </tbody>
+            </table>
+            <h2>Timeline</h2>
+            <p><em>(no phase data available)</em></p>
+            <h2>Dispatches</h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>Role</th>
+                  <th>Dispatches</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>audit-agent</td>
+                  <td>0</td>
+                </tr>
+                <tr>
+                  <td>blocker-specialist</td>
+                  <td>0</td>
+                </tr>
+                <tr>
+                  <td>code-reviewer</td>
+                  <td>0</td>
+                </tr>
+                <tr>
+                  <td>dev</td>
+                  <td>0</td>
+                </tr>
+                <tr>
+                  <td>logic-reviewer</td>
+                  <td>0</td>
+                </tr>
+                <tr>
+                  <td>pm-orchestrator</td>
+                  <td>0</td>
+                </tr>
+                <tr>
+                  <td>qa</td>
+                  <td>0</td>
+                </tr>
+                <tr>
+                  <td><strong>Total</strong></td>
+                  <td>0</td>
+                </tr>
+              </tbody>
+            </table>
+            <h2>Task success rate</h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>Role</th>
+                  <th>Task success rate</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>audit-agent</td>
+                  <td>n/a</td>
+                </tr>
+                <tr>
+                  <td>blocker-specialist</td>
+                  <td>n/a</td>
+                </tr>
+                <tr>
+                  <td>code-reviewer</td>
+                  <td>n/a</td>
+                </tr>
+                <tr>
+                  <td>dev</td>
+                  <td>n/a</td>
+                </tr>
+                <tr>
+                  <td>logic-reviewer</td>
+                  <td>n/a</td>
+                </tr>
+                <tr>
+                  <td>pm-orchestrator</td>
+                  <td>n/a</td>
+                </tr>
+                <tr>
+                  <td>qa</td>
+                  <td>n/a</td>
+                </tr>
+              </tbody>
+            </table>
+            <h2>Loop rate</h2>
+            <p>Loop rate: 0.0%</p>
+            <h2>Escalation rate</h2>
+            <p>Escalation rate: 0.0% — below healthy band (&lt; 10%)</p>
+            <h2>AC closure</h2>
+            <p>Total: 7 | Pass: 10 | Partial: 0 | Fail: 0 | Missing: 7</p>
+            <h2>PM notes log</h2>
+            <p><em>(no PM notes recorded)</em></p>
+            <h2>Token cost</h2>
+            <p>Token cost not available — using dispatch count as cost proxy: 0 dispatches</p>
+          </div>
+        </details>
       </section>
     </main>
   </body>

@@ -3,7 +3,7 @@
 > Feature: daily-page — orquestrador do dia (composição, navegação, autosave)
 > Task ID: FEAT-012
 > Phase: specify
-> Generated at: 2026-05-11T14:02:36.087Z
+> Generated at: 2026-05-11T14:44:22.797Z
 
 ## Insights
 
