@@ -1,0 +1,72 @@
+/**
+ * PageNavigator styles — header layout for date + nav buttons + save indicator.
+ */
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-base, 16px);
+  padding: var(--spacing-sm, 8px) var(--spacing-base, 16px);
+  border-bottom: 1px solid var(--color-paper-line, #e8e0d0);
+  background: transparent;
+}
+
+.navButton {
+  /* Clean icon button — real <button> element */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  padding: 0;
+  border: 1px solid var(--color-paper-line, #e8e0d0);
+  border-radius: var(--radii-md, 4px);
+  background: transparent;
+  color: var(--color-ink-secondary, #5a4a32);
+  font-size: 1.25rem;
+  cursor: pointer;
+  line-height: 1;
+  transition:
+    background 120ms ease,
+    color 120ms ease;
+}
+
+.navButton:hover:not(:disabled) {
+  background: var(--color-paper-line, #e8e0d0);
+  color: var(--color-ink, #2c2416);
+}
+
+.navButton:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* AC-042: focus-visible inherited from GlobalStyles — no outline:none */
+
+.center {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-xs, 4px);
+  min-width: 0;
+}
+
+.dateHeading {
+  margin: 0;
+  font-family: var(--font-hand, 'Caveat', cursive);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--color-ink, #2c2416);
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (min-width: 1024px) {
+  .dateHeading {
+    font-size: 1.5rem;
+  }
+}

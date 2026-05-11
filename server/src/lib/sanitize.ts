@@ -34,8 +34,15 @@ export const sanitizeText = (raw: string): string => DOMPurify.sanitize(raw, SAN
 export function sanitizeDayHtml(day: DailyPageData): DailyPageData {
   return {
     ...day,
-    priorities: day.priorities.map((p) => ({ ...p, text: sanitizeText(p.text) })),
-    agenda: day.agenda.map((s) => ({ ...s, text: sanitizeText(s.text) })),
+    // .map() returns a mutable array; cast back to tuple (zod already validated length).
+    priorities: day.priorities.map((p) => ({
+      ...p,
+      text: sanitizeText(p.text),
+    })) as unknown as DailyPageData['priorities'],
+    agenda: day.agenda.map((s) => ({
+      ...s,
+      text: sanitizeText(s.text),
+    })) as unknown as DailyPageData['agenda'],
     notes: day.notes.map((n) => ({ ...n, text: sanitizeText(n.text) })),
   };
 }

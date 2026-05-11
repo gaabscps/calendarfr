@@ -1,5 +1,5 @@
-import { PaperSheet } from '@/shared/components/PaperSheet';
+import { DailyPage } from '@/features/daily-page';
 
 export function App() {
-  return <PaperSheet>Foundation pronto. Próximo: Flow 2.</PaperSheet>;
+  return <DailyPage />;
 }

@@ -33,6 +33,14 @@ data/
 playwright-report/
 test-results/
 
+# Stale tsc emits in TypeScript source trees (sources são .ts/.tsx; configs ficam .js/.mjs)
+web/src/**/*.js
+test-utils/**/*.js
+!web/src/**/*.config.js
+!test-utils/**/*.config.js
+!web/src/**/*.config.mjs
+!test-utils/**/*.config.mjs
+
 # Workspace build outputs (workspace-scoped to avoid matching root dist/ twice)
 web/dist/
 server/dist/
@@ -44,6 +52,7 @@ storybook-static/
 **/.cache/
 **/.vite/
 **/.swc/
+**/*.tsbuildinfo
 
 # Quality tool reports (gitignored — only docs/agentops/ aggregates are committed)
 reports/

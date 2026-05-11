@@ -142,7 +142,7 @@ module.exports = {
     },
 
     tsConfig: {
-      fileName: 'tsconfig.scripts.json',
+      fileName: 'tsconfig.base.json',
     },
 
     enhancedResolveOptions: {

@@ -3,7 +3,7 @@
 > Feature: rich-text-line — editor Tiptap de uma linha (núcleo de escrita)
 > Task ID: FEAT-007
 > Phase: done
-> Generated at: 2026-05-10T09:01:55.016Z
+> Generated at: 2026-05-11T14:02:36.087Z
 
 ## Insights
 
@@ -26,7 +26,14 @@ _70/30 input/output split assumed; harness reports only total_tokens; 19 of 19 d
 
 ## Repo health snapshot
 
-Repo health: not measured (run `npm run mutation && npm run type-coverage && npm run arch:check` first)
+_Measured at: 2026-05-11_
+
+| Métrica        | Valor | Threshold | Status |
+| -------------- | ----- | --------- | ------ |
+| Mutation score | 70.7% | ≥ 70%     | ✓      |
+| Type coverage  | 97.7% | ≥ 95%     | ✓      |
+| `any` count    | 67    | —         | —      |
+| Dep violations | —     | = 0       | —      |
 
 ## Per-dispatch breakdown
 

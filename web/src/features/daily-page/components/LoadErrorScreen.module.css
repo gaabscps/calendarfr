@@ -1,0 +1,53 @@
+/**
+ * LoadErrorScreen — full-screen error state.
+ * Must be visually prominent so the user immediately understands there's an error.
+ */
+
+.screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-2xl, 48px) var(--spacing-base, 16px);
+  min-height: 300px;
+  text-align: center;
+  gap: var(--spacing-md, 12px);
+}
+
+.icon {
+  font-size: 3rem;
+  margin: 0;
+  line-height: 1;
+}
+
+.title {
+  margin: 0;
+  font-family: var(--font-hand, 'Caveat', cursive);
+  font-size: 1.5rem;
+  color: var(--color-danger, #e74c3c);
+}
+
+.message {
+  margin: 0;
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.875rem;
+  color: var(--color-ink-secondary, #5a4a32);
+  max-width: 360px;
+}
+
+.reloadButton {
+  padding: var(--spacing-sm, 8px) var(--spacing-lg, 24px);
+  border: 1px solid var(--color-danger, #e74c3c);
+  border-radius: var(--radii-md, 4px);
+  background: transparent;
+  color: var(--color-danger, #e74c3c);
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 120ms ease;
+}
+
+.reloadButton:hover {
+  background: color-mix(in srgb, var(--color-danger, #e74c3c) 8%, transparent);
+}

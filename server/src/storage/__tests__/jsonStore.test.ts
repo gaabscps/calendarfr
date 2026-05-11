@@ -32,7 +32,10 @@ function makeDay(date = '2099-01-01'): DailyPageData {
       { id: '01HZZZZZZZZZZZZZZZZZZZZZZB', text: '', done: false },
       { id: '01HZZZZZZZZZZZZZZZZZZZZZZC', text: '', done: false },
     ],
-    agenda: Array.from({ length: 18 }, (_, i) => ({ hour: i + 6, text: '' })),
+    agenda: Array.from({ length: 18 }, (_, i) => ({
+      hour: i + 6,
+      text: '',
+    })) as unknown as DailyPageData['agenda'],
     notes: [],
     createdAt: null,
     updatedAt: null,

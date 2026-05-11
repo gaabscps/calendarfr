@@ -82,7 +82,7 @@ it('sanitizeDayHtml sanitizes priorities, agenda, notes and leaves mood/timestam
       hour: i + 6,
       // DOMPurify strips <a> but preserves inner text: "bad" + "keep" = "badkeep"
       text: i === 0 ? "<a href='x'>bad</a>keep" : '',
-    })),
+    })) as unknown as DailyPageData['agenda'],
     notes: [
       { id: 'n1', prefix: '•', text: '<style>.x{}</style>text' },
       { id: 'n2', prefix: '→', text: 'clean' },

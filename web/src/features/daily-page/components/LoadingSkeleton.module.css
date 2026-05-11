@@ -1,0 +1,34 @@
+/**
+ * LoadingSkeleton — simple loading state placeholder.
+ */
+
+.skeleton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-2xl, 48px) var(--spacing-base, 16px);
+  min-height: 200px;
+}
+
+.text {
+  font-family: var(--font-hand, 'Caveat', cursive);
+  font-size: 1.5rem;
+  color: var(--color-ink-muted, #9a8a72);
+  animation: pulse 1.4s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .text {
+    animation: none;
+  }
+}

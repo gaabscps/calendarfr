@@ -26,7 +26,7 @@ export function createEmptyDay(date: string): DailyPageData {
       { id: newId(), text: '', done: false },
       { id: newId(), text: '', done: false },
     ],
-    agenda: HOURS.map((hour) => ({ hour, text: '' })),
+    agenda: HOURS.map((hour) => ({ hour, text: '' })) as unknown as DailyPageData['agenda'],
     notes: [],
     createdAt: null,
     updatedAt: null,

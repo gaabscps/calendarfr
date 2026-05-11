@@ -1,0 +1,48 @@
+/**
+ * SaveIndicator styles.
+ * Uses CSS custom properties from GlobalStyles (tokens).
+ */
+
+.wrapper {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-xs, 4px);
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.75rem;
+}
+
+.label {
+  /* Base label style */
+  color: var(--color-ink-muted, #9a8a72);
+  transition: color 120ms ease;
+}
+
+.label--saved {
+  color: var(--color-success, #27ae60);
+}
+
+.label--saving,
+.label--dirty {
+  color: var(--color-ink-secondary, #5a4a32);
+}
+
+.label--error {
+  color: var(--color-danger, #e74c3c);
+}
+
+.retryButton {
+  /* Real button, no custom outline — inherits :focus-visible from GlobalStyles */
+  padding: 2px 6px;
+  border: 1px solid currentColor;
+  border-radius: var(--radii-sm, 2px);
+  background: transparent;
+  color: var(--color-danger, #e74c3c);
+  font-size: 0.75rem;
+  font-family: inherit;
+  cursor: pointer;
+  line-height: 1.4;
+}
+
+.retryButton:hover {
+  background: color-mix(in srgb, var(--color-danger, #e74c3c) 8%, transparent);
+}

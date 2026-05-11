@@ -30,7 +30,10 @@ export function validPayload(date = '2026-05-09'): DailyPageData {
       { id: '01HZZZZZZZZZZZZZZZZZZZZZZB', text: '', done: false },
       { id: '01HZZZZZZZZZZZZZZZZZZZZZZC', text: '', done: false },
     ],
-    agenda: Array.from({ length: 18 }, (_, i) => ({ hour: i + 6, text: '' })),
+    agenda: Array.from({ length: 18 }, (_, i) => ({
+      hour: i + 6,
+      text: '',
+    })) as unknown as DailyPageData['agenda'],
     notes: [],
     createdAt: null,
     updatedAt: null,

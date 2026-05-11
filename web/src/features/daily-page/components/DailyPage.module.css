@@ -1,0 +1,71 @@
+/**
+ * DailyPage — Moleskine layout.
+ *
+ * Mobile-first flex column; Grid 2-col em ≥1024px (AC-004).
+ * Tokens: CSS custom properties from GlobalStyles (var(--spacing-*), etc.)
+ *
+ * Grid areas (desktop ≥1024px):
+ *   [top-row] — full width: priorities + mood
+ *   [agenda]  — left col
+ *   [notes]   — right col
+ */
+
+.grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-base, 16px);
+  padding: var(--spacing-base, 16px);
+}
+
+.topRow {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm, 8px);
+  width: 100%;
+}
+
+.agendaCol {
+  width: 100%;
+}
+
+.notesCol {
+  width: 100%;
+}
+
+/* ── Desktop: 2-column layout (AC-004: ≥ 1024px) ───────────────────────────── */
+
+@media (min-width: 1024px) {
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      'top-row top-row'
+      'agenda  notes';
+    gap: var(--spacing-lg, 24px);
+    padding: var(--spacing-lg, 24px);
+  }
+
+  .topRow {
+    grid-area: top-row;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: var(--spacing-lg, 24px);
+  }
+
+  .agendaCol {
+    grid-area: agenda;
+  }
+
+  .notesCol {
+    grid-area: notes;
+  }
+}
+
+/* ── Tablet: single column, slightly larger padding ──────────────────────────── */
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .grid {
+    padding: var(--spacing-md, 12px) var(--spacing-lg, 24px);
+    gap: var(--spacing-md, 12px);
+  }
+}
