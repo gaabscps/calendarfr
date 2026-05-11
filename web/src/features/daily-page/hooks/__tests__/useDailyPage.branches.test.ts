@@ -136,6 +136,47 @@ describe('useDailyPage — AbortError on GET (line 99)', () => {
   });
 });
 
+// Safari abort variant — Safari/WebKit throws TypeError("Load failed") instead of
+// DOMException("AbortError") when a fetch is aborted. isAbortError() must recognize
+// both via signal.aborted check.
+describe('useDailyPage — Safari abort (TypeError "Load failed")', () => {
+  it('treats TypeError on aborted signal as abort, not as loadError', async () => {
+    jest.spyOn(globalThis, 'fetch').mockImplementation(
+      asFetchFn((_input: unknown, init?: MockInit) => {
+        if (init?.signal) {
+          return asFetchResponse(
+            new Promise((_res, rej) => {
+              const sig = init.signal as { addEventListener: (_e: string, _h: () => void) => void };
+              sig.addEventListener('abort', () => {
+                // Safari pattern: TypeError instead of DOMException AbortError.
+                rej(new TypeError('Load failed'));
+              });
+            }),
+          );
+        }
+        return asFetchResponse(okResponse(MOCK_DATA));
+      }),
+    );
+
+    const { result, rerender } = renderHook((d: string) => useDailyPage(d), {
+      initialProps: DATE,
+    });
+
+    jest.restoreAllMocks();
+    jest
+      .spyOn(globalThis, 'fetch')
+      .mockImplementation(() => asFetchResponse(okResponse(MOCK_DATA2)));
+
+    await act(async () => {
+      rerender(DATE2);
+      await jest.runAllTimersAsync();
+    });
+
+    expect(result.current.loadError).toBeNull();
+    expect(result.current.data).toEqual(MOCK_DATA2);
+  });
+});
+
 // ---------------------------------------------------------------------------
 // Lines 132-135: fire-and-forget saveDay error catch on date change
 // The catch at line 134 logs console.error, does not crash.

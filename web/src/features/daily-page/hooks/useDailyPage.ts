@@ -29,6 +29,17 @@ export const AUTOSAVE_DEBOUNCE_MS = 800; // AC-007
 export const MAX_RETRY = 3; // AC-025
 export const LIFE_RAFT_KEY_PREFIX = 'calendarfr:dailypage:'; // AC-028
 
+/**
+ * Cross-browser abort detection.
+ * Chrome/FF throw DOMException("AbortError"); Safari throws TypeError("Load failed").
+ * If the controller signal is aborted, any error from that fetch is the abort.
+ */
+function isAbortError(err: unknown, signal?: AbortSignal): boolean {
+  if (signal?.aborted === true) return true;
+  if (err instanceof DOMException && err.name === 'AbortError') return true;
+  return false;
+}
+
 export function useDailyPage(date: string): UseDailyPageReturn {
   const [state, dispatch] = useReducer(dailyPageReducer, INITIAL_STATE);
 
@@ -86,7 +97,7 @@ export function useDailyPage(date: string): UseDailyPageReturn {
             clearLifeRaft(snapshot.date);
             break;
           } catch (err) {
-            if (err instanceof DOMException && err.name === 'AbortError') break;
+            if (isAbortError(err)) break;
             if (err instanceof HttpError && err.status >= 400 && err.status < 500) {
               console.error('[useDailyPage] Save failed 4xx, no retry:', err);
               dispatch({ type: 'SAVE_GIVEUP', err });
@@ -107,7 +118,7 @@ export function useDailyPage(date: string): UseDailyPageReturn {
                 });
               } catch (waitErr) {
                 // Cancelled by date change (AbortError) — stop retrying without error state
-                if (waitErr instanceof DOMException && waitErr.name === 'AbortError') break;
+                if (isAbortError(waitErr)) break;
                 throw waitErr;
               }
             } else {
@@ -172,7 +183,7 @@ export function useDailyPage(date: string): UseDailyPageReturn {
         const data = await fetchDay(date, { signal: ctrl.signal });
         dispatch({ type: 'LOAD_SUCCESS', data });
       } catch (err) {
-        if (err instanceof DOMException && err.name === 'AbortError') return; // stale GET cancelled (AC-023)
+        if (isAbortError(err, ctrl.signal)) return; // stale GET cancelled (AC-023)
         dispatch({ type: 'LOAD_ERROR', err: err instanceof Error ? err : new Error(String(err)) });
       }
     })();
