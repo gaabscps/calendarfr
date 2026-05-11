@@ -18,6 +18,8 @@
 /* Strip the default outline from the ProseMirror container itself. */
 .wrapper :global(.ProseMirror) {
   outline: none;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 /* Focus ring — keyboard-accessible only, not pointer-focus (WCAG 2.1 AA). */
