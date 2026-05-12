@@ -61,17 +61,16 @@ describe('useCurrentHour', () => {
   // ── Cleanup ──────────────────────────────────────────────────────────────
 
   describe('cleanup on unmount', () => {
-    it('clears timers on unmount — no pending handles', () => {
+    it('clears timers on unmount', () => {
       jest.useFakeTimers();
       jest.setSystemTime(new Date('2026-05-12T10:30:00'));
+      const clearTimeoutSpy = jest.spyOn(globalThis, 'clearTimeout');
       const { unmount } = renderHook(() => useCurrentHour());
 
       unmount();
 
-      act(() => {
-        jest.advanceTimersByTime(120_000);
-      });
-      // No console.error or act() warnings = cleanup worked
+      expect(clearTimeoutSpy).toHaveBeenCalled();
+      clearTimeoutSpy.mockRestore();
     });
   });
 });
