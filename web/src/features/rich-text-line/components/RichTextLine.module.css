@@ -8,6 +8,9 @@
  *    selector: p.is-editor-empty:first-child::before with data-placeholder.
  *
  * Tokens reference: CSS custom properties defined by GlobalStyles (FEAT-001).
+ *
+ * NOTE: ProseMirror rules below are mirrored in RichTextBlock.module.css.
+ * Keep both files in sync — RichTextLine.module.css is the source of truth.
  */
 
 .wrapper {
@@ -20,8 +23,9 @@
   outline: none;
   overflow-wrap: break-word;
   word-break: break-word;
-  line-height: 24px;
-  font-size: 18px;
+  /* line-height = --baseline (24px): snaps text to the Moleskine grid (AC-031). */
+  line-height: var(--baseline);
+  font-size: var(--font-size-lg);
 }
 
 /* Reset browser UA stylesheet margins on <p> inside ProseMirror. */
@@ -30,11 +34,12 @@
   padding: 0;
 }
 
-/* Focus ring — keyboard-accessible only, not pointer-focus (WCAG 2.1 AA). */
+/* Focus ring — keyboard-accessible only, not pointer-focus (WCAG 2.1 AA).
+   Uses canonical var(--focus-ring) token (AC-025). */
 .wrapper :global(.ProseMirror:focus-visible) {
-  outline: 2px solid var(--ink);
-  outline-offset: 2px;
-  border-radius: 2px;
+  outline: var(--focus-ring);
+  outline-offset: var(--focus-ring-offset);
+  border-radius: var(--radius-sm);
 }
 
 /**
@@ -45,11 +50,10 @@
  * ::before to render it as decorative text (not in the DOM / accessible tree).
  *
  * pointer-events: none prevents accidental selection of the pseudo-content.
- * user-select: none ensures the placeholder is not selectable.
  */
 .wrapper :global(.tiptap p.is-editor-empty:first-child::before) {
   content: attr(data-placeholder);
-  color: var(--ink-muted);
+  color: var(--color-ink-muted);
   font-style: italic;
   opacity: 0.75;
   pointer-events: none;

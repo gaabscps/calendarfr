@@ -1,23 +1,25 @@
 /**
  * Priorities styles — CSS Module.
  *
- * Vertical list of 1–10 PriorityItem rows. Gap via token-compatible value.
+ * Vertical list of 1–10 PriorityItem rows. Items carry their own row height
+ * (var(--baseline) = 24px) and the section uses gap=0 so the rows stack
+ * contiguously on the Moleskine grid.
+ *
+ * AC-006: font-size migrated to var(--font-size-xs)
+ * AC-007: padding migrated to var(--spacing-xs)
+ * FEAT-017 (Decision 6): .addButton uses Button ghost sm directly — no size
+ * overrides. The atom already snaps to var(--baseline) = 24px height.
  */
 
 .section {
   display: flex;
   flex-direction: column;
-  gap: 0;
+  gap: 0; /* items carry their own row height; no extra row gap */
   width: 100%;
 }
 
 .addButton {
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: var(--color-ink-muted);
-  /* No --font-size-xs token exists in the design system; 0.75rem matches SaveIndicator. */
-  font-size: 0.75rem;
-  padding: var(--spacing-xs, 4px) 0;
   align-self: flex-start;
+  font-family: var(--font-body);
+  font-size: var(--font-size-xs);
 }

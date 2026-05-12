@@ -54,7 +54,44 @@ export const motion = {
   fast: '120ms',
   base: '220ms',
   slow: '320ms',
+  page: '300ms',
+  pulse: '1.4s',
   spring: { type: 'spring' as const, stiffness: 220, damping: 20 },
+} as const;
+
+/**
+ * Vertical rhythm contract (FEAT-017):
+ * - height, min-height, max-height, padding-top, padding-bottom,
+ *   margin-top, margin-bottom, gap em flex-column => múltiplos de
+ *   24 (--baseline) ou 12 (--baseline-half). Sem outros valores.
+ * - horizontals (width, padding-left/right, margin-left/right,
+ *   gap em flex-row) => livres, mas preferir --spacing-* tokens.
+ * Verificado por scripts/rhythm-check.mjs (CI).
+ */
+export const baseline = {
+  base: 24,
+  half: 12,
+} as const;
+
+export const fontSize = {
+  xs: '0.75rem',
+  sm: '0.875rem',
+  base: '1rem',
+  lg: '1.125rem',
+  xl: '1.5rem',
+  display: '3rem',
+} as const;
+
+export const focusRing = {
+  ring: '2px solid var(--color-accent)',
+  offset: '2px',
+} as const;
+
+export const zIndex = {
+  base: 0,
+  dropdown: 100,
+  toolbar: 200,
+  modal: 1000,
 } as const;
 
 export interface Tokens {
@@ -65,4 +102,8 @@ export interface Tokens {
   radii: typeof radii;
   shadows: typeof shadows;
   motion: typeof motion;
+  fontSize: typeof fontSize;
+  focusRing: typeof focusRing;
+  zIndex: typeof zIndex;
+  baseline: typeof baseline;
 }

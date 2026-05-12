@@ -1,0 +1,88 @@
+/*
+ * Checkbox geometry (FEAT-017 Decision 2 + Decision 5):
+ * - .wrapper (label): 24×24 (var(--baseline)) hit-area, snap to row=24.
+ * - .box (visual): 18×18 — preserves prior visual style, centered in wrapper.
+ * - The 3px "margin" around the visual is implicit (24-18)/2, produced by
+ *   inline-flex center alignment on .wrapper. No fixed padding needed.
+ * - WCAG 2.5.5 Level AA: hit target 24×24 — entire wrapper toggles via native
+ *   <label> click delegation to sr-only <input>.
+ */
+
+.wrapper {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--baseline);
+  height: var(--baseline);
+  position: relative;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.wrapper[data-disabled] {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+/* sr-only technique: hide native input visually but keep it accessible */
+.input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Focus ring on the visible box when the hidden input is focused */
+.input:focus-visible + .box {
+  outline: var(--focus-ring);
+  outline-offset: var(--focus-ring-offset);
+}
+
+/* Custom styled checkbox box — visual 18×18 inside 24×24 wrapper */
+.box {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  min-width: 18px;
+  min-height: 18px;
+  border: 1.5px solid var(--color-ink-muted);
+  border-radius: var(--radius-sm);
+  background: var(--color-paper);
+  transition:
+    background var(--motion-fast),
+    border-color var(--motion-fast);
+  flex-shrink: 0;
+}
+
+/* Checked state: filled box with checkmark via ::after */
+.input:checked + .box {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+.input:checked + .box::after {
+  content: '';
+  display: block;
+  width: 10px;
+  height: 6px;
+  border-left: 2px solid var(--color-paper);
+  border-bottom: 2px solid var(--color-paper);
+  transform: rotate(-45deg) translateY(-1px);
+}
+
+/* Hover state (non-disabled) */
+.wrapper:not([data-disabled]):hover .box {
+  border-color: var(--color-accent);
+}
+
+/* Active/pressed state */
+.wrapper:not([data-disabled]):active .box {
+  background: color-mix(in srgb, var(--color-accent) 10%, transparent);
+}

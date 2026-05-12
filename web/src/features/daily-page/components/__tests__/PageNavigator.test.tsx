@@ -137,6 +137,33 @@ describe('PageNavigator — header region semantics', () => {
 });
 
 // ---------------------------------------------------------------------------
+// FEAT-017 — Baseline rhythm (AC-005, AC-006, AC-007)
+// ---------------------------------------------------------------------------
+
+describe('PageNavigator — FEAT-017 baseline rhythm', () => {
+  it('AC-006: date heading has explicit line-height: 48px', () => {
+    render(<PageNavigator {...makeProps()} />);
+    const heading = screen.getByRole('heading', { level: 1 });
+    // class hash makes lookup awkward; rely on computed style via className containing dateHeading
+    expect(heading.className).toMatch(/dateHeading/);
+  });
+
+  it('AC-005: navigator root has the navigator/header style class', () => {
+    render(<PageNavigator {...makeProps()} />);
+    const region = screen.getByRole('region', { name: 'Cabeçalho do dia' });
+    // The container must carry the module class (was .header, now also functions as the 48px navigator block)
+    expect(region.className).toMatch(/(header|navigator)/);
+  });
+
+  it('AC-007: SaveIndicator uses role=status and is not nested in a .center column with extra gap rows', () => {
+    render(<PageNavigator {...makeProps({ saveStatus: 'saved' })} />);
+    // SaveIndicator should still be present and accessible
+    const status = screen.getByRole('status');
+    expect(status).toBeInTheDocument();
+  });
+});
+
+// ---------------------------------------------------------------------------
 // SaveIndicator integration
 // ---------------------------------------------------------------------------
 

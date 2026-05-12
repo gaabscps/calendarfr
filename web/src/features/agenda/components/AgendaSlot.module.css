@@ -13,11 +13,11 @@
   display: flex;
   flex-direction: row;
   align-items: flex-start;
-  gap: 8px;
+  gap: var(--spacing-sm);
   width: 100%;
-  padding: 0;
+  padding: var(--spacing-none);
   border-left: 3px solid transparent;
-  transition: border-color 120ms ease;
+  transition: border-color var(--motion-fast) ease;
 }
 
 /* Current-hour highlight: subtle accent border-left (AC-010, AC-013).
@@ -33,9 +33,9 @@
   flex-shrink: 0;
   width: 36px;
   font-family: var(--font-mono, monospace);
-  font-size: 0.875rem;
+  font-size: var(--font-size-sm);
   color: var(--color-ink-muted, #8a7a65);
-  line-height: 24px;
+  line-height: var(--baseline);
   text-align: right;
   user-select: none;
 }

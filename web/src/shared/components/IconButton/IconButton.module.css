@@ -1,0 +1,74 @@
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: none;
+  border-radius: var(--radius-md);
+  background: transparent;
+  cursor: pointer;
+  line-height: 1;
+  transition:
+    background var(--motion-fast),
+    color var(--motion-fast);
+}
+
+.button:focus-visible {
+  outline: var(--focus-ring);
+  outline-offset: var(--focus-ring-offset);
+}
+
+.button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* ----- Sizes (FEAT-017 Decision 5: snap a múltiplos de --baseline = 24px) -----
+ * sm = 24×24 (1×baseline) — WCAG 2.5.5 AA min touch target (24×24)
+ * md = 48×48 (2×baseline) — generoso para hit target em chevrons / superfícies primárias
+ */
+
+.sm {
+  width: 24px;
+  height: 24px;
+  min-width: 24px;
+  min-height: 24px;
+  font-size: var(--font-size-sm);
+}
+
+.md {
+  width: 48px;
+  height: 48px;
+  min-width: 48px;
+  min-height: 48px;
+  font-size: var(--font-size-base);
+}
+
+/* ----- Variants ----- */
+
+.ghost {
+  color: var(--color-ink);
+}
+
+.ghost:hover:not(:disabled) {
+  background: var(--color-shadow);
+  color: var(--color-ink);
+}
+
+.ghost:active:not(:disabled) {
+  background: var(--color-paper-line);
+}
+
+.danger {
+  color: var(--color-danger);
+}
+
+.danger:hover:not(:disabled) {
+  background: color-mix(in srgb, var(--color-danger) 10%, transparent);
+  color: var(--color-danger);
+}
+
+.danger:active:not(:disabled) {
+  background: color-mix(in srgb, var(--color-danger) 15%, transparent);
+}

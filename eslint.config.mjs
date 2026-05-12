@@ -206,6 +206,23 @@ export default [
     },
   },
 
+  // Block 7a: Node scripts (scripts/*.mjs) — Node globals, no type-checking
+  {
+    files: ['scripts/**/*.mjs'],
+    languageOptions: {
+      globals: {
+        process: 'readonly',
+        console: 'readonly',
+        URL: 'readonly',
+        import: 'readonly',
+      },
+    },
+    rules: {
+      'no-undef': 'off',
+      'no-console': 'off',
+    },
+  },
+
   // Block 7: test-utils, vite.config.ts, and storybook config (not type-checked by projectService)
   {
     files: ['test-utils/**/*.{ts,tsx}', 'web/vite.config.ts', 'web/.storybook/**/*.{ts,tsx}'],

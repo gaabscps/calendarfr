@@ -5,10 +5,12 @@
  * Delegates state management to usePriorities hook (id stability, toggle, edit,
  * add, remove).
  *
- * Covers: AC-008, AC-010, AC-011, AC-014 (T-009).
+ * Covers: AC-008, AC-010, AC-011, AC-014 (T-009), AC-007, AC-025 (T-010).
  */
 
 import { useEffect, useRef } from 'react';
+
+import { Button } from '@/shared/components/Button';
 
 import { usePriorities } from '../hooks/usePriorities.js';
 import type { Priority } from '../types.js';
@@ -60,14 +62,15 @@ export function Priorities({ value, onChange }: PrioritiesProps) {
       })}
 
       {items.length < 10 && (
-        <button
-          type="button"
+        <Button
+          variant="ghost"
+          size="sm"
           onClick={addPriority}
           className={styles.addButton}
           aria-label="Adicionar prioridade"
         >
           + adicionar
-        </button>
+        </Button>
       )}
     </section>
   );

@@ -14,6 +14,8 @@
 
 import { useEffect } from 'react';
 
+import { Button } from '@/shared/components/Button';
+
 import { useNotes } from '../hooks/useNotes.js';
 import type { Note } from '../types.js';
 
@@ -68,14 +70,15 @@ export function Notes({ value, onChange }: NotesProps) {
       ))}
 
       {/* AC-004: always visible; AC-015: PT-BR label */}
-      <button
-        type="button"
-        className={styles.addButton}
+      <Button
+        variant="ghost"
+        size="sm"
         aria-label="Adicionar nota"
         onClick={onAdd}
+        className={styles.addButton}
       >
         + Adicionar nota
-      </button>
+      </Button>
     </div>
   );
 }

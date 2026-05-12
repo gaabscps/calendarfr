@@ -17,6 +17,7 @@
 import React, { useCallback } from 'react';
 
 import { RichTextBlock } from '@/features/rich-text-line';
+import { IconButton } from '@/shared/components/IconButton';
 
 import type { Note } from '../types.js';
 
@@ -68,14 +69,15 @@ function NoteItemBase({
   return (
     <div className={styles.note}>
       {/* Tab order: prefix first (AC-017) */}
-      <button
-        type="button"
-        className={styles.prefixButton}
+      <IconButton
+        variant="ghost"
+        size="sm"
         aria-label={prefixAriaLabel}
         onClick={handleCyclePrefix}
+        className={styles.prefixButton}
       >
         {note.prefix}
-      </button>
+      </IconButton>
 
       {/* Editor fills remaining width */}
       <div className={styles.editor}>
@@ -88,14 +90,15 @@ function NoteItemBase({
       </div>
 
       {/* Remove button — revealed via CSS on hover/focus-within (AC-012) */}
-      <button
-        type="button"
-        className={styles.removeButton}
+      <IconButton
+        variant="danger"
+        size="sm"
         aria-label="Remover nota"
         onClick={handleRemove}
+        className={styles.removeButton}
       >
         ×
-      </button>
+      </IconButton>
     </div>
   );
 }

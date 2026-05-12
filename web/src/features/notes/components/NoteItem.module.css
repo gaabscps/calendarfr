@@ -4,17 +4,27 @@
  * Single note row: prefix button | editor (flex 1) | remove button (hover/focus).
  * Tokens use CSS custom properties from GlobalStyles (FEAT-001).
  *
- * AC-019: focus ring via :focus-visible on all interactive elements.
+ * AC-019: focus ring via IconButton atom (var(--focus-ring)) on all interactive elements.
+ * AC-025: zero inline outlines — focus handled by IconButton atom.
  * NFR-004: WCAG 2.1 AA — opacity-0 × button is revealed on hover AND focus-within.
+ *
+ * FEAT-017 (Decision 9): row height snaps to var(--baseline) (24px) so each
+ * NoteItem occupies exactly one Moleskine rule line. align-items: center keeps
+ * the 24×24 IconButton sm atoms and the RichTextBlock (line-height: 24)
+ * centred on the 24px row.
  */
 
 /* ── Note row wrapper ── */
 .note {
   display: flex;
   flex-direction: row;
-  align-items: flex-start;
-  gap: 4px; /* --spacing-xs */
+  align-items: center;
+  gap: var(--spacing-xs);
   width: 100%;
+  height: var(--baseline);
+  /* AC-028: strict 24px snap — clip long text instead of letting the editor
+     child expand past var(--baseline). */
+  overflow: hidden;
 }
 
 /* Reveal remove button on hover or keyboard focus-within (a11y: AC-019) */
@@ -23,28 +33,12 @@
   opacity: 1;
 }
 
-/* ── Prefix button ── */
+/* ── Prefix button overrides (extends IconButton ghost) ── */
 .prefixButton {
   flex-shrink: 0;
-  font-size: 1.1em;
-  line-height: 1;
-  color: var(--color-ink, #2c2416);
-  background: transparent;
-  border: 0;
-  padding: 4px; /* --spacing-xs */
-  border-radius: 2px; /* --radius-sm */
-  cursor: pointer;
-  /* Minimum tap target */
-  min-width: 24px;
-  min-height: 24px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.prefixButton:focus-visible {
-  outline: 2px solid var(--color-ink, #2c2416);
-  outline-offset: 2px;
+  font-size: var(--font-size-base);
+  min-width: var(--baseline);
+  min-height: var(--baseline);
 }
 
 /* ── Editor area ── */
@@ -54,30 +48,14 @@
   font-family: var(--font-hand, 'Caveat', cursive);
 }
 
-/* ── Remove button ── */
+/* ── Remove button (extends IconButton danger sm) ── */
 .removeButton {
   flex-shrink: 0;
   opacity: 0;
-  transition: opacity 120ms ease;
-  color: var(--color-ink-muted, #9a8a72);
-  background: transparent;
-  border: 0;
-  padding: 4px; /* --spacing-xs */
-  cursor: pointer;
-  font-size: 1rem;
-  line-height: 1;
-  /* Minimum tap target */
-  min-width: 24px;
-  min-height: 24px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 2px; /* --radius-sm */
+  transition: opacity var(--motion-fast) ease;
 }
 
 /* Keyboard focus always shows the remove button (AC-019) */
 .removeButton:focus-visible {
   opacity: 1;
-  outline: 2px solid var(--color-ink, #2c2416);
-  outline-offset: 2px;
 }

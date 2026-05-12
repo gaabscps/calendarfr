@@ -1,20 +1,29 @@
 /**
  * SaveIndicator styles.
  * Uses CSS custom properties from GlobalStyles (tokens).
+ *
+ * FEAT-017 Decision 4: rendered as absolute overlay anchored on the closest
+ * positioned ancestor (PaperSheet has `position: relative`). This frees the
+ * navigator row from carrying a permanent status row (AC-007) — the indicator
+ * floats top-right and never inflates the PageNavigator block (AC-005).
  */
 
 .wrapper {
+  position: absolute;
+  top: var(--spacing-sm, 8px);
+  right: var(--spacing-md, 12px);
+  z-index: 1;
   display: inline-flex;
   align-items: center;
   gap: var(--spacing-xs, 4px);
   font-family: var(--font-body, 'Inter', sans-serif);
-  font-size: 0.75rem;
+  font-size: var(--font-size-xs, 0.75rem);
 }
 
 .label {
   /* Base label style */
   color: var(--color-ink-muted, #9a8a72);
-  transition: color 120ms ease;
+  transition: color var(--motion-fast) ease;
 }
 
 .label--saved {
@@ -34,10 +43,10 @@
   /* Real button, no custom outline — inherits :focus-visible from GlobalStyles */
   padding: 2px 6px;
   border: 1px solid currentColor;
-  border-radius: var(--radii-sm, 2px);
+  border-radius: var(--radius-sm, 2px);
   background: transparent;
   color: var(--color-danger, #e74c3c);
-  font-size: 0.75rem;
+  font-size: var(--font-size-xs, 0.75rem);
   font-family: inherit;
   cursor: pointer;
   line-height: 1.4;

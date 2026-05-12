@@ -35,23 +35,23 @@
 }
 
 .outgoing--next {
-  animation: slideOutLeft 300ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  animation: slideOutLeft var(--motion-page, 300ms) cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
 .outgoing--prev {
-  animation: slideOutRight 300ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  animation: slideOutRight var(--motion-page, 300ms) cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
 /* ── Incoming layer (enters) ────────────────────────────────────────────────── */
 
 .incoming--next {
   will-change: transform, opacity;
-  animation: slideInFromRight 300ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  animation: slideInFromRight var(--motion-page, 300ms) cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
 .incoming--prev {
   will-change: transform, opacity;
-  animation: slideInFromLeft 300ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  animation: slideInFromLeft var(--motion-page, 300ms) cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
 /* ── Keyframes ──────────────────────────────────────────────────────────────── */
