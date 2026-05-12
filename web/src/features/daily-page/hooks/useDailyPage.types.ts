@@ -12,7 +12,7 @@ import type { DailyPageData, Mood } from '@calendarfr/shared';
 
 import type { AgendaSlots } from '@/features/agenda';
 import type { NotesValue } from '@/features/notes';
-import type { PrioritiesTuple } from '@/features/priorities';
+import type { Priority } from '@/features/priorities';
 
 import type { SaveStatus } from '../types.js';
 
@@ -26,7 +26,7 @@ export interface UseDailyPageReturn {
   /** null = no error; set on failed GET. */
   loadError: Error | null;
   saveStatus: SaveStatus;
-  setPriorities: (next: PrioritiesTuple) => void;
+  setPriorities: (next: Priority[]) => void;
   setMood: (next: Mood | null) => void;
   setAgenda: (next: AgendaSlots) => void;
   setNotes: (next: NotesValue) => void;

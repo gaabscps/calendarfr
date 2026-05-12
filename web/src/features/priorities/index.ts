@@ -9,7 +9,7 @@
 
 // Types
 export type { Priority, PrioritiesTuple } from './types.js';
-export { EMPTY_PRIORITY } from './types.js';
+export { EMPTY_PRIORITY, INITIAL_PRIORITIES } from './types.js';
 
 // Hook
 export { usePriorities } from './hooks/usePriorities.js';

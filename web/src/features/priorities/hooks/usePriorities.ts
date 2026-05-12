@@ -1,18 +1,20 @@
 /**
  * usePriorities — thin hook managing id stability and immutable updates for
- * the fixed 3-slot priority list.
+ * the dynamic priority list (1–10 items).
  *
- * Covers: AC-001, AC-002, AC-004, AC-007, AC-020.
+ * Covers: AC-001, AC-002, AC-004, AC-007, AC-011, AC-020.
  *
  * Contract:
- * - Receives (value: PrioritiesTuple, onChange: (next: PrioritiesTuple) => void).
- * - Returns { items, onChangeText, onToggleDone, onChangeItem }.
+ * - Receives (value: Priority[], onChange: (next: Priority[]) => void).
+ * - Returns { items, onChangeText, onToggleDone, onChangeItem, addPriority, removePriority }.
  * - No internal state, no async effects, no fetch.
  *
  * ULID id-stability rules:
  * - If slot.id === "" at the time of mutation, generate a ULID once and bake it
  *   into the emitted value. Subsequent mutations on that slot see the id already
  *   set (id !== "") and preserve it.
+ * - addPriority emits a new item with an eagerly assigned ULID so the React key
+ *   is stable from mount — prevents editor remount on first keystroke (AC-014).
  * - Handlers are stable references (useCallback). items is memoised (useMemo).
  */
 
@@ -21,11 +23,10 @@ import { useCallback, useMemo } from 'react';
 import { ulid } from 'ulid';
 
 import { normalizePriorities } from '../lib/normalizePriorities.js';
-import type { PrioritiesTuple } from '../types.js';
 
 export interface UsePrioritiesReturn {
   /** Normalised, memoised view of the current value. */
-  items: PrioritiesTuple;
+  items: Priority[];
   /**
    * Update the text of a slot. If slot.id === "", generates a ULID first.
    * Preserves done. Covers AC-001, AC-002, AC-004.
@@ -41,6 +42,16 @@ export interface UsePrioritiesReturn {
    * Covers AC-020.
    */
   onChangeItem: (index: number, partial: Partial<Priority>) => void;
+  /**
+   * Append a new empty slot (id: "", text: "", done: false).
+   * No-op if items.length >= 10. Covers AC-011.
+   */
+  addPriority: () => void;
+  /**
+   * Remove the slot at the given index.
+   * No-op if items.length <= 1 (minimum 1 item). Covers AC-010, AC-011.
+   */
+  removePriority: (index: number) => void;
 }
 
 /** Produces a new stable id: reuses existing if non-empty, else generates ULID. */
@@ -48,57 +59,64 @@ function resolveId(existingId: string): string {
   return existingId !== '' ? existingId : ulid();
 }
 
-/**
- * Builds a new PrioritiesTuple by replacing the slot at `index`.
- * items is guaranteed to be a valid 3-tuple from normalizePriorities.
- */
-function replaceSlot(items: PrioritiesTuple, index: number, next: Priority): PrioritiesTuple {
-  return items.map(
-    (slot, i): Priority => (i === index ? next : slot),
-  ) as unknown as PrioritiesTuple;
-}
-
 export function usePriorities(
-  value: PrioritiesTuple,
-  onChange: (next: PrioritiesTuple) => void,
+  value: Priority[],
+  onChange: (next: Priority[]) => void,
 ): UsePrioritiesReturn {
   // Normalise on every render but memo-gate so downstream only re-renders
-  // if the resulting tuple reference changes (i.e. value itself changed).
+  // if the resulting array reference changes (i.e. value itself changed).
   const items = useMemo(() => normalizePriorities(value), [value]);
 
   const onChangeText = useCallback(
     (index: number, html: string) => {
-      const slot = items[index as 0 | 1 | 2] ?? { id: '', text: '', done: false };
+      const slot = items[index] ?? { id: '', text: '', done: false };
       const id = resolveId(slot.id);
-      onChange(replaceSlot(items, index, { id, text: html, done: slot.done }));
+      onChange(items.map((s, i) => (i === index ? { id, text: html, done: slot.done } : s)));
     },
     [items, onChange],
   );
 
   const onToggleDone = useCallback(
     (index: number) => {
-      const slot = items[index as 0 | 1 | 2] ?? { id: '', text: '', done: false };
+      const slot = items[index] ?? { id: '', text: '', done: false };
       const id = resolveId(slot.id);
-      onChange(replaceSlot(items, index, { id, text: slot.text, done: !slot.done }));
+      onChange(items.map((s, i) => (i === index ? { id, text: slot.text, done: !slot.done } : s)));
     },
     [items, onChange],
   );
 
   const onChangeItem = useCallback(
     (index: number, partial: Partial<Priority>) => {
-      const slot = items[index as 0 | 1 | 2] ?? { id: '', text: '', done: false };
+      const slot = items[index] ?? { id: '', text: '', done: false };
       // AC-002 invariant: once a slot has a non-empty id, it is immutable.
-      // Caller-supplied id is only honored to seed an empty slot.
-      const id = slot.id !== '' ? slot.id : partial.id && partial.id !== '' ? partial.id : ulid();
-      const merged: Priority = {
-        id,
-        text: partial.text ?? slot.text,
-        done: partial.done ?? slot.done,
+      // When slot is empty, caller-supplied partial.id is honored as a seed;
+      // resolveId generates a ULID if neither slot nor partial has a valid id.
+      const seedId = slot.id !== '' ? slot.id : (partial.id ?? '');
+      const updated: Priority = {
+        ...slot,
+        ...partial,
+        id: resolveId(seedId),
       };
-      onChange(replaceSlot(items, index, merged));
+      onChange(items.map((s, i) => (i === index ? updated : s)));
     },
     [items, onChange],
   );
 
-  return { items, onChangeText, onToggleDone, onChangeItem };
+  const addPriority = useCallback(() => {
+    if (items.length >= 10) return; // max 10
+    // Assign ULID eagerly so the React key is stable from mount (AC-014).
+    // Lazy assignment (id:'') would flip the key on first keystroke, remounting
+    // the editor and losing focus mid-typing.
+    onChange([...items, { id: ulid(), text: '', done: false }]);
+  }, [items, onChange]);
+
+  const removePriority = useCallback(
+    (index: number) => {
+      if (items.length <= 1) return; // min 1
+      onChange(items.filter((_, i) => i !== index));
+    },
+    [items, onChange],
+  );
+
+  return { items, onChangeText, onToggleDone, onChangeItem, addPriority, removePriority };
 }

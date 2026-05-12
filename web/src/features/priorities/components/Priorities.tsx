@@ -1,68 +1,74 @@
 /**
- * Priorities — controlled container for the fixed 3-slot priority list.
+ * Priorities — controlled container for the dynamic priority list (1–10 items).
  *
  * Purely controlled: receives value + onChange, no internal async, no fetch.
- * Delegates state management to usePriorities hook (id stability, toggle, edit).
+ * Delegates state management to usePriorities hook (id stability, toggle, edit,
+ * add, remove).
  *
- * Covers: AC-003, AC-005, AC-006, AC-008, AC-009, AC-010, AC-013, AC-014,
- *         AC-015, AC-016, AC-017, AC-018, AC-025.
+ * Covers: AC-008, AC-010, AC-011, AC-014 (T-009).
  */
 
-import { useCallback } from 'react';
+import { useEffect, useRef } from 'react';
 
 import { usePriorities } from '../hooks/usePriorities.js';
-import type { PrioritiesTuple } from '../types.js';
+import type { Priority } from '../types.js';
 
 import styles from './Priorities.module.css';
 import { PriorityItem } from './PriorityItem.js';
 
 export interface PrioritiesProps {
-  /** Current 3-tuple of priorities — controlled. */
-  value: PrioritiesTuple;
-  /** Emitted on every text edit or checkbox toggle with the updated tuple. */
-  onChange: (next: PrioritiesTuple) => void;
+  /** Current list of priorities — controlled. */
+  value: Priority[];
+  /** Emitted on every text edit, checkbox toggle, add, or remove with the updated array. */
+  onChange: (next: Priority[]) => void;
 }
 
 /**
- * Renders exactly 3 PriorityItem slots in a <section> with ARIA label.
+ * Renders all PriorityItem slots dynamically from items[] (1–10 items).
  *
- * Fixed indices 0/1/2 — no add/remove UI (AC-013, US-003 out-of-scope note).
- * Tab order is natural DOM order: checkbox 0 → editor 0 → … (AC-014).
- *
- * Stable per-slot callbacks (useCallback) so React.memo on PriorityItem
- * is not defeated by new function refs when only one slot changes.
+ * Add button appears below the list when items.length < 10 (AC-010).
+ * Delete button on each item is hidden when only 1 item remains (AC-011).
+ * The last added item receives autoFocus via prevLengthRef tracking (AC-014).
  */
 export function Priorities({ value, onChange }: PrioritiesProps) {
-  const { items, onChangeText, onToggleDone } = usePriorities(value, onChange);
+  const { items, onChangeText, onToggleDone, addPriority, removePriority } = usePriorities(
+    value,
+    onChange,
+  );
 
-  const handleChangeText0 = useCallback((html: string) => onChangeText(0, html), [onChangeText]);
-  const handleChangeText1 = useCallback((html: string) => onChangeText(1, html), [onChangeText]);
-  const handleChangeText2 = useCallback((html: string) => onChangeText(2, html), [onChangeText]);
-
-  const handleToggle0 = useCallback(() => onToggleDone(0), [onToggleDone]);
-  const handleToggle1 = useCallback(() => onToggleDone(1), [onToggleDone]);
-  const handleToggle2 = useCallback(() => onToggleDone(2), [onToggleDone]);
+  // Track previous length to detect when a new item is appended (AC-014).
+  const prevLengthRef = useRef(items.length);
+  useEffect(() => {
+    prevLengthRef.current = items.length;
+  });
 
   return (
     <section className={styles.section} aria-label="Prioridades do dia">
-      <PriorityItem
-        value={items[0]}
-        index={0}
-        onChangeText={handleChangeText0}
-        onToggleDone={handleToggle0}
-      />
-      <PriorityItem
-        value={items[1]}
-        index={1}
-        onChangeText={handleChangeText1}
-        onToggleDone={handleToggle1}
-      />
-      <PriorityItem
-        value={items[2]}
-        index={2}
-        onChangeText={handleChangeText2}
-        onToggleDone={handleToggle2}
-      />
+      {items.map((item, index) => {
+        const canDelete = items.length > 1;
+        return (
+          <PriorityItem
+            key={item.id}
+            value={item}
+            index={index}
+            onChangeText={(html: string) => onChangeText(index, html)}
+            onToggleDone={() => onToggleDone(index)}
+            {...(canDelete ? { onDelete: () => removePriority(index) } : {})}
+            autoFocus={index === items.length - 1 && items.length > prevLengthRef.current}
+          />
+        );
+      })}
+
+      {items.length < 10 && (
+        <button
+          type="button"
+          onClick={addPriority}
+          className={styles.addButton}
+          aria-label="Adicionar prioridade"
+        >
+          + adicionar
+        </button>
+      )}
     </section>
   );
 }

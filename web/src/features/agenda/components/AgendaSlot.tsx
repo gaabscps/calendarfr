@@ -1,5 +1,5 @@
 /**
- * AgendaSlot — single timeline row: hour label + RichTextLine.
+ * AgendaSlot — single timeline row: hour label + RichTextBlock.
  *
  * Wrapped in React.memo with default shallow comparator.
  * Props are primitives + a stable callback — memo prevents re-renders of the
@@ -10,7 +10,7 @@
 
 import React from 'react';
 
-import { RichTextLine } from '@/features/rich-text-line';
+import { RichTextBlock } from '@/features/rich-text-line';
 
 import { formatHourAriaLabel, formatHourLabel } from '../lib/formatHour.js';
 import type { AgendaSlot as AgendaSlotType } from '../types.js';
@@ -40,11 +40,11 @@ export interface AgendaSlotProps {
  *   <div [slot wrapper]>
  *     <span aria-hidden="true">06</span>    ← decorative hour label
  *     <div [editor area]>
- *       <RichTextLine ariaLabel="Agenda das 6 horas" ... />
+ *       <RichTextBlock ariaLabel="Agenda das 6 horas" ... />
  *     </div>
  *   </div>
  *
- * Tab order: only the RichTextLine editor is focusable — the label is
+ * Tab order: only the RichTextBlock editor is focusable — the label is
  * aria-hidden and pointer-events:none. Tab order is natural DOM order (AC-014).
  *
  * Placeholder: empty string (no visual noise for 18 lines — spec open question
@@ -71,7 +71,7 @@ function AgendaSlotBase({ slot, onChange, isCurrentHour }: AgendaSlotProps) {
       {/* Editor — fills remaining width. ariaLabel provides full PT-BR
           accessibility label ("Agenda das N horas") per AC-015. */}
       <div className={styles.editor}>
-        <RichTextLine
+        <RichTextBlock
           value={slot.text}
           onChange={onChange}
           placeholder=""

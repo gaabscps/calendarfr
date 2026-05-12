@@ -1,15 +1,15 @@
 /**
- * PriorityItem — single priority slot: checkbox + RichTextLine.
+ * PriorityItem — single priority slot: checkbox + RichTextBlock + delete button.
  *
  * Wrapped in React.memo with default shallow comparator.
  * Props are primitives + stable callbacks — no expensive re-renders.
  *
- * Covers: AC-003, AC-005, AC-006, AC-008, AC-010, AC-014, AC-015, AC-016, AC-017.
+ * Covers: AC-012, AC-013, AC-014, AC-015.
  */
 
 import React from 'react';
 
-import { RichTextLine } from '@/features/rich-text-line';
+import { RichTextBlock } from '@/features/rich-text-line';
 
 import { placeholderForIndex } from '../lib/placeholders.js';
 import type { Priority } from '../types.js';
@@ -25,16 +25,27 @@ export interface PriorityItemProps {
   onChangeText: (html: string) => void;
   /** Called when the checkbox is toggled. */
   onToggleDone: () => void;
+  /** Optional: called when the delete button is clicked. Button hidden when absent. */
+  onDelete?: () => void;
+  /** Optional: whether the editor should auto-focus on mount. */
+  autoFocus?: boolean;
 }
 
 /**
- * Single priority row: custom checkbox + single-line rich text editor.
+ * Single priority row: custom checkbox + rich text editor + optional delete button.
  *
- * DOM order per slot: [checkbox] [editor] — matches AC-014 natural tab order.
+ * DOM order per slot: [checkbox] [editor] [delete?] — matches AC-014 natural tab order.
  * No tabIndex hacks needed: the native <input> and contenteditable are both
  * tab-focusable in DOM order by default.
  */
-function PriorityItemBase({ value, index, onChangeText, onToggleDone }: PriorityItemProps) {
+function PriorityItemBase({
+  value,
+  index,
+  onChangeText,
+  onToggleDone,
+  onDelete,
+  autoFocus,
+}: PriorityItemProps) {
   const slotNumber = index + 1;
 
   const checkboxAriaLabel = value.done
@@ -62,13 +73,26 @@ function PriorityItemBase({ value, index, onChangeText, onToggleDone }: Priority
 
       {/* Editor — AC-010: placeholder per slot, AC-016: aria-label per slot */}
       <div className={styles.editor}>
-        <RichTextLine
+        <RichTextBlock
           value={value.text}
           onChange={onChangeText}
           placeholder={placeholderForIndex(index)}
           ariaLabel={editorAriaLabel}
+          {...(autoFocus !== undefined ? { autoFocus } : {})}
         />
       </div>
+
+      {/* Delete button — AC-004, AC-009: only rendered when onDelete is provided */}
+      {onDelete && (
+        <button
+          type="button"
+          onClick={onDelete}
+          className={styles.deleteButton}
+          aria-label={`Excluir prioridade ${String(slotNumber)}`}
+        >
+          ×
+        </button>
+      )}
     </div>
   );
 }

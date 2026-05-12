@@ -1,7 +1,7 @@
 /**
  * Priorities styles — CSS Module.
  *
- * Vertical list of 3 PriorityItem rows. Gap via token-compatible value.
+ * Vertical list of 1–10 PriorityItem rows. Gap via token-compatible value.
  */
 
 .section {
@@ -9,4 +9,15 @@
   flex-direction: column;
   gap: 0;
   width: 100%;
+}
+
+.addButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--color-ink-muted);
+  /* No --font-size-xs token exists in the design system; 0.75rem matches SaveIndicator. */
+  font-size: 0.75rem;
+  padding: var(--spacing-xs, 4px) 0;
+  align-self: flex-start;
 }

@@ -47,6 +47,8 @@
 .wrapper :global(.tiptap p.is-editor-empty:first-child::before) {
   content: attr(data-placeholder);
   color: var(--ink-muted);
+  font-style: italic;
+  opacity: 0.75;
   pointer-events: none;
   /* float + height keep the placeholder inline without disturbing layout. */
   float: left;

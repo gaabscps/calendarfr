@@ -25,7 +25,6 @@ import type { AgendaSlots } from '@/features/agenda';
 import { MoodPicker } from '@/features/mood';
 import { Notes } from '@/features/notes';
 import { Priorities } from '@/features/priorities';
-import type { PrioritiesTuple } from '@/features/priorities';
 import { PaperSheet } from '@/shared/components/PaperSheet';
 
 import { useDailyPage } from '../hooks/useDailyPage.js';
@@ -42,20 +41,6 @@ import { PageNavigator } from './PageNavigator.js';
 /** AC-001: derive today's date from LOCAL date parts, not UTC */
 function getTodayLocal(): string {
   return toLocalIsoDate(new Date());
-}
-
-/**
- * Narrow DailyPageData.priorities to PrioritiesTuple.
- * Validates length at runtime (L-MINOR-3: guard against corrupt server payload).
- * After the shared type update, DailyPageData.priorities is already
- * readonly [Priority, Priority, Priority] — structurally identical to PrioritiesTuple.
- */
-function toPrioritiesTuple(data: DailyPageData): PrioritiesTuple {
-  const p = data.priorities;
-  if (p.length < 3) {
-    throw new Error(`DailyPage: expected 3 priorities, got ${p.length}`);
-  }
-  return p;
 }
 
 /**
@@ -146,7 +131,7 @@ export function DailyPage({ initialDate }: DailyPageProps = {}) {
               {/* AC-003: Priorities via barrel only */}
               <div className={styles.prioritiesCol}>
                 <h2 className={styles.sectionLabel}>Prioridades</h2>
-                <Priorities value={toPrioritiesTuple(data)} onChange={setPriorities} />
+                <Priorities value={data.priorities} onChange={setPriorities} />
               </div>
               {/* AC-003: MoodPicker via barrel only */}
               <MoodPicker value={data.mood} onChange={setMood} />

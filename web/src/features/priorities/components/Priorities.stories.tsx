@@ -5,11 +5,11 @@
  * See spec US-006.
  */
 
+import type { Priority } from '@calendarfr/shared';
 import type { Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
 
 import { EMPTY_PRIORITY } from '../types.js';
-import type { PrioritiesTuple } from '../types.js';
 
 import { Priorities } from './Priorities.js';
 
@@ -25,20 +25,16 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-/** Canonical 3-tuple of empty slots. */
-const emptyTriple: PrioritiesTuple = [
-  { ...EMPTY_PRIORITY },
-  { ...EMPTY_PRIORITY },
-  { ...EMPTY_PRIORITY },
-];
+/** Empty initial state — single empty slot. */
+const emptyPriorities: Priority[] = [{ ...EMPTY_PRIORITY }];
 
 /**
- * Empty — all 3 slots are unused.
+ * Empty — empty initial state.
  * Demonstrates placeholder text per slot and no visual "done" state.
  */
 export const Empty: Story = {
   args: {
-    value: emptyTriple,
+    value: emptyPriorities,
   },
 };
 
@@ -53,7 +49,7 @@ export const Partial: Story = {
       { id: '01HXYZ0000000000000PARTIAL1', text: 'Revisar contrato', done: false },
       { ...EMPTY_PRIORITY },
       { ...EMPTY_PRIORITY },
-    ] as unknown as PrioritiesTuple,
+    ] satisfies Priority[],
   },
 };
 
@@ -68,20 +64,20 @@ export const AllDone: Story = {
       { id: '01HXYZ0000000000000ALLDONE1', text: '<b>Bold</b> task', done: true },
       { id: '01HXYZ0000000000000ALLDONE2', text: '<i>Italic</i> task', done: true },
       { id: '01HXYZ0000000000000ALLDONE3', text: '<s>Strike</s> task', done: true },
-    ] as unknown as PrioritiesTuple,
+    ] satisfies Priority[],
   },
 };
 
 /**
  * Controlled — value + setState wired together.
- * Shows the current priorities tuple in a <pre> panel next to the component,
+ * Shows the current Priority[] in a <pre> panel next to the component,
  * updating in real time as the user types or toggles checkboxes.
  * Demonstrates the controlled-component contract (AC-022).
  */
 export const Controlled: StoryObj = {
   render: () => {
     // eslint-disable-next-line react-hooks/rules-of-hooks
-    const [value, setValue] = useState<PrioritiesTuple>([
+    const [value, setValue] = useState<Priority[]>([
       { id: '01HXYZ0000000000000CTRL0001', text: 'Primeira prioridade', done: false },
       { id: '01HXYZ0000000000000CTRL0002', text: '<b>Segunda</b> prioridade', done: true },
       { ...EMPTY_PRIORITY },

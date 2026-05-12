@@ -23,39 +23,54 @@ import { renderWithProviders } from '@/test-utils';
 // Mock RichTextLine — simple <input> + render counter per instance
 // ---------------------------------------------------------------------------
 
-/** Per-slot render counter: hour → count */
+/** Per-slot render counter: hour → count (shared via globalThis for jest.mock boundary) */
 const renderCounts: Record<number, number> = {};
+(globalThis as Record<string, unknown>).__agendaRenderCounts = renderCounts;
 
-jest.mock('@/features/rich-text-line', () => ({
-  RichTextLine: ({
-    value,
-    onChange,
-    ariaLabel,
-  }: {
-    value: string;
-    onChange: (_html: string) => void;
-    ariaLabel?: string;
-    placeholder?: string;
-    disabled?: boolean;
-    className?: string;
-  }) => {
-    // Extract hour from ariaLabel "Agenda das N horas" to key render counter
-    const hourMatch = ariaLabel != null ? ariaLabel.match(/Agenda das (\d+) horas/) : null;
-    const hour = hourMatch ? parseInt(hourMatch[1] ?? '-1', 10) : -1;
-    renderCounts[hour] = (renderCounts[hour] ?? 0) + 1;
+jest.mock('@/features/rich-text-line', () => {
+  const React = jest.requireActual<typeof import('react')>('react');
 
-    return (
-      <input
-        type="text"
-        role="textbox"
-        aria-label={ariaLabel}
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        data-testid={`editor-h${String(hour)}`}
-      />
-    );
-  },
-}));
+  const makeMock =
+    (_name: string) =>
+    ({
+      value,
+      onChange,
+      ariaLabel,
+    }: {
+      value: string;
+      onChange: (_html: string) => void;
+      ariaLabel?: string;
+      placeholder?: string;
+      onEnter?: () => void;
+      autoFocus?: boolean;
+      disabled?: boolean;
+      className?: string;
+    }) => {
+      // Extract hour from ariaLabel "Agenda das N horas" to key render counter
+      const hourMatch = ariaLabel != null ? ariaLabel.match(/Agenda das (\d+) horas/) : null;
+      const hour = hourMatch ? parseInt(hourMatch[1] ?? '-1', 10) : -1;
+      // renderCounts lives in module scope; access via globalThis to cross the mock boundary
+      const counts = (globalThis as Record<string, unknown>).__agendaRenderCounts as Record<
+        number,
+        number
+      >;
+      if (counts) counts[hour] = (counts[hour] ?? 0) + 1;
+
+      return React.createElement('input', {
+        type: 'text',
+        role: 'textbox',
+        'aria-label': ariaLabel,
+        value,
+        onChange: (e: React.ChangeEvent<HTMLInputElement>) => onChange(e.target.value),
+        'data-testid': `editor-h${String(hour)}`,
+      });
+    };
+
+  return {
+    RichTextLine: makeMock('RichTextLine'),
+    RichTextBlock: makeMock('RichTextBlock'),
+  };
+});
 
 // ---------------------------------------------------------------------------
 // Helpers

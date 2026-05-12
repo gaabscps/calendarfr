@@ -1,9 +1,8 @@
 /**
  * Branch coverage tests for DailyPage.tsx.
  *
- * Covers uncovered branch:
- *   - Line 55: toPrioritiesTuple throw path when priorities.length < 3
- *     (L-MINOR-3: guard against corrupt server payload)
+ * T-010: Removed stale toPrioritiesTuple throw test — T-007 removed that guard.
+ * DailyPage now accepts Priority[] directly with no tuple cast.
  */
 
 import type { DailyPageData } from '@calendarfr/shared';
@@ -127,46 +126,41 @@ afterEach(() => {
 });
 
 // ---------------------------------------------------------------------------
-// DailyPage.tsx line 55: toPrioritiesTuple throw path
-// When priorities.length < 3, toPrioritiesTuple throws.
-// DailyPage should render an error boundary or propagate the error.
+// DailyPage renders normally with Priority[] (no tuple guard)
+// toPrioritiesTuple was removed in T-007; DailyPage accepts any Priority[].
 // ---------------------------------------------------------------------------
 
-describe('DailyPage — toPrioritiesTuple throw path (line 55)', () => {
-  let consoleErrorSpy: jest.SpyInstance;
-
-  beforeEach(() => {
-    consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
-  });
-
-  afterEach(() => {
-    consoleErrorSpy.mockRestore();
-  });
-
-  it('throws when priorities has fewer than 3 items (L-MINOR-3 guard)', () => {
-    // DailyPageData with only 2 priorities — corrupt server payload
-    const corruptData = makeData({
-      priorities: [
-        { id: 'a', text: '', done: false },
-        { id: 'b', text: '', done: false },
-      ] as unknown as DailyPageData['priorities'],
+describe('DailyPage — renders with Priority[] (AC-012)', () => {
+  it('renders with 1 priority item', () => {
+    const oneItem = makeData({
+      priorities: [{ id: 'a', text: '', done: false }] as DailyPageData['priorities'],
     });
-
-    mockUseDailyPage.mockReturnValue(makeDefaultDailyReturn({ data: corruptData }));
-
-    // DailyPage calls toPrioritiesTuple(data) which throws when p.length < 3
-    // React will catch this as an error boundary violation (render throws)
-    expect(() => {
-      render(<DailyPage />);
-    }).toThrow('DailyPage: expected 3 priorities, got 2');
-  });
-
-  it('does NOT throw when priorities has exactly 3 items', () => {
-    // Normal 3-priority data — should render without throwing
+    mockUseDailyPage.mockReturnValue(makeDefaultDailyReturn({ data: oneItem }));
     expect(() => {
       render(<DailyPage />);
     }).not.toThrow();
+    expect(screen.getByTestId('priorities')).toBeInTheDocument();
+  });
 
+  it('renders with 3 priority items (default fixture)', () => {
+    expect(() => {
+      render(<DailyPage />);
+    }).not.toThrow();
+    expect(screen.getByTestId('priorities')).toBeInTheDocument();
+  });
+
+  it('renders with 5 priority items', () => {
+    const fiveItems = makeData({
+      priorities: Array.from({ length: 5 }, (_, i) => ({
+        id: `p${i}`,
+        text: '',
+        done: false,
+      })) as DailyPageData['priorities'],
+    });
+    mockUseDailyPage.mockReturnValue(makeDefaultDailyReturn({ data: fiveItems }));
+    expect(() => {
+      render(<DailyPage />);
+    }).not.toThrow();
     expect(screen.getByTestId('priorities')).toBeInTheDocument();
   });
 });
