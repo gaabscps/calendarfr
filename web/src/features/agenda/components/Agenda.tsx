@@ -12,7 +12,7 @@
 import { useMemo } from 'react';
 
 import { useAgenda } from '../hooks/useAgenda.js';
-import { getCurrentAgendaHour } from '../lib/currentHour.js';
+import { useCurrentHour } from '../hooks/useCurrentHour.js';
 import { normalizeAgenda } from '../lib/normalizeAgenda.js';
 import { AGENDA_HOURS } from '../types.js';
 import type { AgendaSlots } from '../types.js';
@@ -27,9 +27,8 @@ export interface AgendaProps {
   onChange: (next: AgendaSlots) => void;
   /**
    * @internal — used only for testability (jest/Storybook).
-   * Overrides the "now" used to compute the current-hour highlight.
+   * Overrides the initial "now" for current-hour computation.
    * Not exported from the feature barrel; consumers must NOT rely on this prop.
-   * Computed once at render (AC-012: no polling).
    */
   now?: Date;
 }
@@ -54,8 +53,8 @@ export function Agenda({ value, onChange, now }: AgendaProps) {
   // Normalise defensively — corrupted payloads (AC-008) still render 18 slots.
   const slots = useMemo(() => normalizeAgenda(value), [value]);
 
-  // Compute current hour once on render (AC-012: no polling).
-  const currentHour = useMemo(() => getCurrentAgendaHour(now), [now]);
+  // Current hour updates automatically within ≤1s of the hour change.
+  const currentHour = useCurrentHour(now);
 
   // Per-hour onChange wrappers, keyed by hour. Rebuilt only when onChangeText
   // identity changes — which now only happens when the parent's onChange
