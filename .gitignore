@@ -60,3 +60,7 @@ reports/
 # Test tmpdir leaks (macOS os.tmpdir() inside relative cwd) and accidental package manager artifacts
 var/
 yarn.lock
+
+# ai-squad per-repo hook install (managed by `ai-squad deploy`)
+.claude/hooks/
+docs/agentops/
