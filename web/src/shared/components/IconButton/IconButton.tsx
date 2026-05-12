@@ -2,13 +2,16 @@ import type { ButtonHTMLAttributes, ReactNode } from 'react';
 
 import styles from './IconButton.module.css';
 
+export type IconButtonVariant = 'ghost' | 'danger';
+export type IconButtonSize = 'sm' | 'md';
+
 type IconButtonBaseProps = Omit<
   ButtonHTMLAttributes<HTMLButtonElement>,
   'aria-label' | 'aria-labelledby'
 > & {
   children: ReactNode;
-  variant?: 'ghost' | 'danger';
-  size?: 'sm' | 'md' | 'lg';
+  variant?: IconButtonVariant;
+  size?: IconButtonSize;
 };
 
 // Discriminated union: either aria-label OR aria-labelledby is required

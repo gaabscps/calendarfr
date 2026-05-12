@@ -33,7 +33,8 @@
     "build-storybook": "npm --workspace web run build-storybook",
     "storybook": "npm --workspace web run storybook",
     "prepare": "husky",
-    "tokens:check": "node scripts/tokens-check.mjs"
+    "tokens:check": "node scripts/tokens-check.mjs",
+    "rhythm:check": "node scripts/rhythm-check.mjs"
   },
   "typeCoverage": {
     "atLeast": 95,

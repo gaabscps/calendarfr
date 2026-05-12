@@ -7,15 +7,24 @@
  * AC-019: focus ring via IconButton atom (var(--focus-ring)) on all interactive elements.
  * AC-025: zero inline outlines — focus handled by IconButton atom.
  * NFR-004: WCAG 2.1 AA — opacity-0 × button is revealed on hover AND focus-within.
+ *
+ * FEAT-017 (Decision 9): row height snaps to var(--baseline) (24px) so each
+ * NoteItem occupies exactly one Moleskine rule line. align-items: center keeps
+ * the 24×24 IconButton sm atoms and the RichTextBlock (line-height: 24)
+ * centred on the 24px row.
  */
 
 /* ── Note row wrapper ── */
 .note {
   display: flex;
   flex-direction: row;
-  align-items: flex-start;
+  align-items: center;
   gap: var(--spacing-xs);
   width: 100%;
+  height: var(--baseline);
+  /* AC-028: strict 24px snap — clip long text instead of letting the editor
+     child expand past var(--baseline). */
+  overflow: hidden;
 }
 
 /* Reveal remove button on hover or keyboard focus-within (a11y: AC-019) */
@@ -28,8 +37,8 @@
 .prefixButton {
   flex-shrink: 0;
   font-size: var(--font-size-base);
-  min-width: 24px;
-  min-height: 24px;
+  min-width: var(--baseline);
+  min-height: var(--baseline);
 }
 
 /* ── Editor area ── */

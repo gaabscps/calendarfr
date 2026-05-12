@@ -24,30 +24,25 @@
   pointer-events: none;
 }
 
-/* ----- Sizes (AC-018: sm enforces hit area ≥32×32px) ----- */
+/* ----- Sizes (FEAT-017 Decision 5: snap a múltiplos de --baseline = 24px) -----
+ * sm = 24×24 (1×baseline) — WCAG 2.5.5 AA min touch target (24×24)
+ * md = 48×48 (2×baseline) — generoso para hit target em chevrons / superfícies primárias
+ */
 
 .sm {
-  width: 32px;
-  height: 32px;
-  min-width: 32px;
-  min-height: 32px;
+  width: 24px;
+  height: 24px;
+  min-width: 24px;
+  min-height: 24px;
   font-size: var(--font-size-sm);
 }
 
 .md {
-  width: 36px;
-  height: 36px;
-  min-width: 36px;
-  min-height: 36px;
+  width: 48px;
+  height: 48px;
+  min-width: 48px;
+  min-height: 48px;
   font-size: var(--font-size-base);
-}
-
-.lg {
-  width: 44px;
-  height: 44px;
-  min-width: 44px;
-  min-height: 44px;
-  font-size: var(--font-size-lg);
 }
 
 /* ----- Variants ----- */

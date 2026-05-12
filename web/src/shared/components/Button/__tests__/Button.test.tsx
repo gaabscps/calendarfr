@@ -4,7 +4,7 @@ import userEvent from '@testing-library/user-event';
 import { Button } from '../Button';
 
 describe('Button', () => {
-  // AC-012: API tipada — variant, size, estende ButtonHTMLAttributes
+  // AC-033/AC-034: variant + size API tipada (default secondary/md)
   it('renders with default variant=secondary and size=md', () => {
     render(<Button>Click me</Button>);
     const btn = screen.getByRole('button', { name: /click me/i });
@@ -34,12 +34,12 @@ describe('Button', () => {
     expect(screen.getByRole('button', { name: /small/i }).className).toContain('sm');
   });
 
-  it('renders with size=lg', () => {
-    render(<Button size="lg">Large</Button>);
-    expect(screen.getByRole('button', { name: /large/i }).className).toContain('lg');
+  it('renders with size=md explicitly', () => {
+    render(<Button size="md">Medium</Button>);
+    expect(screen.getByRole('button', { name: /medium/i }).className).toContain('md');
   });
 
-  // AC-012: aceita props HTML nativas de <button>
+  // AC-033: aceita props HTML nativas de <button>
   it('has default type=button to prevent accidental form submission', () => {
     render(<Button>Default type</Button>);
     expect(screen.getByRole('button', { name: /default type/i })).toHaveAttribute('type', 'button');
@@ -74,13 +74,13 @@ describe('Button', () => {
     expect(handler).not.toHaveBeenCalled();
   });
 
-  // AC-015: nome neutro — o componente é chamado Button
+  // AC-033: nome neutro — o componente é chamado Button
   it('renders a <button> element', () => {
     render(<Button>Element</Button>);
     expect(screen.getByRole('button', { name: /element/i }).tagName.toLowerCase()).toBe('button');
   });
 
-  // AC-012: aceita aria-* props nativas
+  // AC-033: aceita aria-* props nativas
   it('forwards aria-label', () => {
     render(<Button aria-label="custom label">X</Button>);
     expect(screen.getByRole('button', { name: /custom label/i })).toBeInTheDocument();

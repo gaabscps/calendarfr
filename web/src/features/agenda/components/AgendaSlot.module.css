@@ -35,7 +35,7 @@
   font-family: var(--font-mono, monospace);
   font-size: var(--font-size-sm);
   color: var(--color-ink-muted, #8a7a65);
-  line-height: 24px;
+  line-height: var(--baseline);
   text-align: right;
   user-select: none;
 }

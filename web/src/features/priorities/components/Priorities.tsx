@@ -10,7 +10,7 @@
 
 import { useEffect, useRef } from 'react';
 
-import { IconButton } from '@/shared/components/IconButton';
+import { Button } from '@/shared/components/Button';
 
 import { usePriorities } from '../hooks/usePriorities.js';
 import type { Priority } from '../types.js';
@@ -62,7 +62,7 @@ export function Priorities({ value, onChange }: PrioritiesProps) {
       })}
 
       {items.length < 10 && (
-        <IconButton
+        <Button
           variant="ghost"
           size="sm"
           onClick={addPriority}
@@ -70,7 +70,7 @@ export function Priorities({ value, onChange }: PrioritiesProps) {
           aria-label="Adicionar prioridade"
         >
           + adicionar
-        </IconButton>
+        </Button>
       )}
     </section>
   );

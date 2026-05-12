@@ -1,31 +1,29 @@
 /**
  * PriorityItem styles — CSS Module.
  *
- * Checkbox visuals are now handled by the shared Checkbox atom.
- * Delete button visuals handled by the shared IconButton atom.
- * This module handles layout and done-state modifier only.
+ * Checkbox visuals are handled by the shared Checkbox atom (24×24 wrapper).
+ * Delete button visuals handled by the shared IconButton atom (sm = 24×24).
+ * This module owns row layout + done-state delegation only.
  *
  * AC-006: font-size migrated to var(--font-size-*)
  * AC-007: spacing migrated to var(--spacing-*)
  * AC-025: focus ring delegated to Checkbox and IconButton atoms
+ *
+ * FEAT-017 (Decision 2): row height snaps to var(--baseline) (24px) so each
+ * PriorityItem occupies exactly one Moleskine rule line. align-items: center
+ * keeps the 18×18 checkbox visual centred on the 24px row. The previous
+ * .checkboxWrapper was removed — the Checkbox atom is already a 24×24 inline
+ * hit-area, no extra wrapper needed.
  */
 
 /* ── Wrapper ── */
 .item {
   display: flex;
   flex-direction: row;
-  align-items: flex-start;
+  align-items: center;
   gap: var(--spacing-sm);
   width: 100%;
-}
-
-/* ── Checkbox wrapper — aligns atom with first text line ── */
-.checkboxWrapper {
-  flex-shrink: 0;
-  margin-top: var(--spacing-xs);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+  height: var(--baseline);
 }
 
 /* ── Editor area ── */

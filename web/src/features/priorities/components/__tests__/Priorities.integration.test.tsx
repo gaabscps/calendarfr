@@ -12,6 +12,9 @@
  * T-010: migrated PrioritiesTuple → Priority[]; removed stale AC-013 no-UI
  * test; added array-size render checks (1, 3, 5 items); fixed noUncheckedIndexedAccess
  * TS errors via non-null assertions.
+ *
+ * FEAT-017 T-006: baseline-rhythm CSS assertions and tab-order checks moved to
+ * Priorities.baseline.integration.test.tsx (kept under the 250-line limit).
  */
 
 import { act, screen, waitFor } from '@testing-library/react';
@@ -540,39 +543,7 @@ describe('PriorityItem — isolation', () => {
 });
 
 // ---------------------------------------------------------------------------
-// Memoization sanity
+// FEAT-017 baseline rhythm + memoization tests:
+// see Priorities.baseline.integration.test.tsx (extracted to keep this file
+// under the 250-line CLAUDE.md soft limit).
 // ---------------------------------------------------------------------------
-
-describe('Priorities — memoization (React.memo)', () => {
-  it('re-rendering parent with same value does not cause errors', async () => {
-    let rerenders = 0;
-    function Counter() {
-      rerenders++;
-      return null;
-    }
-
-    function ParentWithCounter({ value }: { value: Priority[] }) {
-      return (
-        <>
-          <Priorities value={value} onChange={jest.fn()} />
-          <Counter />
-        </>
-      );
-    }
-
-    const { rerender } = renderWithProviders(<ParentWithCounter value={THREE_FILLED} />);
-
-    await waitForEditors(3);
-    const countAfterMount = rerenders;
-
-    rerender(<ParentWithCounter value={THREE_FILLED} />);
-
-    await act(async () => {
-      await new Promise((r) => setTimeout(r, 50));
-    });
-
-    // Counter renders once per parent render — what matters is no exception
-    expect(rerenders).toBeGreaterThanOrEqual(countAfterMount);
-    expect(getCheckboxes()).toHaveLength(3);
-  });
-});

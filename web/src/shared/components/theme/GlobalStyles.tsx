@@ -1,4 +1,5 @@
 import {
+  baseline,
   colors,
   fonts,
   fontSize,
@@ -76,6 +77,8 @@ const css = `
     --z-dropdown: ${zIndex.dropdown};
     --z-toolbar: ${zIndex.toolbar};
     --z-modal: ${zIndex.modal};
+    --baseline: ${baseline.base}px;
+    --baseline-half: ${baseline.half}px;
   }
 `;
 

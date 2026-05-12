@@ -221,3 +221,98 @@ describe('Notes — NoteItem uses RichTextBlock not RichTextLine (AC-037, AC-040
     expect(emitted[0]?.text).toBe('nova anotação');
   });
 });
+
+// ---------------------------------------------------------------------------
+// FEAT-017 T-008: baseline rhythm — Notes/NoteItem CSS
+// Covers: AC-022, AC-023, AC-024, AC-025, AC-028
+// ---------------------------------------------------------------------------
+
+const fsMod = jest.requireActual<typeof import('fs')>('fs');
+const pathMod = jest.requireActual<typeof import('path')>('path');
+
+const NOTE_ITEM_CSS = pathMod.join(
+  process.cwd(),
+  'web/src/features/notes/components/NoteItem.module.css',
+);
+const NOTES_CSS = pathMod.join(process.cwd(), 'web/src/features/notes/components/Notes.module.css');
+const PRIORITIES_CSS = pathMod.join(
+  process.cwd(),
+  'web/src/features/priorities/components/Priorities.module.css',
+);
+
+function readFile(absPath: string): string {
+  return fsMod.readFileSync(absPath, 'utf-8') as string;
+}
+
+describe('FEAT-017 NoteItem CSS — baseline rhythm (AC-028)', () => {
+  it('.note row uses height: var(--baseline) (24px snap)', () => {
+    const css = readFile(NOTE_ITEM_CSS);
+    expect(css).toMatch(/\.note\s*\{[^}]*height:\s*var\(--baseline\)/);
+  });
+
+  it('.note row uses align-items: center (not flex-start)', () => {
+    const css = readFile(NOTE_ITEM_CSS);
+    expect(css).toMatch(/\.note\s*\{[^}]*align-items:\s*center/);
+    expect(css).not.toMatch(/\.note\s*\{[^}]*align-items:\s*flex-start/);
+  });
+
+  it('.note row clips overflow so long text cannot break the 24px snap', () => {
+    const css = readFile(NOTE_ITEM_CSS);
+    expect(css).toMatch(/\.note\s*\{[^}]*overflow:\s*hidden/);
+  });
+
+  it('.prefixButton min-width/min-height reference var(--baseline) (no 24px literal)', () => {
+    const css = readFile(NOTE_ITEM_CSS);
+    const match = /\.prefixButton\s*\{([^}]*)\}/.exec(css);
+    expect(match).not.toBeNull();
+    const block = match?.[1] ?? '';
+    expect(block).toMatch(/min-width:\s*var\(--baseline\)/);
+    expect(block).toMatch(/min-height:\s*var\(--baseline\)/);
+    expect(block).not.toMatch(/min-width:\s*24px/);
+    expect(block).not.toMatch(/min-height:\s*24px/);
+  });
+});
+
+describe('FEAT-017 Notes CSS — addButton (AC-022, AC-023, AC-024, AC-025, AC-028)', () => {
+  it('.addButton no longer carries min-height: 36px hardcoded', () => {
+    const css = readFile(NOTES_CSS);
+    const match = /\.addButton\s*\{([^}]*)\}/.exec(css);
+    expect(match).not.toBeNull();
+    const block = match?.[1] ?? '';
+    expect(block).not.toMatch(/min-height:\s*36px/);
+  });
+
+  it('.addButton no longer carries a dashed border / boxed background override', () => {
+    const css = readFile(NOTES_CSS);
+    const match = /\.addButton\s*\{([^}]*)\}/.exec(css);
+    expect(match).not.toBeNull();
+    const block = match?.[1] ?? '';
+    expect(block).not.toMatch(/border:\s*1px\s+dashed/);
+    expect(block).not.toMatch(/background:\s*var\(--color-paper/);
+  });
+
+  it('.addButton does not override Button atom padding (Decision 6 zero override)', () => {
+    const css = readFile(NOTES_CSS);
+    const match = /\.addButton\s*\{([^}]*)\}/.exec(css);
+    expect(match).not.toBeNull();
+    const block = match?.[1] ?? '';
+    expect(block).not.toMatch(/padding:/);
+  });
+
+  it('.addButton font-family/font-size match Priorities.addButton (AC-023 parity)', () => {
+    const notesCss = readFile(NOTES_CSS);
+    const prioCss = readFile(PRIORITIES_CSS);
+
+    const notesBlock = /\.addButton\s*\{([^}]*)\}/.exec(notesCss)?.[1] ?? '';
+    const prioBlock = /\.addButton\s*\{([^}]*)\}/.exec(prioCss)?.[1] ?? '';
+
+    const fontFamily = (block: string) =>
+      /font-family:\s*([^;]+);?/.exec(block)?.[1]?.trim() ?? null;
+    const fontSize = (block: string) => /font-size:\s*([^;]+);?/.exec(block)?.[1]?.trim() ?? null;
+
+    expect(fontFamily(notesBlock)).not.toBeNull();
+    expect(fontFamily(notesBlock)).toBe(fontFamily(prioBlock));
+    expect(fontSize(notesBlock)).not.toBeNull();
+    expect(fontSize(notesBlock)).toBe(fontSize(prioBlock));
+  });
+});

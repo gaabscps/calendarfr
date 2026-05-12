@@ -6,6 +6,16 @@
  *
  * AC-025: zero inline outlines — focus handled by Button atom (var(--focus-ring)).
  * NFR-004: WCAG 2.1 AA.
+ *
+ * FEAT-017 (Decision 6): .addButton uses Button ghost sm directly — the atom
+ * already snaps to var(--baseline) = 24px height. Removed boxed-dashed
+ * affordance (min-height: 36px, dashed border, paper background) to align
+ * with the unified text-inline ghost AddButton pattern shared with Priorities.
+ *
+ * AC-023 (priorities/notes identical impl): font-family/font-size match the
+ * Priorities .addButton (var(--font-body) + var(--font-size-xs)) — code +
+ * estética idênticos a menos da copy. Zero override of Button atom (no
+ * padding/min-height/border overrides) per Decision 6.
  */
 
 /* ── List container ── */
@@ -19,16 +29,6 @@
 /* ── Add button overrides (extends Button ghost sm) ── */
 .addButton {
   align-self: flex-start;
-  font-family: var(--font-hand, 'Caveat', cursive);
-  font-size: var(--font-size-base);
-  background: var(--color-paper, #fff9f0);
-  border: 1px dashed var(--color-paper-line, #e8e0d0);
-  border-radius: var(--radius-md);
-  min-height: 36px;
-  gap: var(--spacing-xs);
-  margin-top: var(--spacing-xs);
-}
-
-.addButton:hover {
-  background: var(--color-paper-line, #e8e0d0);
+  font-family: var(--font-body);
+  font-size: var(--font-size-xs);
 }

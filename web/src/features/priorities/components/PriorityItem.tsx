@@ -56,18 +56,15 @@ function PriorityItemBase({
 
   const editorAriaLabel = `Prioridade ${String(slotNumber)} do dia`;
 
-  const itemClass = styles.item;
-
   return (
-    <div className={itemClass}>
-      {/* Checkbox atom — AC-028: migrated from inline implementation */}
-      <div className={styles.checkboxWrapper}>
-        <Checkbox
-          checked={value.done}
-          onChange={() => onToggleDone()}
-          aria-label={checkboxAriaLabel}
-        />
-      </div>
+    <div className={styles.item}>
+      {/* Checkbox atom — AC-028 (FEAT-016) + AC-026 (FEAT-017): no extra wrapper.
+          Checkbox atom is already a 24×24 inline hit-area aligned with the row. */}
+      <Checkbox
+        checked={value.done}
+        onChange={() => onToggleDone()}
+        aria-label={checkboxAriaLabel}
+      />
 
       {/* Editor — AC-010: placeholder per slot, AC-016: aria-label per slot.
           data-done propagates done-state to RichTextBlock for strikethrough

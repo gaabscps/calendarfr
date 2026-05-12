@@ -1,4 +1,5 @@
 .sheet {
+  position: relative; /* FEAT-017 D4: anchor for absolute SaveIndicator overlay */
   background: var(--color-paper);
   box-shadow: var(--shadow-paper);
   border-radius: var(--radius-md);

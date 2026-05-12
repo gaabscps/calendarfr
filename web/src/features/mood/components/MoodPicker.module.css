@@ -4,6 +4,11 @@
  * Covers: AC-006 (legend visible + styled), AC-008 (fieldset resets),
  *         AC-012 (focus ring delegated to MoodChip.module.css).
  *
+ * FEAT-017: vertical rhythm — picker snapped to --baseline (24px) multiples.
+ *   - legend: height 24, line-height 24, font-size sm, font-hand (Caveat).
+ *   - chips row: flex-row, gap --spacing-sm (8), flex-wrap on mobile.
+ *   - total desktop height: legend 24 + row 24 = 48 (= 2×baseline). Decision 3.
+ *
  * Token references use CSS custom properties set in GlobalStyles (FEAT-001).
  */
 
@@ -13,14 +18,19 @@
   padding: 0;
   margin: 0;
   min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
 }
 
 /* ── Legend (AC-006) ── */
 .legend {
   font-family: var(--font-hand, 'Caveat', cursive);
   color: var(--color-ink, #2c2416);
-  font-size: var(--font-size-base);
-  margin-bottom: var(--spacing-sm);
+  font-size: var(--font-size-sm);
+  height: var(--baseline);
+  line-height: var(--baseline);
+  margin: 0;
   padding: 0;
   /* Float reset — legend positioning can be quirky in fieldsets */
   float: left;
@@ -37,7 +47,15 @@
   display: flex;
   flex-direction: row;
   gap: var(--spacing-sm);
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   /* Clear any float from legend */
   clear: both;
+}
+
+/* ── Mobile (≤480px): wrap chips, each wrapped line snaps to --baseline ── */
+@media (max-width: 480px) {
+  .row {
+    flex-wrap: wrap;
+    row-gap: var(--baseline);
+  }
 }

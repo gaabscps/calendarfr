@@ -84,6 +84,43 @@ export const Active: Story = {
   },
 };
 
+/**
+ * FEAT-017 baseline grid geometry — wrapper (label) hit-area is 24×24 (var(--baseline))
+ * while the visible box is 18×18. The 3px gap around the visual is produced by
+ * inline-flex centering on the wrapper. Snap to row=24 in PriorityItem/NoteItem.
+ */
+export const BaselineGeometry: StoryObj = {
+  render: () => (
+    <div style={{ display: 'flex', alignItems: 'center', gap: '24px' }}>
+      <div
+        style={{
+          outline: '1px dashed #c0392b',
+          outlineOffset: '-1px',
+          display: 'inline-flex',
+        }}
+      >
+        <Checkbox
+          checked={false}
+          onChange={() => undefined}
+          aria-label="Wrapper 24x24 (dashed outline)"
+        />
+      </div>
+      <div
+        style={{
+          outline: '1px dashed #c0392b',
+          outlineOffset: '-1px',
+          display: 'inline-flex',
+        }}
+      >
+        <Checkbox checked={true} onChange={() => undefined} aria-label="Checked wrapper 24x24" />
+      </div>
+      <span style={{ fontFamily: 'Inter, sans-serif', fontSize: '14px' }}>
+        wrapper 24×24 (dashed), visual 18×18 (centered)
+      </span>
+    </div>
+  ),
+};
+
 /** With external label via <label htmlFor> — clicking label text toggles the checkbox */
 export const WithExternalLabel: StoryObj = {
   render: () => (

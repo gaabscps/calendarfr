@@ -13,7 +13,7 @@ const meta = {
     },
     size: {
       control: 'select',
-      options: ['sm', 'md', 'lg'],
+      options: ['sm', 'md'],
     },
     disabled: { control: 'boolean' },
   },
@@ -99,21 +99,14 @@ export const DangerDisabled: Story = {
 export const SizeSm: Story = {
   args: {
     size: 'sm',
-    children: 'Small',
+    children: 'Small (24px)',
   },
 };
 
 export const SizeMd: Story = {
   args: {
     size: 'md',
-    children: 'Medium',
-  },
-};
-
-export const SizeLg: Story = {
-  args: {
-    size: 'lg',
-    children: 'Large',
+    children: 'Medium (48px)',
   },
 };
 
@@ -128,7 +121,7 @@ export const AllVariants: Story = {
           key={variant}
           style={{ display: 'flex', gap: 'var(--spacing-sm)', alignItems: 'center' }}
         >
-          {(['sm', 'md', 'lg'] as const).map((size) => (
+          {(['sm', 'md'] as const).map((size) => (
             <Button key={size} variant={variant} size={size}>
               {variant} / {size}
             </Button>

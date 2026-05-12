@@ -87,22 +87,20 @@
   background-color: color-mix(in srgb, var(--color-danger) 70%, var(--color-ink) 30%);
 }
 
-/* --- Sizes --- */
+/* --- Sizes ---
+ * Aligned to FEAT-017 baseline grid (24px). All button heights are strict
+ * multiples of --baseline. sm=24 satisfies WCAG 2.5.5 Level AA touch target
+ * (24×24); horizontal padding ensures text buttons exceed 48×24 affordance.
+ */
 
 .sm {
-  height: 28px;
+  height: var(--baseline);
   padding: 0 var(--spacing-sm);
-  font-size: var(--font-size-sm);
+  font-size: var(--font-size-xs);
 }
 
 .md {
-  height: 36px;
+  height: calc(var(--baseline) * 2);
   padding: 0 var(--spacing-md);
   font-size: var(--font-size-base);
-}
-
-.lg {
-  height: 44px;
-  padding: 0 var(--spacing-base);
-  font-size: var(--font-size-lg);
 }

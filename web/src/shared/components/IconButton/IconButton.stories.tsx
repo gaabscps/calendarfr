@@ -13,7 +13,7 @@ const meta = {
     },
     size: {
       control: 'select',
-      options: ['sm', 'md', 'lg'],
+      options: ['sm', 'md'],
     },
   },
   args: {
@@ -28,7 +28,7 @@ type Story = StoryObj<typeof meta>;
 // ----- Ghost variant -----
 
 export const GhostSm: Story = {
-  name: 'Ghost / sm (32px hit area)',
+  name: 'Ghost / sm (24×24 — baseline snap, WCAG AA min)',
   args: {
     variant: 'ghost',
     size: 'sm',
@@ -38,22 +38,12 @@ export const GhostSm: Story = {
 };
 
 export const GhostMd: Story = {
-  name: 'Ghost / md',
+  name: 'Ghost / md (48×48 — 2×baseline)',
   args: {
     variant: 'ghost',
     size: 'md',
     'aria-label': 'move',
     children: '↓',
-  },
-};
-
-export const GhostLg: Story = {
-  name: 'Ghost / lg',
-  args: {
-    variant: 'ghost',
-    size: 'lg',
-    'aria-label': 'expand',
-    children: '⤢',
   },
 };
 
@@ -75,16 +65,6 @@ export const DangerMd: Story = {
     variant: 'danger',
     size: 'md',
     'aria-label': 'remove',
-    children: '🗑',
-  },
-};
-
-export const DangerLg: Story = {
-  name: 'Danger / lg',
-  args: {
-    variant: 'danger',
-    size: 'lg',
-    'aria-label': 'delete all',
     children: '🗑',
   },
 };

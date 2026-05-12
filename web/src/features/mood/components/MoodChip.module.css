@@ -4,6 +4,11 @@
  * Covers: AC-004 (selected chip background), AC-012 (focus ring via accent token),
  *         AC-013 (WCAG AA contrast maintained — paleta validated in moodOptions.ts).
  *
+ * FEAT-017: vertical rhythm — chip height snapped to --baseline (24px).
+ *   - height/line-height: var(--baseline) (24) — Decision 3.
+ *   - vertical padding: 0 (height alone governs row). Horizontal: --spacing-sm (8).
+ *   - selected state: background-color + color swap; no padding/border infl.
+ *
  * Token references use CSS custom properties set in GlobalStyles (FEAT-001).
  */
 
@@ -13,16 +18,21 @@
   flex-direction: row;
   align-items: center;
   gap: var(--spacing-xs);
-  padding: 6px var(--spacing-sm); /* 6px vertical sits between xs(4) and sm(8) */
+  height: var(--baseline);
+  padding: 0 var(--spacing-sm);
   border-radius: var(--radius-md);
   border: 1px solid var(--color-paper-line, #e8e0d0);
   background: var(--color-paper, #fff9f0);
+  color: var(--color-ink, #2c2416);
   cursor: pointer;
-  transition: all var(--motion-fast) ease;
+  transition:
+    background-color var(--motion-fast) ease,
+    color var(--motion-fast) ease,
+    border-color var(--motion-fast) ease;
   /* Reset button defaults */
   font-family: inherit;
   font-size: inherit;
-  line-height: 1.2;
+  line-height: var(--baseline);
   text-align: left;
 }
 
@@ -37,11 +47,14 @@
   outline-offset: var(--focus-ring-offset);
 }
 
-/* ── Selected state (AC-004) ──
+/* ── Selected state (AC-004, AC-017) ──
    backgroundColor is applied via inline style (dynamic color from option.color).
-   Border color subtly matches background to blend. */
+   Border color subtly matches background to blend. State applied with zero
+   geometry impact — no padding/border/box-shadow inflation. */
 .chip.selected {
   border-color: transparent;
+  background-color: var(--color-accent);
+  color: var(--color-paper);
   /* Hover on selected: slight brightness via filter — no color override needed */
 }
 
@@ -60,6 +73,8 @@
 /* ── Label span ── */
 .label {
   font-size: var(--font-size-sm);
-  color: var(--color-ink, #2c2416);
+  /* Color inherits from .chip — base inherits from button (color-ink),
+     .chip.selected overrides to color-paper. Inheritance preserves WCAG AA
+     contrast in both states (AC-017). */
   white-space: nowrap;
 }

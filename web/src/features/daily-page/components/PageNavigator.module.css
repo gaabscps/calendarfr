@@ -1,13 +1,24 @@
 /**
- * PageNavigator styles — header layout for date + nav buttons + save indicator.
+ * PageNavigator styles — FEAT-017 Decision 7.
+ *
+ * Vertical block totals 72px (= 3 × --baseline):
+ *   .header height        : 48px (= 2 × --baseline, hosts chevrons + date)
+ *   .header margin-bottom : 24px (= 1 × --baseline, spacing pre-content)
+ *
+ * SaveIndicator is rendered as an absolute overlay (Decision 4) positioned by
+ * PaperSheet, so it does NOT contribute to the navigator block height.
+ *
+ * AC-008 guarantee: with PaperSheet padding 24 + navigator block 72,
+ * GridContainer top relative to PaperSheet = 96 (= 4 × --baseline).
  */
 
 .header {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: var(--spacing-base, 16px);
-  padding: var(--spacing-sm, 8px) var(--spacing-base, 16px);
-  border-bottom: 1px solid var(--color-paper-line, #e8e0d0);
+  height: 48px; /* 2 × --baseline */
+  margin-bottom: var(--baseline, 24px);
   background: transparent;
 }
 
@@ -16,26 +27,22 @@
 .center {
   flex: 1;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: var(--spacing-xs, 4px);
+  justify-content: center;
   min-width: 0;
 }
 
 .dateHeading {
   margin: 0;
   font-family: var(--font-hand, 'Caveat', cursive);
-  font-size: var(--font-size-lg, 1.125rem);
+  font-size: var(--font-size-xl, 1.5rem);
   font-weight: 600;
+  /* AC-006: explicit line-height = 2 × --baseline (24 × 2 = 48) — overrides
+     UA-default `normal` which would render ~30px and break the rhythm. */
+  line-height: 48px;
   color: var(--color-ink, #2c2416);
   text-align: center;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-}
-
-@media (min-width: 1024px) {
-  .dateHeading {
-    font-size: var(--font-size-xl, 1.5rem);
-  }
 }

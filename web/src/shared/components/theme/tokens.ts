@@ -59,6 +59,20 @@ export const motion = {
   spring: { type: 'spring' as const, stiffness: 220, damping: 20 },
 } as const;
 
+/**
+ * Vertical rhythm contract (FEAT-017):
+ * - height, min-height, max-height, padding-top, padding-bottom,
+ *   margin-top, margin-bottom, gap em flex-column => múltiplos de
+ *   24 (--baseline) ou 12 (--baseline-half). Sem outros valores.
+ * - horizontals (width, padding-left/right, margin-left/right,
+ *   gap em flex-row) => livres, mas preferir --spacing-* tokens.
+ * Verificado por scripts/rhythm-check.mjs (CI).
+ */
+export const baseline = {
+  base: 24,
+  half: 12,
+} as const;
+
 export const fontSize = {
   xs: '0.75rem',
   sm: '0.875rem',
@@ -91,4 +105,5 @@ export interface Tokens {
   fontSize: typeof fontSize;
   focusRing: typeof focusRing;
   zIndex: typeof zIndex;
+  baseline: typeof baseline;
 }

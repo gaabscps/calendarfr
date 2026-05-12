@@ -4,14 +4,14 @@ import userEvent from '@testing-library/user-event';
 import { IconButton } from '../IconButton';
 
 describe('IconButton', () => {
-  // AC-016: component exists and renders
+  // Component exists and renders (carry-over from FEAT-016 baseline)
   it('renders a button element', () => {
     render(<IconButton aria-label="delete item">X</IconButton>);
     expect(screen.getByRole('button', { name: 'delete item' })).toBeInTheDocument();
   });
 
-  // AC-017: aria-label is required — TS enforces this at compile time;
-  // at runtime, the label must be present in the DOM
+  // aria-label is required — TS enforces this at compile time; at runtime,
+  // the label must be present in the DOM (carry-over from FEAT-016 baseline)
   it('applies aria-label to the button', () => {
     render(<IconButton aria-label="close">X</IconButton>);
     const btn = screen.getByRole('button', { name: 'close' });
@@ -32,8 +32,10 @@ describe('IconButton', () => {
     expect(screen.getByRole('button', { name: 'remove' })).toBeInTheDocument();
   });
 
-  // AC-018: size sm produces min-width / min-height of 32px enforced via CSS;
-  // identity-obj-proxy returns class names as their key, so we verify the class is applied
+  // AC-033/AC-034 (FEAT-017 Decision 5): sizes snapadas em múltiplos de --baseline (24px).
+  // sm = 24×24 (WCAG 2.5.5 AA min touch target); md = 48×48 (2×baseline).
+  // 'lg' foi removido — sem consumer interno; reintroduzir se necessidade real surgir.
+  // identity-obj-proxy retorna nomes de classe como sua chave; verificamos a classe aplicada.
   it('applies size class for sm (default)', () => {
     render(<IconButton aria-label="btn">X</IconButton>);
     const btn = screen.getByRole('button');
@@ -50,17 +52,7 @@ describe('IconButton', () => {
     expect(btn.className).toContain('md');
   });
 
-  it('applies size class for lg when size=lg', () => {
-    render(
-      <IconButton aria-label="btn" size="lg">
-        X
-      </IconButton>,
-    );
-    const btn = screen.getByRole('button');
-    expect(btn.className).toContain('lg');
-  });
-
-  // AC-019: variant ghost / danger
+  // Variant ghost / danger (carry-over from FEAT-016 baseline, not in FEAT-017 scope)
   it('applies ghost variant class by default', () => {
     render(<IconButton aria-label="btn">X</IconButton>);
     const btn = screen.getByRole('button');

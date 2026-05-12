@@ -38,10 +38,22 @@ describe('GlobalStyles', () => {
       '--font-body',
       '--font-mono',
       '--paper-rule',
+      // baseline rhythm (FEAT-017)
+      '--baseline',
+      '--baseline-half',
     ];
 
     for (const cssVar of checks) {
       expect(css).toContain(cssVar + ':');
     }
+  });
+
+  it('exposes --baseline=24px and --baseline-half=12px in :root (FEAT-017)', () => {
+    render(<GlobalStyles />);
+    const styleTag = document.querySelector('style');
+    const css = styleTag?.innerHTML ?? '';
+
+    expect(css).toMatch(/--baseline:\s*24px/);
+    expect(css).toMatch(/--baseline-half:\s*12px/);
   });
 });

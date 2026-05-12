@@ -13,14 +13,14 @@
 .grid {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-base, 16px);
-  padding: var(--spacing-base, 16px);
+  gap: var(--baseline);
+  padding: var(--baseline);
 }
 
 .topRow {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-sm, 8px);
+  gap: var(--baseline);
   width: 100%;
 }
 
@@ -41,15 +41,15 @@
     grid-template-areas:
       'top-row top-row'
       'agenda  notes';
-    gap: var(--spacing-lg, 24px);
-    padding: var(--spacing-lg, 24px);
+    gap: var(--baseline);
+    padding: var(--baseline);
   }
 
   .topRow {
     grid-area: top-row;
     flex-direction: row;
     align-items: flex-start;
-    gap: var(--spacing-lg, 24px);
+    gap: var(--spacing-lg);
   }
 
   .agendaCol {
@@ -61,15 +61,6 @@
   }
 }
 
-/* ── Tablet: single column, slightly larger padding ──────────────────────────── */
-
-@media (min-width: 768px) and (max-width: 1023px) {
-  .grid {
-    padding: var(--spacing-md, 12px) var(--spacing-lg, 24px);
-    gap: var(--spacing-md, 12px);
-  }
-}
-
 /* ── Section labels and column wrappers (AC-022–AC-025) ─────────────────────── */
 
 .sectionLabel {
@@ -77,9 +68,9 @@
   font-size: var(--font-size-sm, 0.875rem);
   font-weight: normal;
   color: var(--color-ink-muted, #9a8a72);
-  margin: 0 0 var(--spacing-xs, 4px) 0;
+  margin: 0;
   padding: 0;
-  line-height: 24px;
+  line-height: var(--baseline);
 }
 
 .prioritiesCol {
