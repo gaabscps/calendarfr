@@ -1,4 +1,15 @@
-import { colors, fonts, paper, radii, shadows } from './tokens';
+import {
+  colors,
+  fonts,
+  fontSize,
+  focusRing,
+  motion,
+  paper,
+  radii,
+  shadows,
+  spacing,
+  zIndex,
+} from './tokens';
 
 const css = `
   *, *::before, *::after {
@@ -39,6 +50,32 @@ const css = `
     --radius-md: ${radii.md}px;
     --radius-lg: ${radii.lg}px;
     --radius-full: ${radii.full}px;
+    --spacing-none: ${spacing.none};
+    --spacing-xs: ${spacing.xs}px;
+    --spacing-sm: ${spacing.sm}px;
+    --spacing-md: ${spacing.md}px;
+    --spacing-base: ${spacing.base}px;
+    --spacing-lg: ${spacing.lg}px;
+    --spacing-xl: ${spacing.xl}px;
+    --spacing-2xl: ${spacing['2xl']}px;
+    --spacing-3xl: ${spacing['3xl']}px;
+    --font-size-xs: ${fontSize.xs};
+    --font-size-sm: ${fontSize.sm};
+    --font-size-base: ${fontSize.base};
+    --font-size-lg: ${fontSize.lg};
+    --font-size-xl: ${fontSize.xl};
+    --font-size-display: ${fontSize.display};
+    --motion-fast: ${motion.fast};
+    --motion-base: ${motion.base};
+    --motion-slow: ${motion.slow};
+    --motion-page: ${motion.page};
+    --motion-pulse: ${motion.pulse};
+    --focus-ring: ${focusRing.ring};
+    --focus-ring-offset: ${focusRing.offset};
+    --z-base: ${zIndex.base};
+    --z-dropdown: ${zIndex.dropdown};
+    --z-toolbar: ${zIndex.toolbar};
+    --z-modal: ${zIndex.modal};
   }
 `;
 

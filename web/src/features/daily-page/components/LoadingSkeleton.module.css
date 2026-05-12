@@ -12,9 +12,9 @@
 
 .text {
   font-family: var(--font-hand, 'Caveat', cursive);
-  font-size: 1.5rem;
+  font-size: var(--font-size-xl, 1.5rem);
   color: var(--color-ink-muted, #9a8a72);
-  animation: pulse 1.4s ease-in-out infinite;
+  animation: pulse var(--motion-pulse, 1.4s) ease-in-out infinite;
 }
 
 @keyframes pulse {

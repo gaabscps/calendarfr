@@ -1,0 +1,25 @@
+/**
+ * FocusRing — CSS utility class for focus-visible ring.
+ *
+ * Usage:
+ *   import focusRingStyles from '@/shared/components/FocusRing/focusRing.module.css';
+ *   <div tabIndex={0} className={focusRingStyles.focusable}>…</div>
+ *
+ * Depends on --focus-ring and --focus-ring-offset being defined in :root
+ * (exposed by GlobalStyles.tsx via tokens.ts).
+ *
+ * Button, IconButton and Checkbox atoms declare their own :focus-visible
+ * using the same var(--focus-ring) — this class is for custom focusable
+ * elements that are not one of those atoms.
+ */
+
+.focusable:focus-visible {
+  outline: var(--focus-ring);
+  outline-offset: var(--focus-ring-offset);
+}
+
+@media (forced-colors: active) {
+  .focusable:focus-visible {
+    outline-color: CanvasText;
+  }
+}

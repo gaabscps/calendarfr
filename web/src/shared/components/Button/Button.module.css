@@ -1,0 +1,108 @@
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-xs);
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-weight: 500;
+  line-height: 1; /* suppress inherited line-height from body/typography reset */
+  transition:
+    background-color var(--motion-fast),
+    color var(--motion-fast),
+    box-shadow var(--motion-fast),
+    opacity var(--motion-fast);
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+.button:focus-visible {
+  outline: var(--focus-ring);
+  outline-offset: var(--focus-ring-offset);
+}
+
+.button:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+/* --- Variants --- */
+
+.primary {
+  background-color: var(--color-accent);
+  color: var(--color-paper);
+  font-size: var(--font-size-base);
+}
+
+.primary:hover:not(:disabled) {
+  background-color: color-mix(in srgb, var(--color-accent) 85%, var(--color-ink) 15%);
+}
+
+.primary:active:not(:disabled) {
+  background-color: color-mix(in srgb, var(--color-accent) 70%, var(--color-ink) 30%);
+}
+
+.secondary {
+  background-color: var(--color-paper);
+  border: 1px solid var(--color-ink-muted);
+  color: var(--color-ink);
+  font-size: var(--font-size-base);
+}
+
+.secondary:hover:not(:disabled) {
+  background-color: color-mix(in srgb, var(--color-paper) 85%, var(--color-ink-muted) 15%);
+}
+
+.secondary:active:not(:disabled) {
+  background-color: color-mix(in srgb, var(--color-paper) 70%, var(--color-ink-muted) 30%);
+}
+
+.ghost {
+  background-color: transparent;
+  color: var(--color-ink);
+  font-size: var(--font-size-base);
+}
+
+.ghost:hover:not(:disabled) {
+  background-color: var(--color-shadow);
+}
+
+.ghost:active:not(:disabled) {
+  background-color: color-mix(in srgb, var(--color-shadow) 88%, var(--color-ink) 12%);
+}
+
+.danger {
+  background-color: var(--color-danger);
+  color: var(--color-paper);
+  font-size: var(--font-size-base);
+}
+
+.danger:hover:not(:disabled) {
+  background-color: color-mix(in srgb, var(--color-danger) 85%, var(--color-ink) 15%);
+}
+
+.danger:active:not(:disabled) {
+  background-color: color-mix(in srgb, var(--color-danger) 70%, var(--color-ink) 30%);
+}
+
+/* --- Sizes --- */
+
+.sm {
+  height: 28px;
+  padding: 0 var(--spacing-sm);
+  font-size: var(--font-size-sm);
+}
+
+.md {
+  height: 36px;
+  padding: 0 var(--spacing-md);
+  font-size: var(--font-size-base);
+}
+
+.lg {
+  height: 44px;
+  padding: 0 var(--spacing-base);
+  font-size: var(--font-size-lg);
+}

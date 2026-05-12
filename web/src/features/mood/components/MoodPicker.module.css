@@ -19,8 +19,8 @@
 .legend {
   font-family: var(--font-hand, 'Caveat', cursive);
   color: var(--color-ink, #2c2416);
-  font-size: 1rem;
-  margin-bottom: 8px; /* var(--spacing-sm) */
+  font-size: var(--font-size-base);
+  margin-bottom: var(--spacing-sm);
   padding: 0;
   /* Float reset — legend positioning can be quirky in fieldsets */
   float: left;
@@ -36,7 +36,7 @@
 .row {
   display: flex;
   flex-direction: row;
-  gap: 8px; /* var(--spacing-sm) */
+  gap: var(--spacing-sm);
   flex-wrap: wrap;
   /* Clear any float from legend */
   clear: both;

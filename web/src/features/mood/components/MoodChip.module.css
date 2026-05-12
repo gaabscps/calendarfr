@@ -12,13 +12,13 @@
   display: inline-flex;
   flex-direction: row;
   align-items: center;
-  gap: 4px; /* var(--spacing-xs) */
-  padding: 6px 10px; /* between xs(4) and sm(8) */
-  border-radius: 4px; /* var(--radius-md) */
+  gap: var(--spacing-xs);
+  padding: 6px var(--spacing-sm); /* 6px vertical sits between xs(4) and sm(8) */
+  border-radius: var(--radius-md);
   border: 1px solid var(--color-paper-line, #e8e0d0);
   background: var(--color-paper, #fff9f0);
   cursor: pointer;
-  transition: all 120ms ease; /* motion.fast */
+  transition: all var(--motion-fast) ease;
   /* Reset button defaults */
   font-family: inherit;
   font-size: inherit;
@@ -31,10 +31,10 @@
   background: var(--color-paper-line, #e8e0d0);
 }
 
-/* ── Focus visible ring (AC-012) ── */
+/* ── Focus visible ring (AC-012, AC-025) ── */
 .chip:focus-visible {
-  outline: 2px solid var(--color-accent, #c0392b);
-  outline-offset: 2px;
+  outline: var(--focus-ring);
+  outline-offset: var(--focus-ring-offset);
 }
 
 /* ── Selected state (AC-004) ──
@@ -51,7 +51,7 @@
 
 /* ── Emoji span ── */
 .emoji {
-  font-size: 1.4em;
+  font-size: var(--font-size-lg);
   line-height: 1;
   /* Prevent emoji from shifting layout */
   flex-shrink: 0;
@@ -59,7 +59,7 @@
 
 /* ── Label span ── */
 .label {
-  font-size: 0.85em;
+  font-size: var(--font-size-sm);
   color: var(--color-ink, #2c2416);
   white-space: nowrap;
 }

@@ -11,38 +11,7 @@
   background: transparent;
 }
 
-.navButton {
-  /* Clean icon button — real <button> element */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 36px;
-  height: 36px;
-  flex-shrink: 0;
-  padding: 0;
-  border: 1px solid var(--color-paper-line, #e8e0d0);
-  border-radius: var(--radii-md, 4px);
-  background: transparent;
-  color: var(--color-ink-secondary, #5a4a32);
-  font-size: 1.25rem;
-  cursor: pointer;
-  line-height: 1;
-  transition:
-    background 120ms ease,
-    color 120ms ease;
-}
-
-.navButton:hover:not(:disabled) {
-  background: var(--color-paper-line, #e8e0d0);
-  color: var(--color-ink, #2c2416);
-}
-
-.navButton:disabled {
-  opacity: 0.4;
-  cursor: not-allowed;
-}
-
-/* AC-042: focus-visible inherited from GlobalStyles — no outline:none */
+/* AC-042: focus-visible handled by IconButton atom via var(--focus-ring) */
 
 .center {
   flex: 1;
@@ -56,7 +25,7 @@
 .dateHeading {
   margin: 0;
   font-family: var(--font-hand, 'Caveat', cursive);
-  font-size: 1.25rem;
+  font-size: var(--font-size-lg, 1.125rem);
   font-weight: 600;
   color: var(--color-ink, #2c2416);
   text-align: center;
@@ -67,6 +36,6 @@
 
 @media (min-width: 1024px) {
   .dateHeading {
-    font-size: 1.5rem;
+    font-size: var(--font-size-xl, 1.5rem);
   }
 }

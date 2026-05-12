@@ -2,22 +2,26 @@
  * Priorities styles — CSS Module.
  *
  * Vertical list of 1–10 PriorityItem rows. Gap via token-compatible value.
+ *
+ * AC-006: font-size migrated to var(--font-size-xs)
+ * AC-007: padding migrated to var(--spacing-xs)
  */
 
 .section {
   display: flex;
   flex-direction: column;
-  gap: 0;
+  gap: 0; /* items carry their own internal spacing; no extra row gap needed */
   width: 100%;
 }
 
 .addButton {
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: var(--color-ink-muted);
-  /* No --font-size-xs token exists in the design system; 0.75rem matches SaveIndicator. */
-  font-size: 0.75rem;
-  padding: var(--spacing-xs, 4px) 0;
+  font-family: var(--font-body);
+  font-size: var(--font-size-xs);
+  padding: var(--spacing-xs) 0;
   align-self: flex-start;
+  /* Override IconButton square geometry for this text-label button */
+  width: auto;
+  min-width: unset;
+  height: auto;
+  min-height: unset;
 }

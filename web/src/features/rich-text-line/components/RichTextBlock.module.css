@@ -5,6 +5,9 @@
  * with an added min-height so an empty note does not collapse to 0px.
  *
  * Tokens reference: CSS custom properties defined by GlobalStyles (FEAT-001).
+ *
+ * NOTE: ProseMirror rules below are mirrored from RichTextLine.module.css
+ * (source of truth). Keep both files in sync when changing shared rules.
  */
 
 .wrapper {
@@ -19,7 +22,7 @@
   overflow-wrap: break-word;
   word-break: break-word;
   line-height: 24px;
-  font-size: 18px;
+  font-size: var(--font-size-lg);
 }
 
 /* Reset browser UA stylesheet margins on <p> inside ProseMirror. */
@@ -28,11 +31,22 @@
   padding: 0;
 }
 
-/* Focus ring — keyboard-accessible only, not pointer-focus (WCAG 2.1 AA). */
+/* Focus ring — keyboard-accessible only, not pointer-focus (WCAG 2.1 AA).
+   Uses canonical var(--focus-ring) token (AC-025). */
 .wrapper :global(.ProseMirror:focus-visible) {
-  outline: 2px solid var(--ink);
-  outline-offset: 2px;
-  border-radius: 2px;
+  outline: var(--focus-ring);
+  outline-offset: var(--focus-ring-offset);
+  border-radius: var(--radius-sm);
+}
+
+/**
+ * Done-state modifier: consumers wrap RichTextBlock in a container with
+ * data-done="true"; we apply strikethrough via the descendant ProseMirror.
+ * Kept here (not in consumers) so Tiptap internals stay abstracted (CLAUDE.md rule 3).
+ */
+[data-done='true'] .wrapper :global(.ProseMirror) {
+  text-decoration: line-through;
+  color: var(--color-ink-muted);
 }
 
 /**
@@ -46,7 +60,7 @@
  */
 .wrapper :global(.tiptap p.is-editor-empty:first-child::before) {
   content: attr(data-placeholder);
-  color: var(--ink-muted);
+  color: var(--color-ink-muted);
   font-style: italic;
   opacity: 0.75;
   pointer-events: none;

@@ -354,9 +354,10 @@ describe('Priorities — done styling (AC-006)', () => {
     renderWithProviders(<Harness initial={initial} />);
     await waitForEditors(3);
 
-    // CSS Modules with identity-obj-proxy returns class names as-is ("done").
+    // done-state is communicated via data-done="true" on the editor wrapper
+    // (class-based approach was removed; data-done drives strikethrough via CSS).
     await waitFor(() => {
-      const doneElements = document.querySelectorAll('[class*="done"]');
+      const doneElements = document.querySelectorAll('[data-done="true"]');
       expect(doneElements.length).toBeGreaterThan(0);
     });
   });

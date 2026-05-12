@@ -10,6 +10,8 @@
  * satisfies AC-038 and is safe for nested contexts.
  */
 
+import { IconButton } from '@/shared/components/IconButton';
+
 import { KEYBOARD_SHORTCUTS } from '../hooks/usePageNavigation.js';
 import { formatDateLong } from '../lib/formatDate.js';
 import type { SaveStatus } from '../types.js';
@@ -36,18 +38,18 @@ export function PageNavigator({
 }: PageNavigatorProps) {
   return (
     <section className={styles.header} role="region" aria-label="Cabeçalho do dia">
-      <button
-        type="button"
-        className={styles.navButton}
+      <IconButton
         aria-label="Dia anterior"
         aria-keyshortcuts={KEYBOARD_SHORTCUTS.prev}
+        variant="ghost"
+        size="md"
         disabled={isAnimating}
         onClick={() => {
           void goToPrev();
         }}
       >
         ‹
-      </button>
+      </IconButton>
 
       {/* AC-039: date heading announced on change */}
       <div className={styles.center}>
@@ -58,18 +60,18 @@ export function PageNavigator({
         <SaveIndicator saveStatus={saveStatus} onRetry={onRetry} />
       </div>
 
-      <button
-        type="button"
-        className={styles.navButton}
+      <IconButton
         aria-label="Próximo dia"
         aria-keyshortcuts={KEYBOARD_SHORTCUTS.next}
+        variant="ghost"
+        size="md"
         disabled={isAnimating}
         onClick={() => {
           void goToNext();
         }}
       >
         ›
-      </button>
+      </IconButton>
     </section>
   );
 }

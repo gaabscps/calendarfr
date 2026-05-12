@@ -4,7 +4,7 @@
  * Vertical list of NoteItem rows + "+" add button at the bottom.
  * Tokens reference CSS custom properties from GlobalStyles (FEAT-001).
  *
- * AC-019: focus ring via :focus-visible on addButton.
+ * AC-025: zero inline outlines — focus handled by Button atom (var(--focus-ring)).
  * NFR-004: WCAG 2.1 AA.
  */
 
@@ -16,31 +16,19 @@
   width: 100%;
 }
 
-/* ── Add button ── */
+/* ── Add button overrides (extends Button ghost sm) ── */
 .addButton {
   align-self: flex-start;
-  padding: 6px 12px; /* sm + md */
   font-family: var(--font-hand, 'Caveat', cursive);
-  font-size: 1rem;
-  color: var(--color-ink, #2c2416);
+  font-size: var(--font-size-base);
   background: var(--color-paper, #fff9f0);
   border: 1px dashed var(--color-paper-line, #e8e0d0);
-  border-radius: 4px; /* --radius-md */
-  cursor: pointer;
-  /* Minimum tap target */
+  border-radius: var(--radius-md);
   min-height: 36px;
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  transition: background 120ms ease;
-  margin-top: 4px; /* small visual breathing room */
+  gap: var(--spacing-xs);
+  margin-top: var(--spacing-xs);
 }
 
 .addButton:hover {
   background: var(--color-paper-line, #e8e0d0);
-}
-
-.addButton:focus-visible {
-  outline: 2px solid var(--color-ink, #2c2416);
-  outline-offset: 2px;
 }

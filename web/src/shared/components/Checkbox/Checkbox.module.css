@@ -1,0 +1,74 @@
+.wrapper {
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+}
+
+.wrapper[data-disabled] {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+/* sr-only technique: hide native input visually but keep it accessible */
+.input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Focus ring on the visible box when the hidden input is focused */
+.input:focus-visible + .box {
+  outline: var(--focus-ring);
+  outline-offset: var(--focus-ring-offset);
+}
+
+/* Custom styled checkbox box */
+.box {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  min-width: 16px;
+  min-height: 16px;
+  border: 1.5px solid var(--color-ink-muted);
+  border-radius: var(--radius-sm);
+  background: var(--color-paper);
+  transition:
+    background var(--motion-fast),
+    border-color var(--motion-fast);
+  flex-shrink: 0;
+}
+
+/* Checked state: filled box with checkmark via ::after */
+.input:checked + .box {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+.input:checked + .box::after {
+  content: '';
+  display: block;
+  width: 9px;
+  height: 5px;
+  border-left: 2px solid var(--color-paper);
+  border-bottom: 2px solid var(--color-paper);
+  transform: rotate(-45deg) translateY(-1px);
+}
+
+/* Hover state (non-disabled) */
+.wrapper:not([data-disabled]):hover .box {
+  border-color: var(--color-accent);
+}
+
+/* Active/pressed state */
+.wrapper:not([data-disabled]):active .box {
+  background: color-mix(in srgb, var(--color-accent) 10%, transparent);
+}
