@@ -61,7 +61,7 @@ describe('useCurrentHour', () => {
   // ── Cleanup ──────────────────────────────────────────────────────────────
 
   describe('cleanup on unmount', () => {
-    it('clears timers on unmount', () => {
+    it('clears timeout on unmount before interval starts', () => {
       jest.useFakeTimers();
       jest.setSystemTime(new Date('2026-05-12T10:30:00'));
       const clearTimeoutSpy = jest.spyOn(globalThis, 'clearTimeout');
@@ -71,6 +71,24 @@ describe('useCurrentHour', () => {
 
       expect(clearTimeoutSpy).toHaveBeenCalled();
       clearTimeoutSpy.mockRestore();
+    });
+
+    it('clears interval on unmount after timeout fires', () => {
+      jest.useFakeTimers();
+      // Mount at exact minute boundary so msToNextMinute ≈ 60_000ms
+      jest.setSystemTime(new Date('2026-05-12T10:00:00.000'));
+      const clearIntervalSpy = jest.spyOn(globalThis, 'clearInterval');
+      const { unmount } = renderHook(() => useCurrentHour());
+
+      // Advance past the initial timeout (60s) so intervalId is set
+      act(() => {
+        jest.advanceTimersByTime(61_000);
+      });
+
+      unmount();
+
+      expect(clearIntervalSpy).toHaveBeenCalled();
+      clearIntervalSpy.mockRestore();
     });
   });
 });
