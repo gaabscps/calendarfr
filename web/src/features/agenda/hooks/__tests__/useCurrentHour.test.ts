@@ -25,8 +25,10 @@ describe('useCurrentHour', () => {
     });
 
     it('uses now prop when provided (testability override)', () => {
+      jest.useFakeTimers();
+      jest.setSystemTime(new Date('2026-05-12T03:00:00')); // system time outside range
       const { result } = renderHook(() => useCurrentHour(new Date('2026-05-12T14:00:00')));
-      expect(result.current).toBe(14);
+      expect(result.current).toBe(14); // now prop overrides system time
     });
   });
 

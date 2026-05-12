@@ -26,6 +26,8 @@ export type { AgendaSlotProps } from './components/AgendaSlot.js';
 export { useAgenda } from './hooks/useAgenda.js';
 export type { UseAgendaReturn } from './hooks/useAgenda.js';
 
+// NOTE: useCurrentHour is internal to Agenda and intentionally NOT exported.
+
 // Lib (exported for consumers that need display helpers)
 export { formatHourLabel, formatHourAriaLabel } from './lib/formatHour.js';
 export { getCurrentAgendaHour } from './lib/currentHour.js';
