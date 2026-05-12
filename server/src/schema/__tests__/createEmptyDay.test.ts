@@ -17,16 +17,17 @@ it('createEmptyDay output passes daySchema validation', () => {
 });
 
 // ---------------------------------------------------------------------------
-// Scenario 2: 3 priorities with unique ULID ids
+// Scenario 2: 1 priority with ULID id and empty text/done=false shape
 // ---------------------------------------------------------------------------
-it('createEmptyDay produces 3 priorities with unique ULID ids', () => {
+it('createEmptyDay produces 1 priority with a valid ULID id', () => {
   const ULID_RE = /^[0-9A-HJKMNP-TV-Z]{26}$/;
   const day = createEmptyDay('2026-05-09');
-  expect(day.priorities).toHaveLength(3);
-  const ids = day.priorities.map((p) => p.id);
-  ids.forEach((id) => expect(id).toMatch(ULID_RE));
-  // All IDs are unique
-  expect(new Set(ids).size).toBe(3);
+  expect(day.priorities).toHaveLength(1);
+  expect(day.priorities.length).toBe(1);
+  const first = day.priorities[0]!;
+  expect(first.id).toMatch(ULID_RE);
+  expect(first.text).toBe('');
+  expect(first.done).toBe(false);
 });
 
 // ---------------------------------------------------------------------------

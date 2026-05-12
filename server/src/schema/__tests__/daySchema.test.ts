@@ -55,9 +55,18 @@ it('daySchema accepts payload with mood and notes', () => {
 });
 
 // ---------------------------------------------------------------------------
-// Scenario 3: priorities with 2 items (not 3) rejected
+// Scenario 3: priorities array bounds — min 1, max 10 (dynamic array)
 // ---------------------------------------------------------------------------
-it('daySchema rejects priorities array with 2 items', () => {
+it('daySchema accepts priorities array with 1 item (min)', () => {
+  const payload = {
+    ...makeValidPayload(),
+    priorities: [{ id: '01HZZZZZZZZZZZZZZZZZZZZZZA', text: '', done: false }],
+  };
+  const result = daySchema.safeParse(payload);
+  expect(result.success).toBe(true);
+});
+
+it('daySchema accepts priorities array with 2 items', () => {
   const payload = {
     ...makeValidPayload(),
     priorities: [
@@ -65,6 +74,27 @@ it('daySchema rejects priorities array with 2 items', () => {
       { id: '01HZZZZZZZZZZZZZZZZZZZZZZB', text: '', done: false },
     ],
   };
+  const result = daySchema.safeParse(payload);
+  expect(result.success).toBe(true);
+});
+
+it('daySchema rejects priorities array with 0 items (below min 1)', () => {
+  const payload = { ...makeValidPayload(), priorities: [] };
+  const result = daySchema.safeParse(payload);
+  expect(result.success).toBe(false);
+  if (!result.success) {
+    const paths = result.error.issues.map((i) => i.path.join('.'));
+    expect(paths.some((p) => p.startsWith('priorities'))).toBe(true);
+  }
+});
+
+it('daySchema rejects priorities array with 11 items (above max 10)', () => {
+  const priorities = Array.from({ length: 11 }, (_, i) => ({
+    id: `01HZZZZZZZZZZZZZZZZZZZZZ${String.fromCharCode(65 + i)}`,
+    text: '',
+    done: false,
+  }));
+  const payload = { ...makeValidPayload(), priorities };
   const result = daySchema.safeParse(payload);
   expect(result.success).toBe(false);
   if (!result.success) {

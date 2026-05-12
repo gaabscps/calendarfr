@@ -51,8 +51,7 @@ export const daySchema = z.object({
   schemaVersion: z.literal(1),
   date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
   mood: moodSchema,
-  // z.tuple enforces exact count + aligns with DailyPageData tuple types.
-  priorities: z.tuple([prioritySchema, prioritySchema, prioritySchema]),
+  priorities: z.array(prioritySchema).min(1).max(10),
   agenda: z.tuple([
     agendaSlotSchema,
     agendaSlotSchema,

@@ -1,8 +1,12 @@
 /**
  * HTML sanitization for DailyPageData text fields.
  *
- * Only <b>, <i>, <u>, <s> are allowed. All attributes stripped.
+ * Only <b>, <i>, <u>, <s>, <p>, <br> are allowed. All attributes stripped.
  * Applied after zod validation, before persist (defense-in-depth).
+ *
+ * <p> and <br> are needed because RichTextBlock (Tiptap) emits paragraph-
+ * wrapped HTML (<p>line1</p><p>line2</p>). Stripping them collapses paragraph
+ * breaks on PUT roundtrip. Also benefits Notes (FEAT-011).
  *
  * Covers: AC-018, AC-019, AC-020, AC-021.
  */
@@ -13,7 +17,7 @@ import DOMPurify from 'isomorphic-dompurify';
 // Configuration
 // ---------------------------------------------------------------------------
 
-const ALLOWED_TAGS = ['b', 'i', 'u', 's'];
+const ALLOWED_TAGS = ['b', 'i', 'u', 's', 'p', 'br'];
 const SANITIZE_OPTS = { ALLOWED_TAGS, ALLOWED_ATTR: [] as string[] };
 
 // ---------------------------------------------------------------------------
@@ -38,7 +42,7 @@ export function sanitizeDayHtml(day: DailyPageData): DailyPageData {
     priorities: day.priorities.map((p) => ({
       ...p,
       text: sanitizeText(p.text),
-    })) as unknown as DailyPageData['priorities'],
+    })),
     agenda: day.agenda.map((s) => ({
       ...s,
       text: sanitizeText(s.text),

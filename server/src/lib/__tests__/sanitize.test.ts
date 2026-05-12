@@ -66,7 +66,27 @@ it('sanitizeText removes <style> block entirely', () => {
 });
 
 // ---------------------------------------------------------------------------
-// Scenario 7: sanitizeDayHtml maps all fields correctly
+// Scenario 7 (new): <p> tags pass through — RichTextBlock emits wrapped paragraphs
+// ---------------------------------------------------------------------------
+it('sanitizeText allows <p> tags so paragraph breaks survive PUT roundtrip', () => {
+  expect(sanitizeText('<p>line1</p><p>line2</p>')).toBe('<p>line1</p><p>line2</p>');
+});
+
+it('sanitizeText allows <p> with inline allowed tags inside', () => {
+  expect(sanitizeText('<p><b>bold</b> normal</p>')).toBe('<p><b>bold</b> normal</p>');
+});
+
+// ---------------------------------------------------------------------------
+// Scenario 8 (new): <br> tags pass through
+// ---------------------------------------------------------------------------
+it('sanitizeText allows <br> tags for line breaks', () => {
+  // DOMPurify serialises <br> as <br> (no slash)
+  const result = sanitizeText('line1<br>line2');
+  expect(result).toBe('line1<br>line2');
+});
+
+// ---------------------------------------------------------------------------
+// Scenario 9 (original): sanitizeDayHtml maps all fields correctly
 // ---------------------------------------------------------------------------
 it('sanitizeDayHtml sanitizes priorities, agenda, notes and leaves mood/timestamps intact', () => {
   const day: DailyPageData = {

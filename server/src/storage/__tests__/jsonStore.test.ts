@@ -92,12 +92,12 @@ it('readDay throws StorageCorruptError for invalid JSON syntax', async () => {
 // ---------------------------------------------------------------------------
 // Scenario 4: readDay throws StorageCorruptError for JSON that fails zod
 // (was skipped in BATCH-A — now un-skipped after T-008 real daySchema)
+// Schema changed to z.array(prioritySchema).min(1).max(10): 0 items is invalid.
 // ---------------------------------------------------------------------------
-it('readDay throws StorageCorruptError for JSON valid but failing zod (e.g. priorities array of 2)', async () => {
-  const sourceDay = makeDay();
+it('readDay throws StorageCorruptError for JSON valid but failing zod (e.g. priorities array of 0)', async () => {
   const badDay = {
     ...makeDay('2099-04-04'),
-    priorities: [sourceDay.priorities[0]!],
+    priorities: [],
   };
   const filePath = dayPath('2099-04-04', tmpDir);
   await fs.mkdir(path.dirname(filePath), { recursive: true });

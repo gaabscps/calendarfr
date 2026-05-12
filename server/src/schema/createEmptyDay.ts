@@ -21,11 +21,7 @@ export function createEmptyDay(date: string): DailyPageData {
     schemaVersion: 1,
     date,
     mood: null,
-    priorities: [
-      { id: newId(), text: '', done: false },
-      { id: newId(), text: '', done: false },
-      { id: newId(), text: '', done: false },
-    ],
+    priorities: [{ id: newId(), text: '', done: false }],
     agenda: HOURS.map((hour) => ({ hour, text: '' })) as unknown as DailyPageData['agenda'],
     notes: [],
     createdAt: null,

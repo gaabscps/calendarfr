@@ -35,14 +35,12 @@ afterEach(async () => {
 
 // ---------------------------------------------------------------------------
 // Scenario 6: PUT invalid payload returns 400 VALIDATION_FAILED
+// Schema is z.array(prioritySchema).min(1).max(10): empty array (0 items) is invalid.
 // ---------------------------------------------------------------------------
-it('PUT /api/days/2026-05-09 with priorities=2 returns 400 VALIDATION_FAILED', async () => {
+it('PUT /api/days/2026-05-09 with priorities=0 returns 400 VALIDATION_FAILED', async () => {
   const payload = {
     ...validPayload('2026-05-09'),
-    priorities: [
-      { id: '01HZZZZZZZZZZZZZZZZZZZZZZA', text: '', done: false },
-      { id: '01HZZZZZZZZZZZZZZZZZZZZZZB', text: '', done: false },
-    ],
+    priorities: [],
   };
 
   const res = await ctx.app.inject({

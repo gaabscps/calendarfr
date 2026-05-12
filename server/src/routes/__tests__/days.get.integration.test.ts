@@ -48,7 +48,7 @@ it('GET /api/days/2030-12-31 returns 200 skeleton and creates no file (AC-002)',
   expect(body.date).toBe('2030-12-31');
   expect(body.schemaVersion).toBe(1);
   expect(body.mood).toBeNull();
-  expect(body.priorities).toHaveLength(3);
+  expect(body.priorities).toHaveLength(1);
   expect(body.agenda).toHaveLength(18);
   expect(body.notes).toHaveLength(0);
   expect(body.createdAt).toBeNull();
