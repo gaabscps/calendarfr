@@ -50,15 +50,15 @@ export interface Note {
 /**
  * Root document stored in data/days/YYYY-MM-DD.json.
  * schemaVersion: 1 — reserved for future migrations.
- * priorities: exactly 3 items (enforced by zod schema server-side + tuple type here).
+ * priorities: 1–10 items (enforced by zod schema server-side; min 1 max 10).
  * agenda: exactly 18 items — hours [6..23] (enforced by zod schema server-side + tuple type here).
  */
 export interface DailyPageData {
   schemaVersion: 1;
   date: string;
   mood: Mood | null;
-  /** Exactly 3 priority slots — tuple enforced at the type level (matches zod .tuple). */
-  priorities: readonly [Priority, Priority, Priority];
+  /** 1–10 priority items — dynamic array (matches zod .array().min(1).max(10)). */
+  priorities: Priority[];
   /** Exactly 18 agenda slots (hours 6–23) — tuple enforced at the type level. */
   agenda: readonly [
     AgendaSlot,
