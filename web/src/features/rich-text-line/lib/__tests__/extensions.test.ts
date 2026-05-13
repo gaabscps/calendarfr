@@ -66,6 +66,12 @@ describe('buildExtensionsBlock — AC-031', () => {
     expect(names).toContain('history');
   });
 
+  it('includes hardBreak so SHIFT+ENTER inserts <br> by default (bullet UX parity)', () => {
+    const exts = buildExtensionsBlock();
+    const names = exts.map((e) => e.name);
+    expect(names).toContain('hardBreak');
+  });
+
   it('returns extensions with placeholder configured (empty placeholder when no opts)', () => {
     const exts = buildExtensionsBlock();
     const ph = exts.find((e) => e.name === 'placeholder');

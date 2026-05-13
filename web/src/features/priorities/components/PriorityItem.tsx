@@ -10,6 +10,7 @@
 import React from 'react';
 
 import { RichTextBlock } from '@/features/rich-text-line';
+import type { RichTextEditorRef } from '@/features/rich-text-line';
 import { Checkbox } from '@/shared/components/Checkbox';
 import { IconButton } from '@/shared/components/IconButton';
 
@@ -38,6 +39,16 @@ export interface PriorityItemProps {
    * When absent, ENTER behaves as Tiptap default — new paragraph within item.
    */
   onEnter?: () => void;
+  /**
+   * Optional: called when BACKSPACE is pressed while the editor is empty.
+   * Consumers wire this to remove the surrounding priority (bullet UX).
+   */
+  onBackspaceEmpty?: () => void;
+  /**
+   * Optional: ref forwarded to the underlying Tiptap Editor instance so the
+   * parent container can call `editor.commands.focus('end')` after removals.
+   */
+  editorRef?: RichTextEditorRef;
 }
 
 /**
@@ -55,6 +66,8 @@ function PriorityItemBase({
   onDelete,
   autoFocus,
   onEnter,
+  onBackspaceEmpty,
+  editorRef,
 }: PriorityItemProps) {
   const slotNumber = index + 1;
 
@@ -87,6 +100,8 @@ function PriorityItemBase({
           ariaLabel={editorAriaLabel}
           {...(autoFocus !== undefined ? { autoFocus } : {})}
           {...(onEnter !== undefined ? { onEnter } : {})}
+          {...(onBackspaceEmpty !== undefined ? { onBackspaceEmpty } : {})}
+          {...(editorRef !== undefined ? { editorRef } : {})}
         />
       </div>
 

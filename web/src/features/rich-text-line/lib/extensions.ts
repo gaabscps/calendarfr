@@ -14,6 +14,7 @@ import { mergeAttributes } from '@tiptap/core';
 import type { Extensions } from '@tiptap/core';
 import Bold from '@tiptap/extension-bold';
 import Document from '@tiptap/extension-document';
+import HardBreak from '@tiptap/extension-hard-break';
 import History from '@tiptap/extension-history';
 import Italic from '@tiptap/extension-italic';
 import Paragraph from '@tiptap/extension-paragraph';
@@ -83,6 +84,7 @@ export function buildExtensionsBlock(opts: BuildExtensionsOptions = {}): Extensi
     ItalicAsI,
     Underline,
     Strike,
+    HardBreak,
     History,
     Placeholder.configure({ placeholder: opts.placeholder ?? '' }),
   ];

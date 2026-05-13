@@ -12,8 +12,9 @@
  * Covers: AC-003, AC-004, AC-015, AC-016, AC-017, AC-026, NFR-001, NFR-002.
  */
 
-import { useEffect } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 
+import type { RichTextEditorRef } from '@/features/rich-text-line';
 import { Button } from '@/shared/components/Button';
 
 import { useNotes } from '../hooks/useNotes.js';
@@ -54,6 +55,49 @@ export function Notes({ value, onChange }: NotesProps) {
     }
   });
 
+  // Per-id editor refs for Backspace-driven focus on the previous note.
+  // editorRefsRef itself never changes; each entry is a stable RichTextEditorRef
+  // object so React.memo sees the same prop reference across renders (NFR-002).
+  const editorRefsRef = useRef<Map<string, RichTextEditorRef>>(new Map());
+  function getEditorRef(id: string): RichTextEditorRef {
+    let ref = editorRefsRef.current.get(id);
+    if (!ref) {
+      ref = { current: null };
+      editorRefsRef.current.set(id, ref);
+    }
+    return ref;
+  }
+
+  // Latest-value ref so the Backspace handler can compute the focus target
+  // without listing `value` in its useCallback deps (which would break the
+  // stable-reference invariant the memoised NoteItem depends on — NFR-002).
+  const valueRef = useRef(value);
+  useEffect(() => {
+    valueRef.current = value;
+  });
+
+  // Target id to focus after a Backspace-driven remove. Applied after paint
+  // so the surviving NoteItem has already rendered.
+  const focusAfterRemoveRef = useRef<string | null>(null);
+  useEffect(() => {
+    const targetId = focusAfterRemoveRef.current;
+    if (targetId === null) return;
+    focusAfterRemoveRef.current = null;
+    editorRefsRef.current.get(targetId)?.current?.commands.focus('end');
+  });
+
+  const onBackspaceById = useCallback(
+    (noteId: string) => {
+      const list = valueRef.current;
+      const idx = list.findIndex((n) => n.id === noteId);
+      if (idx === -1) return;
+      const prevId = list[idx - 1]?.id ?? list[idx + 1]?.id ?? null;
+      focusAfterRemoveRef.current = prevId;
+      onRemove(noteId);
+    },
+    [onRemove],
+  );
+
   return (
     <div className={styles.list}>
       {value.map((note, index) => (
@@ -67,6 +111,8 @@ export function Notes({ value, onChange }: NotesProps) {
           onRemove={onRemove}
           autoFocus={note.id === justAddedIdRef.current}
           onEnter={onAdd}
+          onBackspaceById={onBackspaceById}
+          editorRef={getEditorRef(note.id)}
         />
       ))}
 

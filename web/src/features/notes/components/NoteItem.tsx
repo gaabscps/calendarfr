@@ -17,6 +17,7 @@
 import React, { useCallback } from 'react';
 
 import { RichTextBlock } from '@/features/rich-text-line';
+import type { RichTextEditorRef } from '@/features/rich-text-line';
 import { IconButton } from '@/shared/components/IconButton';
 
 import type { Note } from '../types.js';
@@ -40,6 +41,15 @@ export interface NoteItemProps {
   autoFocus: boolean;
   /** Called when ENTER is pressed (no modifier) — triggers note creation. */
   onEnter?: () => void;
+  /**
+   * Called with (noteId) when BACKSPACE is pressed while the editor is empty.
+   * Stable reference (analogous to onRemove). The component binds the id
+   * internally via useCallback so the RichTextBlock prop stays stable across
+   * renders — preserves React.memo effectiveness (NFR-002).
+   */
+  onBackspaceById?: (id: string) => void;
+  /** Optional ref forwarded to the underlying Tiptap Editor instance. */
+  editorRef?: RichTextEditorRef;
 }
 
 function NoteItemBase({
@@ -51,6 +61,8 @@ function NoteItemBase({
   onRemove,
   autoFocus,
   onEnter,
+  onBackspaceById,
+  editorRef,
 }: NoteItemProps) {
   const slotNumber = index + 1;
 
@@ -65,6 +77,11 @@ function NoteItemBase({
   const handleCyclePrefix = useCallback(() => onCyclePrefix(note.id), [note.id, onCyclePrefix]);
 
   const handleRemove = useCallback(() => onRemove(note.id), [note.id, onRemove]);
+
+  const handleBackspaceEmpty = useCallback(
+    () => onBackspaceById?.(note.id),
+    [note.id, onBackspaceById],
+  );
 
   const prefixAriaLabel = `Prefixo da nota ${String(slotNumber)}: ${note.prefix}; clique para alterar`;
   const editorAriaLabel = `Nota ${String(slotNumber)} de ${String(total)}`;
@@ -90,6 +107,8 @@ function NoteItemBase({
           ariaLabel={editorAriaLabel}
           autoFocus={autoFocus}
           {...(onEnter !== undefined ? { onEnter } : {})}
+          {...(onBackspaceById !== undefined ? { onBackspaceEmpty: handleBackspaceEmpty } : {})}
+          {...(editorRef !== undefined ? { editorRef } : {})}
         />
       </div>
 

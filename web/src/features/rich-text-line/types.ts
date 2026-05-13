@@ -38,6 +38,12 @@ export interface RichTextBlockProps {
   onEnter?: () => void;
   /** Called (no args) when the user presses Shift+Enter. */
   onShiftEnter?: () => void;
+  /**
+   * Called when Backspace is pressed while the editor is empty.
+   * Consumers wire this to delete the surrounding list item (bullet UX parity
+   * with Notion/Apple Notes). When absent, Backspace falls through.
+   */
+  onBackspaceEmpty?: () => void;
   /** Ref forwarded to the Tiptap Editor instance — consumers can call editor.commands.focus(). */
   editorRef?: RichTextEditorRef;
 }

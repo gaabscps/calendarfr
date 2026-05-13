@@ -41,12 +41,14 @@ export function RichTextBlock({
   className,
   onEnter,
   onShiftEnter,
+  onBackspaceEmpty,
   editorRef,
 }: RichTextBlockProps) {
   const hookOptions: Parameters<typeof useRichTextBlock>[0] = { value, onChange, disabled };
   if (placeholder !== undefined) hookOptions.placeholder = placeholder;
   if (onEnter !== undefined) hookOptions.onEnter = onEnter;
   if (onShiftEnter !== undefined) hookOptions.onShiftEnter = onShiftEnter;
+  if (onBackspaceEmpty !== undefined) hookOptions.onBackspaceEmpty = onBackspaceEmpty;
 
   const editor = useRichTextBlock(hookOptions);
 

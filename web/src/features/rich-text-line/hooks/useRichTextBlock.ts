@@ -35,6 +35,12 @@ export interface UseRichTextBlockOptions {
   onEnter?: () => void;
   /** Called (no args) when Shift+Enter is pressed — consumer handles navigation. */
   onShiftEnter?: () => void;
+  /**
+   * Called when Backspace is pressed while the editor is empty (`editor.isEmpty === true`).
+   * Consumers wire this to remove the surrounding list item (bullet-list UX —
+   * Notion/Apple Notes parity). When absent, Backspace falls through to Tiptap default.
+   */
+  onBackspaceEmpty?: () => void;
 }
 
 /**
@@ -53,19 +59,21 @@ export interface UseRichTextBlockOptions {
  *     compatibility with legacy values that omit <p> wrappers.
  */
 export function useRichTextBlock(opts: UseRichTextBlockOptions) {
-  const { value, onChange, placeholder, disabled, onEnter, onShiftEnter } = opts;
+  const { value, onChange, placeholder, disabled, onEnter, onShiftEnter, onBackspaceEmpty } = opts;
 
   // Refs that always hold the latest callback — prevents stale closure inside
   // useEditor callbacks which are captured only on initial creation.
   const onChangeRef = useRef<(html: string) => void>(onChange);
   const onEnterRef = useRef(onEnter);
   const onShiftEnterRef = useRef(onShiftEnter);
+  const onBackspaceEmptyRef = useRef(onBackspaceEmpty);
 
   // Keep refs in sync on every render (cheap assignment, no re-render triggered).
   useEffect(() => {
     onChangeRef.current = onChange;
     onEnterRef.current = onEnter;
     onShiftEnterRef.current = onShiftEnter;
+    onBackspaceEmptyRef.current = onBackspaceEmpty;
   });
 
   const editor = useEditor({
@@ -81,7 +89,8 @@ export function useRichTextBlock(opts: UseRichTextBlockOptions) {
       // AC-033: paste sanitises allowed tags while preserving <p>/<br> structure.
       transformPastedHTML: (html: string) => sanitizeHtml(html, { allowParagraphs: true }),
       // AC-013/014/015/016/017: optional ENTER/SHIFT+ENTER intercept.
-      handleKeyDown: (_view, event) => {
+      // Bullet-list UX: BACKSPACE on empty editor removes surrounding item when wired.
+      handleKeyDown: (view, event) => {
         // AC-015: IME guard — CJK composition must not be interrupted.
         if (event.isComposing || event.keyCode === 229) return false;
         if (event.key === 'Enter' && !event.shiftKey && onEnterRef.current) {
@@ -91,6 +100,17 @@ export function useRichTextBlock(opts: UseRichTextBlockOptions) {
         if (event.key === 'Enter' && event.shiftKey && onShiftEnterRef.current) {
           onShiftEnterRef.current();
           return true;
+        }
+        if (event.key === 'Backspace' && onBackspaceEmptyRef.current) {
+          // Use ProseMirror state directly — doc empty == single empty textblock.
+          // editor.isEmpty is the public Tiptap equivalent (we use the view's
+          // state here because the editor instance isn't captured in this closure
+          // — view.state is always the live doc).
+          const doc = view.state.doc;
+          if (doc.textContent === '' && doc.childCount === 1) {
+            onBackspaceEmptyRef.current();
+            return true;
+          }
         }
         return false;
       },
