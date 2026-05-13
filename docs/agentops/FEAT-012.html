@@ -1,0 +1,3504 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>daily-page — orquestrador do dia (composição, navegação, autosave) — AgentOps</title>
+    <style>
+      :root {
+        --bg: #fff;
+        --bg-muted: #f7f7f9;
+        --fg: #1a1a1a;
+        --fg-muted: #6b7280;
+        --border: #e5e7eb;
+        --accent: #2563eb;
+        --status-pass: #16a34a;
+        --status-warn: #ca8a04;
+        --status-fail: #dc2626;
+        /* Semantic aliases for story-card fact-sheet (FEAT-005 T-012) */
+        --color-surface: var(--bg-muted);
+        --color-border: var(--border);
+        --color-text-primary: var(--fg);
+        --color-text-secondary: var(--fg-muted);
+        --color-text-tertiary: #9ca3af;
+        --color-warn: var(--status-warn);
+        --color-warn-bg: rgba(255, 200, 0, 0.08);
+        /* Spacing scale */
+        --space-2: 0.5rem;
+        --space-3: 0.75rem;
+        --space-4: 1rem;
+        /* Radius scale */
+        --radius-sm: 4px;
+        --radius-md: 6px;
+        /* Typography scale */
+        --text-xs: 11px;
+        --text-sm: 13px;
+        --text-base: 1rem;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #0d1117;
+          --bg-muted: #161b22;
+          --fg: #c9d1d9;
+          --fg-muted: #8b949e;
+          --border: #30363d;
+          --accent: #58a6ff;
+          --status-pass: #3fb950;
+          --status-warn: #d29922;
+          --status-fail: #f85149;
+          /* Semantic aliases (same var() refs, resolve to dark-mode primitives above) */
+          --color-surface: var(--bg-muted);
+          --color-border: var(--border);
+          --color-text-primary: var(--fg);
+          --color-text-secondary: var(--fg-muted);
+          --color-text-tertiary: #6b7280;
+          --color-warn: var(--status-warn);
+          --color-warn-bg: rgba(255, 200, 0, 0.14);
+          /* Scale tokens — same in both modes */
+          --space-2: 0.5rem;
+          --space-3: 0.75rem;
+          --space-4: 1rem;
+          --radius-sm: 4px;
+          --radius-md: 6px;
+          --text-xs: 11px;
+          --text-sm: 13px;
+          --text-base: 1rem;
+        }
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family:
+          -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+        font-size: 14px;
+        color: var(--fg);
+        background: var(--bg);
+        line-height: 1.5;
+      }
+      h1,
+      h2,
+      h3,
+      h4 {
+        margin: 0 0 0.5rem;
+        font-weight: 600;
+      }
+      h1 {
+        font-size: 1.5rem;
+      }
+      h2 {
+        font-size: 1.25rem;
+      }
+      h3 {
+        font-size: 1.1rem;
+      }
+      a {
+        color: var(--accent);
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+      table {
+        border-collapse: collapse;
+        width: 100%;
+        font-size: 13px;
+      }
+      th,
+      td {
+        text-align: left;
+        padding: 6px 10px;
+        border: 1px solid var(--border);
+      }
+      th {
+        background: var(--bg-muted);
+        font-weight: 600;
+      }
+      code {
+        font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+        font-size: 12px;
+        background: var(--bg-muted);
+        padding: 1px 4px;
+        border-radius: 3px;
+      }
+      .kpi-bar {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        background: var(--bg);
+        border-bottom: 1px solid var(--border);
+        padding: 0.75rem 1.25rem;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 0.75rem;
+      }
+      .kpi-bar h1 {
+        flex: 1 1 auto;
+        font-size: 1rem;
+        margin: 0;
+      }
+      .kpis {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        align-items: center;
+        font-size: 13px;
+        color: var(--fg-muted);
+      }
+      main {
+        max-width: 960px;
+        margin: 0 auto;
+        padding: 1.5rem 1.25rem;
+      }
+      .story {
+        margin-bottom: 2rem;
+      }
+      .story-card {
+        padding: var(--space-4);
+        border-radius: var(--radius-md);
+        background: var(--color-surface);
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-3);
+        border: 1px solid var(--color-border);
+      }
+      .story-card header {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: var(--space-2);
+      }
+      .story-card header h3 {
+        margin: 0;
+        font-size: var(--text-base);
+        font-weight: 600;
+      }
+      .story-card header h3 .dot {
+        color: var(--color-text-tertiary);
+        margin: 0 0.4em;
+      }
+
+      .story-card__stats {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--space-3);
+        align-items: baseline;
+        font-size: var(--text-sm);
+        color: var(--color-text-secondary);
+      }
+      .story-card__stat {
+        display: inline-flex;
+        gap: 0.3em;
+        align-items: baseline;
+      }
+      .story-card__stat-label {
+        color: var(--color-text-tertiary);
+        font-size: var(--text-xs);
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+      }
+      .story-card__stat-value {
+        color: var(--color-text-primary);
+        font-variant-numeric: tabular-nums;
+      }
+
+      .story-card__pipeline {
+        display: inline-flex;
+        flex-wrap: wrap;
+        gap: 0.4em;
+        color: var(--color-text-secondary);
+        font-size: var(--text-sm);
+      }
+
+      .story-card__summary {
+        margin: 0;
+        font-size: var(--text-sm);
+        color: var(--color-text-secondary);
+        line-height: 1.45;
+      }
+      .story-card__summary--empty {
+        color: var(--color-text-tertiary);
+        font-style: italic;
+      }
+
+      .story-card__retry {
+        padding: var(--space-2) var(--space-3);
+        background: var(--color-warn-bg);
+        border-left: 3px solid var(--color-warn);
+        border-radius: var(--radius-sm);
+        font-size: var(--text-sm);
+        color: var(--color-text-primary);
+      }
+
+      .story-card__drilldowns {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-2);
+      }
+      .story-card__drilldowns details {
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-sm);
+        padding: var(--space-2) var(--space-3);
+      }
+      .story-card__drilldowns details > summary {
+        cursor: pointer;
+        font-size: var(--text-sm);
+        color: var(--color-text-secondary);
+        user-select: none;
+      }
+      .story-card__drilldowns details > summary:hover {
+        color: var(--color-text-primary);
+      }
+      .story-card__drilldowns details[open] > summary {
+        margin-bottom: var(--space-2);
+        color: var(--color-text-primary);
+      }
+      .story-card__drilldowns table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: var(--text-xs);
+        font-variant-numeric: tabular-nums;
+      }
+      .story-card__drilldowns th {
+        text-align: left;
+        color: var(--color-text-tertiary);
+        font-weight: 500;
+        padding: 0.25em 0.5em 0.25em 0;
+        border-bottom: 1px solid var(--color-border);
+      }
+      .story-card__drilldowns td {
+        padding: 0.25em 0.5em 0.25em 0;
+      }
+      .story-card__drilldowns ul {
+        margin: 0;
+        padding-left: var(--space-3);
+        font-size: var(--text-xs);
+      }
+      .story-card__drilldowns ul li {
+        margin-bottom: 0.3em;
+      }
+      .story-card__pmnote {
+        margin: 0;
+        font-size: var(--text-xs);
+        white-space: pre-wrap;
+        color: var(--color-text-secondary);
+      }
+
+      @media (max-width: 767px) {
+        .story-card__stats {
+          font-size: var(--text-xs);
+        }
+        .story-card header {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+      }
+      .kpi-sub {
+        font-size: 12px;
+        opacity: 0.8;
+      }
+      .cost-section {
+        margin: 0 0 2rem;
+        padding: 1.25rem;
+        background: var(--bg-muted);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+      }
+      .cost-section > h2 {
+        margin: 0;
+      }
+      .cost-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.75rem;
+        flex-wrap: wrap;
+        margin-bottom: 1rem;
+      }
+      .cost-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 0.75rem;
+        margin-bottom: 1rem;
+      }
+      .cost-card {
+        display: flex;
+        flex-direction: column;
+        gap: 0.15rem;
+        padding: 0.75rem 0.9rem;
+        background: var(--bg);
+        border: 1px solid var(--border);
+        border-radius: 6px;
+      }
+      .cost-card .cost-label {
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        color: var(--fg-muted);
+      }
+      .cost-card .cost-value {
+        font-size: 1.4rem;
+        font-weight: 600;
+        color: var(--fg);
+        line-height: 1.2;
+        font-variant-numeric: tabular-nums;
+      }
+      .cost-card small {
+        font-size: 11px;
+        color: var(--fg-muted);
+      }
+      .cost-models {
+        margin-top: 0.5rem;
+        font-size: 12px;
+      }
+      .cost-models td,
+      .cost-models th {
+        font-variant-numeric: tabular-nums;
+      }
+      .cost-breakdown {
+        margin-top: 0.75rem;
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        background: var(--bg);
+        padding: 0;
+      }
+      .cost-breakdown > summary {
+        padding: 0.5rem 0.75rem;
+        cursor: pointer;
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--fg);
+        list-style: none;
+      }
+      .cost-breakdown > summary::-webkit-details-marker {
+        display: none;
+      }
+      .cost-breakdown > summary::before {
+        content: '▸';
+        display: inline-block;
+        margin-right: 0.4rem;
+        color: var(--fg-muted);
+        transition: transform 0.15s;
+      }
+      .cost-breakdown[open] > summary::before {
+        transform: rotate(90deg);
+      }
+      .cost-breakdown > .cost-models {
+        margin: 0;
+        border-top: 1px solid var(--border);
+        border-radius: 0 0 6px 6px;
+      }
+      .cost-note {
+        margin: 0.75rem 0 0;
+        font-size: 12px;
+        color: var(--fg-muted);
+      }
+      .cost-empty {
+        margin: 0;
+        color: var(--fg-muted);
+      }
+      .flow-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+        gap: 1rem;
+        margin-top: 1rem;
+      }
+      .flow-card {
+        display: block;
+        background: var(--bg-muted);
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        padding: 0.75rem 1rem;
+        color: var(--fg);
+        text-decoration: none;
+        transition: border-color 0.15s;
+      }
+      .flow-card:hover {
+        border-color: var(--accent);
+        text-decoration: none;
+      }
+      .flow-card header {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-bottom: 0.5rem;
+      }
+      .flow-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        font-size: 12px;
+        color: var(--fg-muted);
+        margin-bottom: 0.5rem;
+      }
+      .trends {
+        display: flex;
+        gap: 0.75rem;
+        font-size: 12px;
+        color: var(--fg-muted);
+        align-items: center;
+      }
+      .badge {
+        display: inline-block;
+        padding: 2px 8px;
+        border-radius: 4px;
+        font-size: 12px;
+        font-weight: 600;
+        line-height: 1.4;
+      }
+      .badge-pass {
+        background: var(--status-pass);
+        color: white;
+      }
+      .badge-warn {
+        background: var(--status-warn);
+        color: white;
+      }
+      .badge-fail {
+        background: var(--status-fail);
+        color: white;
+      }
+      .badge-neutral {
+        background: var(--border);
+        color: var(--fg);
+      }
+      .compliance-notice {
+        margin: 12px 0;
+        padding: 10px 14px;
+        border-radius: 6px;
+        border-left: 4px solid var(--status-warn);
+        background: color-mix(in srgb, var(--status-warn) 10%, transparent);
+        color: var(--fg);
+        font-size: 14px;
+        line-height: 1.5;
+      }
+      .compliance-notice strong {
+        font-weight: 600;
+      }
+      .compliance-notice code {
+        background: color-mix(in srgb, var(--fg) 10%, transparent);
+        padding: 1px 4px;
+        border-radius: 3px;
+        font-size: 12px;
+      }
+      .compliance-pre-standard {
+        border-left-color: var(--border);
+        background: color-mix(in srgb, var(--border) 30%, transparent);
+      }
+      details > summary {
+        cursor: pointer;
+        padding: 0.5rem 0.75rem;
+        font-weight: 600;
+        list-style: none;
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+      }
+      details > summary::before {
+        content: '▶';
+        font-size: 10px;
+        transition: transform 0.15s;
+      }
+      details[open] > summary::before {
+        transform: rotate(90deg);
+      }
+      details[open] > summary {
+        border-bottom: 1px solid var(--border);
+      }
+      details {
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        margin-bottom: 0.5rem;
+        overflow: hidden;
+      }
+      details > *:not(summary) {
+        padding: 0.75rem;
+      }
+      .drilldown {
+        margin-bottom: 2rem;
+      }
+      .raw-data {
+        margin-bottom: 2rem;
+      }
+      .md-embed {
+        font-size: 14px;
+        line-height: 1.6;
+        overflow-x: auto;
+      }
+      .md-embed h1,
+      .md-embed h2,
+      .md-embed h3 {
+        border-bottom: 1px solid var(--border);
+        padding-bottom: 0.25rem;
+        margin: 1rem 0 0.5rem;
+      }
+      .md-embed table {
+        margin: 0.5rem 0;
+      }
+      .md-embed pre {
+        background: var(--bg-muted);
+        border: 1px solid var(--border);
+        border-radius: 4px;
+        padding: 0.75rem;
+        overflow-x: auto;
+      }
+      .md-embed code {
+        background: none;
+        padding: 0;
+      }
+      .repo-health-current {
+        margin-bottom: 2rem;
+      }
+      .repo-health-badges {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-top: 0.5rem;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="kpi-bar">
+      <h1>
+        daily-page — orquestrador do dia (composição, navegação, autosave)
+        <span class="badge badge-warn">⚠</span>
+      </h1>
+      <div class="kpis">
+        <span>8h9m</span>
+        <span>$71.14</span>
+        <span class="kpi-sub">$1.317/AC</span>
+        <span>54/54 ACs</span>
+        <span>mut 70.7%</span>
+        <span>type 97.7%</span>
+        <span>19 loops</span>
+      </div>
+    </header>
+
+    <main>
+      <section class="story">
+        <h2>Story</h2>
+        <article class="story-card story-card--done" aria-label="batch PM-ORCHESTRATOR">
+          <header>
+            <h3>PM-ORCHESTRATOR</h3>
+            <span class="badge badge-pass" aria-label="status: done">✓ done</span>
+          </header>
+          <div class="story-card__stats">
+            <span class="story-card__stat"
+              ><span class="story-card__stat-label">time</span>
+              <span class="story-card__stat-value">9h55m</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">cost</span>
+              <span class="story-card__stat-value">$57.67</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">tasks</span>
+              <span class="story-card__stat-value">0</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">ACs</span>
+              <span class="story-card__stat-value">0</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">files</span>
+              <span class="story-card__stat-value">0</span></span
+            ><span class="story-card__pipeline">pm-orchestrator</span>
+          </div>
+          <p class="story-card__summary">PM/orchestrator session (Stop hook): 466 turns</p>
+          <div class="story-card__drilldowns">
+            <details>
+              <summary>Files changed (0)</summary>
+              <table class="story-card__files">
+                <thead>
+                  <tr>
+                    <th>path</th>
+                    <th>action</th>
+                    <th>tasks</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </details>
+            <details>
+              <summary>ACs covered (0)</summary>
+              <ul class="story-card__acs"></ul>
+            </details>
+            <details>
+              <summary>Pipeline trace (1 dispatches)</summary>
+              <table class="story-card__pipeline-trace">
+                <thead>
+                  <tr>
+                    <th>role</th>
+                    <th>dispatch_id</th>
+                    <th>loop</th>
+                    <th>duration</th>
+                    <th>tokens</th>
+                    <th>status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>pm-orchestrator</td>
+                    <td>pm-orchestrator-dcab8b2e</td>
+                    <td>—</td>
+                    <td>9h55m</td>
+                    <td>68062724</td>
+                    <td>done</td>
+                  </tr>
+                </tbody>
+              </table>
+            </details>
+            <details>
+              <summary>PM note</summary>
+              <p class="story-card__pmnote">PM/orchestrator session (Stop hook): 466 turns</p>
+            </details>
+          </div>
+        </article>
+        <article class="story-card story-card--done-retried" aria-label="batch BATCH-A">
+          <header>
+            <h3>BATCH-A</h3>
+            <span class="badge badge-warn" aria-label="status: done with retries"
+              >↻ done (retried)</span
+            >
+          </header>
+          <div class="story-card__stats">
+            <span class="story-card__stat"
+              ><span class="story-card__stat-label">time</span>
+              <span class="story-card__stat-value">0ms</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">cost</span>
+              <span class="story-card__stat-value">$1.67</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">tasks</span>
+              <span class="story-card__stat-value">0</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">ACs</span>
+              <span class="story-card__stat-value">0</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">files</span>
+              <span class="story-card__stat-value">0</span></span
+            ><span class="story-card__pipeline">dev → code-reviewer ‖ logic-reviewer</span>
+          </div>
+          <aside class="story-card__retry" role="status">
+            ⚠ dev retried 1× — loop 2: Dev L2: todos 5 findings fixed (allow-list text-inputs, clamp
+            [0,2], contentedi…
+          </aside>
+          <aside class="story-card__retry" role="status">
+            ⚠ code-reviewer retried 1× — loop 2: Approve L2.
+          </aside>
+          <aside class="story-card__retry" role="status">
+            ⚠ logic-reviewer retried 1× — loop 2: Approve L2 — todos findings closed.
+          </aside>
+          <p class="story-card__summary">Approve L2 — todos findings closed.</p>
+          <div class="story-card__drilldowns">
+            <details>
+              <summary>Files changed (0)</summary>
+              <table class="story-card__files">
+                <thead>
+                  <tr>
+                    <th>path</th>
+                    <th>action</th>
+                    <th>tasks</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </details>
+            <details>
+              <summary>ACs covered (0)</summary>
+              <ul class="story-card__acs"></ul>
+            </details>
+            <details>
+              <summary>Pipeline trace (6 dispatches)</summary>
+              <table class="story-card__pipeline-trace">
+                <thead>
+                  <tr>
+                    <th>role</th>
+                    <th>dispatch_id</th>
+                    <th>loop</th>
+                    <th>duration</th>
+                    <th>tokens</th>
+                    <th>status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>dev</td>
+                    <td>FEAT-012-BATCH-A-dev-L1</td>
+                    <td>—</td>
+                    <td>16m 21s</td>
+                    <td>113011</td>
+                    <td>done</td>
+                  </tr>
+                  <tr>
+                    <td>code-reviewer</td>
+                    <td>FEAT-012-BATCH-A-code-r…</td>
+                    <td>—</td>
+                    <td>1m 5s</td>
+                    <td>14500</td>
+                    <td>done</td>
+                  </tr>
+                  <tr>
+                    <td>logic-reviewer</td>
+                    <td>FEAT-012-BATCH-A-logic-…</td>
+                    <td>—</td>
+                    <td>3m</td>
+                    <td>48000</td>
+                    <td>done</td>
+                  </tr>
+                  <tr>
+                    <td>dev</td>
+                    <td>FEAT-012-BATCH-A-dev-L2</td>
+                    <td>2</td>
+                    <td>4m 40s</td>
+                    <td>62000</td>
+                    <td>done</td>
+                  </tr>
+                  <tr>
+                    <td>code-reviewer</td>
+                    <td>FEAT-012-BATCH-A-code-r…</td>
+                    <td>2</td>
+                    <td>50s</td>
+                    <td>9000</td>
+                    <td>done</td>
+                  </tr>
+                  <tr>
+                    <td>logic-reviewer</td>
+                    <td>FEAT-012-BATCH-A-logic-…</td>
+                    <td>2</td>
+                    <td>1m 50s</td>
+                    <td>22000</td>
+                    <td>done</td>
+                  </tr>
+                </tbody>
+              </table>
+            </details>
+            <details>
+              <summary>PM note</summary>
+              <p class="story-card__pmnote">Approve L2 — todos findings closed.</p>
+            </details>
+          </div>
+        </article>
+        <article class="story-card story-card--done-retried" aria-label="batch BATCH-B">
+          <header>
+            <h3>BATCH-B</h3>
+            <span class="badge badge-warn" aria-label="status: done with retries"
+              >↻ done (retried)</span
+            >
+          </header>
+          <div class="story-card__stats">
+            <span class="story-card__stat"
+              ><span class="story-card__stat-label">time</span>
+              <span class="story-card__stat-value">0ms</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">cost</span>
+              <span class="story-card__stat-value">$1.86</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">tasks</span>
+              <span class="story-card__stat-value">0</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">ACs</span>
+              <span class="story-card__stat-value">0</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">files</span>
+              <span class="story-card__stat-value">0</span></span
+            ><span class="story-card__pipeline">dev → code-reviewer ‖ logic-reviewer</span>
+          </div>
+          <aside class="story-card__retry" role="status">
+            ⚠ dev retried 2× — loop 2: Split 342→201+153+63 LOC; .catch(console.error) keyboard;
+            round-trip Date.UTC v…; loop 3: L3 final: swipe .catch consistency.
+          </aside>
+          <aside class="story-card__retry" role="status">
+            ⚠ code-reviewer retried 1× — loop 2: Approve L2.
+          </aside>
+          <aside class="story-card__retry" role="status">
+            ⚠ logic-reviewer retried 1× — loop 2: L2: 1 minor — swipe path void mirrored same issue
+            → L3 consistency fix.
+          </aside>
+          <p class="story-card__summary">L3 final: swipe . catch consistency.</p>
+          <div class="story-card__drilldowns">
+            <details>
+              <summary>Files changed (0)</summary>
+              <table class="story-card__files">
+                <thead>
+                  <tr>
+                    <th>path</th>
+                    <th>action</th>
+                    <th>tasks</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </details>
+            <details>
+              <summary>ACs covered (0)</summary>
+              <ul class="story-card__acs"></ul>
+            </details>
+            <details>
+              <summary>Pipeline trace (7 dispatches)</summary>
+              <table class="story-card__pipeline-trace">
+                <thead>
+                  <tr>
+                    <th>role</th>
+                    <th>dispatch_id</th>
+                    <th>loop</th>
+                    <th>duration</th>
+                    <th>tokens</th>
+                    <th>status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>dev</td>
+                    <td>FEAT-012-BATCH-B-dev-L1</td>
+                    <td>—</td>
+                    <td>10m 20s</td>
+                    <td>95000</td>
+                    <td>done</td>
+                  </tr>
+                  <tr>
+                    <td>code-reviewer</td>
+                    <td>FEAT-012-BATCH-B-code-r…</td>
+                    <td>—</td>
+                    <td>1m 10s</td>
+                    <td>11000</td>
+                    <td>done</td>
+                  </tr>
+                  <tr>
+                    <td>logic-reviewer</td>
+                    <td>FEAT-012-BATCH-B-logic-…</td>
+                    <td>—</td>
+                    <td>3m 40s</td>
+                    <td>55000</td>
+                    <td>done</td>
+                  </tr>
+                  <tr>
+                    <td>dev</td>
+                    <td>FEAT-012-BATCH-B-dev-L2</td>
+                    <td>2</td>
+                    <td>6m 20s</td>
+                    <td>78000</td>
+                    <td>done</td>
+                  </tr>
+                  <tr>
+                    <td>code-reviewer</td>
+                    <td>FEAT-012-BATCH-B-code-r…</td>
+                    <td>2</td>
+                    <td>45s</td>
+                    <td>8000</td>
+                    <td>done</td>
+                  </tr>
+                  <tr>
+                    <td>logic-reviewer</td>
+                    <td>FEAT-012-BATCH-B-logic-…</td>
+                    <td>2</td>
+                    <td>2m 30s</td>
+                    <td>30000</td>
+                    <td>done</td>
+                  </tr>
+                  <tr>
+                    <td>dev</td>
+                    <td>FEAT-012-BATCH-B-dev-L3</td>
+                    <td>3</td>
+                    <td>1m 20s</td>
+                    <td>18000</td>
+                    <td>done</td>
+                  </tr>
+                </tbody>
+              </table>
+            </details>
+            <details>
+              <summary>PM note</summary>
+              <p class="story-card__pmnote">L3 final: swipe .catch consistency.</p>
+            </details>
+          </div>
+        </article>
+        <article class="story-card story-card--done-retried" aria-label="batch BATCH-C">
+          <header>
+            <h3>BATCH-C</h3>
+            <span class="badge badge-warn" aria-label="status: done with retries"
+              >↻ done (retried)</span
+            >
+          </header>
+          <div class="story-card__stats">
+            <span class="story-card__stat"
+              ><span class="story-card__stat-label">time</span>
+              <span class="story-card__stat-value">0ms</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">cost</span>
+              <span class="story-card__stat-value">$4.49</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">tasks</span>
+              <span class="story-card__stat-value">0</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">ACs</span>
+              <span class="story-card__stat-value">0</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">files</span>
+              <span class="story-card__stat-value">0</span></span
+            ><span class="story-card__pipeline">dev → code-reviewer ‖ logic-reviewer</span>
+          </div>
+          <aside class="story-card__retry" role="status">
+            ⚠ dev retried 2× — loop 2: L2: retryRejectRef + AbortError catch; debounce drop fix;
+            beforeunload &#39;dirty&#39; …; loop 3: L3 escalado para opus high (matriz nota²: núcleo
+            complexo, última chance). Redu…
+          </aside>
+          <aside class="story-card__retry" role="status">
+            ⚠ code-reviewer retried 1× — loop 2: Approve L2.
+          </aside>
+          <aside class="story-card__retry" role="status">
+            ⚠ logic-reviewer retried 2× — loop 2: L2: MAJOR-F2 not-fixed — Effect 2 cleanup ordering
+            torna fire-and-forget unreac…; loop 3: Approve L3 — todos findings closed.
+          </aside>
+          <p class="story-card__summary">Approve L3 — todos findings closed.</p>
+          <div class="story-card__drilldowns">
+            <details>
+              <summary>Files changed (0)</summary>
+              <table class="story-card__files">
+                <thead>
+                  <tr>
+                    <th>path</th>
+                    <th>action</th>
+                    <th>tasks</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </details>
+            <details>
+              <summary>ACs covered (0)</summary>
+              <ul class="story-card__acs"></ul>
+            </details>
+            <details>
+              <summary>Pipeline trace (8 dispatches)</summary>
+              <table class="story-card__pipeline-trace">
+                <thead>
+                  <tr>
+                    <th>role</th>
+                    <th>dispatch_id</th>
+                    <th>loop</th>
+                    <th>duration</th>
+                    <th>tokens</th>
+                    <th>status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>dev</td>
+                    <td>FEAT-012-BATCH-C-dev-L1</td>
+                    <td>—</td>
+                    <td>15m 20s</td>
+                    <td>145000</td>
+                    <td>done</td>
+                  </tr>
+                  <tr>
+                    <td>code-reviewer</td>
+                    <td>FEAT-012-BATCH-C-code-r…</td>
+                    <td>—</td>
+                    <td>2m 45s</td>
+                    <td>79682</td>
+                    <td>done</td>
+                  </tr>
+                  <tr>
+                    <td>logic-reviewer</td>
+                    <td>FEAT-012-BATCH-C-logic-…</td>
+                    <td>—</td>
+                    <td>4m 12s</td>
+                    <td>81622</td>
+                    <td>done</td>
+                  </tr>
+                  <tr>
+                    <td>dev</td>
+                    <td>FEAT-012-BATCH-C-dev-L2</td>
+                    <td>2</td>
+                    <td>9m</td>
+                    <td>105000</td>
+                    <td>done</td>
+                  </tr>
+                  <tr>
+                    <td>code-reviewer</td>
+                    <td>FEAT-012-BATCH-C-code-r…</td>
+                    <td>2</td>
+                    <td>2m 9s</td>
+                    <td>35499</td>
+                    <td>done</td>
+                  </tr>
+                  <tr>
+                    <td>logic-reviewer</td>
+                    <td>FEAT-012-BATCH-C-logic-…</td>
+                    <td>2</td>
+                    <td>4m 3s</td>
+                    <td>56768</td>
+                    <td>done</td>
+                  </tr>
+                  <tr>
+                    <td>dev</td>
+                    <td>FEAT-012-BATCH-C-dev-L3</td>
+                    <td>3</td>
+                    <td>8m</td>
+                    <td>92000</td>
+                    <td>done</td>
+                  </tr>
+                  <tr>
+                    <td>logic-reviewer</td>
+                    <td>FEAT-012-BATCH-C-logic-…</td>
+                    <td>3</td>
+                    <td>52s</td>
+                    <td>23382</td>
+                    <td>done</td>
+                  </tr>
+                </tbody>
+              </table>
+            </details>
+            <details>
+              <summary>PM note</summary>
+              <p class="story-card__pmnote">Approve L3 — todos findings closed.</p>
+            </details>
+          </div>
+        </article>
+        <article class="story-card story-card--done-retried" aria-label="batch BATCH-D">
+          <header>
+            <h3>BATCH-D</h3>
+            <span class="badge badge-warn" aria-label="status: done with retries"
+              >↻ done (retried)</span
+            >
+          </header>
+          <div class="story-card__stats">
+            <span class="story-card__stat"
+              ><span class="story-card__stat-label">time</span>
+              <span class="story-card__stat-value">0ms</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">cost</span>
+              <span class="story-card__stat-value">$3.38</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">tasks</span>
+              <span class="story-card__stat-value">0</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">ACs</span>
+              <span class="story-card__stat-value">0</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">files</span>
+              <span class="story-card__stat-value">0</span></span
+            ><span class="story-card__pipeline">dev → code-reviewer ‖ logic-reviewer</span>
+          </div>
+          <aside class="story-card__retry" role="status">
+            ⚠ dev retried 2× — loop 2: L2: shared types fixed (tuple priorities/agenda); barrel
+            scrubbed; isAnimatingR…; loop 3: L3 final: 3 guard tests + skeleton-in-incoming with
+            within() + remove review co…
+          </aside>
+          <aside class="story-card__retry" role="status">
+            ⚠ code-reviewer retried 1× — loop 2: Approve L2 (1 minor novo: review-artifact comment).
+          </aside>
+          <aside class="story-card__retry" role="status">
+            ⚠ logic-reviewer retried 2× — loop 2: L2: 2 test rigor gaps remain (guard assertion
+            ausente; skeleton-in-incoming ver…; loop 3: Approve L3.
+          </aside>
+          <p class="story-card__summary">Approve L3.</p>
+          <div class="story-card__drilldowns">
+            <details>
+              <summary>Files changed (0)</summary>
+              <table class="story-card__files">
+                <thead>
+                  <tr>
+                    <th>path</th>
+                    <th>action</th>
+                    <th>tasks</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </details>
+            <details>
+              <summary>ACs covered (0)</summary>
+              <ul class="story-card__acs"></ul>
+            </details>
+            <details>
+              <summary>Pipeline trace (8 dispatches)</summary>
+              <table class="story-card__pipeline-trace">
+                <thead>
+                  <tr>
+                    <th>role</th>
+                    <th>dispatch_id</th>
+                    <th>loop</th>
+                    <th>duration</th>
+                    <th>tokens</th>
+                    <th>status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>dev</td>
+                    <td>FEAT-012-BATCH-D-dev-L1</td>
+                    <td>—</td>
+                    <td>12m</td>
+                    <td>110000</td>
+                    <td>done</td>
+                  </tr>
+                  <tr>
+                    <td>code-reviewer</td>
+                    <td>FEAT-012-BATCH-D-code-r…</td>
+                    <td>—</td>
+                    <td>2m 31s</td>
+                    <td>56286</td>
+                    <td>done</td>
+                  </tr>
+                  <tr>
+                    <td>logic-reviewer</td>
+                    <td>FEAT-012-BATCH-D-logic-…</td>
+                    <td>—</td>
+                    <td>2m 34s</td>
+                    <td>79553</td>
+                    <td>done</td>
+                  </tr>
+                  <tr>
+                    <td>dev</td>
+                    <td>FEAT-012-BATCH-D-dev-L2</td>
+                    <td>2</td>
+                    <td>10m 57s</td>
+                    <td>102037</td>
+                    <td>done</td>
+                  </tr>
+                  <tr>
+                    <td>code-reviewer</td>
+                    <td>FEAT-012-BATCH-D-code-r…</td>
+                    <td>2</td>
+                    <td>2m 8s</td>
+                    <td>38767</td>
+                    <td>done</td>
+                  </tr>
+                  <tr>
+                    <td>logic-reviewer</td>
+                    <td>FEAT-012-BATCH-D-logic-…</td>
+                    <td>2</td>
+                    <td>2m 4s</td>
+                    <td>50848</td>
+                    <td>done</td>
+                  </tr>
+                  <tr>
+                    <td>dev</td>
+                    <td>FEAT-012-BATCH-D-dev-L3</td>
+                    <td>3</td>
+                    <td>2m 40s</td>
+                    <td>55314</td>
+                    <td>done</td>
+                  </tr>
+                  <tr>
+                    <td>logic-reviewer</td>
+                    <td>FEAT-012-BATCH-D-logic-…</td>
+                    <td>3</td>
+                    <td>21s</td>
+                    <td>19108</td>
+                    <td>done</td>
+                  </tr>
+                </tbody>
+              </table>
+            </details>
+            <details>
+              <summary>PM note</summary>
+              <p class="story-card__pmnote">Approve L3.</p>
+            </details>
+          </div>
+        </article>
+        <article class="story-card story-card--done-retried" aria-label="batch BATCH-E">
+          <header>
+            <h3>BATCH-E</h3>
+            <span class="badge badge-warn" aria-label="status: done with retries"
+              >↻ done (retried)</span
+            >
+          </header>
+          <div class="story-card__stats">
+            <span class="story-card__stat"
+              ><span class="story-card__stat-label">time</span>
+              <span class="story-card__stat-value">0ms</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">cost</span>
+              <span class="story-card__stat-value">$1.42</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">tasks</span>
+              <span class="story-card__stat-value">0</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">ACs</span>
+              <span class="story-card__stat-value">0</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">files</span>
+              <span class="story-card__stat-value">0</span></span
+            ><span class="story-card__pipeline">dev → code-reviewer ‖ logic-reviewer</span>
+          </div>
+          <aside class="story-card__retry" role="status">
+            ⚠ code-reviewer retried 1× — loop 2: Approve L2 — PM aplicou os 4 fixes diretamente
+            (jest.spyOn, gitignore *.config.…
+          </aside>
+          <aside class="story-card__retry" role="status">
+            ⚠ logic-reviewer retried 1× — loop 2: Approve L2 — NFR-003 fechado via vite.config.ts
+            manualChunks. Chunk daily-page …
+          </aside>
+          <p class="story-card__summary">Approve L2 — NFR-003 fechado via vite. config.</p>
+          <div class="story-card__drilldowns">
+            <details>
+              <summary>Files changed (0)</summary>
+              <table class="story-card__files">
+                <thead>
+                  <tr>
+                    <th>path</th>
+                    <th>action</th>
+                    <th>tasks</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </details>
+            <details>
+              <summary>ACs covered (0)</summary>
+              <ul class="story-card__acs"></ul>
+            </details>
+            <details>
+              <summary>Pipeline trace (6 dispatches)</summary>
+              <table class="story-card__pipeline-trace">
+                <thead>
+                  <tr>
+                    <th>role</th>
+                    <th>dispatch_id</th>
+                    <th>loop</th>
+                    <th>duration</th>
+                    <th>tokens</th>
+                    <th>status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>dev</td>
+                    <td>FEAT-012-BATCH-E-dev-L1</td>
+                    <td>—</td>
+                    <td>8m 15s</td>
+                    <td>62212</td>
+                    <td>done</td>
+                  </tr>
+                  <tr>
+                    <td>dev</td>
+                    <td>FEAT-012-BATCH-E-COV-de…</td>
+                    <td>—</td>
+                    <td>35m 27s</td>
+                    <td>76186</td>
+                    <td>done</td>
+                  </tr>
+                  <tr>
+                    <td>code-reviewer</td>
+                    <td>FEAT-012-BATCH-E-code-r…</td>
+                    <td>—</td>
+                    <td>1m 47s</td>
+                    <td>57981</td>
+                    <td>done</td>
+                  </tr>
+                  <tr>
+                    <td>logic-reviewer</td>
+                    <td>FEAT-012-BATCH-E-logic-…</td>
+                    <td>—</td>
+                    <td>1m 41s</td>
+                    <td>57344</td>
+                    <td>done</td>
+                  </tr>
+                  <tr>
+                    <td>code-reviewer</td>
+                    <td>FEAT-012-BATCH-E-code-r…</td>
+                    <td>2</td>
+                    <td>0ms</td>
+                    <td>0</td>
+                    <td>done</td>
+                  </tr>
+                  <tr>
+                    <td>logic-reviewer</td>
+                    <td>FEAT-012-BATCH-E-logic-…</td>
+                    <td>2</td>
+                    <td>0ms</td>
+                    <td>0</td>
+                    <td>done</td>
+                  </tr>
+                </tbody>
+              </table>
+            </details>
+            <details>
+              <summary>PM note</summary>
+              <p class="story-card__pmnote">
+                Approve L2 — NFR-003 fechado via vite.config.ts manualChunks. Chunk daily-page =
+                6.00 KB gzip (&lt;18 KB).
+              </p>
+            </details>
+          </div>
+        </article>
+        <article class="story-card story-card--done" aria-label="batch FEAT-012">
+          <header>
+            <h3>FEAT-012</h3>
+            <span class="badge badge-pass" aria-label="status: done">✓ done</span>
+          </header>
+          <div class="story-card__stats">
+            <span class="story-card__stat"
+              ><span class="story-card__stat-label">time</span>
+              <span class="story-card__stat-value">0ms</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">cost</span>
+              <span class="story-card__stat-value">$0.66</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">tasks</span>
+              <span class="story-card__stat-value">0</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">ACs</span>
+              <span class="story-card__stat-value">0</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">files</span>
+              <span class="story-card__stat-value">0</span></span
+            ><span class="story-card__pipeline">qa → audit-agent</span>
+          </div>
+          <p class="story-card__summary">
+            Audit identificou manifesto desincronizado durante execução (L1 inicial). PM reconciliou
+            o manifest pós-audit com todos 36 dispatches efetivos.
+          </p>
+          <div class="story-card__drilldowns">
+            <details>
+              <summary>Files changed (0)</summary>
+              <table class="story-card__files">
+                <thead>
+                  <tr>
+                    <th>path</th>
+                    <th>action</th>
+                    <th>tasks</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </details>
+            <details>
+              <summary>ACs covered (0)</summary>
+              <ul class="story-card__acs"></ul>
+            </details>
+            <details>
+              <summary>Pipeline trace (2 dispatches)</summary>
+              <table class="story-card__pipeline-trace">
+                <thead>
+                  <tr>
+                    <th>role</th>
+                    <th>dispatch_id</th>
+                    <th>loop</th>
+                    <th>duration</th>
+                    <th>tokens</th>
+                    <th>status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>qa</td>
+                    <td>FEAT-012-FEAT-012-qa-L1</td>
+                    <td>—</td>
+                    <td>5m 24s</td>
+                    <td>83073</td>
+                    <td>done</td>
+                  </tr>
+                  <tr>
+                    <td>audit-agent</td>
+                    <td>FEAT-012-FEAT-012-audit…</td>
+                    <td>—</td>
+                    <td>1m 6s</td>
+                    <td>49805</td>
+                    <td>done</td>
+                  </tr>
+                </tbody>
+              </table>
+            </details>
+            <details>
+              <summary>PM note</summary>
+              <p class="story-card__pmnote">
+                Audit identificou manifesto desincronizado durante execução (L1 inicial). PM
+                reconciliou o manifest pós-audit com todos 36 dispatches efetivos. Estado
+                pós-reconcile espelha realidade.
+              </p>
+            </details>
+          </div>
+        </article>
+      </section>
+      <section class="cost-section">
+        <header class="cost-header">
+          <h2>Cost</h2>
+          <span class="badge badge-pass">coverage 38/38 (100%)</span>
+        </header>
+        <div class="cost-grid">
+          <div class="cost-card">
+            <span class="cost-label">Total cost</span>
+            <span class="cost-value">$71.14</span>
+            <small>$71.1441</small>
+          </div>
+          <div class="cost-card">
+            <span class="cost-label">$ / AC</span>
+            <span class="cost-value">$1.3175</span>
+            <small>54 ACs</small>
+          </div>
+          <div class="cost-card">
+            <span class="cost-label">$ / dispatch</span>
+            <span class="cost-value">$1.8722</span>
+            <small>avg of 38</small>
+          </div>
+          <div class="cost-card">
+            <span class="cost-label">Tokens</span>
+            <span class="cost-value">70,143,702</span>
+            <small>49,100,591 in / 21,043,111 out (70/30)</small>
+          </div>
+          <div class="cost-card">
+            <span class="cost-label">Wall-clock</span>
+            <span class="cost-value">13h4m</span>
+            <small>38 dispatches with usage</small>
+          </div>
+          <div class="cost-card">
+            <span class="cost-label">Tool uses</span>
+            <span class="cost-value">1,750</span>
+            <small>~46.1 per dispatch</small>
+          </div>
+        </div>
+        <table class="cost-models">
+          <thead>
+            <tr>
+              <th>Model</th>
+              <th>Dispatches</th>
+              <th>Tokens</th>
+              <th>Duration</th>
+              <th>Tool uses</th>
+              <th>USD</th>
+              <th>Share</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>opus-4-7</code></td>
+              <td>2</td>
+              <td>68,154,724</td>
+              <td>10h3m</td>
+              <td>346</td>
+              <td>$58.6781</td>
+              <td>82.5%</td>
+            </tr>
+            <tr>
+              <td><code>sonnet-4-6</code></td>
+              <td>29</td>
+              <td>1,838,692</td>
+              <td>2h54m</td>
+              <td>1306</td>
+              <td>$12.1354</td>
+              <td>17.1%</td>
+            </tr>
+            <tr>
+              <td><code>haiku-4-5</code></td>
+              <td>7</td>
+              <td>150,286</td>
+              <td>6m 44s</td>
+              <td>98</td>
+              <td>$0.3306</td>
+              <td>0.5%</td>
+            </tr>
+          </tbody>
+        </table>
+        <details class="cost-breakdown">
+          <summary>Cost by role (subagent type)</summary>
+          <table class="cost-models">
+            <thead>
+              <tr>
+                <th>Role</th>
+                <th>Dispatches</th>
+                <th>Tokens</th>
+                <th>Duration</th>
+                <th>USD</th>
+                <th>Share</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>pm-orchestrator</code></td>
+                <td>1</td>
+                <td>68,062,724</td>
+                <td>9h55m</td>
+                <td>$57.6661</td>
+                <td>81.1%</td>
+              </tr>
+              <tr>
+                <td><code>dev</code></td>
+                <td>13</td>
+                <td>1,113,760</td>
+                <td>2h20m</td>
+                <td>$7.7556</td>
+                <td>10.9%</td>
+              </tr>
+              <tr>
+                <td><code>logic-reviewer</code></td>
+                <td>12</td>
+                <td>523,625</td>
+                <td>26m 47s</td>
+                <td>$3.4559</td>
+                <td>4.9%</td>
+              </tr>
+              <tr>
+                <td><code>code-reviewer</code></td>
+                <td>10</td>
+                <td>310,715</td>
+                <td>15m 11s</td>
+                <td>$1.6086</td>
+                <td>2.3%</td>
+              </tr>
+              <tr>
+                <td><code>qa</code></td>
+                <td>1</td>
+                <td>83,073</td>
+                <td>5m 24s</td>
+                <td>$0.5483</td>
+                <td>0.8%</td>
+              </tr>
+              <tr>
+                <td><code>audit-agent</code></td>
+                <td>1</td>
+                <td>49,805</td>
+                <td>1m 6s</td>
+                <td>$0.1096</td>
+                <td>0.2%</td>
+              </tr>
+            </tbody>
+          </table>
+        </details>
+        <details class="cost-breakdown">
+          <summary>Cost by SDD phase</summary>
+          <table class="cost-models">
+            <thead>
+              <tr>
+                <th>Phase</th>
+                <th>Dispatches</th>
+                <th>Tokens</th>
+                <th>Duration</th>
+                <th>USD</th>
+                <th>Share</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>unattributed</code></td>
+                <td>38</td>
+                <td>70,143,702</td>
+                <td>13h4m</td>
+                <td>$71.1441</td>
+                <td>100.0%</td>
+              </tr>
+            </tbody>
+          </table>
+        </details>
+        <p class="cost-note">
+          <em
+            >70/30 input/output split assumed; harness reports only total_tokens; 38 of 38
+            dispatches included in cost</em
+          >
+        </p>
+      </section>
+      <section class="drilldown">
+        <h2>Drilldown</h2>
+        <details>
+          <summary>Per-AC closure detail</summary>
+          <div>
+            <table>
+              <thead>
+                <tr>
+                  <th>AC ID</th>
+                  <th>Status</th>
+                  <th>Validator</th>
+                  <th>Evidence</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>AC-001</td>
+                  <td>pass</td>
+                  <td>qa</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>AC-002</td>
+                  <td>pass</td>
+                  <td>qa</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>AC-003</td>
+                  <td>pass</td>
+                  <td>qa</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>AC-004</td>
+                  <td>pass</td>
+                  <td>qa</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>AC-005</td>
+                  <td>pass</td>
+                  <td>qa</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>AC-006</td>
+                  <td>pass</td>
+                  <td>qa</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>AC-007</td>
+                  <td>pass</td>
+                  <td>qa</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>AC-008</td>
+                  <td>pass</td>
+                  <td>qa</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>AC-009</td>
+                  <td>pass</td>
+                  <td>qa</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>AC-010</td>
+                  <td>pass</td>
+                  <td>qa</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>AC-011</td>
+                  <td>pass</td>
+                  <td>qa</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>AC-012</td>
+                  <td>pass</td>
+                  <td>qa</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>AC-013</td>
+                  <td>pass</td>
+                  <td>qa</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>AC-014</td>
+                  <td>pass</td>
+                  <td>qa</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>AC-015</td>
+                  <td>pass</td>
+                  <td>qa</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>AC-016</td>
+                  <td>pass</td>
+                  <td>qa</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>AC-017</td>
+                  <td>pass</td>
+                  <td>qa</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>AC-018</td>
+                  <td>pass</td>
+                  <td>qa</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>AC-019</td>
+                  <td>pass</td>
+                  <td>qa</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>AC-020</td>
+                  <td>pass</td>
+                  <td>qa</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>AC-021</td>
+                  <td>pass</td>
+                  <td>qa</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>AC-022</td>
+                  <td>pass</td>
+                  <td>qa</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>AC-023</td>
+                  <td>pass</td>
+                  <td>qa</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>AC-024</td>
+                  <td>pass</td>
+                  <td>qa</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>AC-025</td>
+                  <td>pass</td>
+                  <td>qa</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>AC-026</td>
+                  <td>pass</td>
+                  <td>qa</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>AC-027</td>
+                  <td>pass</td>
+                  <td>qa</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>AC-028</td>
+                  <td>pass</td>
+                  <td>qa</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>AC-029</td>
+                  <td>pass</td>
+                  <td>qa</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>AC-030</td>
+                  <td>pass</td>
+                  <td>qa</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>AC-031</td>
+                  <td>pass</td>
+                  <td>qa</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>AC-032</td>
+                  <td>pass</td>
+                  <td>qa</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>AC-033</td>
+                  <td>pass</td>
+                  <td>qa</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>AC-034</td>
+                  <td>pass</td>
+                  <td>qa</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>AC-035</td>
+                  <td>pass</td>
+                  <td>qa</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>AC-036</td>
+                  <td>pass</td>
+                  <td>qa</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>AC-037</td>
+                  <td>pass</td>
+                  <td>qa</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>AC-038</td>
+                  <td>pass</td>
+                  <td>qa</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>AC-039</td>
+                  <td>pass</td>
+                  <td>qa</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>AC-040</td>
+                  <td>pass</td>
+                  <td>qa</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>AC-041</td>
+                  <td>pass</td>
+                  <td>qa</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>AC-042</td>
+                  <td>pass</td>
+                  <td>qa</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>AC-043</td>
+                  <td>pass</td>
+                  <td>qa</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>AC-044</td>
+                  <td>pass</td>
+                  <td>qa</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>AC-045</td>
+                  <td>pass</td>
+                  <td>qa</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>AC-046</td>
+                  <td>pass</td>
+                  <td>qa</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>AC-047</td>
+                  <td>pass</td>
+                  <td>qa</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>AC-048</td>
+                  <td>pass</td>
+                  <td>qa</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>AC-049</td>
+                  <td>pass</td>
+                  <td>qa</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>AC-050</td>
+                  <td>pass</td>
+                  <td>qa</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>AC-051</td>
+                  <td>pass</td>
+                  <td>qa</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>AC-052</td>
+                  <td>pass</td>
+                  <td>qa</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>AC-053</td>
+                  <td>pass</td>
+                  <td>qa</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>AC-054</td>
+                  <td>pass</td>
+                  <td>qa</td>
+                  <td>—</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </details>
+        <details>
+          <summary>Per-dispatch breakdown</summary>
+          <div>
+            <table>
+              <thead>
+                <tr>
+                  <th>Dispatch ID</th>
+                  <th>Role</th>
+                  <th>Status</th>
+                  <th>Loop</th>
+                  <th>Tokens</th>
+                  <th>Duration</th>
+                  <th>PM note</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>pm-orchestrator-d...</td>
+                  <td>pm-orchestrator</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>68062724</td>
+                  <td>595m 18s</td>
+                  <td>PM/orchestrator session (Stop hook): 466 turns</td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-BATCH-A-...</td>
+                  <td>dev</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>113011</td>
+                  <td>16m 21s</td>
+                  <td>BATCH-A entregue: api/dailyPageApi (AbortController+HttpE...</td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-BATCH-A-...</td>
+                  <td>code-reviewer</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>14500</td>
+                  <td>1m 5s</td>
+                  <td>Code review L1: 1 finding (Content-Type GET preflight risk).</td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-BATCH-A-...</td>
+                  <td>logic-reviewer</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>48000</td>
+                  <td>3m</td>
+                  <td>Logic L1: 5 findings (isEditableTarget allow-list, backof...</td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-BATCH-A-...</td>
+                  <td>dev</td>
+                  <td>done</td>
+                  <td>2</td>
+                  <td>62000</td>
+                  <td>4m 40s</td>
+                  <td>Dev L2: todos 5 findings fixed (allow-list text-inputs, c...</td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-BATCH-A-...</td>
+                  <td>code-reviewer</td>
+                  <td>done</td>
+                  <td>2</td>
+                  <td>9000</td>
+                  <td>50s</td>
+                  <td>Approve L2.</td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-BATCH-A-...</td>
+                  <td>logic-reviewer</td>
+                  <td>done</td>
+                  <td>2</td>
+                  <td>22000</td>
+                  <td>1m 50s</td>
+                  <td>Approve L2 — todos findings closed.</td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-BATCH-B-...</td>
+                  <td>dev</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>95000</td>
+                  <td>10m 20s</td>
+                  <td>BATCH-B: usePageNavigation+useReducedMotion+swipeDetector...</td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-BATCH-B-...</td>
+                  <td>code-reviewer</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>11000</td>
+                  <td>1m 10s</td>
+                  <td>L1: blocker — usePageNavigation 342 LOC &gt; 250 inviolável.</td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-BATCH-B-...</td>
+                  <td>logic-reviewer</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>55000</td>
+                  <td>3m 40s</td>
+                  <td>L1: keyboard handler void dropped; out-of-range regex pas...</td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-BATCH-B-...</td>
+                  <td>dev</td>
+                  <td>done</td>
+                  <td>2</td>
+                  <td>78000</td>
+                  <td>6m 20s</td>
+                  <td>Split 342→201+153+63 LOC; .catch(console.error) keyboard;...</td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-BATCH-B-...</td>
+                  <td>code-reviewer</td>
+                  <td>done</td>
+                  <td>2</td>
+                  <td>8000</td>
+                  <td>45s</td>
+                  <td>Approve L2.</td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-BATCH-B-...</td>
+                  <td>logic-reviewer</td>
+                  <td>done</td>
+                  <td>2</td>
+                  <td>30000</td>
+                  <td>2m 30s</td>
+                  <td>L2: 1 minor — swipe path void mirrored same issue → L3 co...</td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-BATCH-B-...</td>
+                  <td>dev</td>
+                  <td>done</td>
+                  <td>3</td>
+                  <td>18000</td>
+                  <td>1m 20s</td>
+                  <td>L3 final: swipe .catch consistency.</td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-BATCH-C-...</td>
+                  <td>dev</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>145000</td>
+                  <td>15m 20s</td>
+                  <td>BATCH-C: useDailyPage useReducer+autosave debounced+retry...</td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-BATCH-C-...</td>
+                  <td>code-reviewer</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>79682</td>
+                  <td>2m 45s</td>
+                  <td>L1: pendingFlushResolveRef dead code + finally branch unr...</td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-BATCH-C-...</td>
+                  <td>logic-reviewer</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>81622</td>
+                  <td>4m 12s</td>
+                  <td>L1 BLOCKER: retry-wait Promise hang (clearTimeout cancels...</td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-BATCH-C-...</td>
+                  <td>dev</td>
+                  <td>done</td>
+                  <td>2</td>
+                  <td>105000</td>
+                  <td>9m</td>
+                  <td>L2: retryRejectRef + AbortError catch; debounce drop fix;...</td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-BATCH-C-...</td>
+                  <td>code-reviewer</td>
+                  <td>done</td>
+                  <td>2</td>
+                  <td>35499</td>
+                  <td>2m 9s</td>
+                  <td>Approve L2.</td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-BATCH-C-...</td>
+                  <td>logic-reviewer</td>
+                  <td>done</td>
+                  <td>2</td>
+                  <td>56768</td>
+                  <td>4m 3s</td>
+                  <td>L2: MAJOR-F2 not-fixed — Effect 2 cleanup ordering torna ...</td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-BATCH-C-...</td>
+                  <td>dev</td>
+                  <td>done</td>
+                  <td>3</td>
+                  <td>92000</td>
+                  <td>8m</td>
+                  <td>L3 escalado para opus high (matriz nota²: núcleo complexo...</td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-BATCH-C-...</td>
+                  <td>logic-reviewer</td>
+                  <td>done</td>
+                  <td>3</td>
+                  <td>23382</td>
+                  <td>52s</td>
+                  <td>Approve L3 — todos findings closed.</td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-BATCH-D-...</td>
+                  <td>dev</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>110000</td>
+                  <td>12m</td>
+                  <td>BATCH-D: 6 componentes + CSS modules + integration tests....</td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-BATCH-D-...</td>
+                  <td>code-reviewer</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>56286</td>
+                  <td>2m 31s</td>
+                  <td>L1: 2 majors (double-cast Agenda + barrel leaks utils/API...</td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-BATCH-D-...</td>
+                  <td>logic-reviewer</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>79553</td>
+                  <td>2m 34s</td>
+                  <td>L1: 4 majors (isAnimating guard ausente, animationend aus...</td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-BATCH-D-...</td>
+                  <td>dev</td>
+                  <td>done</td>
+                  <td>2</td>
+                  <td>102037</td>
+                  <td>10m 57s</td>
+                  <td>L2: shared types fixed (tuple priorities/agenda); barrel ...</td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-BATCH-D-...</td>
+                  <td>code-reviewer</td>
+                  <td>done</td>
+                  <td>2</td>
+                  <td>38767</td>
+                  <td>2m 8s</td>
+                  <td>Approve L2 (1 minor novo: review-artifact comment).</td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-BATCH-D-...</td>
+                  <td>logic-reviewer</td>
+                  <td>done</td>
+                  <td>2</td>
+                  <td>50848</td>
+                  <td>2m 4s</td>
+                  <td>L2: 2 test rigor gaps remain (guard assertion ausente; sk...</td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-BATCH-D-...</td>
+                  <td>dev</td>
+                  <td>done</td>
+                  <td>3</td>
+                  <td>55314</td>
+                  <td>2m 40s</td>
+                  <td>L3 final: 3 guard tests + skeleton-in-incoming with withi...</td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-BATCH-D-...</td>
+                  <td>logic-reviewer</td>
+                  <td>done</td>
+                  <td>3</td>
+                  <td>19108</td>
+                  <td>21s</td>
+                  <td>Approve L3.</td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-BATCH-E-...</td>
+                  <td>dev</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>62212</td>
+                  <td>8m 15s</td>
+                  <td>BATCH-E wiring: App.tsx + jest threshold path-specific + ...</td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-BATCH-E-...</td>
+                  <td>dev</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>76186</td>
+                  <td>35m 27s</td>
+                  <td>Secondary dispatch: subir branch coverage daily-page 80.3...</td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-BATCH-E-...</td>
+                  <td>code-reviewer</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>57981</td>
+                  <td>1m 47s</td>
+                  <td>L1: 1 major (console.error reassignment viola interceptor...</td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-BATCH-E-...</td>
+                  <td>logic-reviewer</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>57344</td>
+                  <td>1m 41s</td>
+                  <td>L1: 1 real concern — NFR-003 18KB chunk gzip não autoriza...</td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-BATCH-E-...</td>
+                  <td>code-reviewer</td>
+                  <td>done</td>
+                  <td>2</td>
+                  <td>0</td>
+                  <td>0ms</td>
+                  <td>Approve L2 — PM aplicou os 4 fixes diretamente (jest.spyO...</td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-BATCH-E-...</td>
+                  <td>logic-reviewer</td>
+                  <td>done</td>
+                  <td>2</td>
+                  <td>0</td>
+                  <td>0ms</td>
+                  <td>Approve L2 — NFR-003 fechado via vite.config.ts manualChu...</td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-FEAT-012...</td>
+                  <td>qa</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>83073</td>
+                  <td>5m 24s</td>
+                  <td>QA gate full: 54/54 AC pass, NFR-001/002/003 pass, SC-001...</td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-FEAT-012...</td>
+                  <td>audit-agent</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>49805</td>
+                  <td>1m 6s</td>
+                  <td>Audit identificou manifesto desincronizado durante execuç...</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </details>
+        <details>
+          <summary>Repo health snapshot</summary>
+          <div>
+            <p><em>Measured at: 2026-05-13</em></p>
+            <table>
+              <thead>
+                <tr>
+                  <th>Métrica</th>
+                  <th>Valor</th>
+                  <th>Threshold</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Mutation score</td>
+                  <td>70.7%</td>
+                  <td>≥ 70%</td>
+                  <td>✓</td>
+                </tr>
+                <tr>
+                  <td>Type coverage</td>
+                  <td>97.7%</td>
+                  <td>≥ 95%</td>
+                  <td>✓</td>
+                </tr>
+                <tr>
+                  <td>`any` count</td>
+                  <td>67</td>
+                  <td>—</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>Dep violations</td>
+                  <td>—</td>
+                  <td>= 0</td>
+                  <td>—</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </details>
+        <details>
+          <summary>Reviewer findings</summary>
+          <div><p>(none)</p></div>
+        </details>
+        <details>
+          <summary>Phase durations</summary>
+          <div><p>(no phase data available)</p></div>
+        </details>
+      </section>
+      <section class="raw-data">
+        <h2>Raw data</h2>
+        <details>
+          <summary>View raw Markdown report</summary>
+          <div class="md-embed">
+            <h1>daily-page — orquestrador do dia (composição, navegação, autosave) — FEAT-012</h1>
+            <blockquote>
+              <p>
+                Feature: daily-page — orquestrador do dia (composição, navegação, autosave) Task ID:
+                FEAT-012 Phase: done Generated at: 2026-05-13T02:03:40.935Z
+              </p>
+            </blockquote>
+            <h2>Insights</h2>
+            <ul>
+              <li>
+                ℹ Escalation rate 0.0% is below the Galileo healthy band (&lt; 10%) — low
+                escalation, agents resolving autonomously. <em>(Galileo healthy band)</em>
+              </li>
+              <li>ℹ Dev task success rate 100.0% is at or above 80% — healthy first-try rate.</li>
+            </ul>
+            <h2>Cost breakdown</h2>
+            <p>
+              <em
+                >70/30 input/output split assumed; harness reports only total_tokens; 38 of 38
+                dispatches included in cost</em
+              >
+            </p>
+            <ul>
+              <li>
+                Total tokens: 70143702
+                <ul>
+                  <li>Estimated input (70%): 49100591</li>
+                  <li>Estimated output (30%): 21043111</li>
+                </ul>
+              </li>
+              <li>Estimated cost USD total: $71.1441</li>
+              <li>Cost per AC: $1.3175</li>
+              <li>Cost per dispatch (avg): $1.8722</li>
+              <li>Wall-clock duration: 784m 26s</li>
+              <li>Tool uses total: 1750</li>
+              <li>Coverage: 38 of 38 dispatches included in cost calculation</li>
+            </ul>
+            <h2>Repo health snapshot</h2>
+            <p><em>Measured at: 2026-05-13</em></p>
+            <table>
+              <thead>
+                <tr>
+                  <th>Métrica</th>
+                  <th>Valor</th>
+                  <th>Threshold</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Mutation score</td>
+                  <td>70.7%</td>
+                  <td>≥ 70%</td>
+                  <td>✓</td>
+                </tr>
+                <tr>
+                  <td>Type coverage</td>
+                  <td>97.7%</td>
+                  <td>≥ 95%</td>
+                  <td>✓</td>
+                </tr>
+                <tr>
+                  <td><code>any</code> count</td>
+                  <td>67</td>
+                  <td>—</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>Dep violations</td>
+                  <td>—</td>
+                  <td>= 0</td>
+                  <td>—</td>
+                </tr>
+              </tbody>
+            </table>
+            <h2>Per-dispatch breakdown</h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Role</th>
+                  <th>Status</th>
+                  <th>Loop</th>
+                  <th>Tokens</th>
+                  <th>$</th>
+                  <th>Duration</th>
+                  <th>PM note</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>pm-orches...</td>
+                  <td>pm-orchestrator</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>68062724</td>
+                  <td>$748.6900</td>
+                  <td>595m 18s</td>
+                  <td>PM/orchestrator session (Stop hook): 466 turns</td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-...</td>
+                  <td>dev</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>113011</td>
+                  <td>$0.7459</td>
+                  <td>16m 21s</td>
+                  <td>
+                    BATCH-A entregue: api/dailyPageApi (AbortController+HttpError+keepalive) + li...
+                  </td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-...</td>
+                  <td>code-reviewer</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>14500</td>
+                  <td>$0.0319</td>
+                  <td>1m 5s</td>
+                  <td>Code review L1: 1 finding (Content-Type GET preflight risk).</td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-...</td>
+                  <td>logic-reviewer</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>48000</td>
+                  <td>$0.3168</td>
+                  <td>3m</td>
+                  <td>
+                    Logic L1: 5 findings (isEditableTarget allow-list, backoff clamp, contentedit...
+                  </td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-...</td>
+                  <td>dev</td>
+                  <td>done</td>
+                  <td>2</td>
+                  <td>62000</td>
+                  <td>$0.4092</td>
+                  <td>4m 40s</td>
+                  <td>
+                    Dev L2: todos 5 findings fixed (allow-list text-inputs, clamp [0,2], contente...
+                  </td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-...</td>
+                  <td>code-reviewer</td>
+                  <td>done</td>
+                  <td>2</td>
+                  <td>9000</td>
+                  <td>$0.0198</td>
+                  <td>50s</td>
+                  <td>Approve L2.</td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-...</td>
+                  <td>logic-reviewer</td>
+                  <td>done</td>
+                  <td>2</td>
+                  <td>22000</td>
+                  <td>$0.1452</td>
+                  <td>1m 50s</td>
+                  <td>Approve L2 — todos findings closed.</td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-...</td>
+                  <td>dev</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>95000</td>
+                  <td>$0.6270</td>
+                  <td>10m 20s</td>
+                  <td>
+                    BATCH-B: usePageNavigation+useReducedMotion+swipeDetector+useSwipeNavigation....
+                  </td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-...</td>
+                  <td>code-reviewer</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>11000</td>
+                  <td>$0.0242</td>
+                  <td>1m 10s</td>
+                  <td>L1: blocker — usePageNavigation 342 LOC &gt; 250 inviolável.</td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-...</td>
+                  <td>logic-reviewer</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>55000</td>
+                  <td>$0.3630</td>
+                  <td>3m 40s</td>
+                  <td>
+                    L1: keyboard handler void dropped; out-of-range regex passed
+                    &#39;2026-13-99&#39;; mi...
+                  </td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-...</td>
+                  <td>dev</td>
+                  <td>done</td>
+                  <td>2</td>
+                  <td>78000</td>
+                  <td>$0.5148</td>
+                  <td>6m 20s</td>
+                  <td>
+                    Split 342→201+153+63 LOC; .catch(console.error) keyboard; round-trip Date.UTC...
+                  </td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-...</td>
+                  <td>code-reviewer</td>
+                  <td>done</td>
+                  <td>2</td>
+                  <td>8000</td>
+                  <td>$0.0176</td>
+                  <td>45s</td>
+                  <td>Approve L2.</td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-...</td>
+                  <td>logic-reviewer</td>
+                  <td>done</td>
+                  <td>2</td>
+                  <td>30000</td>
+                  <td>$0.1980</td>
+                  <td>2m 30s</td>
+                  <td>L2: 1 minor — swipe path void mirrored same issue → L3 consistency fix.</td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-...</td>
+                  <td>dev</td>
+                  <td>done</td>
+                  <td>3</td>
+                  <td>18000</td>
+                  <td>$0.1188</td>
+                  <td>1m 20s</td>
+                  <td>L3 final: swipe .catch consistency.</td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-...</td>
+                  <td>dev</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>145000</td>
+                  <td>$0.9570</td>
+                  <td>15m 20s</td>
+                  <td>
+                    BATCH-C: useDailyPage useReducer+autosave debounced+retry/backoff+beforeunloa...
+                  </td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-...</td>
+                  <td>code-reviewer</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>79682</td>
+                  <td>$0.5259</td>
+                  <td>2m 45s</td>
+                  <td>
+                    L1: pendingFlushResolveRef dead code + finally branch unreachable + console.e...
+                  </td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-...</td>
+                  <td>logic-reviewer</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>81622</td>
+                  <td>$0.5387</td>
+                  <td>4m 12s</td>
+                  <td>
+                    L1 BLOCKER: retry-wait Promise hang (clearTimeout cancels resolver) deadlocks...
+                  </td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-...</td>
+                  <td>dev</td>
+                  <td>done</td>
+                  <td>2</td>
+                  <td>105000</td>
+                  <td>$0.6930</td>
+                  <td>9m</td>
+                  <td>
+                    L2: retryRejectRef + AbortError catch; debounce drop fix; beforeunload
+                    &#39;dirty...
+                  </td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-...</td>
+                  <td>code-reviewer</td>
+                  <td>done</td>
+                  <td>2</td>
+                  <td>35499</td>
+                  <td>$0.2343</td>
+                  <td>2m 9s</td>
+                  <td>Approve L2.</td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-...</td>
+                  <td>logic-reviewer</td>
+                  <td>done</td>
+                  <td>2</td>
+                  <td>56768</td>
+                  <td>$0.3747</td>
+                  <td>4m 3s</td>
+                  <td>
+                    L2: MAJOR-F2 not-fixed — Effect 2 cleanup ordering torna fire-and-forget unre...
+                  </td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-...</td>
+                  <td>dev</td>
+                  <td>done</td>
+                  <td>3</td>
+                  <td>92000</td>
+                  <td>$1.0120</td>
+                  <td>8m</td>
+                  <td>
+                    L3 escalado para opus high (matriz nota²: núcleo complexo, última chance). Re...
+                  </td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-...</td>
+                  <td>logic-reviewer</td>
+                  <td>done</td>
+                  <td>3</td>
+                  <td>23382</td>
+                  <td>$0.1543</td>
+                  <td>52s</td>
+                  <td>Approve L3 — todos findings closed.</td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-...</td>
+                  <td>dev</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>110000</td>
+                  <td>$0.7260</td>
+                  <td>12m</td>
+                  <td>
+                    BATCH-D: 6 componentes + CSS modules + integration tests. Strategy B two-laye...
+                  </td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-...</td>
+                  <td>code-reviewer</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>56286</td>
+                  <td>$0.3715</td>
+                  <td>2m 31s</td>
+                  <td>L1: 2 majors (double-cast Agenda + barrel leaks utils/API) + 5 minors.</td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-...</td>
+                  <td>logic-reviewer</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>79553</td>
+                  <td>$0.5250</td>
+                  <td>2m 34s</td>
+                  <td>
+                    L1: 4 majors (isAnimating guard ausente, animationend ausente, 2 test gaps) +...
+                  </td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-...</td>
+                  <td>dev</td>
+                  <td>done</td>
+                  <td>2</td>
+                  <td>102037</td>
+                  <td>$0.6734</td>
+                  <td>10m 57s</td>
+                  <td>
+                    L2: shared types fixed (tuple priorities/agenda); barrel scrubbed; isAnimatin...
+                  </td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-...</td>
+                  <td>code-reviewer</td>
+                  <td>done</td>
+                  <td>2</td>
+                  <td>38767</td>
+                  <td>$0.2559</td>
+                  <td>2m 8s</td>
+                  <td>Approve L2 (1 minor novo: review-artifact comment).</td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-...</td>
+                  <td>logic-reviewer</td>
+                  <td>done</td>
+                  <td>2</td>
+                  <td>50848</td>
+                  <td>$0.3356</td>
+                  <td>2m 4s</td>
+                  <td>
+                    L2: 2 test rigor gaps remain (guard assertion ausente; skeleton-in-incoming v...
+                  </td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-...</td>
+                  <td>dev</td>
+                  <td>done</td>
+                  <td>3</td>
+                  <td>55314</td>
+                  <td>$0.3651</td>
+                  <td>2m 40s</td>
+                  <td>
+                    L3 final: 3 guard tests + skeleton-in-incoming with within() + remove review ...
+                  </td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-...</td>
+                  <td>logic-reviewer</td>
+                  <td>done</td>
+                  <td>3</td>
+                  <td>19108</td>
+                  <td>$0.1261</td>
+                  <td>21s</td>
+                  <td>Approve L3.</td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-...</td>
+                  <td>dev</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>62212</td>
+                  <td>$0.4106</td>
+                  <td>8m 15s</td>
+                  <td>
+                    BATCH-E wiring: App.tsx + jest threshold path-specific + CLAUDE.md. Identifou...
+                  </td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-...</td>
+                  <td>dev</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>76186</td>
+                  <td>$0.5028</td>
+                  <td>35m 27s</td>
+                  <td>
+                    Secondary dispatch: subir branch coverage daily-page 80.34%→91.33%. +45 teste...
+                  </td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-...</td>
+                  <td>code-reviewer</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>57981</td>
+                  <td>$0.1276</td>
+                  <td>1m 47s</td>
+                  <td>L1: 1 major (console.error reassignment viola interceptor) + 3 minors.</td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-...</td>
+                  <td>logic-reviewer</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>57344</td>
+                  <td>$0.3785</td>
+                  <td>1m 41s</td>
+                  <td>
+                    L1: 1 real concern — NFR-003 18KB chunk gzip não autorizado para diferimento ...
+                  </td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-...</td>
+                  <td>code-reviewer</td>
+                  <td>done</td>
+                  <td>2</td>
+                  <td>0</td>
+                  <td>$0.0000</td>
+                  <td>0ms</td>
+                  <td>
+                    Approve L2 — PM aplicou os 4 fixes diretamente (jest.spyOn, gitignore *.confi...
+                  </td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-...</td>
+                  <td>logic-reviewer</td>
+                  <td>done</td>
+                  <td>2</td>
+                  <td>0</td>
+                  <td>$0.0000</td>
+                  <td>0ms</td>
+                  <td>
+                    Approve L2 — NFR-003 fechado via vite.config.ts manualChunks. Chunk daily-pag...
+                  </td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-...</td>
+                  <td>qa</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>83073</td>
+                  <td>$0.5483</td>
+                  <td>5m 24s</td>
+                  <td>
+                    QA gate full: 54/54 AC pass, NFR-001/002/003 pass, SC-001..006 pass. 892 test...
+                  </td>
+                </tr>
+                <tr>
+                  <td>FEAT-012-...</td>
+                  <td>audit-agent</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>49805</td>
+                  <td>$0.1096</td>
+                  <td>1m 6s</td>
+                  <td>
+                    Audit identificou manifesto desincronizado durante execução (L1 inicial). PM ...
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <h2>Per-AC closure detail</h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>AC ID</th>
+                  <th>Status</th>
+                  <th>Validator</th>
+                  <th>Evidence</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>AC-001</td>
+                  <td>pass</td>
+                  <td>qa</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>AC-002</td>
+                  <td>pass</td>
+                  <td>qa</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>AC-003</td>
+                  <td>pass</td>
+                  <td>qa</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>AC-004</td>
+                  <td>pass</td>
+                  <td>qa</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>AC-005</td>
+                  <td>pass</td>
+                  <td>qa</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>AC-006</td>
+                  <td>pass</td>
+                  <td>qa</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>AC-007</td>
+                  <td>pass</td>
+                  <td>qa</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>AC-008</td>
+                  <td>pass</td>
+                  <td>qa</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>AC-009</td>
+                  <td>pass</td>
+                  <td>qa</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>AC-010</td>
+                  <td>pass</td>
+                  <td>qa</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>AC-011</td>
+                  <td>pass</td>
+                  <td>qa</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>AC-012</td>
+                  <td>pass</td>
+                  <td>qa</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>AC-013</td>
+                  <td>pass</td>
+                  <td>qa</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>AC-014</td>
+                  <td>pass</td>
+                  <td>qa</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>AC-015</td>
+                  <td>pass</td>
+                  <td>qa</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>AC-016</td>
+                  <td>pass</td>
+                  <td>qa</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>AC-017</td>
+                  <td>pass</td>
+                  <td>qa</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>AC-018</td>
+                  <td>pass</td>
+                  <td>qa</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>AC-019</td>
+                  <td>pass</td>
+                  <td>qa</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>AC-020</td>
+                  <td>pass</td>
+                  <td>qa</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>AC-021</td>
+                  <td>pass</td>
+                  <td>qa</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>AC-022</td>
+                  <td>pass</td>
+                  <td>qa</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>AC-023</td>
+                  <td>pass</td>
+                  <td>qa</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>AC-024</td>
+                  <td>pass</td>
+                  <td>qa</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>AC-025</td>
+                  <td>pass</td>
+                  <td>qa</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>AC-026</td>
+                  <td>pass</td>
+                  <td>qa</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>AC-027</td>
+                  <td>pass</td>
+                  <td>qa</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>AC-028</td>
+                  <td>pass</td>
+                  <td>qa</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>AC-029</td>
+                  <td>pass</td>
+                  <td>qa</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>AC-030</td>
+                  <td>pass</td>
+                  <td>qa</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>AC-031</td>
+                  <td>pass</td>
+                  <td>qa</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>AC-032</td>
+                  <td>pass</td>
+                  <td>qa</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>AC-033</td>
+                  <td>pass</td>
+                  <td>qa</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>AC-034</td>
+                  <td>pass</td>
+                  <td>qa</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>AC-035</td>
+                  <td>pass</td>
+                  <td>qa</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>AC-036</td>
+                  <td>pass</td>
+                  <td>qa</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>AC-037</td>
+                  <td>pass</td>
+                  <td>qa</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>AC-038</td>
+                  <td>pass</td>
+                  <td>qa</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>AC-039</td>
+                  <td>pass</td>
+                  <td>qa</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>AC-040</td>
+                  <td>pass</td>
+                  <td>qa</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>AC-041</td>
+                  <td>pass</td>
+                  <td>qa</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>AC-042</td>
+                  <td>pass</td>
+                  <td>qa</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>AC-043</td>
+                  <td>pass</td>
+                  <td>qa</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>AC-044</td>
+                  <td>pass</td>
+                  <td>qa</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>AC-045</td>
+                  <td>pass</td>
+                  <td>qa</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>AC-046</td>
+                  <td>pass</td>
+                  <td>qa</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>AC-047</td>
+                  <td>pass</td>
+                  <td>qa</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>AC-048</td>
+                  <td>pass</td>
+                  <td>qa</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>AC-049</td>
+                  <td>pass</td>
+                  <td>qa</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>AC-050</td>
+                  <td>pass</td>
+                  <td>qa</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>AC-051</td>
+                  <td>pass</td>
+                  <td>qa</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>AC-052</td>
+                  <td>pass</td>
+                  <td>qa</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>AC-053</td>
+                  <td>pass</td>
+                  <td>qa</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>AC-054</td>
+                  <td>pass</td>
+                  <td>qa</td>
+                  <td>—</td>
+                </tr>
+              </tbody>
+            </table>
+            <h2>Phase durations</h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>Phase</th>
+                  <th>Duration</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>specify</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>plan</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>tasks</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>implementation</td>
+                  <td>—</td>
+                </tr>
+              </tbody>
+            </table>
+            <h2>Timeline</h2>
+            <p><em>(no phase data available)</em></p>
+            <h2>Dispatches</h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>Role</th>
+                  <th>Dispatches</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>audit-agent</td>
+                  <td>1</td>
+                </tr>
+                <tr>
+                  <td>blocker-specialist</td>
+                  <td>0</td>
+                </tr>
+                <tr>
+                  <td>code-reviewer</td>
+                  <td>10</td>
+                </tr>
+                <tr>
+                  <td>dev</td>
+                  <td>13</td>
+                </tr>
+                <tr>
+                  <td>logic-reviewer</td>
+                  <td>12</td>
+                </tr>
+                <tr>
+                  <td>pm-orchestrator</td>
+                  <td>1</td>
+                </tr>
+                <tr>
+                  <td>qa</td>
+                  <td>1</td>
+                </tr>
+                <tr>
+                  <td><strong>Total</strong></td>
+                  <td>38</td>
+                </tr>
+              </tbody>
+            </table>
+            <h2>Task success rate</h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>Role</th>
+                  <th>Task success rate</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>audit-agent</td>
+                  <td>100.0%</td>
+                </tr>
+                <tr>
+                  <td>blocker-specialist</td>
+                  <td>n/a</td>
+                </tr>
+                <tr>
+                  <td>code-reviewer</td>
+                  <td>100.0%</td>
+                </tr>
+                <tr>
+                  <td>dev</td>
+                  <td>100.0%</td>
+                </tr>
+                <tr>
+                  <td>logic-reviewer</td>
+                  <td>100.0%</td>
+                </tr>
+                <tr>
+                  <td>pm-orchestrator</td>
+                  <td>100.0%</td>
+                </tr>
+                <tr>
+                  <td>qa</td>
+                  <td>100.0%</td>
+                </tr>
+              </tbody>
+            </table>
+            <h2>Loop rate</h2>
+            <p>Loop rate: 50.0%</p>
+            <h2>Escalation rate</h2>
+            <p>Escalation rate: 0.0% — below healthy band (&lt; 10%)</p>
+            <h2>AC closure</h2>
+            <p>Total: 54 | Pass: 54 | Partial: 0 | Fail: 0 | Missing: 0</p>
+            <h2>Reviewer findings density</h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>Severity</th>
+                  <th>Count</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>critical</td>
+                  <td>0</td>
+                </tr>
+                <tr>
+                  <td>major</td>
+                  <td>0</td>
+                </tr>
+                <tr>
+                  <td>minor</td>
+                  <td>0</td>
+                </tr>
+              </tbody>
+            </table>
+            <h2>PM notes log</h2>
+            <ul>
+              <li>
+                [2026-05-11 04:49 pm-orchestrator] PM/orchestrator session (Stop hook): 466 turns
+              </li>
+              <li>
+                [2026-05-11 05:10 dev] BATCH-A entregue: api/dailyPageApi
+                (AbortController+HttpError+keepalive) + lib
+                (formatDate/dateMath/backoff/isEditableTarget). 92 testes verdes.
+              </li>
+              <li>
+                [2026-05-11 05:10 code-reviewer] Code review L1: 1 finding (Content-Type GET
+                preflight risk).
+              </li>
+              <li>
+                [2026-05-11 05:10 logic-reviewer] Logic L1: 5 findings (isEditableTarget allow-list,
+                backoff clamp, contenteditable barrier, JSON trust boundary, Content-Type).
+              </li>
+              <li>
+                [2026-05-11 05:10 dev] Dev L2: todos 5 findings fixed (allow-list text-inputs, clamp
+                [0,2], contenteditable barrier via closest+&#39;true&#39;, JSDoc SyntaxError,
+                removed Content-Type GET).
+              </li>
+              <li>[2026-05-11 05:10 code-reviewer] Approve L2.</li>
+              <li>[2026-05-11 05:10 logic-reviewer] Approve L2 — todos findings closed.</li>
+              <li>
+                [2026-05-11 05:10 dev] BATCH-B:
+                usePageNavigation+useReducedMotion+swipeDetector+useSwipeNavigation. 1 file&gt;250
+                LOC → split required em L2.
+              </li>
+              <li>
+                [2026-05-11 05:10 code-reviewer] L1: blocker — usePageNavigation 342 LOC &gt; 250
+                inviolável.
+              </li>
+              <li>
+                [2026-05-11 05:10 logic-reviewer] L1: keyboard handler void dropped; out-of-range
+                regex passed &#39;2026-13-99&#39;; missing swipe combined-boundary test.
+              </li>
+              <li>
+                [2026-05-11 05:10 dev] Split 342→201+153+63 LOC; .catch(console.error) keyboard;
+                round-trip Date.UTC validation; novos swipe tests.
+              </li>
+              <li>[2026-05-11 05:10 code-reviewer] Approve L2.</li>
+              <li>
+                [2026-05-11 05:10 logic-reviewer] L2: 1 minor — swipe path void mirrored same issue
+                → L3 consistency fix.
+              </li>
+              <li>[2026-05-11 05:10 dev] L3 final: swipe .catch consistency.</li>
+              <li>
+                [2026-05-11 05:10 dev] BATCH-C: useDailyPage useReducer+autosave
+                debounced+retry/backoff+beforeunload+localStorage life-raft. Snapshot-then-fire race
+                protection.
+              </li>
+              <li>
+                [2026-05-11 05:10 code-reviewer] L1: pendingFlushResolveRef dead code + finally
+                branch unreachable + console.error module-level patch leak.
+              </li>
+              <li>
+                [2026-05-11 05:10 logic-reviewer] L1 BLOCKER: retry-wait Promise hang (clearTimeout
+                cancels resolver) deadlocks flushSavePending. +3 majors.
+              </li>
+              <li>
+                [2026-05-11 05:10 dev] L2: retryRejectRef + AbortError catch; debounce drop fix;
+                beforeunload &#39;dirty&#39; guard; immutability test; dead code removed.
+              </li>
+              <li>[2026-05-11 05:10 code-reviewer] Approve L2.</li>
+              <li>
+                [2026-05-11 05:10 logic-reviewer] L2: MAJOR-F2 not-fixed — Effect 2 cleanup ordering
+                torna fire-and-forget unreachable. Dev L3 obrigatório.
+              </li>
+              <li>
+                [2026-05-11 05:10 dev] L3 escalado para opus high (matriz nota²: núcleo complexo,
+                última chance). Reducer-derived dirty signal substitui debounceTimerRef check —
+                imune a Effect cleanup ordering. +tests retry cancellation... (see manifest entry
+                FEAT-012-BATCH-C-dev-L3)
+              </li>
+              <li>[2026-05-11 05:10 logic-reviewer] Approve L3 — todos findings closed.</li>
+              <li>
+                [2026-05-11 05:10 dev] BATCH-D: 6 componentes + CSS modules + integration tests.
+                Strategy B two-layer crossing animation. 305 tests.
+              </li>
+              <li>
+                [2026-05-11 05:10 code-reviewer] L1: 2 majors (double-cast Agenda + barrel leaks
+                utils/API) + 5 minors.
+              </li>
+              <li>
+                [2026-05-11 05:10 logic-reviewer] L1: 4 majors (isAnimating guard ausente,
+                animationend ausente, 2 test gaps) + 5 minors.
+              </li>
+              <li>
+                [2026-05-11 05:10 dev] L2: shared types fixed (tuple priorities/agenda); barrel
+                scrubbed; isAnimatingRef guard; onAnimationEnd; reduced-motion tests; todos 16
+                findings fixed.
+              </li>
+              <li>
+                [2026-05-11 05:10 code-reviewer] Approve L2 (1 minor novo: review-artifact comment).
+              </li>
+              <li>
+                [2026-05-11 05:10 logic-reviewer] L2: 2 test rigor gaps remain (guard assertion
+                ausente; skeleton-in-incoming verifica post não during).
+              </li>
+              <li>
+                [2026-05-11 05:10 dev] L3 final: 3 guard tests + skeleton-in-incoming with within()
+                + remove review comment. 315 tests.
+              </li>
+              <li>[2026-05-11 05:10 logic-reviewer] Approve L3.</li>
+              <li>
+                [2026-05-11 05:10 dev] BATCH-E wiring: App.tsx + jest threshold path-specific +
+                CLAUDE.md. Identifou 2 débitos pré-existentes (build script stale emits, coverage
+                gap).
+              </li>
+              <li>
+                [2026-05-11 05:10 dev] Secondary dispatch: subir branch coverage daily-page
+                80.34%→91.33%. +45 testes em arquivos *.branches.test.{ts,tsx} sem tocar
+                implementação.
+              </li>
+              <li>
+                [2026-05-11 05:10 code-reviewer] L1: 1 major (console.error reassignment viola
+                interceptor) + 3 minors.
+              </li>
+              <li>
+                [2026-05-11 05:10 logic-reviewer] L1: 1 real concern — NFR-003 18KB chunk gzip não
+                autorizado para diferimento no spec.
+              </li>
+              <li>
+                [2026-05-11 05:10 code-reviewer] Approve L2 — PM aplicou os 4 fixes diretamente
+                (jest.spyOn, gitignore *.config.mjs, type FetchStub, vite manualChunks).
+              </li>
+              <li>
+                [2026-05-11 05:10 logic-reviewer] Approve L2 — NFR-003 fechado via vite.config.ts
+                manualChunks. Chunk daily-page = 6.00 KB gzip (&lt;18 KB).
+              </li>
+              <li>
+                [2026-05-11 05:10 qa] QA gate full: 54/54 AC pass, NFR-001/002/003 pass, SC-001..006
+                pass. 892 testes verdes. Coverage 91.33% &gt; 90%. Build chunk daily-page 6 KB gzip
+                &lt; 18 KB.
+              </li>
+              <li>
+                [2026-05-11 05:10 audit-agent] Audit identificou manifesto desincronizado durante
+                execução (L1 inicial). PM reconciliou o manifest pós-audit com todos 36 dispatches
+                efetivos. Estado pós-reconcile espelha realidade.
+              </li>
+            </ul>
+            <h2>Token cost</h2>
+            <p>Token cost not available — using dispatch count as cost proxy: 38 dispatches</p>
+          </div>
+        </details>
+      </section>
+    </main>
+  </body>
+</html>

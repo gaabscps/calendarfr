@@ -4,10 +4,48 @@
  * Covers: AC-008 (dynamic list from items[]), AC-010 (add button ≤10), AC-011 (add/remove wired),
  *         AC-014 (autoFocus on new item).
  *
+ * FEAT-018 AC-001/002/003 are covered by Priorities.onEnter.test.tsx.
+ *
  * These tests assert the NEW dynamic behaviour introduced in T-009.
  * The old integration tests in Priorities.integration.test.tsx cover AC numbering from
  * the old spec; T-010 will reconcile them.
+ *
+ * Mock strategy: RichTextBlock / RichTextLine rendered as <input> elements so that
+ * the onEnter prop can be triggered via keyDown simulation without Tiptap.
  */
+
+// Mock must appear before any React/testing imports so Jest hoisting works correctly.
+jest.mock('@/features/rich-text-line', () => {
+  const Editor = ({
+    value,
+    onChange,
+    ariaLabel,
+    autoFocus,
+    onEnter,
+  }: {
+    value: string;
+    onChange?: (_v: string) => void;
+    ariaLabel?: string;
+    autoFocus?: boolean;
+    onEnter?: () => void;
+  }) => (
+    <input
+      type="text"
+      value={value}
+      aria-label={ariaLabel}
+      autoFocus={autoFocus}
+      data-autofocus={autoFocus ? 'true' : undefined}
+      onChange={(e) => onChange?.(e.target.value)}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+          onEnter?.();
+        }
+      }}
+      data-testid={ariaLabel}
+    />
+  );
+  return { RichTextBlock: Editor, RichTextLine: Editor };
+});
 
 import { screen, waitFor } from '@testing-library/react';
 import { useState } from 'react';

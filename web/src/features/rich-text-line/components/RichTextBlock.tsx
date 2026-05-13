@@ -39,9 +39,14 @@ export function RichTextBlock({
   autoFocus = false,
   disabled = false,
   className,
+  onEnter,
+  onShiftEnter,
+  editorRef,
 }: RichTextBlockProps) {
   const hookOptions: Parameters<typeof useRichTextBlock>[0] = { value, onChange, disabled };
   if (placeholder !== undefined) hookOptions.placeholder = placeholder;
+  if (onEnter !== undefined) hookOptions.onEnter = onEnter;
+  if (onShiftEnter !== undefined) hookOptions.onShiftEnter = onShiftEnter;
 
   const editor = useRichTextBlock(hookOptions);
 
@@ -54,6 +59,20 @@ export function RichTextBlock({
     // Only run once on mount (editor settles after first render).
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [editor]);
+
+  // AC-012 / AC-011: sync Tiptap editor instance into editorRef so consumers
+  // (Agenda) can call editor.commands.focus('end') without importing Tiptap.
+  // Cleanup nulls the ref on unmount so callers never hold a stale destroyed Editor.
+  useEffect(() => {
+    if (editorRef) {
+      editorRef.current = editor ?? null;
+    }
+    return () => {
+      if (editorRef) {
+        editorRef.current = null;
+      }
+    };
+  }, [editor, editorRef]);
 
   // Apply aria-label to the inner contenteditable element that Tiptap renders.
   // EditorContent renders a div wrapper; the contenteditable is inside it.

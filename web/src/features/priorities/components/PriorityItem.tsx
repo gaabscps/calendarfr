@@ -31,6 +31,13 @@ export interface PriorityItemProps {
   onDelete?: () => void;
   /** Optional: whether the editor should auto-focus on mount. */
   autoFocus?: boolean;
+  /**
+   * Optional: called when ENTER is pressed (without Shift).
+   * When provided, the event is consumed and this callback is invoked instead
+   * of the Tiptap default (new paragraph).
+   * When absent, ENTER behaves as Tiptap default — new paragraph within item.
+   */
+  onEnter?: () => void;
 }
 
 /**
@@ -47,6 +54,7 @@ function PriorityItemBase({
   onToggleDone,
   onDelete,
   autoFocus,
+  onEnter,
 }: PriorityItemProps) {
   const slotNumber = index + 1;
 
@@ -68,7 +76,9 @@ function PriorityItemBase({
 
       {/* Editor — AC-010: placeholder per slot, AC-016: aria-label per slot.
           data-done propagates done-state to RichTextBlock for strikethrough
-          without piercing the Tiptap abstraction (CLAUDE.md rule 3). */}
+          without piercing the Tiptap abstraction (CLAUDE.md rule 3).
+          onEnter: when provided, ENTER creates a new priority (AC-001).
+          onShiftEnter NOT passed — SHIFT+ENTER uses Tiptap default hard break (AC-004). */}
       <div className={styles.editor} data-done={value.done ? 'true' : undefined}>
         <RichTextBlock
           value={value.text}
@@ -76,6 +86,7 @@ function PriorityItemBase({
           placeholder={placeholderForIndex(index)}
           ariaLabel={editorAriaLabel}
           {...(autoFocus !== undefined ? { autoFocus } : {})}
+          {...(onEnter !== undefined ? { onEnter } : {})}
         />
       </div>
 

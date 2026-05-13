@@ -85,15 +85,16 @@ function readFile(absPath: string): string {
 // ---------------------------------------------------------------------------
 
 describe('FEAT-017 PriorityItem CSS — baseline rhythm (AC-009, AC-010, AC-013, AC-026)', () => {
-  it('.item height is var(--baseline) — AC-009/AC-010 (24px row)', () => {
+  it('.item min-height is var(--baseline) — AC-009/AC-010 (24px snap, expands on Enter)', () => {
     const css = readFile(PRIORITY_ITEM_CSS);
-    expect(css).toMatch(/\.item\s*\{[^}]*height:\s*var\(--baseline\)/);
+    expect(css).toMatch(/\.item\s*\{[^}]*min-height:\s*var\(--baseline\)/);
+    expect(css).not.toMatch(/\.item\s*\{[^}]*[^-]height:\s*var\(--baseline\)/);
   });
 
-  it('.item uses align-items: center (not flex-start)', () => {
+  it('.item uses align-items: flex-start (multi-line ENTER support)', () => {
     const css = readFile(PRIORITY_ITEM_CSS);
-    expect(css).toMatch(/\.item\s*\{[^}]*align-items:\s*center/);
-    expect(css).not.toMatch(/\.item\s*\{[^}]*align-items:\s*flex-start/);
+    expect(css).toMatch(/\.item\s*\{[^}]*align-items:\s*flex-start/);
+    expect(css).not.toMatch(/\.item\s*\{[^}]*align-items:\s*center/);
   });
 
   it('does not define a .checkboxWrapper rule (atom Checkbox is already 24×24)', () => {

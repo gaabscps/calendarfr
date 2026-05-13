@@ -66,6 +66,7 @@ export function Notes({ value, onChange }: NotesProps) {
           onCyclePrefix={onCyclePrefix}
           onRemove={onRemove}
           autoFocus={note.id === justAddedIdRef.current}
+          onEnter={onAdd}
         />
       ))}
 

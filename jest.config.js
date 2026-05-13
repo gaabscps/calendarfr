@@ -37,6 +37,7 @@ const config = {
     '/server/dist/',
     '/e2e/',
     '/storybook-static/',
+    '/.agent-session/',
     // Shared helper modules placed inside __tests__/ — not test suites themselves.
     '/__tests__/helpers\\.ts$',
   ],

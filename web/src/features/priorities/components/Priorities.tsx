@@ -48,6 +48,9 @@ export function Priorities({ value, onChange }: PrioritiesProps) {
     <section className={styles.section} aria-label="Prioridades do dia">
       {items.map((item, index) => {
         const canDelete = items.length > 1;
+        // AC-001: when below the 10-item limit, ENTER calls addPriority via onEnter.
+        // AC-002: when at the limit, onEnter is undefined → ENTER falls through to Tiptap default.
+        const enterHandler = items.length < 10 ? addPriority : undefined;
         return (
           <PriorityItem
             key={item.id}
@@ -57,6 +60,7 @@ export function Priorities({ value, onChange }: PrioritiesProps) {
             onToggleDone={() => onToggleDone(index)}
             {...(canDelete ? { onDelete: () => removePriority(index) } : {})}
             autoFocus={index === items.length - 1 && items.length > prevLengthRef.current}
+            {...(enterHandler !== undefined ? { onEnter: enterHandler } : {})}
           />
         );
       })}

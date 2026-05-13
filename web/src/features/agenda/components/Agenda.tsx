@@ -11,6 +11,8 @@
 
 import { useMemo } from 'react';
 
+import type { RichTextEditorRef } from '@/features/rich-text-line';
+
 import { useAgenda } from '../hooks/useAgenda.js';
 import { useCurrentHour } from '../hooks/useCurrentHour.js';
 import { normalizeAgenda } from '../lib/normalizeAgenda.js';
@@ -67,6 +69,33 @@ export function Agenda({ value, onChange, now }: AgendaProps) {
     return map;
   }, [onChangeText]);
 
+  // Stable refs map — created once (no deps). Each ref holds the Tiptap Editor
+  // instance for that hour slot, populated by RichTextBlock via editorRef prop.
+  // AC-009, AC-011.
+  const editorRefs = useMemo(() => {
+    const map = new Map<number, RichTextEditorRef>();
+    for (const hour of AGENDA_HOURS) {
+      map.set(hour, { current: null });
+    }
+    return map;
+  }, []);
+
+  // SHIFT+ENTER handlers — one per slot. Each handler focuses the next slot's
+  // editor at the end of its content (circular: 23h → 06h).
+  // AC-009: consumes event (handled by useRichTextBlock returning true).
+  // AC-010: (i + 1) % AGENDA_HOURS.length ensures 23h wraps to 06h.
+  // AC-011: editor.commands.focus('end') positions cursor at end.
+  const slotShiftEnterHandlers = useMemo(() => {
+    const map = new Map<number, () => void>();
+    for (let i = 0; i < AGENDA_HOURS.length; i++) {
+      const nextHour = AGENDA_HOURS[(i + 1) % AGENDA_HOURS.length]!;
+      map.set(AGENDA_HOURS[i]!, () => {
+        editorRefs.get(nextHour)?.current?.commands.focus('end');
+      });
+    }
+    return map;
+  }, [editorRefs]);
+
   return (
     <section className={styles.section} aria-label="Agenda do dia">
       {slots.map((slot) => (
@@ -77,6 +106,8 @@ export function Agenda({ value, onChange, now }: AgendaProps) {
           // same set, so .get is always defined. `!` is sound here.
           onChange={slotHandlers.get(slot.hour)!}
           isCurrentHour={slot.hour === currentHour}
+          onShiftEnter={slotShiftEnterHandlers.get(slot.hour)!}
+          editorRef={editorRefs.get(slot.hour)!}
         />
       ))}
     </section>

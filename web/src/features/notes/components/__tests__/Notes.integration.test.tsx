@@ -250,15 +250,14 @@ describe('FEAT-017 NoteItem CSS — baseline rhythm (AC-028)', () => {
     expect(css).toMatch(/\.note\s*\{[^}]*height:\s*var\(--baseline\)/);
   });
 
-  it('.note row uses align-items: center (not flex-start)', () => {
+  it('.note row uses align-items: flex-start (FEAT-018 keyboard UX pre-condition)', () => {
     const css = readFile(NOTE_ITEM_CSS);
-    expect(css).toMatch(/\.note\s*\{[^}]*align-items:\s*center/);
-    expect(css).not.toMatch(/\.note\s*\{[^}]*align-items:\s*flex-start/);
+    expect(css).toMatch(/\.note\s*\{[^}]*align-items:\s*flex-start/);
   });
 
-  it('.note row clips overflow so long text cannot break the 24px snap', () => {
+  it('.note row does not clip overflow — multi-line notes expand naturally (FEAT-018)', () => {
     const css = readFile(NOTE_ITEM_CSS);
-    expect(css).toMatch(/\.note\s*\{[^}]*overflow:\s*hidden/);
+    expect(css).not.toMatch(/\.note\s*\{[^}]*overflow:\s*hidden/);
   });
 
   it('.prefixButton min-width/min-height reference var(--baseline) (no 24px literal)', () => {

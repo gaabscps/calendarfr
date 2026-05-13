@@ -38,6 +38,8 @@ export interface NoteItemProps {
   onRemove: (id: string) => void;
   /** Whether the editor should receive focus on mount (for newly-added notes). */
   autoFocus: boolean;
+  /** Called when ENTER is pressed (no modifier) — triggers note creation. */
+  onEnter?: () => void;
 }
 
 function NoteItemBase({
@@ -48,6 +50,7 @@ function NoteItemBase({
   onCyclePrefix,
   onRemove,
   autoFocus,
+  onEnter,
 }: NoteItemProps) {
   const slotNumber = index + 1;
 
@@ -86,6 +89,7 @@ function NoteItemBase({
           onChange={handleChangeText}
           ariaLabel={editorAriaLabel}
           autoFocus={autoFocus}
+          {...(onEnter !== undefined ? { onEnter } : {})}
         />
       </div>
 

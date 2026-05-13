@@ -18,13 +18,10 @@
 .note {
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: flex-start;
   gap: var(--spacing-xs);
   width: 100%;
-  height: var(--baseline);
-  /* AC-028: strict 24px snap — clip long text instead of letting the editor
-     child expand past var(--baseline). */
-  overflow: hidden;
+  min-height: var(--baseline);
 }
 
 /* Reveal remove button on hover or keyboard focus-within (a11y: AC-019) */

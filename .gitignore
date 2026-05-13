@@ -63,4 +63,4 @@ yarn.lock
 
 # ai-squad per-repo hook install (managed by `ai-squad deploy`)
 .claude/hooks/
-docs/agentops/
+docs/superpowers/

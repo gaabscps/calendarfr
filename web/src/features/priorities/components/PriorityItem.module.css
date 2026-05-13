@@ -20,10 +20,10 @@
 .item {
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: flex-start;
   gap: var(--spacing-sm);
   width: 100%;
-  height: var(--baseline);
+  min-height: var(--baseline);
 }
 
 /* ── Editor area ── */

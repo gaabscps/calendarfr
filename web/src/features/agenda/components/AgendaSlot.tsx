@@ -11,6 +11,7 @@
 import React from 'react';
 
 import { RichTextBlock } from '@/features/rich-text-line';
+import type { RichTextEditorRef } from '@/features/rich-text-line';
 
 import { formatHourAriaLabel, formatHourLabel } from '../lib/formatHour.js';
 import type { AgendaSlot as AgendaSlotType } from '../types.js';
@@ -31,6 +32,16 @@ export interface AgendaSlotProps {
    * Covers AC-018.
    */
   isCurrentHour: boolean;
+  /**
+   * Called (no args) when the user presses SHIFT+ENTER in this slot.
+   * Moves focus to the next slot (circular). AC-009.
+   */
+  onShiftEnter?: () => void;
+  /**
+   * Ref to the editor instance (set by RichTextBlock on mount) for this slot.
+   * Used by parent (Agenda) to programmatically focus this editor. AC-009, AC-011.
+   */
+  editorRef?: RichTextEditorRef;
 }
 
 /**
@@ -50,7 +61,13 @@ export interface AgendaSlotProps {
  * Placeholder: empty string (no visual noise for 18 lines — spec open question
  * resolved to "no placeholder" to avoid cluttering the timeline).
  */
-function AgendaSlotBase({ slot, onChange, isCurrentHour }: AgendaSlotProps) {
+function AgendaSlotBase({
+  slot,
+  onChange,
+  isCurrentHour,
+  onShiftEnter,
+  editorRef,
+}: AgendaSlotProps) {
   const slotClassName = [styles.slot, isCurrentHour ? styles.currentHour : '']
     .filter(Boolean)
     .join(' ');
@@ -76,6 +93,8 @@ function AgendaSlotBase({ slot, onChange, isCurrentHour }: AgendaSlotProps) {
           onChange={onChange}
           placeholder=""
           ariaLabel={formatHourAriaLabel(slot.hour)}
+          {...(onShiftEnter !== undefined ? { onShiftEnter } : {})}
+          {...(editorRef !== undefined ? { editorRef } : {})}
         />
       </div>
     </div>
