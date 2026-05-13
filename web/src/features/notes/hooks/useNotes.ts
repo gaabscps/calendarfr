@@ -18,6 +18,7 @@
  */
 
 import type { Note } from '@calendarfr/shared';
+import { arrayMove } from '@dnd-kit/sortable';
 import { useCallback, useRef } from 'react';
 // `@/shared/utils/id/createId.ts` is not present (Plan fallback path); usePriorities
 // uses the same `ulid` package, keeping the ULID source consistent across features.
@@ -53,6 +54,13 @@ export interface UseNotesReturn {
    * Covers AC-008, AC-009.
    */
   onCyclePrefix: (id: string) => void;
+
+  /**
+   * Moves the note at oldIndex to newIndex using arrayMove from @dnd-kit/sortable.
+   * Calls onChange with the reordered array. Handler is permanently stable (deps: []).
+   * Covers AC-016, AC-017.
+   */
+  reorder: (oldIndex: number, newIndex: number) => void;
 
   /**
    * Ref set to the newly-created note id synchronously inside onAdd, before
@@ -100,5 +108,9 @@ export function useNotes(value: Note[], onChange: (next: Note[]) => void): UseNo
     );
   }, []);
 
-  return { onAdd, onRemove, onChangeText, onCyclePrefix, justAddedIdRef };
+  const reorder = useCallback((oldIndex: number, newIndex: number) => {
+    onChangeRef.current(arrayMove(valueRef.current, oldIndex, newIndex));
+  }, []);
+
+  return { onAdd, onRemove, onChangeText, onCyclePrefix, reorder, justAddedIdRef };
 }

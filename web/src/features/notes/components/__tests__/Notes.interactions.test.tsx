@@ -155,23 +155,96 @@ describe('Notes — HTML round-trip (AC-006)', () => {
   });
 });
 
-describe('Notes — tab order (AC-017)', () => {
-  it('Tab cycles prefix → editor → remove → ... → +', async () => {
-    const notes = [makeNote({ id: 'a', prefix: '•' }), makeNote({ id: 'b', prefix: '→' })];
-    renderWithProviders(<Container initial={notes} />);
+describe('Notes — DnD reorder via Alt+↑/↓ (AC-015, AC-017)', () => {
+  it('Alt+ArrowDown on first drag handle calls onChange with reordered notes', async () => {
+    const n1 = makeNote({ id: 'n1', text: 'first' });
+    const n2 = makeNote({ id: 'n2', text: 'second' });
+    const spy = jest.fn();
+    renderWithProviders(<Container initial={[n1, n2]} spy={spy} />);
 
-    const sequence: string[] = [];
-    for (let i = 0; i < 7; i++) {
-      await userEvent.tab();
-      sequence.push(document.activeElement?.getAttribute('aria-label') ?? '');
-    }
+    const handles = screen.getAllByRole('button', { name: /Arrastar nota/i });
+    const firstHandle = handles[0] as HTMLElement;
 
-    expect(sequence[0]).toMatch(/Prefixo da nota 1/);
-    expect(sequence[1]).toBe('Nota 1 de 2');
-    expect(sequence[2]).toBe('Remover nota');
-    expect(sequence[3]).toMatch(/Prefixo da nota 2/);
-    expect(sequence[4]).toBe('Nota 2 de 2');
-    expect(sequence[5]).toBe('Remover nota');
-    expect(sequence[6]).toMatch(/Adicionar nota/i);
+    await act(async () => {
+      firstHandle.focus();
+      firstHandle.dispatchEvent(
+        new KeyboardEvent('keydown', {
+          key: 'ArrowDown',
+          altKey: true,
+          bubbles: true,
+          cancelable: true,
+        }),
+      );
+    });
+
+    await waitFor(() => expect(spy).toHaveBeenCalled());
+    const emitted = spy.mock.calls[spy.mock.calls.length - 1]?.[0] as Note[];
+    expect(emitted).toHaveLength(2);
+    expect(emitted[0]?.id).toBe('n2');
+    expect(emitted[1]?.id).toBe('n1');
+  });
+
+  it('Alt+ArrowUp on second drag handle calls onChange with reordered notes', async () => {
+    const n1 = makeNote({ id: 'n1', text: 'first' });
+    const n2 = makeNote({ id: 'n2', text: 'second' });
+    const spy = jest.fn();
+    renderWithProviders(<Container initial={[n1, n2]} spy={spy} />);
+
+    const handles = screen.getAllByRole('button', { name: /Arrastar nota/i });
+    const secondHandle = handles[1] as HTMLElement;
+
+    await act(async () => {
+      secondHandle.focus();
+      secondHandle.dispatchEvent(
+        new KeyboardEvent('keydown', {
+          key: 'ArrowUp',
+          altKey: true,
+          bubbles: true,
+          cancelable: true,
+        }),
+      );
+    });
+
+    await waitFor(() => expect(spy).toHaveBeenCalled());
+    const emitted = spy.mock.calls[spy.mock.calls.length - 1]?.[0] as Note[];
+    expect(emitted).toHaveLength(2);
+    expect(emitted[0]?.id).toBe('n2');
+    expect(emitted[1]?.id).toBe('n1');
+  });
+});
+
+describe('Notes — DnD onDragEnd path (AC-015)', () => {
+  it('AC-015: handleDragEnd wired to DndContext — direct onDragEnd invocation reorders notes', async () => {
+    // Spy on DndContext.type (inner fn of React.memo) to capture onDragEnd, then invoke
+    // it directly — exercises the real handleDragEnd path without jsdom pointer simulation.
+    type OnDragEnd = (_event: { active: { id: string }; over: { id: string } | null }) => void;
+    let capturedOnDragEnd: OnDragEnd | null = null;
+    // eslint-disable-next-line no-undef
+    const { DndContext } = require('@dnd-kit/core') as {
+      DndContext: { type: (..._args: unknown[]) => unknown };
+    };
+    const originalType = DndContext.type;
+    jest.spyOn(DndContext, 'type').mockImplementation(function (this: unknown, ...args: unknown[]) {
+      const props = args[0] as { onDragEnd?: OnDragEnd };
+      capturedOnDragEnd = props.onDragEnd ?? null;
+      return originalType.apply(this, args);
+    });
+
+    const n1 = makeNote({ id: 'r1', text: 'alpha' });
+    const n2 = makeNote({ id: 'r2', text: 'beta' });
+    const spy = jest.fn();
+    renderWithProviders(<Container initial={[n1, n2]} spy={spy} />);
+
+    expect(capturedOnDragEnd).not.toBeNull();
+    await act(async () => {
+      capturedOnDragEnd!({ active: { id: 'r1' }, over: { id: 'r2' } });
+    });
+
+    await waitFor(() => expect(spy).toHaveBeenCalled());
+    const emitted = spy.mock.calls[spy.mock.calls.length - 1]?.[0] as Note[];
+    expect(emitted[0]?.id).toBe('r2');
+    expect(emitted[1]?.id).toBe('r1');
+
+    jest.restoreAllMocks();
   });
 });

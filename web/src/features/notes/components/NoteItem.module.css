@@ -1,9 +1,11 @@
 /**
  * NoteItem styles — CSS Module.
  *
- * Single note row: prefix button | editor (flex 1) | remove button (hover/focus).
+ * Single note row: drag handle (optional) | prefix button | editor (flex 1) | remove button.
  * Tokens use CSS custom properties from GlobalStyles (FEAT-001).
  *
+ * AC-013: drag handle visible on hover/focus-within when canReorder=true.
+ * AC-018: .lifted state applied when isDragging=true (useSortable integration).
  * AC-019: focus ring via IconButton atom (var(--focus-ring)) on all interactive elements.
  * AC-025: zero inline outlines — focus handled by IconButton atom.
  * NFR-004: WCAG 2.1 AA — opacity-0 × button is revealed on hover AND focus-within.
@@ -28,6 +30,40 @@
 .note:hover .removeButton,
 .note:focus-within .removeButton {
   opacity: 1;
+}
+
+/* Reveal drag handle on hover or keyboard focus-within (AC-013) */
+.note:hover .dragHandle,
+.note:focus-within .dragHandle {
+  opacity: 1;
+}
+
+/* ── Drag handle (AC-013, AC-018) ── */
+.dragHandle {
+  flex-shrink: 0;
+  opacity: 0;
+  cursor: grab;
+  color: var(--color-ink-muted);
+  min-width: var(--baseline);
+  min-height: var(--baseline);
+  background: none;
+  border: none;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity var(--motion-fast) ease;
+}
+
+.dragHandle:focus-visible {
+  opacity: 1;
+}
+
+/* ── Lifted state when dragging (AC-019) ── */
+.lifted {
+  box-shadow: var(--shadow-floating);
+  opacity: 0.85;
+  z-index: var(--z-dropdown);
 }
 
 /* ── Prefix button overrides (extends IconButton ghost) ── */

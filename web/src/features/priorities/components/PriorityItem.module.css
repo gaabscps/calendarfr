@@ -14,6 +14,8 @@
  * keeps the 18×18 checkbox visual centred on the 24px row. The previous
  * .checkboxWrapper was removed — the Checkbox atom is already a 24×24 inline
  * hit-area, no extra wrapper needed.
+ *
+ * FEAT-019: .dragHandle + .lifted for AC-001, AC-006, AC-007 (drag-reorder).
  */
 
 /* ── Wrapper ── */
@@ -43,4 +45,38 @@
 .item:hover .deleteButton,
 .item:focus-within .deleteButton {
   opacity: 1;
+}
+
+/* ── Drag handle — AC-001, AC-010 (FEAT-019) ── */
+.dragHandle {
+  flex-shrink: 0;
+  min-width: var(--baseline);
+  min-height: var(--baseline);
+  opacity: 0;
+  transition: opacity var(--motion-fast);
+  cursor: grab;
+  color: var(--color-ink-muted);
+  background: none;
+  border: none;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+.item:hover .dragHandle,
+.item:focus-within .dragHandle {
+  opacity: 1;
+}
+
+.dragHandle:active {
+  cursor: grabbing;
+}
+
+/* ── Lifted state (while dragging) — AC-006 (FEAT-019) ── */
+.lifted {
+  box-shadow: var(--shadow-floating);
+  opacity: 0.85;
+  z-index: var(--z-dropdown);
 }

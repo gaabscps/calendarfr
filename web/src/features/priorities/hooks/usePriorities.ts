@@ -2,11 +2,11 @@
  * usePriorities — thin hook managing id stability and immutable updates for
  * the dynamic priority list (1–10 items).
  *
- * Covers: AC-001, AC-002, AC-004, AC-007, AC-011, AC-020.
+ * Covers: AC-001, AC-002, AC-004, AC-005, AC-007, AC-011, AC-020.
  *
  * Contract:
  * - Receives (value: Priority[], onChange: (next: Priority[]) => void).
- * - Returns { items, onChangeText, onToggleDone, onChangeItem, addPriority, removePriority }.
+ * - Returns { items, onChangeText, onToggleDone, onChangeItem, addPriority, removePriority, reorder }.
  * - No internal state, no async effects, no fetch.
  *
  * ULID id-stability rules:
@@ -19,6 +19,7 @@
  */
 
 import type { Priority } from '@calendarfr/shared';
+import { arrayMove } from '@dnd-kit/sortable';
 import { useCallback, useMemo } from 'react';
 import { ulid } from 'ulid';
 
@@ -52,6 +53,11 @@ export interface UsePrioritiesReturn {
    * No-op if items.length <= 1 (minimum 1 item). Covers AC-010, AC-011.
    */
   removePriority: (index: number) => void;
+  /**
+   * Reorder: move item from oldIndex to newIndex using arrayMove.
+   * Calls onChange with the reordered array. Covers AC-004, AC-005.
+   */
+  reorder: (oldIndex: number, newIndex: number) => void;
 }
 
 /** Produces a new stable id: reuses existing if non-empty, else generates ULID. */
@@ -118,5 +124,12 @@ export function usePriorities(
     [items, onChange],
   );
 
-  return { items, onChangeText, onToggleDone, onChangeItem, addPriority, removePriority };
+  const reorder = useCallback(
+    (oldIndex: number, newIndex: number) => {
+      onChange(arrayMove(items, oldIndex, newIndex));
+    },
+    [items, onChange],
+  );
+
+  return { items, onChangeText, onToggleDone, onChangeItem, addPriority, removePriority, reorder };
 }

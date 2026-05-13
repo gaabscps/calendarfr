@@ -4,9 +4,12 @@
  * Wrapped in React.memo with default shallow comparator.
  * Props are primitives + stable callbacks — no expensive re-renders.
  *
- * Covers: AC-012, AC-013, AC-014, AC-015, AC-028.
+ * Covers: AC-012, AC-013, AC-014, AC-015, AC-028 (FEAT-008/FEAT-018).
+ * FEAT-019: AC-001, AC-006, AC-007, AC-008, AC-010 — drag handle + useSortable + Alt+↑/↓.
  */
 
+import { useSortable } from '@dnd-kit/sortable';
+import { CSS } from '@dnd-kit/utilities';
 import React from 'react';
 
 import { RichTextBlock } from '@/features/rich-text-line';
@@ -49,13 +52,21 @@ export interface PriorityItemProps {
    * parent container can call `editor.commands.focus('end')` after removals.
    */
   editorRef?: RichTextEditorRef;
+  /** FEAT-019: when true, renders the drag handle (⠿) as first child. */
+  canReorder?: boolean;
+  /** FEAT-019: called when Alt+↑ is pressed on the drag handle. */
+  onMoveUp?: () => void;
+  /** FEAT-019: called when Alt+↓ is pressed on the drag handle. */
+  onMoveDown?: () => void;
+  /** FEAT-019: ref forwarded to the drag handle button for post-reorder focus. */
+  dragHandleRef?: React.RefObject<HTMLButtonElement | null>;
 }
 
 /**
- * Single priority row: Checkbox atom + rich text editor + optional IconButton delete.
+ * Single priority row: [drag handle?] [checkbox] [editor] [delete?]
  *
- * DOM order per slot: [checkbox] [editor] [delete?] — matches AC-014 natural tab order.
- * No tabIndex hacks needed: the native <input> and contenteditable are both
+ * DOM order per slot: drag handle is first so focus order is logical.
+ * No tabIndex hacks needed: the native <input> and contenteditable are
  * tab-focusable in DOM order by default.
  */
 function PriorityItemBase({
@@ -68,6 +79,10 @@ function PriorityItemBase({
   onEnter,
   onBackspaceEmpty,
   editorRef,
+  canReorder,
+  onMoveUp,
+  onMoveDown,
+  dragHandleRef,
 }: PriorityItemProps) {
   const slotNumber = index + 1;
 
@@ -77,8 +92,50 @@ function PriorityItemBase({
 
   const editorAriaLabel = `Prioridade ${String(slotNumber)} do dia`;
 
+  const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
+    id: value.id,
+    attributes: { roleDescription: 'reordenável' },
+  });
+
+  const wrapperStyle: React.CSSProperties = {
+    transform: CSS.Transform.toString(transform),
+    transition: transition ?? undefined,
+  };
+
+  function handleDragHandleKeyDown(event: React.KeyboardEvent<HTMLButtonElement>) {
+    if (event.altKey && event.key === 'ArrowUp') {
+      event.preventDefault();
+      onMoveUp?.();
+    } else if (event.altKey && event.key === 'ArrowDown') {
+      event.preventDefault();
+      onMoveDown?.();
+    } else {
+      // Delegate non-Alt keys to @dnd-kit's keyboard handler (space/enter/escape).
+      listeners?.onKeyDown?.(event);
+    }
+  }
+
   return (
-    <div className={styles.item}>
+    <div
+      ref={setNodeRef}
+      style={wrapperStyle}
+      className={`${styles.item}${isDragging ? ` ${styles.lifted}` : ''}`}
+    >
+      {/* Drag handle — AC-001, AC-007, AC-010: only rendered when canReorder=true */}
+      {canReorder && (
+        <button
+          type="button"
+          ref={dragHandleRef}
+          className={styles.dragHandle}
+          aria-label={`Arrastar prioridade ${String(slotNumber)}`}
+          {...attributes}
+          {...listeners}
+          onKeyDown={handleDragHandleKeyDown}
+        >
+          ⠿
+        </button>
+      )}
+
       {/* Checkbox atom — AC-028 (FEAT-016) + AC-026 (FEAT-017): no extra wrapper.
           Checkbox atom is already a 24×24 inline hit-area aligned with the row. */}
       <Checkbox

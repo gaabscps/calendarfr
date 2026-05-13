@@ -3,12 +3,20 @@
  *
  * Purely controlled: receives value + onChange, no internal async, no fetch.
  * Delegates state management to usePriorities hook (id stability, toggle, edit,
- * add, remove).
+ * add, remove, reorder).
  *
- * Covers: AC-008, AC-010, AC-011, AC-014 (T-009), AC-007, AC-025 (T-010).
+ * Covers: AC-002, AC-003, AC-005, AC-008, AC-009, AC-010, AC-011, AC-012,
+ *         AC-014 (T-009), AC-007, AC-025, AC-026 (T-010).
  */
 
-import { useEffect, useRef } from 'react';
+import { DndContext, KeyboardSensor, PointerSensor, useSensor, useSensors } from '@dnd-kit/core';
+import type { DragEndEvent } from '@dnd-kit/core';
+import {
+  SortableContext,
+  sortableKeyboardCoordinates,
+  verticalListSortingStrategy,
+} from '@dnd-kit/sortable';
+import { useCallback, useEffect, useMemo, useRef } from 'react';
 
 import type { RichTextEditorRef } from '@/features/rich-text-line';
 import { Button } from '@/shared/components/Button';
@@ -22,7 +30,7 @@ import { PriorityItem } from './PriorityItem.js';
 export interface PrioritiesProps {
   /** Current list of priorities — controlled. */
   value: Priority[];
-  /** Emitted on every text edit, checkbox toggle, add, or remove with the updated array. */
+  /** Emitted on every text edit, checkbox toggle, add, remove, or reorder. */
   onChange: (next: Priority[]) => void;
 }
 
@@ -32,23 +40,98 @@ export interface PrioritiesProps {
  * Add button appears below the list when items.length < 10 (AC-010).
  * Delete button on each item is hidden when only 1 item remains (AC-011).
  * The last added item receives autoFocus via prevLengthRef tracking (AC-014).
+ * DndContext + SortableContext enable drag-and-drop reorder (AC-002, AC-003).
  */
 export function Priorities({ value, onChange }: PrioritiesProps) {
-  const { items, onChangeText, onToggleDone, addPriority, removePriority } = usePriorities(
+  const { items, onChangeText, onToggleDone, addPriority, removePriority, reorder } = usePriorities(
     value,
     onChange,
   );
 
-  // Track previous length to detect when a new item is appended (AC-014).
+  // ---- DnD sensors (AC-009, AC-025) ----
+  const sensors = useSensors(
+    useSensor(PointerSensor, { activationConstraint: { distance: 5 } }),
+    useSensor(KeyboardSensor, { coordinateGetter: sortableKeyboardCoordinates }),
+  );
+
+  // ---- Announcements PT-BR (AC-025, AC-026) ----
+  const announcements = useMemo(
+    () => ({
+      onDragStart({ active }: { active: { id: string | number } }) {
+        const pos = items.findIndex((i) => i.id === active.id) + 1;
+        const total = items.length;
+        return `Item levantado. Posição atual ${pos} de ${total}. Use as setas para mover, espaço ou Enter para soltar, Escape para cancelar.`;
+      },
+      onDragOver({
+        over,
+      }: {
+        active: { id: string | number };
+        over: { id: string | number } | null;
+      }) {
+        if (!over) return '';
+        const pos = items.findIndex((i) => i.id === over.id) + 1;
+        return `Item movido para posição ${pos} de ${items.length}.`;
+      },
+      onDragEnd({
+        over,
+      }: {
+        active: { id: string | number };
+        over: { id: string | number } | null;
+      }) {
+        if (!over) return '';
+        const pos = items.findIndex((i) => i.id === over.id) + 1;
+        return `Item solto em posição ${pos}.`;
+      },
+      onDragCancel() {
+        return 'Reordenação cancelada.';
+      },
+    }),
+    [items],
+  );
+
+  // ---- handleDragEnd (AC-002, AC-003, AC-005) ----
+  const handleDragEnd = useCallback(
+    ({ active, over }: DragEndEvent) => {
+      if (over && active.id !== over.id) {
+        const oldIndex = items.findIndex((item) => item.id === active.id);
+        const newIndex = items.findIndex((item) => item.id === over.id);
+        if (oldIndex !== -1 && newIndex !== -1) {
+          reorder(oldIndex, newIndex);
+          focusAfterReorderRef.current = String(active.id);
+        }
+      }
+    },
+    [items, reorder],
+  );
+
+  // ---- Drag handle refs (AC-011, AC-012) ----
+  const dragHandleRefsRef = useRef<Map<string, React.RefObject<HTMLButtonElement | null>>>(
+    new Map(),
+  );
+  const getDragHandleRef = useCallback((id: string): React.RefObject<HTMLButtonElement | null> => {
+    if (!dragHandleRefsRef.current.has(id)) {
+      dragHandleRefsRef.current.set(id, { current: null });
+    }
+    return dragHandleRefsRef.current.get(id)!;
+  }, []);
+
+  // ---- Focus tracking after reorder (AC-011, AC-012) ----
+  const focusAfterReorderRef = useRef<string | null>(null);
+  useEffect(() => {
+    const id = focusAfterReorderRef.current;
+    if (id) {
+      focusAfterReorderRef.current = null;
+      dragHandleRefsRef.current.get(id)?.current?.focus();
+    }
+  });
+
+  // ---- Auto-focus after add (AC-014) ----
   const prevLengthRef = useRef(items.length);
   useEffect(() => {
     prevLengthRef.current = items.length;
   });
 
-  // Stable per-id editor refs so Backspace-to-delete can focus the surviving
-  // neighbour after a remove. Map persists across renders; entries created
-  // lazily and pruned by GC when ids disappear (not strictly leaked because the
-  // map itself is component-scoped and dies on unmount).
+  // ---- Editor refs for Backspace-to-delete focus restore ----
   const editorRefsRef = useRef<Map<string, RichTextEditorRef>>(new Map());
   function getEditorRef(id: string): RichTextEditorRef {
     let ref = editorRefsRef.current.get(id);
@@ -59,8 +142,6 @@ export function Priorities({ value, onChange }: PrioritiesProps) {
     return ref;
   }
 
-  // Pending focus target after a Backspace-driven remove. Read inside a layout
-  // useEffect so the focus call happens after the new items array has rendered.
   const focusAfterRemoveRef = useRef<string | null>(null);
   useEffect(() => {
     const targetId = focusAfterRemoveRef.current;
@@ -71,36 +152,53 @@ export function Priorities({ value, onChange }: PrioritiesProps) {
 
   return (
     <section className={styles.section} aria-label="Prioridades do dia">
-      {items.map((item, index) => {
-        const canDelete = items.length > 1;
-        // AC-001: when below the 10-item limit, ENTER calls addPriority via onEnter.
-        // AC-002: when at the limit, onEnter is undefined → ENTER falls through to Tiptap default.
-        const enterHandler = items.length < 10 ? addPriority : undefined;
-        // Bullet UX: BACKSPACE on an empty editor removes the priority and
-        // refocuses the surviving neighbour. Disabled when canDelete=false
-        // (single remaining item — enforce minimum-1 invariant).
-        const backspaceHandler = canDelete
-          ? () => {
-              const prevId = items[index - 1]?.id ?? items[index + 1]?.id ?? null;
-              focusAfterRemoveRef.current = prevId;
-              removePriority(index);
-            }
-          : undefined;
-        return (
-          <PriorityItem
-            key={item.id}
-            value={item}
-            index={index}
-            onChangeText={(html: string) => onChangeText(index, html)}
-            onToggleDone={() => onToggleDone(index)}
-            {...(canDelete ? { onDelete: () => removePriority(index) } : {})}
-            autoFocus={index === items.length - 1 && items.length > prevLengthRef.current}
-            {...(enterHandler !== undefined ? { onEnter: enterHandler } : {})}
-            {...(backspaceHandler !== undefined ? { onBackspaceEmpty: backspaceHandler } : {})}
-            editorRef={getEditorRef(item.id)}
-          />
-        );
-      })}
+      <DndContext sensors={sensors} accessibility={{ announcements }} onDragEnd={handleDragEnd}>
+        <SortableContext items={items.map((i) => i.id)} strategy={verticalListSortingStrategy}>
+          {items.map((item, index) => {
+            const canDelete = items.length > 1;
+            const enterHandler = items.length < 10 ? addPriority : undefined;
+            const backspaceHandler = canDelete
+              ? () => {
+                  const prevId = items[index - 1]?.id ?? items[index + 1]?.id ?? null;
+                  focusAfterRemoveRef.current = prevId;
+                  removePriority(index);
+                }
+              : undefined;
+            const moveUpHandler =
+              index > 0
+                ? () => {
+                    focusAfterReorderRef.current = item.id;
+                    reorder(index, index - 1);
+                  }
+                : undefined;
+            const moveDownHandler =
+              index < items.length - 1
+                ? () => {
+                    focusAfterReorderRef.current = item.id;
+                    reorder(index, index + 1);
+                  }
+                : undefined;
+            return (
+              <PriorityItem
+                key={item.id}
+                value={item}
+                index={index}
+                onChangeText={(html: string) => onChangeText(index, html)}
+                onToggleDone={() => onToggleDone(index)}
+                {...(canDelete ? { onDelete: () => removePriority(index) } : {})}
+                autoFocus={index === items.length - 1 && items.length > prevLengthRef.current}
+                {...(enterHandler !== undefined ? { onEnter: enterHandler } : {})}
+                {...(backspaceHandler !== undefined ? { onBackspaceEmpty: backspaceHandler } : {})}
+                editorRef={getEditorRef(item.id)}
+                canReorder={items.length > 1}
+                {...(moveUpHandler !== undefined ? { onMoveUp: moveUpHandler } : {})}
+                {...(moveDownHandler !== undefined ? { onMoveDown: moveDownHandler } : {})}
+                dragHandleRef={getDragHandleRef(item.id)}
+              />
+            );
+          })}
+        </SortableContext>
+      </DndContext>
 
       {items.length < 10 && (
         <Button

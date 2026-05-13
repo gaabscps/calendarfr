@@ -5,7 +5,7 @@
 > Feature: Batch story-card UX redesign (fact-sheet)
 > Task ID: FEAT-005
 > Phase: done
-> Generated at: 2026-05-13T02:03:40.935Z
+> Generated at: 2026-05-13T06:56:58.631Z
 
 ## Insights
 

@@ -1,8 +1,8 @@
-# ui-v1-consistente — redesign de interface e UX do planner — DISC-001
+# sticky-note — Post-it global com aba colada, rich text e persistência servidor — FEAT-020
 
-> Feature: ui-v1-consistente — redesign de interface e UX do planner
-> Task ID: DISC-001
-> Phase: done
+> Feature: sticky-note — Post-it global com aba colada, rich text e persistência servidor
+> Task ID: FEAT-020
+> Phase: implementation
 > Generated at: 2026-05-13T06:56:58.631Z
 
 ## Insights
@@ -40,7 +40,34 @@ _(no dispatches)_
 
 ## Per-AC closure detail
 
-_(no ACs defined)_
+| AC ID  | Status  | Validator | Evidence |
+| ------ | ------- | --------- | -------- |
+| AC-001 | missing | —         | —        |
+| AC-002 | missing | —         | —        |
+| AC-003 | missing | —         | —        |
+| AC-004 | missing | —         | —        |
+| AC-005 | missing | —         | —        |
+| AC-006 | missing | —         | —        |
+| AC-007 | missing | —         | —        |
+| AC-008 | missing | —         | —        |
+| AC-009 | missing | —         | —        |
+| AC-010 | missing | —         | —        |
+| AC-011 | missing | —         | —        |
+| AC-012 | missing | —         | —        |
+| AC-013 | missing | —         | —        |
+| AC-014 | missing | —         | —        |
+| AC-015 | missing | —         | —        |
+| AC-016 | missing | —         | —        |
+| AC-017 | missing | —         | —        |
+| AC-018 | missing | —         | —        |
+| AC-019 | missing | —         | —        |
+| AC-020 | missing | —         | —        |
+| AC-021 | missing | —         | —        |
+| AC-022 | missing | —         | —        |
+| AC-023 | missing | —         | —        |
+| AC-024 | missing | —         | —        |
+| AC-025 | missing | —         | —        |
+| AC-026 | missing | —         | —        |
 
 ## Phase durations
 
@@ -90,7 +117,7 @@ Escalation rate: 0.0% — below healthy band (< 10%)
 
 ## AC closure
 
-Total: 0 | Pass: 0 | Partial: 0 | Fail: 0 | Missing: 0
+Total: 26 | Pass: 0 | Partial: 0 | Fail: 0 | Missing: 26
 
 ## PM notes log
 

@@ -240,3 +240,7 @@ describe('Priorities dynamic — AC-014: autoFocus on new item', () => {
     expect(screen.getAllByRole('textbox')).toHaveLength(2);
   });
 });
+
+// Reorder pipeline, handle visibility, and DnD accessibility tests are in
+// Priorities.reorder.test.tsx (FEAT-019: AC-001, AC-002, AC-003, AC-005,
+// AC-006, AC-009, AC-025, AC-026).

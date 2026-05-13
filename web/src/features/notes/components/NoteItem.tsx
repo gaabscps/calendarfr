@@ -9,11 +9,14 @@
  * NoteItem has its own bound handler that doesn't change unless the unbound handler
  * changes (which doesn't happen because useNotes returns stable refs).
  *
- * DOM order: prefix → editor → remove (Tab order per AC-017).
+ * DOM order: drag handle (optional) → prefix → editor → remove (Tab order per AC-017).
  *
- * Covers: AC-003, AC-006, AC-010, AC-012, AC-014, AC-017, AC-018, AC-019, NFR-002.
+ * Covers: AC-003, AC-006, AC-010, AC-012, AC-013, AC-014, AC-017, AC-018, AC-019,
+ *         AC-020, AC-022, NFR-002.
  */
 
+import { useSortable } from '@dnd-kit/sortable';
+import { CSS } from '@dnd-kit/utilities';
 import React, { useCallback } from 'react';
 
 import { RichTextBlock } from '@/features/rich-text-line';
@@ -50,6 +53,14 @@ export interface NoteItemProps {
   onBackspaceById?: (id: string) => void;
   /** Optional ref forwarded to the underlying Tiptap Editor instance. */
   editorRef?: RichTextEditorRef;
+  /** Whether drag reorder is active (length > 1). Shows drag handle when true. */
+  canReorder?: boolean;
+  /** Called when Alt+↑ is pressed on the drag handle (AC-020). */
+  onMoveUp?: () => void;
+  /** Called when Alt+↓ is pressed on the drag handle (AC-020). */
+  onMoveDown?: () => void;
+  /** Ref forwarded to the drag handle button (for focus-after-reorder). */
+  dragHandleRef?: React.RefObject<HTMLButtonElement | null>;
 }
 
 function NoteItemBase({
@@ -63,12 +74,26 @@ function NoteItemBase({
   onEnter,
   onBackspaceById,
   editorRef,
+  canReorder,
+  onMoveUp,
+  onMoveDown,
+  dragHandleRef,
 }: NoteItemProps) {
   const slotNumber = index + 1;
 
+  // useSortable — integrates DnD context (AC-018).
+  // roleDescription overridden to PT-BR per AC-025.
+  const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
+    id: note.id,
+    attributes: { roleDescription: 'reordenável' },
+  });
+
+  const sortableStyle: React.CSSProperties = {
+    transform: CSS.Transform.toString(transform),
+    transition: transition ?? undefined,
+  };
+
   // Per-id bound handlers — stable unless the unbound handler or note.id changes.
-  // This preserves React.memo effectiveness when the parent re-renders with new
-  // inline functions (useNotes returns stable handlers, so these rarely change).
   const handleChangeText = useCallback(
     (html: string) => onChangeText(note.id, html),
     [note.id, onChangeText],
@@ -83,11 +108,47 @@ function NoteItemBase({
     [note.id, onBackspaceById],
   );
 
+  // Alt+↑/↓ keyboard reorder handler (AC-020).
+  // Non-Alt keys are delegated to dnd-kit's KeyboardSensor (Space/Enter/Escape)
+  // so that the built-in keyboard drag flow is not clobbered (AC-018).
+  const handleDragHandleKeyDown = useCallback(
+    (event: React.KeyboardEvent<HTMLButtonElement>) => {
+      if (event.altKey && event.key === 'ArrowUp') {
+        event.preventDefault();
+        onMoveUp?.();
+      } else if (event.altKey && event.key === 'ArrowDown') {
+        event.preventDefault();
+        onMoveDown?.();
+      } else {
+        // Delegate non-Alt keys to @dnd-kit's keyboard handler (space/enter/escape).
+        listeners?.onKeyDown?.(event);
+      }
+    },
+    [onMoveUp, onMoveDown, listeners],
+  );
+
   const prefixAriaLabel = `Prefixo da nota ${String(slotNumber)}: ${note.prefix}; clique para alterar`;
   const editorAriaLabel = `Nota ${String(slotNumber)} de ${String(total)}`;
 
+  const wrapperClassName = [styles.note, isDragging ? styles.lifted : ''].filter(Boolean).join(' ');
+
   return (
-    <div className={styles.note}>
+    <div ref={setNodeRef} style={sortableStyle} className={wrapperClassName}>
+      {/* Drag handle — shown only when canReorder is truthy (AC-013, AC-022) */}
+      {canReorder && (
+        <button
+          type="button"
+          ref={dragHandleRef}
+          {...attributes}
+          {...listeners}
+          aria-label={`Arrastar nota ${String(slotNumber)}`}
+          className={styles.dragHandle}
+          onKeyDown={handleDragHandleKeyDown}
+        >
+          ⠿
+        </button>
+      )}
+
       {/* Tab order: prefix first (AC-017) */}
       <IconButton
         variant="ghost"
