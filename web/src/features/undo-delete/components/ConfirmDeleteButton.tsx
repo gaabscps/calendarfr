@@ -22,7 +22,11 @@ export interface ConfirmDeleteButtonProps {
   idleAriaLabel?: string;
   confirmingAriaLabel?: string;
   children?: ReactNode;
-  className?: string;
+  /**
+   * `string | undefined` (not `string?`) so callers can pass `styles.xxx`
+   * from CSS modules under `exactOptionalPropertyTypes: true`.
+   */
+  className?: string | undefined;
 }
 
 const CONFIRM_TIMEOUT_MS = 3000;

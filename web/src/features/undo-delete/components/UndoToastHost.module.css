@@ -1,0 +1,25 @@
+/* UndoToastHost — fixed bottom-center stack of undo toasts (FEAT-022 T-005).
+ *
+ * AC-005: stack vertical com 8px gap entre toasts.
+ * AC-012: container com role/aria-live para anunciar entradas.
+ * AC-013: keyboard handler global (lógica no .tsx).
+ */
+
+.host {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: calc(100vh - 48px);
+  overflow-y: auto;
+  /* Permite cliques passarem pelos gaps; toasts re-habilitam abaixo. */
+  pointer-events: none;
+  z-index: 1000;
+}
+
+.host > * {
+  pointer-events: auto;
+}
