@@ -26,6 +26,7 @@ import { MoodPicker } from '@/features/mood';
 import { Notes } from '@/features/notes';
 import { Priorities } from '@/features/priorities';
 import { StickyNote } from '@/features/sticky-note';
+import { UndoQueueProvider, UndoToastHost, useUndoQueueContext } from '@/features/undo-delete';
 import { PaperSheet } from '@/shared/components/PaperSheet';
 
 import { useDailyPage } from '../hooks/useDailyPage.js';
@@ -60,9 +61,33 @@ export interface DailyPageProps {
   initialDate?: string;
 }
 
-export function DailyPage({ initialDate }: DailyPageProps = {}) {
+/**
+ * Top-level DailyPage — owns the UndoQueueProvider so children (and the
+ * UndoToastHost sibling) share a single undo queue instance. FEAT-022 T-008.
+ */
+export function DailyPage(props: DailyPageProps = {}) {
+  return (
+    <UndoQueueProvider>
+      <DailyPageInner {...props} />
+      {/* AC-014: UndoToastHost mounted at the end of the tree so position:fixed
+          stack overlays viewport regardless of PaperSheet/grid layout. */}
+      <UndoToastHost />
+    </UndoQueueProvider>
+  );
+}
+
+/**
+ * DailyPageInner — consumes the undo queue context to gate autosave while
+ * undo toasts are pending and to flush the queue on date change / unmount.
+ */
+function DailyPageInner({ initialDate }: DailyPageProps = {}) {
   const today = initialDate ?? getTodayLocal();
   const reducedMotion = useReducedMotion();
+
+  // FEAT-022 AC-014/AC-015: Gate autosave while undo toasts are pending,
+  // and flush the queue when the date changes or the component unmounts.
+  const { queue, flushAll } = useUndoQueueContext();
+  const gateOpen = queue.length === 0;
 
   // flushSavePending is captured via ref since it's defined AFTER usePageNavigation.
   // onBeforeChange must fire on EVERY nav path (buttons, keyboard, swipe) so the
@@ -85,11 +110,20 @@ export function DailyPage({ initialDate }: DailyPageProps = {}) {
     retrySave,
     flushSavePending,
     reload,
-  } = useDailyPage(date);
+  } = useDailyPage(date, { gateOpen });
 
   useEffect(() => {
     flushSavePendingRef.current = flushSavePending;
   }, [flushSavePending]);
+
+  // AC-015: flush pending undo entries when date changes or component unmounts.
+  // flushAll commits (does NOT call undoFn), so the post-flush state is what gets
+  // autosaved by the existing autosave loop on the OUTGOING date.
+  useEffect(() => {
+    return () => {
+      flushAll();
+    };
+  }, [date, flushAll]);
 
   const handlePrev = async () => {
     await goToPrev();
