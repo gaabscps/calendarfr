@@ -3,7 +3,7 @@
 > Feature: rich-text-line — editor Tiptap de uma linha (núcleo de escrita)
 > Task ID: FEAT-007
 > Phase: done
-> Generated at: 2026-05-14T03:10:15.087Z
+> Generated at: 2026-05-14T06:01:46.252Z
 
 ## Insights
 

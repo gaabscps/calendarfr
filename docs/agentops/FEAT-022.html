@@ -4,7 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>
-      sticky-note — Post-it global com aba colada, rich text e persistência servidor — AgentOps
+      undo-delete — confirmação anti-misclick para exclusões em Priorities, Notes e Sticky Note —
+      AgentOps
     </title>
     <style>
       :root {
@@ -567,17 +568,17 @@
   <body>
     <header class="kpi-bar">
       <h1>
-        sticky-note — Post-it global com aba colada, rich text e persistência servidor
+        undo-delete — confirmação anti-misclick para exclusões em Priorities, Notes e Sticky Note
         <span class="badge badge-warn">⚠</span>
       </h1>
       <div class="kpis">
         <span>—</span>
-        <span>$5.05</span>
-        <span class="kpi-sub">$0.194/AC</span>
-        <span>60/26 ACs</span>
+        <span>$50.98</span>
+        <span class="kpi-sub">$3.399/AC</span>
+        <span>0/15 ACs</span>
         <span>mut 70.7%</span>
         <span>type 97.7%</span>
-        <span>32 loops</span>
+        <span>19 loops</span>
       </div>
     </header>
 
@@ -592,1214 +593,24 @@
           <div class="story-card__stats">
             <span class="story-card__stat"
               ><span class="story-card__stat-label">time</span>
-              <span class="story-card__stat-value">3m 30s</span></span
+              <span class="story-card__stat-value">7m 30s</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">cost</span>
-              <span class="story-card__stat-value">$0.46</span></span
+              <span class="story-card__stat-value">$0.29</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">tasks</span>
               <span class="story-card__stat-value">1</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">ACs</span>
-              <span class="story-card__stat-value">2</span></span
+              <span class="story-card__stat-value">0</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">files</span>
               <span class="story-card__stat-value">2</span></span
             ><span class="story-card__pipeline">dev → logic-reviewer → qa</span>
           </div>
-          <p class="story-card__summary story-card__summary--empty">(no summary)</p>
-          <div class="story-card__drilldowns">
-            <details>
-              <summary>Files changed (2)</summary>
-              <table class="story-card__files">
-                <thead>
-                  <tr>
-                    <th>path</th>
-                    <th>action</th>
-                    <th>tasks</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>server/src/storage/stickyStore.ts</td>
-                    <td>changed</td>
-                    <td>T-001</td>
-                  </tr>
-                  <tr>
-                    <td>server/src/schema/stickySchema.ts</td>
-                    <td>changed</td>
-                    <td>T-001</td>
-                  </tr>
-                </tbody>
-              </table>
-            </details>
-            <details>
-              <summary>ACs covered (2)</summary>
-              <ul class="story-card__acs">
-                <li><strong>AC-018</strong> — e-001</li>
-                <li><strong>AC-020</strong> — e-001</li>
-              </ul>
-            </details>
-            <details>
-              <summary>Pipeline trace (3 dispatches)</summary>
-              <table class="story-card__pipeline-trace">
-                <thead>
-                  <tr>
-                    <th>role</th>
-                    <th>dispatch_id</th>
-                    <th>loop</th>
-                    <th>model</th>
-                    <th>effort</th>
-                    <th>duration</th>
-                    <th>tokens</th>
-                    <th>cost</th>
-                    <th>status</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>dev</td>
-                    <td>d-T-001-dev-l1</td>
-                    <td>1</td>
-                    <td>sonnet-4-6</td>
-                    <td>medium</td>
-                    <td>3m</td>
-                    <td>32000</td>
-                    <td>$0.21</td>
-                    <td>done</td>
-                  </tr>
-                  <tr>
-                    <td>logic-reviewer</td>
-                    <td>d-T-001-logic-reviewer-…</td>
-                    <td>1</td>
-                    <td>sonnet-4-6</td>
-                    <td>medium</td>
-                    <td>1m 20s</td>
-                    <td>28000</td>
-                    <td>$0.18</td>
-                    <td>done</td>
-                  </tr>
-                  <tr>
-                    <td>qa</td>
-                    <td>d-T-001-qa-l1</td>
-                    <td>1</td>
-                    <td>haiku-4-5</td>
-                    <td>high</td>
-                    <td>1m</td>
-                    <td>28000</td>
-                    <td>$0.06</td>
-                    <td>done</td>
-                  </tr>
-                </tbody>
-              </table>
-            </details>
-            <details>
-              <summary>PM note</summary>
-              <p class="story-card__pmnote">(no PM note)</p>
-            </details>
-          </div>
-        </article>
-        <article class="story-card story-card--done-retried" aria-label="batch T-002">
-          <header>
-            <h3>T-002</h3>
-            <span class="badge badge-warn" aria-label="status: done with retries"
-              >↻ done (retried)</span
-            >
-          </header>
-          <div class="story-card__stats">
-            <span class="story-card__stat"
-              ><span class="story-card__stat-label">time</span>
-              <span class="story-card__stat-value">9m</span></span
-            ><span class="story-card__stat"
-              ><span class="story-card__stat-label">cost</span>
-              <span class="story-card__stat-value">$0.48</span></span
-            ><span class="story-card__stat"
-              ><span class="story-card__stat-label">tasks</span>
-              <span class="story-card__stat-value">1</span></span
-            ><span class="story-card__stat"
-              ><span class="story-card__stat-label">ACs</span>
-              <span class="story-card__stat-value">5</span></span
-            ><span class="story-card__stat"
-              ><span class="story-card__stat-label">files</span>
-              <span class="story-card__stat-value">4</span></span
-            ><span class="story-card__pipeline">dev → qa</span>
-          </div>
-          <aside class="story-card__retry" role="status">
-            ⚠ dev retried 1× — loop 2: (no PM note)
-          </aside>
-          <aside class="story-card__retry" role="status">
-            ⚠ qa retried 1× — loop 2: (no PM note)
-          </aside>
-          <p class="story-card__summary story-card__summary--empty">(no summary)</p>
-          <div class="story-card__drilldowns">
-            <details>
-              <summary>Files changed (4)</summary>
-              <table class="story-card__files">
-                <thead>
-                  <tr>
-                    <th>path</th>
-                    <th>action</th>
-                    <th>tasks</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>server/src/routes/sticky.ts</td>
-                    <td>changed</td>
-                    <td>T-002</td>
-                  </tr>
-                  <tr>
-                    <td>server/src/lib/app.ts</td>
-                    <td>changed</td>
-                    <td>T-002</td>
-                  </tr>
-                  <tr>
-                    <td>server/src/schema/stickySchema.ts</td>
-                    <td>changed</td>
-                    <td>T-002</td>
-                  </tr>
-                  <tr>
-                    <td>server/src/storage/stickyStore.ts</td>
-                    <td>changed</td>
-                    <td>T-002</td>
-                  </tr>
-                </tbody>
-              </table>
-            </details>
-            <details>
-              <summary>ACs covered (5)</summary>
-              <ul class="story-card__acs">
-                <li><strong>AC-017</strong> — e-001, e-002</li>
-                <li><strong>AC-018</strong> — e-003, e-004</li>
-                <li><strong>AC-019</strong> — e-005</li>
-                <li><strong>AC-020</strong> — e-006, e-007</li>
-                <li><strong>AC-021</strong> — e-008, e-009</li>
-              </ul>
-            </details>
-            <details>
-              <summary>Pipeline trace (3 dispatches)</summary>
-              <table class="story-card__pipeline-trace">
-                <thead>
-                  <tr>
-                    <th>role</th>
-                    <th>dispatch_id</th>
-                    <th>loop</th>
-                    <th>model</th>
-                    <th>effort</th>
-                    <th>duration</th>
-                    <th>tokens</th>
-                    <th>cost</th>
-                    <th>status</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>dev</td>
-                    <td>d-T-002-dev-l1</td>
-                    <td>1</td>
-                    <td>sonnet-4-6</td>
-                    <td>medium</td>
-                    <td>3m</td>
-                    <td>32000</td>
-                    <td>$0.21</td>
-                    <td>done</td>
-                  </tr>
-                  <tr>
-                    <td>dev</td>
-                    <td>d-T-002-dev-l2</td>
-                    <td>2</td>
-                    <td>sonnet-4-6</td>
-                    <td>high</td>
-                    <td>3m</td>
-                    <td>32000</td>
-                    <td>$0.21</td>
-                    <td>done</td>
-                  </tr>
-                  <tr>
-                    <td>qa</td>
-                    <td>d-T-002-qa-l1</td>
-                    <td>2</td>
-                    <td>haiku-4-5</td>
-                    <td>high</td>
-                    <td>1m</td>
-                    <td>28000</td>
-                    <td>$0.06</td>
-                    <td>done</td>
-                  </tr>
-                </tbody>
-              </table>
-            </details>
-            <details>
-              <summary>PM note</summary>
-              <p class="story-card__pmnote">(no PM note)</p>
-            </details>
-          </div>
-        </article>
-        <article class="story-card story-card--done" aria-label="batch T-003">
-          <header>
-            <h3>T-003</h3>
-            <span class="badge badge-pass" aria-label="status: done">✓ done</span>
-          </header>
-          <div class="story-card__stats">
-            <span class="story-card__stat"
-              ><span class="story-card__stat-label">time</span>
-              <span class="story-card__stat-value">8m</span></span
-            ><span class="story-card__stat"
-              ><span class="story-card__stat-label">cost</span>
-              <span class="story-card__stat-value">$0.27</span></span
-            ><span class="story-card__stat"
-              ><span class="story-card__stat-label">tasks</span>
-              <span class="story-card__stat-value">1</span></span
-            ><span class="story-card__stat"
-              ><span class="story-card__stat-label">ACs</span>
-              <span class="story-card__stat-value">4</span></span
-            ><span class="story-card__stat"
-              ><span class="story-card__stat-label">files</span>
-              <span class="story-card__stat-value">3</span></span
-            ><span class="story-card__pipeline">dev → qa</span>
-          </div>
-          <p class="story-card__summary story-card__summary--empty">(no summary)</p>
-          <div class="story-card__drilldowns">
-            <details>
-              <summary>Files changed (3)</summary>
-              <table class="story-card__files">
-                <thead>
-                  <tr>
-                    <th>path</th>
-                    <th>action</th>
-                    <th>tasks</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>web/src/features/sticky-note/types.ts</td>
-                    <td>changed</td>
-                    <td>T-003</td>
-                  </tr>
-                  <tr>
-                    <td>web/src/features/sticky-note/api/fetchSticky.ts</td>
-                    <td>changed</td>
-                    <td>T-003</td>
-                  </tr>
-                  <tr>
-                    <td>web/src/features/sticky-note/api/saveSticky.ts</td>
-                    <td>changed</td>
-                    <td>T-003</td>
-                  </tr>
-                </tbody>
-              </table>
-            </details>
-            <details>
-              <summary>ACs covered (4)</summary>
-              <ul class="story-card__acs">
-                <li><strong>AC-017</strong> — e-001</li>
-                <li><strong>AC-019</strong> — e-002</li>
-                <li><strong>AC-021</strong> — e-003</li>
-                <li><strong>AC-023</strong> — e-004</li>
-              </ul>
-            </details>
-            <details>
-              <summary>Pipeline trace (2 dispatches)</summary>
-              <table class="story-card__pipeline-trace">
-                <thead>
-                  <tr>
-                    <th>role</th>
-                    <th>dispatch_id</th>
-                    <th>loop</th>
-                    <th>model</th>
-                    <th>effort</th>
-                    <th>duration</th>
-                    <th>tokens</th>
-                    <th>cost</th>
-                    <th>status</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>dev</td>
-                    <td>d-T-003-dev-l1</td>
-                    <td>1</td>
-                    <td>sonnet-4-6</td>
-                    <td>medium</td>
-                    <td>3m</td>
-                    <td>32000</td>
-                    <td>$0.21</td>
-                    <td>done</td>
-                  </tr>
-                  <tr>
-                    <td>qa</td>
-                    <td>d-T-003-qa-l1</td>
-                    <td>1</td>
-                    <td>haiku-4-5</td>
-                    <td>high</td>
-                    <td>1m</td>
-                    <td>28000</td>
-                    <td>$0.06</td>
-                    <td>done</td>
-                  </tr>
-                </tbody>
-              </table>
-            </details>
-            <details>
-              <summary>PM note</summary>
-              <p class="story-card__pmnote">(no PM note)</p>
-            </details>
-          </div>
-        </article>
-        <article class="story-card story-card--done" aria-label="batch T-004">
-          <header>
-            <h3>T-004</h3>
-            <span class="badge badge-pass" aria-label="status: done">✓ done</span>
-          </header>
-          <div class="story-card__stats">
-            <span class="story-card__stat"
-              ><span class="story-card__stat-label">time</span>
-              <span class="story-card__stat-value">8m</span></span
-            ><span class="story-card__stat"
-              ><span class="story-card__stat-label">cost</span>
-              <span class="story-card__stat-value">$0.32</span></span
-            ><span class="story-card__stat"
-              ><span class="story-card__stat-label">tasks</span>
-              <span class="story-card__stat-value">1</span></span
-            ><span class="story-card__stat"
-              ><span class="story-card__stat-label">ACs</span>
-              <span class="story-card__stat-value">8</span></span
-            ><span class="story-card__stat"
-              ><span class="story-card__stat-label">files</span>
-              <span class="story-card__stat-value">2</span></span
-            ><span class="story-card__pipeline">dev → code-reviewer → qa</span>
-          </div>
-          <p class="story-card__summary story-card__summary--empty">(no summary)</p>
-          <div class="story-card__drilldowns">
-            <details>
-              <summary>Files changed (2)</summary>
-              <table class="story-card__files">
-                <thead>
-                  <tr>
-                    <th>path</th>
-                    <th>action</th>
-                    <th>tasks</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>server/src/storage/__tests__/stickyStore.test.ts</td>
-                    <td>changed</td>
-                    <td>T-004</td>
-                  </tr>
-                  <tr>
-                    <td>server/src/routes/__tests__/sticky.test.ts</td>
-                    <td>changed</td>
-                    <td>T-004</td>
-                  </tr>
-                </tbody>
-              </table>
-            </details>
-            <details>
-              <summary>ACs covered (8)</summary>
-              <ul class="story-card__acs">
-                <li><strong>AC-018</strong> —</li>
-                <li><strong>AC-019</strong> —</li>
-                <li><strong>AC-020</strong> —</li>
-                <li><strong>AC-021</strong> —</li>
-                <li><strong>FEAT-020/AC-018</strong> — e-001</li>
-                <li><strong>FEAT-020/AC-019</strong> — e-002</li>
-                <li><strong>FEAT-020/AC-020</strong> — e-003</li>
-                <li><strong>FEAT-020/AC-021</strong> — e-004</li>
-              </ul>
-            </details>
-            <details>
-              <summary>Pipeline trace (3 dispatches)</summary>
-              <table class="story-card__pipeline-trace">
-                <thead>
-                  <tr>
-                    <th>role</th>
-                    <th>dispatch_id</th>
-                    <th>loop</th>
-                    <th>model</th>
-                    <th>effort</th>
-                    <th>duration</th>
-                    <th>tokens</th>
-                    <th>cost</th>
-                    <th>status</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>dev</td>
-                    <td>d-T-004-dev-l1</td>
-                    <td>1</td>
-                    <td>sonnet-4-6</td>
-                    <td>medium</td>
-                    <td>3m</td>
-                    <td>32000</td>
-                    <td>$0.21</td>
-                    <td>done</td>
-                  </tr>
-                  <tr>
-                    <td>code-reviewer</td>
-                    <td>d-T-004-code-reviewer-l1</td>
-                    <td>1</td>
-                    <td>haiku-4-5</td>
-                    <td>high</td>
-                    <td>45s</td>
-                    <td>20000</td>
-                    <td>$0.04</td>
-                    <td>done</td>
-                  </tr>
-                  <tr>
-                    <td>qa</td>
-                    <td>d-T-004-qa-l1</td>
-                    <td>1</td>
-                    <td>haiku-4-5</td>
-                    <td>high</td>
-                    <td>1m</td>
-                    <td>28000</td>
-                    <td>$0.06</td>
-                    <td>done</td>
-                  </tr>
-                </tbody>
-              </table>
-            </details>
-            <details>
-              <summary>PM note</summary>
-              <p class="story-card__pmnote">(no PM note)</p>
-            </details>
-          </div>
-        </article>
-        <article class="story-card story-card--done-retried" aria-label="batch T-005">
-          <header>
-            <h3>T-005</h3>
-            <span class="badge badge-warn" aria-label="status: done with retries"
-              >↻ done (retried)</span
-            >
-          </header>
-          <div class="story-card__stats">
-            <span class="story-card__stat"
-              ><span class="story-card__stat-label">time</span>
-              <span class="story-card__stat-value">12m</span></span
-            ><span class="story-card__stat"
-              ><span class="story-card__stat-label">cost</span>
-              <span class="story-card__stat-value">$0.67</span></span
-            ><span class="story-card__stat"
-              ><span class="story-card__stat-label">tasks</span>
-              <span class="story-card__stat-value">1</span></span
-            ><span class="story-card__stat"
-              ><span class="story-card__stat-label">ACs</span>
-              <span class="story-card__stat-value">16</span></span
-            ><span class="story-card__stat"
-              ><span class="story-card__stat-label">files</span>
-              <span class="story-card__stat-value">1</span></span
-            ><span class="story-card__pipeline">dev → logic-reviewer → qa</span>
-          </div>
-          <aside class="story-card__retry" role="status">
-            ⚠ dev retried 1× — loop 2: (no PM note)
-          </aside>
-          <aside class="story-card__retry" role="status">
-            ⚠ logic-reviewer retried 1× — loop 2: (no PM note)
-          </aside>
-          <aside class="story-card__retry" role="status">
-            ⚠ qa retried 1× — loop 2: (no PM note)
-          </aside>
-          <p class="story-card__summary story-card__summary--empty">(no summary)</p>
-          <div class="story-card__drilldowns">
-            <details>
-              <summary>Files changed (1)</summary>
-              <table class="story-card__files">
-                <thead>
-                  <tr>
-                    <th>path</th>
-                    <th>action</th>
-                    <th>tasks</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>web/src/features/sticky-note/hooks/useStickyNote.ts</td>
-                    <td>changed</td>
-                    <td>T-005</td>
-                  </tr>
-                </tbody>
-              </table>
-            </details>
-            <details>
-              <summary>ACs covered (16)</summary>
-              <ul class="story-card__acs">
-                <li><strong>AC-007</strong> —</li>
-                <li><strong>AC-008</strong> —</li>
-                <li><strong>AC-012</strong> —</li>
-                <li><strong>AC-013</strong> —</li>
-                <li><strong>AC-017</strong> —</li>
-                <li><strong>AC-019</strong> —</li>
-                <li><strong>AC-022</strong> —</li>
-                <li><strong>AC-023</strong> —</li>
-                <li><strong>FEAT-020/AC-007</strong> — e-001</li>
-                <li><strong>FEAT-020/AC-008</strong> — e-002</li>
-                <li><strong>FEAT-020/AC-012</strong> — e-003</li>
-                <li><strong>FEAT-020/AC-013</strong> — e-004</li>
-                <li><strong>FEAT-020/AC-017</strong> — e-005</li>
-                <li><strong>FEAT-020/AC-019</strong> — e-006</li>
-                <li><strong>FEAT-020/AC-022</strong> — e-007</li>
-                <li><strong>FEAT-020/AC-023</strong> — e-008</li>
-              </ul>
-            </details>
-            <details>
-              <summary>Pipeline trace (4 dispatches)</summary>
-              <table class="story-card__pipeline-trace">
-                <thead>
-                  <tr>
-                    <th>role</th>
-                    <th>dispatch_id</th>
-                    <th>loop</th>
-                    <th>model</th>
-                    <th>effort</th>
-                    <th>duration</th>
-                    <th>tokens</th>
-                    <th>cost</th>
-                    <th>status</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>dev</td>
-                    <td>d-T-005-dev-l1</td>
-                    <td>1</td>
-                    <td>sonnet-4-6</td>
-                    <td>high</td>
-                    <td>3m</td>
-                    <td>32000</td>
-                    <td>$0.21</td>
-                    <td>done</td>
-                  </tr>
-                  <tr>
-                    <td>dev</td>
-                    <td>d-T-005-dev-l2</td>
-                    <td>2</td>
-                    <td>sonnet-4-6</td>
-                    <td>high</td>
-                    <td>3m</td>
-                    <td>32000</td>
-                    <td>$0.21</td>
-                    <td>done</td>
-                  </tr>
-                  <tr>
-                    <td>logic-reviewer</td>
-                    <td>d-T-005-logic-reviewer-…</td>
-                    <td>2</td>
-                    <td>sonnet-4-6</td>
-                    <td>high</td>
-                    <td>1m 20s</td>
-                    <td>28000</td>
-                    <td>$0.18</td>
-                    <td>done</td>
-                  </tr>
-                  <tr>
-                    <td>qa</td>
-                    <td>d-T-005-qa-l1</td>
-                    <td>2</td>
-                    <td>haiku-4-5</td>
-                    <td>medium</td>
-                    <td>1m</td>
-                    <td>28000</td>
-                    <td>$0.06</td>
-                    <td>done</td>
-                  </tr>
-                </tbody>
-              </table>
-            </details>
-            <details>
-              <summary>PM note</summary>
-              <p class="story-card__pmnote">(no PM note)</p>
-            </details>
-          </div>
-        </article>
-        <article class="story-card story-card--done" aria-label="batch T-006">
-          <header>
-            <h3>T-006</h3>
-            <span class="badge badge-pass" aria-label="status: done">✓ done</span>
-          </header>
-          <div class="story-card__stats">
-            <span class="story-card__stat"
-              ><span class="story-card__stat-label">time</span>
-              <span class="story-card__stat-value">16m</span></span
-            ><span class="story-card__stat"
-              ><span class="story-card__stat-label">cost</span>
-              <span class="story-card__stat-value">$0.22</span></span
-            ><span class="story-card__stat"
-              ><span class="story-card__stat-label">tasks</span>
-              <span class="story-card__stat-value">1</span></span
-            ><span class="story-card__stat"
-              ><span class="story-card__stat-label">ACs</span>
-              <span class="story-card__stat-value">10</span></span
-            ><span class="story-card__stat"
-              ><span class="story-card__stat-label">files</span>
-              <span class="story-card__stat-value">2</span></span
-            ><span class="story-card__pipeline">dev → qa</span>
-          </div>
-          <p class="story-card__summary story-card__summary--empty">(no summary)</p>
-          <div class="story-card__drilldowns">
-            <details>
-              <summary>Files changed (2)</summary>
-              <table class="story-card__files">
-                <thead>
-                  <tr>
-                    <th>path</th>
-                    <th>action</th>
-                    <th>tasks</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>web/src/features/sticky-note/components/StickyTab.tsx</td>
-                    <td>changed</td>
-                    <td>T-006</td>
-                  </tr>
-                  <tr>
-                    <td>web/src/features/sticky-note/components/StickyTab.module.css</td>
-                    <td>changed</td>
-                    <td>T-006</td>
-                  </tr>
-                </tbody>
-              </table>
-            </details>
-            <details>
-              <summary>ACs covered (10)</summary>
-              <ul class="story-card__acs">
-                <li><strong>AC-001</strong> —</li>
-                <li><strong>AC-002</strong> —</li>
-                <li><strong>AC-003</strong> —</li>
-                <li><strong>AC-004</strong> —</li>
-                <li><strong>AC-022</strong> —</li>
-                <li><strong>FEAT-020/AC-001</strong> — e-001</li>
-                <li><strong>FEAT-020/AC-002</strong> — e-001</li>
-                <li><strong>FEAT-020/AC-003</strong> — e-002</li>
-                <li><strong>FEAT-020/AC-004</strong> — e-002</li>
-                <li><strong>FEAT-020/AC-022</strong> — e-003</li>
-              </ul>
-            </details>
-            <details>
-              <summary>Pipeline trace (2 dispatches)</summary>
-              <table class="story-card__pipeline-trace">
-                <thead>
-                  <tr>
-                    <th>role</th>
-                    <th>dispatch_id</th>
-                    <th>loop</th>
-                    <th>model</th>
-                    <th>effort</th>
-                    <th>duration</th>
-                    <th>tokens</th>
-                    <th>cost</th>
-                    <th>status</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>dev</td>
-                    <td>d-T-006-dev-l1</td>
-                    <td>1</td>
-                    <td>sonnet-4-6</td>
-                    <td>—</td>
-                    <td>51s</td>
-                    <td>25232</td>
-                    <td>$0.17</td>
-                    <td>done</td>
-                  </tr>
-                  <tr>
-                    <td>qa</td>
-                    <td>d-T-006-qa-l1</td>
-                    <td>1</td>
-                    <td>haiku-4-5</td>
-                    <td>—</td>
-                    <td>45s</td>
-                    <td>23330</td>
-                    <td>$0.05</td>
-                    <td>done</td>
-                  </tr>
-                </tbody>
-              </table>
-            </details>
-            <details>
-              <summary>PM note</summary>
-              <p class="story-card__pmnote">(no PM note)</p>
-            </details>
-          </div>
-        </article>
-        <article class="story-card story-card--done-retried" aria-label="batch T-007">
-          <header>
-            <h3>T-007</h3>
-            <span class="badge badge-warn" aria-label="status: done with retries"
-              >↻ done (retried)</span
-            >
-          </header>
-          <div class="story-card__stats">
-            <span class="story-card__stat"
-              ><span class="story-card__stat-label">time</span>
-              <span class="story-card__stat-value">17m</span></span
-            ><span class="story-card__stat"
-              ><span class="story-card__stat-label">cost</span>
-              <span class="story-card__stat-value">$0.41</span></span
-            ><span class="story-card__stat"
-              ><span class="story-card__stat-label">tasks</span>
-              <span class="story-card__stat-value">1</span></span
-            ><span class="story-card__stat"
-              ><span class="story-card__stat-label">ACs</span>
-              <span class="story-card__stat-value">8</span></span
-            ><span class="story-card__stat"
-              ><span class="story-card__stat-label">files</span>
-              <span class="story-card__stat-value">2</span></span
-            ><span class="story-card__pipeline">dev → qa</span>
-          </div>
-          <aside class="story-card__retry" role="status">
-            ⚠ dev retried 1× — loop 2: Loop 2 — minor fix: font-size var(--font-size-lg)
-          </aside>
-          <aside class="story-card__retry" role="status">
-            ⚠ qa retried 1× — loop 2: (no PM note)
-          </aside>
-          <p class="story-card__summary">Loop 2 — minor fix: font-size var(--font-size-lg)</p>
-          <div class="story-card__drilldowns">
-            <details>
-              <summary>Files changed (2)</summary>
-              <table class="story-card__files">
-                <thead>
-                  <tr>
-                    <th>path</th>
-                    <th>action</th>
-                    <th>tasks</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>web/src/features/sticky-note/components/StickyPanel.tsx</td>
-                    <td>changed</td>
-                    <td>T-007</td>
-                  </tr>
-                  <tr>
-                    <td>web/src/features/sticky-note/components/StickyPanel.module.…</td>
-                    <td>changed</td>
-                    <td>T-007</td>
-                  </tr>
-                </tbody>
-              </table>
-            </details>
-            <details>
-              <summary>ACs covered (8)</summary>
-              <ul class="story-card__acs">
-                <li><strong>AC-005</strong> — e-001</li>
-                <li><strong>AC-006</strong> — e-002</li>
-                <li><strong>AC-009</strong> — e-003</li>
-                <li><strong>AC-010</strong> — e-004</li>
-                <li><strong>AC-011</strong> — e-005</li>
-                <li><strong>AC-014</strong> — e-006</li>
-                <li><strong>AC-015</strong> — e-007</li>
-                <li><strong>AC-016</strong> — e-008</li>
-              </ul>
-            </details>
-            <details>
-              <summary>Pipeline trace (3 dispatches)</summary>
-              <table class="story-card__pipeline-trace">
-                <thead>
-                  <tr>
-                    <th>role</th>
-                    <th>dispatch_id</th>
-                    <th>loop</th>
-                    <th>model</th>
-                    <th>effort</th>
-                    <th>duration</th>
-                    <th>tokens</th>
-                    <th>cost</th>
-                    <th>status</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>dev</td>
-                    <td>d-T-007-dev-l1</td>
-                    <td>1</td>
-                    <td>sonnet-4-6</td>
-                    <td>—</td>
-                    <td>2m 14s</td>
-                    <td>34600</td>
-                    <td>$0.23</td>
-                    <td>done</td>
-                  </tr>
-                  <tr>
-                    <td>dev</td>
-                    <td>d-T-007-dev-l2</td>
-                    <td>2</td>
-                    <td>sonnet-4-6</td>
-                    <td>—</td>
-                    <td>43s</td>
-                    <td>15378</td>
-                    <td>$0.10</td>
-                    <td>done</td>
-                  </tr>
-                  <tr>
-                    <td>qa</td>
-                    <td>d-T-007-qa-l1</td>
-                    <td>2</td>
-                    <td>haiku-4-5</td>
-                    <td>—</td>
-                    <td>1m 51s</td>
-                    <td>37283</td>
-                    <td>$0.08</td>
-                    <td>done</td>
-                  </tr>
-                </tbody>
-              </table>
-            </details>
-            <details>
-              <summary>PM note</summary>
-              <p class="story-card__pmnote">Loop 2 — minor fix: font-size var(--font-size-lg)</p>
-            </details>
-          </div>
-        </article>
-        <article class="story-card story-card--done-retried" aria-label="batch T-008">
-          <header>
-            <h3>T-008</h3>
-            <span class="badge badge-warn" aria-label="status: done with retries"
-              >↻ done (retried)</span
-            >
-          </header>
-          <div class="story-card__stats">
-            <span class="story-card__stat"
-              ><span class="story-card__stat-label">time</span>
-              <span class="story-card__stat-value">22m</span></span
-            ><span class="story-card__stat"
-              ><span class="story-card__stat-label">cost</span>
-              <span class="story-card__stat-value">$0.60</span></span
-            ><span class="story-card__stat"
-              ><span class="story-card__stat-label">tasks</span>
-              <span class="story-card__stat-value">1</span></span
-            ><span class="story-card__stat"
-              ><span class="story-card__stat-label">ACs</span>
-              <span class="story-card__stat-value">6</span></span
-            ><span class="story-card__stat"
-              ><span class="story-card__stat-label">files</span>
-              <span class="story-card__stat-value">6</span></span
-            ><span class="story-card__pipeline">dev → qa</span>
-          </div>
-          <aside class="story-card__retry" role="status">
-            ⚠ dev retried 1× — loop 2: Loop 2 — AC-025: jest.mock sticky-note em DailyPage tests
-          </aside>
-          <aside class="story-card__retry" role="status">
-            ⚠ qa retried 1× — loop 2: (no PM note)
-          </aside>
-          <p class="story-card__summary">Loop 2 — AC-025: jest.</p>
-          <div class="story-card__drilldowns">
-            <details>
-              <summary>Files changed (6)</summary>
-              <table class="story-card__files">
-                <thead>
-                  <tr>
-                    <th>path</th>
-                    <th>action</th>
-                    <th>tasks</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>web/src/features/sticky-note/components/StickyNote.tsx</td>
-                    <td>changed</td>
-                    <td>T-008</td>
-                  </tr>
-                  <tr>
-                    <td>web/src/features/sticky-note/components/StickyNote.module.c…</td>
-                    <td>changed</td>
-                    <td>T-008</td>
-                  </tr>
-                  <tr>
-                    <td>web/src/features/sticky-note/index.ts</td>
-                    <td>changed</td>
-                    <td>T-008</td>
-                  </tr>
-                  <tr>
-                    <td>web/src/features/daily-page/components/DailyPage.tsx</td>
-                    <td>changed</td>
-                    <td>T-008</td>
-                  </tr>
-                  <tr>
-                    <td>web/src/features/daily-page/components/__tests__/DailyPage.…</td>
-                    <td>changed</td>
-                    <td>T-008</td>
-                  </tr>
-                  <tr>
-                    <td>web/src/features/daily-page/components/__tests__/DailyPage.…</td>
-                    <td>changed</td>
-                    <td>T-008</td>
-                  </tr>
-                </tbody>
-              </table>
-            </details>
-            <details>
-              <summary>ACs covered (6)</summary>
-              <ul class="story-card__acs">
-                <li><strong>AC-024</strong> —</li>
-                <li><strong>AC-025</strong> —</li>
-                <li><strong>AC-026</strong> —</li>
-                <li><strong>FEAT-020/AC-024</strong> — e-001, e-002</li>
-                <li><strong>FEAT-020/AC-025</strong> — e-003</li>
-                <li><strong>FEAT-020/AC-026</strong> — e-004</li>
-              </ul>
-            </details>
-            <details>
-              <summary>Pipeline trace (3 dispatches)</summary>
-              <table class="story-card__pipeline-trace">
-                <thead>
-                  <tr>
-                    <th>role</th>
-                    <th>dispatch_id</th>
-                    <th>loop</th>
-                    <th>model</th>
-                    <th>effort</th>
-                    <th>duration</th>
-                    <th>tokens</th>
-                    <th>cost</th>
-                    <th>status</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>dev</td>
-                    <td>d-T-008-dev-l1</td>
-                    <td>1</td>
-                    <td>sonnet-4-6</td>
-                    <td>—</td>
-                    <td>5m 1s</td>
-                    <td>35087</td>
-                    <td>$0.23</td>
-                    <td>needs_review</td>
-                  </tr>
-                  <tr>
-                    <td>dev</td>
-                    <td>d-T-008-dev-l2</td>
-                    <td>2</td>
-                    <td>sonnet-4-6</td>
-                    <td>—</td>
-                    <td>1m 6s</td>
-                    <td>27776</td>
-                    <td>$0.18</td>
-                    <td>done</td>
-                  </tr>
-                  <tr>
-                    <td>qa</td>
-                    <td>d-T-008-qa-l1</td>
-                    <td>2</td>
-                    <td>sonnet-4-6</td>
-                    <td>—</td>
-                    <td>1m 49s</td>
-                    <td>27746</td>
-                    <td>$0.18</td>
-                    <td>done</td>
-                  </tr>
-                </tbody>
-              </table>
-            </details>
-            <details>
-              <summary>PM note</summary>
-              <p class="story-card__pmnote">
-                Loop 2 — AC-025: jest.mock sticky-note em DailyPage tests
-              </p>
-            </details>
-          </div>
-        </article>
-        <article class="story-card story-card--done-retried" aria-label="batch T-009">
-          <header>
-            <h3>T-009</h3>
-            <span class="badge badge-warn" aria-label="status: done with retries"
-              >↻ done (retried)</span
-            >
-          </header>
-          <div class="story-card__stats">
-            <span class="story-card__stat"
-              ><span class="story-card__stat-label">time</span>
-              <span class="story-card__stat-value">32m</span></span
-            ><span class="story-card__stat"
-              ><span class="story-card__stat-label">cost</span>
-              <span class="story-card__stat-value">$0.56</span></span
-            ><span class="story-card__stat"
-              ><span class="story-card__stat-label">tasks</span>
-              <span class="story-card__stat-value">1</span></span
-            ><span class="story-card__stat"
-              ><span class="story-card__stat-label">ACs</span>
-              <span class="story-card__stat-value">16</span></span
-            ><span class="story-card__stat"
-              ><span class="story-card__stat-label">files</span>
-              <span class="story-card__stat-value">6</span></span
-            ><span class="story-card__pipeline">dev → qa</span>
-          </div>
-          <aside class="story-card__retry" role="status">
-            ⚠ dev retried 1× — loop 2: Loop 2 — split em 4 arquivos; adicionou tabRef containment +
-            hasUserEdited race…
-          </aside>
-          <aside class="story-card__retry" role="status">
-            ⚠ qa retried 1× — loop 2: (no PM note)
-          </aside>
           <p class="story-card__summary">
-            Loop 2 — split em 4 arquivos; adicionou tabRef containment + hasUserEdited race guard
-          </p>
-          <div class="story-card__drilldowns">
-            <details>
-              <summary>Files changed (6)</summary>
-              <table class="story-card__files">
-                <thead>
-                  <tr>
-                    <th>path</th>
-                    <th>action</th>
-                    <th>tasks</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>web/src/features/sticky-note/hooks/__tests__/useStickyNote.…</td>
-                    <td>changed</td>
-                    <td>T-009</td>
-                  </tr>
-                  <tr>
-                    <td>web/src/features/sticky-note/api/__tests__/fetchSticky.test…</td>
-                    <td>changed</td>
-                    <td>T-009</td>
-                  </tr>
-                  <tr>
-                    <td>web/src/features/sticky-note/api/__tests__/saveSticky.test.…</td>
-                    <td>changed</td>
-                    <td>T-009</td>
-                  </tr>
-                  <tr>
-                    <td>web/src/features/sticky-note/hooks/__tests__/useStickyNote.…</td>
-                    <td>changed</td>
-                    <td>T-009</td>
-                  </tr>
-                  <tr>
-                    <td>web/src/features/sticky-note/hooks/__tests__/useStickyNote.…</td>
-                    <td>changed</td>
-                    <td>T-009</td>
-                  </tr>
-                  <tr>
-                    <td>web/src/features/sticky-note/hooks/__tests__/useStickyNote.…</td>
-                    <td>changed</td>
-                    <td>T-009</td>
-                  </tr>
-                </tbody>
-              </table>
-            </details>
-            <details>
-              <summary>ACs covered (16)</summary>
-              <ul class="story-card__acs">
-                <li><strong>AC-007</strong> —</li>
-                <li><strong>AC-008</strong> —</li>
-                <li><strong>AC-012</strong> —</li>
-                <li><strong>AC-013</strong> —</li>
-                <li><strong>AC-017</strong> —</li>
-                <li><strong>AC-019</strong> —</li>
-                <li><strong>AC-022</strong> —</li>
-                <li><strong>AC-023</strong> —</li>
-                <li><strong>FEAT-020/AC-007</strong> — e-001</li>
-                <li><strong>FEAT-020/AC-008</strong> — e-001</li>
-                <li><strong>FEAT-020/AC-012</strong> — e-002</li>
-                <li><strong>FEAT-020/AC-013</strong> — e-002</li>
-                <li><strong>FEAT-020/AC-017</strong> — e-003</li>
-                <li><strong>FEAT-020/AC-019</strong> — e-004</li>
-                <li><strong>FEAT-020/AC-022</strong> — e-005</li>
-                <li><strong>FEAT-020/AC-023</strong> — e-005</li>
-              </ul>
-            </details>
-            <details>
-              <summary>Pipeline trace (3 dispatches)</summary>
-              <table class="story-card__pipeline-trace">
-                <thead>
-                  <tr>
-                    <th>role</th>
-                    <th>dispatch_id</th>
-                    <th>loop</th>
-                    <th>model</th>
-                    <th>effort</th>
-                    <th>duration</th>
-                    <th>tokens</th>
-                    <th>cost</th>
-                    <th>status</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>dev</td>
-                    <td>d-T-009-dev-l1</td>
-                    <td>1</td>
-                    <td>sonnet-4-6</td>
-                    <td>—</td>
-                    <td>3m 19s</td>
-                    <td>43737</td>
-                    <td>$0.29</td>
-                    <td>done</td>
-                  </tr>
-                  <tr>
-                    <td>dev</td>
-                    <td>d-T-009-dev-l2</td>
-                    <td>2</td>
-                    <td>sonnet-4-6</td>
-                    <td>—</td>
-                    <td>3m 12s</td>
-                    <td>28632</td>
-                    <td>$0.19</td>
-                    <td>done</td>
-                  </tr>
-                  <tr>
-                    <td>qa</td>
-                    <td>d-T-009-qa-l1</td>
-                    <td>2</td>
-                    <td>haiku-4-5</td>
-                    <td>—</td>
-                    <td>1m 6s</td>
-                    <td>37044</td>
-                    <td>$0.08</td>
-                    <td>done</td>
-                  </tr>
-                </tbody>
-              </table>
-            </details>
-            <details>
-              <summary>PM note</summary>
-              <p class="story-card__pmnote">
-                Loop 2 — split em 4 arquivos; adicionou tabRef containment + hasUserEdited race
-                guard
-              </p>
-            </details>
-          </div>
-        </article>
-        <article class="story-card story-card--done-retried" aria-label="batch T-010">
-          <header>
-            <h3>T-010</h3>
-            <span class="badge badge-warn" aria-label="status: done with retries"
-              >↻ done (retried)</span
-            >
-          </header>
-          <div class="story-card__stats">
-            <span class="story-card__stat"
-              ><span class="story-card__stat-label">time</span>
-              <span class="story-card__stat-value">32m</span></span
-            ><span class="story-card__stat"
-              ><span class="story-card__stat-label">cost</span>
-              <span class="story-card__stat-value">$0.64</span></span
-            ><span class="story-card__stat"
-              ><span class="story-card__stat-label">tasks</span>
-              <span class="story-card__stat-value">1</span></span
-            ><span class="story-card__stat"
-              ><span class="story-card__stat-label">ACs</span>
-              <span class="story-card__stat-value">13</span></span
-            ><span class="story-card__stat"
-              ><span class="story-card__stat-label">files</span>
-              <span class="story-card__stat-value">2</span></span
-            ><span class="story-card__pipeline">dev → qa</span>
-          </div>
-          <aside class="story-card__retry" role="status">
-            ⚠ dev retried 1× — loop 2: Loop 2 — split em 2 arquivos; waitFor AC-010; AC-022
-            data-loading; AC-023 error…
-          </aside>
-          <aside class="story-card__retry" role="status">
-            ⚠ qa retried 1× — loop 2: (no PM note)
-          </aside>
-          <p class="story-card__summary">
-            Loop 2 — split em 2 arquivos; waitFor AC-010; AC-022 data-loading; AC-023 error fallback
+            T-001 cria barrel + types. ts da feature undo-delete (UndoEntry, UndoEntryKind,
+            EnqueueUndoOptions).
           </p>
           <div class="story-card__drilldowns">
             <details>
@@ -1814,136 +625,16 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <td>web/src/features/sticky-note/components/__tests__/StickyNot…</td>
+                    <td>web/src/features/undo-delete/index.ts</td>
                     <td>changed</td>
-                    <td>T-010</td>
+                    <td>T-001</td>
                   </tr>
                   <tr>
-                    <td>web/src/features/sticky-note/components/__tests__/StickyNot…</td>
+                    <td>web/src/features/undo-delete/types.ts</td>
                     <td>changed</td>
-                    <td>T-010</td>
+                    <td>T-001</td>
                   </tr>
                 </tbody>
-              </table>
-            </details>
-            <details>
-              <summary>ACs covered (13)</summary>
-              <ul class="story-card__acs">
-                <li><strong>AC-001</strong> — e-001</li>
-                <li><strong>AC-002</strong> — e-002</li>
-                <li><strong>AC-003</strong> — e-002</li>
-                <li><strong>AC-004</strong> — e-001</li>
-                <li><strong>AC-005</strong> — e-002</li>
-                <li><strong>AC-006</strong> — e-003</li>
-                <li><strong>AC-010</strong> — e-004</li>
-                <li><strong>AC-011</strong> — e-005</li>
-                <li><strong>AC-024</strong> — e-008</li>
-                <li><strong>AC-025</strong> — e-008</li>
-                <li><strong>AC-026</strong> — e-008</li>
-                <li><strong>AC-022</strong> — e-006</li>
-                <li><strong>AC-023</strong> — e-007</li>
-              </ul>
-            </details>
-            <details>
-              <summary>Pipeline trace (3 dispatches)</summary>
-              <table class="story-card__pipeline-trace">
-                <thead>
-                  <tr>
-                    <th>role</th>
-                    <th>dispatch_id</th>
-                    <th>loop</th>
-                    <th>model</th>
-                    <th>effort</th>
-                    <th>duration</th>
-                    <th>tokens</th>
-                    <th>cost</th>
-                    <th>status</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>dev</td>
-                    <td>d-T-010-dev-l1</td>
-                    <td>1</td>
-                    <td>sonnet-4-6</td>
-                    <td>—</td>
-                    <td>3m 4s</td>
-                    <td>48199</td>
-                    <td>$0.32</td>
-                    <td>done</td>
-                  </tr>
-                  <tr>
-                    <td>dev</td>
-                    <td>d-T-010-dev-l2</td>
-                    <td>2</td>
-                    <td>sonnet-4-6</td>
-                    <td>—</td>
-                    <td>4m 28s</td>
-                    <td>36918</td>
-                    <td>$0.24</td>
-                    <td>done</td>
-                  </tr>
-                  <tr>
-                    <td>qa</td>
-                    <td>d-T-010-qa-l1</td>
-                    <td>2</td>
-                    <td>haiku-4-5</td>
-                    <td>—</td>
-                    <td>1m 24s</td>
-                    <td>34392</td>
-                    <td>$0.08</td>
-                    <td>done</td>
-                  </tr>
-                </tbody>
-              </table>
-            </details>
-            <details>
-              <summary>PM note</summary>
-              <p class="story-card__pmnote">
-                Loop 2 — split em 2 arquivos; waitFor AC-010; AC-022 data-loading; AC-023 error
-                fallback
-              </p>
-            </details>
-          </div>
-        </article>
-        <article class="story-card story-card--done-retried" aria-label="batch FEAT-020">
-          <header>
-            <h3>FEAT-020</h3>
-            <span class="badge badge-warn" aria-label="status: done with retries"
-              >↻ done (retried)</span
-            >
-          </header>
-          <div class="story-card__stats">
-            <span class="story-card__stat"
-              ><span class="story-card__stat-label">time</span>
-              <span class="story-card__stat-value">12m</span></span
-            ><span class="story-card__stat"
-              ><span class="story-card__stat-label">cost</span>
-              <span class="story-card__stat-value">$0.43</span></span
-            ><span class="story-card__stat"
-              ><span class="story-card__stat-label">tasks</span>
-              <span class="story-card__stat-value">1</span></span
-            ><span class="story-card__stat"
-              ><span class="story-card__stat-label">ACs</span>
-              <span class="story-card__stat-value">0</span></span
-            ><span class="story-card__stat"
-              ><span class="story-card__stat-label">files</span>
-              <span class="story-card__stat-value">0</span></span
-            ><span class="story-card__pipeline">audit-agent</span>
-          </div>
-          <p class="story-card__summary">Audit L3 passed — todos os checks verdes</p>
-          <div class="story-card__drilldowns">
-            <details>
-              <summary>Files changed (0)</summary>
-              <table class="story-card__files">
-                <thead>
-                  <tr>
-                    <th>path</th>
-                    <th>action</th>
-                    <th>tasks</th>
-                  </tr>
-                </thead>
-                <tbody></tbody>
               </table>
             </details>
             <details>
@@ -1968,36 +659,36 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <td>audit-agent</td>
-                    <td>d-audit-l1</td>
+                    <td>dev</td>
+                    <td>d-T-001-dev-l1</td>
                     <td>1</td>
                     <td>haiku-4-5</td>
-                    <td>—</td>
-                    <td>2m 25s</td>
-                    <td>75139</td>
-                    <td>$0.17</td>
-                    <td>blocked</td>
+                    <td>high</td>
+                    <td>1m 14s</td>
+                    <td>29470</td>
+                    <td>$0.06</td>
+                    <td>done</td>
                   </tr>
                   <tr>
-                    <td>audit-agent</td>
-                    <td>d-audit-l2</td>
+                    <td>logic-reviewer</td>
+                    <td>d-T-001-logic-reviewer-…</td>
                     <td>1</td>
-                    <td>haiku-4-5</td>
-                    <td>—</td>
-                    <td>1m 30s</td>
-                    <td>61864</td>
+                    <td>sonnet-4-6</td>
+                    <td>medium</td>
+                    <td>57s</td>
+                    <td>21668</td>
                     <td>$0.14</td>
-                    <td>blocked</td>
+                    <td>done</td>
                   </tr>
                   <tr>
-                    <td>audit-agent</td>
-                    <td>d-audit-l3</td>
+                    <td>qa</td>
+                    <td>d-T-001-qa-l1</td>
                     <td>1</td>
                     <td>haiku-4-5</td>
-                    <td>—</td>
-                    <td>1m 12s</td>
-                    <td>57834</td>
-                    <td>$0.13</td>
+                    <td>high</td>
+                    <td>2m 30s</td>
+                    <td>38622</td>
+                    <td>$0.08</td>
                     <td>done</td>
                   </tr>
                 </tbody>
@@ -2005,7 +696,1423 @@
             </details>
             <details>
               <summary>PM note</summary>
-              <p class="story-card__pmnote">Audit L3 passed — todos os checks verdes</p>
+              <p class="story-card__pmnote">Lint+typecheck+resolution all green; no ACs in scope</p>
+            </details>
+          </div>
+        </article>
+        <article class="story-card story-card--blocked" aria-label="batch FEAT-022">
+          <header>
+            <h3>FEAT-022</h3>
+            <span class="badge badge-fail" aria-label="status: blocked">⏸ blocked</span>
+          </header>
+          <div class="story-card__stats">
+            <span class="story-card__stat"
+              ><span class="story-card__stat-label">time</span>
+              <span class="story-card__stat-value">1m</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">cost</span>
+              <span class="story-card__stat-value">$0.08</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">tasks</span>
+              <span class="story-card__stat-value">1</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">ACs</span>
+              <span class="story-card__stat-value">0</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">files</span>
+              <span class="story-card__stat-value">0</span></span
+            ><span class="story-card__pipeline">audit-agent</span>
+          </div>
+          <p class="story-card__summary">
+            Mid-pipeline pause checkpoint; audit flagged usage_missing (now backfilled); no bypass
+            detected
+          </p>
+          <div class="story-card__drilldowns">
+            <details>
+              <summary>Files changed (0)</summary>
+              <table class="story-card__files">
+                <thead>
+                  <tr>
+                    <th>path</th>
+                    <th>action</th>
+                    <th>tasks</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </details>
+            <details>
+              <summary>ACs covered (0)</summary>
+              <ul class="story-card__acs"></ul>
+            </details>
+            <details>
+              <summary>Pipeline trace (1 dispatches)</summary>
+              <table class="story-card__pipeline-trace">
+                <thead>
+                  <tr>
+                    <th>role</th>
+                    <th>dispatch_id</th>
+                    <th>loop</th>
+                    <th>model</th>
+                    <th>effort</th>
+                    <th>duration</th>
+                    <th>tokens</th>
+                    <th>cost</th>
+                    <th>status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>audit-agent</td>
+                    <td>d-FEAT-022-audit-agent-…</td>
+                    <td>1</td>
+                    <td>haiku-4-5</td>
+                    <td>—</td>
+                    <td>1m 6s</td>
+                    <td>37828</td>
+                    <td>$0.08</td>
+                    <td>blocked</td>
+                  </tr>
+                </tbody>
+              </table>
+            </details>
+            <details>
+              <summary>PM note</summary>
+              <p class="story-card__pmnote">
+                Mid-pipeline pause checkpoint; audit flagged usage_missing (now backfilled); no
+                bypass detected
+              </p>
+            </details>
+          </div>
+        </article>
+        <article class="story-card story-card--done" aria-label="batch pm-orchestrator">
+          <header>
+            <h3>pm-orchestrator</h3>
+            <span class="badge badge-pass" aria-label="status: done">✓ done</span>
+          </header>
+          <div class="story-card__stats">
+            <span class="story-card__stat"
+              ><span class="story-card__stat-label">time</span>
+              <span class="story-card__stat-value">2h35m</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">cost</span>
+              <span class="story-card__stat-value">$45.35</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">tasks</span>
+              <span class="story-card__stat-value">0</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">ACs</span>
+              <span class="story-card__stat-value">0</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">files</span>
+              <span class="story-card__stat-value">0</span></span
+            ><span class="story-card__pipeline">pm-orchestrator</span>
+          </div>
+          <p class="story-card__summary">PM takeover (Opus 4.</p>
+          <div class="story-card__drilldowns">
+            <details>
+              <summary>Files changed (0)</summary>
+              <table class="story-card__files">
+                <thead>
+                  <tr>
+                    <th>path</th>
+                    <th>action</th>
+                    <th>tasks</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </details>
+            <details>
+              <summary>ACs covered (0)</summary>
+              <ul class="story-card__acs"></ul>
+            </details>
+            <details>
+              <summary>Pipeline trace (4 dispatches)</summary>
+              <table class="story-card__pipeline-trace">
+                <thead>
+                  <tr>
+                    <th>role</th>
+                    <th>dispatch_id</th>
+                    <th>loop</th>
+                    <th>model</th>
+                    <th>effort</th>
+                    <th>duration</th>
+                    <th>tokens</th>
+                    <th>cost</th>
+                    <th>status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>pm-orchestrator</td>
+                    <td>pm-orchestrator-b3ddb2cb</td>
+                    <td>—</td>
+                    <td>opus-4-7</td>
+                    <td>—</td>
+                    <td>1h34m</td>
+                    <td>34860745</td>
+                    <td>$28.80</td>
+                    <td>done</td>
+                  </tr>
+                  <tr>
+                    <td>pm-orchestrator</td>
+                    <td>pm-orchestrator-b3ddb2cb</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>0ms</td>
+                    <td>0</td>
+                    <td>—</td>
+                    <td>done</td>
+                  </tr>
+                  <tr>
+                    <td>pm-orchestrator</td>
+                    <td>pm-orchestrator-1103a5bd</td>
+                    <td>—</td>
+                    <td>opus-4-7</td>
+                    <td>—</td>
+                    <td>9m 53s</td>
+                    <td>6538596</td>
+                    <td>$16.55</td>
+                    <td>done</td>
+                  </tr>
+                  <tr>
+                    <td>pm-orchestrator</td>
+                    <td>pm-orchestrator-continua</td>
+                    <td>—</td>
+                    <td>opus-4-7</td>
+                    <td>—</td>
+                    <td>31m 36s</td>
+                    <td>0</td>
+                    <td>$0.00</td>
+                    <td>done</td>
+                  </tr>
+                </tbody>
+              </table>
+            </details>
+            <details>
+              <summary>PM note</summary>
+              <p class="story-card__pmnote">
+                PM takeover (Opus 4.7) — completes T-002 through T-016 via 15 general-purpose
+                subagent dispatches, serial commits with husky lint-staged, full repo
+                typecheck+lint+jest green
+              </p>
+            </details>
+          </div>
+        </article>
+        <article class="story-card story-card--done" aria-label="batch T-002">
+          <header>
+            <h3>T-002</h3>
+            <span class="badge badge-pass" aria-label="status: done">✓ done</span>
+          </header>
+          <div class="story-card__stats">
+            <span class="story-card__stat"
+              ><span class="story-card__stat-label">time</span>
+              <span class="story-card__stat-value">2m 10s</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">cost</span>
+              <span class="story-card__stat-value">$0.26</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">tasks</span>
+              <span class="story-card__stat-value">0</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">ACs</span>
+              <span class="story-card__stat-value">0</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">files</span>
+              <span class="story-card__stat-value">0</span></span
+            ><span class="story-card__pipeline">dev</span>
+          </div>
+          <p class="story-card__summary">useUndoQueue hook with TTL stack — 9/9 tests</p>
+          <div class="story-card__drilldowns">
+            <details>
+              <summary>Files changed (0)</summary>
+              <table class="story-card__files">
+                <thead>
+                  <tr>
+                    <th>path</th>
+                    <th>action</th>
+                    <th>tasks</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </details>
+            <details>
+              <summary>ACs covered (0)</summary>
+              <ul class="story-card__acs"></ul>
+            </details>
+            <details>
+              <summary>Pipeline trace (1 dispatches)</summary>
+              <table class="story-card__pipeline-trace">
+                <thead>
+                  <tr>
+                    <th>role</th>
+                    <th>dispatch_id</th>
+                    <th>loop</th>
+                    <th>model</th>
+                    <th>effort</th>
+                    <th>duration</th>
+                    <th>tokens</th>
+                    <th>cost</th>
+                    <th>status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>dev</td>
+                    <td>d-T-002-dev-l1</td>
+                    <td>1</td>
+                    <td>sonnet-4-6</td>
+                    <td>high</td>
+                    <td>2m 10s</td>
+                    <td>38946</td>
+                    <td>$0.26</td>
+                    <td>done</td>
+                  </tr>
+                </tbody>
+              </table>
+            </details>
+            <details>
+              <summary>PM note</summary>
+              <p class="story-card__pmnote">useUndoQueue hook with TTL stack — 9/9 tests</p>
+            </details>
+          </div>
+        </article>
+        <article class="story-card story-card--done" aria-label="batch T-003">
+          <header>
+            <h3>T-003</h3>
+            <span class="badge badge-pass" aria-label="status: done">✓ done</span>
+          </header>
+          <div class="story-card__stats">
+            <span class="story-card__stat"
+              ><span class="story-card__stat-label">time</span>
+              <span class="story-card__stat-value">2m 4s</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">cost</span>
+              <span class="story-card__stat-value">$0.24</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">tasks</span>
+              <span class="story-card__stat-value">0</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">ACs</span>
+              <span class="story-card__stat-value">0</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">files</span>
+              <span class="story-card__stat-value">0</span></span
+            ><span class="story-card__pipeline">dev</span>
+          </div>
+          <p class="story-card__summary">UndoQueueProvider + useUndoQueueContext — 4/4 tests</p>
+          <div class="story-card__drilldowns">
+            <details>
+              <summary>Files changed (0)</summary>
+              <table class="story-card__files">
+                <thead>
+                  <tr>
+                    <th>path</th>
+                    <th>action</th>
+                    <th>tasks</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </details>
+            <details>
+              <summary>ACs covered (0)</summary>
+              <ul class="story-card__acs"></ul>
+            </details>
+            <details>
+              <summary>Pipeline trace (1 dispatches)</summary>
+              <table class="story-card__pipeline-trace">
+                <thead>
+                  <tr>
+                    <th>role</th>
+                    <th>dispatch_id</th>
+                    <th>loop</th>
+                    <th>model</th>
+                    <th>effort</th>
+                    <th>duration</th>
+                    <th>tokens</th>
+                    <th>cost</th>
+                    <th>status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>dev</td>
+                    <td>d-T-003-dev-l1</td>
+                    <td>1</td>
+                    <td>sonnet-4-6</td>
+                    <td>high</td>
+                    <td>2m 4s</td>
+                    <td>35691</td>
+                    <td>$0.24</td>
+                    <td>done</td>
+                  </tr>
+                </tbody>
+              </table>
+            </details>
+            <details>
+              <summary>PM note</summary>
+              <p class="story-card__pmnote">UndoQueueProvider + useUndoQueueContext — 4/4 tests</p>
+            </details>
+          </div>
+        </article>
+        <article class="story-card story-card--done" aria-label="batch T-004">
+          <header>
+            <h3>T-004</h3>
+            <span class="badge badge-pass" aria-label="status: done">✓ done</span>
+          </header>
+          <div class="story-card__stats">
+            <span class="story-card__stat"
+              ><span class="story-card__stat-label">time</span>
+              <span class="story-card__stat-value">1m 10s</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">cost</span>
+              <span class="story-card__stat-value">$0.21</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">tasks</span>
+              <span class="story-card__stat-value">0</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">ACs</span>
+              <span class="story-card__stat-value">0</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">files</span>
+              <span class="story-card__stat-value">0</span></span
+            ><span class="story-card__pipeline">dev</span>
+          </div>
+          <p class="story-card__summary">UndoToast presentational component — 5/5 tests</p>
+          <div class="story-card__drilldowns">
+            <details>
+              <summary>Files changed (0)</summary>
+              <table class="story-card__files">
+                <thead>
+                  <tr>
+                    <th>path</th>
+                    <th>action</th>
+                    <th>tasks</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </details>
+            <details>
+              <summary>ACs covered (0)</summary>
+              <ul class="story-card__acs"></ul>
+            </details>
+            <details>
+              <summary>Pipeline trace (1 dispatches)</summary>
+              <table class="story-card__pipeline-trace">
+                <thead>
+                  <tr>
+                    <th>role</th>
+                    <th>dispatch_id</th>
+                    <th>loop</th>
+                    <th>model</th>
+                    <th>effort</th>
+                    <th>duration</th>
+                    <th>tokens</th>
+                    <th>cost</th>
+                    <th>status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>dev</td>
+                    <td>d-T-004-dev-l1</td>
+                    <td>1</td>
+                    <td>sonnet-4-6</td>
+                    <td>high</td>
+                    <td>1m 10s</td>
+                    <td>31493</td>
+                    <td>$0.21</td>
+                    <td>done</td>
+                  </tr>
+                </tbody>
+              </table>
+            </details>
+            <details>
+              <summary>PM note</summary>
+              <p class="story-card__pmnote">UndoToast presentational component — 5/5 tests</p>
+            </details>
+          </div>
+        </article>
+        <article class="story-card story-card--done" aria-label="batch T-005">
+          <header>
+            <h3>T-005</h3>
+            <span class="badge badge-pass" aria-label="status: done">✓ done</span>
+          </header>
+          <div class="story-card__stats">
+            <span class="story-card__stat"
+              ><span class="story-card__stat-label">time</span>
+              <span class="story-card__stat-value">2m 6s</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">cost</span>
+              <span class="story-card__stat-value">$0.27</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">tasks</span>
+              <span class="story-card__stat-value">0</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">ACs</span>
+              <span class="story-card__stat-value">0</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">files</span>
+              <span class="story-card__stat-value">0</span></span
+            ><span class="story-card__pipeline">dev</span>
+          </div>
+          <p class="story-card__summary">
+            UndoToastHost stack + global Cmd/Ctrl+Z — 9 new, 40/40 feature tests
+          </p>
+          <div class="story-card__drilldowns">
+            <details>
+              <summary>Files changed (0)</summary>
+              <table class="story-card__files">
+                <thead>
+                  <tr>
+                    <th>path</th>
+                    <th>action</th>
+                    <th>tasks</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </details>
+            <details>
+              <summary>ACs covered (0)</summary>
+              <ul class="story-card__acs"></ul>
+            </details>
+            <details>
+              <summary>Pipeline trace (1 dispatches)</summary>
+              <table class="story-card__pipeline-trace">
+                <thead>
+                  <tr>
+                    <th>role</th>
+                    <th>dispatch_id</th>
+                    <th>loop</th>
+                    <th>model</th>
+                    <th>effort</th>
+                    <th>duration</th>
+                    <th>tokens</th>
+                    <th>cost</th>
+                    <th>status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>dev</td>
+                    <td>d-T-005-dev-l1</td>
+                    <td>1</td>
+                    <td>sonnet-4-6</td>
+                    <td>high</td>
+                    <td>2m 6s</td>
+                    <td>41307</td>
+                    <td>$0.27</td>
+                    <td>done</td>
+                  </tr>
+                </tbody>
+              </table>
+            </details>
+            <details>
+              <summary>PM note</summary>
+              <p class="story-card__pmnote">
+                UndoToastHost stack + global Cmd/Ctrl+Z — 9 new, 40/40 feature tests
+              </p>
+            </details>
+          </div>
+        </article>
+        <article class="story-card story-card--done" aria-label="batch T-006">
+          <header>
+            <h3>T-006</h3>
+            <span class="badge badge-pass" aria-label="status: done">✓ done</span>
+          </header>
+          <div class="story-card__stats">
+            <span class="story-card__stat"
+              ><span class="story-card__stat-label">time</span>
+              <span class="story-card__stat-value">2m 2s</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">cost</span>
+              <span class="story-card__stat-value">$0.24</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">tasks</span>
+              <span class="story-card__stat-value">0</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">ACs</span>
+              <span class="story-card__stat-value">0</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">files</span>
+              <span class="story-card__stat-value">0</span></span
+            ><span class="story-card__pipeline">dev</span>
+          </div>
+          <p class="story-card__summary">
+            ConfirmDeleteButton 2-cliques anti-misclick — 13/13 tests
+          </p>
+          <div class="story-card__drilldowns">
+            <details>
+              <summary>Files changed (0)</summary>
+              <table class="story-card__files">
+                <thead>
+                  <tr>
+                    <th>path</th>
+                    <th>action</th>
+                    <th>tasks</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </details>
+            <details>
+              <summary>ACs covered (0)</summary>
+              <ul class="story-card__acs"></ul>
+            </details>
+            <details>
+              <summary>Pipeline trace (1 dispatches)</summary>
+              <table class="story-card__pipeline-trace">
+                <thead>
+                  <tr>
+                    <th>role</th>
+                    <th>dispatch_id</th>
+                    <th>loop</th>
+                    <th>model</th>
+                    <th>effort</th>
+                    <th>duration</th>
+                    <th>tokens</th>
+                    <th>cost</th>
+                    <th>status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>dev</td>
+                    <td>d-T-006-dev-l1</td>
+                    <td>1</td>
+                    <td>sonnet-4-6</td>
+                    <td>high</td>
+                    <td>2m 2s</td>
+                    <td>35899</td>
+                    <td>$0.24</td>
+                    <td>done</td>
+                  </tr>
+                </tbody>
+              </table>
+            </details>
+            <details>
+              <summary>PM note</summary>
+              <p class="story-card__pmnote">
+                ConfirmDeleteButton 2-cliques anti-misclick — 13/13 tests
+              </p>
+            </details>
+          </div>
+        </article>
+        <article class="story-card story-card--done" aria-label="batch T-007">
+          <header>
+            <h3>T-007</h3>
+            <span class="badge badge-pass" aria-label="status: done">✓ done</span>
+          </header>
+          <div class="story-card__stats">
+            <span class="story-card__stat"
+              ><span class="story-card__stat-label">time</span>
+              <span class="story-card__stat-value">1m 47s</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">cost</span>
+              <span class="story-card__stat-value">$0.40</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">tasks</span>
+              <span class="story-card__stat-value">0</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">ACs</span>
+              <span class="story-card__stat-value">0</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">files</span>
+              <span class="story-card__stat-value">0</span></span
+            ><span class="story-card__pipeline">dev</span>
+          </div>
+          <p class="story-card__summary">
+            gateOpen prop em useDailyPage para defer-write — 3 new, T4 tier
+          </p>
+          <div class="story-card__drilldowns">
+            <details>
+              <summary>Files changed (0)</summary>
+              <table class="story-card__files">
+                <thead>
+                  <tr>
+                    <th>path</th>
+                    <th>action</th>
+                    <th>tasks</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </details>
+            <details>
+              <summary>ACs covered (0)</summary>
+              <ul class="story-card__acs"></ul>
+            </details>
+            <details>
+              <summary>Pipeline trace (1 dispatches)</summary>
+              <table class="story-card__pipeline-trace">
+                <thead>
+                  <tr>
+                    <th>role</th>
+                    <th>dispatch_id</th>
+                    <th>loop</th>
+                    <th>model</th>
+                    <th>effort</th>
+                    <th>duration</th>
+                    <th>tokens</th>
+                    <th>cost</th>
+                    <th>status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>dev</td>
+                    <td>d-T-007-dev-l1</td>
+                    <td>1</td>
+                    <td>sonnet-4-6</td>
+                    <td>high</td>
+                    <td>1m 47s</td>
+                    <td>60868</td>
+                    <td>$0.40</td>
+                    <td>done</td>
+                  </tr>
+                </tbody>
+              </table>
+            </details>
+            <details>
+              <summary>PM note</summary>
+              <p class="story-card__pmnote">
+                gateOpen prop em useDailyPage para defer-write — 3 new, T4 tier
+              </p>
+            </details>
+          </div>
+        </article>
+        <article class="story-card story-card--done" aria-label="batch T-008">
+          <header>
+            <h3>T-008</h3>
+            <span class="badge badge-pass" aria-label="status: done">✓ done</span>
+          </header>
+          <div class="story-card__stats">
+            <span class="story-card__stat"
+              ><span class="story-card__stat-label">time</span>
+              <span class="story-card__stat-value">1m 58s</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">cost</span>
+              <span class="story-card__stat-value">$0.38</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">tasks</span>
+              <span class="story-card__stat-value">0</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">ACs</span>
+              <span class="story-card__stat-value">0</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">files</span>
+              <span class="story-card__stat-value">0</span></span
+            ><span class="story-card__pipeline">dev</span>
+          </div>
+          <p class="story-card__summary">
+            Mount UndoQueueProvider + UndoToastHost + flush no unmount — 6 new
+          </p>
+          <div class="story-card__drilldowns">
+            <details>
+              <summary>Files changed (0)</summary>
+              <table class="story-card__files">
+                <thead>
+                  <tr>
+                    <th>path</th>
+                    <th>action</th>
+                    <th>tasks</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </details>
+            <details>
+              <summary>ACs covered (0)</summary>
+              <ul class="story-card__acs"></ul>
+            </details>
+            <details>
+              <summary>Pipeline trace (1 dispatches)</summary>
+              <table class="story-card__pipeline-trace">
+                <thead>
+                  <tr>
+                    <th>role</th>
+                    <th>dispatch_id</th>
+                    <th>loop</th>
+                    <th>model</th>
+                    <th>effort</th>
+                    <th>duration</th>
+                    <th>tokens</th>
+                    <th>cost</th>
+                    <th>status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>dev</td>
+                    <td>d-T-008-dev-l1</td>
+                    <td>1</td>
+                    <td>sonnet-4-6</td>
+                    <td>high</td>
+                    <td>1m 58s</td>
+                    <td>57749</td>
+                    <td>$0.38</td>
+                    <td>done</td>
+                  </tr>
+                </tbody>
+              </table>
+            </details>
+            <details>
+              <summary>PM note</summary>
+              <p class="story-card__pmnote">
+                Mount UndoQueueProvider + UndoToastHost + flush no unmount — 6 new
+              </p>
+            </details>
+          </div>
+        </article>
+        <article class="story-card story-card--done" aria-label="batch T-009">
+          <header>
+            <h3>T-009</h3>
+            <span class="badge badge-pass" aria-label="status: done">✓ done</span>
+          </header>
+          <div class="story-card__stats">
+            <span class="story-card__stat"
+              ><span class="story-card__stat-label">time</span>
+              <span class="story-card__stat-value">58s</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">cost</span>
+              <span class="story-card__stat-value">$0.19</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">tasks</span>
+              <span class="story-card__stat-value">0</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">ACs</span>
+              <span class="story-card__stat-value">0</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">files</span>
+              <span class="story-card__stat-value">0</span></span
+            ><span class="story-card__pipeline">dev</span>
+          </div>
+          <p class="story-card__summary">
+            data-tiptap-editor marker para passthrough Cmd+Z — 1 test
+          </p>
+          <div class="story-card__drilldowns">
+            <details>
+              <summary>Files changed (0)</summary>
+              <table class="story-card__files">
+                <thead>
+                  <tr>
+                    <th>path</th>
+                    <th>action</th>
+                    <th>tasks</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </details>
+            <details>
+              <summary>ACs covered (0)</summary>
+              <ul class="story-card__acs"></ul>
+            </details>
+            <details>
+              <summary>Pipeline trace (1 dispatches)</summary>
+              <table class="story-card__pipeline-trace">
+                <thead>
+                  <tr>
+                    <th>role</th>
+                    <th>dispatch_id</th>
+                    <th>loop</th>
+                    <th>model</th>
+                    <th>effort</th>
+                    <th>duration</th>
+                    <th>tokens</th>
+                    <th>cost</th>
+                    <th>status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>dev</td>
+                    <td>d-T-009-dev-l1</td>
+                    <td>1</td>
+                    <td>sonnet-4-6</td>
+                    <td>high</td>
+                    <td>58s</td>
+                    <td>28215</td>
+                    <td>$0.19</td>
+                    <td>done</td>
+                  </tr>
+                </tbody>
+              </table>
+            </details>
+            <details>
+              <summary>PM note</summary>
+              <p class="story-card__pmnote">
+                data-tiptap-editor marker para passthrough Cmd+Z — 1 test
+              </p>
+            </details>
+          </div>
+        </article>
+        <article class="story-card story-card--done" aria-label="batch T-010">
+          <header>
+            <h3>T-010</h3>
+            <span class="badge badge-pass" aria-label="status: done">✓ done</span>
+          </header>
+          <div class="story-card__stats">
+            <span class="story-card__stat"
+              ><span class="story-card__stat-label">time</span>
+              <span class="story-card__stat-value">6m 3s</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">cost</span>
+              <span class="story-card__stat-value">$0.57</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">tasks</span>
+              <span class="story-card__stat-value">0</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">ACs</span>
+              <span class="story-card__stat-value">0</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">files</span>
+              <span class="story-card__stat-value">0</span></span
+            ><span class="story-card__pipeline">dev</span>
+          </div>
+          <p class="story-card__summary">
+            Priorities BACKSPACE-empty enqueueUndo + render util refactor — 6 new
+          </p>
+          <div class="story-card__drilldowns">
+            <details>
+              <summary>Files changed (0)</summary>
+              <table class="story-card__files">
+                <thead>
+                  <tr>
+                    <th>path</th>
+                    <th>action</th>
+                    <th>tasks</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </details>
+            <details>
+              <summary>ACs covered (0)</summary>
+              <ul class="story-card__acs"></ul>
+            </details>
+            <details>
+              <summary>Pipeline trace (1 dispatches)</summary>
+              <table class="story-card__pipeline-trace">
+                <thead>
+                  <tr>
+                    <th>role</th>
+                    <th>dispatch_id</th>
+                    <th>loop</th>
+                    <th>model</th>
+                    <th>effort</th>
+                    <th>duration</th>
+                    <th>tokens</th>
+                    <th>cost</th>
+                    <th>status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>dev</td>
+                    <td>d-T-010-dev-l1</td>
+                    <td>1</td>
+                    <td>sonnet-4-6</td>
+                    <td>high</td>
+                    <td>6m 3s</td>
+                    <td>86062</td>
+                    <td>$0.57</td>
+                    <td>done</td>
+                  </tr>
+                </tbody>
+              </table>
+            </details>
+            <details>
+              <summary>PM note</summary>
+              <p class="story-card__pmnote">
+                Priorities BACKSPACE-empty enqueueUndo + render util refactor — 6 new
+              </p>
+            </details>
+          </div>
+        </article>
+        <article class="story-card story-card--done" aria-label="batch T-011">
+          <header>
+            <h3>T-011</h3>
+            <span class="badge badge-pass" aria-label="status: done">✓ done</span>
+          </header>
+          <div class="story-card__stats">
+            <span class="story-card__stat"
+              ><span class="story-card__stat-label">time</span>
+              <span class="story-card__stat-value">5m 31s</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">cost</span>
+              <span class="story-card__stat-value">$0.58</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">tasks</span>
+              <span class="story-card__stat-value">0</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">ACs</span>
+              <span class="story-card__stat-value">0</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">files</span>
+              <span class="story-card__stat-value">0</span></span
+            ><span class="story-card__pipeline">dev</span>
+          </div>
+          <p class="story-card__summary">Notes BACKSPACE-empty enqueueUndo — 4 new</p>
+          <div class="story-card__drilldowns">
+            <details>
+              <summary>Files changed (0)</summary>
+              <table class="story-card__files">
+                <thead>
+                  <tr>
+                    <th>path</th>
+                    <th>action</th>
+                    <th>tasks</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </details>
+            <details>
+              <summary>ACs covered (0)</summary>
+              <ul class="story-card__acs"></ul>
+            </details>
+            <details>
+              <summary>Pipeline trace (1 dispatches)</summary>
+              <table class="story-card__pipeline-trace">
+                <thead>
+                  <tr>
+                    <th>role</th>
+                    <th>dispatch_id</th>
+                    <th>loop</th>
+                    <th>model</th>
+                    <th>effort</th>
+                    <th>duration</th>
+                    <th>tokens</th>
+                    <th>cost</th>
+                    <th>status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>dev</td>
+                    <td>d-T-011-dev-l1</td>
+                    <td>1</td>
+                    <td>sonnet-4-6</td>
+                    <td>high</td>
+                    <td>5m 31s</td>
+                    <td>88065</td>
+                    <td>$0.58</td>
+                    <td>done</td>
+                  </tr>
+                </tbody>
+              </table>
+            </details>
+            <details>
+              <summary>PM note</summary>
+              <p class="story-card__pmnote">Notes BACKSPACE-empty enqueueUndo — 4 new</p>
+            </details>
+          </div>
+        </article>
+        <article class="story-card story-card--done" aria-label="batch T-012">
+          <header>
+            <h3>T-012</h3>
+            <span class="badge badge-pass" aria-label="status: done">✓ done</span>
+          </header>
+          <div class="story-card__stats">
+            <span class="story-card__stat"
+              ><span class="story-card__stat-label">time</span>
+              <span class="story-card__stat-value">3m 28s</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">cost</span>
+              <span class="story-card__stat-value">$0.37</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">tasks</span>
+              <span class="story-card__stat-value">0</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">ACs</span>
+              <span class="story-card__stat-value">0</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">files</span>
+              <span class="story-card__stat-value">0</span></span
+            ><span class="story-card__pipeline">dev</span>
+          </div>
+          <p class="story-card__summary">
+            ConfirmDeleteButton em PriorityItem — 6 new, className type widened
+          </p>
+          <div class="story-card__drilldowns">
+            <details>
+              <summary>Files changed (0)</summary>
+              <table class="story-card__files">
+                <thead>
+                  <tr>
+                    <th>path</th>
+                    <th>action</th>
+                    <th>tasks</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </details>
+            <details>
+              <summary>ACs covered (0)</summary>
+              <ul class="story-card__acs"></ul>
+            </details>
+            <details>
+              <summary>Pipeline trace (1 dispatches)</summary>
+              <table class="story-card__pipeline-trace">
+                <thead>
+                  <tr>
+                    <th>role</th>
+                    <th>dispatch_id</th>
+                    <th>loop</th>
+                    <th>model</th>
+                    <th>effort</th>
+                    <th>duration</th>
+                    <th>tokens</th>
+                    <th>cost</th>
+                    <th>status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>dev</td>
+                    <td>d-T-012-dev-l1</td>
+                    <td>1</td>
+                    <td>sonnet-4-6</td>
+                    <td>high</td>
+                    <td>3m 28s</td>
+                    <td>55527</td>
+                    <td>$0.37</td>
+                    <td>done</td>
+                  </tr>
+                </tbody>
+              </table>
+            </details>
+            <details>
+              <summary>PM note</summary>
+              <p class="story-card__pmnote">
+                ConfirmDeleteButton em PriorityItem — 6 new, className type widened
+              </p>
+            </details>
+          </div>
+        </article>
+        <article class="story-card story-card--done" aria-label="batch T-013">
+          <header>
+            <h3>T-013</h3>
+            <span class="badge badge-pass" aria-label="status: done">✓ done</span>
+          </header>
+          <div class="story-card__stats">
+            <span class="story-card__stat"
+              ><span class="story-card__stat-label">time</span>
+              <span class="story-card__stat-value">3m 6s</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">cost</span>
+              <span class="story-card__stat-value">$0.35</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">tasks</span>
+              <span class="story-card__stat-value">0</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">ACs</span>
+              <span class="story-card__stat-value">0</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">files</span>
+              <span class="story-card__stat-value">0</span></span
+            ><span class="story-card__pipeline">dev</span>
+          </div>
+          <p class="story-card__summary">ConfirmDeleteButton em NoteItem — 4 new</p>
+          <div class="story-card__drilldowns">
+            <details>
+              <summary>Files changed (0)</summary>
+              <table class="story-card__files">
+                <thead>
+                  <tr>
+                    <th>path</th>
+                    <th>action</th>
+                    <th>tasks</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </details>
+            <details>
+              <summary>ACs covered (0)</summary>
+              <ul class="story-card__acs"></ul>
+            </details>
+            <details>
+              <summary>Pipeline trace (1 dispatches)</summary>
+              <table class="story-card__pipeline-trace">
+                <thead>
+                  <tr>
+                    <th>role</th>
+                    <th>dispatch_id</th>
+                    <th>loop</th>
+                    <th>model</th>
+                    <th>effort</th>
+                    <th>duration</th>
+                    <th>tokens</th>
+                    <th>cost</th>
+                    <th>status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>dev</td>
+                    <td>d-T-013-dev-l1</td>
+                    <td>1</td>
+                    <td>sonnet-4-6</td>
+                    <td>high</td>
+                    <td>3m 6s</td>
+                    <td>52438</td>
+                    <td>$0.35</td>
+                    <td>done</td>
+                  </tr>
+                </tbody>
+              </table>
+            </details>
+            <details>
+              <summary>PM note</summary>
+              <p class="story-card__pmnote">ConfirmDeleteButton em NoteItem — 4 new</p>
+            </details>
+          </div>
+        </article>
+        <article class="story-card story-card--done" aria-label="batch T-014">
+          <header>
+            <h3>T-014</h3>
+            <span class="badge badge-pass" aria-label="status: done">✓ done</span>
+          </header>
+          <div class="story-card__stats">
+            <span class="story-card__stat"
+              ><span class="story-card__stat-label">time</span>
+              <span class="story-card__stat-value">3m 22s</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">cost</span>
+              <span class="story-card__stat-value">$0.43</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">tasks</span>
+              <span class="story-card__stat-value">0</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">ACs</span>
+              <span class="story-card__stat-value">0</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">files</span>
+              <span class="story-card__stat-value">0</span></span
+            ><span class="story-card__pipeline">dev</span>
+          </div>
+          <p class="story-card__summary">ConfirmDeleteButton em StickyPanel close — 4 new</p>
+          <div class="story-card__drilldowns">
+            <details>
+              <summary>Files changed (0)</summary>
+              <table class="story-card__files">
+                <thead>
+                  <tr>
+                    <th>path</th>
+                    <th>action</th>
+                    <th>tasks</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </details>
+            <details>
+              <summary>ACs covered (0)</summary>
+              <ul class="story-card__acs"></ul>
+            </details>
+            <details>
+              <summary>Pipeline trace (1 dispatches)</summary>
+              <table class="story-card__pipeline-trace">
+                <thead>
+                  <tr>
+                    <th>role</th>
+                    <th>dispatch_id</th>
+                    <th>loop</th>
+                    <th>model</th>
+                    <th>effort</th>
+                    <th>duration</th>
+                    <th>tokens</th>
+                    <th>cost</th>
+                    <th>status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>dev</td>
+                    <td>d-T-014-dev-l1</td>
+                    <td>1</td>
+                    <td>sonnet-4-6</td>
+                    <td>high</td>
+                    <td>3m 22s</td>
+                    <td>65570</td>
+                    <td>$0.43</td>
+                    <td>done</td>
+                  </tr>
+                </tbody>
+              </table>
+            </details>
+            <details>
+              <summary>PM note</summary>
+              <p class="story-card__pmnote">ConfirmDeleteButton em StickyPanel close — 4 new</p>
+            </details>
+          </div>
+        </article>
+        <article class="story-card story-card--done" aria-label="batch T-015">
+          <header>
+            <h3>T-015</h3>
+            <span class="badge badge-pass" aria-label="status: done">✓ done</span>
+          </header>
+          <div class="story-card__stats">
+            <span class="story-card__stat"
+              ><span class="story-card__stat-label">time</span>
+              <span class="story-card__stat-value">1m 34s</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">cost</span>
+              <span class="story-card__stat-value">$0.26</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">tasks</span>
+              <span class="story-card__stat-value">0</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">ACs</span>
+              <span class="story-card__stat-value">0</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">files</span>
+              <span class="story-card__stat-value">0</span></span
+            ><span class="story-card__pipeline">dev</span>
+          </div>
+          <p class="story-card__summary">Integration test Cmd/Ctrl+Z + Tiptap passthrough — 4/4</p>
+          <div class="story-card__drilldowns">
+            <details>
+              <summary>Files changed (0)</summary>
+              <table class="story-card__files">
+                <thead>
+                  <tr>
+                    <th>path</th>
+                    <th>action</th>
+                    <th>tasks</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </details>
+            <details>
+              <summary>ACs covered (0)</summary>
+              <ul class="story-card__acs"></ul>
+            </details>
+            <details>
+              <summary>Pipeline trace (1 dispatches)</summary>
+              <table class="story-card__pipeline-trace">
+                <thead>
+                  <tr>
+                    <th>role</th>
+                    <th>dispatch_id</th>
+                    <th>loop</th>
+                    <th>model</th>
+                    <th>effort</th>
+                    <th>duration</th>
+                    <th>tokens</th>
+                    <th>cost</th>
+                    <th>status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>dev</td>
+                    <td>d-T-015-dev-l1</td>
+                    <td>1</td>
+                    <td>sonnet-4-6</td>
+                    <td>high</td>
+                    <td>1m 34s</td>
+                    <td>39955</td>
+                    <td>$0.26</td>
+                    <td>done</td>
+                  </tr>
+                </tbody>
+              </table>
+            </details>
+            <details>
+              <summary>PM note</summary>
+              <p class="story-card__pmnote">
+                Integration test Cmd/Ctrl+Z + Tiptap passthrough — 4/4
+              </p>
+            </details>
+          </div>
+        </article>
+        <article class="story-card story-card--done" aria-label="batch T-016">
+          <header>
+            <h3>T-016</h3>
+            <span class="badge badge-pass" aria-label="status: done">✓ done</span>
+          </header>
+          <div class="story-card__stats">
+            <span class="story-card__stat"
+              ><span class="story-card__stat-label">time</span>
+              <span class="story-card__stat-value">4m 31s</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">cost</span>
+              <span class="story-card__stat-value">$0.52</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">tasks</span>
+              <span class="story-card__stat-value">0</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">ACs</span>
+              <span class="story-card__stat-value">0</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">files</span>
+              <span class="story-card__stat-value">0</span></span
+            ><span class="story-card__pipeline">dev</span>
+          </div>
+          <p class="story-card__summary">Integration test flush em date change/unmount — 9/9</p>
+          <div class="story-card__drilldowns">
+            <details>
+              <summary>Files changed (0)</summary>
+              <table class="story-card__files">
+                <thead>
+                  <tr>
+                    <th>path</th>
+                    <th>action</th>
+                    <th>tasks</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </details>
+            <details>
+              <summary>ACs covered (0)</summary>
+              <ul class="story-card__acs"></ul>
+            </details>
+            <details>
+              <summary>Pipeline trace (1 dispatches)</summary>
+              <table class="story-card__pipeline-trace">
+                <thead>
+                  <tr>
+                    <th>role</th>
+                    <th>dispatch_id</th>
+                    <th>loop</th>
+                    <th>model</th>
+                    <th>effort</th>
+                    <th>duration</th>
+                    <th>tokens</th>
+                    <th>cost</th>
+                    <th>status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>dev</td>
+                    <td>d-T-016-dev-l1</td>
+                    <td>1</td>
+                    <td>sonnet-4-6</td>
+                    <td>high</td>
+                    <td>4m 31s</td>
+                    <td>78668</td>
+                    <td>$0.52</td>
+                    <td>done</td>
+                  </tr>
+                </tbody>
+              </table>
+            </details>
+            <details>
+              <summary>PM note</summary>
+              <p class="story-card__pmnote">Integration test flush em date change/unmount — 9/9</p>
             </details>
           </div>
         </article>
@@ -2013,38 +2120,38 @@
       <section class="cost-section">
         <header class="cost-header">
           <h2>Cost</h2>
-          <span class="badge badge-pass">coverage 32/32 (100%)</span>
+          <span class="badge badge-pass">coverage 22/23 (96%)</span>
         </header>
         <div class="cost-grid">
           <div class="cost-card">
             <span class="cost-label">Total cost</span>
-            <span class="cost-value">$5.0530</span>
-            <small>$5.0530</small>
+            <span class="cost-value">$50.9843</span>
+            <small>$50.9843</small>
           </div>
           <div class="cost-card">
             <span class="cost-label">$ / AC</span>
-            <span class="cost-value">$0.1943</span>
-            <small>26 ACs</small>
+            <span class="cost-value">$3.3990</span>
+            <small>15 ACs</small>
           </div>
           <div class="cost-card">
             <span class="cost-label">$ / dispatch</span>
-            <span class="cost-value">$0.1579</span>
-            <small>avg of 32</small>
+            <span class="cost-value">$2.2167</span>
+            <small>avg of 22</small>
           </div>
           <div class="cost-card">
             <span class="cost-label">Tokens</span>
-            <span class="cost-value">1,090,191</span>
-            <small>763,134 in / 327,057 out (70/30)</small>
+            <span class="cost-value">42,323,382</span>
+            <small>29,626,367 in / 12,697,015 out (70/30)</small>
           </div>
           <div class="cost-card">
             <span class="cost-label">Wall-clock</span>
-            <span class="cost-value">1h5m</span>
-            <small>32 dispatches with usage</small>
+            <span class="cost-value">3h3m</span>
+            <small>23 dispatches with usage</small>
           </div>
           <div class="cost-card">
             <span class="cost-label">Tool uses</span>
-            <span class="cost-value">661</span>
-            <small>~20.7 per dispatch</small>
+            <span class="cost-value">695</span>
+            <small>~30.2 per dispatch</small>
           </div>
         </div>
         <table class="cost-models">
@@ -2061,22 +2168,40 @@
           </thead>
           <tbody>
             <tr>
+              <td><code>opus-4-7</code></td>
+              <td>3</td>
+              <td>41,399,341</td>
+              <td>2h16m</td>
+              <td>185</td>
+              <td>$45.3517</td>
+              <td>89.0%</td>
+            </tr>
+            <tr>
               <td><code>sonnet-4-6</code></td>
-              <td>19</td>
-              <td>603,305</td>
-              <td>49m 27s</td>
-              <td>367</td>
-              <td>$3.9818</td>
-              <td>78.8%</td>
+              <td>16</td>
+              <td>818,121</td>
+              <td>42m 46s</td>
+              <td>441</td>
+              <td>$5.3996</td>
+              <td>10.6%</td>
             </tr>
             <tr>
               <td><code>haiku-4-5</code></td>
-              <td>13</td>
-              <td>486,886</td>
-              <td>15m 58s</td>
-              <td>294</td>
-              <td>$1.0711</td>
-              <td>21.2%</td>
+              <td>3</td>
+              <td>105,920</td>
+              <td>4m 50s</td>
+              <td>69</td>
+              <td>$0.2330</td>
+              <td>0.5%</td>
+            </tr>
+            <tr>
+              <td><code>unknown</code></td>
+              <td>1</td>
+              <td>0</td>
+              <td>0ms</td>
+              <td>0</td>
+              <td>$0.0000</td>
+              <td>0.0%</td>
             </tr>
           </tbody>
         </table>
@@ -2095,44 +2220,44 @@
             </thead>
             <tbody>
               <tr>
+                <td><code>pm-orchestrator</code></td>
+                <td>4</td>
+                <td>41,399,341</td>
+                <td>2h16m</td>
+                <td>$45.3517</td>
+                <td>89.0%</td>
+              </tr>
+              <tr>
                 <td><code>dev</code></td>
                 <td>16</td>
-                <td>519,559</td>
-                <td>44m 58s</td>
-                <td>$3.4291</td>
-                <td>67.9%</td>
-              </tr>
-              <tr>
-                <td><code>qa</code></td>
-                <td>10</td>
-                <td>299,795</td>
-                <td>11m 56s</td>
-                <td>$0.7816</td>
-                <td>15.5%</td>
-              </tr>
-              <tr>
-                <td><code>audit-agent</code></td>
-                <td>3</td>
-                <td>194,837</td>
-                <td>5m 7s</td>
-                <td>$0.4286</td>
-                <td>8.5%</td>
+                <td>825,923</td>
+                <td>43m 3s</td>
+                <td>$5.3214</td>
+                <td>10.4%</td>
               </tr>
               <tr>
                 <td><code>logic-reviewer</code></td>
-                <td>2</td>
-                <td>56,000</td>
-                <td>2m 40s</td>
-                <td>$0.3696</td>
-                <td>7.3%</td>
+                <td>1</td>
+                <td>21,668</td>
+                <td>57s</td>
+                <td>$0.1430</td>
+                <td>0.3%</td>
               </tr>
               <tr>
-                <td><code>code-reviewer</code></td>
+                <td><code>qa</code></td>
                 <td>1</td>
-                <td>20,000</td>
-                <td>45s</td>
-                <td>$0.0440</td>
-                <td>0.9%</td>
+                <td>38,622</td>
+                <td>2m 30s</td>
+                <td>$0.0850</td>
+                <td>0.2%</td>
+              </tr>
+              <tr>
+                <td><code>audit-agent</code></td>
+                <td>1</td>
+                <td>37,828</td>
+                <td>1m 6s</td>
+                <td>$0.0832</td>
+                <td>0.2%</td>
               </tr>
             </tbody>
           </table>
@@ -2153,10 +2278,10 @@
             <tbody>
               <tr>
                 <td><code>implementation</code></td>
-                <td>32</td>
-                <td>1,090,191</td>
-                <td>1h5m</td>
-                <td>$5.0530</td>
+                <td>23</td>
+                <td>42,323,382</td>
+                <td>3h3m</td>
+                <td>$50.9843</td>
                 <td>100.0%</td>
               </tr>
             </tbody>
@@ -2164,7 +2289,7 @@
         </details>
         <p class="cost-note">
           <em
-            >70/30 input/output split assumed; harness reports only total_tokens; 32 of 32
+            >70/30 input/output split assumed; harness reports only total_tokens; 22 of 23
             dispatches included in cost</em
           >
         </p>
@@ -2186,157 +2311,91 @@
               <tbody>
                 <tr>
                   <td>AC-001</td>
-                  <td>pass</td>
+                  <td>missing</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-002</td>
-                  <td>pass</td>
+                  <td>missing</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-003</td>
-                  <td>pass</td>
+                  <td>missing</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-004</td>
-                  <td>pass</td>
+                  <td>missing</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-005</td>
-                  <td>pass</td>
+                  <td>missing</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-006</td>
-                  <td>pass</td>
+                  <td>missing</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-007</td>
-                  <td>pass</td>
+                  <td>missing</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-008</td>
-                  <td>pass</td>
+                  <td>missing</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-009</td>
-                  <td>pass</td>
+                  <td>missing</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-010</td>
-                  <td>pass</td>
+                  <td>missing</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-011</td>
-                  <td>pass</td>
+                  <td>missing</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-012</td>
-                  <td>pass</td>
+                  <td>missing</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-013</td>
-                  <td>pass</td>
+                  <td>missing</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-014</td>
-                  <td>pass</td>
+                  <td>missing</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-015</td>
-                  <td>pass</td>
-                  <td>qa</td>
-                  <td>—</td>
-                </tr>
-                <tr>
-                  <td>AC-016</td>
-                  <td>pass</td>
-                  <td>qa</td>
-                  <td>—</td>
-                </tr>
-                <tr>
-                  <td>AC-017</td>
-                  <td>pass</td>
-                  <td>qa</td>
-                  <td>—</td>
-                </tr>
-                <tr>
-                  <td>AC-018</td>
-                  <td>pass</td>
-                  <td>qa</td>
-                  <td>—</td>
-                </tr>
-                <tr>
-                  <td>AC-019</td>
-                  <td>pass</td>
-                  <td>qa</td>
-                  <td>—</td>
-                </tr>
-                <tr>
-                  <td>AC-020</td>
-                  <td>pass</td>
-                  <td>qa</td>
-                  <td>—</td>
-                </tr>
-                <tr>
-                  <td>AC-021</td>
-                  <td>pass</td>
-                  <td>qa</td>
-                  <td>—</td>
-                </tr>
-                <tr>
-                  <td>AC-022</td>
-                  <td>pass</td>
-                  <td>qa</td>
-                  <td>—</td>
-                </tr>
-                <tr>
-                  <td>AC-023</td>
-                  <td>pass</td>
-                  <td>qa</td>
-                  <td>—</td>
-                </tr>
-                <tr>
-                  <td>AC-024</td>
-                  <td>pass</td>
-                  <td>qa</td>
-                  <td>—</td>
-                </tr>
-                <tr>
-                  <td>AC-025</td>
-                  <td>pass</td>
-                  <td>qa</td>
-                  <td>—</td>
-                </tr>
-                <tr>
-                  <td>AC-026</td>
-                  <td>pass</td>
+                  <td>missing</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
@@ -2365,288 +2424,207 @@
                   <td>dev</td>
                   <td>done</td>
                   <td>1</td>
-                  <td>32000</td>
-                  <td>3m</td>
-                  <td>—</td>
+                  <td>29470</td>
+                  <td>1m 14s</td>
+                  <td>Scaffold types+barrel</td>
                 </tr>
                 <tr>
                   <td>d-T-001-logic-rev...</td>
                   <td>logic-reviewer</td>
                   <td>done</td>
                   <td>1</td>
-                  <td>28000</td>
-                  <td>1m 20s</td>
-                  <td>—</td>
+                  <td>21668</td>
+                  <td>57s</td>
+                  <td>Clean — shape supports planned consumers (T-002/T-004/T-0...</td>
                 </tr>
                 <tr>
                   <td>d-T-001-qa-l1</td>
                   <td>qa</td>
                   <td>done</td>
                   <td>1</td>
-                  <td>28000</td>
-                  <td>1m</td>
+                  <td>38622</td>
+                  <td>2m 30s</td>
+                  <td>Lint+typecheck+resolution all green; no ACs in scope</td>
+                </tr>
+                <tr>
+                  <td>d-FEAT-022-audit-...</td>
+                  <td>audit-agent</td>
+                  <td>blocked</td>
+                  <td>1</td>
+                  <td>37828</td>
+                  <td>1m 6s</td>
+                  <td>Mid-pipeline pause checkpoint; audit flagged usage_missin...</td>
+                </tr>
+                <tr>
+                  <td>pm-orchestrator-b...</td>
+                  <td>pm-orchestrator</td>
+                  <td>done</td>
                   <td>—</td>
+                  <td>34860745</td>
+                  <td>94m 44s</td>
+                  <td>PM/orchestrator session (Stop hook): 255 turns</td>
+                </tr>
+                <tr>
+                  <td>pm-orchestrator-b...</td>
+                  <td>pm-orchestrator</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>0</td>
+                  <td>0ms</td>
+                  <td>PM/orchestrator session (Stop hook): 1 turns</td>
+                </tr>
+                <tr>
+                  <td>pm-orchestrator-1...</td>
+                  <td>pm-orchestrator</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>6538596</td>
+                  <td>9m 53s</td>
+                  <td>PM/orchestrator session (Stop hook): 79 turns</td>
                 </tr>
                 <tr>
                   <td>d-T-002-dev-l1</td>
                   <td>dev</td>
                   <td>done</td>
                   <td>1</td>
-                  <td>32000</td>
-                  <td>3m</td>
-                  <td>—</td>
+                  <td>38946</td>
+                  <td>2m 10s</td>
+                  <td>useUndoQueue hook with TTL stack — 9/9 tests</td>
                 </tr>
                 <tr>
-                  <td>d-T-002-dev-l2</td>
-                  <td>dev</td>
+                  <td>pm-orchestrator-c...</td>
+                  <td>pm-orchestrator</td>
                   <td>done</td>
-                  <td>2</td>
-                  <td>32000</td>
-                  <td>3m</td>
                   <td>—</td>
-                </tr>
-                <tr>
-                  <td>d-T-002-qa-l1</td>
-                  <td>qa</td>
-                  <td>done</td>
-                  <td>2</td>
-                  <td>28000</td>
-                  <td>1m</td>
-                  <td>—</td>
+                  <td>0</td>
+                  <td>31m 36s</td>
+                  <td>PM takeover (Opus 4.7) — completes T-002 through T-016 vi...</td>
                 </tr>
                 <tr>
                   <td>d-T-003-dev-l1</td>
                   <td>dev</td>
                   <td>done</td>
                   <td>1</td>
-                  <td>32000</td>
-                  <td>3m</td>
-                  <td>—</td>
+                  <td>35691</td>
+                  <td>2m 4s</td>
+                  <td>UndoQueueProvider + useUndoQueueContext — 4/4 tests</td>
                 </tr>
                 <tr>
                   <td>d-T-004-dev-l1</td>
                   <td>dev</td>
                   <td>done</td>
                   <td>1</td>
-                  <td>32000</td>
-                  <td>3m</td>
-                  <td>—</td>
-                </tr>
-                <tr>
-                  <td>d-T-004-code-revi...</td>
-                  <td>code-reviewer</td>
-                  <td>done</td>
-                  <td>1</td>
-                  <td>20000</td>
-                  <td>45s</td>
-                  <td>—</td>
-                </tr>
-                <tr>
-                  <td>d-T-003-qa-l1</td>
-                  <td>qa</td>
-                  <td>done</td>
-                  <td>1</td>
-                  <td>28000</td>
-                  <td>1m</td>
-                  <td>—</td>
-                </tr>
-                <tr>
-                  <td>d-T-004-qa-l1</td>
-                  <td>qa</td>
-                  <td>done</td>
-                  <td>1</td>
-                  <td>28000</td>
-                  <td>1m</td>
-                  <td>—</td>
+                  <td>31493</td>
+                  <td>1m 10s</td>
+                  <td>UndoToast presentational component — 5/5 tests</td>
                 </tr>
                 <tr>
                   <td>d-T-005-dev-l1</td>
                   <td>dev</td>
                   <td>done</td>
                   <td>1</td>
-                  <td>32000</td>
-                  <td>3m</td>
-                  <td>—</td>
-                </tr>
-                <tr>
-                  <td>d-T-005-dev-l2</td>
-                  <td>dev</td>
-                  <td>done</td>
-                  <td>2</td>
-                  <td>32000</td>
-                  <td>3m</td>
-                  <td>—</td>
-                </tr>
-                <tr>
-                  <td>d-T-005-logic-rev...</td>
-                  <td>logic-reviewer</td>
-                  <td>done</td>
-                  <td>2</td>
-                  <td>28000</td>
-                  <td>1m 20s</td>
-                  <td>—</td>
-                </tr>
-                <tr>
-                  <td>d-T-005-qa-l1</td>
-                  <td>qa</td>
-                  <td>done</td>
-                  <td>2</td>
-                  <td>28000</td>
-                  <td>1m</td>
-                  <td>—</td>
+                  <td>41307</td>
+                  <td>2m 6s</td>
+                  <td>UndoToastHost stack + global Cmd/Ctrl+Z — 9 new, 40/40 fe...</td>
                 </tr>
                 <tr>
                   <td>d-T-006-dev-l1</td>
                   <td>dev</td>
                   <td>done</td>
                   <td>1</td>
-                  <td>25232</td>
-                  <td>51s</td>
-                  <td>—</td>
+                  <td>35899</td>
+                  <td>2m 2s</td>
+                  <td>ConfirmDeleteButton 2-cliques anti-misclick — 13/13 tests</td>
                 </tr>
                 <tr>
                   <td>d-T-007-dev-l1</td>
                   <td>dev</td>
                   <td>done</td>
                   <td>1</td>
-                  <td>34600</td>
-                  <td>2m 14s</td>
-                  <td>—</td>
-                </tr>
-                <tr>
-                  <td>d-T-007-dev-l2</td>
-                  <td>dev</td>
-                  <td>done</td>
-                  <td>2</td>
-                  <td>15378</td>
-                  <td>43s</td>
-                  <td>Loop 2 — minor fix: font-size var(--font-size-lg)</td>
-                </tr>
-                <tr>
-                  <td>d-T-006-qa-l1</td>
-                  <td>qa</td>
-                  <td>done</td>
-                  <td>1</td>
-                  <td>23330</td>
-                  <td>45s</td>
-                  <td>—</td>
-                </tr>
-                <tr>
-                  <td>d-T-007-qa-l1</td>
-                  <td>qa</td>
-                  <td>done</td>
-                  <td>2</td>
-                  <td>37283</td>
-                  <td>1m 51s</td>
-                  <td>—</td>
+                  <td>60868</td>
+                  <td>1m 47s</td>
+                  <td>gateOpen prop em useDailyPage para defer-write — 3 new, T...</td>
                 </tr>
                 <tr>
                   <td>d-T-008-dev-l1</td>
                   <td>dev</td>
-                  <td>needs_review</td>
+                  <td>done</td>
                   <td>1</td>
-                  <td>35087</td>
-                  <td>5m 1s</td>
-                  <td>AC-025 parcial: DailyPage tests precisam de mock para @/f...</td>
-                </tr>
-                <tr>
-                  <td>d-T-008-dev-l2</td>
-                  <td>dev</td>
-                  <td>done</td>
-                  <td>2</td>
-                  <td>27776</td>
-                  <td>1m 6s</td>
-                  <td>Loop 2 — AC-025: jest.mock sticky-note em DailyPage tests</td>
-                </tr>
-                <tr>
-                  <td>d-T-008-qa-l1</td>
-                  <td>qa</td>
-                  <td>done</td>
-                  <td>2</td>
-                  <td>27746</td>
-                  <td>1m 49s</td>
-                  <td>—</td>
+                  <td>57749</td>
+                  <td>1m 58s</td>
+                  <td>Mount UndoQueueProvider + UndoToastHost + flush no unmoun...</td>
                 </tr>
                 <tr>
                   <td>d-T-009-dev-l1</td>
                   <td>dev</td>
                   <td>done</td>
                   <td>1</td>
-                  <td>43737</td>
-                  <td>3m 19s</td>
-                  <td>—</td>
+                  <td>28215</td>
+                  <td>58s</td>
+                  <td>data-tiptap-editor marker para passthrough Cmd+Z — 1 test</td>
                 </tr>
                 <tr>
                   <td>d-T-010-dev-l1</td>
                   <td>dev</td>
                   <td>done</td>
                   <td>1</td>
-                  <td>48199</td>
-                  <td>3m 4s</td>
-                  <td>—</td>
+                  <td>86062</td>
+                  <td>6m 3s</td>
+                  <td>Priorities BACKSPACE-empty enqueueUndo + render util refa...</td>
                 </tr>
                 <tr>
-                  <td>d-T-009-dev-l2</td>
+                  <td>d-T-011-dev-l1</td>
                   <td>dev</td>
                   <td>done</td>
-                  <td>2</td>
-                  <td>28632</td>
-                  <td>3m 12s</td>
-                  <td>Loop 2 — split em 4 arquivos; adicionou tabRef containmen...</td>
+                  <td>1</td>
+                  <td>88065</td>
+                  <td>5m 31s</td>
+                  <td>Notes BACKSPACE-empty enqueueUndo — 4 new</td>
                 </tr>
                 <tr>
-                  <td>d-T-010-dev-l2</td>
+                  <td>d-T-012-dev-l1</td>
                   <td>dev</td>
                   <td>done</td>
-                  <td>2</td>
-                  <td>36918</td>
-                  <td>4m 28s</td>
-                  <td>Loop 2 — split em 2 arquivos; waitFor AC-010; AC-022 data...</td>
-                </tr>
-                <tr>
-                  <td>d-T-009-qa-l1</td>
-                  <td>qa</td>
-                  <td>done</td>
-                  <td>2</td>
-                  <td>37044</td>
-                  <td>1m 6s</td>
-                  <td>—</td>
-                </tr>
-                <tr>
-                  <td>d-T-010-qa-l1</td>
-                  <td>qa</td>
-                  <td>done</td>
-                  <td>2</td>
-                  <td>34392</td>
-                  <td>1m 24s</td>
-                  <td>—</td>
-                </tr>
-                <tr>
-                  <td>d-audit-l1</td>
-                  <td>audit-agent</td>
-                  <td>blocked</td>
                   <td>1</td>
-                  <td>75139</td>
-                  <td>2m 25s</td>
-                  <td>Audit L1 blocked: 11 findings — corrected: task_id, usage...</td>
+                  <td>55527</td>
+                  <td>3m 28s</td>
+                  <td>ConfirmDeleteButton em PriorityItem — 6 new, className ty...</td>
                 </tr>
                 <tr>
-                  <td>d-audit-l2</td>
-                  <td>audit-agent</td>
-                  <td>blocked</td>
-                  <td>1</td>
-                  <td>61864</td>
-                  <td>1m 30s</td>
-                  <td>Audit L2 blocked: usage missing in all dispatches. Correc...</td>
-                </tr>
-                <tr>
-                  <td>d-audit-l3</td>
-                  <td>audit-agent</td>
+                  <td>d-T-013-dev-l1</td>
+                  <td>dev</td>
                   <td>done</td>
                   <td>1</td>
-                  <td>57834</td>
-                  <td>1m 12s</td>
-                  <td>Audit L3 passed — todos os checks verdes</td>
+                  <td>52438</td>
+                  <td>3m 6s</td>
+                  <td>ConfirmDeleteButton em NoteItem — 4 new</td>
+                </tr>
+                <tr>
+                  <td>d-T-014-dev-l1</td>
+                  <td>dev</td>
+                  <td>done</td>
+                  <td>1</td>
+                  <td>65570</td>
+                  <td>3m 22s</td>
+                  <td>ConfirmDeleteButton em StickyPanel close — 4 new</td>
+                </tr>
+                <tr>
+                  <td>d-T-015-dev-l1</td>
+                  <td>dev</td>
+                  <td>done</td>
+                  <td>1</td>
+                  <td>39955</td>
+                  <td>1m 34s</td>
+                  <td>Integration test Cmd/Ctrl+Z + Tiptap passthrough — 4/4</td>
+                </tr>
+                <tr>
+                  <td>d-T-016-dev-l1</td>
+                  <td>dev</td>
+                  <td>done</td>
+                  <td>1</td>
+                  <td>78668</td>
+                  <td>4m 31s</td>
+                  <td>Integration test flush em date change/unmount — 9/9</td>
                 </tr>
               </tbody>
             </table>
@@ -2714,10 +2692,10 @@
               <tbody>
                 <tr>
                   <td>implementation</td>
-                  <td>20:00:00</td>
-                  <td>2026-05-13 22:37:00</td>
-                  <td>157m</td>
-                  <td>done</td>
+                  <td>01:25:00</td>
+                  <td>running</td>
+                  <td>running</td>
+                  <td>running</td>
                 </tr>
               </tbody>
             </table>
@@ -2730,13 +2708,13 @@
           <summary>View raw Markdown report</summary>
           <div class="md-embed">
             <h1>
-              sticky-note — Post-it global com aba colada, rich text e persistência servidor —
-              FEAT-020
+              undo-delete — confirmação anti-misclick para exclusões em Priorities, Notes e Sticky
+              Note — FEAT-022
             </h1>
             <blockquote>
               <p>
-                Feature: sticky-note — Post-it global com aba colada, rich text e persistência
-                servidor Task ID: FEAT-020 Phase: done Generated at: 2026-05-14T06:01:46.252Z
+                Feature: undo-delete — confirmação anti-misclick para exclusões em Priorities, Notes
+                e Sticky Note Task ID: FEAT-022 Phase: done Generated at: 2026-05-14T06:01:46.252Z
               </p>
             </blockquote>
             <h2>Insights</h2>
@@ -2745,33 +2723,33 @@
                 ℹ Escalation rate 0.0% is below the Galileo healthy band (&lt; 10%) — low
                 escalation, agents resolving autonomously. <em>(Galileo healthy band)</em>
               </li>
-              <li>ℹ Dev task success rate 93.8% is at or above 80% — healthy first-try rate.</li>
+              <li>ℹ Dev task success rate 100.0% is at or above 80% — healthy first-try rate.</li>
               <li>
-                ⚠ Loop rate 100.0% exceeds 50% — more than half of dispatches needed loops. Consider
+                ⚠ Loop rate 82.6% exceeds 50% — more than half of dispatches needed loops. Consider
                 strengthening the preflight contract.
               </li>
             </ul>
             <h2>Cost breakdown</h2>
             <p>
               <em
-                >70/30 input/output split assumed; harness reports only total_tokens; 32 of 32
+                >70/30 input/output split assumed; harness reports only total_tokens; 22 of 23
                 dispatches included in cost</em
               >
             </p>
             <ul>
               <li>
-                Total tokens: 1090191
+                Total tokens: 42323382
                 <ul>
-                  <li>Estimated input (70%): 763134</li>
-                  <li>Estimated output (30%): 327057</li>
+                  <li>Estimated input (70%): 29626367</li>
+                  <li>Estimated output (30%): 12697015</li>
                 </ul>
               </li>
-              <li>Estimated cost USD total: $5.0530</li>
-              <li>Cost per AC: $0.1943</li>
-              <li>Cost per dispatch (avg): $0.1579</li>
-              <li>Wall-clock duration: 65m 26s</li>
-              <li>Tool uses total: 661</li>
-              <li>Coverage: 32 of 32 dispatches included in cost calculation</li>
+              <li>Estimated cost USD total: $50.9843</li>
+              <li>Cost per AC: $3.3990</li>
+              <li>Cost per dispatch (avg): $2.2167</li>
+              <li>Wall-clock duration: 183m 48s</li>
+              <li>Tool uses total: 695</li>
+              <li>Coverage: 22 of 23 dispatches included in cost calculation</li>
             </ul>
             <h2>Repo health snapshot</h2>
             <p><em>Measured at: 2026-05-14</em></p>
@@ -2831,330 +2809,234 @@
                   <td>dev</td>
                   <td>done</td>
                   <td>1</td>
-                  <td>32000</td>
-                  <td>$0.2112</td>
-                  <td>3m</td>
-                  <td>—</td>
+                  <td>29470</td>
+                  <td>$0.0648</td>
+                  <td>1m 14s</td>
+                  <td>Scaffold types+barrel</td>
                 </tr>
                 <tr>
                   <td>d-T-001-l...</td>
                   <td>logic-reviewer</td>
                   <td>done</td>
                   <td>1</td>
-                  <td>28000</td>
-                  <td>$0.1848</td>
-                  <td>1m 20s</td>
-                  <td>—</td>
+                  <td>21668</td>
+                  <td>$0.1430</td>
+                  <td>57s</td>
+                  <td>Clean — shape supports planned consumers (T-002/T-004/T-005), no gaps</td>
                 </tr>
                 <tr>
                   <td>d-T-001-q...</td>
                   <td>qa</td>
                   <td>done</td>
                   <td>1</td>
-                  <td>28000</td>
-                  <td>$0.0616</td>
-                  <td>1m</td>
+                  <td>38622</td>
+                  <td>$0.0850</td>
+                  <td>2m 30s</td>
+                  <td>Lint+typecheck+resolution all green; no ACs in scope</td>
+                </tr>
+                <tr>
+                  <td>d-FEAT-02...</td>
+                  <td>audit-agent</td>
+                  <td>blocked</td>
+                  <td>1</td>
+                  <td>37828</td>
+                  <td>$0.0832</td>
+                  <td>1m 6s</td>
+                  <td>
+                    Mid-pipeline pause checkpoint; audit flagged usage_missing (now backfilled); ...
+                  </td>
+                </tr>
+                <tr>
+                  <td>pm-orches...</td>
+                  <td>pm-orchestrator</td>
+                  <td>done</td>
                   <td>—</td>
+                  <td>34860745</td>
+                  <td>$28.8036</td>
+                  <td>94m 44s</td>
+                  <td>PM/orchestrator session (Stop hook): 255 turns</td>
+                </tr>
+                <tr>
+                  <td>pm-orches...</td>
+                  <td>pm-orchestrator</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>0</td>
+                  <td>—</td>
+                  <td>0ms</td>
+                  <td>PM/orchestrator session (Stop hook): 1 turns</td>
+                </tr>
+                <tr>
+                  <td>pm-orches...</td>
+                  <td>pm-orchestrator</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>6538596</td>
+                  <td>$16.5480</td>
+                  <td>9m 53s</td>
+                  <td>PM/orchestrator session (Stop hook): 79 turns</td>
                 </tr>
                 <tr>
                   <td>d-T-002-d...</td>
                   <td>dev</td>
                   <td>done</td>
                   <td>1</td>
-                  <td>32000</td>
-                  <td>$0.2112</td>
-                  <td>3m</td>
-                  <td>—</td>
+                  <td>38946</td>
+                  <td>$0.2570</td>
+                  <td>2m 10s</td>
+                  <td>useUndoQueue hook with TTL stack — 9/9 tests</td>
                 </tr>
                 <tr>
-                  <td>d-T-002-d...</td>
-                  <td>dev</td>
+                  <td>pm-orches...</td>
+                  <td>pm-orchestrator</td>
                   <td>done</td>
-                  <td>2</td>
-                  <td>32000</td>
-                  <td>$0.2112</td>
-                  <td>3m</td>
                   <td>—</td>
-                </tr>
-                <tr>
-                  <td>d-T-002-q...</td>
-                  <td>qa</td>
-                  <td>done</td>
-                  <td>2</td>
-                  <td>28000</td>
-                  <td>$0.0616</td>
-                  <td>1m</td>
-                  <td>—</td>
+                  <td>0</td>
+                  <td>$0.0000</td>
+                  <td>31m 36s</td>
+                  <td>
+                    PM takeover (Opus 4.7) — completes T-002 through T-016 via 15 general-purpose...
+                  </td>
                 </tr>
                 <tr>
                   <td>d-T-003-d...</td>
                   <td>dev</td>
                   <td>done</td>
                   <td>1</td>
-                  <td>32000</td>
-                  <td>$0.2112</td>
-                  <td>3m</td>
-                  <td>—</td>
+                  <td>35691</td>
+                  <td>$0.2356</td>
+                  <td>2m 4s</td>
+                  <td>UndoQueueProvider + useUndoQueueContext — 4/4 tests</td>
                 </tr>
                 <tr>
                   <td>d-T-004-d...</td>
                   <td>dev</td>
                   <td>done</td>
                   <td>1</td>
-                  <td>32000</td>
-                  <td>$0.2112</td>
-                  <td>3m</td>
-                  <td>—</td>
-                </tr>
-                <tr>
-                  <td>d-T-004-c...</td>
-                  <td>code-reviewer</td>
-                  <td>done</td>
-                  <td>1</td>
-                  <td>20000</td>
-                  <td>$0.0440</td>
-                  <td>45s</td>
-                  <td>—</td>
-                </tr>
-                <tr>
-                  <td>d-T-003-q...</td>
-                  <td>qa</td>
-                  <td>done</td>
-                  <td>1</td>
-                  <td>28000</td>
-                  <td>$0.0616</td>
-                  <td>1m</td>
-                  <td>—</td>
-                </tr>
-                <tr>
-                  <td>d-T-004-q...</td>
-                  <td>qa</td>
-                  <td>done</td>
-                  <td>1</td>
-                  <td>28000</td>
-                  <td>$0.0616</td>
-                  <td>1m</td>
-                  <td>—</td>
+                  <td>31493</td>
+                  <td>$0.2079</td>
+                  <td>1m 10s</td>
+                  <td>UndoToast presentational component — 5/5 tests</td>
                 </tr>
                 <tr>
                   <td>d-T-005-d...</td>
                   <td>dev</td>
                   <td>done</td>
                   <td>1</td>
-                  <td>32000</td>
-                  <td>$0.2112</td>
-                  <td>3m</td>
-                  <td>—</td>
-                </tr>
-                <tr>
-                  <td>d-T-005-d...</td>
-                  <td>dev</td>
-                  <td>done</td>
-                  <td>2</td>
-                  <td>32000</td>
-                  <td>$0.2112</td>
-                  <td>3m</td>
-                  <td>—</td>
-                </tr>
-                <tr>
-                  <td>d-T-005-l...</td>
-                  <td>logic-reviewer</td>
-                  <td>done</td>
-                  <td>2</td>
-                  <td>28000</td>
-                  <td>$0.1848</td>
-                  <td>1m 20s</td>
-                  <td>—</td>
-                </tr>
-                <tr>
-                  <td>d-T-005-q...</td>
-                  <td>qa</td>
-                  <td>done</td>
-                  <td>2</td>
-                  <td>28000</td>
-                  <td>$0.0616</td>
-                  <td>1m</td>
-                  <td>—</td>
+                  <td>41307</td>
+                  <td>$0.2726</td>
+                  <td>2m 6s</td>
+                  <td>UndoToastHost stack + global Cmd/Ctrl+Z — 9 new, 40/40 feature tests</td>
                 </tr>
                 <tr>
                   <td>d-T-006-d...</td>
                   <td>dev</td>
                   <td>done</td>
                   <td>1</td>
-                  <td>25232</td>
-                  <td>$0.1665</td>
-                  <td>51s</td>
-                  <td>—</td>
+                  <td>35899</td>
+                  <td>$0.2369</td>
+                  <td>2m 2s</td>
+                  <td>ConfirmDeleteButton 2-cliques anti-misclick — 13/13 tests</td>
                 </tr>
                 <tr>
                   <td>d-T-007-d...</td>
                   <td>dev</td>
                   <td>done</td>
                   <td>1</td>
-                  <td>34600</td>
-                  <td>$0.2284</td>
-                  <td>2m 14s</td>
-                  <td>—</td>
-                </tr>
-                <tr>
-                  <td>d-T-007-d...</td>
-                  <td>dev</td>
-                  <td>done</td>
-                  <td>2</td>
-                  <td>15378</td>
-                  <td>$0.1015</td>
-                  <td>43s</td>
-                  <td>Loop 2 — minor fix: font-size var(--font-size-lg)</td>
-                </tr>
-                <tr>
-                  <td>d-T-006-q...</td>
-                  <td>qa</td>
-                  <td>done</td>
-                  <td>1</td>
-                  <td>23330</td>
-                  <td>$0.0513</td>
-                  <td>45s</td>
-                  <td>—</td>
-                </tr>
-                <tr>
-                  <td>d-T-007-q...</td>
-                  <td>qa</td>
-                  <td>done</td>
-                  <td>2</td>
-                  <td>37283</td>
-                  <td>$0.0820</td>
-                  <td>1m 51s</td>
-                  <td>—</td>
-                </tr>
-                <tr>
-                  <td>d-T-008-d...</td>
-                  <td>dev</td>
-                  <td>needs_review</td>
-                  <td>1</td>
-                  <td>35087</td>
-                  <td>$0.2316</td>
-                  <td>5m 1s</td>
-                  <td>
-                    AC-025 parcial: DailyPage tests precisam de mock para @/features/sticky-note
-                  </td>
+                  <td>60868</td>
+                  <td>$0.4017</td>
+                  <td>1m 47s</td>
+                  <td>gateOpen prop em useDailyPage para defer-write — 3 new, T4 tier</td>
                 </tr>
                 <tr>
                   <td>d-T-008-d...</td>
                   <td>dev</td>
                   <td>done</td>
-                  <td>2</td>
-                  <td>27776</td>
-                  <td>$0.1833</td>
-                  <td>1m 6s</td>
-                  <td>Loop 2 — AC-025: jest.mock sticky-note em DailyPage tests</td>
-                </tr>
-                <tr>
-                  <td>d-T-008-q...</td>
-                  <td>qa</td>
-                  <td>done</td>
-                  <td>2</td>
-                  <td>27746</td>
-                  <td>$0.1831</td>
-                  <td>1m 49s</td>
-                  <td>—</td>
+                  <td>1</td>
+                  <td>57749</td>
+                  <td>$0.3811</td>
+                  <td>1m 58s</td>
+                  <td>Mount UndoQueueProvider + UndoToastHost + flush no unmount — 6 new</td>
                 </tr>
                 <tr>
                   <td>d-T-009-d...</td>
                   <td>dev</td>
                   <td>done</td>
                   <td>1</td>
-                  <td>43737</td>
-                  <td>$0.2887</td>
-                  <td>3m 19s</td>
-                  <td>—</td>
+                  <td>28215</td>
+                  <td>$0.1862</td>
+                  <td>58s</td>
+                  <td>data-tiptap-editor marker para passthrough Cmd+Z — 1 test</td>
                 </tr>
                 <tr>
                   <td>d-T-010-d...</td>
                   <td>dev</td>
                   <td>done</td>
                   <td>1</td>
-                  <td>48199</td>
-                  <td>$0.3181</td>
-                  <td>3m 4s</td>
-                  <td>—</td>
+                  <td>86062</td>
+                  <td>$0.5680</td>
+                  <td>6m 3s</td>
+                  <td>Priorities BACKSPACE-empty enqueueUndo + render util refactor — 6 new</td>
                 </tr>
                 <tr>
-                  <td>d-T-009-d...</td>
+                  <td>d-T-011-d...</td>
                   <td>dev</td>
                   <td>done</td>
-                  <td>2</td>
-                  <td>28632</td>
-                  <td>$0.1890</td>
-                  <td>3m 12s</td>
-                  <td>
-                    Loop 2 — split em 4 arquivos; adicionou tabRef containment + hasUserEdited ra...
-                  </td>
+                  <td>1</td>
+                  <td>88065</td>
+                  <td>$0.5812</td>
+                  <td>5m 31s</td>
+                  <td>Notes BACKSPACE-empty enqueueUndo — 4 new</td>
                 </tr>
                 <tr>
-                  <td>d-T-010-d...</td>
+                  <td>d-T-012-d...</td>
                   <td>dev</td>
                   <td>done</td>
-                  <td>2</td>
-                  <td>36918</td>
-                  <td>$0.2437</td>
-                  <td>4m 28s</td>
-                  <td>
-                    Loop 2 — split em 2 arquivos; waitFor AC-010; AC-022 data-loading; AC-023 err...
-                  </td>
-                </tr>
-                <tr>
-                  <td>d-T-009-q...</td>
-                  <td>qa</td>
-                  <td>done</td>
-                  <td>2</td>
-                  <td>37044</td>
-                  <td>$0.0815</td>
-                  <td>1m 6s</td>
-                  <td>—</td>
-                </tr>
-                <tr>
-                  <td>d-T-010-q...</td>
-                  <td>qa</td>
-                  <td>done</td>
-                  <td>2</td>
-                  <td>34392</td>
-                  <td>$0.0757</td>
-                  <td>1m 24s</td>
-                  <td>—</td>
-                </tr>
-                <tr>
-                  <td>d-audit-l1</td>
-                  <td>audit-agent</td>
-                  <td>blocked</td>
                   <td>1</td>
-                  <td>75139</td>
-                  <td>$0.1653</td>
-                  <td>2m 25s</td>
-                  <td>
-                    Audit L1 blocked: 11 findings — corrected: task_id, usage, reviewer statuses....
-                  </td>
+                  <td>55527</td>
+                  <td>$0.3665</td>
+                  <td>3m 28s</td>
+                  <td>ConfirmDeleteButton em PriorityItem — 6 new, className type widened</td>
                 </tr>
                 <tr>
-                  <td>d-audit-l2</td>
-                  <td>audit-agent</td>
-                  <td>blocked</td>
-                  <td>1</td>
-                  <td>61864</td>
-                  <td>$0.1361</td>
-                  <td>1m 30s</td>
-                  <td>
-                    Audit L2 blocked: usage missing in all dispatches. Corrected via proxy estima...
-                  </td>
-                </tr>
-                <tr>
-                  <td>d-audit-l3</td>
-                  <td>audit-agent</td>
+                  <td>d-T-013-d...</td>
+                  <td>dev</td>
                   <td>done</td>
                   <td>1</td>
-                  <td>57834</td>
-                  <td>$0.1272</td>
-                  <td>1m 12s</td>
-                  <td>Audit L3 passed — todos os checks verdes</td>
+                  <td>52438</td>
+                  <td>$0.3461</td>
+                  <td>3m 6s</td>
+                  <td>ConfirmDeleteButton em NoteItem — 4 new</td>
+                </tr>
+                <tr>
+                  <td>d-T-014-d...</td>
+                  <td>dev</td>
+                  <td>done</td>
+                  <td>1</td>
+                  <td>65570</td>
+                  <td>$0.4328</td>
+                  <td>3m 22s</td>
+                  <td>ConfirmDeleteButton em StickyPanel close — 4 new</td>
+                </tr>
+                <tr>
+                  <td>d-T-015-d...</td>
+                  <td>dev</td>
+                  <td>done</td>
+                  <td>1</td>
+                  <td>39955</td>
+                  <td>$0.2637</td>
+                  <td>1m 34s</td>
+                  <td>Integration test Cmd/Ctrl+Z + Tiptap passthrough — 4/4</td>
+                </tr>
+                <tr>
+                  <td>d-T-016-d...</td>
+                  <td>dev</td>
+                  <td>done</td>
+                  <td>1</td>
+                  <td>78668</td>
+                  <td>$0.5192</td>
+                  <td>4m 31s</td>
+                  <td>Integration test flush em date change/unmount — 9/9</td>
                 </tr>
               </tbody>
             </table>
@@ -3171,157 +3053,91 @@
               <tbody>
                 <tr>
                   <td>AC-001</td>
-                  <td>pass</td>
+                  <td>missing</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-002</td>
-                  <td>pass</td>
+                  <td>missing</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-003</td>
-                  <td>pass</td>
+                  <td>missing</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-004</td>
-                  <td>pass</td>
+                  <td>missing</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-005</td>
-                  <td>pass</td>
+                  <td>missing</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-006</td>
-                  <td>pass</td>
+                  <td>missing</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-007</td>
-                  <td>pass</td>
+                  <td>missing</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-008</td>
-                  <td>pass</td>
+                  <td>missing</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-009</td>
-                  <td>pass</td>
+                  <td>missing</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-010</td>
-                  <td>pass</td>
+                  <td>missing</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-011</td>
-                  <td>pass</td>
+                  <td>missing</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-012</td>
-                  <td>pass</td>
+                  <td>missing</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-013</td>
-                  <td>pass</td>
+                  <td>missing</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-014</td>
-                  <td>pass</td>
+                  <td>missing</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-015</td>
-                  <td>pass</td>
-                  <td>qa</td>
-                  <td>—</td>
-                </tr>
-                <tr>
-                  <td>AC-016</td>
-                  <td>pass</td>
-                  <td>qa</td>
-                  <td>—</td>
-                </tr>
-                <tr>
-                  <td>AC-017</td>
-                  <td>pass</td>
-                  <td>qa</td>
-                  <td>—</td>
-                </tr>
-                <tr>
-                  <td>AC-018</td>
-                  <td>pass</td>
-                  <td>qa</td>
-                  <td>—</td>
-                </tr>
-                <tr>
-                  <td>AC-019</td>
-                  <td>pass</td>
-                  <td>qa</td>
-                  <td>—</td>
-                </tr>
-                <tr>
-                  <td>AC-020</td>
-                  <td>pass</td>
-                  <td>qa</td>
-                  <td>—</td>
-                </tr>
-                <tr>
-                  <td>AC-021</td>
-                  <td>pass</td>
-                  <td>qa</td>
-                  <td>—</td>
-                </tr>
-                <tr>
-                  <td>AC-022</td>
-                  <td>pass</td>
-                  <td>qa</td>
-                  <td>—</td>
-                </tr>
-                <tr>
-                  <td>AC-023</td>
-                  <td>pass</td>
-                  <td>qa</td>
-                  <td>—</td>
-                </tr>
-                <tr>
-                  <td>AC-024</td>
-                  <td>pass</td>
-                  <td>qa</td>
-                  <td>—</td>
-                </tr>
-                <tr>
-                  <td>AC-025</td>
-                  <td>pass</td>
-                  <td>qa</td>
-                  <td>—</td>
-                </tr>
-                <tr>
-                  <td>AC-026</td>
-                  <td>pass</td>
+                  <td>missing</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
@@ -3350,7 +3166,7 @@
                 </tr>
                 <tr>
                   <td>implementation</td>
-                  <td>157 min</td>
+                  <td>running</td>
                 </tr>
               </tbody>
             </table>
@@ -3368,10 +3184,10 @@
               <tbody>
                 <tr>
                   <td>implementation</td>
-                  <td>20:00:00</td>
-                  <td>22:37:00</td>
-                  <td>157m</td>
-                  <td>██████████</td>
+                  <td>01:25:00</td>
+                  <td>running</td>
+                  <td>running</td>
+                  <td>░░░░░░░░░░</td>
                 </tr>
               </tbody>
             </table>
@@ -3386,7 +3202,7 @@
               <tbody>
                 <tr>
                   <td>audit-agent</td>
-                  <td>3</td>
+                  <td>1</td>
                 </tr>
                 <tr>
                   <td>blocker-specialist</td>
@@ -3394,7 +3210,7 @@
                 </tr>
                 <tr>
                   <td>code-reviewer</td>
-                  <td>1</td>
+                  <td>0</td>
                 </tr>
                 <tr>
                   <td>dev</td>
@@ -3402,19 +3218,19 @@
                 </tr>
                 <tr>
                   <td>logic-reviewer</td>
-                  <td>2</td>
+                  <td>1</td>
                 </tr>
                 <tr>
                   <td>pm-orchestrator</td>
-                  <td>0</td>
+                  <td>4</td>
                 </tr>
                 <tr>
                   <td>qa</td>
-                  <td>10</td>
+                  <td>1</td>
                 </tr>
                 <tr>
                   <td><strong>Total</strong></td>
-                  <td>32</td>
+                  <td>23</td>
                 </tr>
               </tbody>
             </table>
@@ -3429,7 +3245,7 @@
               <tbody>
                 <tr>
                   <td>audit-agent</td>
-                  <td>33.3%</td>
+                  <td>0.0%</td>
                 </tr>
                 <tr>
                   <td>blocker-specialist</td>
@@ -3437,11 +3253,11 @@
                 </tr>
                 <tr>
                   <td>code-reviewer</td>
-                  <td>100.0%</td>
+                  <td>n/a</td>
                 </tr>
                 <tr>
                   <td>dev</td>
-                  <td>93.8%</td>
+                  <td>100.0%</td>
                 </tr>
                 <tr>
                   <td>logic-reviewer</td>
@@ -3449,7 +3265,7 @@
                 </tr>
                 <tr>
                   <td>pm-orchestrator</td>
-                  <td>n/a</td>
+                  <td>100.0%</td>
                 </tr>
                 <tr>
                   <td>qa</td>
@@ -3458,11 +3274,11 @@
               </tbody>
             </table>
             <h2>Loop rate</h2>
-            <p>Loop rate: 100.0%</p>
+            <p>Loop rate: 82.6%</p>
             <h2>Escalation rate</h2>
             <p>Escalation rate: 0.0% — below healthy band (&lt; 10%)</p>
             <h2>AC closure</h2>
-            <p>Total: 26 | Pass: 26 | Partial: 0 | Fail: 0 | Missing: 0</p>
+            <p>Total: 15 | Pass: 0 | Partial: 0 | Fail: 0 | Missing: 15</p>
             <h2>Reviewer findings density</h2>
             <table>
               <thead>
@@ -3488,38 +3304,67 @@
             </table>
             <h2>PM notes log</h2>
             <ul>
-              <li>[2026-05-13 21:10 dev] Loop 2 — minor fix: font-size var(--font-size-lg)</li>
+              <li>[2026-05-14 01:47 dev] Scaffold types+barrel</li>
               <li>
-                [2026-05-13 21:20 dev] AC-025 parcial: DailyPage tests precisam de mock para
-                @/features/sticky-note
+                [2026-05-14 01:50 logic-reviewer] Clean — shape supports planned consumers
+                (T-002/T-004/T-005), no gaps
+              </li>
+              <li>[2026-05-14 01:52 qa] Lint+typecheck+resolution all green; no ACs in scope</li>
+              <li>
+                [2026-05-14 01:55 audit-agent] Mid-pipeline pause checkpoint; audit flagged
+                usage_missing (now backfilled); no bypass detected
               </li>
               <li>
-                [2026-05-13 21:30 dev] Loop 2 — AC-025: jest.mock sticky-note em DailyPage tests
+                [2026-05-14 03:26 pm-orchestrator] PM/orchestrator session (Stop hook): 255 turns
               </li>
               <li>
-                [2026-05-13 22:00 dev] Loop 2 — split em 4 arquivos; adicionou tabRef containment +
-                hasUserEdited race guard
+                [2026-05-14 03:31 pm-orchestrator] PM/orchestrator session (Stop hook): 1 turns
               </li>
               <li>
-                [2026-05-13 22:00 dev] Loop 2 — split em 2 arquivos; waitFor AC-010; AC-022
-                data-loading; AC-023 error fallback
+                [2026-05-14 05:01 pm-orchestrator] PM/orchestrator session (Stop hook): 79 turns
+              </li>
+              <li>[2026-05-14 05:30 dev] useUndoQueue hook with TTL stack — 9/9 tests</li>
+              <li>
+                [2026-05-14 05:30 pm-orchestrator] PM takeover (Opus 4.7) — completes T-002 through
+                T-016 via 15 general-purpose subagent dispatches, serial commits with husky
+                lint-staged, full repo typecheck+lint+jest green
+              </li>
+              <li>[2026-05-14 05:32 dev] UndoQueueProvider + useUndoQueueContext — 4/4 tests</li>
+              <li>[2026-05-14 05:34 dev] UndoToast presentational component — 5/5 tests</li>
+              <li>
+                [2026-05-14 05:35 dev] UndoToastHost stack + global Cmd/Ctrl+Z — 9 new, 40/40
+                feature tests
               </li>
               <li>
-                [2026-05-13 22:25 audit-agent] Audit L1 blocked: 11 findings — corrected: task_id,
-                usage, reviewer statuses. Dispatching audit L2.
+                [2026-05-14 05:37 dev] ConfirmDeleteButton 2-cliques anti-misclick — 13/13 tests
               </li>
               <li>
-                [2026-05-13 22:30 audit-agent] Audit L2 blocked: usage missing in all dispatches.
-                Corrected via proxy estimates. Dispatching audit L3.
+                [2026-05-14 05:39 dev] gateOpen prop em useDailyPage para defer-write — 3 new, T4
+                tier
               </li>
-              <li>[2026-05-13 22:35 audit-agent] Audit L3 passed — todos os checks verdes</li>
+              <li>
+                [2026-05-14 05:41 dev] Mount UndoQueueProvider + UndoToastHost + flush no unmount —
+                6 new
+              </li>
+              <li>
+                [2026-05-14 05:43 dev] data-tiptap-editor marker para passthrough Cmd+Z — 1 test
+              </li>
+              <li>
+                [2026-05-14 05:44 dev] Priorities BACKSPACE-empty enqueueUndo + render util refactor
+                — 6 new
+              </li>
+              <li>[2026-05-14 05:50 dev] Notes BACKSPACE-empty enqueueUndo — 4 new</li>
+              <li>
+                [2026-05-14 05:55 dev] ConfirmDeleteButton em PriorityItem — 6 new, className type
+                widened
+              </li>
+              <li>[2026-05-14 05:59 dev] ConfirmDeleteButton em NoteItem — 4 new</li>
+              <li>[2026-05-14 06:02 dev] ConfirmDeleteButton em StickyPanel close — 4 new</li>
+              <li>[2026-05-14 06:05 dev] Integration test Cmd/Ctrl+Z + Tiptap passthrough — 4/4</li>
+              <li>[2026-05-14 06:07 dev] Integration test flush em date change/unmount — 9/9</li>
             </ul>
             <h2>Token cost</h2>
-            <p>Token cost not available — using dispatch count as cost proxy: 32 dispatches</p>
-            <p>
-              ⚠ pm-orchestrator Stop hook did not run — re-run agentops install-hooks
-              (worktree-aware)
-            </p>
+            <p>Token cost not available — using dispatch count as cost proxy: 23 dispatches</p>
           </div>
         </details>
       </section>

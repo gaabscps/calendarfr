@@ -3,7 +3,7 @@
 > Feature: input-ux-fixes — quebra de linha, prioridades dinâmicas, placeholder visual
 > Task ID: FEAT-015
 > Phase: done
-> Generated at: 2026-05-14T03:10:15.087Z
+> Generated at: 2026-05-14T06:01:46.252Z
 
 ## Insights
 

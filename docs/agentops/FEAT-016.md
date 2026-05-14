@@ -3,7 +3,7 @@
 > Feature: ui-v1-design-system — design-system overhaul, átomos shared, token coverage ≥95%
 > Task ID: FEAT-016
 > Phase: escalated
-> Generated at: 2026-05-14T03:10:15.087Z
+> Generated at: 2026-05-14T06:01:46.252Z
 
 ## Insights
 

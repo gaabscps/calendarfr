@@ -3,7 +3,7 @@
 > Feature: drag-reorder — reordenação drag-and-drop + teclado em Prioridades e Notas
 > Task ID: FEAT-019
 > Phase: done
-> Generated at: 2026-05-14T03:10:15.087Z
+> Generated at: 2026-05-14T06:01:46.252Z
 
 ## Insights
 

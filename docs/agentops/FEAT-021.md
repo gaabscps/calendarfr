@@ -3,7 +3,7 @@
 > Feature: sticky-note — Post-its multi-cor com drag livre e proporção post-it real
 > Task ID: FEAT-021
 > Phase: done
-> Generated at: 2026-05-14T03:10:15.087Z
+> Generated at: 2026-05-14T06:01:46.252Z
 
 ## Insights
 
@@ -13,17 +13,17 @@
 
 ## Cost breakdown
 
-_70/30 input/output split assumed; harness reports only total_tokens; 25 of 74 dispatches included in cost_
+_70/30 input/output split assumed; harness reports only total_tokens; 26 of 74 dispatches included in cost_
 
-- Total tokens: 25453773
-  - Estimated input (70%): 17817641
-  - Estimated output (30%): 7636132
-- Estimated cost USD total: $18.3105
-- Cost per AC: $0.5086
-- Cost per dispatch (avg): $0.2474
-- Wall-clock duration: 45m 8s
-- Tool uses total: 521
-- Coverage: 25 of 74 dispatches included in cost calculation
+- Total tokens: 106344365
+  - Estimated input (70%): 74441056
+  - Estimated output (30%): 31903310
+- Estimated cost USD total: $65.5462
+- Cost per AC: $1.8207
+- Cost per dispatch (avg): $0.8858
+- Wall-clock duration: 322m 34s
+- Tool uses total: 958
+- Coverage: 26 of 74 dispatches included in cost calculation
 
 ## Repo health snapshot
 
@@ -111,7 +111,7 @@ _Measured at: 2026-05-14_
 | d-T-007-q... | qa             | done         | 1    | —        | —        | 0ms      | T-007 QA pass — output packet recorded late                                      |
 | d-T-006-q... | qa             | done         | 1    | —        | —        | 0ms      | T-006 QA pass: 37 tests, all ACs covered                                         |
 | d-T-006-d... | dev            | done         | 3    | —        | —        | 0ms      | T-006 L3 JSDoc fix — stale AC-017/AC-022 replaced with AC-028/AC-032             |
-| d-T-006-c... | code-reviewer  | done         | 3    | —        | —        | 0ms      | T-006 code-reviewer-l3 — confirmed JSDoc fix, no findings                        |
+| d-T-006-c... | code-reviewer  | done         | 3    | 80890592 | $47.2357 | 277m 26s | T-006 code-reviewer-l3 — confirmed JSDoc fix, no findings                        |
 | d-audit-l4   | audit-agent    | blocked      | 1    | —        | —        | 0ms      | Audit L4 blocked: 6 files flagged as undeclared dev changes. PM resolved: upd... |
 | d-audit-l5   | audit-agent    | done         | 1    | —        | —        | 0ms      | Audit L5 PASS — all 6 checks passed. Handoff cleared.                            |
 

@@ -3,7 +3,7 @@
 > Feature: ui-v1-consistente — redesign de interface e UX do planner
 > Task ID: DISC-001
 > Phase: done
-> Generated at: 2026-05-14T03:10:15.087Z
+> Generated at: 2026-05-14T06:01:46.252Z
 
 ## Insights
 
