@@ -19,6 +19,7 @@ import {
 import { useCallback, useEffect, useMemo, useRef } from 'react';
 
 import type { RichTextEditorRef } from '@/features/rich-text-line';
+import { useUndoQueueContext } from '@/features/undo-delete';
 import { Button } from '@/shared/components/Button';
 
 import { useNotes } from '../hooks/useNotes.js';
@@ -53,6 +54,14 @@ export function Notes({ value, onChange }: NotesProps) {
     value,
     onChange,
   );
+  const { enqueueUndo } = useUndoQueueContext();
+
+  // Ref espelho do onChange para que o undoFn (capturado no momento do BACKSPACE)
+  // sempre dispare o setter mais recente — evita restaurar via callback obsoleto.
+  const onChangeRef = useRef(onChange);
+  useEffect(() => {
+    onChangeRef.current = onChange;
+  });
 
   // Clear justAddedIdRef after each render so autoFocus fires only on mount.
   useEffect(() => {
@@ -80,10 +89,25 @@ export function Notes({ value, onChange }: NotesProps) {
       const list = valueRef.current;
       const idx = list.findIndex((n) => n.id === noteId);
       if (idx === -1) return;
+      const snapshot = list[idx];
+      if (!snapshot) return;
       focusAfterRemoveRef.current = list[idx - 1]?.id ?? list[idx + 1]?.id ?? null;
+
+      // Snapshot da lista no momento da remoção; undoFn re-insere o item na
+      // posição original (AC-002, AC-004). enqueueUndo é chamado ANTES do
+      // onRemove para que o toast já esteja montado quando o React re-renderiza.
+      const restored: Note[] = [...list];
+      enqueueUndo({
+        kind: 'note',
+        label: 'Nota removida',
+        undoFn: () => {
+          onChangeRef.current(restored);
+        },
+      });
+
       onRemove(noteId);
     },
-    [onRemove],
+    [onRemove, enqueueUndo],
   );
 
   const sensors = useSensors(
