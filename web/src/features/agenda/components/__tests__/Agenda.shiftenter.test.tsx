@@ -62,7 +62,7 @@ jest.mock('@/features/rich-text-line', () => {
     const captured = (globalThis as Record<string, unknown>)
       .__shiftEnterCapturedSlotProps as Record<
       number,
-      { onShiftEnter?: () => void; editorRef?: { current: unknown } }
+      { onShiftEnter?: (() => void) | undefined; editorRef?: { current: unknown } | undefined }
     >;
     if (captured && hour >= 0) {
       captured[hour] = { onShiftEnter, editorRef };
@@ -198,7 +198,7 @@ describe('Agenda — SHIFT+ENTER focus target (AC-011)', () => {
     // Check a sample of non-last slots
     const sampleHours = [6, 10, 18, 22];
     for (const hour of sampleHours) {
-      const nextHour = AGENDA_HOURS[AGENDA_HOURS.indexOf(hour) + 1]!;
+      const nextHour = AGENDA_HOURS[AGENDA_HOURS.indexOf(hour as never) + 1]!;
       capturedSlotProps[hour]?.onShiftEnter?.();
 
       const nextRef = capturedSlotProps[nextHour]?.editorRef as
