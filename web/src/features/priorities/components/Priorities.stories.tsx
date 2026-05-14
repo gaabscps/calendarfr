@@ -9,6 +9,8 @@ import type { Priority } from '@calendarfr/shared';
 import type { Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
 
+import { UndoQueueProvider } from '@/features/undo-delete';
+
 import { EMPTY_PRIORITY } from '../types.js';
 
 import { Priorities } from './Priorities.js';
@@ -20,6 +22,13 @@ const meta = {
   args: {
     onChange: () => undefined,
   },
+  decorators: [
+    (Story) => (
+      <UndoQueueProvider>
+        <Story />
+      </UndoQueueProvider>
+    ),
+  ],
 } satisfies Meta<typeof Priorities>;
 
 export default meta;

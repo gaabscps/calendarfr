@@ -19,6 +19,7 @@ import {
 import { useCallback, useEffect, useMemo, useRef } from 'react';
 
 import type { RichTextEditorRef } from '@/features/rich-text-line';
+import { useUndoQueueContext } from '@/features/undo-delete';
 import { Button } from '@/shared/components/Button';
 
 import { usePriorities } from '../hooks/usePriorities.js';
@@ -46,6 +47,29 @@ export function Priorities({ value, onChange }: PrioritiesProps) {
   const { items, onChangeText, onToggleDone, addPriority, removePriority, reorder } = usePriorities(
     value,
     onChange,
+  );
+  const { enqueueUndo } = useUndoQueueContext();
+
+  // ---- BACKSPACE-empty undo (FEAT-022 T-010, AC-001/002/004/005) ----
+  // Captura snapshot do array completo ANTES de mutar e enfileira undo de 10s.
+  // A remoção em si é feita pelo fluxo normal (removePriority) após o enqueue.
+  // Click em "Desfazer" → undoFn re-emite o snapshot via onChange, restaurando
+  // o item EXATAMENTE na mesma posição com o mesmo conteúdo. TTL expirado →
+  // entrada removida sem chamar undoFn (commit implícito).
+  const enqueuePriorityUndo = useCallback(
+    (index: number) => {
+      if (index < 0 || index >= items.length) return;
+      const preRemoval = items;
+      enqueueUndo({
+        kind: 'priority',
+        label: 'Prioridade removida',
+        ttlMs: 10_000,
+        undoFn: () => {
+          onChange(preRemoval);
+        },
+      });
+    },
+    [items, enqueueUndo, onChange],
   );
 
   // ---- DnD sensors (AC-009, AC-025) ----
@@ -161,6 +185,9 @@ export function Priorities({ value, onChange }: PrioritiesProps) {
               ? () => {
                   const prevId = items[index - 1]?.id ?? items[index + 1]?.id ?? null;
                   focusAfterRemoveRef.current = prevId;
+                  // FEAT-022 T-010: snapshot ANTES da mutação para que o undo
+                  // restaure o item na mesma posição com o mesmo conteúdo.
+                  enqueuePriorityUndo(index);
                   removePriority(index);
                 }
               : undefined;
