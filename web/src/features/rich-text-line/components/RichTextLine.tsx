@@ -74,7 +74,7 @@ export function RichTextLine({
   }, [editor, ariaLabel]);
 
   return (
-    <div className={[styles.wrapper, className].filter(Boolean).join(' ')}>
+    <div className={[styles.wrapper, className].filter(Boolean).join(' ')} data-tiptap-editor="">
       {editor && <FloatingToolbar editor={editor} />}
       <EditorContent editor={editor} />
     </div>
