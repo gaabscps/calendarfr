@@ -88,7 +88,8 @@ describe('Notes — prefix cycle (AC-008, AC-009)', () => {
 });
 
 describe('Notes — remove via × (AC-011, AC-013, AC-014)', () => {
-  it('clicking × removes that note; survivors preserved by reference', async () => {
+  // FEAT-022 T-013: remoção agora exige 2-click (ConfirmDeleteButton).
+  it('two clicks on × remove that note; survivors preserved by reference', async () => {
     const n1 = makeNote({ id: 'n1', text: 'a' });
     const n2 = makeNote({ id: 'n2', prefix: '→', text: 'b' });
     const n3 = makeNote({ id: 'n3', text: 'c' });
@@ -96,7 +97,14 @@ describe('Notes — remove via × (AC-011, AC-013, AC-014)', () => {
     renderWithProviders(<Container initial={[n1, n2, n3]} spy={spy} />);
 
     const removeButtons = screen.getAllByRole('button', { name: 'Remover nota' });
+    // 1st click arms confirm state
     await userEvent.click(removeButtons[1] as HTMLElement);
+    // After first click, aria-label switches to confirming variant.
+    const confirming = await screen.findByRole('button', {
+      name: 'Confirmar remoção da nota',
+    });
+    // 2nd click commits removal
+    await userEvent.click(confirming);
 
     await waitFor(() => expect(spy).toHaveBeenCalledTimes(1));
     const emitted = spy.mock.calls[0]?.[0] as Note[];
@@ -117,18 +125,23 @@ describe('Notes — remove via × (AC-011, AC-013, AC-014)', () => {
 
     const removeButtons = screen.getAllByRole('button', { name: 'Remover nota' });
     await userEvent.click(removeButtons[0] as HTMLElement);
+    const confirming = await screen.findByRole('button', {
+      name: 'Confirmar remoção da nota',
+    });
+    await userEvent.click(confirming);
 
     await waitFor(() => {
       expect(document.activeElement).not.toBe(editor1);
     });
   });
 
-  it('AC-014: clicking × does NOT open a confirmation dialog', async () => {
+  it('AC-014: clicking × does NOT open a confirmation dialog (inline confirm only)', async () => {
     const note = makeNote({ id: 'n1' });
     renderWithProviders(<Container initial={[note]} />);
 
     await userEvent.click(screen.getByRole('button', { name: 'Remover nota' }));
 
+    // Inline confirm flips aria-label / label, but should NOT open any modal dialog.
     expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
     expect(screen.queryByRole('alertdialog')).not.toBeInTheDocument();
   });

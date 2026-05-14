@@ -21,6 +21,7 @@ import React, { useCallback } from 'react';
 
 import { RichTextBlock } from '@/features/rich-text-line';
 import type { RichTextEditorRef } from '@/features/rich-text-line';
+import { ConfirmDeleteButton } from '@/features/undo-delete';
 import { IconButton } from '@/shared/components/IconButton';
 
 import type { Note } from '../types.js';
@@ -173,16 +174,19 @@ function NoteItemBase({
         />
       </div>
 
-      {/* Remove button — revealed via CSS on hover/focus-within (AC-012) */}
-      <IconButton
-        variant="danger"
-        size="sm"
-        aria-label="Remover nota"
-        onClick={handleRemove}
+      {/* Remove button — revealed via CSS on hover/focus-within (AC-012).
+          FEAT-022 T-013: ConfirmDeleteButton substitui IconButton X.
+          Idle visual mantém o X icon (children); confirming mostra "Confirmar?".
+          AC-006, AC-007, AC-008, AC-009 (FEAT-022). */}
+      <ConfirmDeleteButton
+        onConfirm={handleRemove}
+        idleAriaLabel="Remover nota"
+        confirmingAriaLabel="Confirmar remoção da nota"
+        confirmingLabel="Confirmar?"
         className={styles.removeButton}
       >
         ×
-      </IconButton>
+      </ConfirmDeleteButton>
     </div>
   );
 }
