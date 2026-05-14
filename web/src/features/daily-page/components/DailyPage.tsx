@@ -25,6 +25,7 @@ import type { AgendaSlots } from '@/features/agenda';
 import { MoodPicker } from '@/features/mood';
 import { Notes } from '@/features/notes';
 import { Priorities } from '@/features/priorities';
+import { StickyNote } from '@/features/sticky-note';
 import { PaperSheet } from '@/shared/components/PaperSheet';
 
 import { useDailyPage } from '../hooks/useDailyPage.js';
@@ -99,62 +100,66 @@ export function DailyPage({ initialDate }: DailyPageProps = {}) {
   };
 
   return (
-    <PaperSheet as="article" ariaLabel="Planner do dia">
-      {/* AC-038: Header region with aria-label */}
-      <PageNavigator
-        date={date}
-        saveStatus={saveStatus}
-        isAnimating={isAnimating}
-        goToPrev={handlePrev}
-        goToNext={handleNext}
-        onRetry={retrySave}
-      />
+    <>
+      <PaperSheet as="article" ariaLabel="Planner do dia">
+        {/* AC-038: Header region with aria-label */}
+        <PageNavigator
+          date={date}
+          saveStatus={saveStatus}
+          isAnimating={isAnimating}
+          goToPrev={handlePrev}
+          goToNext={handleNext}
+          onRetry={retrySave}
+        />
 
-      {/* AC-034–AC-037: DayLayer manages animation layers.
-          L-MINOR-2: swipeProps on outer DayLayer wrapper so swipe works
-          during load (data===null) and error states. */}
-      <DayLayer
-        date={date}
-        direction={direction}
-        isAnimating={isAnimating}
-        reducedMotion={reducedMotion}
-        swipeProps={swipeProps}
-      >
-        {loadError !== null ? (
-          <LoadErrorScreen error={loadError} onReload={reload} />
-        ) : data === null ? (
-          <LoadingSkeleton />
-        ) : (
-          <div className={styles.grid}>
-            {/* Header row: priorities + mood — full width on desktop, stacked on mobile */}
-            <div className={styles.topRow}>
-              {/* AC-003: Priorities via barrel only */}
-              <div className={styles.prioritiesCol}>
-                <h2 className={styles.sectionLabel}>Prioridades</h2>
-                <Priorities value={data.priorities} onChange={setPriorities} />
+        {/* AC-034–AC-037: DayLayer manages animation layers.
+            L-MINOR-2: swipeProps on outer DayLayer wrapper so swipe works
+            during load (data===null) and error states. */}
+        <DayLayer
+          date={date}
+          direction={direction}
+          isAnimating={isAnimating}
+          reducedMotion={reducedMotion}
+          swipeProps={swipeProps}
+        >
+          {loadError !== null ? (
+            <LoadErrorScreen error={loadError} onReload={reload} />
+          ) : data === null ? (
+            <LoadingSkeleton />
+          ) : (
+            <div className={styles.grid}>
+              {/* Header row: priorities + mood — full width on desktop, stacked on mobile */}
+              <div className={styles.topRow}>
+                {/* AC-003: Priorities via barrel only */}
+                <div className={styles.prioritiesCol}>
+                  <h2 className={styles.sectionLabel}>Prioridades</h2>
+                  <Priorities value={data.priorities} onChange={setPriorities} />
+                </div>
+                {/* AC-003: MoodPicker via barrel only */}
+                <MoodPicker value={data.mood} onChange={setMood} />
               </div>
-              {/* AC-003: MoodPicker via barrel only */}
-              <MoodPicker value={data.mood} onChange={setMood} />
-            </div>
 
-            {/* Left column: Agenda */}
-            <div className={styles.agendaCol}>
-              {/* AC-023: visible section label */}
-              <h2 className={styles.sectionLabel}>Agenda</h2>
-              {/* AC-003: Agenda via barrel only */}
-              <Agenda value={toAgendaSlots(data)} onChange={setAgenda} />
-            </div>
+              {/* Left column: Agenda */}
+              <div className={styles.agendaCol}>
+                {/* AC-023: visible section label */}
+                <h2 className={styles.sectionLabel}>Agenda</h2>
+                {/* AC-003: Agenda via barrel only */}
+                <Agenda value={toAgendaSlots(data)} onChange={setAgenda} />
+              </div>
 
-            {/* Right column: Notes */}
-            <div className={styles.notesCol}>
-              {/* AC-024: visible section label */}
-              <h2 className={styles.sectionLabel}>Notas</h2>
-              {/* AC-003: Notes via barrel only */}
-              <Notes value={data.notes} onChange={setNotes} />
+              {/* Right column: Notes */}
+              <div className={styles.notesCol}>
+                {/* AC-024: visible section label */}
+                <h2 className={styles.sectionLabel}>Notas</h2>
+                {/* AC-003: Notes via barrel only */}
+                <Notes value={data.notes} onChange={setNotes} />
+              </div>
             </div>
-          </div>
-        )}
-      </DayLayer>
-    </PaperSheet>
+          )}
+        </DayLayer>
+      </PaperSheet>
+      {/* AC-024: StickyNote is position:fixed — does not affect PaperSheet/grid layout */}
+      <StickyNote />
+    </>
   );
 }

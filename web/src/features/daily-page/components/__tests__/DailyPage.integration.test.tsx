@@ -57,6 +57,10 @@ jest.mock('@/features/notes', () => ({
   ),
 }));
 
+jest.mock('@/features/sticky-note', () => ({
+  StickyNote: () => null,
+}));
+
 // ---------------------------------------------------------------------------
 // Mock hooks (will be overridden per test group)
 // ---------------------------------------------------------------------------

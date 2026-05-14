@@ -3,7 +3,7 @@
 > Feature: rich-text-line — editor Tiptap de uma linha (núcleo de escrita)
 > Task ID: FEAT-007
 > Phase: done
-> Generated at: 2026-05-13T06:56:58.631Z
+> Generated at: 2026-05-14T03:10:15.087Z
 
 ## Insights
 
@@ -26,7 +26,7 @@ _70/30 input/output split assumed; harness reports only total_tokens; 19 of 19 d
 
 ## Repo health snapshot
 
-_Measured at: 2026-05-13_
+_Measured at: 2026-05-14_
 
 | Métrica        | Valor | Threshold | Status |
 | -------------- | ----- | --------- | ------ |
@@ -37,27 +37,27 @@ _Measured at: 2026-05-13_
 
 ## Per-dispatch breakdown
 
-| ID           | Role            | Status       | Loop | Tokens   | $         | Duration | PM note                                                                          |
-| ------------ | --------------- | ------------ | ---- | -------- | --------- | -------- | -------------------------------------------------------------------------------- |
-| pm-orches... | pm-orchestrator | done         | —    | 15765530 | $173.4208 | 109m 37s | PM/orchestrator session (Stop hook): 118 turns                                   |
-| feat007-b... | dev             | done         | —    | 63251    | $0.4175   | 6m 46s   | Setup deps + libs (sanitize/normalize) + useRichTextLine hook + 63 unit tests... |
-| feat007-b... | code-reviewer   | needs_review | —    | 37350    | $0.2465   | 1m 53s   | 2 blockers (jest config) escopo BATCH-D; 1 major in-scope (semver); 3 minor.     |
-| feat007-b... | logic-reviewer  | needs_review | —    | 41448    | $0.2736   | 2m 16s   | 3 blockers reais (AC-028 cursor-jump, stale closure, teste placeholder); 4 ma... |
-| feat007-b... | dev             | done         | 1    | 56734    | $0.3744   | 4m 34s   | Fix loop 1: AC-028 strip <p>, useRef stale closure fix, IME guard, real Enter... |
-| feat007-b... | qa              | done         | —    | 42222    | $0.2787   | 2m 36s   | 89/89 tests verdes; 15 ACs pass, AC-020+AC-025 deferred to BATCH-B integration.  |
-| feat007-b... | dev             | done         | —    | 121599   | $0.8026   | 16m 28s  | RichTextLine component + 25 integration tests; 111/111 verdes; typecheck clean.  |
-| feat007-b... | logic-reviewer  | needs_review | —    | 42691    | $0.2818   | 2m 6s    | 1 blocker (paste bypass), 3 majors (mark regex, rapid typing batched), 2 mino... |
-| feat007-b... | qa              | done         | —    | 45000    | $0.2970   | 2m 30s   | 111/111 tests verdes; 11 ACs pass; rapid typing test fraco mas passa intent —... |
-| feat007-b... | dev             | done         | 1    | 91293    | $0.6025   | 9m 38s   | Fix loop 1: BoldAsB/ItalicAsI custom renderHTML, real paste via clipboardData... |
-| feat007-b... | dev             | done         | —    | 70962    | $0.4683   | 6m 28s   | FloatingToolbar a11y (BubbleMenu, role=toolbar, aria-pressed, arrow nav) + 16... |
-| feat007-b... | qa              | done         | —    | 34183    | $0.2256   | 1m 36s   | 128/128 verdes; 6 ACs pass; AC-006/007 show/hide deferidos a Storybook+e2e (j... |
-| feat007-b... | dev             | needs_review | —    | 53826    | $0.3553   | 3m 47s   | Stories+jest config+CLAUDE.md done. Storybook build verde. Gap: FloatingToolb... |
-| feat007-b... | dev             | done         | 1    | 106014   | $0.6997   | 13m 58s  | Coverage fix: tests adicionais para FloatingToolbar funcs/branches, RichTextL... |
-| feat007-b... | qa              | done         | —    | 43372    | $0.2863   | 5m 38s   | 4/4 ACs pass; 897 tests verdes; coverage threshold ok; storybook build verde;... |
-| feat007-a... | audit-agent     | blocked      | —    | 60311    | $0.1327   | 1m 56s   | Initial audit retornou bypass_detected (reviewers ausentes em B/C/D). Reviewe... |
-| feat007-b... | code-reviewer   | needs_review | —    | 33791    | $0.0743   | 49s      | Test file 393L > 250L (split como follow-up); restante limpo.                    |
-| feat007-b... | code-reviewer   | needs_review | —    | 24514    | $0.0539   | 27s      | Test file 481L; CSS tokens hard-coded + aria-label coupling (5 minors). Follo... |
-| feat007-a... | audit-agent     | done         | —    | 68668    | $0.1511   | 2m 40s   | Re-audit clean: 4/4 batches roles completos; 35/35 ACs cobertos; 3 reviewers ... |
+| ID           | Role            | Status       | Loop | Tokens   | $        | Duration | PM note                                                                          |
+| ------------ | --------------- | ------------ | ---- | -------- | -------- | -------- | -------------------------------------------------------------------------------- |
+| pm-orches... | pm-orchestrator | done         | —    | 15765530 | $16.9778 | 109m 37s | PM/orchestrator session (Stop hook): 118 turns                                   |
+| feat007-b... | dev             | done         | —    | 63251    | $0.4175  | 6m 46s   | Setup deps + libs (sanitize/normalize) + useRichTextLine hook + 63 unit tests... |
+| feat007-b... | code-reviewer   | needs_review | —    | 37350    | $0.2465  | 1m 53s   | 2 blockers (jest config) escopo BATCH-D; 1 major in-scope (semver); 3 minor.     |
+| feat007-b... | logic-reviewer  | needs_review | —    | 41448    | $0.2736  | 2m 16s   | 3 blockers reais (AC-028 cursor-jump, stale closure, teste placeholder); 4 ma... |
+| feat007-b... | dev             | done         | 1    | 56734    | $0.3744  | 4m 34s   | Fix loop 1: AC-028 strip <p>, useRef stale closure fix, IME guard, real Enter... |
+| feat007-b... | qa              | done         | —    | 42222    | $0.2787  | 2m 36s   | 89/89 tests verdes; 15 ACs pass, AC-020+AC-025 deferred to BATCH-B integration.  |
+| feat007-b... | dev             | done         | —    | 121599   | $0.8026  | 16m 28s  | RichTextLine component + 25 integration tests; 111/111 verdes; typecheck clean.  |
+| feat007-b... | logic-reviewer  | needs_review | —    | 42691    | $0.2818  | 2m 6s    | 1 blocker (paste bypass), 3 majors (mark regex, rapid typing batched), 2 mino... |
+| feat007-b... | qa              | done         | —    | 45000    | $0.2970  | 2m 30s   | 111/111 tests verdes; 11 ACs pass; rapid typing test fraco mas passa intent —... |
+| feat007-b... | dev             | done         | 1    | 91293    | $0.6025  | 9m 38s   | Fix loop 1: BoldAsB/ItalicAsI custom renderHTML, real paste via clipboardData... |
+| feat007-b... | dev             | done         | —    | 70962    | $0.4683  | 6m 28s   | FloatingToolbar a11y (BubbleMenu, role=toolbar, aria-pressed, arrow nav) + 16... |
+| feat007-b... | qa              | done         | —    | 34183    | $0.2256  | 1m 36s   | 128/128 verdes; 6 ACs pass; AC-006/007 show/hide deferidos a Storybook+e2e (j... |
+| feat007-b... | dev             | needs_review | —    | 53826    | $0.3553  | 3m 47s   | Stories+jest config+CLAUDE.md done. Storybook build verde. Gap: FloatingToolb... |
+| feat007-b... | dev             | done         | 1    | 106014   | $0.6997  | 13m 58s  | Coverage fix: tests adicionais para FloatingToolbar funcs/branches, RichTextL... |
+| feat007-b... | qa              | done         | —    | 43372    | $0.2863  | 5m 38s   | 4/4 ACs pass; 897 tests verdes; coverage threshold ok; storybook build verde;... |
+| feat007-a... | audit-agent     | blocked      | —    | 60311    | $0.1327  | 1m 56s   | Initial audit retornou bypass_detected (reviewers ausentes em B/C/D). Reviewe... |
+| feat007-b... | code-reviewer   | needs_review | —    | 33791    | $0.0743  | 49s      | Test file 393L > 250L (split como follow-up); restante limpo.                    |
+| feat007-b... | code-reviewer   | needs_review | —    | 24514    | $0.0539  | 27s      | Test file 481L; CSS tokens hard-coded + aria-label coupling (5 minors). Follo... |
+| feat007-a... | audit-agent     | done         | —    | 68668    | $0.1511  | 2m 40s   | Re-audit clean: 4/4 batches roles completos; 35/35 ACs cobertos; 3 reviewers ... |
 
 ## Per-AC closure detail
 
@@ -103,14 +103,19 @@ _Measured at: 2026-05-13_
 
 | Phase          | Duration |
 | -------------- | -------- |
-| specify        | —        |
-| plan           | —        |
-| tasks          | —        |
-| implementation | —        |
+| specify        | 10 min   |
+| plan           | 10 min   |
+| tasks          | 10 min   |
+| implementation | 95 min   |
 
 ## Timeline
 
-_(no phase data available)_
+| Phase          | Started  | Completed | Duration | Visual     |
+| -------------- | -------- | --------- | -------- | ---------- |
+| specify        | 18:00:00 | 18:10:00  | 10m      | █░░░░░░░░░ |
+| plan           | 18:10:00 | 18:20:00  | 10m      | █░░░░░░░░░ |
+| tasks          | 18:20:00 | 18:30:00  | 10m      | █░░░░░░░░░ |
+| implementation | 18:30:00 | 20:05:00  | 95m      | ██████████ |
 
 ## Dispatches
 
@@ -147,7 +152,7 @@ Escalation rate: 0.0% — below healthy band (< 10%)
 
 ## AC closure
 
-Total: 35 | Pass: 36 | Partial: 2 | Fail: 0 | Missing: 0
+Total: 35 | Pass: 35 | Partial: 0 | Fail: 0 | Missing: 0
 
 ## Reviewer findings density
 

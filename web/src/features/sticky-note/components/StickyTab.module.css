@@ -1,0 +1,11 @@
+.tab {
+  display: block;
+  width: 16px;
+  height: 48px;
+  border-radius: 0 6px 6px 0;
+  box-shadow: var(--shadow-paper, 0 2px 8px rgba(0, 0, 0, 0.4));
+  cursor: pointer;
+  border: none;
+  padding: 0;
+  /* background set via inline style; opacity set via inline style */
+}

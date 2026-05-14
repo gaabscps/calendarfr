@@ -3,7 +3,7 @@
 > Feature: keyboard-ux-enter — ENTER/SHIFT+ENTER padrão da indústria em listas e agenda
 > Task ID: FEAT-018
 > Phase: done
-> Generated at: 2026-05-13T06:56:58.631Z
+> Generated at: 2026-05-14T03:10:15.087Z
 
 ## Insights
 
@@ -20,14 +20,14 @@ _70/30 input/output split assumed; harness reports only total_tokens; 49 of 53 d
   - Estimated output (30%): 338750
 - Estimated cost USD total: $5.5552
 - Cost per AC: $0.3086
-- Cost per dispatch (avg): $0.1134
+- Cost per dispatch (avg): $0.1048
 - Wall-clock duration: 164m 34s
 - Tool uses total: 569
 - Coverage: 49 of 53 dispatches included in cost calculation
 
 ## Repo health snapshot
 
-_Measured at: 2026-05-13_
+_Measured at: 2026-05-14_
 
 | Métrica        | Valor | Threshold | Status |
 | -------------- | ----- | --------- | ------ |
@@ -96,26 +96,26 @@ _Measured at: 2026-05-13_
 
 ## Per-AC closure detail
 
-| AC ID  | Status  | Validator | Evidence |
-| ------ | ------- | --------- | -------- |
-| AC-001 | pass    | qa        | —        |
-| AC-002 | pass    | qa        | —        |
-| AC-003 | pass    | qa        | —        |
-| AC-004 | pass    | qa        | —        |
-| AC-005 | pass    | qa        | —        |
-| AC-006 | pass    | qa        | —        |
-| AC-007 | pass    | qa        | —        |
-| AC-008 | missing | qa        | —        |
-| AC-009 | pass    | qa        | —        |
-| AC-010 | pass    | qa        | —        |
-| AC-011 | pass    | qa        | —        |
-| AC-012 | missing | qa        | —        |
-| AC-013 | pass    | qa        | —        |
-| AC-014 | pass    | qa        | —        |
-| AC-015 | pass    | qa        | —        |
-| AC-016 | pass    | qa        | —        |
-| AC-017 | pass    | qa        | —        |
-| AC-018 | pass    | qa        | —        |
+| AC ID  | Status | Validator | Evidence |
+| ------ | ------ | --------- | -------- |
+| AC-001 | pass   | qa        | —        |
+| AC-002 | pass   | qa        | —        |
+| AC-003 | pass   | qa        | —        |
+| AC-004 | pass   | qa        | —        |
+| AC-005 | pass   | qa        | —        |
+| AC-006 | pass   | qa        | —        |
+| AC-007 | pass   | qa        | —        |
+| AC-008 | pass   | qa        | —        |
+| AC-009 | pass   | qa        | —        |
+| AC-010 | pass   | qa        | —        |
+| AC-011 | pass   | qa        | —        |
+| AC-012 | pass   | qa        | —        |
+| AC-013 | pass   | qa        | —        |
+| AC-014 | pass   | qa        | —        |
+| AC-015 | pass   | qa        | —        |
+| AC-016 | pass   | qa        | —        |
+| AC-017 | pass   | qa        | —        |
+| AC-018 | pass   | qa        | —        |
 
 ## Phase durations
 
@@ -165,7 +165,7 @@ Escalation rate: 0.0% — below healthy band (< 10%)
 
 ## AC closure
 
-Total: 18 | Pass: 32 | Partial: 0 | Fail: 0 | Missing: 2
+Total: 18 | Pass: 18 | Partial: 0 | Fail: 0 | Missing: 0
 
 ## Reviewer findings density
 
@@ -194,3 +194,5 @@ Total: 18 | Pass: 32 | Partial: 0 | Fail: 0 | Missing: 2
 ## Token cost
 
 Token cost not available — using dispatch count as cost proxy: 53 dispatches
+
+⚠ pm-orchestrator Stop hook did not run — re-run agentops install-hooks (worktree-aware)

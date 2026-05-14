@@ -584,9 +584,9 @@
     <main>
       <section class="story">
         <h2>Story</h2>
-        <article class="story-card story-card--done" aria-label="batch PM-ORCHESTRATOR">
+        <article class="story-card story-card--done" aria-label="batch pm-orchestrator">
           <header>
-            <h3>PM-ORCHESTRATOR</h3>
+            <h3>pm-orchestrator</h3>
             <span class="badge badge-pass" aria-label="status: done">✓ done</span>
           </header>
           <div class="story-card__stats">
@@ -634,8 +634,11 @@
                     <th>role</th>
                     <th>dispatch_id</th>
                     <th>loop</th>
+                    <th>model</th>
+                    <th>effort</th>
                     <th>duration</th>
                     <th>tokens</th>
+                    <th>cost</th>
                     <th>status</th>
                   </tr>
                 </thead>
@@ -644,8 +647,11 @@
                     <td>pm-orchestrator</td>
                     <td>pm-orchestrator-d6a4db92</td>
                     <td>—</td>
+                    <td>opus-4-7</td>
+                    <td>—</td>
                     <td>38m 13s</td>
                     <td>18969453</td>
+                    <td>$18.98</td>
                     <td>done</td>
                   </tr>
                 </tbody>
@@ -657,12 +663,9 @@
             </details>
           </div>
         </article>
-        <article class="story-card story-card--done-retried" aria-label="batch BATCH-A">
+        <article class="story-card story-card--done-retried" aria-label="batch FEAT-005">
           <header>
-            <h3>
-              BATCH-A<span class="dot">·</span>Foundation — types module + format utils +
-              Session.expectedPipeline extension
-            </h3>
+            <h3>FEAT-005</h3>
             <span class="badge badge-warn" aria-label="status: done with retries"
               >↻ done (retried)</span
             >
@@ -670,24 +673,31 @@
           <div class="story-card__stats">
             <span class="story-card__stat"
               ><span class="story-card__stat-label">time</span>
-              <span class="story-card__stat-value">9m</span></span
+              <span class="story-card__stat-value">57m</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">cost</span>
-              <span class="story-card__stat-value">$1.36</span></span
+              <span class="story-card__stat-value">$5.05</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">tasks</span>
-              <span class="story-card__stat-value">3</span></span
+              <span class="story-card__stat-value">17</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">ACs</span>
-              <span class="story-card__stat-value">3/3</span></span
+              <span class="story-card__stat-value">26</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">files</span>
-              <span class="story-card__stat-value">6</span></span
-            ><span class="story-card__pipeline">dev → code-reviewer ‖ logic-reviewer → qa</span>
+              <span class="story-card__stat-value">51</span></span
+            ><span class="story-card__pipeline"
+              >dev → code-reviewer ‖ logic-reviewer → qa → audit-agent</span
+            >
           </div>
           <aside class="story-card__retry" role="status">
-            ⚠ dev retried 1× — loop 2: Blocking resolved via extraction (enrich.test.ts 875-&gt;802;
-            new enrich-pipeline.…
+            ⚠ dev retried 2× — loop 2: Blocking resolved via extraction (enrich.test.ts 875-&gt;802;
+            new enrich-pipeline.…; loop 2: All 3 blockers resolved. Aggregator split: extract.ts
+            156L + merge.ts 61L + ind…
+          </aside>
+          <aside class="story-card__retry" role="status">
+            ⚠ audit-agent retried 1× — loop 2: All 6 checks PASS with PM attestation applied. Bypass
+            detection: feat_005_owned…
           </aside>
           <p class="story-card__summary">
             T-001 creates the types module (BatchState, BatchData, BatchDispatchRow) with correct
@@ -695,7 +705,7 @@
           </p>
           <div class="story-card__drilldowns">
             <details>
-              <summary>Files changed (6)</summary>
+              <summary>Files changed (51)</summary>
               <table class="story-card__files">
                 <thead>
                   <tr>
@@ -707,13 +717,13 @@
                 <tbody>
                   <tr>
                     <td>scripts/agentops/render/html/components/story-card/types.ts</td>
-                    <td>created</td>
-                    <td>T-001</td>
+                    <td>changed</td>
+                    <td>FEAT-005</td>
                   </tr>
                   <tr>
                     <td>scripts/agentops/render/html/components/story-card/format.ts</td>
-                    <td>created</td>
-                    <td>T-002</td>
+                    <td>changed</td>
+                    <td>FEAT-005</td>
                   </tr>
                   <tr>
                     <td>scripts/agentops/render/html/components/story-card/__tests_…</td>
@@ -722,8 +732,8 @@
                   </tr>
                   <tr>
                     <td>scripts/agentops/types.ts</td>
-                    <td>extended</td>
-                    <td>T-003</td>
+                    <td>modified</td>
+                    <td>T-005</td>
                   </tr>
                   <tr>
                     <td>scripts/agentops/enrich/phases.ts</td>
@@ -732,152 +742,14 @@
                   </tr>
                   <tr>
                     <td>scripts/agentops/__tests__/enrich.test.ts</td>
-                    <td>extended</td>
-                    <td>T-003</td>
-                  </tr>
-                </tbody>
-              </table>
-            </details>
-            <details>
-              <summary>ACs covered (3)</summary>
-              <ul class="story-card__acs">
-                <li>
-                  <strong>AC-001</strong> — types.ts:119-124 optional title field; phases.ts:37
-                  reads entry.title with type guard; back-compat preserved (older manifests produce
-                  undefined, fallback is do…
-                </li>
-                <li>
-                  <strong>AC-005</strong> — types.ts:25-28 declares tasksCovered+acsCovered+acScope
-                  on BatchData; phases.ts:38-43 reads ac_scope+tasks_covered with isArray guard +
-                  string filter
-                </li>
-                <li>
-                  <strong>AC-007</strong> — format.ts:6-19 formatDuration handles all boundaries;
-                  format.ts:21-24 formatCost null-&gt;&#39;-&#39;, $0.00 for zero, $X.XX rounding;
-                  format.test.ts covers all branches …
-                </li>
-              </ul>
-            </details>
-            <details>
-              <summary>Pipeline trace (5 dispatches)</summary>
-              <table class="story-card__pipeline-trace">
-                <thead>
-                  <tr>
-                    <th>role</th>
-                    <th>dispatch_id</th>
-                    <th>loop</th>
-                    <th>duration</th>
-                    <th>tokens</th>
-                    <th>status</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>dev</td>
-                    <td>batch-a-dev</td>
-                    <td>—</td>
-                    <td>3m 29s</td>
-                    <td>54570</td>
-                    <td>done</td>
+                    <td>changed</td>
+                    <td>FEAT-005</td>
                   </tr>
                   <tr>
-                    <td>code-reviewer</td>
-                    <td>batch-a-code-reviewer</td>
-                    <td>—</td>
-                    <td>1m 36s</td>
-                    <td>50391</td>
-                    <td>needs_review</td>
+                    <td>scripts/agentops/__tests__/enrich-pipeline.test.ts</td>
+                    <td>changed</td>
+                    <td>FEAT-005</td>
                   </tr>
-                  <tr>
-                    <td>logic-reviewer</td>
-                    <td>batch-a-logic-reviewer</td>
-                    <td>—</td>
-                    <td>1m 3s</td>
-                    <td>42037</td>
-                    <td>done</td>
-                  </tr>
-                  <tr>
-                    <td>dev</td>
-                    <td>batch-a-dev-loop2</td>
-                    <td>2</td>
-                    <td>1m 52s</td>
-                    <td>32545</td>
-                    <td>done</td>
-                  </tr>
-                  <tr>
-                    <td>qa</td>
-                    <td>batch-a-qa</td>
-                    <td>—</td>
-                    <td>1m 1s</td>
-                    <td>25853</td>
-                    <td>done</td>
-                  </tr>
-                </tbody>
-              </table>
-            </details>
-            <details>
-              <summary>PM note</summary>
-              <p class="story-card__pmnote">
-                All 3 ACs pass (AC-001/005/007). lint exit 0, typecheck exit 0, 3 suites/50 tests
-                exit 0.
-              </p>
-            </details>
-          </div>
-        </article>
-        <article class="story-card story-card--done-retried" aria-label="batch BATCH-B">
-          <header>
-            <h3>
-              BATCH-B<span class="dot">·</span>Central logic — state machine + rich aggregator
-            </h3>
-            <span class="badge badge-warn" aria-label="status: done with retries"
-              >↻ done (retried)</span
-            >
-          </header>
-          <div class="story-card__stats">
-            <span class="story-card__stat"
-              ><span class="story-card__stat-label">time</span>
-              <span class="story-card__stat-value">19m</span></span
-            ><span class="story-card__stat"
-              ><span class="story-card__stat-label">cost</span>
-              <span class="story-card__stat-value">$1.83</span></span
-            ><span class="story-card__stat"
-              ><span class="story-card__stat-label">tasks</span>
-              <span class="story-card__stat-value">2</span></span
-            ><span class="story-card__stat"
-              ><span class="story-card__stat-label">ACs</span>
-              <span class="story-card__stat-value">13/13</span></span
-            ><span class="story-card__stat"
-              ><span class="story-card__stat-label">files</span>
-              <span class="story-card__stat-value">11</span></span
-            ><span class="story-card__pipeline">dev → code-reviewer ‖ logic-reviewer → qa</span>
-          </div>
-          <aside class="story-card__retry" role="status">
-            ⚠ dev retried 1× — loop 2: All 3 blockers resolved. Aggregator split: extract.ts 156L +
-            merge.ts 61L + ind…
-          </aside>
-          <p class="story-card__summary">
-            T-004 implements computeBatchState() as a 5-state machine
-            (done/done-retried/escalated/blocked/running) with lastDispatchByRole resolving the
-            AUDIT-AGENT blocked+retry case (AC-004) and needs_review filtered from terminal-state
-            aggregation (AC-003); 15 state tests pass. T-005 implements
-            aggregateBatchesFromSession() populating all BatchData fields via type-guarded reads of
-            outputPacket: title from expectedPipeline with batchId fallback (AC-001),
-            acsCovered/filesChanged/tasksCovered aggregated last-wins by id/path, summary extracted
-            as first-2-sentences of dev summary_for_reviewers (AC-009), retryEntries for loops &gt;=
-            2 (AC-010/011), costUsd summed from usage.
-          </p>
-          <div class="story-card__drilldowns">
-            <details>
-              <summary>Files changed (11)</summary>
-              <table class="story-card__files">
-                <thead>
-                  <tr>
-                    <th>path</th>
-                    <th>action</th>
-                    <th>tasks</th>
-                  </tr>
-                </thead>
-                <tbody>
                   <tr>
                     <td>scripts/agentops/render/html/components/story-card/state.ts</td>
                     <td>modified</td>
@@ -899,11 +771,6 @@
                     <td>T-005</td>
                   </tr>
                   <tr>
-                    <td>scripts/agentops/types.ts</td>
-                    <td>modified</td>
-                    <td>T-005</td>
-                  </tr>
-                  <tr>
                     <td>scripts/agentops/render/html/components/story-card/aggregat…</td>
                     <td>created</td>
                     <td>T-005</td>
@@ -933,178 +800,6 @@
                     <td>created</td>
                     <td>T-005</td>
                   </tr>
-                </tbody>
-              </table>
-            </details>
-            <details>
-              <summary>ACs covered (13)</summary>
-              <ul class="story-card__acs">
-                <li>
-                  <strong>AC-001</strong> — aggregator.ts:148 pipelineEntry?.title ?? batchId
-                  fallback; aggregator.test.ts:205 title from expectedPipeline, :216 fallback to
-                  batchId
-                </li>
-                <li>
-                  <strong>AC-002</strong> — state.ts:29-55 computeBatchState 5-state machine
-                  unchanged; state.test.ts all table-driven transitions pass
-                </li>
-                <li>
-                  <strong>AC-003</strong> — state.ts:35-47 blocked branch now filters needs_review
-                  via terminalDispatches before lastByRole; state.test.ts:108-122 new regression
-                  test: dev blocked+done + …
-                </li>
-                <li>
-                  <strong>AC-004</strong> — state.ts:35-41 lastDispatchByRole all-done →
-                  done-retried; state.test.ts:42-55 AUDIT-AGENT blocked+done-retry → done-retried
-                </li>
-                <li>
-                  <strong>AC-005</strong> — aggregator.ts:151 acScope from pipelineEntry?.acScope ??
-                  null; aggregator.test.ts:209-211 acScope from manifest
-                </li>
-                <li>
-                  <strong>AC-007</strong> — aggregator/index.ts:73-81 costUsd reads
-                  dispatch.usage?.cost_usd directly (no cast); types.ts:22 cost_usd?:number added to
-                  Usage interface; aggregator-cost-and…
-                </li>
-                <li>
-                  <strong>AC-009</strong> — aggregator.ts:109-113 extractSummary 2-sentence
-                  heuristic; aggregator.ts:246-251 dev summary fallback chain;
-                  aggregator.test.ts:181-187 summary from dev dispat…
-                </li>
-                <li>
-                  <strong>AC-010</strong> — aggregator.ts:222-225 retryEntries built for loop &gt;=
-                  2; aggregator.test.ts:172-178 retryEntries.length &gt;= 1 with loop 2
-                </li>
-                <li>
-                  <strong>AC-011</strong> — aggregator.ts:223 truncate(dispatch.pmNote, 80);
-                  aggregator.test.ts:177 reason matches Loop 2 text
-                </li>
-                <li>
-                  <strong>AC-014</strong> — aggregator.ts:163+79-91 filesMap last-wins by path;
-                  aggregator.test.ts:189-203 files dedup verified
-                </li>
-                <li>
-                  <strong>AC-015</strong> — aggregator.ts:165+94-103 acsMap last-wins by id;
-                  aggregator.test.ts:429-447 AC-001 last evidence wins
-                </li>
-                <li>
-                  <strong>AC-016</strong> — aggregator.ts:180-215 dispatchRows built in
-                  chronological order with durationMs/totalTokens/status; aggregator.test.ts:225-232
-                  4 rows correct order
-                </li>
-                <li>
-                  <strong>AC-017</strong> — aggregator.ts:174+219-220 pmNote last non-null across
-                  sorted dispatches; aggregator.test.ts:217-219 pmNote from loop2
-                </li>
-              </ul>
-            </details>
-            <details>
-              <summary>Pipeline trace (5 dispatches)</summary>
-              <table class="story-card__pipeline-trace">
-                <thead>
-                  <tr>
-                    <th>role</th>
-                    <th>dispatch_id</th>
-                    <th>loop</th>
-                    <th>duration</th>
-                    <th>tokens</th>
-                    <th>status</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>dev</td>
-                    <td>batch-b-dev</td>
-                    <td>—</td>
-                    <td>5m 24s</td>
-                    <td>67458</td>
-                    <td>done</td>
-                  </tr>
-                  <tr>
-                    <td>code-reviewer</td>
-                    <td>batch-b-code-reviewer</td>
-                    <td>—</td>
-                    <td>1m 53s</td>
-                    <td>38910</td>
-                    <td>needs_review</td>
-                  </tr>
-                  <tr>
-                    <td>logic-reviewer</td>
-                    <td>batch-b-logic-reviewer</td>
-                    <td>—</td>
-                    <td>1m 44s</td>
-                    <td>48814</td>
-                    <td>needs_review</td>
-                  </tr>
-                  <tr>
-                    <td>dev</td>
-                    <td>batch-b-dev-loop2</td>
-                    <td>2</td>
-                    <td>9m 5s</td>
-                    <td>74502</td>
-                    <td>done</td>
-                  </tr>
-                  <tr>
-                    <td>qa</td>
-                    <td>batch-b-qa</td>
-                    <td>—</td>
-                    <td>2m 22s</td>
-                    <td>47060</td>
-                    <td>done</td>
-                  </tr>
-                </tbody>
-              </table>
-            </details>
-            <details>
-              <summary>PM note</summary>
-              <p class="story-card__pmnote">
-                13/13 ACs pass. lint+typecheck exit 0. 8 suites/98 tests exit 0. All 6 files under
-                250-line cap.
-              </p>
-            </details>
-          </div>
-        </article>
-        <article class="story-card story-card--done" aria-label="batch BATCH-C">
-          <header>
-            <h3>
-              BATCH-C<span class="dot">·</span>Render parts (6 small components) + CSS additivo
-            </h3>
-            <span class="badge badge-pass" aria-label="status: done">✓ done</span>
-          </header>
-          <div class="story-card__stats">
-            <span class="story-card__stat"
-              ><span class="story-card__stat-label">time</span>
-              <span class="story-card__stat-value">10m</span></span
-            ><span class="story-card__stat"
-              ><span class="story-card__stat-label">cost</span>
-              <span class="story-card__stat-value">$0.74</span></span
-            ><span class="story-card__stat"
-              ><span class="story-card__stat-label">tasks</span>
-              <span class="story-card__stat-value">7</span></span
-            ><span class="story-card__stat"
-              ><span class="story-card__stat-label">ACs</span>
-              <span class="story-card__stat-value">20/20</span></span
-            ><span class="story-card__stat"
-              ><span class="story-card__stat-label">files</span>
-              <span class="story-card__stat-value">14</span></span
-            ><span class="story-card__pipeline">dev → qa</span>
-          </div>
-          <p class="story-card__summary">
-            Implemented 6 render parts (T-006.. T-011) as pure TypeScript functions under parts/
-            directory.
-          </p>
-          <div class="story-card__drilldowns">
-            <details>
-              <summary>Files changed (14)</summary>
-              <table class="story-card__files">
-                <thead>
-                  <tr>
-                    <th>path</th>
-                    <th>action</th>
-                    <th>tasks</th>
-                  </tr>
-                </thead>
-                <tbody>
                   <tr>
                     <td>scripts/agentops/render/html/components/story-card/parts/ca…</td>
                     <td>create</td>
@@ -1173,182 +868,8 @@
                   <tr>
                     <td>scripts/agentops/render/html/shared/tokens.css.ts</td>
                     <td>modify</td>
-                    <td>T-012</td>
+                    <td>T-014</td>
                   </tr>
-                </tbody>
-              </table>
-            </details>
-            <details>
-              <summary>ACs covered (20)</summary>
-              <ul class="story-card__acs">
-                <li>
-                  <strong>AC-001</strong> — card-header.ts:renderCardHeader — case-insensitive
-                  compare title===batchId omits dot·title span; test: card-header.test.ts L34-40
-                </li>
-                <li>
-                  <strong>AC-002</strong> — card-header.ts:renderBadge calls batchStateToBadge; all
-                  5 states tested card-header.test.ts L42-66
-                </li>
-                <li>
-                  <strong>AC-005</strong> — stats-strip.ts:renderStatsStrip — 6 KPIs in fixed order;
-                  order verified stats-strip.test.ts L57-73
-                </li>
-                <li>
-                  <strong>AC-006</strong> — pipeline-line.ts:renderPipelineLine — ‖ for adjacent
-                  reviewer-reviewer pairs, → otherwise; canonical pipeline tested
-                  pipeline-line.test.ts L18-33
-                </li>
-                <li>
-                  <strong>AC-007</strong> — stats-strip.ts reuses formatDuration/formatCost;
-                  null→&#39;—&#39; tested stats-strip.test.ts L75-93
-                </li>
-                <li>
-                  <strong>AC-008</strong> — layout.ts: @media (max-width:767px)
-                  flex-direction:column on header, font-size:xs on stats
-                </li>
-                <li>
-                  <strong>AC-009</strong> — summary.ts:renderSummary — null→empty class with (no
-                  summary); tested summary.test.ts
-                </li>
-                <li>
-                  <strong>AC-010</strong> — retry-banner.ts:renderRetryBanner — groups by role, ⚠
-                  {role} retried {N}×; tested retry-banner.test.ts L22-45
-                </li>
-                <li>
-                  <strong>AC-011</strong> — retry-banner.ts: escape(entry.reason) applied; XSS test
-                  retry-banner.test.ts L57-63
-                </li>
-                <li>
-                  <strong>AC-012</strong> — retry-banner.ts: empty array → return &#39;&#39;; tested
-                  retry-banner.test.ts L16-18
-                </li>
-                <li>
-                  <strong>AC-013</strong> — drilldowns.ts:renderDrilldowns — 4 details in fixed
-                  order; count+order tested drilldowns.test.ts L59-83
-                </li>
-                <li>
-                  <strong>AC-014</strong> — drilldowns.ts:renderFilesChanged — table
-                  path|action|tasks, truncate 60; tested drilldowns.test.ts L84-107
-                </li>
-                <li>
-                  <strong>AC-015</strong> — drilldowns.ts:renderAcsCovered — ul with id —
-                  evidence(160); tested drilldowns.test.ts L109-124
-                </li>
-                <li>
-                  <strong>AC-016</strong> — drilldowns.ts:renderPipelineTrace — table
-                  role|dispatch_id|loop|duration|tokens|status; dispatch_id truncated 24; tested
-                  drilldowns.test.ts L126-192
-                </li>
-                <li>
-                  <strong>AC-017</strong> — drilldowns.ts:renderPmNote — no truncation, (no PM note)
-                  fallback; tested drilldowns.test.ts L194-205
-                </li>
-                <li>
-                  <strong>AC-018</strong> — drilldowns.ts: pure &lt;details&gt;/&lt;summary&gt;
-                  HTML5, zero &lt;script&gt; in output; tested drilldowns.test.ts L207-210
-                </li>
-                <li>
-                  <strong>AC-019</strong> — card-header.ts: returns
-                  &lt;header&gt;...&lt;/header&gt;; badge has aria-label=&#39;status:
-                  &lt;text&gt;&#39;; tested card-header.test.ts L100-105
-                </li>
-                <li>
-                  <strong>AC-020</strong> — layout.ts: flex-wrap:wrap on stats and pipeline; @media
-                  767px column layout prevents overflow
-                </li>
-                <li>
-                  <strong>AC-021</strong> — layout.ts: gap/padding using --space-* tokens keeps
-                  collapsed card compact; validated structurally
-                </li>
-                <li>
-                  <strong>NFR-003</strong> — tokens.css.ts/layout.ts: CSS only, zero JS dependencies
-                  added
-                </li>
-              </ul>
-            </details>
-            <details>
-              <summary>Pipeline trace (2 dispatches)</summary>
-              <table class="story-card__pipeline-trace">
-                <thead>
-                  <tr>
-                    <th>role</th>
-                    <th>dispatch_id</th>
-                    <th>loop</th>
-                    <th>duration</th>
-                    <th>tokens</th>
-                    <th>status</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>dev</td>
-                    <td>batch-c-dev</td>
-                    <td>—</td>
-                    <td>6m 39s</td>
-                    <td>69166</td>
-                    <td>done</td>
-                  </tr>
-                  <tr>
-                    <td>qa</td>
-                    <td>batch-c-qa</td>
-                    <td>—</td>
-                    <td>2m 5s</td>
-                    <td>42416</td>
-                    <td>done</td>
-                  </tr>
-                </tbody>
-              </table>
-            </details>
-            <details>
-              <summary>PM note</summary>
-              <p class="story-card__pmnote">
-                All 20 ACs pass. lint+typecheck+tests exit 0. All 13 files under 250 cap (largest:
-                drilldowns.test.ts 233, layout.ts 215).
-              </p>
-            </details>
-          </div>
-        </article>
-        <article class="story-card story-card--done" aria-label="batch BATCH-D">
-          <header>
-            <h3>
-              BATCH-D<span class="dot">·</span>Composer + integration + snapshot regen + cleanup
-            </h3>
-            <span class="badge badge-pass" aria-label="status: done">✓ done</span>
-          </header>
-          <div class="story-card__stats">
-            <span class="story-card__stat"
-              ><span class="story-card__stat-label">time</span>
-              <span class="story-card__stat-value">13m</span></span
-            ><span class="story-card__stat"
-              ><span class="story-card__stat-label">cost</span>
-              <span class="story-card__stat-value">$0.82</span></span
-            ><span class="story-card__stat"
-              ><span class="story-card__stat-label">tasks</span>
-              <span class="story-card__stat-value">4</span></span
-            ><span class="story-card__stat"
-              ><span class="story-card__stat-label">ACs</span>
-              <span class="story-card__stat-value">17/17</span></span
-            ><span class="story-card__stat"
-              ><span class="story-card__stat-label">files</span>
-              <span class="story-card__stat-value">21</span></span
-            ><span class="story-card__pipeline">dev → qa</span>
-          </div>
-          <p class="story-card__summary">
-            T-013: created story-card/index. ts barrel + storyCard() composer (22 tests, all
-            passing).
-          </p>
-          <div class="story-card__drilldowns">
-            <details>
-              <summary>Files changed (21)</summary>
-              <table class="story-card__files">
-                <thead>
-                  <tr>
-                    <th>path</th>
-                    <th>action</th>
-                    <th>tasks</th>
-                  </tr>
-                </thead>
-                <tbody>
                   <tr>
                     <td>scripts/agentops/render/html/components/story-card/index.ts</td>
                     <td>create</td>
@@ -1363,11 +884,6 @@
                     <td>scripts/agentops/render/html/components/story-card/__tests_…</td>
                     <td>create</td>
                     <td>T-013</td>
-                  </tr>
-                  <tr>
-                    <td>scripts/agentops/render/html/shared/tokens.css.ts</td>
-                    <td>modify</td>
-                    <td>T-014</td>
                   </tr>
                   <tr>
                     <td>scripts/agentops/render/html/__tests__/__snapshots__/flow-r…</td>
@@ -1458,217 +974,230 @@
               </table>
             </details>
             <details>
-              <summary>ACs covered (17)</summary>
+              <summary>ACs covered (26)</summary>
               <ul class="story-card__acs">
                 <li>
-                  <strong>AC-001</strong> — index.ts:storyCard calls renderCardHeader which uses
-                  case-insensitive title===batchId guard; FEAT-001.html line 437 shows
-                  &#39;BATCH-A&lt;span class=&quot;dot&quot;&gt;·&lt;/span&gt;Set…
+                  <strong>AC-001</strong> — lint-exit-0, typecheck-exit-0, npm-test-exit-0,
+                  grep-batch-a-title
                 </li>
-                <li>
-                  <strong>AC-002</strong> — state.ts:batchStateToBadge maps 5 states to badge
-                  kind/label/ariaLabel; story-card.test.ts:badge-states suite confirms all 5 states
-                  map to correct article clas…
-                </li>
-                <li>
-                  <strong>AC-003</strong> — state.ts:computeBatchState filters needs_review as
-                  intermediate (line 38); story-card.test.ts:AC-003 test confirms done when only
-                  needs_review+done dispatches
-                </li>
-                <li>
-                  <strong>AC-004</strong> — state.ts:blocked-then-done-by-role →
-                  &#39;done-retried&#39;; FEAT-001.html line 461 shows AUDIT-AGENT as
-                  story-card--done-retried badge-warn (was fail/red before FEAT-…
-                </li>
-                <li>
-                  <strong>AC-005</strong> — stats-strip.ts:renderStatsStrip outputs 6 KPIs in fixed
-                  order; story-card.test.ts:structure test verifies all 6 slots present;
-                  FEAT-001.html BATCH-A shows time…
-                </li>
-                <li>
-                  <strong>AC-006</strong> — pipeline-line.ts:renderPipelineLine; FEAT-001.html
-                  BATCH-A shows &#39;dev → code-reviewer ‖ logic-reviewer → qa&#39;
-                </li>
-                <li>
-                  <strong>AC-007</strong> — format.ts:formatDuration/formatCost; story-card.test.ts
-                  verifies $1.23 and — for null; running card (null durationMs/costUsd) shows —
-                </li>
-                <li>
-                  <strong>AC-009</strong> — aggregator/index.ts:extractSummary used for dev dispatch
-                  with lowest loop; story-card.test.ts:structure confirms summary paragraph present
-                </li>
-                <li>
-                  <strong>AC-010</strong> — retry-banner.ts:renderRetryBanner outputs
-                  aside.story-card__retry when retryEntries.length&gt;0;
-                  story-card.test.ts:retry-banner suite verifies content
-                </li>
-                <li>
-                  <strong>AC-012</strong> — retry-banner.ts returns &#39;&#39; for empty
-                  retryEntries; story-card.test.ts:omits retry banner entirely test; FEAT-001.html
-                  BATCH-B (no retries) has no aside element
-                </li>
-                <li>
-                  <strong>AC-013</strong> — drilldowns.ts:renderDrilldowns outputs 4 details in
-                  fixed order; story-card.test.ts:4 drilldown elements test verifies order via
-                  indexOf
-                </li>
-                <li>
-                  <strong>AC-018</strong> — index.ts and drilldowns.ts use only
-                  &lt;details&gt;/&lt;summary&gt; HTML5; no &lt;script&gt; tags; flow-report.test.ts
-                  drilldown-no-open test passes (exit 0)
-                </li>
-                <li>
-                  <strong>AC-019</strong> — index.ts:storyCard wraps in &lt;article
-                  aria-label=&#39;batch {batchId}&#39;&gt;; renderCardHeader returns &lt;header&gt;;
-                  story-card.test.ts:structure tests verify both
-                </li>
-                <li>
-                  <strong>NFR-001</strong> — agentops:report completed in 0.10s (well under 5s
-                  threshold); command: npm run agentops:report exit 0
-                </li>
-                <li>
-                  <strong>SC-001</strong> — FEAT-001.html BATCH-A card shows: title &#39;Setup +
-                  Foundational configs&#39;, status &#39;done retried&#39;, 1h45m, 8 tasks, 7/7 ACs,
-                  13 files, pipeline, retry banner with l…
-                </li>
-                <li>
-                  <strong>SC-002</strong> — FEAT-001.html line 461: &lt;article
-                  class=&#39;story-card story-card--done-retried&#39; aria-label=&#39;batch
-                  AUDIT-AGENT&#39;&gt; with badge-warn &#39;↻ done (retried)&#39; — no badge-fail…
-                </li>
-                <li>
-                  <strong>SC-003</strong> — 4 cards (BATCH-A..D + AUDIT-AGENT=5 in FEAT-001) each
-                  have compact layout via flex+gap tokens; collapsed drilldowns minimize card
-                  height; CSS padding/gap use -…
-                </li>
+                <li><strong>AC-005</strong> — grep-story-card-stats-6-kpis</li>
+                <li><strong>AC-007</strong> — jest-format-duration-cost-story-card</li>
+                <li><strong>AC-002</strong> — jest-story-card-22-pass, grep-story-card-classes</li>
+                <li><strong>AC-003</strong> — jest-state-needs-review-intermediate</li>
+                <li><strong>AC-004</strong> — grep-audit-agent-done-retried</li>
+                <li><strong>AC-009</strong> — grep-story-card-summary-present</li>
+                <li><strong>AC-010</strong> — grep-story-card-retry-aside</li>
+                <li><strong>AC-011</strong> — E-AC011</li>
+                <li><strong>AC-014</strong> — E-AC014</li>
+                <li><strong>AC-015</strong> — E-AC015</li>
+                <li><strong>AC-016</strong> — E-AC016</li>
+                <li><strong>AC-017</strong> — E-AC017</li>
+                <li><strong>AC-006</strong> — grep-pipeline-separators</li>
+                <li><strong>AC-008</strong> — E-AC008</li>
+                <li><strong>AC-012</strong> — grep-aside-only-batch-a</li>
+                <li><strong>AC-013</strong> — jest-drilldowns-4-details</li>
+                <li><strong>AC-018</strong> — grep-no-script-tags</li>
+                <li><strong>AC-019</strong> — grep-aria-label-status-DEVIATION-NOTE</li>
+                <li><strong>AC-020</strong> — E-AC020</li>
+                <li><strong>AC-021</strong> — E-AC021</li>
+                <li><strong>NFR-003</strong> — E-NFR003</li>
+                <li><strong>NFR-001</strong> — agentops-report-0.10s</li>
+                <li><strong>SC-001</strong> — grep-batch-a-full-narrative</li>
+                <li><strong>SC-002</strong> — grep-audit-agent-no-fail-badge</li>
+                <li><strong>SC-003</strong> — html-files-exist-compact-layout</li>
               </ul>
             </details>
             <details>
-              <summary>Pipeline trace (2 dispatches)</summary>
+              <summary>Pipeline trace (16 dispatches)</summary>
               <table class="story-card__pipeline-trace">
                 <thead>
                   <tr>
                     <th>role</th>
                     <th>dispatch_id</th>
                     <th>loop</th>
+                    <th>model</th>
+                    <th>effort</th>
                     <th>duration</th>
                     <th>tokens</th>
+                    <th>cost</th>
                     <th>status</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
                     <td>dev</td>
+                    <td>batch-a-dev</td>
+                    <td>—</td>
+                    <td>sonnet-4-6</td>
+                    <td>—</td>
+                    <td>3m 29s</td>
+                    <td>54570</td>
+                    <td>$0.36</td>
+                    <td>done</td>
+                  </tr>
+                  <tr>
+                    <td>code-reviewer</td>
+                    <td>batch-a-code-reviewer</td>
+                    <td>—</td>
+                    <td>sonnet-4-6</td>
+                    <td>—</td>
+                    <td>1m 36s</td>
+                    <td>50391</td>
+                    <td>$0.33</td>
+                    <td>needs_review</td>
+                  </tr>
+                  <tr>
+                    <td>logic-reviewer</td>
+                    <td>batch-a-logic-reviewer</td>
+                    <td>—</td>
+                    <td>sonnet-4-6</td>
+                    <td>—</td>
+                    <td>1m 3s</td>
+                    <td>42037</td>
+                    <td>$0.28</td>
+                    <td>done</td>
+                  </tr>
+                  <tr>
+                    <td>dev</td>
+                    <td>batch-a-dev-loop2</td>
+                    <td>2</td>
+                    <td>sonnet-4-6</td>
+                    <td>—</td>
+                    <td>1m 52s</td>
+                    <td>32545</td>
+                    <td>$0.21</td>
+                    <td>done</td>
+                  </tr>
+                  <tr>
+                    <td>qa</td>
+                    <td>batch-a-qa</td>
+                    <td>—</td>
+                    <td>sonnet-4-6</td>
+                    <td>—</td>
+                    <td>1m 1s</td>
+                    <td>25853</td>
+                    <td>$0.17</td>
+                    <td>done</td>
+                  </tr>
+                  <tr>
+                    <td>dev</td>
+                    <td>batch-b-dev</td>
+                    <td>—</td>
+                    <td>sonnet-4-6</td>
+                    <td>—</td>
+                    <td>5m 24s</td>
+                    <td>67458</td>
+                    <td>$0.45</td>
+                    <td>done</td>
+                  </tr>
+                  <tr>
+                    <td>code-reviewer</td>
+                    <td>batch-b-code-reviewer</td>
+                    <td>—</td>
+                    <td>sonnet-4-6</td>
+                    <td>—</td>
+                    <td>1m 53s</td>
+                    <td>38910</td>
+                    <td>$0.26</td>
+                    <td>needs_review</td>
+                  </tr>
+                  <tr>
+                    <td>logic-reviewer</td>
+                    <td>batch-b-logic-reviewer</td>
+                    <td>—</td>
+                    <td>sonnet-4-6</td>
+                    <td>—</td>
+                    <td>1m 44s</td>
+                    <td>48814</td>
+                    <td>$0.32</td>
+                    <td>needs_review</td>
+                  </tr>
+                  <tr>
+                    <td>dev</td>
+                    <td>batch-b-dev-loop2</td>
+                    <td>2</td>
+                    <td>sonnet-4-6</td>
+                    <td>—</td>
+                    <td>9m 5s</td>
+                    <td>74502</td>
+                    <td>$0.49</td>
+                    <td>done</td>
+                  </tr>
+                  <tr>
+                    <td>qa</td>
+                    <td>batch-b-qa</td>
+                    <td>—</td>
+                    <td>sonnet-4-6</td>
+                    <td>—</td>
+                    <td>2m 22s</td>
+                    <td>47060</td>
+                    <td>$0.31</td>
+                    <td>done</td>
+                  </tr>
+                  <tr>
+                    <td>dev</td>
+                    <td>batch-c-dev</td>
+                    <td>—</td>
+                    <td>sonnet-4-6</td>
+                    <td>—</td>
+                    <td>6m 39s</td>
+                    <td>69166</td>
+                    <td>$0.46</td>
+                    <td>done</td>
+                  </tr>
+                  <tr>
+                    <td>qa</td>
+                    <td>batch-c-qa</td>
+                    <td>—</td>
+                    <td>sonnet-4-6</td>
+                    <td>—</td>
+                    <td>2m 5s</td>
+                    <td>42416</td>
+                    <td>$0.28</td>
+                    <td>done</td>
+                  </tr>
+                  <tr>
+                    <td>dev</td>
                     <td>batch-d-dev</td>
+                    <td>—</td>
+                    <td>sonnet-4-6</td>
                     <td>—</td>
                     <td>8m 41s</td>
                     <td>79794</td>
+                    <td>$0.53</td>
                     <td>done</td>
                   </tr>
                   <tr>
                     <td>qa</td>
                     <td>batch-d-qa</td>
                     <td>—</td>
+                    <td>sonnet-4-6</td>
+                    <td>—</td>
                     <td>4m 17s</td>
                     <td>45184</td>
+                    <td>$0.30</td>
                     <td>done</td>
                   </tr>
-                </tbody>
-              </table>
-            </details>
-            <details>
-              <summary>PM note</summary>
-              <p class="story-card__pmnote">
-                16/17 ACs verified pass; 1 deviation flagged (AC-019 aria-label uses &#39;status:
-                done with retries&#39; instead of spec example &#39;status: done (retried)&#39;). PM
-                judgment: paraphrase is semantically equivalent and more accessible (parens
-                confusing for screen readers); AC-019 requires format &#39;status:
-                &lt;texto-do-badge&gt;&#39; which is satisfied. SC-001/002/003 all visually
-                confirmed in FEAT-001.html. Legacy files confirmed deleted. NFR-001: 0.10s well
-                within 5s budget. STATUS UPGRADED to done by PM.
-              </p>
-            </details>
-          </div>
-        </article>
-        <article class="story-card story-card--done-retried" aria-label="batch AUDIT-AGENT">
-          <header>
-            <h3>AUDIT-AGENT</h3>
-            <span class="badge badge-warn" aria-label="status: done with retries"
-              >↻ done (retried)</span
-            >
-          </header>
-          <div class="story-card__stats">
-            <span class="story-card__stat"
-              ><span class="story-card__stat-label">time</span>
-              <span class="story-card__stat-value">6m</span></span
-            ><span class="story-card__stat"
-              ><span class="story-card__stat-label">cost</span>
-              <span class="story-card__stat-value">$0.31</span></span
-            ><span class="story-card__stat"
-              ><span class="story-card__stat-label">tasks</span>
-              <span class="story-card__stat-value">0</span></span
-            ><span class="story-card__stat"
-              ><span class="story-card__stat-label">ACs</span>
-              <span class="story-card__stat-value">0</span></span
-            ><span class="story-card__stat"
-              ><span class="story-card__stat-label">files</span>
-              <span class="story-card__stat-value">0</span></span
-            ><span class="story-card__pipeline">audit-agent</span>
-          </div>
-          <aside class="story-card__retry" role="status">
-            ⚠ audit-agent retried 1× — loop 2: All 6 checks PASS with PM attestation applied. Bypass
-            detection: feat_005_owned…
-          </aside>
-          <p class="story-card__summary">
-            All 6 checks PASS with PM attestation applied. Bypass detection: feat_005_owned_diff ⊆
-            (claimed ∪ deleted), zero unaccounted files.
-          </p>
-          <div class="story-card__drilldowns">
-            <details>
-              <summary>Files changed (0)</summary>
-              <table class="story-card__files">
-                <thead>
-                  <tr>
-                    <th>path</th>
-                    <th>action</th>
-                    <th>tasks</th>
-                  </tr>
-                </thead>
-                <tbody></tbody>
-              </table>
-            </details>
-            <details>
-              <summary>ACs covered (0)</summary>
-              <ul class="story-card__acs"></ul>
-            </details>
-            <details>
-              <summary>Pipeline trace (2 dispatches)</summary>
-              <table class="story-card__pipeline-trace">
-                <thead>
-                  <tr>
-                    <th>role</th>
-                    <th>dispatch_id</th>
-                    <th>loop</th>
-                    <th>duration</th>
-                    <th>tokens</th>
-                    <th>status</th>
-                  </tr>
-                </thead>
-                <tbody>
                   <tr>
                     <td>audit-agent</td>
                     <td>audit-agent</td>
                     <td>—</td>
+                    <td>haiku-4-5</td>
+                    <td>—</td>
                     <td>1m 24s</td>
                     <td>58543</td>
+                    <td>$0.13</td>
                     <td>blocked</td>
                   </tr>
                   <tr>
                     <td>audit-agent</td>
                     <td>audit-agent-retry</td>
                     <td>2</td>
+                    <td>haiku-4-5</td>
+                    <td>—</td>
                     <td>3m</td>
                     <td>82382</td>
+                    <td>$0.18</td>
                     <td>done</td>
                   </tr>
                 </tbody>
@@ -1696,7 +1225,7 @@
         <div class="cost-grid">
           <div class="cost-card">
             <span class="cost-label">Total cost</span>
-            <span class="cost-value">$24.03</span>
+            <span class="cost-value">$24.0331</span>
             <small>$24.0331</small>
           </div>
           <div class="cost-card">
@@ -2193,7 +1722,7 @@
         <details>
           <summary>Repo health snapshot</summary>
           <div>
-            <p><em>Measured at: 2026-05-13</em></p>
+            <p><em>Measured at: 2026-05-14</em></p>
             <table>
               <thead>
                 <tr>
@@ -2300,7 +1829,7 @@
             <blockquote>
               <p>
                 Feature: Batch story-card UX redesign (fact-sheet) Task ID: FEAT-005 Phase: done
-                Generated at: 2026-05-13T06:56:58.631Z
+                Generated at: 2026-05-14T03:10:15.087Z
               </p>
             </blockquote>
             <h2>Insights</h2>
@@ -2334,7 +1863,7 @@
               <li>Coverage: 17 of 17 dispatches included in cost calculation</li>
             </ul>
             <h2>Repo health snapshot</h2>
-            <p><em>Measured at: 2026-05-13</em></p>
+            <p><em>Measured at: 2026-05-14</em></p>
             <table>
               <thead>
                 <tr>
@@ -2392,7 +1921,7 @@
                   <td>done</td>
                   <td>—</td>
                   <td>18969453</td>
-                  <td>$208.6640</td>
+                  <td>$18.9796</td>
                   <td>38m 13s</td>
                   <td>PM/orchestrator session (Stop hook): 158 turns</td>
                 </tr>
@@ -2885,7 +2414,7 @@
             <h2>Escalation rate</h2>
             <p>Escalation rate: 0.0% — below healthy band (&lt; 10%)</p>
             <h2>AC closure</h2>
-            <p>Total: 21 | Pass: 37 | Partial: 0 | Fail: 0 | Missing: 0</p>
+            <p>Total: 21 | Pass: 26 | Partial: 0 | Fail: 0 | Missing: 0</p>
             <h2>Reviewer findings density</h2>
             <table>
               <thead>

@@ -3,7 +3,7 @@
 > Feature: ui-v1-design-system — design-system overhaul, átomos shared, token coverage ≥95%
 > Task ID: FEAT-016
 > Phase: escalated
-> Generated at: 2026-05-13T06:56:58.631Z
+> Generated at: 2026-05-14T03:10:15.087Z
 
 ## Insights
 
@@ -18,16 +18,16 @@ _70/30 input/output split assumed; harness reports only total_tokens; 74 of 81 d
 - Total tokens: 86496448
   - Estimated input (70%): 60547514
   - Estimated output (30%): 25948934
-- Estimated cost USD total: $299.8910
-- Cost per AC: $7.1403
-- Cost per dispatch (avg): $4.0526
+- Estimated cost USD total: $113.1063
+- Cost per AC: $2.6930
+- Cost per dispatch (avg): $1.3964
 - Wall-clock duration: 243m 14s
 - Tool uses total: 1723
 - Coverage: 74 of 81 dispatches included in cost calculation
 
 ## Repo health snapshot
 
-_Measured at: 2026-05-13_
+_Measured at: 2026-05-14_
 
 | Métrica        | Valor | Threshold | Status |
 | -------------- | ----- | --------- | ------ |
@@ -38,89 +38,89 @@ _Measured at: 2026-05-13_
 
 ## Per-dispatch breakdown
 
-| ID           | Role            | Status       | Loop | Tokens   | $         | Duration | PM note                                                                          |
-| ------------ | --------------- | ------------ | ---- | -------- | --------- | -------- | -------------------------------------------------------------------------------- |
-| pm-orches... | pm-orchestrator | done         | —    | 17032479 | $187.3573 | 33m 37s  | PM/orchestrator session (Stop hook): 138 turns                                   |
-| pm-orches... | pm-orchestrator | done         | —    | 45384933 | $499.2343 | 82m 15s  | PM/orchestrator session (Stop hook): 247 turns                                   |
-| pm-orches... | pm-orchestrator | done         | —    | 2579185  | $28.3710  | 5m 11s   | PM/orchestrator session (Stop hook): 41 turns                                    |
-| ae326466-... | dev             | done         | 1    | 50000    | $0.5500   | 2m 30s   | proxy estimate                                                                   |
-| 80e25f5f-... | dev             | done         | 1    | 50000    | $0.5500   | 2m 30s   | proxy estimate                                                                   |
-| 6a5a2d51-... | dev             | done         | 1    | 50000    | $0.5500   | 2m 30s   | proxy estimate                                                                   |
-| 37ec4f07-... | dev             | done         | 1    | 50000    | $0.5500   | 2m 30s   | proxy estimate                                                                   |
-| 05379653-... | code-reviewer   | needs_review | 1    | 20000    | $0.1320   | 50s      | proxy estimate                                                                   |
-| 5c980525-... | logic-reviewer  | needs_review | 1    | 25000    | $0.1650   | 45s      | proxy estimate                                                                   |
-| 9c1a3116-... | code-reviewer   | needs_review | 1    | 20000    | $0.1320   | 50s      | proxy estimate                                                                   |
-| 5d1c746f-... | logic-reviewer  | needs_review | 1    | 25000    | $0.1650   | 45s      | proxy estimate                                                                   |
-| a33a8206-... | code-reviewer   | needs_review | 1    | 20000    | $0.1320   | 50s      | proxy estimate                                                                   |
-| ce16ef72-... | logic-reviewer  | needs_review | 1    | 25000    | $0.1650   | 45s      | proxy estimate                                                                   |
-| 40313cda-... | code-reviewer   | done         | 1    | 20000    | $0.1320   | 50s      | proxy estimate                                                                   |
-| f707db1d-... | logic-reviewer  | needs_review | 1    | 25000    | $0.1650   | 45s      | proxy estimate                                                                   |
-| 132604e5-... | dev             | done         | 2    | 50000    | $0.5500   | 2m 30s   | Loop 2 restart — reviewer findings: type=button default, color-mix 150% bug, ... |
-| 02ba9556-... | dev             | done         | 2    | 50000    | $0.5500   | 2m 30s   | Loop 2 restart — reviewer findings: hardcoded rgba (color-mix), .base→.button... |
-| faaa6aa0-... | dev             | done         | 2    | 50000    | $0.5500   | 2m 30s   | Loop 2 restart — reviewer findings: <label> hit-target, hardcoded rgba, Story... |
-| 20a6e682-... | dev             | done         | 2    | 50000    | $0.5500   | 2m 30s   | Loop 2 restart — reviewer findings: BLOCKER token grammar (outline) + minor b... |
-| 2bd381d0-... | code-reviewer   | done         | 2    | 20000    | $0.1320   | 50s      | proxy estimate                                                                   |
-| 91809fe1-... | logic-reviewer  | done         | 2    | 25000    | $0.1650   | 45s      | proxy estimate                                                                   |
-| 5474d4cc-... | code-reviewer   | needs_review | 2    | 20000    | $0.1320   | 50s      | proxy estimate                                                                   |
-| 84bd20d6-... | logic-reviewer  | done         | 2    | 25000    | $0.1650   | 45s      | proxy estimate                                                                   |
-| 70853d0e-... | code-reviewer   | done         | 2    | 20000    | $0.1320   | 50s      | proxy estimate                                                                   |
-| 183b761f-... | logic-reviewer  | done         | 2    | 25000    | $0.1650   | 45s      | proxy estimate                                                                   |
-| fe378805-... | code-reviewer   | done         | 2    | 20000    | $0.1320   | 50s      | proxy estimate                                                                   |
-| 091ef4b3-... | logic-reviewer  | done         | 2    | 25000    | $0.1650   | 45s      | proxy estimate                                                                   |
-| 8d9cc828-... | qa              | done         | 2    | 35000    | $0.3850   | 1m 50s   | proxy estimate                                                                   |
-| 949fbd09-... | qa              | done         | 2    | 35000    | $0.3850   | 1m 50s   | proxy estimate                                                                   |
-| 85dc3eab-... | qa              | done         | 2    | 35000    | $0.3850   | 1m 50s   | proxy estimate                                                                   |
-| 9d5d944d-... | qa              | done         | 2    | 35000    | $0.3850   | 1m 50s   | proxy estimate                                                                   |
-| ccbab4b9-... | dev             | done         | 1    | 50000    | $0.5500   | 2m 30s   | proxy estimate                                                                   |
-| b33655ed-... | dev             | done         | 1    | 50000    | $0.5500   | 2m 30s   | proxy estimate                                                                   |
-| b421eaae-... | dev             | done         | 1    | 50000    | $0.5500   | 2m 30s   | proxy estimate                                                                   |
-| 90f60575-... | dev             | done         | 1    | 50000    | $0.5500   | 2m 30s   | proxy estimate                                                                   |
-| 76316ead-... | dev             | done         | 1    | 50000    | $0.5500   | 2m 30s   | proxy estimate                                                                   |
-| 93f112b5-... | dev             | done         | 1    | 50000    | $0.5500   | 2m 30s   | proxy estimate                                                                   |
-| d5af5c64-... | code-reviewer   | needs_review | 1    | 20000    | $0.1320   | 50s      | proxy estimate                                                                   |
-| 61ab1785-... | logic-reviewer  | done         | 1    | 25000    | $0.1650   | 45s      | proxy estimate                                                                   |
-| 8a3199a7-... | code-reviewer   | needs_review | 1    | 20000    | $0.1320   | 50s      | proxy estimate                                                                   |
-| a1eadc4a-... | logic-reviewer  | done         | 1    | 25000    | $0.1650   | 45s      | proxy estimate                                                                   |
-| 8fd6e281-... | code-reviewer   | needs_review | 1    | 20000    | $0.1320   | 50s      | proxy estimate                                                                   |
-| fbdb3a6f-... | logic-reviewer  | done         | 1    | 25000    | $0.1650   | 45s      | proxy estimate                                                                   |
-| e55d21d7-... | code-reviewer   | needs_review | 1    | 20000    | $0.1320   | 50s      | proxy estimate                                                                   |
-| d7770164-... | logic-reviewer  | done         | 1    | 19229851 | $211.5284 | 20m      | proxy estimate — logic-reviewer T-013 loop 1; status done                        |
-| fb599f79-... | code-reviewer   | needs_review | 1    | 20000    | $0.1320   | 50s      | proxy estimate                                                                   |
-| eb92cb38-... | logic-reviewer  | done         | 1    | 25000    | $0.1650   | 45s      | proxy estimate                                                                   |
-| 2cbbf19f-... | code-reviewer   | needs_review | 1    | 20000    | $0.1320   | 50s      | proxy estimate                                                                   |
-| 3a121d07-... | logic-reviewer  | done         | 1    | 25000    | $0.1650   | 45s      | proxy estimate                                                                   |
-| a79222d3-... | dev             | done         | 2    | 50000    | $0.5500   | 2m 30s   | Loop 2 — Tiptap boundary fix moved to rich-text-line; minors 2+3 valid (exact... |
-| 14d9e556-... | dev             | done         | 2    | 50000    | $0.5500   | 2m 30s   | Loop 2 — color-mix replaces hardcoded rgba; attribute selectors → local classes  |
-| 124178db-... | qa              | done         | 1    | 35000    | $0.3850   | 1m 50s   | proxy estimate                                                                   |
-| c77cbb37-... | qa              | done         | 1    | 35000    | $0.3850   | 1m 50s   | proxy estimate                                                                   |
-| d870af87-... | qa              | done         | 1    | 35000    | $0.3850   | 1m 50s   | proxy estimate                                                                   |
-| da98473e-... | qa              | done         | 1    | 35000    | $0.3850   | 1m 50s   | proxy estimate                                                                   |
-| 9577d27a-... | code-reviewer   | needs_review | 2    | 20000    | $0.1320   | 50s      | proxy estimate                                                                   |
-| 85cf0a6f-... | logic-reviewer  | needs_review | 2    | 25000    | $0.1650   | 45s      | proxy estimate                                                                   |
-| 6b13964c-... | code-reviewer   | needs_review | 2    | 20000    | $0.1320   | 50s      | proxy estimate                                                                   |
-| ccf9af46-... | logic-reviewer  | done         | 2    | 25000    | $0.1650   | 45s      | proxy estimate                                                                   |
-| 1dfd9d53-... | dev             | done         | 3    | 50000    | $0.5500   | 2m 30s   | Loop 3 cleanup — orphan styles.done removed; integration test selector aligne... |
-| 877d8269-... | qa              | done         | 2    | 35000    | $0.3850   | 1m 50s   | proxy estimate                                                                   |
-| 548ce594-... | code-reviewer   | done         | 3    | 20000    | $0.1320   | 50s      | proxy estimate                                                                   |
-| 0cd581d9-... | logic-reviewer  | done         | 3    | 25000    | $0.1650   | 45s      | proxy estimate                                                                   |
-| 9cf63cad-... | qa              | done         | 3    | 35000    | $0.3850   | 1m 50s   | proxy estimate                                                                   |
-| ecc1549b-... | dev             | done         | 1    | 50000    | $0.5500   | 2m 30s   | proxy estimate                                                                   |
-| 2c3f2224-... | code-reviewer   | done         | 1    | 20000    | $0.1320   | 50s      | proxy estimate                                                                   |
-| cb72b1e4-... | logic-reviewer  | needs_review | 1    | 25000    | $0.1650   | 45s      | 3 minor — runtime a11y verification deferred to T-017                            |
-| c3f082fc-... | qa              | done         | 1    | 35000    | $0.3850   | 1m 50s   | proxy estimate                                                                   |
-| 715362b2-... | dev             | done         | 1    | 50000    | $0.5500   | 2m 30s   | proxy estimate                                                                   |
-| 97da47f9-... | code-reviewer   | needs_review | 1    | 20000    | $0.1320   | 50s      | proxy estimate                                                                   |
-| e03e318e-... | logic-reviewer  | done         | 1    | 25000    | $0.1650   | 45s      | proxy estimate                                                                   |
-| d996deae-... | qa              | done         | 1    | 35000    | $0.3850   | 1m 50s   | proxy estimate                                                                   |
-| 28918c38-... | dev             | done         | 2    | 50000    | $0.5500   | 2m 30s   | Loop 2 — SaveIndicator transition migrated to --motion-fast                      |
-| 2fd24b19-... | code-reviewer   | done         | 2    | 20000    | $0.1320   | 50s      | proxy estimate                                                                   |
-| c6a1b2af-... | dev             | done         | 1    | —        | —         | 35m      | —                                                                                |
-| 41b9b697-... | code-reviewer   | needs_review | 1    | —        | —         | 35m      | —                                                                                |
-| 52280d34-... | logic-reviewer  | done         | 1    | —        | —         | 35m      | —                                                                                |
-| 97f1dec2-... | qa              | done         | 1    | —        | —         | 35m      | —                                                                                |
-| 8665d253-... | dev             | done         | 2    | —        | —         | 35m      | Loop 2 — agentops report fixes (dedup, proxy backfill, index update)             |
-| 8e031009-... | audit-agent     | blocked      | 1    | —        | —         | 5m       | Initial audit — flagged missing reviewer packets; orchestrator backfilled and... |
-| 17f314e1-... | audit-agent     | blocked      | 2    | —        | —         | 5m       | Re-audit after backfill; remaining gaps are prior-session loop-2 reviewer byp... |
+| ID           | Role            | Status       | Loop | Tokens   | $        | Duration | PM note                                                                          |
+| ------------ | --------------- | ------------ | ---- | -------- | -------- | -------- | -------------------------------------------------------------------------------- |
+| pm-orches... | pm-orchestrator | done         | —    | 17032479 | $20.5558 | 33m 37s  | PM/orchestrator session (Stop hook): 138 turns                                   |
+| pm-orches... | pm-orchestrator | done         | —    | 45384933 | $43.4115 | 82m 15s  | PM/orchestrator session (Stop hook): 247 turns                                   |
+| pm-orches... | pm-orchestrator | done         | —    | 2579185  | $3.1653  | 5m 11s   | PM/orchestrator session (Stop hook): 41 turns                                    |
+| ae326466-... | dev             | done         | 1    | 50000    | $0.5500  | 2m 30s   | proxy estimate                                                                   |
+| 80e25f5f-... | dev             | done         | 1    | 50000    | $0.5500  | 2m 30s   | proxy estimate                                                                   |
+| 6a5a2d51-... | dev             | done         | 1    | 50000    | $0.5500  | 2m 30s   | proxy estimate                                                                   |
+| 37ec4f07-... | dev             | done         | 1    | 50000    | $0.5500  | 2m 30s   | proxy estimate                                                                   |
+| 05379653-... | code-reviewer   | needs_review | 1    | 20000    | $0.1320  | 50s      | proxy estimate                                                                   |
+| 5c980525-... | logic-reviewer  | needs_review | 1    | 25000    | $0.1650  | 45s      | proxy estimate                                                                   |
+| 9c1a3116-... | code-reviewer   | needs_review | 1    | 20000    | $0.1320  | 50s      | proxy estimate                                                                   |
+| 5d1c746f-... | logic-reviewer  | needs_review | 1    | 25000    | $0.1650  | 45s      | proxy estimate                                                                   |
+| a33a8206-... | code-reviewer   | needs_review | 1    | 20000    | $0.1320  | 50s      | proxy estimate                                                                   |
+| ce16ef72-... | logic-reviewer  | needs_review | 1    | 25000    | $0.1650  | 45s      | proxy estimate                                                                   |
+| 40313cda-... | code-reviewer   | done         | 1    | 20000    | $0.1320  | 50s      | proxy estimate                                                                   |
+| f707db1d-... | logic-reviewer  | needs_review | 1    | 25000    | $0.1650  | 45s      | proxy estimate                                                                   |
+| 132604e5-... | dev             | done         | 2    | 50000    | $0.5500  | 2m 30s   | Loop 2 restart — reviewer findings: type=button default, color-mix 150% bug, ... |
+| 02ba9556-... | dev             | done         | 2    | 50000    | $0.5500  | 2m 30s   | Loop 2 restart — reviewer findings: hardcoded rgba (color-mix), .base→.button... |
+| faaa6aa0-... | dev             | done         | 2    | 50000    | $0.5500  | 2m 30s   | Loop 2 restart — reviewer findings: <label> hit-target, hardcoded rgba, Story... |
+| 20a6e682-... | dev             | done         | 2    | 50000    | $0.5500  | 2m 30s   | Loop 2 restart — reviewer findings: BLOCKER token grammar (outline) + minor b... |
+| 2bd381d0-... | code-reviewer   | done         | 2    | 20000    | $0.1320  | 50s      | proxy estimate                                                                   |
+| 91809fe1-... | logic-reviewer  | done         | 2    | 25000    | $0.1650  | 45s      | proxy estimate                                                                   |
+| 5474d4cc-... | code-reviewer   | needs_review | 2    | 20000    | $0.1320  | 50s      | proxy estimate                                                                   |
+| 84bd20d6-... | logic-reviewer  | done         | 2    | 25000    | $0.1650  | 45s      | proxy estimate                                                                   |
+| 70853d0e-... | code-reviewer   | done         | 2    | 20000    | $0.1320  | 50s      | proxy estimate                                                                   |
+| 183b761f-... | logic-reviewer  | done         | 2    | 25000    | $0.1650  | 45s      | proxy estimate                                                                   |
+| fe378805-... | code-reviewer   | done         | 2    | 20000    | $0.1320  | 50s      | proxy estimate                                                                   |
+| 091ef4b3-... | logic-reviewer  | done         | 2    | 25000    | $0.1650  | 45s      | proxy estimate                                                                   |
+| 8d9cc828-... | qa              | done         | 2    | 35000    | $0.3850  | 1m 50s   | proxy estimate                                                                   |
+| 949fbd09-... | qa              | done         | 2    | 35000    | $0.3850  | 1m 50s   | proxy estimate                                                                   |
+| 85dc3eab-... | qa              | done         | 2    | 35000    | $0.3850  | 1m 50s   | proxy estimate                                                                   |
+| 9d5d944d-... | qa              | done         | 2    | 35000    | $0.3850  | 1m 50s   | proxy estimate                                                                   |
+| ccbab4b9-... | dev             | done         | 1    | 50000    | $0.5500  | 2m 30s   | proxy estimate                                                                   |
+| b33655ed-... | dev             | done         | 1    | 50000    | $0.5500  | 2m 30s   | proxy estimate                                                                   |
+| b421eaae-... | dev             | done         | 1    | 50000    | $0.5500  | 2m 30s   | proxy estimate                                                                   |
+| 90f60575-... | dev             | done         | 1    | 50000    | $0.5500  | 2m 30s   | proxy estimate                                                                   |
+| 76316ead-... | dev             | done         | 1    | 50000    | $0.5500  | 2m 30s   | proxy estimate                                                                   |
+| 93f112b5-... | dev             | done         | 1    | 50000    | $0.5500  | 2m 30s   | proxy estimate                                                                   |
+| d5af5c64-... | code-reviewer   | needs_review | 1    | 20000    | $0.1320  | 50s      | proxy estimate                                                                   |
+| 61ab1785-... | logic-reviewer  | done         | 1    | 25000    | $0.1650  | 45s      | proxy estimate                                                                   |
+| 8a3199a7-... | code-reviewer   | needs_review | 1    | 20000    | $0.1320  | 50s      | proxy estimate                                                                   |
+| a1eadc4a-... | logic-reviewer  | done         | 1    | 25000    | $0.1650  | 45s      | proxy estimate                                                                   |
+| 8fd6e281-... | code-reviewer   | needs_review | 1    | 20000    | $0.1320  | 50s      | proxy estimate                                                                   |
+| fbdb3a6f-... | logic-reviewer  | done         | 1    | 25000    | $0.1650  | 45s      | proxy estimate                                                                   |
+| e55d21d7-... | code-reviewer   | needs_review | 1    | 20000    | $0.1320  | 50s      | proxy estimate                                                                   |
+| d7770164-... | logic-reviewer  | done         | 1    | 19229851 | $24.7437 | 20m      | proxy estimate — logic-reviewer T-013 loop 1; status done                        |
+| fb599f79-... | code-reviewer   | needs_review | 1    | 20000    | $0.1320  | 50s      | proxy estimate                                                                   |
+| eb92cb38-... | logic-reviewer  | done         | 1    | 25000    | $0.1650  | 45s      | proxy estimate                                                                   |
+| 2cbbf19f-... | code-reviewer   | needs_review | 1    | 20000    | $0.1320  | 50s      | proxy estimate                                                                   |
+| 3a121d07-... | logic-reviewer  | done         | 1    | 25000    | $0.1650  | 45s      | proxy estimate                                                                   |
+| a79222d3-... | dev             | done         | 2    | 50000    | $0.5500  | 2m 30s   | Loop 2 — Tiptap boundary fix moved to rich-text-line; minors 2+3 valid (exact... |
+| 14d9e556-... | dev             | done         | 2    | 50000    | $0.5500  | 2m 30s   | Loop 2 — color-mix replaces hardcoded rgba; attribute selectors → local classes  |
+| 124178db-... | qa              | done         | 1    | 35000    | $0.3850  | 1m 50s   | proxy estimate                                                                   |
+| c77cbb37-... | qa              | done         | 1    | 35000    | $0.3850  | 1m 50s   | proxy estimate                                                                   |
+| d870af87-... | qa              | done         | 1    | 35000    | $0.3850  | 1m 50s   | proxy estimate                                                                   |
+| da98473e-... | qa              | done         | 1    | 35000    | $0.3850  | 1m 50s   | proxy estimate                                                                   |
+| 9577d27a-... | code-reviewer   | needs_review | 2    | 20000    | $0.1320  | 50s      | proxy estimate                                                                   |
+| 85cf0a6f-... | logic-reviewer  | needs_review | 2    | 25000    | $0.1650  | 45s      | proxy estimate                                                                   |
+| 6b13964c-... | code-reviewer   | needs_review | 2    | 20000    | $0.1320  | 50s      | proxy estimate                                                                   |
+| ccf9af46-... | logic-reviewer  | done         | 2    | 25000    | $0.1650  | 45s      | proxy estimate                                                                   |
+| 1dfd9d53-... | dev             | done         | 3    | 50000    | $0.5500  | 2m 30s   | Loop 3 cleanup — orphan styles.done removed; integration test selector aligne... |
+| 877d8269-... | qa              | done         | 2    | 35000    | $0.3850  | 1m 50s   | proxy estimate                                                                   |
+| 548ce594-... | code-reviewer   | done         | 3    | 20000    | $0.1320  | 50s      | proxy estimate                                                                   |
+| 0cd581d9-... | logic-reviewer  | done         | 3    | 25000    | $0.1650  | 45s      | proxy estimate                                                                   |
+| 9cf63cad-... | qa              | done         | 3    | 35000    | $0.3850  | 1m 50s   | proxy estimate                                                                   |
+| ecc1549b-... | dev             | done         | 1    | 50000    | $0.5500  | 2m 30s   | proxy estimate                                                                   |
+| 2c3f2224-... | code-reviewer   | done         | 1    | 20000    | $0.1320  | 50s      | proxy estimate                                                                   |
+| cb72b1e4-... | logic-reviewer  | needs_review | 1    | 25000    | $0.1650  | 45s      | 3 minor — runtime a11y verification deferred to T-017                            |
+| c3f082fc-... | qa              | done         | 1    | 35000    | $0.3850  | 1m 50s   | proxy estimate                                                                   |
+| 715362b2-... | dev             | done         | 1    | 50000    | $0.5500  | 2m 30s   | proxy estimate                                                                   |
+| 97da47f9-... | code-reviewer   | needs_review | 1    | 20000    | $0.1320  | 50s      | proxy estimate                                                                   |
+| e03e318e-... | logic-reviewer  | done         | 1    | 25000    | $0.1650  | 45s      | proxy estimate                                                                   |
+| d996deae-... | qa              | done         | 1    | 35000    | $0.3850  | 1m 50s   | proxy estimate                                                                   |
+| 28918c38-... | dev             | done         | 2    | 50000    | $0.5500  | 2m 30s   | Loop 2 — SaveIndicator transition migrated to --motion-fast                      |
+| 2fd24b19-... | code-reviewer   | done         | 2    | 20000    | $0.1320  | 50s      | proxy estimate                                                                   |
+| c6a1b2af-... | dev             | done         | 1    | —        | —        | 35m      | —                                                                                |
+| 41b9b697-... | code-reviewer   | needs_review | 1    | —        | —        | 35m      | —                                                                                |
+| 52280d34-... | logic-reviewer  | done         | 1    | —        | —        | 35m      | —                                                                                |
+| 97f1dec2-... | qa              | done         | 1    | —        | —        | 35m      | —                                                                                |
+| 8665d253-... | dev             | done         | 2    | —        | —        | 35m      | Loop 2 — agentops report fixes (dedup, proxy backfill, index update)             |
+| 8e031009-... | audit-agent     | blocked      | 1    | —        | —        | 5m       | Initial audit — flagged missing reviewer packets; orchestrator backfilled and... |
+| 17f314e1-... | audit-agent     | blocked      | 2    | —        | —        | 5m       | Re-audit after backfill; remaining gaps are prior-session loop-2 reviewer byp... |
 
 ## Per-AC closure detail
 
@@ -176,11 +176,13 @@ _Measured at: 2026-05-13_
 | specify        | —        |
 | plan           | —        |
 | tasks          | —        |
-| implementation | —        |
+| implementation | 270 min  |
 
 ## Timeline
 
-_(no phase data available)_
+| Phase          | Started  | Completed | Duration | Visual     |
+| -------------- | -------- | --------- | -------- | ---------- |
+| implementation | 17:05:00 | 21:35:00  | 270m     | ██████████ |
 
 ## Dispatches
 

@@ -603,7 +603,7 @@
               <span class="story-card__stat-value">$1.46</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">tasks</span>
-              <span class="story-card__stat-value">8</span></span
+              <span class="story-card__stat-value">9</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">ACs</span>
               <span class="story-card__stat-value">7/7</span></span
@@ -633,7 +633,7 @@
                   <tr>
                     <td>package.json</td>
                     <td>formatted</td>
-                    <td></td>
+                    <td>FEAT-001</td>
                   </tr>
                   <tr>
                     <td>web/package.json</td>
@@ -642,13 +642,13 @@
                   </tr>
                   <tr>
                     <td>server/package.json</td>
-                    <td>created</td>
-                    <td>T-003</td>
+                    <td>changed</td>
+                    <td>FEAT-001</td>
                   </tr>
                   <tr>
                     <td>tsconfig.base.json</td>
-                    <td>created</td>
-                    <td>T-004</td>
+                    <td>changed</td>
+                    <td>FEAT-001</td>
                   </tr>
                   <tr>
                     <td>web/tsconfig.json</td>
@@ -668,12 +668,12 @@
                   <tr>
                     <td>README.md</td>
                     <td>formatted</td>
-                    <td></td>
+                    <td>FEAT-001</td>
                   </tr>
                   <tr>
                     <td>eslint.config.mjs</td>
                     <td>modified</td>
-                    <td></td>
+                    <td>FEAT-001</td>
                   </tr>
                   <tr>
                     <td>prettier.config.mjs</td>
@@ -682,8 +682,8 @@
                   </tr>
                   <tr>
                     <td>.prettierignore</td>
-                    <td>created</td>
-                    <td>T-007</td>
+                    <td>changed</td>
+                    <td>FEAT-001</td>
                   </tr>
                   <tr>
                     <td>commitlint.config.mjs</td>
@@ -693,7 +693,7 @@
                   <tr>
                     <td>docs/specs/2026-05-08-mvp-overview.md</td>
                     <td>formatted</td>
-                    <td></td>
+                    <td>FEAT-001</td>
                   </tr>
                 </tbody>
               </table>
@@ -747,8 +747,11 @@
                     <th>role</th>
                     <th>dispatch_id</th>
                     <th>loop</th>
+                    <th>model</th>
+                    <th>effort</th>
                     <th>duration</th>
                     <th>tokens</th>
+                    <th>cost</th>
                     <th>status</th>
                   </tr>
                 </thead>
@@ -757,56 +760,77 @@
                     <td>dev</td>
                     <td>batch-a-dev</td>
                     <td>—</td>
+                    <td>sonnet-4-6</td>
+                    <td>—</td>
                     <td>2m 3s</td>
                     <td>46175</td>
+                    <td>$0.30</td>
                     <td>done</td>
                   </tr>
                   <tr>
                     <td>code-reviewer</td>
                     <td>batch-a-code-reviewer</td>
                     <td>—</td>
+                    <td>sonnet-4-6</td>
+                    <td>—</td>
                     <td>1m 29s</td>
                     <td>32303</td>
+                    <td>$0.21</td>
                     <td>needs_review</td>
                   </tr>
                   <tr>
                     <td>logic-reviewer</td>
                     <td>batch-a-logic-reviewer</td>
                     <td>—</td>
+                    <td>sonnet-4-6</td>
+                    <td>—</td>
                     <td>1m 53s</td>
                     <td>57584</td>
+                    <td>$0.38</td>
                     <td>needs_review</td>
                   </tr>
                   <tr>
                     <td>dev</td>
                     <td>batch-a-dev-loop2</td>
                     <td>2</td>
+                    <td>sonnet-4-6</td>
+                    <td>—</td>
                     <td>1m 33s</td>
                     <td>20657</td>
+                    <td>$0.14</td>
                     <td>done</td>
                   </tr>
                   <tr>
                     <td>qa</td>
                     <td>batch-a-qa</td>
                     <td>—</td>
+                    <td>sonnet-4-6</td>
+                    <td>—</td>
                     <td>4m 1s</td>
                     <td>32226</td>
+                    <td>$0.21</td>
                     <td>needs_review</td>
                   </tr>
                   <tr>
                     <td>dev</td>
                     <td>batch-a-dev-loop3</td>
                     <td>3</td>
+                    <td>sonnet-4-6</td>
+                    <td>—</td>
                     <td>1m 17s</td>
                     <td>14717</td>
+                    <td>$0.10</td>
                     <td>done</td>
                   </tr>
                   <tr>
                     <td>qa</td>
                     <td>batch-a-qa-reverify</td>
                     <td>—</td>
+                    <td>sonnet-4-6</td>
+                    <td>—</td>
                     <td>5m</td>
                     <td>18000</td>
+                    <td>$0.12</td>
                     <td>done</td>
                   </tr>
                 </tbody>
@@ -835,7 +859,7 @@
               <span class="story-card__stat-value">$0.67</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">tasks</span>
-              <span class="story-card__stat-value">7</span></span
+              <span class="story-card__stat-value">8</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">ACs</span>
               <span class="story-card__stat-value">12/12</span></span
@@ -1057,8 +1081,11 @@
                     <th>role</th>
                     <th>dispatch_id</th>
                     <th>loop</th>
+                    <th>model</th>
+                    <th>effort</th>
                     <th>duration</th>
                     <th>tokens</th>
+                    <th>cost</th>
                     <th>status</th>
                   </tr>
                 </thead>
@@ -1067,16 +1094,22 @@
                     <td>dev</td>
                     <td>batch-b-dev</td>
                     <td>—</td>
+                    <td>sonnet-4-6</td>
+                    <td>—</td>
                     <td>19m 58s</td>
                     <td>76236</td>
+                    <td>$0.50</td>
                     <td>done</td>
                   </tr>
                   <tr>
                     <td>qa</td>
                     <td>batch-b-qa-pm</td>
                     <td>—</td>
+                    <td>sonnet-4-6</td>
+                    <td>—</td>
                     <td>5m</td>
                     <td>25000</td>
+                    <td>$0.17</td>
                     <td>done</td>
                   </tr>
                 </tbody>
@@ -1104,7 +1137,7 @@
               <span class="story-card__stat-value">$0.74</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">tasks</span>
-              <span class="story-card__stat-value">9</span></span
+              <span class="story-card__stat-value">10</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">ACs</span>
               <span class="story-card__stat-value">14/14</span></span
@@ -1295,8 +1328,11 @@
                     <th>role</th>
                     <th>dispatch_id</th>
                     <th>loop</th>
+                    <th>model</th>
+                    <th>effort</th>
                     <th>duration</th>
                     <th>tokens</th>
+                    <th>cost</th>
                     <th>status</th>
                   </tr>
                 </thead>
@@ -1305,16 +1341,22 @@
                     <td>dev</td>
                     <td>batch-c-dev</td>
                     <td>—</td>
+                    <td>sonnet-4-6</td>
+                    <td>—</td>
                     <td>7m 24s</td>
                     <td>76651</td>
+                    <td>$0.51</td>
                     <td>done</td>
                   </tr>
                   <tr>
                     <td>qa</td>
                     <td>batch-c-qa-pm</td>
                     <td>—</td>
+                    <td>sonnet-4-6</td>
+                    <td>—</td>
                     <td>5m</td>
                     <td>35000</td>
+                    <td>$0.23</td>
                     <td>done</td>
                   </tr>
                 </tbody>
@@ -1342,7 +1384,7 @@
               <span class="story-card__stat-value">$0.48</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">tasks</span>
-              <span class="story-card__stat-value">2</span></span
+              <span class="story-card__stat-value">3</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">ACs</span>
               <span class="story-card__stat-value">7/7</span></span
@@ -1397,8 +1439,11 @@
                     <th>role</th>
                     <th>dispatch_id</th>
                     <th>loop</th>
+                    <th>model</th>
+                    <th>effort</th>
                     <th>duration</th>
                     <th>tokens</th>
+                    <th>cost</th>
                     <th>status</th>
                   </tr>
                 </thead>
@@ -1407,16 +1452,22 @@
                     <td>dev</td>
                     <td>batch-d-dev</td>
                     <td>—</td>
+                    <td>sonnet-4-6</td>
+                    <td>—</td>
                     <td>2m 26s</td>
                     <td>52605</td>
+                    <td>$0.35</td>
                     <td>done</td>
                   </tr>
                   <tr>
                     <td>qa</td>
                     <td>batch-d-qa-pm</td>
                     <td>—</td>
+                    <td>sonnet-4-6</td>
+                    <td>—</td>
                     <td>5m</td>
                     <td>20000</td>
+                    <td>$0.13</td>
                     <td>done</td>
                   </tr>
                 </tbody>
@@ -1444,7 +1495,7 @@
               <span class="story-card__stat-value">$0.06</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">tasks</span>
-              <span class="story-card__stat-value">0</span></span
+              <span class="story-card__stat-value">1</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">ACs</span>
               <span class="story-card__stat-value">0</span></span
@@ -1480,8 +1531,11 @@
                     <th>role</th>
                     <th>dispatch_id</th>
                     <th>loop</th>
+                    <th>model</th>
+                    <th>effort</th>
                     <th>duration</th>
                     <th>tokens</th>
+                    <th>cost</th>
                     <th>status</th>
                   </tr>
                 </thead>
@@ -1490,16 +1544,22 @@
                     <td>audit-agent</td>
                     <td>audit-agent</td>
                     <td>—</td>
+                    <td>haiku-4-5</td>
+                    <td>—</td>
                     <td>2m</td>
                     <td>12000</td>
+                    <td>$0.03</td>
                     <td>blocked</td>
                   </tr>
                   <tr>
                     <td>audit-agent</td>
                     <td>audit-agent-retry</td>
                     <td>—</td>
+                    <td>haiku-4-5</td>
+                    <td>—</td>
                     <td>3m</td>
                     <td>15000</td>
+                    <td>$0.03</td>
                     <td>done</td>
                   </tr>
                 </tbody>
@@ -1520,7 +1580,7 @@
         <div class="cost-grid">
           <div class="cost-card">
             <span class="cost-label">Total cost</span>
-            <span class="cost-value">$3.41</span>
+            <span class="cost-value">$3.4066</span>
             <small>$3.4066</small>
           </div>
           <div class="cost-card">
@@ -2153,7 +2213,7 @@
         <details>
           <summary>Repo health snapshot</summary>
           <div>
-            <p><em>Measured at: 2026-05-13</em></p>
+            <p><em>Measured at: 2026-05-14</em></p>
             <table>
               <thead>
                 <tr>
@@ -2260,7 +2320,7 @@
             <blockquote>
               <p>
                 Feature: Foundation — scaffolding, infra de testes, design tokens, PaperSheet Task
-                ID: FEAT-001 Phase: done Generated at: 2026-05-13T06:56:58.631Z
+                ID: FEAT-001 Phase: done Generated at: 2026-05-14T03:10:15.087Z
               </p>
             </blockquote>
             <h2>Insights</h2>
@@ -2294,7 +2354,7 @@
               <li>Coverage: 15 of 15 dispatches included in cost calculation</li>
             </ul>
             <h2>Repo health snapshot</h2>
-            <p><em>Measured at: 2026-05-13</em></p>
+            <p><em>Measured at: 2026-05-14</em></p>
             <table>
               <thead>
                 <tr>
@@ -3010,7 +3070,7 @@
             <h2>Escalation rate</h2>
             <p>Escalation rate: 0.0% — below healthy band (&lt; 10%)</p>
             <h2>AC closure</h2>
-            <p>Total: 39 | Pass: 39 | Partial: 1 | Fail: 0 | Missing: 0</p>
+            <p>Total: 39 | Pass: 38 | Partial: 1 | Fail: 0 | Missing: 0</p>
             <h2>Reviewer findings density</h2>
             <table>
               <thead>
@@ -3079,6 +3139,10 @@
             </ul>
             <h2>Token cost</h2>
             <p>Token cost not available — using dispatch count as cost proxy: 15 dispatches</p>
+            <p>
+              ⚠ pm-orchestrator Stop hook did not run — re-run agentops install-hooks
+              (worktree-aware)
+            </p>
           </div>
         </details>
       </section>

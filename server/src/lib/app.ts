@@ -11,6 +11,7 @@ import Fastify, { type FastifyInstance } from 'fastify';
 
 import daysRoutes from '../routes/days.js';
 import healthRoutes from '../routes/health.js';
+import stickyRoutes from '../routes/sticky.js';
 
 import { errorHandler } from './errorHandler.js';
 
@@ -32,6 +33,7 @@ export async function buildApp(): Promise<FastifyInstance> {
 
   await app.register(healthRoutes, { prefix: '/api' });
   await app.register(daysRoutes, { prefix: '/api' });
+  await app.register(stickyRoutes, { prefix: '/api' });
 
   return app;
 }

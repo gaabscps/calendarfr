@@ -3,7 +3,7 @@
 > Feature: input-ux-fixes — quebra de linha, prioridades dinâmicas, placeholder visual
 > Task ID: FEAT-015
 > Phase: done
-> Generated at: 2026-05-13T06:56:58.631Z
+> Generated at: 2026-05-14T03:10:15.087Z
 
 ## Insights
 
@@ -27,7 +27,7 @@ _no usage data available — dispatch count fallback: 70 dispatches_
 
 ## Repo health snapshot
 
-_Measured at: 2026-05-13_
+_Measured at: 2026-05-14_
 
 | Métrica        | Valor | Threshold | Status |
 | -------------- | ----- | --------- | ------ |
@@ -142,11 +142,13 @@ _Measured at: 2026-05-13_
 | specify        | —        |
 | plan           | —        |
 | tasks          | —        |
-| implementation | —        |
+| implementation | 315 min  |
 
 ## Timeline
 
-_(no phase data available)_
+| Phase          | Started  | Completed | Duration | Visual     |
+| -------------- | -------- | --------- | -------- | ---------- |
+| implementation | 01:00:00 | 06:15:00  | 315m     | ██████████ |
 
 ## Dispatches
 
@@ -237,3 +239,5 @@ Total: 19 | Pass: 0 | Partial: 0 | Fail: 0 | Missing: 19
 ## Token cost
 
 Token cost not available — using dispatch count as cost proxy: 70 dispatches
+
+⚠ pm-orchestrator Stop hook did not run — re-run agentops install-hooks (worktree-aware)

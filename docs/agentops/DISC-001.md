@@ -3,7 +3,7 @@
 > Feature: ui-v1-consistente — redesign de interface e UX do planner
 > Task ID: DISC-001
 > Phase: done
-> Generated at: 2026-05-13T06:56:58.631Z
+> Generated at: 2026-05-14T03:10:15.087Z
 
 ## Insights
 
@@ -25,7 +25,7 @@ _no usage data available — dispatch count fallback: 0 dispatches_
 
 ## Repo health snapshot
 
-_Measured at: 2026-05-13_
+_Measured at: 2026-05-14_
 
 | Métrica        | Valor | Threshold | Status |
 | -------------- | ----- | --------- | ------ |
@@ -99,3 +99,5 @@ _(no PM notes recorded)_
 ## Token cost
 
 Token cost not available — using dispatch count as cost proxy: 0 dispatches
+
+⚠ pm-orchestrator Stop hook did not run — re-run agentops install-hooks (worktree-aware)

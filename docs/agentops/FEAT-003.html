@@ -604,19 +604,19 @@
               <span class="story-card__stat-value">$0.53</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">tasks</span>
-              <span class="story-card__stat-value">5</span></span
+              <span class="story-card__stat-value">6</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">ACs</span>
               <span class="story-card__stat-value">13/13</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">files</span>
-              <span class="story-card__stat-value">0</span></span
+              <span class="story-card__stat-value">9</span></span
             ><span class="story-card__pipeline">dev → qa</span>
           </div>
           <p class="story-card__summary">All 5 tasks complete. 6 new devDeps installed.</p>
           <div class="story-card__drilldowns">
             <details>
-              <summary>Files changed (0)</summary>
+              <summary>Files changed (9)</summary>
               <table class="story-card__files">
                 <thead>
                   <tr>
@@ -625,7 +625,53 @@
                     <th>tasks</th>
                   </tr>
                 </thead>
-                <tbody></tbody>
+                <tbody>
+                  <tr>
+                    <td>package.json</td>
+                    <td>changed</td>
+                    <td>FEAT-003</td>
+                  </tr>
+                  <tr>
+                    <td>.gitignore</td>
+                    <td>changed</td>
+                    <td>FEAT-003</td>
+                  </tr>
+                  <tr>
+                    <td>jest.config.js</td>
+                    <td>changed</td>
+                    <td>FEAT-003</td>
+                  </tr>
+                  <tr>
+                    <td>eslint.config.mjs</td>
+                    <td>changed</td>
+                    <td>FEAT-003</td>
+                  </tr>
+                  <tr>
+                    <td>stryker.config.json</td>
+                    <td>changed</td>
+                    <td>FEAT-003</td>
+                  </tr>
+                  <tr>
+                    <td>stryker.jest.config.cjs</td>
+                    <td>changed</td>
+                    <td>FEAT-003</td>
+                  </tr>
+                  <tr>
+                    <td>.dependency-cruiser.cjs</td>
+                    <td>changed</td>
+                    <td>FEAT-003</td>
+                  </tr>
+                  <tr>
+                    <td>scripts/agentops/type-coverage-json.ts</td>
+                    <td>changed</td>
+                    <td>FEAT-003</td>
+                  </tr>
+                  <tr>
+                    <td>scripts/agentops/insights.ts</td>
+                    <td>changed</td>
+                    <td>FEAT-003</td>
+                  </tr>
+                </tbody>
               </table>
             </details>
             <details>
@@ -701,8 +747,11 @@
                     <th>role</th>
                     <th>dispatch_id</th>
                     <th>loop</th>
+                    <th>model</th>
+                    <th>effort</th>
                     <th>duration</th>
                     <th>tokens</th>
+                    <th>cost</th>
                     <th>status</th>
                   </tr>
                 </thead>
@@ -711,13 +760,19 @@
                     <td>dev</td>
                     <td>feat-003-batch-a-dev</td>
                     <td>—</td>
+                    <td>sonnet-4-6</td>
+                    <td>—</td>
                     <td>9m 10s</td>
                     <td>80729</td>
+                    <td>$0.53</td>
                     <td>done</td>
                   </tr>
                   <tr>
                     <td>qa</td>
                     <td>feat-003-batch-a-qa-pm</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
                     <td>—</td>
                     <td>—</td>
                     <td>—</td>
@@ -749,19 +804,19 @@
               <span class="story-card__stat-value">$0.72</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">tasks</span>
-              <span class="story-card__stat-value">0</span></span
+              <span class="story-card__stat-value">1</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">ACs</span>
               <span class="story-card__stat-value">10/10</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">files</span>
-              <span class="story-card__stat-value">0</span></span
+              <span class="story-card__stat-value">12</span></span
             ><span class="story-card__pipeline">dev → qa</span>
           </div>
           <p class="story-card__summary">PM-conducted QA. 10/10 ACs pass.</p>
           <div class="story-card__drilldowns">
             <details>
-              <summary>Files changed (0)</summary>
+              <summary>Files changed (12)</summary>
               <table class="story-card__files">
                 <thead>
                   <tr>
@@ -770,7 +825,68 @@
                     <th>tasks</th>
                   </tr>
                 </thead>
-                <tbody></tbody>
+                <tbody>
+                  <tr>
+                    <td>docs/agentops/conventions.md</td>
+                    <td>changed</td>
+                    <td>FEAT-003</td>
+                  </tr>
+                  <tr>
+                    <td>scripts/agentops/backfill-usage.ts</td>
+                    <td>changed</td>
+                    <td>FEAT-003</td>
+                  </tr>
+                  <tr>
+                    <td>scripts/agentops/usage-backfill.json</td>
+                    <td>changed</td>
+                    <td>FEAT-003</td>
+                  </tr>
+                  <tr>
+                    <td>scripts/agentops/types.ts</td>
+                    <td>changed</td>
+                    <td>FEAT-003</td>
+                  </tr>
+                  <tr>
+                    <td>scripts/agentops/enrich/guards.ts</td>
+                    <td>changed</td>
+                    <td>FEAT-003</td>
+                  </tr>
+                  <tr>
+                    <td>scripts/agentops/enrich/dispatches.ts</td>
+                    <td>changed</td>
+                    <td>FEAT-003</td>
+                  </tr>
+                  <tr>
+                    <td>scripts/agentops/constants.ts</td>
+                    <td>changed</td>
+                    <td>FEAT-003</td>
+                  </tr>
+                  <tr>
+                    <td>scripts/agentops/measure/cost.ts</td>
+                    <td>changed</td>
+                    <td>FEAT-003</td>
+                  </tr>
+                  <tr>
+                    <td>scripts/agentops/measure.ts</td>
+                    <td>changed</td>
+                    <td>FEAT-003</td>
+                  </tr>
+                  <tr>
+                    <td>scripts/agentops/__tests__/backfill-usage.test.ts</td>
+                    <td>changed</td>
+                    <td>FEAT-003</td>
+                  </tr>
+                  <tr>
+                    <td>scripts/agentops/__tests__/enrich.test.ts</td>
+                    <td>changed</td>
+                    <td>FEAT-003</td>
+                  </tr>
+                  <tr>
+                    <td>scripts/agentops/__tests__/measure.test.ts</td>
+                    <td>changed</td>
+                    <td>FEAT-003</td>
+                  </tr>
+                </tbody>
               </table>
             </details>
             <details>
@@ -830,8 +946,11 @@
                     <th>role</th>
                     <th>dispatch_id</th>
                     <th>loop</th>
+                    <th>model</th>
+                    <th>effort</th>
                     <th>duration</th>
                     <th>tokens</th>
+                    <th>cost</th>
                     <th>status</th>
                   </tr>
                 </thead>
@@ -840,13 +959,19 @@
                     <td>dev</td>
                     <td>feat-003-batch-b-dev</td>
                     <td>—</td>
+                    <td>sonnet-4-6</td>
+                    <td>—</td>
                     <td>9m 15s</td>
                     <td>109845</td>
+                    <td>$0.72</td>
                     <td>done</td>
                   </tr>
                   <tr>
                     <td>qa</td>
                     <td>feat-003-batch-b-qa-pm</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
                     <td>—</td>
                     <td>—</td>
                     <td>—</td>
@@ -881,19 +1006,19 @@
               <span class="story-card__stat-value">$0.93</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">tasks</span>
-              <span class="story-card__stat-value">0</span></span
+              <span class="story-card__stat-value">1</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">ACs</span>
               <span class="story-card__stat-value">0/11</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">files</span>
-              <span class="story-card__stat-value">0</span></span
+              <span class="story-card__stat-value">26</span></span
             ><span class="story-card__pipeline">dev → qa</span>
           </div>
           <p class="story-card__summary">PM-conducted QA. 11/11 ACs pass.</p>
           <div class="story-card__drilldowns">
             <details>
-              <summary>Files changed (0)</summary>
+              <summary>Files changed (26)</summary>
               <table class="story-card__files">
                 <thead>
                   <tr>
@@ -902,7 +1027,138 @@
                     <th>tasks</th>
                   </tr>
                 </thead>
-                <tbody></tbody>
+                <tbody>
+                  <tr>
+                    <td>scripts/agentops/repo-health.ts</td>
+                    <td>changed</td>
+                    <td>FEAT-003</td>
+                  </tr>
+                  <tr>
+                    <td>scripts/agentops/render/flow-report.ts</td>
+                    <td>changed</td>
+                    <td>FEAT-003</td>
+                  </tr>
+                  <tr>
+                    <td>scripts/agentops/render/flow-report/index.ts</td>
+                    <td>changed</td>
+                    <td>FEAT-003</td>
+                  </tr>
+                  <tr>
+                    <td>scripts/agentops/render/flow-report/header.ts</td>
+                    <td>changed</td>
+                    <td>FEAT-003</td>
+                  </tr>
+                  <tr>
+                    <td>scripts/agentops/render/flow-report/existing-sections.ts</td>
+                    <td>changed</td>
+                    <td>FEAT-003</td>
+                  </tr>
+                  <tr>
+                    <td>scripts/agentops/render/flow-report/cost-breakdown.ts</td>
+                    <td>changed</td>
+                    <td>FEAT-003</td>
+                  </tr>
+                  <tr>
+                    <td>scripts/agentops/render/flow-report/per-dispatch-table.ts</td>
+                    <td>changed</td>
+                    <td>FEAT-003</td>
+                  </tr>
+                  <tr>
+                    <td>scripts/agentops/render/flow-report/per-ac-detail.ts</td>
+                    <td>changed</td>
+                    <td>FEAT-003</td>
+                  </tr>
+                  <tr>
+                    <td>scripts/agentops/render/flow-report/repo-health-snapshot.ts</td>
+                    <td>changed</td>
+                    <td>FEAT-003</td>
+                  </tr>
+                  <tr>
+                    <td>scripts/agentops/render/flow-report/timeline.ts</td>
+                    <td>changed</td>
+                    <td>FEAT-003</td>
+                  </tr>
+                  <tr>
+                    <td>scripts/agentops/render/flow-report/pm-notes.ts</td>
+                    <td>changed</td>
+                    <td>FEAT-003</td>
+                  </tr>
+                  <tr>
+                    <td>scripts/agentops/render/index-report.ts</td>
+                    <td>changed</td>
+                    <td>FEAT-003</td>
+                  </tr>
+                  <tr>
+                    <td>scripts/agentops/__tests__/repo-health.test.ts</td>
+                    <td>changed</td>
+                    <td>FEAT-003</td>
+                  </tr>
+                  <tr>
+                    <td>scripts/agentops/__tests__/cost-breakdown.test.ts</td>
+                    <td>changed</td>
+                    <td>FEAT-003</td>
+                  </tr>
+                  <tr>
+                    <td>scripts/agentops/__tests__/per-dispatch-table.test.ts</td>
+                    <td>changed</td>
+                    <td>FEAT-003</td>
+                  </tr>
+                  <tr>
+                    <td>scripts/agentops/__tests__/per-ac-detail.test.ts</td>
+                    <td>changed</td>
+                    <td>FEAT-003</td>
+                  </tr>
+                  <tr>
+                    <td>scripts/agentops/__tests__/repo-health-snapshot.test.ts</td>
+                    <td>changed</td>
+                    <td>FEAT-003</td>
+                  </tr>
+                  <tr>
+                    <td>scripts/agentops/__tests__/timeline.test.ts</td>
+                    <td>changed</td>
+                    <td>FEAT-003</td>
+                  </tr>
+                  <tr>
+                    <td>scripts/agentops/__tests__/pm-notes.test.ts</td>
+                    <td>changed</td>
+                    <td>FEAT-003</td>
+                  </tr>
+                  <tr>
+                    <td>scripts/agentops/__tests__/index-report.test.ts</td>
+                    <td>changed</td>
+                    <td>FEAT-003</td>
+                  </tr>
+                  <tr>
+                    <td>scripts/agentops/__tests__/index-report-batch-c.test.ts</td>
+                    <td>changed</td>
+                    <td>FEAT-003</td>
+                  </tr>
+                  <tr>
+                    <td>scripts/agentops/__tests__/repo-health-fixtures/mutation/mu…</td>
+                    <td>changed</td>
+                    <td>FEAT-003</td>
+                  </tr>
+                  <tr>
+                    <td>scripts/agentops/__tests__/repo-health-fixtures/type-covera…</td>
+                    <td>changed</td>
+                    <td>FEAT-003</td>
+                  </tr>
+                  <tr>
+                    <td>scripts/agentops/__tests__/repo-health-fixtures/dep-cruiser…</td>
+                    <td>changed</td>
+                    <td>FEAT-003</td>
+                  </tr>
+                  <tr>
+                    <td>scripts/agentops/__tests__/__snapshots__/flow-report.test.t…</td>
+                    <td>changed</td>
+                    <td>FEAT-003</td>
+                  </tr>
+                  <tr>
+                    <td>scripts/agentops/__tests__/__snapshots__/index-report.test.…</td>
+                    <td>changed</td>
+                    <td>FEAT-003</td>
+                  </tr>
+                </tbody>
               </table>
             </details>
             <details>
@@ -917,8 +1173,11 @@
                     <th>role</th>
                     <th>dispatch_id</th>
                     <th>loop</th>
+                    <th>model</th>
+                    <th>effort</th>
                     <th>duration</th>
                     <th>tokens</th>
+                    <th>cost</th>
                     <th>status</th>
                   </tr>
                 </thead>
@@ -927,13 +1186,19 @@
                     <td>dev</td>
                     <td>feat-003-batch-c-dev</td>
                     <td>—</td>
+                    <td>sonnet-4-6</td>
+                    <td>—</td>
                     <td>11m 27s</td>
                     <td>140383</td>
+                    <td>$0.93</td>
                     <td>done</td>
                   </tr>
                   <tr>
                     <td>qa</td>
                     <td>feat-003-batch-c-qa-pm</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
                     <td>—</td>
                     <td>—</td>
                     <td>—</td>
@@ -971,13 +1236,13 @@
               <span class="story-card__stat-value">$1.17</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">tasks</span>
-              <span class="story-card__stat-value">0</span></span
+              <span class="story-card__stat-value">1</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">ACs</span>
               <span class="story-card__stat-value">0/4</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">files</span>
-              <span class="story-card__stat-value">0</span></span
+              <span class="story-card__stat-value">10</span></span
             ><span class="story-card__pipeline">dev → qa</span>
           </div>
           <aside class="story-card__retry" role="status">
@@ -987,7 +1252,7 @@
           <p class="story-card__summary">PM-conducted QA. 6/6 ACs pass (loops 1+2 combinados).</p>
           <div class="story-card__drilldowns">
             <details>
-              <summary>Files changed (0)</summary>
+              <summary>Files changed (10)</summary>
               <table class="story-card__files">
                 <thead>
                   <tr>
@@ -996,7 +1261,58 @@
                     <th>tasks</th>
                   </tr>
                 </thead>
-                <tbody></tbody>
+                <tbody>
+                  <tr>
+                    <td>scripts/agentops/index.ts</td>
+                    <td>changed</td>
+                    <td>FEAT-003</td>
+                  </tr>
+                  <tr>
+                    <td>scripts/agentops/repo-health.ts</td>
+                    <td>changed</td>
+                    <td>FEAT-003</td>
+                  </tr>
+                  <tr>
+                    <td>scripts/agentops/__tests__/index.integration.test.ts</td>
+                    <td>changed</td>
+                    <td>FEAT-003</td>
+                  </tr>
+                  <tr>
+                    <td>docs/issues/ai-squad-orchestrator-usage-capture.md</td>
+                    <td>changed</td>
+                    <td>FEAT-003</td>
+                  </tr>
+                  <tr>
+                    <td>CLAUDE.md</td>
+                    <td>changed</td>
+                    <td>FEAT-003</td>
+                  </tr>
+                  <tr>
+                    <td>scripts/agentops/enrich/dispatches.ts</td>
+                    <td>changed</td>
+                    <td>FEAT-003</td>
+                  </tr>
+                  <tr>
+                    <td>scripts/agentops/__tests__/enrich.test.ts</td>
+                    <td>changed</td>
+                    <td>FEAT-003</td>
+                  </tr>
+                  <tr>
+                    <td>docs/agentops/conventions.md</td>
+                    <td>changed</td>
+                    <td>FEAT-003</td>
+                  </tr>
+                  <tr>
+                    <td>scripts/agentops/measure.ts</td>
+                    <td>changed</td>
+                    <td>FEAT-003</td>
+                  </tr>
+                  <tr>
+                    <td>scripts/agentops/__tests__/__snapshots__/flow-report.test.t…</td>
+                    <td>changed</td>
+                    <td>FEAT-003</td>
+                  </tr>
+                </tbody>
               </table>
             </details>
             <details>
@@ -1011,8 +1327,11 @@
                     <th>role</th>
                     <th>dispatch_id</th>
                     <th>loop</th>
+                    <th>model</th>
+                    <th>effort</th>
                     <th>duration</th>
                     <th>tokens</th>
+                    <th>cost</th>
                     <th>status</th>
                   </tr>
                 </thead>
@@ -1021,21 +1340,30 @@
                     <td>dev</td>
                     <td>feat-003-batch-d-dev</td>
                     <td>1</td>
+                    <td>sonnet-4-6</td>
+                    <td>—</td>
                     <td>8m 24s</td>
                     <td>97502</td>
+                    <td>$0.64</td>
                     <td>done</td>
                   </tr>
                   <tr>
                     <td>dev</td>
                     <td>feat-003-batch-d-dev-lo…</td>
                     <td>2</td>
+                    <td>sonnet-4-6</td>
+                    <td>—</td>
                     <td>6m 3s</td>
                     <td>79497</td>
+                    <td>$0.52</td>
                     <td>done</td>
                   </tr>
                   <tr>
                     <td>qa</td>
                     <td>feat-003-batch-d-qa-pm</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
                     <td>—</td>
                     <td>—</td>
                     <td>—</td>
@@ -1067,7 +1395,7 @@
               <span class="story-card__stat-value">$0.12</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">tasks</span>
-              <span class="story-card__stat-value">0</span></span
+              <span class="story-card__stat-value">1</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">ACs</span>
               <span class="story-card__stat-value">0</span></span
@@ -1105,8 +1433,11 @@
                     <th>role</th>
                     <th>dispatch_id</th>
                     <th>loop</th>
+                    <th>model</th>
+                    <th>effort</th>
                     <th>duration</th>
                     <th>tokens</th>
+                    <th>cost</th>
                     <th>status</th>
                   </tr>
                 </thead>
@@ -1115,8 +1446,11 @@
                     <td>audit-agent</td>
                     <td>feat-003-audit-agent</td>
                     <td>—</td>
+                    <td>haiku-4-5</td>
+                    <td>—</td>
                     <td>2m 15s</td>
                     <td>52336</td>
+                    <td>$0.12</td>
                     <td>done</td>
                   </tr>
                 </tbody>
@@ -1139,7 +1473,7 @@
         <div class="cost-grid">
           <div class="cost-card">
             <span class="cost-label">Total cost</span>
-            <span class="cost-value">$3.47</span>
+            <span class="cost-value">$3.4676</span>
             <small>$3.4676</small>
           </div>
           <div class="cost-card">
@@ -1149,7 +1483,7 @@
           </div>
           <div class="cost-card">
             <span class="cost-label">$ / dispatch</span>
-            <span class="cost-value">$0.5779</span>
+            <span class="cost-value">$0.3468</span>
             <small>avg of 6</small>
           </div>
           <div class="cost-card">
@@ -1683,7 +2017,7 @@
         <details>
           <summary>Repo health snapshot</summary>
           <div>
-            <p><em>Measured at: 2026-05-13</em></p>
+            <p><em>Measured at: 2026-05-14</em></p>
             <table>
               <thead>
                 <tr>
@@ -1790,7 +2124,7 @@
             <blockquote>
               <p>
                 Feature: Quality baseline + cost telemetry + AgentOps dashboard enrichment Task ID:
-                FEAT-003 Phase: done Generated at: 2026-05-13T06:56:58.631Z
+                FEAT-003 Phase: done Generated at: 2026-05-14T03:10:15.087Z
               </p>
             </blockquote>
             <h2>Insights</h2>
@@ -1818,13 +2152,13 @@
               </li>
               <li>Estimated cost USD total: $3.4676</li>
               <li>Cost per AC: $0.0963</li>
-              <li>Cost per dispatch (avg): $0.5779</li>
+              <li>Cost per dispatch (avg): $0.3468</li>
               <li>Wall-clock duration: 46m 34s</li>
               <li>Tool uses total: 442</li>
               <li>Coverage: 6 of 10 dispatches included in cost calculation</li>
             </ul>
             <h2>Repo health snapshot</h2>
-            <p><em>Measured at: 2026-05-13</em></p>
+            <p><em>Measured at: 2026-05-14</em></p>
             <table>
               <thead>
                 <tr>
@@ -2468,7 +2802,7 @@
             <h2>Escalation rate</h2>
             <p>Escalation rate: 0.0% — below healthy band (&lt; 10%)</p>
             <h2>AC closure</h2>
-            <p>Total: 36 | Pass: 40 | Partial: 0 | Fail: 0 | Missing: 0</p>
+            <p>Total: 36 | Pass: 34 | Partial: 0 | Fail: 0 | Missing: 0</p>
             <h2>PM notes log</h2>
             <ul>
               <li>
@@ -2519,6 +2853,10 @@
             </ul>
             <h2>Token cost</h2>
             <p>Token cost not available — using dispatch count as cost proxy: 10 dispatches</p>
+            <p>
+              ⚠ pm-orchestrator Stop hook did not run — re-run agentops install-hooks
+              (worktree-aware)
+            </p>
           </div>
         </details>
       </section>

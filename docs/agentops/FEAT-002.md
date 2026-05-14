@@ -5,7 +5,7 @@
 > Feature: AgentOps observability extractor — relatórios Markdown a partir de .agent-session/\*
 > Task ID: FEAT-002
 > Phase: done
-> Generated at: 2026-05-13T06:56:58.631Z
+> Generated at: 2026-05-14T03:10:15.087Z
 
 ## Insights
 
@@ -21,14 +21,14 @@ _70/30 input/output split assumed; harness reports only total_tokens; 7 of 11 di
   - Estimated output (30%): 167618
 - Estimated cost USD total: $3.3448
 - Cost per AC: $0.1338
-- Cost per dispatch (avg): $0.4778
+- Cost per dispatch (avg): $0.3041
 - Wall-clock duration: 59m 4s
 - Tool uses total: 509
 - Coverage: 7 of 11 dispatches included in cost calculation
 
 ## Repo health snapshot
 
-_Measured at: 2026-05-13_
+_Measured at: 2026-05-14_
 
 | Métrica        | Valor | Threshold | Status |
 | -------------- | ----- | --------- | ------ |
@@ -136,7 +136,7 @@ Escalation rate: 0.0% — below healthy band (< 10%)
 
 ## AC closure
 
-Total: 25 | Pass: 33 | Partial: 7 | Fail: 0 | Missing: 0
+Total: 25 | Pass: 24 | Partial: 1 | Fail: 0 | Missing: 0
 
 ## PM notes log
 
@@ -155,3 +155,5 @@ Total: 25 | Pass: 33 | Partial: 7 | Fail: 0 | Missing: 0
 ## Token cost
 
 Token cost not available — using dispatch count as cost proxy: 11 dispatches
+
+⚠ pm-orchestrator Stop hook did not run — re-run agentops install-hooks (worktree-aware)

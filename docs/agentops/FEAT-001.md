@@ -5,7 +5,7 @@
 > Feature: Foundation — scaffolding, infra de testes, design tokens, PaperSheet
 > Task ID: FEAT-001
 > Phase: done
-> Generated at: 2026-05-13T06:56:58.631Z
+> Generated at: 2026-05-14T03:10:15.087Z
 
 ## Insights
 
@@ -28,7 +28,7 @@ _70/30 input/output split assumed; harness reports only total_tokens; 15 of 15 d
 
 ## Repo health snapshot
 
-_Measured at: 2026-05-13_
+_Measured at: 2026-05-14_
 
 | Métrica        | Valor | Threshold | Status |
 | -------------- | ----- | --------- | ------ |
@@ -154,7 +154,7 @@ Escalation rate: 0.0% — below healthy band (< 10%)
 
 ## AC closure
 
-Total: 39 | Pass: 39 | Partial: 1 | Fail: 0 | Missing: 0
+Total: 39 | Pass: 38 | Partial: 1 | Fail: 0 | Missing: 0
 
 ## Reviewer findings density
 
@@ -181,3 +181,5 @@ Total: 39 | Pass: 39 | Partial: 1 | Fail: 0 | Missing: 0
 ## Token cost
 
 Token cost not available — using dispatch count as cost proxy: 15 dispatches
+
+⚠ pm-orchestrator Stop hook did not run — re-run agentops install-hooks (worktree-aware)

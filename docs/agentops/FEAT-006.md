@@ -5,7 +5,7 @@
 > Feature: Server companion — Fastify + JSON store (rotas /api/days/:date)
 > Task ID: FEAT-006
 > Phase: done
-> Generated at: 2026-05-13T06:56:58.631Z
+> Generated at: 2026-05-14T03:10:15.087Z
 
 ## Insights
 
@@ -21,14 +21,14 @@ _70/30 input/output split assumed; harness reports only total_tokens; 1 of 16 di
   - Estimated output (30%): 3052880
 - Estimated cost USD total: $13.8704
 - Cost per AC: $0.4623
-- Cost per dispatch (avg): $13.8704
+- Cost per dispatch (avg): $0.8669
 - Wall-clock duration: 25m 8s
 - Tool uses total: 61
 - Coverage: 1 of 16 dispatches included in cost calculation
 
 ## Repo health snapshot
 
-_Measured at: 2026-05-13_
+_Measured at: 2026-05-14_
 
 | Métrica        | Valor | Threshold | Status |
 | -------------- | ----- | --------- | ------ |
@@ -39,24 +39,24 @@ _Measured at: 2026-05-13_
 
 ## Per-dispatch breakdown
 
-| ID           | Role            | Status       | Loop | Tokens   | $         | Duration | PM note                                       |
-| ------------ | --------------- | ------------ | ---- | -------- | --------- | -------- | --------------------------------------------- |
-| pm-orches... | pm-orchestrator | done         | —    | 10176266 | $111.9389 | 25m 8s   | PM/orchestrator session (Stop hook): 98 turns |
-| batch-a-dev  | dev             | done         | —    | —        | —         | 12m      | —                                             |
-| batch-a-c... | code-reviewer   | done         | —    | —        | —         | 12m      | —                                             |
-| batch-a-l... | logic-reviewer  | needs_review | —    | —        | —         | 11m      | —                                             |
-| batch-a-qa   | qa              | done         | —    | —        | —         | 4m       | —                                             |
-| batch-b-dev  | dev             | done         | —    | —        | —         | 20m      | —                                             |
-| batch-b-c... | code-reviewer   | needs_review | —    | —        | —         | 12m      | —                                             |
-| batch-b-l... | logic-reviewer  | needs_review | —    | —        | —         | 13m      | —                                             |
-| batch-b-d... | dev             | done         | 2    | —        | —         | 4m       | —                                             |
-| batch-b-qa   | qa              | done         | —    | —        | —         | 5m       | —                                             |
-| batch-c-dev  | dev             | done         | —    | —        | —         | 32m      | —                                             |
-| batch-c-d... | dev             | done         | 2    | —        | —         | 2m       | —                                             |
-| batch-c-qa   | qa              | done         | —    | —        | —         | 2m       | —                                             |
-| batch-d-dev  | dev             | done         | —    | —        | —         | 6m       | —                                             |
-| batch-d-qa   | qa              | done         | —    | —        | —         | 1m       | —                                             |
-| audit-agent  | audit-agent     | done         | —    | —        | —         | 1m       | —                                             |
+| ID           | Role            | Status       | Loop | Tokens   | $        | Duration | PM note                                       |
+| ------------ | --------------- | ------------ | ---- | -------- | -------- | -------- | --------------------------------------------- |
+| pm-orches... | pm-orchestrator | done         | —    | 10176266 | $13.8704 | 25m 8s   | PM/orchestrator session (Stop hook): 98 turns |
+| batch-a-dev  | dev             | done         | —    | —        | —        | 12m      | —                                             |
+| batch-a-c... | code-reviewer   | done         | —    | —        | —        | 12m      | —                                             |
+| batch-a-l... | logic-reviewer  | needs_review | —    | —        | —        | 11m      | —                                             |
+| batch-a-qa   | qa              | done         | —    | —        | —        | 4m       | —                                             |
+| batch-b-dev  | dev             | done         | —    | —        | —        | 20m      | —                                             |
+| batch-b-c... | code-reviewer   | needs_review | —    | —        | —        | 12m      | —                                             |
+| batch-b-l... | logic-reviewer  | needs_review | —    | —        | —        | 13m      | —                                             |
+| batch-b-d... | dev             | done         | 2    | —        | —        | 4m       | —                                             |
+| batch-b-qa   | qa              | done         | —    | —        | —        | 5m       | —                                             |
+| batch-c-dev  | dev             | done         | —    | —        | —        | 32m      | —                                             |
+| batch-c-d... | dev             | done         | 2    | —        | —        | 2m       | —                                             |
+| batch-c-qa   | qa              | done         | —    | —        | —        | 2m       | —                                             |
+| batch-d-dev  | dev             | done         | —    | —        | —        | 6m       | —                                             |
+| batch-d-qa   | qa              | done         | —    | —        | —        | 1m       | —                                             |
+| audit-agent  | audit-agent     | done         | —    | —        | —        | 1m       | —                                             |
 
 ## Per-AC closure detail
 
@@ -97,14 +97,19 @@ _Measured at: 2026-05-13_
 
 | Phase          | Duration |
 | -------------- | -------- |
-| specify        | —        |
-| plan           | —        |
-| tasks          | —        |
-| implementation | —        |
+| specify        | 15 min   |
+| plan           | 15 min   |
+| tasks          | 15 min   |
+| implementation | 114 min  |
 
 ## Timeline
 
-_(no phase data available)_
+| Phase          | Started  | Completed | Duration | Visual     |
+| -------------- | -------- | --------- | -------- | ---------- |
+| specify        | 15:00:00 | 15:15:00  | 15m      | █░░░░░░░░░ |
+| plan           | 15:15:00 | 15:30:00  | 15m      | █░░░░░░░░░ |
+| tasks          | 15:30:00 | 15:45:00  | 15m      | █░░░░░░░░░ |
+| implementation | 15:50:00 | 17:44:00  | 114m     | ██████████ |
 
 ## Dispatches
 

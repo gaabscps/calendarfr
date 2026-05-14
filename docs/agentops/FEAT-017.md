@@ -3,7 +3,7 @@
 > Feature: baseline-grid-alignment — rítmica vertical 24px como contrato do design system
 > Task ID: FEAT-017
 > Phase: escalated
-> Generated at: 2026-05-13T06:56:58.631Z
+> Generated at: 2026-05-14T03:10:15.087Z
 
 ## Insights
 
@@ -11,21 +11,21 @@
 
 ## Cost breakdown
 
-_70/30 input/output split assumed; harness reports only total_tokens; 10 of 10 dispatches included in cost_
+_70/30 input/output split assumed; harness reports only total_tokens; 13 of 13 dispatches included in cost_
 
-- Total tokens: 230828031
-  - Estimated input (70%): 161579622
-  - Estimated output (30%): 69248409
-- Estimated cost USD total: $163.5999
-- Cost per AC: $3.1462
-- Cost per dispatch (avg): $16.3600
-- Wall-clock duration: 1138m 5s
-- Tool uses total: 802
-- Coverage: 10 of 10 dispatches included in cost calculation
+- Total tokens: 266939008
+  - Estimated input (70%): 186857306
+  - Estimated output (30%): 80081702
+- Estimated cost USD total: $185.2970
+- Cost per AC: $3.5634
+- Cost per dispatch (avg): $14.2536
+- Wall-clock duration: 1267m 27s
+- Tool uses total: 1006
+- Coverage: 13 of 13 dispatches included in cost calculation
 
 ## Repo health snapshot
 
-_Measured at: 2026-05-13_
+_Measured at: 2026-05-14_
 
 | Métrica        | Valor | Threshold | Status |
 | -------------- | ----- | --------- | ------ |
@@ -36,18 +36,21 @@ _Measured at: 2026-05-13_
 
 ## Per-dispatch breakdown
 
-| ID           | Role            | Status  | Loop | Tokens    | $          | Duration | PM note                                                                          |
-| ------------ | --------------- | ------- | ---- | --------- | ---------- | -------- | -------------------------------------------------------------------------------- |
-| pm-orches... | pm-orchestrator | done    | —    | 126903926 | $1395.9432 | 478m 20s | PM/orchestrator session (Stop hook): 417 turns                                   |
-| feat017-a... | audit-agent     | blocked | 1    | 52270     | $0.1150    | 1m 39s   | Audit returned blocked/bypass_detected. PM analysis in handoff.md classifies ... |
-| pm-orches... | pm-orchestrator | done    | —    | 1184612   | $13.0307   | 49m 46s  | PM/orchestrator session (Stop hook): 28 turns                                    |
-| pm-orches... | pm-orchestrator | done    | —    | 211250    | $2.3237    | 20s      | PM/orchestrator session (Stop hook): 5 turns                                     |
-| pm-orches... | pm-orchestrator | done    | —    | 12318184  | $81.3000   | 197m 31s | PM/orchestrator session (Stop hook): 159 turns                                   |
-| pm-orches... | pm-orchestrator | done    | —    | 517398    | $3.4148    | 5m 51s   | PM/orchestrator session (Stop hook): 17 turns                                    |
-| pm-orches... | pm-orchestrator | done    | —    | 68316     | $0.7515    | 17s      | PM/orchestrator session (Stop hook): 2 turns                                     |
-| pm-orches... | pm-orchestrator | done    | —    | 64754796  | $427.3817  | 356m 12s | PM/orchestrator session (Stop hook): 611 turns                                   |
-| pm-orches... | pm-orchestrator | done    | —    | 22818872  | $251.0076  | 31m 39s  | PM/orchestrator session (Stop hook): 199 turns                                   |
-| pm-orches... | pm-orchestrator | done    | —    | 1998407   | $13.1895   | 16m 30s  | PM/orchestrator session (Stop hook): 49 turns                                    |
+| ID           | Role            | Status  | Loop | Tokens    | $        | Duration | PM note                                                                          |
+| ------------ | --------------- | ------- | ---- | --------- | -------- | -------- | -------------------------------------------------------------------------------- |
+| pm-orches... | pm-orchestrator | done    | —    | 126903926 | $94.5701 | 478m 20s | PM/orchestrator session (Stop hook): 417 turns                                   |
+| feat017-a... | audit-agent     | blocked | 1    | 52270     | $0.1150  | 1m 39s   | Audit returned blocked/bypass_detected. PM analysis in handoff.md classifies ... |
+| pm-orches... | pm-orchestrator | done    | —    | 1184612   | $1.2796  | 49m 46s  | PM/orchestrator session (Stop hook): 28 turns                                    |
+| pm-orches... | pm-orchestrator | done    | —    | 211250    | $0.5006  | 20s      | PM/orchestrator session (Stop hook): 5 turns                                     |
+| pm-orches... | pm-orchestrator | done    | —    | 12318184  | $6.8500  | 197m 31s | PM/orchestrator session (Stop hook): 159 turns                                   |
+| pm-orches... | pm-orchestrator | done    | —    | 517398    | $0.4365  | 5m 51s   | PM/orchestrator session (Stop hook): 17 turns                                    |
+| pm-orches... | pm-orchestrator | done    | —    | 68316     | $0.1777  | 17s      | PM/orchestrator session (Stop hook): 2 turns                                     |
+| pm-orches... | pm-orchestrator | done    | —    | 64754796  | $40.1110 | 356m 12s | PM/orchestrator session (Stop hook): 611 turns                                   |
+| pm-orches... | pm-orchestrator | done    | —    | 22818872  | $18.3671 | 31m 39s  | PM/orchestrator session (Stop hook): 199 turns                                   |
+| pm-orches... | pm-orchestrator | done    | —    | 1998407   | $1.1923  | 16m 30s  | PM/orchestrator session (Stop hook): 49 turns                                    |
+| pm-orches... | pm-orchestrator | done    | —    | 34287611  | $20.2632 | 120m 16s | PM/orchestrator session (Stop hook): 356 turns                                   |
+| pm-orches... | pm-orchestrator | done    | —    | 140490    | $0.1656  | 7s       | PM/orchestrator session (Stop hook): 5 turns                                     |
+| pm-orches... | pm-orchestrator | done    | —    | 1682876   | $1.2684  | 8m 59s   | PM/orchestrator session (Stop hook): 41 turns                                    |
 
 ## Per-AC closure detail
 
@@ -85,10 +88,10 @@ _Measured at: 2026-05-13_
 | AC-030 | missing | —         | —        |
 | AC-031 | missing | —         | —        |
 | AC-032 | missing | —         | —        |
-| AC-033 | missing | —         | —        |
-| AC-034 | missing | —         | —        |
-| AC-035 | missing | —         | —        |
-| AC-036 | missing | —         | —        |
+| AC-033 | pass    | —         | —        |
+| AC-034 | pass    | —         | —        |
+| AC-035 | pass    | —         | —        |
+| AC-036 | pass    | —         | —        |
 | AC-037 | missing | —         | —        |
 | AC-038 | missing | —         | —        |
 | AC-039 | missing | —         | —        |
@@ -102,7 +105,7 @@ _Measured at: 2026-05-13_
 | AC-047 | missing | —         | —        |
 | AC-048 | missing | —         | —        |
 | AC-049 | missing | —         | —        |
-| AC-050 | missing | —         | —        |
+| AC-050 | pass    | —         | —        |
 | AC-051 | missing | —         | —        |
 | AC-052 | missing | —         | —        |
 
@@ -113,11 +116,13 @@ _Measured at: 2026-05-13_
 | specify        | —        |
 | plan           | —        |
 | tasks          | —        |
-| implementation | —        |
+| implementation | 175 min  |
 
 ## Timeline
 
-_(no phase data available)_
+| Phase          | Started  | Completed | Duration | Visual     |
+| -------------- | -------- | --------- | -------- | ---------- |
+| implementation | 03:35:00 | 06:30:00  | 175m     | ██████████ |
 
 ## Dispatches
 
@@ -128,9 +133,9 @@ _(no phase data available)_
 | code-reviewer      | 0          |
 | dev                | 0          |
 | logic-reviewer     | 0          |
-| pm-orchestrator    | 9          |
+| pm-orchestrator    | 12         |
 | qa                 | 0          |
-| **Total**          | 10         |
+| **Total**          | 13         |
 
 ## Task success rate
 
@@ -146,7 +151,7 @@ _(no phase data available)_
 
 ## Loop rate
 
-Loop rate: 10.0%
+Loop rate: 7.7%
 
 ## Escalation rate
 
@@ -154,7 +159,7 @@ Escalation rate: 0.0% — below healthy band (< 10%)
 
 ## AC closure
 
-Total: 52 | Pass: 5 | Partial: 0 | Fail: 0 | Missing: 52
+Total: 52 | Pass: 5 | Partial: 0 | Fail: 0 | Missing: 47
 
 ## PM notes log
 
@@ -168,7 +173,10 @@ Total: 52 | Pass: 5 | Partial: 0 | Fail: 0 | Missing: 52
 - [2026-05-12 20:20 pm-orchestrator] PM/orchestrator session (Stop hook): 611 turns
 - [2026-05-13 02:28 pm-orchestrator] PM/orchestrator session (Stop hook): 199 turns
 - [2026-05-13 04:00 pm-orchestrator] PM/orchestrator session (Stop hook): 49 turns
+- [2026-05-13 20:05 pm-orchestrator] PM/orchestrator session (Stop hook): 356 turns
+- [2026-05-13 22:30 pm-orchestrator] PM/orchestrator session (Stop hook): 5 turns
+- [2026-05-13 22:33 pm-orchestrator] PM/orchestrator session (Stop hook): 41 turns
 
 ## Token cost
 
-Token cost not available — using dispatch count as cost proxy: 10 dispatches
+Token cost not available — using dispatch count as cost proxy: 13 dispatches

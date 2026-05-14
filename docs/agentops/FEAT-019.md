@@ -3,7 +3,7 @@
 > Feature: drag-reorder — reordenação drag-and-drop + teclado em Prioridades e Notas
 > Task ID: FEAT-019
 > Phase: done
-> Generated at: 2026-05-13T06:56:58.631Z
+> Generated at: 2026-05-14T03:10:15.087Z
 
 ## Insights
 
@@ -18,16 +18,16 @@ _70/30 input/output split assumed; harness reports only total_tokens; 4 of 65 di
 - Total tokens: 193984975
   - Estimated input (70%): 135789483
   - Estimated output (30%): 58195493
-- Estimated cost USD total: $761.6940
-- Cost per AC: $29.2959
-- Cost per dispatch (avg): $190.4235
+- Estimated cost USD total: $123.5428
+- Cost per AC: $4.7516
+- Cost per dispatch (avg): $1.9007
 - Wall-clock duration: 174m
 - Tool uses total: 968
 - Coverage: 4 of 65 dispatches included in cost calculation
 
 ## Repo health snapshot
 
-_Measured at: 2026-05-13_
+_Measured at: 2026-05-14_
 
 | Métrica        | Valor | Threshold | Status |
 | -------------- | ----- | --------- | ------ |
@@ -38,104 +38,104 @@ _Measured at: 2026-05-13_
 
 ## Per-dispatch breakdown
 
-| ID           | Role               | Status       | Loop | Tokens   | $         | Duration | PM note                                                                          |
-| ------------ | ------------------ | ------------ | ---- | -------- | --------- | -------- | -------------------------------------------------------------------------------- |
-| d-T-001-d... | dev                | done         | 1    | —        | —         | 0ms      | —                                                                                |
-| d-T-001-c... | code-reviewer      | done         | 1    | 26498341 | $174.8891 | 0ms      | —                                                                                |
-| d-T-001-l... | logic-reviewer     | done         | 1    | —        | —         | 0ms      | —                                                                                |
-| d-T-001-q... | qa                 | done         | 1    | —        | —         | 0ms      | NFR-003 pass — @dnd-kit installed, renderWithDnd criado, 77 suites/1064 teste... |
-| d-T-002-d... | dev                | done         | 1    | —        | —         | 0ms      | —                                                                                |
-| d-T-002-c... | code-reviewer      | done         | 1    | —        | —         | 0ms      | —                                                                                |
-| d-T-002-l... | logic-reviewer     | done         | 1    | —        | —         | 0ms      | —                                                                                |
-| d-T-002-q... | qa                 | done         | 1    | —        | —         | 0ms      | AC-004/AC-005 pass — arrayMove imutável, useCallback estável                     |
-| d-T-003-d... | dev                | done         | 1    | —        | —         | 0ms      | —                                                                                |
-| d-T-003-c... | code-reviewer      | done         | 1    | 32500775 | $214.5051 | 0ms      | —                                                                                |
-| d-T-003-l... | logic-reviewer     | done         | 1    | —        | —         | 0ms      | —                                                                                |
-| d-T-003-q... | qa                 | done         | 1    | —        | —         | 0ms      | AC-016/AC-017 pass — arrayMove deps:[] via valueRef+onChangeRef estável          |
-| d-T-004-d... | dev                | done         | 1    | —        | —         | 0ms      | —                                                                                |
-| d-T-004-d... | dev                | done         | 2    | —        | —         | 0ms      | Loop L2 restart — fix comment: .lifted AC-006 only; test describe label          |
-| d-T-004-c... | code-reviewer      | blocked      | 1    | —        | —         | 0ms      | Loop L2 — 2 comment/AC-label findings: .lifted CSS comment mislabels AC-007; ... |
-| d-T-004-l... | logic-reviewer     | done         | 1    | —        | —         | 0ms      | —                                                                                |
-| d-T-004-c... | code-reviewer      | done         | 2    | —        | —         | 0ms      | —                                                                                |
-| d-T-004-l... | logic-reviewer     | done         | 2    | —        | —         | 0ms      | —                                                                                |
-| d-T-005-c... | code-reviewer      | blocked      | 1    | —        | —         | 0ms      | Loop L2 — bug: handleDragHandleKeyDown clobbers listeners.onKeyDown, quebra K... |
-| d-T-005-l... | logic-reviewer     | blocked      | 1    | —        | —         | 0ms      | Loop L2 — confirma bug AC-018: listeners.onKeyDown clobbered em NoteItem:137     |
-| d-T-005-d... | dev                | done         | 2    | —        | —         | 0ms      | Loop L2 restart — fix AC-018: handleDragHandleKeyDown delegates listeners.onK... |
-| d-T-004-q... | qa                 | done         | 2    | —        | —         | 0ms      | AC-001/006/007/008/010 pass — 10/10 testes                                       |
-| d-T-005-c... | code-reviewer      | done         | 2    | —        | —         | 0ms      | —                                                                                |
-| d-T-005-l... | logic-reviewer     | done         | 2    | —        | —         | 0ms      | —                                                                                |
-| d-T-005-q... | qa                 | done         | 2    | —        | —         | 0ms      | AC-013/018/019/020/022 pass — 8/8 testes, listeners delegation validado          |
-| d-T-006-d... | dev                | done         | 1    | —        | —         | 0ms      | —                                                                                |
-| d-T-007-d... | dev                | needs_review | 1    | —        | —         | 0ms      | Pre-existing tab-order test failure (Notes.interactions:169) — T-009 scope; 1... |
-| d-T-006-c... | code-reviewer      | blocked      | 1    | —        | —         | 0ms      | Loop L2 — AC-026: announcement strings usam IDs em vez de posição ordinal; an... |
-| d-T-006-l... | logic-reviewer     | blocked      | 1    | —        | —         | 0ms      | Loop L2 — critical: null deref em onDragEnd(over=null); AC-026 strings off-sp... |
-| d-T-006-d... | dev                | done         | 2    | —        | —         | 0ms      | Loop L2 restart — fix AC-026: guard over=null, ordinal positions, useMemo([it... |
-| d-T-006-c... | code-reviewer      | done         | 2    | —        | —         | 0ms      | —                                                                                |
-| d-T-006-l... | logic-reviewer     | done         | 2    | —        | —         | 0ms      | —                                                                                |
-| d-T-007-c... | code-reviewer      | blocked      | 1    | —        | —         | 0ms      | Loop L2 — AC-026: announcement strings usam IDs em vez de posição ordinal; me... |
-| d-T-007-l... | logic-reviewer     | blocked      | 1    | —        | —         | 0ms      | Loop L2 — AC-026: announcements é const module-level, não pode computar posiç... |
-| d-T-006-q... | qa                 | done         | 2    | 48468367 | $319.8912 | 0ms      | AC-002/003/005/009/011/012/025/026 pass — 125/125 testes                         |
-| d-T-007-d... | dev                | done         | 2    | —        | —         | 0ms      | Loop L2 restart — fix AC-026: announcements moved to useMemo([value]) closure... |
-| d-T-007-c... | code-reviewer      | done         | 2    | —        | —         | 0ms      | —                                                                                |
-| d-T-007-l... | logic-reviewer     | done         | 2    | —        | —         | 0ms      | —                                                                                |
-| d-T-007-q... | qa                 | done         | 2    | —        | —         | 0ms      | AC-014/015/017/021/023/024/025/026 pass — 91/92 testes (1 pre-existente tab-o... |
-| d-T-008-d... | dev                | done         | 1    | —        | —         | 0ms      | —                                                                                |
-| d-T-009-d... | dev                | done         | 1    | —        | —         | 0ms      | —                                                                                |
-| pm-orches... | pm-orchestrator    | done         | —    | 86517492 | $571.0154 | 174m     | PM/orchestrator session (Stop hook): 802 turns                                   |
-| d-T-008-c... | code-reviewer      | needs_review | 1    | —        | —         | 2m       | Loop L2 — 2 file-size violations (usePriorities.test.ts=642, Priorities.dynam... |
-| d-T-008-l... | logic-reviewer     | needs_review | 1    | —        | —         | 2m       | Loop L2 — AC-003/006/009/012/025/026 coverage gaps; critical: AC-012 focus an... |
-| d-T-009-c... | code-reviewer      | needs_review | 1    | —        | —         | 2m       | Loop L2 — 2 file-size violations (useNotes.mutations.test.ts=377, NoteItem.re... |
-| d-T-009-l... | logic-reviewer     | needs_review | 1    | —        | —         | 2m       | Loop L2 — AC-015 DnD path not tested; AC-024 focus vacuous; AC-026 PT-BR stri... |
-| d-T-008-d... | dev                | done         | 2    | —        | —         | 10m      | Loop L2 restart — split 641-line test into 3 files; split 319-line dynamic; A... |
-| d-T-009-d... | dev                | done         | 2    | —        | —         | 10m      | Loop L2 restart — split oversized files; AC-015 DnD proxy; AC-024 focus; AC-0... |
-| d-T-008-c... | code-reviewer      | done         | 2    | —        | —         | 2m       | —                                                                                |
-| d-T-008-l... | logic-reviewer     | needs_review | 2    | —        | —         | 4m       | Loop L3 — AC-025 presence-only (must assert value='reordenável'); AC-026 no P... |
-| d-T-009-c... | code-reviewer      | done         | 2    | —        | —         | 2m       | —                                                                                |
-| d-T-009-l... | logic-reviewer     | needs_review | 2    | —        | —         | 7m       | Loop L3 — AC-026 tautological self-assertions (no component rendered); AC-025... |
-| d-T-008-d... | dev                | done         | 3    | —        | —         | 8m       | Loop L3 restart — AC-025 value 'reordenável' asserted; AC-026 announcement fu... |
-| d-T-009-d... | dev                | done         | 3    | —        | —         | 10m      | Loop L3 restart — AC-025 value; AC-026 DndContext spy; AC-015 real onDragEnd ... |
-| d-T-008-c... | code-reviewer      | needs_review | 3    | —        | —         | 4m       | L3 findings: reorder.test.tsx 251 lines (false alarm — actual 250); AC-026 lo... |
-| d-T-008-l... | logic-reviewer     | needs_review | 3    | —        | —         | 6m       | L3 findings: AC-026 tests closures locais não exercitam Priorities.tsx:62-79;... |
-| d-T-009-c... | code-reviewer      | done         | 3    | —        | —         | 3m       | —                                                                                |
-| d-T-009-l... | logic-reviewer     | needs_review | 3    | —        | —         | 7m       | L3 finding: AC-026 onDragStart/onDragOver PT-BR strings untested — DndContext... |
-| d-T-008-b... | blocker-specialist | done         | 3    | —        | —         | 5m       | Blocker resolved: dispatch_dev — verbatim DndContext spy replacement for all ... |
-| d-T-009-b... | blocker-specialist | done         | 3    | —        | —         | 4m       | Blocker resolved: task_continue — insert 11-line combined onDragStart+onDragO... |
-| d-T-008-d... | dev                | done         | 3    | —        | —         | 2m       | Post-blocker dev done — 228 lines, exit 0, 152 tests; all 4 AC-026 PT-BR stri... |
-| d-T-009-d... | dev                | done         | 3    | —        | —         | 3m       | Post-blocker dev done — 250 lines, exit 0, 112 tests; onDragStart+onDragOver ... |
-| d-T-008-q... | qa                 | done         | 3    | —        | —         | 3m       | 14/14 ACs pass — 152 testes; AC-025/026 via DndContext spy confirmado            |
-| d-T-009-q... | qa                 | done         | 3    | —        | —         | 5m       | 14/14 ACs pass — 112 testes; AC-015/025/026 confirmados                          |
-| d-audit-a... | audit-agent        | done         | 1    | —        | —         | 2m       | All 6 checks pass — 62 dispatches verified; 26 ACs + NFR-003 covered; zero by... |
+| ID           | Role               | Status       | Loop | Tokens   | $        | Duration | PM note                                                                          |
+| ------------ | ------------------ | ------------ | ---- | -------- | -------- | -------- | -------------------------------------------------------------------------------- |
+| d-T-001-d... | dev                | done         | 1    | —        | —        | 0ms      | —                                                                                |
+| d-T-001-c... | code-reviewer      | done         | 1    | 26498341 | $16.3541 | 0ms      | —                                                                                |
+| d-T-001-l... | logic-reviewer     | done         | 1    | —        | —        | 0ms      | —                                                                                |
+| d-T-001-q... | qa                 | done         | 1    | —        | —        | 0ms      | NFR-003 pass — @dnd-kit installed, renderWithDnd criado, 77 suites/1064 teste... |
+| d-T-002-d... | dev                | done         | 1    | —        | —        | 0ms      | —                                                                                |
+| d-T-002-c... | code-reviewer      | done         | 1    | —        | —        | 0ms      | —                                                                                |
+| d-T-002-l... | logic-reviewer     | done         | 1    | —        | —        | 0ms      | —                                                                                |
+| d-T-002-q... | qa                 | done         | 1    | —        | —        | 0ms      | AC-004/AC-005 pass — arrayMove imutável, useCallback estável                     |
+| d-T-003-d... | dev                | done         | 1    | —        | —        | 0ms      | —                                                                                |
+| d-T-003-c... | code-reviewer      | done         | 1    | 32500775 | $23.0030 | 0ms      | —                                                                                |
+| d-T-003-l... | logic-reviewer     | done         | 1    | —        | —        | 0ms      | —                                                                                |
+| d-T-003-q... | qa                 | done         | 1    | —        | —        | 0ms      | AC-016/AC-017 pass — arrayMove deps:[] via valueRef+onChangeRef estável          |
+| d-T-004-d... | dev                | done         | 1    | —        | —        | 0ms      | —                                                                                |
+| d-T-004-d... | dev                | done         | 2    | —        | —        | 0ms      | Loop L2 restart — fix comment: .lifted AC-006 only; test describe label          |
+| d-T-004-c... | code-reviewer      | blocked      | 1    | —        | —        | 0ms      | Loop L2 — 2 comment/AC-label findings: .lifted CSS comment mislabels AC-007; ... |
+| d-T-004-l... | logic-reviewer     | done         | 1    | —        | —        | 0ms      | —                                                                                |
+| d-T-004-c... | code-reviewer      | done         | 2    | —        | —        | 0ms      | —                                                                                |
+| d-T-004-l... | logic-reviewer     | done         | 2    | —        | —        | 0ms      | —                                                                                |
+| d-T-005-c... | code-reviewer      | blocked      | 1    | —        | —        | 0ms      | Loop L2 — bug: handleDragHandleKeyDown clobbers listeners.onKeyDown, quebra K... |
+| d-T-005-l... | logic-reviewer     | blocked      | 1    | —        | —        | 0ms      | Loop L2 — confirma bug AC-018: listeners.onKeyDown clobbered em NoteItem:137     |
+| d-T-005-d... | dev                | done         | 2    | —        | —        | 0ms      | Loop L2 restart — fix AC-018: handleDragHandleKeyDown delegates listeners.onK... |
+| d-T-004-q... | qa                 | done         | 2    | —        | —        | 0ms      | AC-001/006/007/008/010 pass — 10/10 testes                                       |
+| d-T-005-c... | code-reviewer      | done         | 2    | —        | —        | 0ms      | —                                                                                |
+| d-T-005-l... | logic-reviewer     | done         | 2    | —        | —        | 0ms      | —                                                                                |
+| d-T-005-q... | qa                 | done         | 2    | —        | —        | 0ms      | AC-013/018/019/020/022 pass — 8/8 testes, listeners delegation validado          |
+| d-T-006-d... | dev                | done         | 1    | —        | —        | 0ms      | —                                                                                |
+| d-T-007-d... | dev                | needs_review | 1    | —        | —        | 0ms      | Pre-existing tab-order test failure (Notes.interactions:169) — T-009 scope; 1... |
+| d-T-006-c... | code-reviewer      | blocked      | 1    | —        | —        | 0ms      | Loop L2 — AC-026: announcement strings usam IDs em vez de posição ordinal; an... |
+| d-T-006-l... | logic-reviewer     | blocked      | 1    | —        | —        | 0ms      | Loop L2 — critical: null deref em onDragEnd(over=null); AC-026 strings off-sp... |
+| d-T-006-d... | dev                | done         | 2    | —        | —        | 0ms      | Loop L2 restart — fix AC-026: guard over=null, ordinal positions, useMemo([it... |
+| d-T-006-c... | code-reviewer      | done         | 2    | —        | —        | 0ms      | —                                                                                |
+| d-T-006-l... | logic-reviewer     | done         | 2    | —        | —        | 0ms      | —                                                                                |
+| d-T-007-c... | code-reviewer      | blocked      | 1    | —        | —        | 0ms      | Loop L2 — AC-026: announcement strings usam IDs em vez de posição ordinal; me... |
+| d-T-007-l... | logic-reviewer     | blocked      | 1    | —        | —        | 0ms      | Loop L2 — AC-026: announcements é const module-level, não pode computar posiç... |
+| d-T-006-q... | qa                 | done         | 2    | 48468367 | $31.7772 | 0ms      | AC-002/003/005/009/011/012/025/026 pass — 125/125 testes                         |
+| d-T-007-d... | dev                | done         | 2    | —        | —        | 0ms      | Loop L2 restart — fix AC-026: announcements moved to useMemo([value]) closure... |
+| d-T-007-c... | code-reviewer      | done         | 2    | —        | —        | 0ms      | —                                                                                |
+| d-T-007-l... | logic-reviewer     | done         | 2    | —        | —        | 0ms      | —                                                                                |
+| d-T-007-q... | qa                 | done         | 2    | —        | —        | 0ms      | AC-014/015/017/021/023/024/025/026 pass — 91/92 testes (1 pre-existente tab-o... |
+| d-T-008-d... | dev                | done         | 1    | —        | —        | 0ms      | —                                                                                |
+| d-T-009-d... | dev                | done         | 1    | —        | —        | 0ms      | —                                                                                |
+| pm-orches... | pm-orchestrator    | done         | —    | 86517492 | $52.4086 | 174m     | PM/orchestrator session (Stop hook): 802 turns                                   |
+| d-T-008-c... | code-reviewer      | needs_review | 1    | —        | —        | 2m       | Loop L2 — 2 file-size violations (usePriorities.test.ts=642, Priorities.dynam... |
+| d-T-008-l... | logic-reviewer     | needs_review | 1    | —        | —        | 2m       | Loop L2 — AC-003/006/009/012/025/026 coverage gaps; critical: AC-012 focus an... |
+| d-T-009-c... | code-reviewer      | needs_review | 1    | —        | —        | 2m       | Loop L2 — 2 file-size violations (useNotes.mutations.test.ts=377, NoteItem.re... |
+| d-T-009-l... | logic-reviewer     | needs_review | 1    | —        | —        | 2m       | Loop L2 — AC-015 DnD path not tested; AC-024 focus vacuous; AC-026 PT-BR stri... |
+| d-T-008-d... | dev                | done         | 2    | —        | —        | 10m      | Loop L2 restart — split 641-line test into 3 files; split 319-line dynamic; A... |
+| d-T-009-d... | dev                | done         | 2    | —        | —        | 10m      | Loop L2 restart — split oversized files; AC-015 DnD proxy; AC-024 focus; AC-0... |
+| d-T-008-c... | code-reviewer      | done         | 2    | —        | —        | 2m       | —                                                                                |
+| d-T-008-l... | logic-reviewer     | needs_review | 2    | —        | —        | 4m       | Loop L3 — AC-025 presence-only (must assert value='reordenável'); AC-026 no P... |
+| d-T-009-c... | code-reviewer      | done         | 2    | —        | —        | 2m       | —                                                                                |
+| d-T-009-l... | logic-reviewer     | needs_review | 2    | —        | —        | 7m       | Loop L3 — AC-026 tautological self-assertions (no component rendered); AC-025... |
+| d-T-008-d... | dev                | done         | 3    | —        | —        | 8m       | Loop L3 restart — AC-025 value 'reordenável' asserted; AC-026 announcement fu... |
+| d-T-009-d... | dev                | done         | 3    | —        | —        | 10m      | Loop L3 restart — AC-025 value; AC-026 DndContext spy; AC-015 real onDragEnd ... |
+| d-T-008-c... | code-reviewer      | needs_review | 3    | —        | —        | 4m       | L3 findings: reorder.test.tsx 251 lines (false alarm — actual 250); AC-026 lo... |
+| d-T-008-l... | logic-reviewer     | needs_review | 3    | —        | —        | 6m       | L3 findings: AC-026 tests closures locais não exercitam Priorities.tsx:62-79;... |
+| d-T-009-c... | code-reviewer      | done         | 3    | —        | —        | 3m       | —                                                                                |
+| d-T-009-l... | logic-reviewer     | needs_review | 3    | —        | —        | 7m       | L3 finding: AC-026 onDragStart/onDragOver PT-BR strings untested — DndContext... |
+| d-T-008-b... | blocker-specialist | done         | 3    | —        | —        | 5m       | Blocker resolved: dispatch_dev — verbatim DndContext spy replacement for all ... |
+| d-T-009-b... | blocker-specialist | done         | 3    | —        | —        | 4m       | Blocker resolved: task_continue — insert 11-line combined onDragStart+onDragO... |
+| d-T-008-d... | dev                | done         | 3    | —        | —        | 2m       | Post-blocker dev done — 228 lines, exit 0, 152 tests; all 4 AC-026 PT-BR stri... |
+| d-T-009-d... | dev                | done         | 3    | —        | —        | 3m       | Post-blocker dev done — 250 lines, exit 0, 112 tests; onDragStart+onDragOver ... |
+| d-T-008-q... | qa                 | done         | 3    | —        | —        | 3m       | 14/14 ACs pass — 152 testes; AC-025/026 via DndContext spy confirmado            |
+| d-T-009-q... | qa                 | done         | 3    | —        | —        | 5m       | 14/14 ACs pass — 112 testes; AC-015/025/026 confirmados                          |
+| d-audit-a... | audit-agent        | done         | 1    | —        | —        | 2m       | All 6 checks pass — 62 dispatches verified; 26 ACs + NFR-003 covered; zero by... |
 
 ## Per-AC closure detail
 
-| AC ID  | Status  | Validator | Evidence |
-| ------ | ------- | --------- | -------- |
-| AC-001 | pass    | qa        | —        |
-| AC-002 | missing | qa        | —        |
-| AC-003 | missing | qa        | —        |
-| AC-004 | pass    | qa        | —        |
-| AC-005 | pass    | qa        | —        |
-| AC-006 | pass    | qa        | —        |
-| AC-007 | pass    | qa        | —        |
-| AC-008 | pass    | qa        | —        |
-| AC-009 | missing | qa        | —        |
-| AC-010 | pass    | qa        | —        |
-| AC-011 | missing | qa        | —        |
-| AC-012 | missing | qa        | —        |
-| AC-013 | pass    | qa        | —        |
-| AC-014 | missing | qa        | —        |
-| AC-015 | missing | qa        | —        |
-| AC-016 | pass    | qa        | —        |
-| AC-017 | pass    | qa        | —        |
-| AC-018 | pass    | qa        | —        |
-| AC-019 | pass    | qa        | —        |
-| AC-020 | pass    | qa        | —        |
-| AC-021 | missing | qa        | —        |
-| AC-022 | pass    | qa        | —        |
-| AC-023 | missing | qa        | —        |
-| AC-024 | missing | qa        | —        |
-| AC-025 | missing | qa        | —        |
-| AC-026 | missing | qa        | —        |
+| AC ID  | Status | Validator | Evidence |
+| ------ | ------ | --------- | -------- |
+| AC-001 | pass   | qa        | —        |
+| AC-002 | pass   | qa        | —        |
+| AC-003 | pass   | qa        | —        |
+| AC-004 | pass   | qa        | —        |
+| AC-005 | pass   | qa        | —        |
+| AC-006 | pass   | qa        | —        |
+| AC-007 | pass   | qa        | —        |
+| AC-008 | pass   | qa        | —        |
+| AC-009 | pass   | qa        | —        |
+| AC-010 | pass   | qa        | —        |
+| AC-011 | pass   | qa        | —        |
+| AC-012 | pass   | qa        | —        |
+| AC-013 | pass   | qa        | —        |
+| AC-014 | pass   | qa        | —        |
+| AC-015 | pass   | qa        | —        |
+| AC-016 | pass   | qa        | —        |
+| AC-017 | pass   | qa        | —        |
+| AC-018 | pass   | qa        | —        |
+| AC-019 | pass   | qa        | —        |
+| AC-020 | pass   | qa        | —        |
+| AC-021 | pass   | qa        | —        |
+| AC-022 | pass   | qa        | —        |
+| AC-023 | pass   | qa        | —        |
+| AC-024 | pass   | qa        | —        |
+| AC-025 | pass   | qa        | —        |
+| AC-026 | pass   | qa        | —        |
 
 ## Phase durations
 
@@ -144,11 +144,13 @@ _Measured at: 2026-05-13_
 | specify        | —        |
 | plan           | —        |
 | tasks          | —        |
-| implementation | —        |
+| implementation | 438 min  |
 
 ## Timeline
 
-_(no phase data available)_
+| Phase          | Started  | Completed | Duration | Visual     |
+| -------------- | -------- | --------- | -------- | ---------- |
+| implementation | 00:00:00 | 07:18:00  | 438m     | ██████████ |
 
 ## Dispatches
 
@@ -185,7 +187,7 @@ Escalation rate: 0.0% — below healthy band (< 10%)
 
 ## AC closure
 
-Total: 26 | Pass: 59 | Partial: 0 | Fail: 0 | Missing: 12
+Total: 26 | Pass: 27 | Partial: 0 | Fail: 0 | Missing: 0
 
 ## Reviewer findings density
 

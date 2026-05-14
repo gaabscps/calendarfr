@@ -5,7 +5,7 @@
 > Feature: Batch story-card UX redesign (fact-sheet)
 > Task ID: FEAT-005
 > Phase: done
-> Generated at: 2026-05-13T06:56:58.631Z
+> Generated at: 2026-05-14T03:10:15.087Z
 
 ## Insights
 
@@ -28,7 +28,7 @@ _70/30 input/output split assumed; harness reports only total_tokens; 17 of 17 d
 
 ## Repo health snapshot
 
-_Measured at: 2026-05-13_
+_Measured at: 2026-05-14_
 
 | Métrica        | Valor | Threshold | Status |
 | -------------- | ----- | --------- | ------ |
@@ -39,25 +39,25 @@ _Measured at: 2026-05-13_
 
 ## Per-dispatch breakdown
 
-| ID           | Role            | Status       | Loop | Tokens   | $         | Duration | PM note                                                                          |
-| ------------ | --------------- | ------------ | ---- | -------- | --------- | -------- | -------------------------------------------------------------------------------- |
-| pm-orches... | pm-orchestrator | done         | —    | 18969453 | $208.6640 | 38m 13s  | PM/orchestrator session (Stop hook): 158 turns                                   |
-| batch-a-dev  | dev             | done         | —    | 54570    | $0.3602   | 3m 29s   | Dev expanded scope to scripts/agentops/enrich/phases.ts (real enricher locati... |
-| batch-a-c... | code-reviewer   | needs_review | —    | 50391    | $0.3326   | 1m 36s   | 1 blocking finding: enrich.test.ts at 875 lines violates CLAUDE.md 250-line r... |
-| batch-a-l... | logic-reviewer  | done         | —    | 42037    | $0.2774   | 1m 3s    | —                                                                                |
-| batch-a-d... | dev             | done         | 2    | 32545    | $0.2148   | 1m 52s   | Blocking resolved via extraction (enrich.test.ts 875->802; new enrich-pipelin... |
-| batch-a-qa   | qa              | done         | —    | 25853    | $0.1706   | 1m 1s    | All 3 ACs pass (AC-001/005/007). lint exit 0, typecheck exit 0, 3 suites/50 t... |
-| batch-b-dev  | dev             | done         | —    | 67458    | $0.4452   | 5m 24s   | 91 tests pass (15 state + 26 aggregator + 50 prior). 13/13 ACs evidence with ... |
-| batch-b-c... | code-reviewer   | needs_review | —    | 38910    | $0.2568   | 1m 53s   | 2 blockers (aggregator.ts 299L + test 479L exceed 250 cap) + 2 majors (cost_u... |
-| batch-b-l... | logic-reviewer  | needs_review | —    | 48814    | $0.3222   | 1m 44s   | 1 confirmed blocker (state.ts blocked-branch needs_review filter missing — AC... |
-| batch-b-d... | dev             | done         | 2    | 74502    | $0.4917   | 9m 5s    | All 3 blockers resolved. Aggregator split: extract.ts 156L + merge.ts 61L + i... |
-| batch-b-qa   | qa              | done         | —    | 47060    | $0.3106   | 2m 22s   | 13/13 ACs pass. lint+typecheck exit 0. 8 suites/98 tests exit 0. All 6 files ... |
-| batch-c-dev  | dev             | done         | —    | 69166    | $0.4565   | 6m 39s   | All 6 parts + CSS + tokens implemented. 165 tests / 14 suites pass first try.... |
-| batch-c-qa   | qa              | done         | —    | 42416    | $0.2799   | 2m 5s    | All 20 ACs pass. lint+typecheck+tests exit 0. All 13 files under 250 cap (lar... |
-| batch-d-dev  | dev             | done         | —    | 79794    | $0.5266   | 8m 41s   | All 4 tasks done. T-013: index.ts barrel + 22 tests / 4 snapshots. T-014: flo... |
-| batch-d-qa   | qa              | done         | —    | 45184    | $0.2982   | 4m 17s   | 16/17 ACs verified pass; 1 deviation flagged (AC-019 aria-label uses 'status:... |
-| audit-agent  | audit-agent     | blocked      | —    | 58543    | $0.1288   | 1m 24s   | Audit blocked with 2 false-positive findings (Check 3 bypass_detection + Chec... |
-| audit-age... | audit-agent     | done         | 2    | 82382    | $0.1812   | 3m       | All 6 checks PASS with PM attestation applied. Bypass detection: feat_005_own... |
+| ID           | Role            | Status       | Loop | Tokens   | $        | Duration | PM note                                                                          |
+| ------------ | --------------- | ------------ | ---- | -------- | -------- | -------- | -------------------------------------------------------------------------------- |
+| pm-orches... | pm-orchestrator | done         | —    | 18969453 | $18.9796 | 38m 13s  | PM/orchestrator session (Stop hook): 158 turns                                   |
+| batch-a-dev  | dev             | done         | —    | 54570    | $0.3602  | 3m 29s   | Dev expanded scope to scripts/agentops/enrich/phases.ts (real enricher locati... |
+| batch-a-c... | code-reviewer   | needs_review | —    | 50391    | $0.3326  | 1m 36s   | 1 blocking finding: enrich.test.ts at 875 lines violates CLAUDE.md 250-line r... |
+| batch-a-l... | logic-reviewer  | done         | —    | 42037    | $0.2774  | 1m 3s    | —                                                                                |
+| batch-a-d... | dev             | done         | 2    | 32545    | $0.2148  | 1m 52s   | Blocking resolved via extraction (enrich.test.ts 875->802; new enrich-pipelin... |
+| batch-a-qa   | qa              | done         | —    | 25853    | $0.1706  | 1m 1s    | All 3 ACs pass (AC-001/005/007). lint exit 0, typecheck exit 0, 3 suites/50 t... |
+| batch-b-dev  | dev             | done         | —    | 67458    | $0.4452  | 5m 24s   | 91 tests pass (15 state + 26 aggregator + 50 prior). 13/13 ACs evidence with ... |
+| batch-b-c... | code-reviewer   | needs_review | —    | 38910    | $0.2568  | 1m 53s   | 2 blockers (aggregator.ts 299L + test 479L exceed 250 cap) + 2 majors (cost_u... |
+| batch-b-l... | logic-reviewer  | needs_review | —    | 48814    | $0.3222  | 1m 44s   | 1 confirmed blocker (state.ts blocked-branch needs_review filter missing — AC... |
+| batch-b-d... | dev             | done         | 2    | 74502    | $0.4917  | 9m 5s    | All 3 blockers resolved. Aggregator split: extract.ts 156L + merge.ts 61L + i... |
+| batch-b-qa   | qa              | done         | —    | 47060    | $0.3106  | 2m 22s   | 13/13 ACs pass. lint+typecheck exit 0. 8 suites/98 tests exit 0. All 6 files ... |
+| batch-c-dev  | dev             | done         | —    | 69166    | $0.4565  | 6m 39s   | All 6 parts + CSS + tokens implemented. 165 tests / 14 suites pass first try.... |
+| batch-c-qa   | qa              | done         | —    | 42416    | $0.2799  | 2m 5s    | All 20 ACs pass. lint+typecheck+tests exit 0. All 13 files under 250 cap (lar... |
+| batch-d-dev  | dev             | done         | —    | 79794    | $0.5266  | 8m 41s   | All 4 tasks done. T-013: index.ts barrel + 22 tests / 4 snapshots. T-014: flo... |
+| batch-d-qa   | qa              | done         | —    | 45184    | $0.2982  | 4m 17s   | 16/17 ACs verified pass; 1 deviation flagged (AC-019 aria-label uses 'status:... |
+| audit-agent  | audit-agent     | blocked      | —    | 58543    | $0.1288  | 1m 24s   | Audit blocked with 2 false-positive findings (Check 3 bypass_detection + Chec... |
+| audit-age... | audit-agent     | done         | 2    | 82382    | $0.1812  | 3m       | All 6 checks PASS with PM attestation applied. Bypass detection: feat_005_own... |
 
 ## Per-AC closure detail
 
@@ -138,7 +138,7 @@ Escalation rate: 0.0% — below healthy band (< 10%)
 
 ## AC closure
 
-Total: 21 | Pass: 37 | Partial: 0 | Fail: 0 | Missing: 0
+Total: 21 | Pass: 26 | Partial: 0 | Fail: 0 | Missing: 0
 
 ## Reviewer findings density
 

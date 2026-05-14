@@ -3,7 +3,7 @@
 > Feature: ux-mvp-polish — alinhamento de linhas, notas multi-linha e polimento visual
 > Task ID: FEAT-014
 > Phase: done
-> Generated at: 2026-05-13T06:56:58.631Z
+> Generated at: 2026-05-14T03:10:15.087Z
 
 ## Insights
 
@@ -27,7 +27,7 @@ _no usage data available — dispatch count fallback: 68 dispatches_
 
 ## Repo health snapshot
 
-_Measured at: 2026-05-13_
+_Measured at: 2026-05-14_
 
 | Métrica        | Valor | Threshold | Status |
 | -------------- | ----- | --------- | ------ |
@@ -111,52 +111,52 @@ _Measured at: 2026-05-13_
 
 ## Per-AC closure detail
 
-| AC ID  | Status  | Validator | Evidence |
-| ------ | ------- | --------- | -------- |
-| AC-001 | pass    | qa        | —        |
-| AC-002 | pass    | qa        | —        |
-| AC-003 | pass    | qa        | —        |
-| AC-004 | missing | qa        | —        |
-| AC-005 | pass    | qa        | —        |
-| AC-006 | pass    | qa        | —        |
-| AC-007 | pass    | qa        | —        |
-| AC-008 | pass    | qa        | —        |
-| AC-009 | pass    | qa        | —        |
-| AC-010 | pass    | qa        | —        |
-| AC-011 | pass    | qa        | —        |
-| AC-012 | pass    | qa        | —        |
-| AC-013 | pass    | qa        | —        |
-| AC-014 | missing | qa        | —        |
-| AC-015 | missing | qa        | —        |
-| AC-016 | pass    | qa        | —        |
-| AC-017 | pass    | qa        | —        |
-| AC-018 | pass    | qa        | —        |
-| AC-019 | pass    | qa        | —        |
-| AC-020 | missing | qa        | —        |
-| AC-021 | pass    | qa        | —        |
-| AC-022 | missing | qa        | —        |
-| AC-023 | missing | qa        | —        |
-| AC-024 | missing | qa        | —        |
-| AC-025 | missing | qa        | —        |
-| AC-026 | missing | qa        | —        |
-| AC-027 | missing | qa        | —        |
-| AC-028 | missing | qa        | —        |
-| AC-029 | missing | qa        | —        |
-| AC-030 | missing | qa        | —        |
-| AC-031 | missing | qa        | —        |
-| AC-032 | missing | qa        | —        |
-| AC-033 | missing | qa        | —        |
-| AC-034 | missing | qa        | —        |
-| AC-035 | missing | qa        | —        |
-| AC-036 | missing | qa        | —        |
-| AC-037 | missing | qa        | —        |
-| AC-038 | missing | qa        | —        |
-| AC-039 | missing | qa        | —        |
-| AC-040 | missing | qa        | —        |
-| AC-041 | pass    | qa        | —        |
-| AC-042 | pass    | qa        | —        |
-| AC-043 | pass    | qa        | —        |
-| AC-044 | pass    | qa        | —        |
+| AC ID  | Status | Validator | Evidence |
+| ------ | ------ | --------- | -------- |
+| AC-001 | pass   | qa        | —        |
+| AC-002 | pass   | qa        | —        |
+| AC-003 | pass   | qa        | —        |
+| AC-004 | pass   | qa        | —        |
+| AC-005 | pass   | qa        | —        |
+| AC-006 | pass   | qa        | —        |
+| AC-007 | pass   | qa        | —        |
+| AC-008 | pass   | qa        | —        |
+| AC-009 | pass   | qa        | —        |
+| AC-010 | pass   | qa        | —        |
+| AC-011 | pass   | qa        | —        |
+| AC-012 | pass   | qa        | —        |
+| AC-013 | pass   | qa        | —        |
+| AC-014 | pass   | qa        | —        |
+| AC-015 | pass   | qa        | —        |
+| AC-016 | pass   | qa        | —        |
+| AC-017 | pass   | qa        | —        |
+| AC-018 | pass   | qa        | —        |
+| AC-019 | pass   | qa        | —        |
+| AC-020 | pass   | qa        | —        |
+| AC-021 | pass   | qa        | —        |
+| AC-022 | pass   | qa        | —        |
+| AC-023 | pass   | qa        | —        |
+| AC-024 | pass   | qa        | —        |
+| AC-025 | pass   | qa        | —        |
+| AC-026 | pass   | qa        | —        |
+| AC-027 | pass   | qa        | —        |
+| AC-028 | pass   | qa        | —        |
+| AC-029 | pass   | qa        | —        |
+| AC-030 | pass   | qa        | —        |
+| AC-031 | pass   | qa        | —        |
+| AC-032 | pass   | qa        | —        |
+| AC-033 | pass   | qa        | —        |
+| AC-034 | pass   | qa        | —        |
+| AC-035 | pass   | qa        | —        |
+| AC-036 | pass   | qa        | —        |
+| AC-037 | pass   | qa        | —        |
+| AC-038 | pass   | qa        | —        |
+| AC-039 | pass   | qa        | —        |
+| AC-040 | pass   | qa        | —        |
+| AC-041 | pass   | qa        | —        |
+| AC-042 | pass   | qa        | —        |
+| AC-043 | pass   | qa        | —        |
+| AC-044 | pass   | qa        | —        |
 
 ## Phase durations
 
@@ -206,7 +206,7 @@ Escalation rate: 0.0% — below healthy band (< 10%)
 
 ## AC closure
 
-Total: 44 | Pass: 44 | Partial: 0 | Fail: 0 | Missing: 23
+Total: 44 | Pass: 44 | Partial: 0 | Fail: 0 | Missing: 0
 
 ## Reviewer findings density
 
@@ -247,3 +247,5 @@ Total: 44 | Pass: 44 | Partial: 0 | Fail: 0 | Missing: 23
 ## Token cost
 
 Token cost not available — using dispatch count as cost proxy: 68 dispatches
+
+⚠ pm-orchestrator Stop hook did not run — re-run agentops install-hooks (worktree-aware)

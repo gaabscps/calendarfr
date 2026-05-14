@@ -5,7 +5,7 @@
 > Feature: priorities — Top 3 prioridades do dia (checkbox + RichTextLine)
 > Task ID: FEAT-008
 > Phase: done
-> Generated at: 2026-05-13T06:56:58.631Z
+> Generated at: 2026-05-14T03:10:15.087Z
 
 ## Insights
 
@@ -28,7 +28,7 @@ _70/30 input/output split assumed; harness reports only total_tokens; 13 of 13 d
 
 ## Repo health snapshot
 
-_Measured at: 2026-05-13_
+_Measured at: 2026-05-14_
 
 | Métrica        | Valor | Threshold | Status |
 | -------------- | ----- | --------- | ------ |
@@ -90,14 +90,19 @@ _Measured at: 2026-05-13_
 
 | Phase          | Duration |
 | -------------- | -------- |
-| specify        | —        |
-| plan           | —        |
-| tasks          | —        |
-| implementation | —        |
+| specify        | 1 min    |
+| plan           | 7 min    |
+| tasks          | 5 min    |
+| implementation | 25 min   |
 
 ## Timeline
 
-_(no phase data available)_
+| Phase          | Started  | Completed | Duration | Visual     |
+| -------------- | -------- | --------- | -------- | ---------- |
+| specify        | 17:17:00 | 17:18:00  | 1m       | ░░░░░░░░░░ |
+| plan           | 17:18:00 | 17:25:00  | 7m       | ███░░░░░░░ |
+| tasks          | 17:25:00 | 17:30:00  | 5m       | ██░░░░░░░░ |
+| implementation | 17:30:00 | 17:55:00  | 25m      | ██████████ |
 
 ## Dispatches
 
@@ -163,3 +168,5 @@ Total: 26 | Pass: 0 | Partial: 0 | Fail: 0 | Missing: 26
 ## Token cost
 
 Token cost not available — using dispatch count as cost proxy: 13 dispatches
+
+⚠ pm-orchestrator Stop hook did not run — re-run agentops install-hooks (worktree-aware)

@@ -572,8 +572,8 @@
       </h1>
       <div class="kpis">
         <span>—</span>
-        <span>$163.60</span>
-        <span class="kpi-sub">$3.146/AC</span>
+        <span>$185.30</span>
+        <span class="kpi-sub">$3.563/AC</span>
         <span>5/52 ACs</span>
         <span>mut 70.7%</span>
         <span>type 97.7%</span>
@@ -584,18 +584,18 @@
     <main>
       <section class="story">
         <h2>Story</h2>
-        <article class="story-card story-card--done" aria-label="batch PM-ORCHESTRATOR">
+        <article class="story-card story-card--done" aria-label="batch pm-orchestrator">
           <header>
-            <h3>PM-ORCHESTRATOR</h3>
+            <h3>pm-orchestrator</h3>
             <span class="badge badge-pass" aria-label="status: done">✓ done</span>
           </header>
           <div class="story-card__stats">
             <span class="story-card__stat"
               ><span class="story-card__stat-label">time</span>
-              <span class="story-card__stat-value">22h47m</span></span
+              <span class="story-card__stat-value">41h12m</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">cost</span>
-              <span class="story-card__stat-value">$163.48</span></span
+              <span class="story-card__stat-value">$185.18</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">tasks</span>
               <span class="story-card__stat-value">0</span></span
@@ -607,7 +607,7 @@
               <span class="story-card__stat-value">0</span></span
             ><span class="story-card__pipeline">pm-orchestrator</span>
           </div>
-          <p class="story-card__summary">PM/orchestrator session (Stop hook): 49 turns</p>
+          <p class="story-card__summary">PM/orchestrator session (Stop hook): 41 turns</p>
           <div class="story-card__drilldowns">
             <details>
               <summary>Files changed (0)</summary>
@@ -627,15 +627,18 @@
               <ul class="story-card__acs"></ul>
             </details>
             <details>
-              <summary>Pipeline trace (9 dispatches)</summary>
+              <summary>Pipeline trace (12 dispatches)</summary>
               <table class="story-card__pipeline-trace">
                 <thead>
                   <tr>
                     <th>role</th>
                     <th>dispatch_id</th>
                     <th>loop</th>
+                    <th>model</th>
+                    <th>effort</th>
                     <th>duration</th>
                     <th>tokens</th>
+                    <th>cost</th>
                     <th>status</th>
                   </tr>
                 </thead>
@@ -644,72 +647,132 @@
                     <td>pm-orchestrator</td>
                     <td>pm-orchestrator-a6792af9</td>
                     <td>—</td>
+                    <td>opus-4-7</td>
+                    <td>—</td>
                     <td>7h58m</td>
                     <td>126903926</td>
+                    <td>$94.57</td>
                     <td>done</td>
                   </tr>
                   <tr>
                     <td>pm-orchestrator</td>
                     <td>pm-orchestrator-da7813bb</td>
                     <td>—</td>
+                    <td>opus-4-7</td>
+                    <td>—</td>
                     <td>49m 46s</td>
                     <td>1184612</td>
+                    <td>$1.28</td>
                     <td>done</td>
                   </tr>
                   <tr>
                     <td>pm-orchestrator</td>
                     <td>pm-orchestrator-d9066212</td>
+                    <td>—</td>
+                    <td>opus-4-7</td>
                     <td>—</td>
                     <td>20s</td>
                     <td>211250</td>
+                    <td>$0.50</td>
                     <td>done</td>
                   </tr>
                   <tr>
                     <td>pm-orchestrator</td>
                     <td>pm-orchestrator-d9066212</td>
                     <td>—</td>
+                    <td>sonnet-4-6</td>
+                    <td>—</td>
                     <td>3h17m</td>
                     <td>12318184</td>
+                    <td>$6.85</td>
                     <td>done</td>
                   </tr>
                   <tr>
                     <td>pm-orchestrator</td>
                     <td>pm-orchestrator-7da915d8</td>
+                    <td>—</td>
+                    <td>sonnet-4-6</td>
                     <td>—</td>
                     <td>5m 51s</td>
                     <td>517398</td>
+                    <td>$0.44</td>
                     <td>done</td>
                   </tr>
                   <tr>
                     <td>pm-orchestrator</td>
                     <td>pm-orchestrator-7da915d8</td>
                     <td>—</td>
+                    <td>opus-4-7</td>
+                    <td>—</td>
                     <td>17s</td>
                     <td>68316</td>
+                    <td>$0.18</td>
                     <td>done</td>
                   </tr>
                   <tr>
                     <td>pm-orchestrator</td>
                     <td>pm-orchestrator-24d5ec92</td>
                     <td>—</td>
+                    <td>sonnet-4-6</td>
+                    <td>—</td>
                     <td>5h56m</td>
                     <td>64754796</td>
+                    <td>$40.11</td>
                     <td>done</td>
                   </tr>
                   <tr>
                     <td>pm-orchestrator</td>
                     <td>pm-orchestrator-01f3393d</td>
                     <td>—</td>
+                    <td>opus-4-7</td>
+                    <td>—</td>
                     <td>31m 39s</td>
                     <td>22818872</td>
+                    <td>$18.37</td>
                     <td>done</td>
                   </tr>
                   <tr>
                     <td>pm-orchestrator</td>
                     <td>pm-orchestrator-c76a225a</td>
                     <td>—</td>
+                    <td>sonnet-4-6</td>
+                    <td>—</td>
                     <td>16m 30s</td>
                     <td>1998407</td>
+                    <td>$1.19</td>
+                    <td>done</td>
+                  </tr>
+                  <tr>
+                    <td>pm-orchestrator</td>
+                    <td>pm-orchestrator-0f4de449</td>
+                    <td>—</td>
+                    <td>sonnet-4-6</td>
+                    <td>—</td>
+                    <td>2h</td>
+                    <td>34287611</td>
+                    <td>$20.26</td>
+                    <td>done</td>
+                  </tr>
+                  <tr>
+                    <td>pm-orchestrator</td>
+                    <td>pm-orchestrator-4f28c139</td>
+                    <td>—</td>
+                    <td>sonnet-4-6</td>
+                    <td>—</td>
+                    <td>7s</td>
+                    <td>140490</td>
+                    <td>$0.17</td>
+                    <td>done</td>
+                  </tr>
+                  <tr>
+                    <td>pm-orchestrator</td>
+                    <td>pm-orchestrator-90a8027f</td>
+                    <td>—</td>
+                    <td>sonnet-4-6</td>
+                    <td>—</td>
+                    <td>8m 59s</td>
+                    <td>1682876</td>
+                    <td>$1.27</td>
                     <td>done</td>
                   </tr>
                 </tbody>
@@ -717,13 +780,13 @@
             </details>
             <details>
               <summary>PM note</summary>
-              <p class="story-card__pmnote">PM/orchestrator session (Stop hook): 49 turns</p>
+              <p class="story-card__pmnote">PM/orchestrator session (Stop hook): 41 turns</p>
             </details>
           </div>
         </article>
-        <article class="story-card story-card--blocked" aria-label="batch FEAT017-AUDIT">
+        <article class="story-card story-card--blocked" aria-label="batch audit-agent">
           <header>
-            <h3>FEAT017-AUDIT</h3>
+            <h3>audit-agent</h3>
             <span class="badge badge-fail" aria-label="status: blocked">⏸ blocked</span>
           </header>
           <div class="story-card__stats">
@@ -735,7 +798,7 @@
               <span class="story-card__stat-value">$0.11</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">tasks</span>
-              <span class="story-card__stat-value">0</span></span
+              <span class="story-card__stat-value">1</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">ACs</span>
               <span class="story-card__stat-value">0</span></span
@@ -773,8 +836,11 @@
                     <th>role</th>
                     <th>dispatch_id</th>
                     <th>loop</th>
+                    <th>model</th>
+                    <th>effort</th>
                     <th>duration</th>
                     <th>tokens</th>
+                    <th>cost</th>
                     <th>status</th>
                   </tr>
                 </thead>
@@ -783,8 +849,11 @@
                     <td>audit-agent</td>
                     <td>feat017-audit-1</td>
                     <td>1</td>
+                    <td>haiku-4-5</td>
+                    <td>—</td>
                     <td>1m 39s</td>
                     <td>52270</td>
+                    <td>$0.11</td>
                     <td>blocked</td>
                   </tr>
                 </tbody>
@@ -804,38 +873,38 @@
       <section class="cost-section">
         <header class="cost-header">
           <h2>Cost</h2>
-          <span class="badge badge-pass">coverage 10/10 (100%)</span>
+          <span class="badge badge-pass">coverage 13/13 (100%)</span>
         </header>
         <div class="cost-grid">
           <div class="cost-card">
             <span class="cost-label">Total cost</span>
-            <span class="cost-value">$163.60</span>
-            <small>$163.5999</small>
+            <span class="cost-value">$185.2970</span>
+            <small>$185.2970</small>
           </div>
           <div class="cost-card">
             <span class="cost-label">$ / AC</span>
-            <span class="cost-value">$3.1462</span>
+            <span class="cost-value">$3.5634</span>
             <small>52 ACs</small>
           </div>
           <div class="cost-card">
             <span class="cost-label">$ / dispatch</span>
-            <span class="cost-value">$16.3600</span>
-            <small>avg of 10</small>
+            <span class="cost-value">$14.2536</span>
+            <small>avg of 13</small>
           </div>
           <div class="cost-card">
             <span class="cost-label">Tokens</span>
-            <span class="cost-value">230,828,031</span>
-            <small>161,579,622 in / 69,248,409 out (70/30)</small>
+            <span class="cost-value">266,939,008</span>
+            <small>186,857,306 in / 80,081,702 out (70/30)</small>
           </div>
           <div class="cost-card">
             <span class="cost-label">Wall-clock</span>
-            <span class="cost-value">18h58m</span>
-            <small>10 dispatches with usage</small>
+            <span class="cost-value">21h7m</span>
+            <small>13 dispatches with usage</small>
           </div>
           <div class="cost-card">
             <span class="cost-label">Tool uses</span>
-            <span class="cost-value">802</span>
-            <small>~80.2 per dispatch</small>
+            <span class="cost-value">1,006</span>
+            <small>~77.4 per dispatch</small>
           </div>
         </div>
         <table class="cost-models">
@@ -858,16 +927,16 @@
               <td>9h20m</td>
               <td>334</td>
               <td>$114.8952</td>
-              <td>70.2%</td>
+              <td>62.0%</td>
             </tr>
             <tr>
               <td><code>sonnet-4-6</code></td>
-              <td>4</td>
-              <td>79,588,785</td>
-              <td>9h36m</td>
-              <td>436</td>
-              <td>$48.5897</td>
-              <td>29.7%</td>
+              <td>7</td>
+              <td>115,699,762</td>
+              <td>11h45m</td>
+              <td>640</td>
+              <td>$70.2869</td>
+              <td>37.9%</td>
             </tr>
             <tr>
               <td><code>haiku-4-5</code></td>
@@ -896,10 +965,10 @@
             <tbody>
               <tr>
                 <td><code>pm-orchestrator</code></td>
-                <td>9</td>
-                <td>230,775,761</td>
-                <td>18h56m</td>
-                <td>$163.4849</td>
+                <td>12</td>
+                <td>266,886,738</td>
+                <td>21h5m</td>
+                <td>$185.1820</td>
                 <td>99.9%</td>
               </tr>
               <tr>
@@ -928,19 +997,27 @@
             </thead>
             <tbody>
               <tr>
+                <td><code>implementation</code></td>
+                <td>2</td>
+                <td>126,956,196</td>
+                <td>7h59m</td>
+                <td>$94.6851</td>
+                <td>51.1%</td>
+              </tr>
+              <tr>
                 <td><code>unattributed</code></td>
-                <td>10</td>
-                <td>230,828,031</td>
-                <td>18h58m</td>
-                <td>$163.5999</td>
-                <td>100.0%</td>
+                <td>11</td>
+                <td>139,982,812</td>
+                <td>13h7m</td>
+                <td>$90.6119</td>
+                <td>48.9%</td>
               </tr>
             </tbody>
           </table>
         </details>
         <p class="cost-note">
           <em
-            >70/30 input/output split assumed; harness reports only total_tokens; 10 of 10
+            >70/30 input/output split assumed; harness reports only total_tokens; 13 of 13
             dispatches included in cost</em
           >
         </p>
@@ -1154,25 +1231,25 @@
                 </tr>
                 <tr>
                   <td>AC-033</td>
-                  <td>missing</td>
+                  <td>pass</td>
                   <td>—</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-034</td>
-                  <td>missing</td>
+                  <td>pass</td>
                   <td>—</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-035</td>
-                  <td>missing</td>
+                  <td>pass</td>
                   <td>—</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-036</td>
-                  <td>missing</td>
+                  <td>pass</td>
                   <td>—</td>
                   <td>—</td>
                 </tr>
@@ -1256,7 +1333,7 @@
                 </tr>
                 <tr>
                   <td>AC-050</td>
-                  <td>missing</td>
+                  <td>pass</td>
                   <td>—</td>
                   <td>—</td>
                 </tr>
@@ -1382,6 +1459,33 @@
                   <td>16m 30s</td>
                   <td>PM/orchestrator session (Stop hook): 49 turns</td>
                 </tr>
+                <tr>
+                  <td>pm-orchestrator-0...</td>
+                  <td>pm-orchestrator</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>34287611</td>
+                  <td>120m 16s</td>
+                  <td>PM/orchestrator session (Stop hook): 356 turns</td>
+                </tr>
+                <tr>
+                  <td>pm-orchestrator-4...</td>
+                  <td>pm-orchestrator</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>140490</td>
+                  <td>7s</td>
+                  <td>PM/orchestrator session (Stop hook): 5 turns</td>
+                </tr>
+                <tr>
+                  <td>pm-orchestrator-9...</td>
+                  <td>pm-orchestrator</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>1682876</td>
+                  <td>8m 59s</td>
+                  <td>PM/orchestrator session (Stop hook): 41 turns</td>
+                </tr>
               </tbody>
             </table>
           </div>
@@ -1389,7 +1493,7 @@
         <details>
           <summary>Repo health snapshot</summary>
           <div>
-            <p><em>Measured at: 2026-05-13</em></p>
+            <p><em>Measured at: 2026-05-14</em></p>
             <table>
               <thead>
                 <tr>
@@ -1434,7 +1538,28 @@
         </details>
         <details>
           <summary>Phase durations</summary>
-          <div><p>(no phase data available)</p></div>
+          <div>
+            <table>
+              <thead>
+                <tr>
+                  <th>Phase</th>
+                  <th>Started</th>
+                  <th>Completed</th>
+                  <th>Duration</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>implementation</td>
+                  <td>03:35:00</td>
+                  <td>2026-05-12 06:30:00</td>
+                  <td>175m</td>
+                  <td>done</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </details>
       </section>
       <section class="raw-data">
@@ -1449,7 +1574,7 @@
             <blockquote>
               <p>
                 Feature: baseline-grid-alignment — rítmica vertical 24px como contrato do design
-                system Task ID: FEAT-017 Phase: escalated Generated at: 2026-05-13T06:56:58.631Z
+                system Task ID: FEAT-017 Phase: escalated Generated at: 2026-05-14T03:10:15.087Z
               </p>
             </blockquote>
             <h2>Insights</h2>
@@ -1462,27 +1587,27 @@
             <h2>Cost breakdown</h2>
             <p>
               <em
-                >70/30 input/output split assumed; harness reports only total_tokens; 10 of 10
+                >70/30 input/output split assumed; harness reports only total_tokens; 13 of 13
                 dispatches included in cost</em
               >
             </p>
             <ul>
               <li>
-                Total tokens: 230828031
+                Total tokens: 266939008
                 <ul>
-                  <li>Estimated input (70%): 161579622</li>
-                  <li>Estimated output (30%): 69248409</li>
+                  <li>Estimated input (70%): 186857306</li>
+                  <li>Estimated output (30%): 80081702</li>
                 </ul>
               </li>
-              <li>Estimated cost USD total: $163.5999</li>
-              <li>Cost per AC: $3.1462</li>
-              <li>Cost per dispatch (avg): $16.3600</li>
-              <li>Wall-clock duration: 1138m 5s</li>
-              <li>Tool uses total: 802</li>
-              <li>Coverage: 10 of 10 dispatches included in cost calculation</li>
+              <li>Estimated cost USD total: $185.2970</li>
+              <li>Cost per AC: $3.5634</li>
+              <li>Cost per dispatch (avg): $14.2536</li>
+              <li>Wall-clock duration: 1267m 27s</li>
+              <li>Tool uses total: 1006</li>
+              <li>Coverage: 13 of 13 dispatches included in cost calculation</li>
             </ul>
             <h2>Repo health snapshot</h2>
-            <p><em>Measured at: 2026-05-13</em></p>
+            <p><em>Measured at: 2026-05-14</em></p>
             <table>
               <thead>
                 <tr>
@@ -1540,7 +1665,7 @@
                   <td>done</td>
                   <td>—</td>
                   <td>126903926</td>
-                  <td>$1395.9432</td>
+                  <td>$94.5701</td>
                   <td>478m 20s</td>
                   <td>PM/orchestrator session (Stop hook): 417 turns</td>
                 </tr>
@@ -1562,7 +1687,7 @@
                   <td>done</td>
                   <td>—</td>
                   <td>1184612</td>
-                  <td>$13.0307</td>
+                  <td>$1.2796</td>
                   <td>49m 46s</td>
                   <td>PM/orchestrator session (Stop hook): 28 turns</td>
                 </tr>
@@ -1572,7 +1697,7 @@
                   <td>done</td>
                   <td>—</td>
                   <td>211250</td>
-                  <td>$2.3237</td>
+                  <td>$0.5006</td>
                   <td>20s</td>
                   <td>PM/orchestrator session (Stop hook): 5 turns</td>
                 </tr>
@@ -1582,7 +1707,7 @@
                   <td>done</td>
                   <td>—</td>
                   <td>12318184</td>
-                  <td>$81.3000</td>
+                  <td>$6.8500</td>
                   <td>197m 31s</td>
                   <td>PM/orchestrator session (Stop hook): 159 turns</td>
                 </tr>
@@ -1592,7 +1717,7 @@
                   <td>done</td>
                   <td>—</td>
                   <td>517398</td>
-                  <td>$3.4148</td>
+                  <td>$0.4365</td>
                   <td>5m 51s</td>
                   <td>PM/orchestrator session (Stop hook): 17 turns</td>
                 </tr>
@@ -1602,7 +1727,7 @@
                   <td>done</td>
                   <td>—</td>
                   <td>68316</td>
-                  <td>$0.7515</td>
+                  <td>$0.1777</td>
                   <td>17s</td>
                   <td>PM/orchestrator session (Stop hook): 2 turns</td>
                 </tr>
@@ -1612,7 +1737,7 @@
                   <td>done</td>
                   <td>—</td>
                   <td>64754796</td>
-                  <td>$427.3817</td>
+                  <td>$40.1110</td>
                   <td>356m 12s</td>
                   <td>PM/orchestrator session (Stop hook): 611 turns</td>
                 </tr>
@@ -1622,7 +1747,7 @@
                   <td>done</td>
                   <td>—</td>
                   <td>22818872</td>
-                  <td>$251.0076</td>
+                  <td>$18.3671</td>
                   <td>31m 39s</td>
                   <td>PM/orchestrator session (Stop hook): 199 turns</td>
                 </tr>
@@ -1632,9 +1757,39 @@
                   <td>done</td>
                   <td>—</td>
                   <td>1998407</td>
-                  <td>$13.1895</td>
+                  <td>$1.1923</td>
                   <td>16m 30s</td>
                   <td>PM/orchestrator session (Stop hook): 49 turns</td>
+                </tr>
+                <tr>
+                  <td>pm-orches...</td>
+                  <td>pm-orchestrator</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>34287611</td>
+                  <td>$20.2632</td>
+                  <td>120m 16s</td>
+                  <td>PM/orchestrator session (Stop hook): 356 turns</td>
+                </tr>
+                <tr>
+                  <td>pm-orches...</td>
+                  <td>pm-orchestrator</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>140490</td>
+                  <td>$0.1656</td>
+                  <td>7s</td>
+                  <td>PM/orchestrator session (Stop hook): 5 turns</td>
+                </tr>
+                <tr>
+                  <td>pm-orches...</td>
+                  <td>pm-orchestrator</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>1682876</td>
+                  <td>$1.2684</td>
+                  <td>8m 59s</td>
+                  <td>PM/orchestrator session (Stop hook): 41 turns</td>
                 </tr>
               </tbody>
             </table>
@@ -1843,25 +1998,25 @@
                 </tr>
                 <tr>
                   <td>AC-033</td>
-                  <td>missing</td>
+                  <td>pass</td>
                   <td>—</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-034</td>
-                  <td>missing</td>
+                  <td>pass</td>
                   <td>—</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-035</td>
-                  <td>missing</td>
+                  <td>pass</td>
                   <td>—</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-036</td>
-                  <td>missing</td>
+                  <td>pass</td>
                   <td>—</td>
                   <td>—</td>
                 </tr>
@@ -1945,7 +2100,7 @@
                 </tr>
                 <tr>
                   <td>AC-050</td>
-                  <td>missing</td>
+                  <td>pass</td>
                   <td>—</td>
                   <td>—</td>
                 </tr>
@@ -1986,12 +2141,31 @@
                 </tr>
                 <tr>
                   <td>implementation</td>
-                  <td>—</td>
+                  <td>175 min</td>
                 </tr>
               </tbody>
             </table>
             <h2>Timeline</h2>
-            <p><em>(no phase data available)</em></p>
+            <table>
+              <thead>
+                <tr>
+                  <th>Phase</th>
+                  <th>Started</th>
+                  <th>Completed</th>
+                  <th>Duration</th>
+                  <th>Visual</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>implementation</td>
+                  <td>03:35:00</td>
+                  <td>06:30:00</td>
+                  <td>175m</td>
+                  <td>██████████</td>
+                </tr>
+              </tbody>
+            </table>
             <h2>Dispatches</h2>
             <table>
               <thead>
@@ -2023,7 +2197,7 @@
                 </tr>
                 <tr>
                   <td>pm-orchestrator</td>
-                  <td>9</td>
+                  <td>12</td>
                 </tr>
                 <tr>
                   <td>qa</td>
@@ -2031,7 +2205,7 @@
                 </tr>
                 <tr>
                   <td><strong>Total</strong></td>
-                  <td>10</td>
+                  <td>13</td>
                 </tr>
               </tbody>
             </table>
@@ -2075,11 +2249,11 @@
               </tbody>
             </table>
             <h2>Loop rate</h2>
-            <p>Loop rate: 10.0%</p>
+            <p>Loop rate: 7.7%</p>
             <h2>Escalation rate</h2>
             <p>Escalation rate: 0.0% — below healthy band (&lt; 10%)</p>
             <h2>AC closure</h2>
-            <p>Total: 52 | Pass: 5 | Partial: 0 | Fail: 0 | Missing: 52</p>
+            <p>Total: 52 | Pass: 5 | Partial: 0 | Fail: 0 | Missing: 47</p>
             <h2>PM notes log</h2>
             <ul>
               <li>
@@ -2115,9 +2289,18 @@
               <li>
                 [2026-05-13 04:00 pm-orchestrator] PM/orchestrator session (Stop hook): 49 turns
               </li>
+              <li>
+                [2026-05-13 20:05 pm-orchestrator] PM/orchestrator session (Stop hook): 356 turns
+              </li>
+              <li>
+                [2026-05-13 22:30 pm-orchestrator] PM/orchestrator session (Stop hook): 5 turns
+              </li>
+              <li>
+                [2026-05-13 22:33 pm-orchestrator] PM/orchestrator session (Stop hook): 41 turns
+              </li>
             </ul>
             <h2>Token cost</h2>
-            <p>Token cost not available — using dispatch count as cost proxy: 10 dispatches</p>
+            <p>Token cost not available — using dispatch count as cost proxy: 13 dispatches</p>
           </div>
         </details>
       </section>

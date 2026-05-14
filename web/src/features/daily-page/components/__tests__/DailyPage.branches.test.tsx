@@ -41,6 +41,10 @@ jest.mock('@/features/notes', () => ({
   ),
 }));
 
+jest.mock('@/features/sticky-note', () => ({
+  StickyNote: () => null,
+}));
+
 const mockUseDailyPage = jest.fn();
 const mockUsePageNavigation = jest.fn();
 const mockUseReducedMotion = jest.fn();

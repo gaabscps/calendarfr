@@ -587,9 +587,9 @@
     <main>
       <section class="story">
         <h2>Story</h2>
-        <article class="story-card story-card--done" aria-label="batch PM-ORCHESTRATOR">
+        <article class="story-card story-card--done" aria-label="batch pm-orchestrator">
           <header>
-            <h3>PM-ORCHESTRATOR</h3>
+            <h3>pm-orchestrator</h3>
             <span class="badge badge-pass" aria-label="status: done">✓ done</span>
           </header>
           <div class="story-card__stats">
@@ -637,8 +637,11 @@
                     <th>role</th>
                     <th>dispatch_id</th>
                     <th>loop</th>
+                    <th>model</th>
+                    <th>effort</th>
                     <th>duration</th>
                     <th>tokens</th>
+                    <th>cost</th>
                     <th>status</th>
                   </tr>
                 </thead>
@@ -647,8 +650,11 @@
                     <td>pm-orchestrator</td>
                     <td>pm-orchestrator-adaf13f7</td>
                     <td>—</td>
+                    <td>opus-4-7</td>
+                    <td>—</td>
                     <td>25m 8s</td>
                     <td>10176266</td>
+                    <td>$13.87</td>
                     <td>done</td>
                   </tr>
                 </tbody>
@@ -677,10 +683,10 @@
               <span class="story-card__stat-value">—</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">tasks</span>
-              <span class="story-card__stat-value">5</span></span
+              <span class="story-card__stat-value">6</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">ACs</span>
-              <span class="story-card__stat-value">9/11</span></span
+              <span class="story-card__stat-value">10/11</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">files</span>
               <span class="story-card__stat-value">15</span></span
@@ -705,117 +711,97 @@
                   <tr>
                     <td>shared/package.json</td>
                     <td>create</td>
-                    <td></td>
+                    <td>FEAT-006</td>
                   </tr>
                   <tr>
                     <td>shared/tsconfig.json</td>
                     <td>create</td>
-                    <td></td>
+                    <td>FEAT-006</td>
                   </tr>
                   <tr>
                     <td>shared/src/api/types.ts</td>
                     <td>create</td>
-                    <td></td>
+                    <td>FEAT-006</td>
                   </tr>
                   <tr>
                     <td>shared/src/api/ids.ts</td>
                     <td>create</td>
-                    <td></td>
+                    <td>FEAT-006</td>
                   </tr>
                   <tr>
                     <td>shared/src/index.ts</td>
                     <td>create</td>
-                    <td></td>
+                    <td>FEAT-006</td>
                   </tr>
                   <tr>
                     <td>package.json</td>
                     <td>edit</td>
-                    <td></td>
+                    <td>FEAT-006</td>
                   </tr>
                   <tr>
                     <td>web/package.json</td>
                     <td>edit</td>
-                    <td></td>
+                    <td>FEAT-006</td>
                   </tr>
                   <tr>
                     <td>server/package.json</td>
                     <td>edit</td>
-                    <td></td>
+                    <td>FEAT-006</td>
                   </tr>
                   <tr>
                     <td>server/tsconfig.json</td>
                     <td>edit</td>
-                    <td></td>
+                    <td>FEAT-006</td>
                   </tr>
                   <tr>
                     <td>server/src/lib/errors.ts</td>
                     <td>create-stub</td>
-                    <td></td>
+                    <td>FEAT-006</td>
                   </tr>
                   <tr>
                     <td>server/src/schema/daySchema.ts</td>
                     <td>create-stub</td>
-                    <td></td>
+                    <td>FEAT-006</td>
                   </tr>
                   <tr>
                     <td>server/src/storage/jsonStore.ts</td>
                     <td>create</td>
-                    <td></td>
+                    <td>FEAT-006</td>
                   </tr>
                   <tr>
                     <td>server/src/storage/__tests__/jsonStore.test.ts</td>
                     <td>create</td>
-                    <td></td>
+                    <td>FEAT-006</td>
                   </tr>
                   <tr>
                     <td>jest.config.js</td>
                     <td>edit</td>
-                    <td></td>
+                    <td>FEAT-006</td>
                   </tr>
                   <tr>
                     <td>eslint.config.mjs</td>
                     <td>edit</td>
-                    <td></td>
+                    <td>FEAT-006</td>
                   </tr>
                 </tbody>
               </table>
             </details>
             <details>
-              <summary>ACs covered (9)</summary>
+              <summary>ACs covered (10)</summary>
               <ul class="story-card__acs">
-                <li>
-                  <strong>AC-003</strong> — server/src/storage/jsonStore.ts:44-70 (readDay reads
-                  file, validates, returns DailyPageData)
-                </li>
-                <li>
-                  <strong>AC-004</strong> — server/src/storage/jsonStore.ts:55 and 62 and 67
-                  (StorageCorruptError thrown on ENOENT-other / JSON parse fail / zod fail)
-                </li>
-                <li>
-                  <strong>AC-005</strong> — server/src/storage/jsonStore.ts:82-100 (writeDay:
-                  ensureDataDir → writeFile tmpPath → rename(tmp, final))
-                </li>
-                <li>
-                  <strong>AC-006</strong> — server/src/storage/jsonStore.ts:32-37 (ensureDataDir:
-                  fs.mkdir recursive)
-                </li>
-                <li>
-                  <strong>AC-007</strong> — server/src/storage/jsonStore.ts:92-97 (writeFile catch:
-                  throws StorageWriteError, rename NOT called)
-                </li>
-                <li>
-                  <strong>AC-014</strong> — shared/src/api/types.ts:1 (DailyPageData, Mood,
-                  Priority, AgendaSlot, Note, NotePrefix exported)
-                </li>
-                <li>
-                  <strong>AC-015</strong> — shared/package.json:8 (exports: { &#39;.&#39;:
-                  &#39;./src/index.ts&#39; }); package.json:12 (shared in workspaces)
-                </li>
+                <li><strong>AC-003</strong> —</li>
+                <li><strong>AC-004</strong> —</li>
+                <li><strong>AC-005</strong> —</li>
+                <li><strong>AC-006</strong> —</li>
+                <li><strong>AC-007</strong> —</li>
+                <li><strong>AC-014</strong> —</li>
+                <li><strong>AC-015</strong> —</li>
                 <li>
                   <strong>AC-016</strong> — deferred to T-008 (stub daySchema is permissive; real
                   schema with satisfies z.ZodType&lt;DailyPageData&gt; in BATCH-B)
                 </li>
-                <li><strong>AC-017</strong> — shared/src/api/ids.ts:4 (newId() via ulid export)</li>
+                <li><strong>AC-017</strong> —</li>
+                <li><strong>AC-026</strong> —</li>
               </ul>
             </details>
             <details>
@@ -826,8 +812,11 @@
                     <th>role</th>
                     <th>dispatch_id</th>
                     <th>loop</th>
+                    <th>model</th>
+                    <th>effort</th>
                     <th>duration</th>
                     <th>tokens</th>
+                    <th>cost</th>
                     <th>status</th>
                   </tr>
                 </thead>
@@ -835,6 +824,9 @@
                   <tr>
                     <td>dev</td>
                     <td>batch-a-dev</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
                     <td>—</td>
                     <td>—</td>
                     <td>—</td>
@@ -846,6 +838,9 @@
                     <td>—</td>
                     <td>—</td>
                     <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
                     <td>done</td>
                   </tr>
                   <tr>
@@ -854,11 +849,17 @@
                     <td>—</td>
                     <td>—</td>
                     <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
                     <td>needs_review</td>
                   </tr>
                   <tr>
                     <td>qa</td>
                     <td>batch-a-qa</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
                     <td>—</td>
                     <td>—</td>
                     <td>—</td>
@@ -892,7 +893,7 @@
               <span class="story-card__stat-value">—</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">tasks</span>
-              <span class="story-card__stat-value">8</span></span
+              <span class="story-card__stat-value">9</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">ACs</span>
               <span class="story-card__stat-value">18/18</span></span
@@ -925,97 +926,97 @@
                   <tr>
                     <td>server/src/storage/jsonStore.ts</td>
                     <td>edit</td>
-                    <td></td>
+                    <td>FEAT-006</td>
                   </tr>
                   <tr>
                     <td>server/src/storage/__tests__/jsonStore.test.ts</td>
                     <td>edit</td>
-                    <td></td>
+                    <td>FEAT-006</td>
                   </tr>
                   <tr>
                     <td>server/src/lib/errors.ts</td>
                     <td>rewrite</td>
-                    <td></td>
+                    <td>FEAT-006</td>
                   </tr>
                   <tr>
                     <td>server/src/lib/sanitize.ts</td>
                     <td>create</td>
-                    <td></td>
+                    <td>FEAT-006</td>
                   </tr>
                   <tr>
                     <td>server/src/lib/__tests__/sanitize.test.ts</td>
                     <td>create</td>
-                    <td></td>
+                    <td>FEAT-006</td>
                   </tr>
                   <tr>
                     <td>server/src/lib/errorHandler.ts</td>
                     <td>create</td>
-                    <td></td>
+                    <td>FEAT-006</td>
                   </tr>
                   <tr>
                     <td>server/src/lib/app.ts</td>
                     <td>edit</td>
-                    <td></td>
+                    <td>FEAT-006</td>
                   </tr>
                   <tr>
                     <td>server/src/schema/daySchema.ts</td>
                     <td>rewrite</td>
-                    <td></td>
+                    <td>FEAT-006</td>
                   </tr>
                   <tr>
                     <td>server/src/schema/__tests__/daySchema.test.ts</td>
                     <td>create</td>
-                    <td></td>
+                    <td>FEAT-006</td>
                   </tr>
                   <tr>
                     <td>server/src/schema/createEmptyDay.ts</td>
                     <td>edit</td>
-                    <td></td>
+                    <td>FEAT-006</td>
                   </tr>
                   <tr>
                     <td>server/src/schema/__tests__/createEmptyDay.test.ts</td>
                     <td>create</td>
-                    <td></td>
+                    <td>FEAT-006</td>
                   </tr>
                   <tr>
                     <td>server/src/routes/days.ts</td>
                     <td>create</td>
-                    <td></td>
+                    <td>FEAT-006</td>
                   </tr>
                   <tr>
                     <td>server/src/routes/__tests__/days.integration.test.ts</td>
                     <td>delete</td>
-                    <td></td>
+                    <td>FEAT-006</td>
                   </tr>
                   <tr>
                     <td>jest.config.js</td>
                     <td>edit</td>
-                    <td></td>
+                    <td>FEAT-006</td>
                   </tr>
                   <tr>
                     <td>__mocks__/isomorphic-dompurify.js</td>
                     <td>create</td>
-                    <td></td>
+                    <td>FEAT-006</td>
                   </tr>
                   <tr>
                     <td>eslint.config.mjs</td>
                     <td>edit</td>
-                    <td></td>
+                    <td>FEAT-006</td>
                   </tr>
                   <tr>
                     <td>server/src/routes/__tests__/helpers.ts</td>
                     <td>create</td>
-                    <td></td>
+                    <td>FEAT-006</td>
                   </tr>
                   <tr>
                     <td>server/src/routes/__tests__/days.get.integration.test.ts</td>
                     <td>create</td>
-                    <td></td>
+                    <td>FEAT-006</td>
                   </tr>
                   <tr>
                     <td>server/src/routes/__tests__/days.put.integration.test.ts</td>
                     <td>create</td>
-                    <td></td>
+                    <td>FEAT-006</td>
                   </tr>
                 </tbody>
               </table>
@@ -1023,82 +1024,24 @@
             <details>
               <summary>ACs covered (18)</summary>
               <ul class="story-card__acs">
-                <li>
-                  <strong>AC-001</strong> — server/src/routes/days.ts:41-50 (GET returns
-                  createEmptyDay when readDay returns null)
-                </li>
-                <li>
-                  <strong>AC-002</strong> — server/src/routes/days.ts:48 (returns createEmptyDay
-                  inline — no writeDay call); days.integration.test.ts:71-74 (asserts ENOENT on
-                  dayPath)
-                </li>
-                <li>
-                  <strong>AC-008</strong> — server/src/routes/days.ts:86-92 (preserves
-                  previous?.createdAt ?? now); days.integration.test.ts:238-261 (createdAt
-                  preserved, updatedAt updated)
-                </li>
-                <li>
-                  <strong>AC-009</strong> — server/src/schema/daySchema.ts:45-57 (daySchema with all
-                  required fields)
-                </li>
-                <li>
-                  <strong>AC-010</strong> — server/src/routes/days.ts:55-67 (safeParse → badRequest
-                  VALIDATION_FAILED with details); days.integration.test.ts:158-179
-                </li>
-                <li>
-                  <strong>AC-011</strong> — server/src/schema/daySchema.ts:27-31 (prioritySchema:
-                  id, text, done)
-                </li>
-                <li>
-                  <strong>AC-012</strong> — server/src/schema/daySchema.ts:33-40 (agendaSlotSchema
-                  hour min(6).max(23); noteSchema prefix enum)
-                </li>
-                <li>
-                  <strong>AC-013</strong> — server/src/routes/days.ts:69-73 (DATE_MISMATCH check);
-                  days.integration.test.ts:183-198
-                </li>
-                <li>
-                  <strong>AC-018</strong> — server/src/routes/days.ts:76 (sanitizeDayHtml applied
-                  after parse, before writeDay); days.integration.test.ts:202-232
-                </li>
-                <li>
-                  <strong>AC-019</strong> — server/src/lib/__tests__/sanitize.test.ts:14-16 (plain
-                  text preserved)
-                </li>
-                <li>
-                  <strong>AC-020</strong> — server/src/lib/__tests__/sanitize.test.ts:20-38
-                  (script/a/onclick/style all stripped)
-                </li>
-                <li>
-                  <strong>AC-021</strong> — server/src/lib/sanitize.ts:30-43 (pure function);
-                  server/src/lib/__tests__/sanitize.test.ts:44-113 (7 scenarios)
-                </li>
-                <li>
-                  <strong>AC-022</strong> — server/src/lib/errors.ts:14-23 (ErrorCode const with 6
-                  codes)
-                </li>
-                <li>
-                  <strong>AC-023</strong> — server/src/routes/days.ts:43-47 and 53-57 (DATE_RE.test
-                  → INVALID_DATE_FORMAT)
-                </li>
-                <li>
-                  <strong>AC-024</strong> — server/src/lib/errorHandler.ts:89-95 (default catch-all
-                  logs stack, returns INTERNAL_ERROR no leak); server/src/lib/app.ts:23
-                  (setErrorHandler before routes)
-                </li>
-                <li>
-                  <strong>AC-025</strong> — server/src/lib/errorHandler.ts:38-44
-                  (reply.code(...).send({error:{...}}) — Fastify default CT: application/json)
-                </li>
-                <li>
-                  <strong>AC-027</strong> — server/src/schema/__tests__/daySchema.test.ts:1-176 (11
-                  scenarios); server/src/schema/__tests__/createEmptyDay.test.ts:1-64 (5 scenarios)
-                </li>
-                <li>
-                  <strong>AC-028</strong> —
-                  server/src/routes/__tests__/days.integration.test.ts:1-300 (10 scenarios via
-                  app.inject)
-                </li>
+                <li><strong>AC-001</strong> — E-001</li>
+                <li><strong>AC-002</strong> — E-002</li>
+                <li><strong>AC-008</strong> — E-003</li>
+                <li><strong>AC-009</strong> — E-004</li>
+                <li><strong>AC-010</strong> — E-005</li>
+                <li><strong>AC-011</strong> — E-006</li>
+                <li><strong>AC-012</strong> — E-007</li>
+                <li><strong>AC-013</strong> — E-008</li>
+                <li><strong>AC-018</strong> — E-009</li>
+                <li><strong>AC-019</strong> — E-010</li>
+                <li><strong>AC-020</strong> — E-011</li>
+                <li><strong>AC-021</strong> — E-012</li>
+                <li><strong>AC-022</strong> — E-013</li>
+                <li><strong>AC-023</strong> — E-014</li>
+                <li><strong>AC-024</strong> — E-015</li>
+                <li><strong>AC-025</strong> — E-016</li>
+                <li><strong>AC-027</strong> — E-017</li>
+                <li><strong>AC-028</strong> — E-018</li>
               </ul>
             </details>
             <details>
@@ -1109,8 +1052,11 @@
                     <th>role</th>
                     <th>dispatch_id</th>
                     <th>loop</th>
+                    <th>model</th>
+                    <th>effort</th>
                     <th>duration</th>
                     <th>tokens</th>
+                    <th>cost</th>
                     <th>status</th>
                   </tr>
                 </thead>
@@ -1118,6 +1064,9 @@
                   <tr>
                     <td>dev</td>
                     <td>batch-b-dev</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
                     <td>—</td>
                     <td>—</td>
                     <td>—</td>
@@ -1129,11 +1078,17 @@
                     <td>—</td>
                     <td>—</td>
                     <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
                     <td>needs_review</td>
                   </tr>
                   <tr>
                     <td>logic-reviewer</td>
                     <td>batch-b-logic-reviewer</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
                     <td>—</td>
                     <td>—</td>
                     <td>—</td>
@@ -1145,11 +1100,17 @@
                     <td>2</td>
                     <td>—</td>
                     <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
                     <td>done</td>
                   </tr>
                   <tr>
                     <td>qa</td>
                     <td>batch-b-qa</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
                     <td>—</td>
                     <td>—</td>
                     <td>—</td>
@@ -1183,13 +1144,13 @@
               <span class="story-card__stat-value">—</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">tasks</span>
-              <span class="story-card__stat-value">0</span></span
+              <span class="story-card__stat-value">1</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">ACs</span>
               <span class="story-card__stat-value">2/2</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">files</span>
-              <span class="story-card__stat-value">0</span></span
+              <span class="story-card__stat-value">12</span></span
             ><span class="story-card__pipeline">dev → qa</span>
           </div>
           <aside class="story-card__retry" role="status">
@@ -1198,7 +1159,7 @@
           <p class="story-card__summary">T-014 (jest. config.</p>
           <div class="story-card__drilldowns">
             <details>
-              <summary>Files changed (0)</summary>
+              <summary>Files changed (12)</summary>
               <table class="story-card__files">
                 <thead>
                   <tr>
@@ -1207,7 +1168,68 @@
                     <th>tasks</th>
                   </tr>
                 </thead>
-                <tbody></tbody>
+                <tbody>
+                  <tr>
+                    <td>jest.config.js</td>
+                    <td>changed</td>
+                    <td>FEAT-006</td>
+                  </tr>
+                  <tr>
+                    <td>e2e/smoke/days-roundtrip.spec.ts</td>
+                    <td>changed</td>
+                    <td>FEAT-006</td>
+                  </tr>
+                  <tr>
+                    <td>server/src/lib/__tests__/errorHandler.test.ts</td>
+                    <td>changed</td>
+                    <td>FEAT-006</td>
+                  </tr>
+                  <tr>
+                    <td>server/src/lib/app.ts</td>
+                    <td>changed</td>
+                    <td>FEAT-006</td>
+                  </tr>
+                  <tr>
+                    <td>server/src/routes/health.ts</td>
+                    <td>changed</td>
+                    <td>FEAT-006</td>
+                  </tr>
+                  <tr>
+                    <td>server/src/routes/__tests__/days.put.integration.test.ts</td>
+                    <td>changed</td>
+                    <td>FEAT-006</td>
+                  </tr>
+                  <tr>
+                    <td>server/src/routes/__tests__/health.integration.test.ts</td>
+                    <td>changed</td>
+                    <td>FEAT-006</td>
+                  </tr>
+                  <tr>
+                    <td>server/src/schema/daySchema.ts</td>
+                    <td>changed</td>
+                    <td>FEAT-006</td>
+                  </tr>
+                  <tr>
+                    <td>server/src/schema/__tests__/daySchema.test.ts</td>
+                    <td>changed</td>
+                    <td>FEAT-006</td>
+                  </tr>
+                  <tr>
+                    <td>server/src/storage/__tests__/jsonStore.test.ts</td>
+                    <td>changed</td>
+                    <td>FEAT-006</td>
+                  </tr>
+                  <tr>
+                    <td>package.json</td>
+                    <td>changed</td>
+                    <td>FEAT-006</td>
+                  </tr>
+                  <tr>
+                    <td>package-lock.json</td>
+                    <td>changed</td>
+                    <td>FEAT-006</td>
+                  </tr>
+                </tbody>
               </table>
             </details>
             <details>
@@ -1225,8 +1247,11 @@
                     <th>role</th>
                     <th>dispatch_id</th>
                     <th>loop</th>
+                    <th>model</th>
+                    <th>effort</th>
                     <th>duration</th>
                     <th>tokens</th>
+                    <th>cost</th>
                     <th>status</th>
                   </tr>
                 </thead>
@@ -1234,6 +1259,9 @@
                   <tr>
                     <td>dev</td>
                     <td>batch-c-dev</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
                     <td>—</td>
                     <td>—</td>
                     <td>—</td>
@@ -1245,11 +1273,17 @@
                     <td>2</td>
                     <td>—</td>
                     <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
                     <td>done</td>
                   </tr>
                   <tr>
                     <td>qa</td>
                     <td>batch-c-qa</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
                     <td>—</td>
                     <td>—</td>
                     <td>—</td>
@@ -1278,19 +1312,19 @@
               <span class="story-card__stat-value">—</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">tasks</span>
-              <span class="story-card__stat-value">0</span></span
+              <span class="story-card__stat-value">1</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">ACs</span>
               <span class="story-card__stat-value">0/0</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">files</span>
-              <span class="story-card__stat-value">0</span></span
+              <span class="story-card__stat-value">1</span></span
             ><span class="story-card__pipeline">dev → qa</span>
           </div>
           <p class="story-card__summary story-card__summary--empty">(no summary)</p>
           <div class="story-card__drilldowns">
             <details>
-              <summary>Files changed (0)</summary>
+              <summary>Files changed (1)</summary>
               <table class="story-card__files">
                 <thead>
                   <tr>
@@ -1299,7 +1333,13 @@
                     <th>tasks</th>
                   </tr>
                 </thead>
-                <tbody></tbody>
+                <tbody>
+                  <tr>
+                    <td>CLAUDE.md</td>
+                    <td>changed</td>
+                    <td>FEAT-006</td>
+                  </tr>
+                </tbody>
               </table>
             </details>
             <details>
@@ -1314,8 +1354,11 @@
                     <th>role</th>
                     <th>dispatch_id</th>
                     <th>loop</th>
+                    <th>model</th>
+                    <th>effort</th>
                     <th>duration</th>
                     <th>tokens</th>
+                    <th>cost</th>
                     <th>status</th>
                   </tr>
                 </thead>
@@ -1326,11 +1369,17 @@
                     <td>—</td>
                     <td>—</td>
                     <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
                     <td>done</td>
                   </tr>
                   <tr>
                     <td>qa</td>
                     <td>batch-d-qa</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
                     <td>—</td>
                     <td>—</td>
                     <td>—</td>
@@ -1359,7 +1408,7 @@
               <span class="story-card__stat-value">—</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">tasks</span>
-              <span class="story-card__stat-value">0</span></span
+              <span class="story-card__stat-value">1</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">ACs</span>
               <span class="story-card__stat-value">0</span></span
@@ -1395,8 +1444,11 @@
                     <th>role</th>
                     <th>dispatch_id</th>
                     <th>loop</th>
+                    <th>model</th>
+                    <th>effort</th>
                     <th>duration</th>
                     <th>tokens</th>
+                    <th>cost</th>
                     <th>status</th>
                   </tr>
                 </thead>
@@ -1404,6 +1456,9 @@
                   <tr>
                     <td>audit-agent</td>
                     <td>audit-agent</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
                     <td>—</td>
                     <td>—</td>
                     <td>—</td>
@@ -1427,7 +1482,7 @@
         <div class="cost-grid">
           <div class="cost-card">
             <span class="cost-label">Total cost</span>
-            <span class="cost-value">$13.87</span>
+            <span class="cost-value">$13.8704</span>
             <small>$13.8704</small>
           </div>
           <div class="cost-card">
@@ -1437,7 +1492,7 @@
           </div>
           <div class="cost-card">
             <span class="cost-label">$ / dispatch</span>
-            <span class="cost-value">$13.8704</span>
+            <span class="cost-value">$0.8669</span>
             <small>avg of 1</small>
           </div>
           <div class="cost-card">
@@ -1903,7 +1958,7 @@
         <details>
           <summary>Repo health snapshot</summary>
           <div>
-            <p><em>Measured at: 2026-05-13</em></p>
+            <p><em>Measured at: 2026-05-14</em></p>
             <table>
               <thead>
                 <tr>
@@ -1948,7 +2003,49 @@
         </details>
         <details>
           <summary>Phase durations</summary>
-          <div><p>(no phase data available)</p></div>
+          <div>
+            <table>
+              <thead>
+                <tr>
+                  <th>Phase</th>
+                  <th>Started</th>
+                  <th>Completed</th>
+                  <th>Duration</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>specify</td>
+                  <td>15:00:00</td>
+                  <td>2026-05-09 15:15:00</td>
+                  <td>15m</td>
+                  <td>done</td>
+                </tr>
+                <tr>
+                  <td>plan</td>
+                  <td>15:15:00</td>
+                  <td>2026-05-09 15:30:00</td>
+                  <td>15m</td>
+                  <td>done</td>
+                </tr>
+                <tr>
+                  <td>tasks</td>
+                  <td>15:30:00</td>
+                  <td>2026-05-09 15:45:00</td>
+                  <td>15m</td>
+                  <td>done</td>
+                </tr>
+                <tr>
+                  <td>implementation</td>
+                  <td>15:50:00</td>
+                  <td>2026-05-09 17:44:00</td>
+                  <td>114m</td>
+                  <td>done</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </details>
       </section>
       <section class="raw-data">
@@ -1968,7 +2065,7 @@
             <blockquote>
               <p>
                 Feature: Server companion — Fastify + JSON store (rotas /api/days/:date) Task ID:
-                FEAT-006 Phase: done Generated at: 2026-05-13T06:56:58.631Z
+                FEAT-006 Phase: done Generated at: 2026-05-14T03:10:15.087Z
               </p>
             </blockquote>
             <h2>Insights</h2>
@@ -1996,13 +2093,13 @@
               </li>
               <li>Estimated cost USD total: $13.8704</li>
               <li>Cost per AC: $0.4623</li>
-              <li>Cost per dispatch (avg): $13.8704</li>
+              <li>Cost per dispatch (avg): $0.8669</li>
               <li>Wall-clock duration: 25m 8s</li>
               <li>Tool uses total: 61</li>
               <li>Coverage: 1 of 16 dispatches included in cost calculation</li>
             </ul>
             <h2>Repo health snapshot</h2>
-            <p><em>Measured at: 2026-05-13</em></p>
+            <p><em>Measured at: 2026-05-14</em></p>
             <table>
               <thead>
                 <tr>
@@ -2060,7 +2157,7 @@
                   <td>done</td>
                   <td>—</td>
                   <td>10176266</td>
-                  <td>$111.9389</td>
+                  <td>$13.8704</td>
                   <td>25m 8s</td>
                   <td>PM/orchestrator session (Stop hook): 98 turns</td>
                 </tr>
@@ -2420,24 +2517,64 @@
               <tbody>
                 <tr>
                   <td>specify</td>
-                  <td>—</td>
+                  <td>15 min</td>
                 </tr>
                 <tr>
                   <td>plan</td>
-                  <td>—</td>
+                  <td>15 min</td>
                 </tr>
                 <tr>
                   <td>tasks</td>
-                  <td>—</td>
+                  <td>15 min</td>
                 </tr>
                 <tr>
                   <td>implementation</td>
-                  <td>—</td>
+                  <td>114 min</td>
                 </tr>
               </tbody>
             </table>
             <h2>Timeline</h2>
-            <p><em>(no phase data available)</em></p>
+            <table>
+              <thead>
+                <tr>
+                  <th>Phase</th>
+                  <th>Started</th>
+                  <th>Completed</th>
+                  <th>Duration</th>
+                  <th>Visual</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>specify</td>
+                  <td>15:00:00</td>
+                  <td>15:15:00</td>
+                  <td>15m</td>
+                  <td>█░░░░░░░░░</td>
+                </tr>
+                <tr>
+                  <td>plan</td>
+                  <td>15:15:00</td>
+                  <td>15:30:00</td>
+                  <td>15m</td>
+                  <td>█░░░░░░░░░</td>
+                </tr>
+                <tr>
+                  <td>tasks</td>
+                  <td>15:30:00</td>
+                  <td>15:45:00</td>
+                  <td>15m</td>
+                  <td>█░░░░░░░░░</td>
+                </tr>
+                <tr>
+                  <td>implementation</td>
+                  <td>15:50:00</td>
+                  <td>17:44:00</td>
+                  <td>114m</td>
+                  <td>██████████</td>
+                </tr>
+              </tbody>
+            </table>
             <h2>Dispatches</h2>
             <table>
               <thead>

@@ -582,9 +582,9 @@
     <main>
       <section class="story">
         <h2>Story</h2>
-        <article class="story-card story-card--done" aria-label="batch PM-ORCHESTRATOR">
+        <article class="story-card story-card--done" aria-label="batch pm-orchestrator">
           <header>
-            <h3>PM-ORCHESTRATOR</h3>
+            <h3>pm-orchestrator</h3>
             <span class="badge badge-pass" aria-label="status: done">✓ done</span>
           </header>
           <div class="story-card__stats">
@@ -632,8 +632,11 @@
                     <th>role</th>
                     <th>dispatch_id</th>
                     <th>loop</th>
+                    <th>model</th>
+                    <th>effort</th>
                     <th>duration</th>
                     <th>tokens</th>
+                    <th>cost</th>
                     <th>status</th>
                   </tr>
                 </thead>
@@ -642,8 +645,11 @@
                     <td>pm-orchestrator</td>
                     <td>pm-orchestrator-dcab8b2e</td>
                     <td>—</td>
+                    <td>opus-4-7</td>
+                    <td>—</td>
                     <td>9h55m</td>
                     <td>68062724</td>
+                    <td>$57.67</td>
                     <td>done</td>
                   </tr>
                 </tbody>
@@ -717,8 +723,11 @@
                     <th>role</th>
                     <th>dispatch_id</th>
                     <th>loop</th>
+                    <th>model</th>
+                    <th>effort</th>
                     <th>duration</th>
                     <th>tokens</th>
+                    <th>cost</th>
                     <th>status</th>
                   </tr>
                 </thead>
@@ -727,48 +736,66 @@
                     <td>dev</td>
                     <td>FEAT-012-BATCH-A-dev-L1</td>
                     <td>—</td>
+                    <td>sonnet-4-6</td>
+                    <td>—</td>
                     <td>16m 21s</td>
                     <td>113011</td>
+                    <td>$0.75</td>
                     <td>done</td>
                   </tr>
                   <tr>
                     <td>code-reviewer</td>
                     <td>FEAT-012-BATCH-A-code-r…</td>
                     <td>—</td>
+                    <td>haiku-4-5</td>
+                    <td>—</td>
                     <td>1m 5s</td>
                     <td>14500</td>
+                    <td>$0.03</td>
                     <td>done</td>
                   </tr>
                   <tr>
                     <td>logic-reviewer</td>
                     <td>FEAT-012-BATCH-A-logic-…</td>
                     <td>—</td>
+                    <td>sonnet-4-6</td>
+                    <td>—</td>
                     <td>3m</td>
                     <td>48000</td>
+                    <td>$0.32</td>
                     <td>done</td>
                   </tr>
                   <tr>
                     <td>dev</td>
                     <td>FEAT-012-BATCH-A-dev-L2</td>
                     <td>2</td>
+                    <td>sonnet-4-6</td>
+                    <td>—</td>
                     <td>4m 40s</td>
                     <td>62000</td>
+                    <td>$0.41</td>
                     <td>done</td>
                   </tr>
                   <tr>
                     <td>code-reviewer</td>
                     <td>FEAT-012-BATCH-A-code-r…</td>
                     <td>2</td>
+                    <td>haiku-4-5</td>
+                    <td>—</td>
                     <td>50s</td>
                     <td>9000</td>
+                    <td>$0.02</td>
                     <td>done</td>
                   </tr>
                   <tr>
                     <td>logic-reviewer</td>
                     <td>FEAT-012-BATCH-A-logic-…</td>
                     <td>2</td>
+                    <td>sonnet-4-6</td>
+                    <td>—</td>
                     <td>1m 50s</td>
                     <td>22000</td>
+                    <td>$0.15</td>
                     <td>done</td>
                   </tr>
                 </tbody>
@@ -843,8 +870,11 @@
                     <th>role</th>
                     <th>dispatch_id</th>
                     <th>loop</th>
+                    <th>model</th>
+                    <th>effort</th>
                     <th>duration</th>
                     <th>tokens</th>
+                    <th>cost</th>
                     <th>status</th>
                   </tr>
                 </thead>
@@ -853,56 +883,77 @@
                     <td>dev</td>
                     <td>FEAT-012-BATCH-B-dev-L1</td>
                     <td>—</td>
+                    <td>sonnet-4-6</td>
+                    <td>—</td>
                     <td>10m 20s</td>
                     <td>95000</td>
+                    <td>$0.63</td>
                     <td>done</td>
                   </tr>
                   <tr>
                     <td>code-reviewer</td>
                     <td>FEAT-012-BATCH-B-code-r…</td>
                     <td>—</td>
+                    <td>haiku-4-5</td>
+                    <td>—</td>
                     <td>1m 10s</td>
                     <td>11000</td>
+                    <td>$0.02</td>
                     <td>done</td>
                   </tr>
                   <tr>
                     <td>logic-reviewer</td>
                     <td>FEAT-012-BATCH-B-logic-…</td>
                     <td>—</td>
+                    <td>sonnet-4-6</td>
+                    <td>—</td>
                     <td>3m 40s</td>
                     <td>55000</td>
+                    <td>$0.36</td>
                     <td>done</td>
                   </tr>
                   <tr>
                     <td>dev</td>
                     <td>FEAT-012-BATCH-B-dev-L2</td>
                     <td>2</td>
+                    <td>sonnet-4-6</td>
+                    <td>—</td>
                     <td>6m 20s</td>
                     <td>78000</td>
+                    <td>$0.51</td>
                     <td>done</td>
                   </tr>
                   <tr>
                     <td>code-reviewer</td>
                     <td>FEAT-012-BATCH-B-code-r…</td>
                     <td>2</td>
+                    <td>haiku-4-5</td>
+                    <td>—</td>
                     <td>45s</td>
                     <td>8000</td>
+                    <td>$0.02</td>
                     <td>done</td>
                   </tr>
                   <tr>
                     <td>logic-reviewer</td>
                     <td>FEAT-012-BATCH-B-logic-…</td>
                     <td>2</td>
+                    <td>sonnet-4-6</td>
+                    <td>—</td>
                     <td>2m 30s</td>
                     <td>30000</td>
+                    <td>$0.20</td>
                     <td>done</td>
                   </tr>
                   <tr>
                     <td>dev</td>
                     <td>FEAT-012-BATCH-B-dev-L3</td>
                     <td>3</td>
+                    <td>sonnet-4-6</td>
+                    <td>—</td>
                     <td>1m 20s</td>
                     <td>18000</td>
+                    <td>$0.12</td>
                     <td>done</td>
                   </tr>
                 </tbody>
@@ -978,8 +1029,11 @@
                     <th>role</th>
                     <th>dispatch_id</th>
                     <th>loop</th>
+                    <th>model</th>
+                    <th>effort</th>
                     <th>duration</th>
                     <th>tokens</th>
+                    <th>cost</th>
                     <th>status</th>
                   </tr>
                 </thead>
@@ -988,64 +1042,88 @@
                     <td>dev</td>
                     <td>FEAT-012-BATCH-C-dev-L1</td>
                     <td>—</td>
+                    <td>sonnet-4-6</td>
+                    <td>—</td>
                     <td>15m 20s</td>
                     <td>145000</td>
+                    <td>$0.96</td>
                     <td>done</td>
                   </tr>
                   <tr>
                     <td>code-reviewer</td>
                     <td>FEAT-012-BATCH-C-code-r…</td>
                     <td>—</td>
+                    <td>sonnet-4-6</td>
+                    <td>—</td>
                     <td>2m 45s</td>
                     <td>79682</td>
+                    <td>$0.53</td>
                     <td>done</td>
                   </tr>
                   <tr>
                     <td>logic-reviewer</td>
                     <td>FEAT-012-BATCH-C-logic-…</td>
                     <td>—</td>
+                    <td>sonnet-4-6</td>
+                    <td>—</td>
                     <td>4m 12s</td>
                     <td>81622</td>
+                    <td>$0.54</td>
                     <td>done</td>
                   </tr>
                   <tr>
                     <td>dev</td>
                     <td>FEAT-012-BATCH-C-dev-L2</td>
                     <td>2</td>
+                    <td>sonnet-4-6</td>
+                    <td>—</td>
                     <td>9m</td>
                     <td>105000</td>
+                    <td>$0.69</td>
                     <td>done</td>
                   </tr>
                   <tr>
                     <td>code-reviewer</td>
                     <td>FEAT-012-BATCH-C-code-r…</td>
                     <td>2</td>
+                    <td>sonnet-4-6</td>
+                    <td>—</td>
                     <td>2m 9s</td>
                     <td>35499</td>
+                    <td>$0.23</td>
                     <td>done</td>
                   </tr>
                   <tr>
                     <td>logic-reviewer</td>
                     <td>FEAT-012-BATCH-C-logic-…</td>
                     <td>2</td>
+                    <td>sonnet-4-6</td>
+                    <td>—</td>
                     <td>4m 3s</td>
                     <td>56768</td>
+                    <td>$0.37</td>
                     <td>done</td>
                   </tr>
                   <tr>
                     <td>dev</td>
                     <td>FEAT-012-BATCH-C-dev-L3</td>
                     <td>3</td>
+                    <td>opus-4-7</td>
+                    <td>—</td>
                     <td>8m</td>
                     <td>92000</td>
+                    <td>$1.01</td>
                     <td>done</td>
                   </tr>
                   <tr>
                     <td>logic-reviewer</td>
                     <td>FEAT-012-BATCH-C-logic-…</td>
                     <td>3</td>
+                    <td>sonnet-4-6</td>
+                    <td>—</td>
                     <td>52s</td>
                     <td>23382</td>
+                    <td>$0.15</td>
                     <td>done</td>
                   </tr>
                 </tbody>
@@ -1121,8 +1199,11 @@
                     <th>role</th>
                     <th>dispatch_id</th>
                     <th>loop</th>
+                    <th>model</th>
+                    <th>effort</th>
                     <th>duration</th>
                     <th>tokens</th>
+                    <th>cost</th>
                     <th>status</th>
                   </tr>
                 </thead>
@@ -1131,64 +1212,88 @@
                     <td>dev</td>
                     <td>FEAT-012-BATCH-D-dev-L1</td>
                     <td>—</td>
+                    <td>sonnet-4-6</td>
+                    <td>—</td>
                     <td>12m</td>
                     <td>110000</td>
+                    <td>$0.73</td>
                     <td>done</td>
                   </tr>
                   <tr>
                     <td>code-reviewer</td>
                     <td>FEAT-012-BATCH-D-code-r…</td>
                     <td>—</td>
+                    <td>sonnet-4-6</td>
+                    <td>—</td>
                     <td>2m 31s</td>
                     <td>56286</td>
+                    <td>$0.37</td>
                     <td>done</td>
                   </tr>
                   <tr>
                     <td>logic-reviewer</td>
                     <td>FEAT-012-BATCH-D-logic-…</td>
                     <td>—</td>
+                    <td>sonnet-4-6</td>
+                    <td>—</td>
                     <td>2m 34s</td>
                     <td>79553</td>
+                    <td>$0.53</td>
                     <td>done</td>
                   </tr>
                   <tr>
                     <td>dev</td>
                     <td>FEAT-012-BATCH-D-dev-L2</td>
                     <td>2</td>
+                    <td>sonnet-4-6</td>
+                    <td>—</td>
                     <td>10m 57s</td>
                     <td>102037</td>
+                    <td>$0.67</td>
                     <td>done</td>
                   </tr>
                   <tr>
                     <td>code-reviewer</td>
                     <td>FEAT-012-BATCH-D-code-r…</td>
                     <td>2</td>
+                    <td>sonnet-4-6</td>
+                    <td>—</td>
                     <td>2m 8s</td>
                     <td>38767</td>
+                    <td>$0.26</td>
                     <td>done</td>
                   </tr>
                   <tr>
                     <td>logic-reviewer</td>
                     <td>FEAT-012-BATCH-D-logic-…</td>
                     <td>2</td>
+                    <td>sonnet-4-6</td>
+                    <td>—</td>
                     <td>2m 4s</td>
                     <td>50848</td>
+                    <td>$0.34</td>
                     <td>done</td>
                   </tr>
                   <tr>
                     <td>dev</td>
                     <td>FEAT-012-BATCH-D-dev-L3</td>
                     <td>3</td>
+                    <td>sonnet-4-6</td>
+                    <td>—</td>
                     <td>2m 40s</td>
                     <td>55314</td>
+                    <td>$0.37</td>
                     <td>done</td>
                   </tr>
                   <tr>
                     <td>logic-reviewer</td>
                     <td>FEAT-012-BATCH-D-logic-…</td>
                     <td>3</td>
+                    <td>sonnet-4-6</td>
+                    <td>—</td>
                     <td>21s</td>
                     <td>19108</td>
+                    <td>$0.13</td>
                     <td>done</td>
                   </tr>
                 </tbody>
@@ -1213,7 +1318,7 @@
               <span class="story-card__stat-value">0ms</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">cost</span>
-              <span class="story-card__stat-value">$1.42</span></span
+              <span class="story-card__stat-value">$0.92</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">tasks</span>
               <span class="story-card__stat-value">0</span></span
@@ -1253,15 +1358,18 @@
               <ul class="story-card__acs"></ul>
             </details>
             <details>
-              <summary>Pipeline trace (6 dispatches)</summary>
+              <summary>Pipeline trace (5 dispatches)</summary>
               <table class="story-card__pipeline-trace">
                 <thead>
                   <tr>
                     <th>role</th>
                     <th>dispatch_id</th>
                     <th>loop</th>
+                    <th>model</th>
+                    <th>effort</th>
                     <th>duration</th>
                     <th>tokens</th>
+                    <th>cost</th>
                     <th>status</th>
                   </tr>
                 </thead>
@@ -1270,48 +1378,55 @@
                     <td>dev</td>
                     <td>FEAT-012-BATCH-E-dev-L1</td>
                     <td>—</td>
+                    <td>sonnet-4-6</td>
+                    <td>—</td>
                     <td>8m 15s</td>
                     <td>62212</td>
-                    <td>done</td>
-                  </tr>
-                  <tr>
-                    <td>dev</td>
-                    <td>FEAT-012-BATCH-E-COV-de…</td>
-                    <td>—</td>
-                    <td>35m 27s</td>
-                    <td>76186</td>
+                    <td>$0.41</td>
                     <td>done</td>
                   </tr>
                   <tr>
                     <td>code-reviewer</td>
                     <td>FEAT-012-BATCH-E-code-r…</td>
+                    <td>—</td>
+                    <td>haiku-4-5</td>
                     <td>—</td>
                     <td>1m 47s</td>
                     <td>57981</td>
+                    <td>$0.13</td>
                     <td>done</td>
                   </tr>
                   <tr>
                     <td>logic-reviewer</td>
                     <td>FEAT-012-BATCH-E-logic-…</td>
                     <td>—</td>
+                    <td>sonnet-4-6</td>
+                    <td>—</td>
                     <td>1m 41s</td>
                     <td>57344</td>
+                    <td>$0.38</td>
                     <td>done</td>
                   </tr>
                   <tr>
                     <td>code-reviewer</td>
                     <td>FEAT-012-BATCH-E-code-r…</td>
                     <td>2</td>
+                    <td>haiku-4-5</td>
+                    <td>—</td>
                     <td>0ms</td>
                     <td>0</td>
+                    <td>$0.00</td>
                     <td>done</td>
                   </tr>
                   <tr>
                     <td>logic-reviewer</td>
                     <td>FEAT-012-BATCH-E-logic-…</td>
                     <td>2</td>
+                    <td>sonnet-4-6</td>
+                    <td>—</td>
                     <td>0ms</td>
                     <td>0</td>
+                    <td>$0.00</td>
                     <td>done</td>
                   </tr>
                 </tbody>
@@ -1322,6 +1437,90 @@
               <p class="story-card__pmnote">
                 Approve L2 — NFR-003 fechado via vite.config.ts manualChunks. Chunk daily-page =
                 6.00 KB gzip (&lt;18 KB).
+              </p>
+            </details>
+          </div>
+        </article>
+        <article class="story-card story-card--done" aria-label="batch BATCH-E-COV">
+          <header>
+            <h3>BATCH-E-COV</h3>
+            <span class="badge badge-pass" aria-label="status: done">✓ done</span>
+          </header>
+          <div class="story-card__stats">
+            <span class="story-card__stat"
+              ><span class="story-card__stat-label">time</span>
+              <span class="story-card__stat-value">0ms</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">cost</span>
+              <span class="story-card__stat-value">$0.50</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">tasks</span>
+              <span class="story-card__stat-value">0</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">ACs</span>
+              <span class="story-card__stat-value">0</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">files</span>
+              <span class="story-card__stat-value">0</span></span
+            ><span class="story-card__pipeline">dev</span>
+          </div>
+          <p class="story-card__summary">
+            Secondary dispatch: subir branch coverage daily-page 80. 34%→91.
+          </p>
+          <div class="story-card__drilldowns">
+            <details>
+              <summary>Files changed (0)</summary>
+              <table class="story-card__files">
+                <thead>
+                  <tr>
+                    <th>path</th>
+                    <th>action</th>
+                    <th>tasks</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </details>
+            <details>
+              <summary>ACs covered (0)</summary>
+              <ul class="story-card__acs"></ul>
+            </details>
+            <details>
+              <summary>Pipeline trace (1 dispatches)</summary>
+              <table class="story-card__pipeline-trace">
+                <thead>
+                  <tr>
+                    <th>role</th>
+                    <th>dispatch_id</th>
+                    <th>loop</th>
+                    <th>model</th>
+                    <th>effort</th>
+                    <th>duration</th>
+                    <th>tokens</th>
+                    <th>cost</th>
+                    <th>status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>dev</td>
+                    <td>FEAT-012-BATCH-E-COV-de…</td>
+                    <td>—</td>
+                    <td>sonnet-4-6</td>
+                    <td>—</td>
+                    <td>35m 27s</td>
+                    <td>76186</td>
+                    <td>$0.50</td>
+                    <td>done</td>
+                  </tr>
+                </tbody>
+              </table>
+            </details>
+            <details>
+              <summary>PM note</summary>
+              <p class="story-card__pmnote">
+                Secondary dispatch: subir branch coverage daily-page 80.34%→91.33%. +45 testes em
+                arquivos *.branches.test.{ts,tsx} sem tocar implementação.
               </p>
             </details>
           </div>
@@ -1379,8 +1578,11 @@
                     <th>role</th>
                     <th>dispatch_id</th>
                     <th>loop</th>
+                    <th>model</th>
+                    <th>effort</th>
                     <th>duration</th>
                     <th>tokens</th>
+                    <th>cost</th>
                     <th>status</th>
                   </tr>
                 </thead>
@@ -1389,16 +1591,22 @@
                     <td>qa</td>
                     <td>FEAT-012-FEAT-012-qa-L1</td>
                     <td>—</td>
+                    <td>sonnet-4-6</td>
+                    <td>—</td>
                     <td>5m 24s</td>
                     <td>83073</td>
+                    <td>$0.55</td>
                     <td>done</td>
                   </tr>
                   <tr>
                     <td>audit-agent</td>
                     <td>FEAT-012-FEAT-012-audit…</td>
                     <td>—</td>
+                    <td>haiku-4-5</td>
+                    <td>—</td>
                     <td>1m 6s</td>
                     <td>49805</td>
+                    <td>$0.11</td>
                     <td>done</td>
                   </tr>
                 </tbody>
@@ -1423,7 +1631,7 @@
         <div class="cost-grid">
           <div class="cost-card">
             <span class="cost-label">Total cost</span>
-            <span class="cost-value">$71.14</span>
+            <span class="cost-value">$71.1441</span>
             <small>$71.1441</small>
           </div>
           <div class="cost-card">
@@ -2299,7 +2507,7 @@
         <details>
           <summary>Repo health snapshot</summary>
           <div>
-            <p><em>Measured at: 2026-05-13</em></p>
+            <p><em>Measured at: 2026-05-14</em></p>
             <table>
               <thead>
                 <tr>
@@ -2356,7 +2564,7 @@
             <blockquote>
               <p>
                 Feature: daily-page — orquestrador do dia (composição, navegação, autosave) Task ID:
-                FEAT-012 Phase: done Generated at: 2026-05-13T06:56:58.631Z
+                FEAT-012 Phase: done Generated at: 2026-05-14T03:10:15.087Z
               </p>
             </blockquote>
             <h2>Insights</h2>
@@ -2390,7 +2598,7 @@
               <li>Coverage: 38 of 38 dispatches included in cost calculation</li>
             </ul>
             <h2>Repo health snapshot</h2>
-            <p><em>Measured at: 2026-05-13</em></p>
+            <p><em>Measured at: 2026-05-14</em></p>
             <table>
               <thead>
                 <tr>
@@ -2448,7 +2656,7 @@
                   <td>done</td>
                   <td>—</td>
                   <td>68062724</td>
-                  <td>$748.6900</td>
+                  <td>$57.6661</td>
                   <td>595m 18s</td>
                   <td>PM/orchestrator session (Stop hook): 466 turns</td>
                 </tr>
@@ -2716,7 +2924,7 @@
                   <td>done</td>
                   <td>—</td>
                   <td>79553</td>
-                  <td>$0.5250</td>
+                  <td>$0.5251</td>
                   <td>2m 34s</td>
                   <td>
                     L1: 4 majors (isAnimating guard ausente, animationend ausente, 2 test gaps) +...

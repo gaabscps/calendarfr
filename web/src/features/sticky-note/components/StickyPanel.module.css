@@ -1,0 +1,123 @@
+/* StickyPanel — floating post-it panel.
+ *
+ * AC-001: width 220px; min-height 220px; max-height 400px
+ * AC-002: overflow-y auto (content scrolls inside panel)
+ * AC-003: border-radius 4px; box-shadow var(--shadow-paper)
+ * AC-004: position fixed; left/top come from inline style prop
+ * AC-005: opacity+scale transition (replaces old translateX)
+ * AC-019: drag handle height 20px; cursor grab
+ * AC-021: .dragging class changes cursor to grabbing
+ * AC-033/036: close button styles
+ */
+
+/* ── Base panel ─────────────────────────────────────────────────────────────── */
+
+.panel {
+  position: fixed;
+  width: 220px;
+  min-height: 220px;
+  max-height: 400px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  border-radius: 4px;
+  box-shadow: var(--shadow-paper, 0 2px 8px rgba(0, 0, 0, 0.4));
+  font-family: var(--font-hand);
+  padding: 0 12px 12px 12px;
+  /* AC-005: opacity+scale transition */
+  transition:
+    opacity var(--motion-base, 220ms) ease,
+    transform var(--motion-base, 220ms) ease;
+}
+
+/* AC-005: closed state — hidden, no interaction */
+.panel.closed {
+  opacity: 0;
+  transform: scale(0.95);
+  pointer-events: none;
+}
+
+/* AC-005: open state — visible */
+.panel.open {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* ── Drag handle ────────────────────────────────────────────────────────────── */
+
+/* AC-019: drag handle — 20px height, grab cursor, spans panel width */
+.dragHandle {
+  height: 20px;
+  flex-shrink: 0;
+  cursor: grab;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  background: rgba(0, 0, 0, 0.08);
+  border-radius: 4px 4px 0 0;
+  /* Extends to fill padded panel width */
+  margin: 0 -12px 8px -12px;
+  position: relative;
+}
+
+/* AC-021: grabbing cursor during drag */
+.dragHandle.dragging {
+  cursor: grabbing;
+}
+
+/* Drag indicator — centered line */
+.dragIndicator {
+  width: 32px;
+  height: 3px;
+  background: rgba(0, 0, 0, 0.25);
+  border-radius: 2px;
+}
+
+/* ── Close button ───────────────────────────────────────────────────────────── */
+
+/* AC-033: × button in drag handle, right-aligned */
+.closeButton {
+  position: absolute;
+  right: 4px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 11px;
+  opacity: 0.6;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0 4px;
+  color: inherit;
+  line-height: 1;
+}
+
+.closeButton:hover {
+  opacity: 1;
+}
+
+/* ── Note list ──────────────────────────────────────────────────────────────── */
+
+/* AC-002: list scrolls internally; flex:1 + min-height:0 allow shrink below content size */
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  overflow-y: auto;
+  flex: 1;
+  min-height: 0;
+}
+
+/* ── Add button ─────────────────────────────────────────────────────────────── */
+
+.addButton {
+  flex-shrink: 0;
+  margin-top: var(--spacing-base, 8px);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-hand);
+  font-size: 0.9rem;
+  color: inherit;
+  padding: 0;
+}

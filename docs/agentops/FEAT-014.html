@@ -584,12 +584,10 @@
     <main>
       <section class="story">
         <h2>Story</h2>
-        <article class="story-card story-card--done-retried" aria-label="batch FEAT014-T001">
+        <article class="story-card story-card--done" aria-label="batch T-001">
           <header>
-            <h3>FEAT014-T001</h3>
-            <span class="badge badge-warn" aria-label="status: done with retries"
-              >↻ done (retried)</span
-            >
+            <h3>T-001</h3>
+            <span class="badge badge-pass" aria-label="status: done">✓ done</span>
           </header>
           <div class="story-card__stats">
             <span class="story-card__stat"
@@ -600,13 +598,13 @@
               <span class="story-card__stat-value">—</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">tasks</span>
-              <span class="story-card__stat-value">0</span></span
+              <span class="story-card__stat-value">2</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">ACs</span>
-              <span class="story-card__stat-value">0</span></span
+              <span class="story-card__stat-value">8</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">files</span>
-              <span class="story-card__stat-value">0</span></span
+              <span class="story-card__stat-value">1</span></span
             ><span class="story-card__pipeline">dev → code-reviewer ‖ logic-reviewer → qa</span>
           </div>
           <p class="story-card__summary">
@@ -615,7 +613,7 @@
           </p>
           <div class="story-card__drilldowns">
             <details>
-              <summary>Files changed (0)</summary>
+              <summary>Files changed (1)</summary>
               <table class="story-card__files">
                 <thead>
                   <tr>
@@ -624,12 +622,27 @@
                     <th>tasks</th>
                   </tr>
                 </thead>
-                <tbody></tbody>
+                <tbody>
+                  <tr>
+                    <td>web/src/features/rich-text-line/components/RichTextLine.mod…</td>
+                    <td>changed</td>
+                    <td>T-001</td>
+                  </tr>
+                </tbody>
               </table>
             </details>
             <details>
-              <summary>ACs covered (0)</summary>
-              <ul class="story-card__acs"></ul>
+              <summary>ACs covered (8)</summary>
+              <ul class="story-card__acs">
+                <li><strong>AC-001</strong> —</li>
+                <li><strong>AC-002</strong> —</li>
+                <li><strong>AC-005</strong> —</li>
+                <li><strong>AC-006</strong> —</li>
+                <li><strong>AC-010</strong> —</li>
+                <li><strong>AC-016</strong> —</li>
+                <li><strong>AC-017</strong> —</li>
+                <li><strong>AC-021</strong> —</li>
+              </ul>
             </details>
             <details>
               <summary>Pipeline trace (4 dispatches)</summary>
@@ -639,8 +652,11 @@
                     <th>role</th>
                     <th>dispatch_id</th>
                     <th>loop</th>
+                    <th>model</th>
+                    <th>effort</th>
                     <th>duration</th>
                     <th>tokens</th>
+                    <th>cost</th>
                     <th>status</th>
                   </tr>
                 </thead>
@@ -651,12 +667,18 @@
                     <td>1</td>
                     <td>—</td>
                     <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
                     <td>done</td>
                   </tr>
                   <tr>
                     <td>code-reviewer</td>
                     <td>feat014-t001-cr-001</td>
                     <td>1</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
                     <td>—</td>
                     <td>—</td>
                     <td>done</td>
@@ -667,12 +689,18 @@
                     <td>1</td>
                     <td>—</td>
                     <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
                     <td>done</td>
                   </tr>
                   <tr>
                     <td>qa</td>
                     <td>feat014-t001-qa-001</td>
                     <td>1</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
                     <td>—</td>
                     <td>—</td>
                     <td>done</td>
@@ -688,12 +716,10 @@
             </details>
           </div>
         </article>
-        <article class="story-card story-card--done-retried" aria-label="batch FEAT014-T002">
+        <article class="story-card story-card--done" aria-label="batch T-002">
           <header>
-            <h3>FEAT014-T002</h3>
-            <span class="badge badge-warn" aria-label="status: done with retries"
-              >↻ done (retried)</span
-            >
+            <h3>T-002</h3>
+            <span class="badge badge-pass" aria-label="status: done">✓ done</span>
           </header>
           <div class="story-card__stats">
             <span class="story-card__stat"
@@ -704,19 +730,19 @@
               <span class="story-card__stat-value">—</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">tasks</span>
-              <span class="story-card__stat-value">0</span></span
+              <span class="story-card__stat-value">2</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">ACs</span>
-              <span class="story-card__stat-value">0</span></span
+              <span class="story-card__stat-value">5</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">files</span>
-              <span class="story-card__stat-value">0</span></span
+              <span class="story-card__stat-value">2</span></span
             ><span class="story-card__pipeline">dev → code-reviewer ‖ logic-reviewer → qa</span>
           </div>
           <p class="story-card__summary">Updated paper. rule to 24px cycle, added fonts.</p>
           <div class="story-card__drilldowns">
             <details>
-              <summary>Files changed (0)</summary>
+              <summary>Files changed (2)</summary>
               <table class="story-card__files">
                 <thead>
                   <tr>
@@ -725,12 +751,29 @@
                     <th>tasks</th>
                   </tr>
                 </thead>
-                <tbody></tbody>
+                <tbody>
+                  <tr>
+                    <td>web/src/shared/components/theme/tokens.ts</td>
+                    <td>changed</td>
+                    <td>T-002</td>
+                  </tr>
+                  <tr>
+                    <td>web/src/shared/components/theme/GlobalStyles.tsx</td>
+                    <td>changed</td>
+                    <td>T-002</td>
+                  </tr>
+                </tbody>
               </table>
             </details>
             <details>
-              <summary>ACs covered (0)</summary>
-              <ul class="story-card__acs"></ul>
+              <summary>ACs covered (5)</summary>
+              <ul class="story-card__acs">
+                <li><strong>AC-007</strong> —</li>
+                <li><strong>AC-041</strong> —</li>
+                <li><strong>AC-042</strong> —</li>
+                <li><strong>AC-043</strong> —</li>
+                <li><strong>AC-044</strong> —</li>
+              </ul>
             </details>
             <details>
               <summary>Pipeline trace (4 dispatches)</summary>
@@ -740,8 +783,11 @@
                     <th>role</th>
                     <th>dispatch_id</th>
                     <th>loop</th>
+                    <th>model</th>
+                    <th>effort</th>
                     <th>duration</th>
                     <th>tokens</th>
+                    <th>cost</th>
                     <th>status</th>
                   </tr>
                 </thead>
@@ -752,12 +798,18 @@
                     <td>1</td>
                     <td>—</td>
                     <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
                     <td>done</td>
                   </tr>
                   <tr>
                     <td>code-reviewer</td>
                     <td>feat014-t002-cr-001</td>
                     <td>1</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
                     <td>—</td>
                     <td>—</td>
                     <td>done</td>
@@ -768,12 +820,18 @@
                     <td>1</td>
                     <td>—</td>
                     <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
                     <td>done</td>
                   </tr>
                   <tr>
                     <td>qa</td>
                     <td>feat014-t002-qa-001</td>
                     <td>1</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
                     <td>—</td>
                     <td>—</td>
                     <td>done</td>
@@ -789,12 +847,10 @@
             </details>
           </div>
         </article>
-        <article class="story-card story-card--done-retried" aria-label="batch FEAT014-T003">
+        <article class="story-card story-card--done" aria-label="batch T-003">
           <header>
-            <h3>FEAT014-T003</h3>
-            <span class="badge badge-warn" aria-label="status: done with retries"
-              >↻ done (retried)</span
-            >
+            <h3>T-003</h3>
+            <span class="badge badge-pass" aria-label="status: done">✓ done</span>
           </header>
           <div class="story-card__stats">
             <span class="story-card__stat"
@@ -805,13 +861,13 @@
               <span class="story-card__stat-value">—</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">tasks</span>
-              <span class="story-card__stat-value">0</span></span
+              <span class="story-card__stat-value">2</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">ACs</span>
-              <span class="story-card__stat-value">0</span></span
+              <span class="story-card__stat-value">2</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">files</span>
-              <span class="story-card__stat-value">0</span></span
+              <span class="story-card__stat-value">1</span></span
             ><span class="story-card__pipeline">dev → code-reviewer ‖ logic-reviewer → qa</span>
           </div>
           <p class="story-card__summary">
@@ -819,7 +875,7 @@
           </p>
           <div class="story-card__drilldowns">
             <details>
-              <summary>Files changed (0)</summary>
+              <summary>Files changed (1)</summary>
               <table class="story-card__files">
                 <thead>
                   <tr>
@@ -828,12 +884,21 @@
                     <th>tasks</th>
                   </tr>
                 </thead>
-                <tbody></tbody>
+                <tbody>
+                  <tr>
+                    <td>web/src/shared/components/PaperSheet/PaperSheet.module.css</td>
+                    <td>changed</td>
+                    <td>T-003</td>
+                  </tr>
+                </tbody>
               </table>
             </details>
             <details>
-              <summary>ACs covered (0)</summary>
-              <ul class="story-card__acs"></ul>
+              <summary>ACs covered (2)</summary>
+              <ul class="story-card__acs">
+                <li><strong>AC-008</strong> —</li>
+                <li><strong>AC-009</strong> —</li>
+              </ul>
             </details>
             <details>
               <summary>Pipeline trace (4 dispatches)</summary>
@@ -843,8 +908,11 @@
                     <th>role</th>
                     <th>dispatch_id</th>
                     <th>loop</th>
+                    <th>model</th>
+                    <th>effort</th>
                     <th>duration</th>
                     <th>tokens</th>
+                    <th>cost</th>
                     <th>status</th>
                   </tr>
                 </thead>
@@ -855,12 +923,18 @@
                     <td>1</td>
                     <td>—</td>
                     <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
                     <td>done</td>
                   </tr>
                   <tr>
                     <td>code-reviewer</td>
                     <td>feat014-t003-cr-001</td>
                     <td>1</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
                     <td>—</td>
                     <td>—</td>
                     <td>done</td>
@@ -871,12 +945,18 @@
                     <td>1</td>
                     <td>—</td>
                     <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
                     <td>done</td>
                   </tr>
                   <tr>
                     <td>qa</td>
                     <td>feat014-t003-qa-001</td>
                     <td>1</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
                     <td>—</td>
                     <td>—</td>
                     <td>done</td>
@@ -890,12 +970,10 @@
             </details>
           </div>
         </article>
-        <article class="story-card story-card--done-retried" aria-label="batch FEAT014-T004">
+        <article class="story-card story-card--done" aria-label="batch T-004">
           <header>
-            <h3>FEAT014-T004</h3>
-            <span class="badge badge-warn" aria-label="status: done with retries"
-              >↻ done (retried)</span
-            >
+            <h3>T-004</h3>
+            <span class="badge badge-pass" aria-label="status: done">✓ done</span>
           </header>
           <div class="story-card__stats">
             <span class="story-card__stat"
@@ -906,19 +984,19 @@
               <span class="story-card__stat-value">—</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">tasks</span>
-              <span class="story-card__stat-value">0</span></span
+              <span class="story-card__stat-value">2</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">ACs</span>
-              <span class="story-card__stat-value">0</span></span
+              <span class="story-card__stat-value">4</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">files</span>
-              <span class="story-card__stat-value">0</span></span
+              <span class="story-card__stat-value">1</span></span
             ><span class="story-card__pipeline">dev → code-reviewer ‖ logic-reviewer → qa</span>
           </div>
           <p class="story-card__summary">Updated AgendaSlot . label to font-size 0.</p>
           <div class="story-card__drilldowns">
             <details>
-              <summary>Files changed (0)</summary>
+              <summary>Files changed (1)</summary>
               <table class="story-card__files">
                 <thead>
                   <tr>
@@ -927,12 +1005,23 @@
                     <th>tasks</th>
                   </tr>
                 </thead>
-                <tbody></tbody>
+                <tbody>
+                  <tr>
+                    <td>web/src/features/agenda/components/AgendaSlot.module.css</td>
+                    <td>changed</td>
+                    <td>T-004</td>
+                  </tr>
+                </tbody>
               </table>
             </details>
             <details>
-              <summary>ACs covered (0)</summary>
-              <ul class="story-card__acs"></ul>
+              <summary>ACs covered (4)</summary>
+              <ul class="story-card__acs">
+                <li><strong>AC-003</strong> —</li>
+                <li><strong>AC-011</strong> —</li>
+                <li><strong>AC-012</strong> —</li>
+                <li><strong>AC-018</strong> —</li>
+              </ul>
             </details>
             <details>
               <summary>Pipeline trace (4 dispatches)</summary>
@@ -942,8 +1031,11 @@
                     <th>role</th>
                     <th>dispatch_id</th>
                     <th>loop</th>
+                    <th>model</th>
+                    <th>effort</th>
                     <th>duration</th>
                     <th>tokens</th>
+                    <th>cost</th>
                     <th>status</th>
                   </tr>
                 </thead>
@@ -954,12 +1046,18 @@
                     <td>1</td>
                     <td>—</td>
                     <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
                     <td>done</td>
                   </tr>
                   <tr>
                     <td>code-reviewer</td>
                     <td>feat014-t004-cr-001</td>
                     <td>1</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
                     <td>—</td>
                     <td>—</td>
                     <td>done</td>
@@ -970,12 +1068,18 @@
                     <td>1</td>
                     <td>—</td>
                     <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
                     <td>done</td>
                   </tr>
                   <tr>
                     <td>qa</td>
                     <td>feat014-t004-qa-001</td>
                     <td>1</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
                     <td>—</td>
                     <td>—</td>
                     <td>done</td>
@@ -991,12 +1095,10 @@
             </details>
           </div>
         </article>
-        <article class="story-card story-card--done-retried" aria-label="batch FEAT014-T005">
+        <article class="story-card story-card--done" aria-label="batch T-005">
           <header>
-            <h3>FEAT014-T005</h3>
-            <span class="badge badge-warn" aria-label="status: done with retries"
-              >↻ done (retried)</span
-            >
+            <h3>T-005</h3>
+            <span class="badge badge-pass" aria-label="status: done">✓ done</span>
           </header>
           <div class="story-card__stats">
             <span class="story-card__stat"
@@ -1007,13 +1109,13 @@
               <span class="story-card__stat-value">—</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">tasks</span>
-              <span class="story-card__stat-value">0</span></span
+              <span class="story-card__stat-value">2</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">ACs</span>
-              <span class="story-card__stat-value">0</span></span
+              <span class="story-card__stat-value">2</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">files</span>
-              <span class="story-card__stat-value">0</span></span
+              <span class="story-card__stat-value">1</span></span
             ><span class="story-card__pipeline">dev → code-reviewer ‖ logic-reviewer → qa</span>
           </div>
           <p class="story-card__summary">
@@ -1022,7 +1124,7 @@
           </p>
           <div class="story-card__drilldowns">
             <details>
-              <summary>Files changed (0)</summary>
+              <summary>Files changed (1)</summary>
               <table class="story-card__files">
                 <thead>
                   <tr>
@@ -1031,12 +1133,21 @@
                     <th>tasks</th>
                   </tr>
                 </thead>
-                <tbody></tbody>
+                <tbody>
+                  <tr>
+                    <td>web/src/features/priorities/components/Priorities.module.css</td>
+                    <td>changed</td>
+                    <td>T-005</td>
+                  </tr>
+                </tbody>
               </table>
             </details>
             <details>
-              <summary>ACs covered (0)</summary>
-              <ul class="story-card__acs"></ul>
+              <summary>ACs covered (2)</summary>
+              <ul class="story-card__acs">
+                <li><strong>AC-013</strong> —</li>
+                <li><strong>AC-019</strong> —</li>
+              </ul>
             </details>
             <details>
               <summary>Pipeline trace (4 dispatches)</summary>
@@ -1046,8 +1157,11 @@
                     <th>role</th>
                     <th>dispatch_id</th>
                     <th>loop</th>
+                    <th>model</th>
+                    <th>effort</th>
                     <th>duration</th>
                     <th>tokens</th>
+                    <th>cost</th>
                     <th>status</th>
                   </tr>
                 </thead>
@@ -1058,12 +1172,18 @@
                     <td>1</td>
                     <td>—</td>
                     <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
                     <td>done</td>
                   </tr>
                   <tr>
                     <td>code-reviewer</td>
                     <td>feat014-t005-cr-001</td>
                     <td>1</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
                     <td>—</td>
                     <td>—</td>
                     <td>done</td>
@@ -1074,12 +1194,18 @@
                     <td>1</td>
                     <td>—</td>
                     <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
                     <td>done</td>
                   </tr>
                   <tr>
                     <td>qa</td>
                     <td>feat014-t005-qa-001</td>
                     <td>1</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
                     <td>—</td>
                     <td>—</td>
                     <td>done</td>
@@ -1093,12 +1219,10 @@
             </details>
           </div>
         </article>
-        <article class="story-card story-card--done-retried" aria-label="batch FEAT014-T006">
+        <article class="story-card story-card--done" aria-label="batch T-006">
           <header>
-            <h3>FEAT014-T006</h3>
-            <span class="badge badge-warn" aria-label="status: done with retries"
-              >↻ done (retried)</span
-            >
+            <h3>T-006</h3>
+            <span class="badge badge-pass" aria-label="status: done">✓ done</span>
           </header>
           <div class="story-card__stats">
             <span class="story-card__stat"
@@ -1109,19 +1233,19 @@
               <span class="story-card__stat-value">—</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">tasks</span>
-              <span class="story-card__stat-value">0</span></span
+              <span class="story-card__stat-value">2</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">ACs</span>
-              <span class="story-card__stat-value">0</span></span
+              <span class="story-card__stat-value">2</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">files</span>
-              <span class="story-card__stat-value">0</span></span
+              <span class="story-card__stat-value">2</span></span
             ><span class="story-card__pipeline">dev → code-reviewer ‖ logic-reviewer → qa</span>
           </div>
           <p class="story-card__summary">Set Agenda . section gap to 0 (was 4px) and Notes .</p>
           <div class="story-card__drilldowns">
             <details>
-              <summary>Files changed (0)</summary>
+              <summary>Files changed (2)</summary>
               <table class="story-card__files">
                 <thead>
                   <tr>
@@ -1130,12 +1254,26 @@
                     <th>tasks</th>
                   </tr>
                 </thead>
-                <tbody></tbody>
+                <tbody>
+                  <tr>
+                    <td>web/src/features/agenda/components/Agenda.module.css</td>
+                    <td>changed</td>
+                    <td>T-006</td>
+                  </tr>
+                  <tr>
+                    <td>web/src/features/notes/components/Notes.module.css</td>
+                    <td>changed</td>
+                    <td>T-006</td>
+                  </tr>
+                </tbody>
               </table>
             </details>
             <details>
-              <summary>ACs covered (0)</summary>
-              <ul class="story-card__acs"></ul>
+              <summary>ACs covered (2)</summary>
+              <ul class="story-card__acs">
+                <li><strong>FEAT-014/AC-004</strong> — ev-001, ev-003</li>
+                <li><strong>FEAT-014/AC-014</strong> — ev-002, ev-004</li>
+              </ul>
             </details>
             <details>
               <summary>Pipeline trace (4 dispatches)</summary>
@@ -1145,8 +1283,11 @@
                     <th>role</th>
                     <th>dispatch_id</th>
                     <th>loop</th>
+                    <th>model</th>
+                    <th>effort</th>
                     <th>duration</th>
                     <th>tokens</th>
+                    <th>cost</th>
                     <th>status</th>
                   </tr>
                 </thead>
@@ -1157,12 +1298,18 @@
                     <td>1</td>
                     <td>—</td>
                     <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
                     <td>done</td>
                   </tr>
                   <tr>
                     <td>code-reviewer</td>
                     <td>feat014-t006-cr-001</td>
                     <td>1</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
                     <td>—</td>
                     <td>—</td>
                     <td>done</td>
@@ -1173,12 +1320,18 @@
                     <td>1</td>
                     <td>—</td>
                     <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
                     <td>done</td>
                   </tr>
                   <tr>
                     <td>qa</td>
                     <td>feat014-t006-qa-001</td>
                     <td>1</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
                     <td>—</td>
                     <td>—</td>
                     <td>done</td>
@@ -1192,12 +1345,10 @@
             </details>
           </div>
         </article>
-        <article class="story-card story-card--done-retried" aria-label="batch FEAT014-T007">
+        <article class="story-card story-card--done" aria-label="batch T-007">
           <header>
-            <h3>FEAT014-T007</h3>
-            <span class="badge badge-warn" aria-label="status: done with retries"
-              >↻ done (retried)</span
-            >
+            <h3>T-007</h3>
+            <span class="badge badge-pass" aria-label="status: done">✓ done</span>
           </header>
           <div class="story-card__stats">
             <span class="story-card__stat"
@@ -1208,19 +1359,19 @@
               <span class="story-card__stat-value">—</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">tasks</span>
-              <span class="story-card__stat-value">0</span></span
+              <span class="story-card__stat-value">1</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">ACs</span>
-              <span class="story-card__stat-value">0</span></span
+              <span class="story-card__stat-value">4</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">files</span>
-              <span class="story-card__stat-value">0</span></span
+              <span class="story-card__stat-value">1</span></span
             ><span class="story-card__pipeline">dev → code-reviewer ‖ logic-reviewer → qa</span>
           </div>
           <p class="story-card__summary">Added RuledWithEditor story to PaperSheet. stories.</p>
           <div class="story-card__drilldowns">
             <details>
-              <summary>Files changed (0)</summary>
+              <summary>Files changed (1)</summary>
               <table class="story-card__files">
                 <thead>
                   <tr>
@@ -1229,12 +1380,25 @@
                     <th>tasks</th>
                   </tr>
                 </thead>
-                <tbody></tbody>
+                <tbody>
+                  <tr>
+                    <td>web/src/shared/components/PaperSheet/PaperSheet.stories.tsx</td>
+                    <td>changed</td>
+                    <td>FEAT-014</td>
+                  </tr>
+                </tbody>
               </table>
             </details>
             <details>
-              <summary>ACs covered (0)</summary>
-              <ul class="story-card__acs"></ul>
+              <summary>ACs covered (4)</summary>
+              <ul class="story-card__acs">
+                <li><strong>AC-015</strong> —</li>
+                <li><strong>AC-020</strong> —</li>
+                <li><strong>FEAT-014/AC-015</strong> — e-ac015-file, e-ac015-props</li>
+                <li>
+                  <strong>FEAT-014/AC-020</strong> — e-ac020-typecheck, e-ac020-build-storybook
+                </li>
+              </ul>
             </details>
             <details>
               <summary>Pipeline trace (4 dispatches)</summary>
@@ -1244,8 +1408,11 @@
                     <th>role</th>
                     <th>dispatch_id</th>
                     <th>loop</th>
+                    <th>model</th>
+                    <th>effort</th>
                     <th>duration</th>
                     <th>tokens</th>
+                    <th>cost</th>
                     <th>status</th>
                   </tr>
                 </thead>
@@ -1256,12 +1423,18 @@
                     <td>1</td>
                     <td>—</td>
                     <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
                     <td>done</td>
                   </tr>
                   <tr>
                     <td>code-reviewer</td>
                     <td>feat014-t007-cr-001</td>
                     <td>1</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
                     <td>—</td>
                     <td>—</td>
                     <td>done</td>
@@ -1272,12 +1445,18 @@
                     <td>1</td>
                     <td>—</td>
                     <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
                     <td>done</td>
                   </tr>
                   <tr>
                     <td>qa</td>
                     <td>feat014-t007-qa-001</td>
                     <td>1</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
                     <td>—</td>
                     <td>—</td>
                     <td>done</td>
@@ -1291,9 +1470,9 @@
             </details>
           </div>
         </article>
-        <article class="story-card story-card--done-retried" aria-label="batch FEAT014-T008">
+        <article class="story-card story-card--done-retried" aria-label="batch T-008">
           <header>
-            <h3>FEAT014-T008</h3>
+            <h3>T-008</h3>
             <span class="badge badge-warn" aria-label="status: done with retries"
               >↻ done (retried)</span
             >
@@ -1307,13 +1486,13 @@
               <span class="story-card__stat-value">—</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">tasks</span>
-              <span class="story-card__stat-value">0</span></span
+              <span class="story-card__stat-value">2</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">ACs</span>
-              <span class="story-card__stat-value">0</span></span
+              <span class="story-card__stat-value">7</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">files</span>
-              <span class="story-card__stat-value">0</span></span
+              <span class="story-card__stat-value">2</span></span
             ><span class="story-card__pipeline">dev → code-reviewer ‖ logic-reviewer → qa</span>
           </div>
           <aside class="story-card__retry" role="status">
@@ -1334,7 +1513,7 @@
           </p>
           <div class="story-card__drilldowns">
             <details>
-              <summary>Files changed (0)</summary>
+              <summary>Files changed (2)</summary>
               <table class="story-card__files">
                 <thead>
                   <tr>
@@ -1343,12 +1522,31 @@
                     <th>tasks</th>
                   </tr>
                 </thead>
-                <tbody></tbody>
+                <tbody>
+                  <tr>
+                    <td>web/src/features/daily-page/components/DailyPage.tsx</td>
+                    <td>changed</td>
+                    <td>FEAT-014</td>
+                  </tr>
+                  <tr>
+                    <td>web/src/features/daily-page/components/DailyPage.module.css</td>
+                    <td>changed</td>
+                    <td>FEAT-014</td>
+                  </tr>
+                </tbody>
               </table>
             </details>
             <details>
-              <summary>ACs covered (0)</summary>
-              <ul class="story-card__acs"></ul>
+              <summary>ACs covered (7)</summary>
+              <ul class="story-card__acs">
+                <li><strong>FEAT-014/AC-022</strong> — ev-001</li>
+                <li><strong>FEAT-014/AC-023</strong> — ev-002</li>
+                <li><strong>FEAT-014/AC-024</strong> — ev-003</li>
+                <li><strong>FEAT-014/AC-025</strong> — ev-004</li>
+                <li><strong>FEAT-014/AC-026</strong> — ev-005</li>
+                <li><strong>FEAT-014/AC-027</strong> — ev-006</li>
+                <li><strong>FEAT-014/AC-028</strong> — ev-007, ev-008</li>
+              </ul>
             </details>
             <details>
               <summary>Pipeline trace (7 dispatches)</summary>
@@ -1358,8 +1556,11 @@
                     <th>role</th>
                     <th>dispatch_id</th>
                     <th>loop</th>
+                    <th>model</th>
+                    <th>effort</th>
                     <th>duration</th>
                     <th>tokens</th>
+                    <th>cost</th>
                     <th>status</th>
                   </tr>
                 </thead>
@@ -1370,12 +1571,18 @@
                     <td>1</td>
                     <td>—</td>
                     <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
                     <td>done</td>
                   </tr>
                   <tr>
                     <td>code-reviewer</td>
                     <td>feat014-t008-cr-001</td>
                     <td>1</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
                     <td>—</td>
                     <td>—</td>
                     <td>done</td>
@@ -1386,12 +1593,18 @@
                     <td>1</td>
                     <td>—</td>
                     <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
                     <td>done</td>
                   </tr>
                   <tr>
                     <td>dev</td>
                     <td>feat014-t008-dev-002</td>
                     <td>2</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
                     <td>—</td>
                     <td>—</td>
                     <td>done</td>
@@ -1402,6 +1615,9 @@
                     <td>2</td>
                     <td>—</td>
                     <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
                     <td>done</td>
                   </tr>
                   <tr>
@@ -1410,12 +1626,18 @@
                     <td>2</td>
                     <td>—</td>
                     <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
                     <td>done</td>
                   </tr>
                   <tr>
                     <td>qa</td>
                     <td>feat014-t008-qa-001</td>
                     <td>2</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
                     <td>—</td>
                     <td>—</td>
                     <td>done</td>
@@ -1429,12 +1651,10 @@
             </details>
           </div>
         </article>
-        <article class="story-card story-card--done-retried" aria-label="batch FEAT014-T009">
+        <article class="story-card story-card--done" aria-label="batch T-009">
           <header>
-            <h3>FEAT014-T009</h3>
-            <span class="badge badge-warn" aria-label="status: done with retries"
-              >↻ done (retried)</span
-            >
+            <h3>T-009</h3>
+            <span class="badge badge-pass" aria-label="status: done">✓ done</span>
           </header>
           <div class="story-card__stats">
             <span class="story-card__stat"
@@ -1445,13 +1665,13 @@
               <span class="story-card__stat-value">—</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">tasks</span>
-              <span class="story-card__stat-value">0</span></span
+              <span class="story-card__stat-value">1</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">ACs</span>
-              <span class="story-card__stat-value">0</span></span
+              <span class="story-card__stat-value">2</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">files</span>
-              <span class="story-card__stat-value">0</span></span
+              <span class="story-card__stat-value">2</span></span
             ><span class="story-card__pipeline">dev → code-reviewer ‖ logic-reviewer → qa</span>
           </div>
           <p class="story-card__summary">
@@ -1459,7 +1679,7 @@
           </p>
           <div class="story-card__drilldowns">
             <details>
-              <summary>Files changed (0)</summary>
+              <summary>Files changed (2)</summary>
               <table class="story-card__files">
                 <thead>
                   <tr>
@@ -1468,12 +1688,26 @@
                     <th>tasks</th>
                   </tr>
                 </thead>
-                <tbody></tbody>
+                <tbody>
+                  <tr>
+                    <td>web/src/features/rich-text-line/lib/normalizeHtml.ts</td>
+                    <td>changed</td>
+                    <td>FEAT-014</td>
+                  </tr>
+                  <tr>
+                    <td>web/src/features/rich-text-line/lib/__tests__/normalizeHtml…</td>
+                    <td>changed</td>
+                    <td>FEAT-014</td>
+                  </tr>
+                </tbody>
               </table>
             </details>
             <details>
-              <summary>ACs covered (0)</summary>
-              <ul class="story-card__acs"></ul>
+              <summary>ACs covered (2)</summary>
+              <ul class="story-card__acs">
+                <li><strong>AC-032</strong> —</li>
+                <li><strong>FEAT-014/AC-032</strong> — ev-001, ev-002</li>
+              </ul>
             </details>
             <details>
               <summary>Pipeline trace (4 dispatches)</summary>
@@ -1483,8 +1717,11 @@
                     <th>role</th>
                     <th>dispatch_id</th>
                     <th>loop</th>
+                    <th>model</th>
+                    <th>effort</th>
                     <th>duration</th>
                     <th>tokens</th>
+                    <th>cost</th>
                     <th>status</th>
                   </tr>
                 </thead>
@@ -1495,12 +1732,18 @@
                     <td>1</td>
                     <td>—</td>
                     <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
                     <td>done</td>
                   </tr>
                   <tr>
                     <td>code-reviewer</td>
                     <td>feat014-t009-cr-001</td>
                     <td>1</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
                     <td>—</td>
                     <td>—</td>
                     <td>done</td>
@@ -1511,12 +1754,18 @@
                     <td>1</td>
                     <td>—</td>
                     <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
                     <td>done</td>
                   </tr>
                   <tr>
                     <td>qa</td>
                     <td>feat014-t009-qa-001</td>
                     <td>1</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
                     <td>—</td>
                     <td>—</td>
                     <td>done</td>
@@ -1530,12 +1779,10 @@
             </details>
           </div>
         </article>
-        <article class="story-card story-card--done-retried" aria-label="batch FEAT014-T010">
+        <article class="story-card story-card--done" aria-label="batch T-010">
           <header>
-            <h3>FEAT014-T010</h3>
-            <span class="badge badge-warn" aria-label="status: done with retries"
-              >↻ done (retried)</span
-            >
+            <h3>T-010</h3>
+            <span class="badge badge-pass" aria-label="status: done">✓ done</span>
           </header>
           <div class="story-card__stats">
             <span class="story-card__stat"
@@ -1546,13 +1793,13 @@
               <span class="story-card__stat-value">—</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">tasks</span>
-              <span class="story-card__stat-value">0</span></span
+              <span class="story-card__stat-value">1</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">ACs</span>
-              <span class="story-card__stat-value">0</span></span
+              <span class="story-card__stat-value">2</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">files</span>
-              <span class="story-card__stat-value">0</span></span
+              <span class="story-card__stat-value">2</span></span
             ><span class="story-card__pipeline">dev → code-reviewer ‖ logic-reviewer → qa</span>
           </div>
           <p class="story-card__summary">
@@ -1561,7 +1808,7 @@
           </p>
           <div class="story-card__drilldowns">
             <details>
-              <summary>Files changed (0)</summary>
+              <summary>Files changed (2)</summary>
               <table class="story-card__files">
                 <thead>
                   <tr>
@@ -1570,12 +1817,26 @@
                     <th>tasks</th>
                   </tr>
                 </thead>
-                <tbody></tbody>
+                <tbody>
+                  <tr>
+                    <td>web/src/features/rich-text-line/lib/extensions.ts</td>
+                    <td>changed</td>
+                    <td>FEAT-014</td>
+                  </tr>
+                  <tr>
+                    <td>web/src/features/rich-text-line/lib/__tests__/extensions.te…</td>
+                    <td>changed</td>
+                    <td>FEAT-014</td>
+                  </tr>
+                </tbody>
               </table>
             </details>
             <details>
-              <summary>ACs covered (0)</summary>
-              <ul class="story-card__acs"></ul>
+              <summary>ACs covered (2)</summary>
+              <ul class="story-card__acs">
+                <li><strong>AC-031</strong> —</li>
+                <li><strong>FEAT-014/AC-031</strong> — e1, e2</li>
+              </ul>
             </details>
             <details>
               <summary>Pipeline trace (4 dispatches)</summary>
@@ -1585,8 +1846,11 @@
                     <th>role</th>
                     <th>dispatch_id</th>
                     <th>loop</th>
+                    <th>model</th>
+                    <th>effort</th>
                     <th>duration</th>
                     <th>tokens</th>
+                    <th>cost</th>
                     <th>status</th>
                   </tr>
                 </thead>
@@ -1597,12 +1861,18 @@
                     <td>1</td>
                     <td>—</td>
                     <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
                     <td>done</td>
                   </tr>
                   <tr>
                     <td>code-reviewer</td>
                     <td>feat014-t010-cr-001</td>
                     <td>1</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
                     <td>—</td>
                     <td>—</td>
                     <td>done</td>
@@ -1613,12 +1883,18 @@
                     <td>1</td>
                     <td>—</td>
                     <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
                     <td>done</td>
                   </tr>
                   <tr>
                     <td>qa</td>
                     <td>feat014-t010-qa-001</td>
                     <td>1</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
                     <td>—</td>
                     <td>—</td>
                     <td>done</td>
@@ -1632,9 +1908,9 @@
             </details>
           </div>
         </article>
-        <article class="story-card story-card--done-retried" aria-label="batch FEAT014-T011">
+        <article class="story-card story-card--done-retried" aria-label="batch T-011">
           <header>
-            <h3>FEAT014-T011</h3>
+            <h3>T-011</h3>
             <span class="badge badge-warn" aria-label="status: done with retries"
               >↻ done (retried)</span
             >
@@ -1648,13 +1924,13 @@
               <span class="story-card__stat-value">—</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">tasks</span>
-              <span class="story-card__stat-value">0</span></span
+              <span class="story-card__stat-value">1</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">ACs</span>
-              <span class="story-card__stat-value">0</span></span
+              <span class="story-card__stat-value">8</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">files</span>
-              <span class="story-card__stat-value">0</span></span
+              <span class="story-card__stat-value">5</span></span
             ><span class="story-card__pipeline">dev → code-reviewer ‖ logic-reviewer → qa</span>
           </div>
           <aside class="story-card__retry" role="status">
@@ -1678,7 +1954,7 @@
           </p>
           <div class="story-card__drilldowns">
             <details>
-              <summary>Files changed (0)</summary>
+              <summary>Files changed (5)</summary>
               <table class="story-card__files">
                 <thead>
                   <tr>
@@ -1687,12 +1963,47 @@
                     <th>tasks</th>
                   </tr>
                 </thead>
-                <tbody></tbody>
+                <tbody>
+                  <tr>
+                    <td>web/src/features/rich-text-line/hooks/useRichTextBlock.ts</td>
+                    <td>changed</td>
+                    <td>FEAT-014</td>
+                  </tr>
+                  <tr>
+                    <td>web/src/features/rich-text-line/hooks/__tests__/useRichText…</td>
+                    <td>changed</td>
+                    <td>FEAT-014</td>
+                  </tr>
+                  <tr>
+                    <td>web/src/features/rich-text-line/lib/sanitizeHtml.ts</td>
+                    <td>changed</td>
+                    <td>FEAT-014</td>
+                  </tr>
+                  <tr>
+                    <td>web/src/features/rich-text-line/lib/normalizeHtml.ts</td>
+                    <td>changed</td>
+                    <td>FEAT-014</td>
+                  </tr>
+                  <tr>
+                    <td>web/src/features/rich-text-line/lib/__tests__/normalizeHtml…</td>
+                    <td>changed</td>
+                    <td>FEAT-014</td>
+                  </tr>
+                </tbody>
               </table>
             </details>
             <details>
-              <summary>ACs covered (0)</summary>
-              <ul class="story-card__acs"></ul>
+              <summary>ACs covered (8)</summary>
+              <ul class="story-card__acs">
+                <li><strong>AC-033</strong> —</li>
+                <li><strong>AC-034</strong> —</li>
+                <li><strong>AC-035</strong> —</li>
+                <li><strong>AC-039</strong> —</li>
+                <li><strong>FEAT-014/AC-033</strong> — ev-001, ev-005</li>
+                <li><strong>FEAT-014/AC-034</strong> — ev-002</li>
+                <li><strong>FEAT-014/AC-035</strong> — ev-003</li>
+                <li><strong>FEAT-014/AC-039</strong> — ev-004</li>
+              </ul>
             </details>
             <details>
               <summary>Pipeline trace (7 dispatches)</summary>
@@ -1702,8 +2013,11 @@
                     <th>role</th>
                     <th>dispatch_id</th>
                     <th>loop</th>
+                    <th>model</th>
+                    <th>effort</th>
                     <th>duration</th>
                     <th>tokens</th>
+                    <th>cost</th>
                     <th>status</th>
                   </tr>
                 </thead>
@@ -1714,12 +2028,18 @@
                     <td>1</td>
                     <td>—</td>
                     <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
                     <td>done</td>
                   </tr>
                   <tr>
                     <td>code-reviewer</td>
                     <td>feat014-t011-cr-001</td>
                     <td>1</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
                     <td>—</td>
                     <td>—</td>
                     <td>done</td>
@@ -1730,12 +2050,18 @@
                     <td>1</td>
                     <td>—</td>
                     <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
                     <td>done</td>
                   </tr>
                   <tr>
                     <td>dev</td>
                     <td>feat014-t011-dev-002</td>
                     <td>2</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
                     <td>—</td>
                     <td>—</td>
                     <td>done</td>
@@ -1746,6 +2072,9 @@
                     <td>2</td>
                     <td>—</td>
                     <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
                     <td>done</td>
                   </tr>
                   <tr>
@@ -1754,12 +2083,18 @@
                     <td>2</td>
                     <td>—</td>
                     <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
                     <td>done</td>
                   </tr>
                   <tr>
                     <td>qa</td>
                     <td>feat014-t011-qa-001</td>
                     <td>2</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
                     <td>—</td>
                     <td>—</td>
                     <td>done</td>
@@ -1775,9 +2110,9 @@
             </details>
           </div>
         </article>
-        <article class="story-card story-card--done-retried" aria-label="batch FEAT014-T012">
+        <article class="story-card story-card--done-retried" aria-label="batch T-012">
           <header>
-            <h3>FEAT014-T012</h3>
+            <h3>T-012</h3>
             <span class="badge badge-warn" aria-label="status: done with retries"
               >↻ done (retried)</span
             >
@@ -1791,13 +2126,13 @@
               <span class="story-card__stat-value">—</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">tasks</span>
-              <span class="story-card__stat-value">0</span></span
+              <span class="story-card__stat-value">1</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">ACs</span>
-              <span class="story-card__stat-value">0</span></span
+              <span class="story-card__stat-value">4</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">files</span>
-              <span class="story-card__stat-value">0</span></span
+              <span class="story-card__stat-value">4</span></span
             ><span class="story-card__pipeline">dev → code-reviewer ‖ logic-reviewer → qa</span>
           </div>
           <aside class="story-card__retry" role="status">
@@ -1811,7 +2146,7 @@
           </p>
           <div class="story-card__drilldowns">
             <details>
-              <summary>Files changed (0)</summary>
+              <summary>Files changed (4)</summary>
               <table class="story-card__files">
                 <thead>
                   <tr>
@@ -1820,12 +2155,38 @@
                     <th>tasks</th>
                   </tr>
                 </thead>
-                <tbody></tbody>
+                <tbody>
+                  <tr>
+                    <td>web/src/features/rich-text-line/types.ts</td>
+                    <td>changed</td>
+                    <td>FEAT-014</td>
+                  </tr>
+                  <tr>
+                    <td>web/src/features/rich-text-line/components/RichTextBlock.mo…</td>
+                    <td>changed</td>
+                    <td>FEAT-014</td>
+                  </tr>
+                  <tr>
+                    <td>web/src/features/rich-text-line/components/RichTextBlock.tsx</td>
+                    <td>changed</td>
+                    <td>FEAT-014</td>
+                  </tr>
+                  <tr>
+                    <td>web/src/features/rich-text-line/index.ts</td>
+                    <td>changed</td>
+                    <td>FEAT-014</td>
+                  </tr>
+                </tbody>
               </table>
             </details>
             <details>
-              <summary>ACs covered (0)</summary>
-              <ul class="story-card__acs"></ul>
+              <summary>ACs covered (4)</summary>
+              <ul class="story-card__acs">
+                <li><strong>FEAT-014/AC-029</strong> — E-001</li>
+                <li><strong>FEAT-014/AC-030</strong> — E-002</li>
+                <li><strong>FEAT-014/AC-036</strong> — E-003</li>
+                <li><strong>FEAT-014/AC-038</strong> — E-004</li>
+              </ul>
             </details>
             <details>
               <summary>Pipeline trace (5 dispatches)</summary>
@@ -1835,8 +2196,11 @@
                     <th>role</th>
                     <th>dispatch_id</th>
                     <th>loop</th>
+                    <th>model</th>
+                    <th>effort</th>
                     <th>duration</th>
                     <th>tokens</th>
+                    <th>cost</th>
                     <th>status</th>
                   </tr>
                 </thead>
@@ -1847,12 +2211,18 @@
                     <td>1</td>
                     <td>—</td>
                     <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
                     <td>done</td>
                   </tr>
                   <tr>
                     <td>code-reviewer</td>
                     <td>feat014-t012-cr-001</td>
                     <td>1</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
                     <td>—</td>
                     <td>—</td>
                     <td>done</td>
@@ -1863,6 +2233,9 @@
                     <td>1</td>
                     <td>—</td>
                     <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
                     <td>done</td>
                   </tr>
                   <tr>
@@ -1871,12 +2244,18 @@
                     <td>2</td>
                     <td>—</td>
                     <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
                     <td>done</td>
                   </tr>
                   <tr>
                     <td>qa</td>
                     <td>feat014-t012-qa-001</td>
                     <td>2</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
                     <td>—</td>
                     <td>—</td>
                     <td>done</td>
@@ -1892,9 +2271,9 @@
             </details>
           </div>
         </article>
-        <article class="story-card story-card--done-retried" aria-label="batch FEAT014-T013">
+        <article class="story-card story-card--done-retried" aria-label="batch T-013">
           <header>
-            <h3>FEAT014-T013</h3>
+            <h3>T-013</h3>
             <span class="badge badge-warn" aria-label="status: done with retries"
               >↻ done (retried)</span
             >
@@ -1908,13 +2287,13 @@
               <span class="story-card__stat-value">—</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">tasks</span>
-              <span class="story-card__stat-value">0</span></span
+              <span class="story-card__stat-value">1</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">ACs</span>
-              <span class="story-card__stat-value">0</span></span
+              <span class="story-card__stat-value">1</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">files</span>
-              <span class="story-card__stat-value">0</span></span
+              <span class="story-card__stat-value">5</span></span
             ><span class="story-card__pipeline">dev → code-reviewer ‖ logic-reviewer → qa</span>
           </div>
           <aside class="story-card__retry" role="status">
@@ -1929,7 +2308,7 @@
           </p>
           <div class="story-card__drilldowns">
             <details>
-              <summary>Files changed (0)</summary>
+              <summary>Files changed (5)</summary>
               <table class="story-card__files">
                 <thead>
                   <tr>
@@ -1938,12 +2317,40 @@
                     <th>tasks</th>
                   </tr>
                 </thead>
-                <tbody></tbody>
+                <tbody>
+                  <tr>
+                    <td>web/src/features/notes/components/NoteItem.tsx</td>
+                    <td>changed</td>
+                    <td>FEAT-014</td>
+                  </tr>
+                  <tr>
+                    <td>web/src/features/notes/components/NoteItem.module.css</td>
+                    <td>changed</td>
+                    <td>FEAT-014</td>
+                  </tr>
+                  <tr>
+                    <td>web/src/features/notes/components/__tests__/Notes.interacti…</td>
+                    <td>changed</td>
+                    <td>FEAT-014</td>
+                  </tr>
+                  <tr>
+                    <td>web/src/features/notes/components/__tests__/Notes.integrati…</td>
+                    <td>changed</td>
+                    <td>FEAT-014</td>
+                  </tr>
+                  <tr>
+                    <td>web/src/features/notes/components/__tests__/Notes.memo.test…</td>
+                    <td>changed</td>
+                    <td>FEAT-014</td>
+                  </tr>
+                </tbody>
               </table>
             </details>
             <details>
-              <summary>ACs covered (0)</summary>
-              <ul class="story-card__acs"></ul>
+              <summary>ACs covered (1)</summary>
+              <ul class="story-card__acs">
+                <li><strong>FEAT-014/AC-037</strong> — ev-1, ev-2, ev-3, ev-4, ev-5</li>
+              </ul>
             </details>
             <details>
               <summary>Pipeline trace (5 dispatches)</summary>
@@ -1953,8 +2360,11 @@
                     <th>role</th>
                     <th>dispatch_id</th>
                     <th>loop</th>
+                    <th>model</th>
+                    <th>effort</th>
                     <th>duration</th>
                     <th>tokens</th>
+                    <th>cost</th>
                     <th>status</th>
                   </tr>
                 </thead>
@@ -1965,12 +2375,18 @@
                     <td>1</td>
                     <td>—</td>
                     <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
                     <td>done</td>
                   </tr>
                   <tr>
                     <td>code-reviewer</td>
                     <td>feat014-t013-cr-001</td>
                     <td>1</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
                     <td>—</td>
                     <td>—</td>
                     <td>done</td>
@@ -1981,6 +2397,9 @@
                     <td>1</td>
                     <td>—</td>
                     <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
                     <td>done</td>
                   </tr>
                   <tr>
@@ -1989,12 +2408,18 @@
                     <td>2</td>
                     <td>—</td>
                     <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
                     <td>done</td>
                   </tr>
                   <tr>
                     <td>qa</td>
                     <td>feat014-t013-qa-001</td>
                     <td>2</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
                     <td>—</td>
                     <td>—</td>
                     <td>done</td>
@@ -2010,9 +2435,9 @@
             </details>
           </div>
         </article>
-        <article class="story-card story-card--done-retried" aria-label="batch FEAT014-T014">
+        <article class="story-card story-card--done-retried" aria-label="batch T-014">
           <header>
-            <h3>FEAT014-T014</h3>
+            <h3>T-014</h3>
             <span class="badge badge-warn" aria-label="status: done with retries"
               >↻ done (retried)</span
             >
@@ -2026,13 +2451,13 @@
               <span class="story-card__stat-value">—</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">tasks</span>
-              <span class="story-card__stat-value">0</span></span
+              <span class="story-card__stat-value">1</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">ACs</span>
-              <span class="story-card__stat-value">0</span></span
+              <span class="story-card__stat-value">1</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">files</span>
-              <span class="story-card__stat-value">0</span></span
+              <span class="story-card__stat-value">2</span></span
             ><span class="story-card__pipeline">dev → code-reviewer ‖ logic-reviewer → qa</span>
           </div>
           <aside class="story-card__retry" role="status">
@@ -2053,7 +2478,7 @@
           </p>
           <div class="story-card__drilldowns">
             <details>
-              <summary>Files changed (0)</summary>
+              <summary>Files changed (2)</summary>
               <table class="story-card__files">
                 <thead>
                   <tr>
@@ -2062,12 +2487,25 @@
                     <th>tasks</th>
                   </tr>
                 </thead>
-                <tbody></tbody>
+                <tbody>
+                  <tr>
+                    <td>web/src/features/rich-text-line/components/__tests__/RichTe…</td>
+                    <td>changed</td>
+                    <td>FEAT-014</td>
+                  </tr>
+                  <tr>
+                    <td>web/src/features/notes/components/__tests__/Notes.integrati…</td>
+                    <td>changed</td>
+                    <td>FEAT-014</td>
+                  </tr>
+                </tbody>
               </table>
             </details>
             <details>
-              <summary>ACs covered (0)</summary>
-              <ul class="story-card__acs"></ul>
+              <summary>ACs covered (1)</summary>
+              <ul class="story-card__acs">
+                <li><strong>FEAT-014/AC-040</strong> — ev-001, ev-002, ev-003, ev-004</li>
+              </ul>
             </details>
             <details>
               <summary>Pipeline trace (7 dispatches)</summary>
@@ -2077,8 +2515,11 @@
                     <th>role</th>
                     <th>dispatch_id</th>
                     <th>loop</th>
+                    <th>model</th>
+                    <th>effort</th>
                     <th>duration</th>
                     <th>tokens</th>
+                    <th>cost</th>
                     <th>status</th>
                   </tr>
                 </thead>
@@ -2089,12 +2530,18 @@
                     <td>1</td>
                     <td>—</td>
                     <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
                     <td>done</td>
                   </tr>
                   <tr>
                     <td>code-reviewer</td>
                     <td>feat014-t014-cr-001</td>
                     <td>1</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
                     <td>—</td>
                     <td>—</td>
                     <td>needs_review</td>
@@ -2105,12 +2552,18 @@
                     <td>1</td>
                     <td>—</td>
                     <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
                     <td>needs_review</td>
                   </tr>
                   <tr>
                     <td>dev</td>
                     <td>feat014-t014-dev-002</td>
                     <td>2</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
                     <td>—</td>
                     <td>—</td>
                     <td>done</td>
@@ -2121,6 +2574,9 @@
                     <td>2</td>
                     <td>—</td>
                     <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
                     <td>done</td>
                   </tr>
                   <tr>
@@ -2129,12 +2585,18 @@
                     <td>2</td>
                     <td>—</td>
                     <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
                     <td>done</td>
                   </tr>
                   <tr>
                     <td>qa</td>
                     <td>feat014-t014-qa-001</td>
                     <td>2</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
                     <td>—</td>
                     <td>—</td>
                     <td>done</td>
@@ -2151,12 +2613,10 @@
             </details>
           </div>
         </article>
-        <article class="story-card story-card--done-retried" aria-label="batch FEAT014-AUDIT">
+        <article class="story-card story-card--done" aria-label="batch FEAT-014">
           <header>
-            <h3>FEAT014-AUDIT</h3>
-            <span class="badge badge-warn" aria-label="status: done with retries"
-              >↻ done (retried)</span
-            >
+            <h3>FEAT-014</h3>
+            <span class="badge badge-pass" aria-label="status: done">✓ done</span>
           </header>
           <div class="story-card__stats">
             <span class="story-card__stat"
@@ -2167,7 +2627,7 @@
               <span class="story-card__stat-value">—</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">tasks</span>
-              <span class="story-card__stat-value">0</span></span
+              <span class="story-card__stat-value">1</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">ACs</span>
               <span class="story-card__stat-value">0</span></span
@@ -2205,8 +2665,11 @@
                     <th>role</th>
                     <th>dispatch_id</th>
                     <th>loop</th>
+                    <th>model</th>
+                    <th>effort</th>
                     <th>duration</th>
                     <th>tokens</th>
+                    <th>cost</th>
                     <th>status</th>
                   </tr>
                 </thead>
@@ -2215,6 +2678,9 @@
                     <td>audit-agent</td>
                     <td>feat014-audit-001</td>
                     <td>1</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
                     <td>—</td>
                     <td>—</td>
                     <td>done</td>
@@ -2305,7 +2771,7 @@
                 </tr>
                 <tr>
                   <td>AC-004</td>
-                  <td>missing</td>
+                  <td>pass</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
@@ -2365,13 +2831,13 @@
                 </tr>
                 <tr>
                   <td>AC-014</td>
-                  <td>missing</td>
+                  <td>pass</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-015</td>
-                  <td>missing</td>
+                  <td>pass</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
@@ -2401,7 +2867,7 @@
                 </tr>
                 <tr>
                   <td>AC-020</td>
-                  <td>missing</td>
+                  <td>pass</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
@@ -2413,115 +2879,115 @@
                 </tr>
                 <tr>
                   <td>AC-022</td>
-                  <td>missing</td>
+                  <td>pass</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-023</td>
-                  <td>missing</td>
+                  <td>pass</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-024</td>
-                  <td>missing</td>
+                  <td>pass</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-025</td>
-                  <td>missing</td>
+                  <td>pass</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-026</td>
-                  <td>missing</td>
+                  <td>pass</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-027</td>
-                  <td>missing</td>
+                  <td>pass</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-028</td>
-                  <td>missing</td>
+                  <td>pass</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-029</td>
-                  <td>missing</td>
+                  <td>pass</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-030</td>
-                  <td>missing</td>
+                  <td>pass</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-031</td>
-                  <td>missing</td>
+                  <td>pass</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-032</td>
-                  <td>missing</td>
+                  <td>pass</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-033</td>
-                  <td>missing</td>
+                  <td>pass</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-034</td>
-                  <td>missing</td>
+                  <td>pass</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-035</td>
-                  <td>missing</td>
+                  <td>pass</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-036</td>
-                  <td>missing</td>
+                  <td>pass</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-037</td>
-                  <td>missing</td>
+                  <td>pass</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-038</td>
-                  <td>missing</td>
+                  <td>pass</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-039</td>
-                  <td>missing</td>
+                  <td>pass</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-040</td>
-                  <td>missing</td>
+                  <td>pass</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
@@ -3188,7 +3654,7 @@
         <details>
           <summary>Repo health snapshot</summary>
           <div>
-            <p><em>Measured at: 2026-05-13</em></p>
+            <p><em>Measured at: 2026-05-14</em></p>
             <table>
               <thead>
                 <tr>
@@ -3270,7 +3736,7 @@
             <blockquote>
               <p>
                 Feature: ux-mvp-polish — alinhamento de linhas, notas multi-linha e polimento visual
-                Task ID: FEAT-014 Phase: done Generated at: 2026-05-13T06:56:58.631Z
+                Task ID: FEAT-014 Phase: done Generated at: 2026-05-14T03:10:15.087Z
               </p>
             </blockquote>
             <h2>Insights</h2>
@@ -3303,7 +3769,7 @@
               <li>Coverage: 0 of 68 dispatches included in cost calculation</li>
             </ul>
             <h2>Repo health snapshot</h2>
-            <p><em>Measured at: 2026-05-13</em></p>
+            <p><em>Measured at: 2026-05-14</em></p>
             <table>
               <thead>
                 <tr>
@@ -4086,7 +4552,7 @@
                 </tr>
                 <tr>
                   <td>AC-004</td>
-                  <td>missing</td>
+                  <td>pass</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
@@ -4146,13 +4612,13 @@
                 </tr>
                 <tr>
                   <td>AC-014</td>
-                  <td>missing</td>
+                  <td>pass</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-015</td>
-                  <td>missing</td>
+                  <td>pass</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
@@ -4182,7 +4648,7 @@
                 </tr>
                 <tr>
                   <td>AC-020</td>
-                  <td>missing</td>
+                  <td>pass</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
@@ -4194,115 +4660,115 @@
                 </tr>
                 <tr>
                   <td>AC-022</td>
-                  <td>missing</td>
+                  <td>pass</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-023</td>
-                  <td>missing</td>
+                  <td>pass</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-024</td>
-                  <td>missing</td>
+                  <td>pass</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-025</td>
-                  <td>missing</td>
+                  <td>pass</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-026</td>
-                  <td>missing</td>
+                  <td>pass</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-027</td>
-                  <td>missing</td>
+                  <td>pass</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-028</td>
-                  <td>missing</td>
+                  <td>pass</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-029</td>
-                  <td>missing</td>
+                  <td>pass</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-030</td>
-                  <td>missing</td>
+                  <td>pass</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-031</td>
-                  <td>missing</td>
+                  <td>pass</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-032</td>
-                  <td>missing</td>
+                  <td>pass</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-033</td>
-                  <td>missing</td>
+                  <td>pass</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-034</td>
-                  <td>missing</td>
+                  <td>pass</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-035</td>
-                  <td>missing</td>
+                  <td>pass</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-036</td>
-                  <td>missing</td>
+                  <td>pass</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-037</td>
-                  <td>missing</td>
+                  <td>pass</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-038</td>
-                  <td>missing</td>
+                  <td>pass</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-039</td>
-                  <td>missing</td>
+                  <td>pass</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-040</td>
-                  <td>missing</td>
+                  <td>pass</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
@@ -4448,7 +4914,7 @@
             <h2>Escalation rate</h2>
             <p>Escalation rate: 0.0% — below healthy band (&lt; 10%)</p>
             <h2>AC closure</h2>
-            <p>Total: 44 | Pass: 44 | Partial: 0 | Fail: 0 | Missing: 23</p>
+            <p>Total: 44 | Pass: 44 | Partial: 0 | Fail: 0 | Missing: 0</p>
             <h2>Reviewer findings density</h2>
             <table>
               <thead>
@@ -4550,6 +5016,10 @@
             </ul>
             <h2>Token cost</h2>
             <p>Token cost not available — using dispatch count as cost proxy: 68 dispatches</p>
+            <p>
+              ⚠ pm-orchestrator Stop hook did not run — re-run agentops install-hooks
+              (worktree-aware)
+            </p>
           </div>
         </details>
       </section>

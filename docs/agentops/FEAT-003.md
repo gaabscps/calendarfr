@@ -5,7 +5,7 @@
 > Feature: Quality baseline + cost telemetry + AgentOps dashboard enrichment
 > Task ID: FEAT-003
 > Phase: done
-> Generated at: 2026-05-13T06:56:58.631Z
+> Generated at: 2026-05-14T03:10:15.087Z
 
 ## Insights
 
@@ -21,14 +21,14 @@ _70/30 input/output split assumed; harness reports only total_tokens; 6 of 10 di
   - Estimated output (30%): 168088
 - Estimated cost USD total: $3.4676
 - Cost per AC: $0.0963
-- Cost per dispatch (avg): $0.5779
+- Cost per dispatch (avg): $0.3468
 - Wall-clock duration: 46m 34s
 - Tool uses total: 442
 - Coverage: 6 of 10 dispatches included in cost calculation
 
 ## Repo health snapshot
 
-_Measured at: 2026-05-13_
+_Measured at: 2026-05-14_
 
 | Métrica        | Valor | Threshold | Status |
 | -------------- | ----- | --------- | ------ |
@@ -146,7 +146,7 @@ Escalation rate: 0.0% — below healthy band (< 10%)
 
 ## AC closure
 
-Total: 36 | Pass: 40 | Partial: 0 | Fail: 0 | Missing: 0
+Total: 36 | Pass: 34 | Partial: 0 | Fail: 0 | Missing: 0
 
 ## PM notes log
 
@@ -164,3 +164,5 @@ Total: 36 | Pass: 40 | Partial: 0 | Fail: 0 | Missing: 0
 ## Token cost
 
 Token cost not available — using dispatch count as cost proxy: 10 dispatches
+
+⚠ pm-orchestrator Stop hook did not run — re-run agentops install-hooks (worktree-aware)

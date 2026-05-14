@@ -572,8 +572,8 @@
       </h1>
       <div class="kpis">
         <span>—</span>
-        <span>$761.69</span>
-        <span class="kpi-sub">$29.296/AC</span>
+        <span>$123.54</span>
+        <span class="kpi-sub">$4.752/AC</span>
         <span>59/26 ACs</span>
         <span>mut 70.7%</span>
         <span>type 97.7%</span>
@@ -584,77 +584,35 @@
     <main>
       <section class="story">
         <h2>Story</h2>
-        <article class="story-card story-card--done-retried" aria-label="batch D-T">
+        <article class="story-card story-card--done" aria-label="batch T-001">
           <header>
-            <h3>D-T</h3>
-            <span class="badge badge-warn" aria-label="status: done with retries"
-              >↻ done (retried)</span
-            >
+            <h3>T-001</h3>
+            <span class="badge badge-pass" aria-label="status: done">✓ done</span>
           </header>
           <div class="story-card__stats">
             <span class="story-card__stat"
               ><span class="story-card__stat-label">time</span>
-              <span class="story-card__stat-value">7h15m</span></span
+              <span class="story-card__stat-value">0ms</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">cost</span>
-              <span class="story-card__stat-value">$709.29</span></span
+              <span class="story-card__stat-value">$16.35</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">tasks</span>
-              <span class="story-card__stat-value">0</span></span
+              <span class="story-card__stat-value">1</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">ACs</span>
-              <span class="story-card__stat-value">0</span></span
+              <span class="story-card__stat-value">1</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">files</span>
-              <span class="story-card__stat-value">0</span></span
-            ><span class="story-card__pipeline"
-              >dev → code-reviewer ‖ logic-reviewer → qa → blocker-specialist</span
-            >
+              <span class="story-card__stat-value">2</span></span
+            ><span class="story-card__pipeline">dev → code-reviewer ‖ logic-reviewer → qa</span>
           </div>
-          <aside class="story-card__retry" role="status">
-            ⚠ dev retried 10× — loop 2: Loop L2 restart — fix comment: .lifted AC-006 only; test
-            describe label; loop 2: Loop L2 restart — fix AC-018: handleDragHandleKeyDown delegates
-            listeners.onKey…; loop 2: Loop L2 restart — fix AC-026: guard over=null, ordinal
-            positions, useMemo([item…; loop 2: Loop L2 restart — fix AC-026: announcements moved to
-            useMemo([value]) closure; …; loop 2: Loop L2 restart — split 641-line test into 3 files;
-            split 319-line dynamic; AC-…; loop 2: Loop L2 restart — split oversized files; AC-015
-            DnD proxy; AC-024 focus; AC-025…; loop 3: Loop L3 restart — AC-025 value
-            &#39;reordenável&#39; asserted; AC-026 announcement func…; loop 3: Loop L3 restart —
-            AC-025 value; AC-026 DndContext spy; AC-015 real onDragEnd pa…; loop 3: Post-blocker dev
-            done — 228 lines, exit 0, 152 tests; all 4 AC-026 PT-BR string…; loop 3: Post-blocker
-            dev done — 250 lines, exit 0, 112 tests; onDragStart+onDragOver ad…
-          </aside>
-          <aside class="story-card__retry" role="status">
-            ⚠ code-reviewer retried 8× — loop 2: (no PM note); loop 2: (no PM note); loop 2: (no PM
-            note); loop 2: (no PM note); loop 2: (no PM note); loop 2: (no PM note); loop 3: L3
-            findings: reorder.test.tsx 251 lines (false alarm — actual 250); AC-026 loca…; loop 3:
-            (no PM note)
-          </aside>
-          <aside class="story-card__retry" role="status">
-            ⚠ logic-reviewer retried 8× — loop 2: (no PM note); loop 2: (no PM note); loop 2: (no PM
-            note); loop 2: (no PM note); loop 2: Loop L3 — AC-025 presence-only (must assert
-            value=&#39;reordenável&#39;); AC-026 no PT-…; loop 2: Loop L3 — AC-026 tautological
-            self-assertions (no component rendered); AC-025 p…; loop 3: L3 findings: AC-026 tests
-            closures locais não exercitam Priorities.tsx:62-79; a…; loop 3: L3 finding: AC-026
-            onDragStart/onDragOver PT-BR strings untested — DndContext s…
-          </aside>
-          <aside class="story-card__retry" role="status">
-            ⚠ qa retried 6× — loop 2: AC-001/006/007/008/010 pass — 10/10 testes; loop 2:
-            AC-013/018/019/020/022 pass — 8/8 testes, listeners delegation validado; loop 2:
-            AC-002/003/005/009/011/012/025/026 pass — 125/125 testes; loop 2:
-            AC-014/015/017/021/023/024/025/026 pass — 91/92 testes (1 pre-existente tab-ord…; loop
-            3: 14/14 ACs pass — 152 testes; AC-025/026 via DndContext spy confirmado; loop 3: 14/14
-            ACs pass — 112 testes; AC-015/025/026 confirmados
-          </aside>
-          <aside class="story-card__retry" role="status">
-            ⚠ blocker-specialist retried 2× — loop 3: Blocker resolved: dispatch_dev — verbatim
-            DndContext spy replacement for all 4 …; loop 3: Blocker resolved: task_continue — insert
-            11-line combined onDragStart+onDragOve…
-          </aside>
-          <p class="story-card__summary">14/14 ACs pass — 112 testes; AC-015/025/026 confirmados</p>
+          <p class="story-card__summary">
+            NFR-003 pass — @dnd-kit installed, renderWithDnd criado, 77 suites/1064 testes pass
+          </p>
           <div class="story-card__drilldowns">
             <details>
-              <summary>Files changed (0)</summary>
+              <summary>Files changed (2)</summary>
               <table class="story-card__files">
                 <thead>
                   <tr>
@@ -663,23 +621,39 @@
                     <th>tasks</th>
                   </tr>
                 </thead>
-                <tbody></tbody>
+                <tbody>
+                  <tr>
+                    <td>web/package.json</td>
+                    <td>changed</td>
+                    <td>T-001</td>
+                  </tr>
+                  <tr>
+                    <td>test-utils/renderWithDnd.tsx</td>
+                    <td>changed</td>
+                    <td>T-001</td>
+                  </tr>
+                </tbody>
               </table>
             </details>
             <details>
-              <summary>ACs covered (0)</summary>
-              <ul class="story-card__acs"></ul>
+              <summary>ACs covered (1)</summary>
+              <ul class="story-card__acs">
+                <li><strong>NFR-003</strong> — E-NFR003-001, E-NFR003-002, E-NFR003-003</li>
+              </ul>
             </details>
             <details>
-              <summary>Pipeline trace (63 dispatches)</summary>
+              <summary>Pipeline trace (4 dispatches)</summary>
               <table class="story-card__pipeline-trace">
                 <thead>
                   <tr>
                     <th>role</th>
                     <th>dispatch_id</th>
                     <th>loop</th>
+                    <th>model</th>
+                    <th>effort</th>
                     <th>duration</th>
                     <th>tokens</th>
+                    <th>cost</th>
                     <th>status</th>
                   </tr>
                 </thead>
@@ -689,6 +663,9 @@
                     <td>d-T-001-dev-l1</td>
                     <td>1</td>
                     <td>—</td>
+                    <td>medium</td>
+                    <td>—</td>
+                    <td>—</td>
                     <td>—</td>
                     <td>done</td>
                   </tr>
@@ -696,14 +673,20 @@
                     <td>code-reviewer</td>
                     <td>d-T-001-code-reviewer-l1</td>
                     <td>1</td>
+                    <td>sonnet-4-6</td>
+                    <td>high</td>
                     <td>0ms</td>
                     <td>26498341</td>
+                    <td>$16.35</td>
                     <td>done</td>
                   </tr>
                   <tr>
                     <td>logic-reviewer</td>
                     <td>d-T-001-logic-reviewer-…</td>
                     <td>1</td>
+                    <td>—</td>
+                    <td>medium</td>
+                    <td>—</td>
                     <td>—</td>
                     <td>—</td>
                     <td>done</td>
@@ -713,13 +696,105 @@
                     <td>d-T-001-qa-l1</td>
                     <td>1</td>
                     <td>—</td>
+                    <td>high</td>
+                    <td>—</td>
+                    <td>—</td>
                     <td>—</td>
                     <td>done</td>
                   </tr>
+                </tbody>
+              </table>
+            </details>
+            <details>
+              <summary>PM note</summary>
+              <p class="story-card__pmnote">
+                NFR-003 pass — @dnd-kit installed, renderWithDnd criado, 77 suites/1064 testes pass
+              </p>
+            </details>
+          </div>
+        </article>
+        <article class="story-card story-card--done" aria-label="batch T-002">
+          <header>
+            <h3>T-002</h3>
+            <span class="badge badge-pass" aria-label="status: done">✓ done</span>
+          </header>
+          <div class="story-card__stats">
+            <span class="story-card__stat"
+              ><span class="story-card__stat-label">time</span>
+              <span class="story-card__stat-value">0ms</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">cost</span>
+              <span class="story-card__stat-value">—</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">tasks</span>
+              <span class="story-card__stat-value">1</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">ACs</span>
+              <span class="story-card__stat-value">2</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">files</span>
+              <span class="story-card__stat-value">2</span></span
+            ><span class="story-card__pipeline">dev → code-reviewer ‖ logic-reviewer → qa</span>
+          </div>
+          <p class="story-card__summary">
+            AC-004/AC-005 pass — arrayMove imutável, useCallback estável
+          </p>
+          <div class="story-card__drilldowns">
+            <details>
+              <summary>Files changed (2)</summary>
+              <table class="story-card__files">
+                <thead>
+                  <tr>
+                    <th>path</th>
+                    <th>action</th>
+                    <th>tasks</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>web/src/features/priorities/hooks/usePriorities.ts</td>
+                    <td>changed</td>
+                    <td>T-002</td>
+                  </tr>
+                  <tr>
+                    <td>web/src/features/priorities/hooks/__tests__/usePriorities.t…</td>
+                    <td>changed</td>
+                    <td>T-002</td>
+                  </tr>
+                </tbody>
+              </table>
+            </details>
+            <details>
+              <summary>ACs covered (2)</summary>
+              <ul class="story-card__acs">
+                <li><strong>AC-004</strong> — e-001</li>
+                <li><strong>AC-005</strong> — e-002</li>
+              </ul>
+            </details>
+            <details>
+              <summary>Pipeline trace (4 dispatches)</summary>
+              <table class="story-card__pipeline-trace">
+                <thead>
+                  <tr>
+                    <th>role</th>
+                    <th>dispatch_id</th>
+                    <th>loop</th>
+                    <th>model</th>
+                    <th>effort</th>
+                    <th>duration</th>
+                    <th>tokens</th>
+                    <th>cost</th>
+                    <th>status</th>
+                  </tr>
+                </thead>
+                <tbody>
                   <tr>
                     <td>dev</td>
                     <td>d-T-002-dev-l1</td>
                     <td>1</td>
+                    <td>—</td>
+                    <td>medium</td>
+                    <td>—</td>
                     <td>—</td>
                     <td>—</td>
                     <td>done</td>
@@ -729,6 +804,9 @@
                     <td>d-T-002-code-reviewer-l1</td>
                     <td>1</td>
                     <td>—</td>
+                    <td>high</td>
+                    <td>—</td>
+                    <td>—</td>
                     <td>—</td>
                     <td>done</td>
                   </tr>
@@ -736,6 +814,9 @@
                     <td>logic-reviewer</td>
                     <td>d-T-002-logic-reviewer-…</td>
                     <td>1</td>
+                    <td>—</td>
+                    <td>medium</td>
+                    <td>—</td>
                     <td>—</td>
                     <td>—</td>
                     <td>done</td>
@@ -745,13 +826,105 @@
                     <td>d-T-002-qa-l1</td>
                     <td>1</td>
                     <td>—</td>
+                    <td>high</td>
+                    <td>—</td>
+                    <td>—</td>
                     <td>—</td>
                     <td>done</td>
                   </tr>
+                </tbody>
+              </table>
+            </details>
+            <details>
+              <summary>PM note</summary>
+              <p class="story-card__pmnote">
+                AC-004/AC-005 pass — arrayMove imutável, useCallback estável
+              </p>
+            </details>
+          </div>
+        </article>
+        <article class="story-card story-card--done" aria-label="batch T-003">
+          <header>
+            <h3>T-003</h3>
+            <span class="badge badge-pass" aria-label="status: done">✓ done</span>
+          </header>
+          <div class="story-card__stats">
+            <span class="story-card__stat"
+              ><span class="story-card__stat-label">time</span>
+              <span class="story-card__stat-value">0ms</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">cost</span>
+              <span class="story-card__stat-value">$23.00</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">tasks</span>
+              <span class="story-card__stat-value">1</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">ACs</span>
+              <span class="story-card__stat-value">2</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">files</span>
+              <span class="story-card__stat-value">2</span></span
+            ><span class="story-card__pipeline">dev → code-reviewer ‖ logic-reviewer → qa</span>
+          </div>
+          <p class="story-card__summary">
+            AC-016/AC-017 pass — arrayMove deps:[] via valueRef+onChangeRef estável
+          </p>
+          <div class="story-card__drilldowns">
+            <details>
+              <summary>Files changed (2)</summary>
+              <table class="story-card__files">
+                <thead>
+                  <tr>
+                    <th>path</th>
+                    <th>action</th>
+                    <th>tasks</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>web/src/features/notes/hooks/useNotes.ts</td>
+                    <td>changed</td>
+                    <td>T-003</td>
+                  </tr>
+                  <tr>
+                    <td>web/src/features/notes/hooks/__tests__/useNotes.mutations.t…</td>
+                    <td>changed</td>
+                    <td>T-003</td>
+                  </tr>
+                </tbody>
+              </table>
+            </details>
+            <details>
+              <summary>ACs covered (2)</summary>
+              <ul class="story-card__acs">
+                <li><strong>AC-016</strong> — e-001, e-003</li>
+                <li><strong>AC-017</strong> — e-002, e-004, e-005</li>
+              </ul>
+            </details>
+            <details>
+              <summary>Pipeline trace (4 dispatches)</summary>
+              <table class="story-card__pipeline-trace">
+                <thead>
+                  <tr>
+                    <th>role</th>
+                    <th>dispatch_id</th>
+                    <th>loop</th>
+                    <th>model</th>
+                    <th>effort</th>
+                    <th>duration</th>
+                    <th>tokens</th>
+                    <th>cost</th>
+                    <th>status</th>
+                  </tr>
+                </thead>
+                <tbody>
                   <tr>
                     <td>dev</td>
                     <td>d-T-003-dev-l1</td>
                     <td>1</td>
+                    <td>—</td>
+                    <td>medium</td>
+                    <td>—</td>
                     <td>—</td>
                     <td>—</td>
                     <td>done</td>
@@ -760,14 +933,20 @@
                     <td>code-reviewer</td>
                     <td>d-T-003-code-reviewer-l1</td>
                     <td>1</td>
+                    <td>sonnet-4-6</td>
+                    <td>high</td>
                     <td>0ms</td>
                     <td>32500775</td>
+                    <td>$23.00</td>
                     <td>done</td>
                   </tr>
                   <tr>
                     <td>logic-reviewer</td>
                     <td>d-T-003-logic-reviewer-…</td>
                     <td>1</td>
+                    <td>—</td>
+                    <td>medium</td>
+                    <td>—</td>
                     <td>—</td>
                     <td>—</td>
                     <td>done</td>
@@ -777,13 +956,126 @@
                     <td>d-T-003-qa-l1</td>
                     <td>1</td>
                     <td>—</td>
+                    <td>high</td>
+                    <td>—</td>
+                    <td>—</td>
                     <td>—</td>
                     <td>done</td>
                   </tr>
+                </tbody>
+              </table>
+            </details>
+            <details>
+              <summary>PM note</summary>
+              <p class="story-card__pmnote">
+                AC-016/AC-017 pass — arrayMove deps:[] via valueRef+onChangeRef estável
+              </p>
+            </details>
+          </div>
+        </article>
+        <article class="story-card story-card--done-retried" aria-label="batch T-004">
+          <header>
+            <h3>T-004</h3>
+            <span class="badge badge-warn" aria-label="status: done with retries"
+              >↻ done (retried)</span
+            >
+          </header>
+          <div class="story-card__stats">
+            <span class="story-card__stat"
+              ><span class="story-card__stat-label">time</span>
+              <span class="story-card__stat-value">0ms</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">cost</span>
+              <span class="story-card__stat-value">—</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">tasks</span>
+              <span class="story-card__stat-value">1</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">ACs</span>
+              <span class="story-card__stat-value">5</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">files</span>
+              <span class="story-card__stat-value">3</span></span
+            ><span class="story-card__pipeline">dev → code-reviewer ‖ logic-reviewer → qa</span>
+          </div>
+          <aside class="story-card__retry" role="status">
+            ⚠ dev retried 1× — loop 2: Loop L2 restart — fix comment: .lifted AC-006 only; test
+            describe label
+          </aside>
+          <aside class="story-card__retry" role="status">
+            ⚠ code-reviewer retried 1× — loop 2: (no PM note)
+          </aside>
+          <aside class="story-card__retry" role="status">
+            ⚠ logic-reviewer retried 1× — loop 2: (no PM note)
+          </aside>
+          <aside class="story-card__retry" role="status">
+            ⚠ qa retried 1× — loop 2: AC-001/006/007/008/010 pass — 10/10 testes
+          </aside>
+          <p class="story-card__summary">AC-001/006/007/008/010 pass — 10/10 testes</p>
+          <div class="story-card__drilldowns">
+            <details>
+              <summary>Files changed (3)</summary>
+              <table class="story-card__files">
+                <thead>
+                  <tr>
+                    <th>path</th>
+                    <th>action</th>
+                    <th>tasks</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>web/src/features/priorities/components/PriorityItem.tsx</td>
+                    <td>changed</td>
+                    <td>T-004</td>
+                  </tr>
+                  <tr>
+                    <td>web/src/features/priorities/components/PriorityItem.module.…</td>
+                    <td>changed</td>
+                    <td>T-004</td>
+                  </tr>
+                  <tr>
+                    <td>web/src/features/priorities/components/__tests__/PriorityIt…</td>
+                    <td>changed</td>
+                    <td>T-004</td>
+                  </tr>
+                </tbody>
+              </table>
+            </details>
+            <details>
+              <summary>ACs covered (5)</summary>
+              <ul class="story-card__acs">
+                <li><strong>AC-001</strong> — e-001</li>
+                <li><strong>AC-006</strong> — e-002</li>
+                <li><strong>AC-007</strong> — e-003</li>
+                <li><strong>AC-008</strong> — e-004</li>
+                <li><strong>AC-010</strong> — e-005</li>
+              </ul>
+            </details>
+            <details>
+              <summary>Pipeline trace (7 dispatches)</summary>
+              <table class="story-card__pipeline-trace">
+                <thead>
+                  <tr>
+                    <th>role</th>
+                    <th>dispatch_id</th>
+                    <th>loop</th>
+                    <th>model</th>
+                    <th>effort</th>
+                    <th>duration</th>
+                    <th>tokens</th>
+                    <th>cost</th>
+                    <th>status</th>
+                  </tr>
+                </thead>
+                <tbody>
                   <tr>
                     <td>dev</td>
                     <td>d-T-004-dev-l1</td>
                     <td>1</td>
+                    <td>—</td>
+                    <td>medium</td>
+                    <td>—</td>
                     <td>—</td>
                     <td>—</td>
                     <td>done</td>
@@ -793,6 +1085,9 @@
                     <td>d-T-004-dev-l2</td>
                     <td>2</td>
                     <td>—</td>
+                    <td>high</td>
+                    <td>—</td>
+                    <td>—</td>
                     <td>—</td>
                     <td>done</td>
                   </tr>
@@ -801,6 +1096,9 @@
                     <td>d-T-004-code-reviewer-l1</td>
                     <td>1</td>
                     <td>—</td>
+                    <td>high</td>
+                    <td>—</td>
+                    <td>—</td>
                     <td>—</td>
                     <td>blocked</td>
                   </tr>
@@ -808,6 +1106,9 @@
                     <td>logic-reviewer</td>
                     <td>d-T-004-logic-reviewer-…</td>
                     <td>1</td>
+                    <td>—</td>
+                    <td>medium</td>
+                    <td>—</td>
                     <td>—</td>
                     <td>—</td>
                     <td>done</td>
@@ -817,6 +1118,9 @@
                     <td>d-T-004-code-reviewer-l2</td>
                     <td>2</td>
                     <td>—</td>
+                    <td>high</td>
+                    <td>—</td>
+                    <td>—</td>
                     <td>—</td>
                     <td>done</td>
                   </tr>
@@ -825,29 +1129,8 @@
                     <td>d-T-004-logic-reviewer-…</td>
                     <td>2</td>
                     <td>—</td>
+                    <td>medium</td>
                     <td>—</td>
-                    <td>done</td>
-                  </tr>
-                  <tr>
-                    <td>code-reviewer</td>
-                    <td>d-T-005-code-reviewer-l1</td>
-                    <td>1</td>
-                    <td>—</td>
-                    <td>—</td>
-                    <td>blocked</td>
-                  </tr>
-                  <tr>
-                    <td>logic-reviewer</td>
-                    <td>d-T-005-logic-reviewer-…</td>
-                    <td>1</td>
-                    <td>—</td>
-                    <td>—</td>
-                    <td>blocked</td>
-                  </tr>
-                  <tr>
-                    <td>dev</td>
-                    <td>d-T-005-dev-l2</td>
-                    <td>2</td>
                     <td>—</td>
                     <td>—</td>
                     <td>done</td>
@@ -857,6 +1140,145 @@
                     <td>d-T-004-qa-l1</td>
                     <td>2</td>
                     <td>—</td>
+                    <td>high</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>done</td>
+                  </tr>
+                </tbody>
+              </table>
+            </details>
+            <details>
+              <summary>PM note</summary>
+              <p class="story-card__pmnote">AC-001/006/007/008/010 pass — 10/10 testes</p>
+            </details>
+          </div>
+        </article>
+        <article class="story-card story-card--done-retried" aria-label="batch T-005">
+          <header>
+            <h3>T-005</h3>
+            <span class="badge badge-warn" aria-label="status: done with retries"
+              >↻ done (retried)</span
+            >
+          </header>
+          <div class="story-card__stats">
+            <span class="story-card__stat"
+              ><span class="story-card__stat-label">time</span>
+              <span class="story-card__stat-value">0ms</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">cost</span>
+              <span class="story-card__stat-value">—</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">tasks</span>
+              <span class="story-card__stat-value">1</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">ACs</span>
+              <span class="story-card__stat-value">5</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">files</span>
+              <span class="story-card__stat-value">2</span></span
+            ><span class="story-card__pipeline">code-reviewer ‖ logic-reviewer → dev → qa</span>
+          </div>
+          <aside class="story-card__retry" role="status">
+            ⚠ dev retried 1× — loop 2: Loop L2 restart — fix AC-018: handleDragHandleKeyDown
+            delegates listeners.onKey…
+          </aside>
+          <aside class="story-card__retry" role="status">
+            ⚠ code-reviewer retried 1× — loop 2: (no PM note)
+          </aside>
+          <aside class="story-card__retry" role="status">
+            ⚠ logic-reviewer retried 1× — loop 2: (no PM note)
+          </aside>
+          <aside class="story-card__retry" role="status">
+            ⚠ qa retried 1× — loop 2: AC-013/018/019/020/022 pass — 8/8 testes, listeners delegation
+            validado
+          </aside>
+          <p class="story-card__summary">
+            AC-013/018/019/020/022 pass — 8/8 testes, listeners delegation validado
+          </p>
+          <div class="story-card__drilldowns">
+            <details>
+              <summary>Files changed (2)</summary>
+              <table class="story-card__files">
+                <thead>
+                  <tr>
+                    <th>path</th>
+                    <th>action</th>
+                    <th>tasks</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>web/src/features/notes/components/NoteItem.tsx</td>
+                    <td>changed</td>
+                    <td>T-005</td>
+                  </tr>
+                  <tr>
+                    <td>web/src/features/notes/components/__tests__/NoteItem.reorde…</td>
+                    <td>changed</td>
+                    <td>T-005</td>
+                  </tr>
+                </tbody>
+              </table>
+            </details>
+            <details>
+              <summary>ACs covered (5)</summary>
+              <ul class="story-card__acs">
+                <li><strong>AC-013</strong> — e-test-AC-013</li>
+                <li><strong>AC-018</strong> — e-test-AC-018</li>
+                <li><strong>AC-019</strong> — e-test-AC-019</li>
+                <li><strong>AC-020</strong> — e-test-AC-020</li>
+                <li><strong>AC-022</strong> — e-test-AC-022</li>
+              </ul>
+            </details>
+            <details>
+              <summary>Pipeline trace (6 dispatches)</summary>
+              <table class="story-card__pipeline-trace">
+                <thead>
+                  <tr>
+                    <th>role</th>
+                    <th>dispatch_id</th>
+                    <th>loop</th>
+                    <th>model</th>
+                    <th>effort</th>
+                    <th>duration</th>
+                    <th>tokens</th>
+                    <th>cost</th>
+                    <th>status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>code-reviewer</td>
+                    <td>d-T-005-code-reviewer-l1</td>
+                    <td>1</td>
+                    <td>—</td>
+                    <td>high</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>blocked</td>
+                  </tr>
+                  <tr>
+                    <td>logic-reviewer</td>
+                    <td>d-T-005-logic-reviewer-…</td>
+                    <td>1</td>
+                    <td>—</td>
+                    <td>medium</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>blocked</td>
+                  </tr>
+                  <tr>
+                    <td>dev</td>
+                    <td>d-T-005-dev-l2</td>
+                    <td>2</td>
+                    <td>—</td>
+                    <td>high</td>
+                    <td>—</td>
+                    <td>—</td>
                     <td>—</td>
                     <td>done</td>
                   </tr>
@@ -864,6 +1286,9 @@
                     <td>code-reviewer</td>
                     <td>d-T-005-code-reviewer-l2</td>
                     <td>2</td>
+                    <td>—</td>
+                    <td>high</td>
+                    <td>—</td>
                     <td>—</td>
                     <td>—</td>
                     <td>done</td>
@@ -873,6 +1298,9 @@
                     <td>d-T-005-logic-reviewer-…</td>
                     <td>2</td>
                     <td>—</td>
+                    <td>medium</td>
+                    <td>—</td>
+                    <td>—</td>
                     <td>—</td>
                     <td>done</td>
                   </tr>
@@ -881,29 +1309,132 @@
                     <td>d-T-005-qa-l1</td>
                     <td>2</td>
                     <td>—</td>
+                    <td>high</td>
+                    <td>—</td>
+                    <td>—</td>
                     <td>—</td>
                     <td>done</td>
                   </tr>
+                </tbody>
+              </table>
+            </details>
+            <details>
+              <summary>PM note</summary>
+              <p class="story-card__pmnote">
+                AC-013/018/019/020/022 pass — 8/8 testes, listeners delegation validado
+              </p>
+            </details>
+          </div>
+        </article>
+        <article class="story-card story-card--done-retried" aria-label="batch T-006">
+          <header>
+            <h3>T-006</h3>
+            <span class="badge badge-warn" aria-label="status: done with retries"
+              >↻ done (retried)</span
+            >
+          </header>
+          <div class="story-card__stats">
+            <span class="story-card__stat"
+              ><span class="story-card__stat-label">time</span>
+              <span class="story-card__stat-value">0ms</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">cost</span>
+              <span class="story-card__stat-value">$31.78</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">tasks</span>
+              <span class="story-card__stat-value">1</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">ACs</span>
+              <span class="story-card__stat-value">8</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">files</span>
+              <span class="story-card__stat-value">1</span></span
+            ><span class="story-card__pipeline">dev → code-reviewer ‖ logic-reviewer → qa</span>
+          </div>
+          <aside class="story-card__retry" role="status">
+            ⚠ dev retried 1× — loop 2: Loop L2 restart — fix AC-026: guard over=null, ordinal
+            positions, useMemo([item…
+          </aside>
+          <aside class="story-card__retry" role="status">
+            ⚠ code-reviewer retried 1× — loop 2: (no PM note)
+          </aside>
+          <aside class="story-card__retry" role="status">
+            ⚠ logic-reviewer retried 1× — loop 2: (no PM note)
+          </aside>
+          <aside class="story-card__retry" role="status">
+            ⚠ qa retried 1× — loop 2: AC-002/003/005/009/011/012/025/026 pass — 125/125 testes
+          </aside>
+          <p class="story-card__summary">
+            AC-002/003/005/009/011/012/025/026 pass — 125/125 testes
+          </p>
+          <div class="story-card__drilldowns">
+            <details>
+              <summary>Files changed (1)</summary>
+              <table class="story-card__files">
+                <thead>
+                  <tr>
+                    <th>path</th>
+                    <th>action</th>
+                    <th>tasks</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>web/src/features/priorities/components/Priorities.tsx</td>
+                    <td>changed</td>
+                    <td>T-006</td>
+                  </tr>
+                </tbody>
+              </table>
+            </details>
+            <details>
+              <summary>ACs covered (8)</summary>
+              <ul class="story-card__acs">
+                <li><strong>FEAT-019/AC-002</strong> — e-001</li>
+                <li><strong>FEAT-019/AC-003</strong> — e-002</li>
+                <li><strong>FEAT-019/AC-005</strong> — e-003</li>
+                <li><strong>FEAT-019/AC-009</strong> — e-004</li>
+                <li><strong>FEAT-019/AC-011</strong> — e-005</li>
+                <li><strong>FEAT-019/AC-012</strong> — e-006</li>
+                <li><strong>FEAT-019/AC-025</strong> — e-007</li>
+                <li><strong>FEAT-019/AC-026</strong> — e-008</li>
+              </ul>
+            </details>
+            <details>
+              <summary>Pipeline trace (7 dispatches)</summary>
+              <table class="story-card__pipeline-trace">
+                <thead>
+                  <tr>
+                    <th>role</th>
+                    <th>dispatch_id</th>
+                    <th>loop</th>
+                    <th>model</th>
+                    <th>effort</th>
+                    <th>duration</th>
+                    <th>tokens</th>
+                    <th>cost</th>
+                    <th>status</th>
+                  </tr>
+                </thead>
+                <tbody>
                   <tr>
                     <td>dev</td>
                     <td>d-T-006-dev-l1</td>
                     <td>1</td>
                     <td>—</td>
+                    <td>high</td>
+                    <td>—</td>
+                    <td>—</td>
                     <td>—</td>
                     <td>done</td>
-                  </tr>
-                  <tr>
-                    <td>dev</td>
-                    <td>d-T-007-dev-l1</td>
-                    <td>1</td>
-                    <td>—</td>
-                    <td>—</td>
-                    <td>needs_review</td>
                   </tr>
                   <tr>
                     <td>code-reviewer</td>
                     <td>d-T-006-code-reviewer-l1</td>
                     <td>1</td>
+                    <td>—</td>
+                    <td>medium</td>
+                    <td>—</td>
                     <td>—</td>
                     <td>—</td>
                     <td>blocked</td>
@@ -912,6 +1443,9 @@
                     <td>logic-reviewer</td>
                     <td>d-T-006-logic-reviewer-…</td>
                     <td>1</td>
+                    <td>—</td>
+                    <td>high</td>
+                    <td>—</td>
                     <td>—</td>
                     <td>—</td>
                     <td>blocked</td>
@@ -921,6 +1455,9 @@
                     <td>d-T-006-dev-l2</td>
                     <td>2</td>
                     <td>—</td>
+                    <td>high</td>
+                    <td>—</td>
+                    <td>—</td>
                     <td>—</td>
                     <td>done</td>
                   </tr>
@@ -928,6 +1465,9 @@
                     <td>code-reviewer</td>
                     <td>d-T-006-code-reviewer-l2</td>
                     <td>2</td>
+                    <td>—</td>
+                    <td>medium</td>
+                    <td>—</td>
                     <td>—</td>
                     <td>—</td>
                     <td>done</td>
@@ -937,13 +1477,145 @@
                     <td>d-T-006-logic-reviewer-…</td>
                     <td>2</td>
                     <td>—</td>
+                    <td>high</td>
+                    <td>—</td>
+                    <td>—</td>
                     <td>—</td>
                     <td>done</td>
+                  </tr>
+                  <tr>
+                    <td>qa</td>
+                    <td>d-T-006-qa-l1</td>
+                    <td>2</td>
+                    <td>sonnet-4-6</td>
+                    <td>—</td>
+                    <td>0ms</td>
+                    <td>48468367</td>
+                    <td>$31.78</td>
+                    <td>done</td>
+                  </tr>
+                </tbody>
+              </table>
+            </details>
+            <details>
+              <summary>PM note</summary>
+              <p class="story-card__pmnote">
+                AC-002/003/005/009/011/012/025/026 pass — 125/125 testes
+              </p>
+            </details>
+          </div>
+        </article>
+        <article class="story-card story-card--done-retried" aria-label="batch T-007">
+          <header>
+            <h3>T-007</h3>
+            <span class="badge badge-warn" aria-label="status: done with retries"
+              >↻ done (retried)</span
+            >
+          </header>
+          <div class="story-card__stats">
+            <span class="story-card__stat"
+              ><span class="story-card__stat-label">time</span>
+              <span class="story-card__stat-value">0ms</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">cost</span>
+              <span class="story-card__stat-value">—</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">tasks</span>
+              <span class="story-card__stat-value">1</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">ACs</span>
+              <span class="story-card__stat-value">8</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">files</span>
+              <span class="story-card__stat-value">1</span></span
+            ><span class="story-card__pipeline">dev → code-reviewer ‖ logic-reviewer → qa</span>
+          </div>
+          <aside class="story-card__retry" role="status">
+            ⚠ dev retried 1× — loop 2: Loop L2 restart — fix AC-026: announcements moved to
+            useMemo([value]) closure; …
+          </aside>
+          <aside class="story-card__retry" role="status">
+            ⚠ code-reviewer retried 1× — loop 2: (no PM note)
+          </aside>
+          <aside class="story-card__retry" role="status">
+            ⚠ logic-reviewer retried 1× — loop 2: (no PM note)
+          </aside>
+          <aside class="story-card__retry" role="status">
+            ⚠ qa retried 1× — loop 2: AC-014/015/017/021/023/024/025/026 pass — 91/92 testes (1
+            pre-existente tab-ord…
+          </aside>
+          <p class="story-card__summary">
+            AC-014/015/017/021/023/024/025/026 pass — 91/92 testes (1 pre-existente tab-order, T-009
+            scope)
+          </p>
+          <div class="story-card__drilldowns">
+            <details>
+              <summary>Files changed (1)</summary>
+              <table class="story-card__files">
+                <thead>
+                  <tr>
+                    <th>path</th>
+                    <th>action</th>
+                    <th>tasks</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>web/src/features/notes/components/Notes.tsx</td>
+                    <td>changed</td>
+                    <td>T-007</td>
+                  </tr>
+                </tbody>
+              </table>
+            </details>
+            <details>
+              <summary>ACs covered (8)</summary>
+              <ul class="story-card__acs">
+                <li><strong>FEAT-019/AC-014</strong> — e-001, e-002</li>
+                <li><strong>FEAT-019/AC-015</strong> — e-003, e-004</li>
+                <li><strong>FEAT-019/AC-017</strong> — e-005, e-006</li>
+                <li><strong>FEAT-019/AC-021</strong> — e-007, e-008</li>
+                <li><strong>FEAT-019/AC-023</strong> — e-009, e-010</li>
+                <li><strong>FEAT-019/AC-024</strong> — e-011, e-012</li>
+                <li><strong>FEAT-019/AC-025</strong> — e-013, e-014</li>
+                <li><strong>FEAT-019/AC-026</strong> — e-015, e-016</li>
+              </ul>
+            </details>
+            <details>
+              <summary>Pipeline trace (7 dispatches)</summary>
+              <table class="story-card__pipeline-trace">
+                <thead>
+                  <tr>
+                    <th>role</th>
+                    <th>dispatch_id</th>
+                    <th>loop</th>
+                    <th>model</th>
+                    <th>effort</th>
+                    <th>duration</th>
+                    <th>tokens</th>
+                    <th>cost</th>
+                    <th>status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>dev</td>
+                    <td>d-T-007-dev-l1</td>
+                    <td>1</td>
+                    <td>—</td>
+                    <td>high</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>needs_review</td>
                   </tr>
                   <tr>
                     <td>code-reviewer</td>
                     <td>d-T-007-code-reviewer-l1</td>
                     <td>1</td>
+                    <td>—</td>
+                    <td>medium</td>
+                    <td>—</td>
                     <td>—</td>
                     <td>—</td>
                     <td>blocked</td>
@@ -953,21 +1625,19 @@
                     <td>d-T-007-logic-reviewer-…</td>
                     <td>1</td>
                     <td>—</td>
+                    <td>high</td>
+                    <td>—</td>
+                    <td>—</td>
                     <td>—</td>
                     <td>blocked</td>
-                  </tr>
-                  <tr>
-                    <td>qa</td>
-                    <td>d-T-006-qa-l1</td>
-                    <td>2</td>
-                    <td>0ms</td>
-                    <td>48468367</td>
-                    <td>done</td>
                   </tr>
                   <tr>
                     <td>dev</td>
                     <td>d-T-007-dev-l2</td>
                     <td>2</td>
+                    <td>—</td>
+                    <td>high</td>
+                    <td>—</td>
                     <td>—</td>
                     <td>—</td>
                     <td>done</td>
@@ -977,6 +1647,9 @@
                     <td>d-T-007-code-reviewer-l2</td>
                     <td>2</td>
                     <td>—</td>
+                    <td>medium</td>
+                    <td>—</td>
+                    <td>—</td>
                     <td>—</td>
                     <td>done</td>
                   </tr>
@@ -984,6 +1657,9 @@
                     <td>logic-reviewer</td>
                     <td>d-T-007-logic-reviewer-…</td>
                     <td>2</td>
+                    <td>—</td>
+                    <td>high</td>
+                    <td>—</td>
                     <td>—</td>
                     <td>—</td>
                     <td>done</td>
@@ -993,21 +1669,175 @@
                     <td>d-T-007-qa-l1</td>
                     <td>2</td>
                     <td>—</td>
+                    <td>medium</td>
+                    <td>—</td>
+                    <td>—</td>
                     <td>—</td>
                     <td>done</td>
                   </tr>
+                </tbody>
+              </table>
+            </details>
+            <details>
+              <summary>PM note</summary>
+              <p class="story-card__pmnote">
+                AC-014/015/017/021/023/024/025/026 pass — 91/92 testes (1 pre-existente tab-order,
+                T-009 scope)
+              </p>
+            </details>
+          </div>
+        </article>
+        <article class="story-card story-card--done-retried" aria-label="batch T-008">
+          <header>
+            <h3>T-008</h3>
+            <span class="badge badge-warn" aria-label="status: done with retries"
+              >↻ done (retried)</span
+            >
+          </header>
+          <div class="story-card__stats">
+            <span class="story-card__stat"
+              ><span class="story-card__stat-label">time</span>
+              <span class="story-card__stat-value">7h13m</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">cost</span>
+              <span class="story-card__stat-value">—</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">tasks</span>
+              <span class="story-card__stat-value">1</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">ACs</span>
+              <span class="story-card__stat-value">14</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">files</span>
+              <span class="story-card__stat-value">8</span></span
+            ><span class="story-card__pipeline"
+              >dev → code-reviewer ‖ logic-reviewer → blocker-specialist → qa</span
+            >
+          </div>
+          <aside class="story-card__retry" role="status">
+            ⚠ dev retried 3× — loop 2: Loop L2 restart — split 641-line test into 3 files; split
+            319-line dynamic; AC-…; loop 3: Loop L3 restart — AC-025 value &#39;reordenável&#39;
+            asserted; AC-026 announcement func…; loop 3: Post-blocker dev done — 228 lines, exit 0,
+            152 tests; all 4 AC-026 PT-BR string…
+          </aside>
+          <aside class="story-card__retry" role="status">
+            ⚠ code-reviewer retried 2× — loop 2: (no PM note); loop 3: L3 findings: reorder.test.tsx
+            251 lines (false alarm — actual 250); AC-026 loca…
+          </aside>
+          <aside class="story-card__retry" role="status">
+            ⚠ logic-reviewer retried 2× — loop 2: Loop L3 — AC-025 presence-only (must assert
+            value=&#39;reordenável&#39;); AC-026 no PT-…; loop 3: L3 findings: AC-026 tests closures
+            locais não exercitam Priorities.tsx:62-79; a…
+          </aside>
+          <aside class="story-card__retry" role="status">
+            ⚠ blocker-specialist retried 1× — loop 3: Blocker resolved: dispatch_dev — verbatim
+            DndContext spy replacement for all 4 …
+          </aside>
+          <aside class="story-card__retry" role="status">
+            ⚠ qa retried 1× — loop 3: 14/14 ACs pass — 152 testes; AC-025/026 via DndContext spy
+            confirmado
+          </aside>
+          <p class="story-card__summary">
+            14/14 ACs pass — 152 testes; AC-025/026 via DndContext spy confirmado
+          </p>
+          <div class="story-card__drilldowns">
+            <details>
+              <summary>Files changed (8)</summary>
+              <table class="story-card__files">
+                <thead>
+                  <tr>
+                    <th>path</th>
+                    <th>action</th>
+                    <th>tasks</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>web/src/features/priorities/hooks/__tests__/usePriorities.t…</td>
+                    <td>changed</td>
+                    <td>T-008</td>
+                  </tr>
+                  <tr>
+                    <td>web/src/features/priorities/components/__tests__/Priorities…</td>
+                    <td>changed</td>
+                    <td>T-008</td>
+                  </tr>
+                  <tr>
+                    <td>web/src/features/priorities/components/__tests__/Priorities…</td>
+                    <td>changed</td>
+                    <td>T-008</td>
+                  </tr>
+                  <tr>
+                    <td>web/src/features/priorities/hooks/__tests__/usePriorities.m…</td>
+                    <td>changed</td>
+                    <td>T-008</td>
+                  </tr>
+                  <tr>
+                    <td>web/src/features/priorities/hooks/__tests__/usePriorities.r…</td>
+                    <td>changed</td>
+                    <td>T-008</td>
+                  </tr>
+                  <tr>
+                    <td>web/src/features/priorities/components/__tests__/Priorities…</td>
+                    <td>changed</td>
+                    <td>T-008</td>
+                  </tr>
+                  <tr>
+                    <td>web/src/features/priorities/components/__tests__/PriorityIt…</td>
+                    <td>changed</td>
+                    <td>T-008</td>
+                  </tr>
+                  <tr>
+                    <td>web/src/features/priorities/components/PriorityItem.tsx</td>
+                    <td>changed</td>
+                    <td>T-008</td>
+                  </tr>
+                </tbody>
+              </table>
+            </details>
+            <details>
+              <summary>ACs covered (14)</summary>
+              <ul class="story-card__acs">
+                <li><strong>FEAT-019/AC-001</strong> — e-001, e-009</li>
+                <li><strong>FEAT-019/AC-002</strong> — e-002, e-010</li>
+                <li><strong>FEAT-019/AC-003</strong> — e-003</li>
+                <li><strong>FEAT-019/AC-004</strong> — e-004, e-005</li>
+                <li><strong>FEAT-019/AC-005</strong> — e-006, e-007</li>
+                <li><strong>FEAT-019/AC-006</strong> — e-008</li>
+                <li><strong>FEAT-019/AC-007</strong> — e-009</li>
+                <li><strong>FEAT-019/AC-008</strong> — e-011</li>
+                <li><strong>FEAT-019/AC-009</strong> — e-012</li>
+                <li><strong>FEAT-019/AC-010</strong> — e-013</li>
+                <li><strong>FEAT-019/AC-011</strong> — e-014</li>
+                <li><strong>FEAT-019/AC-012</strong> — e-015</li>
+                <li><strong>FEAT-019/AC-025</strong> — e-016</li>
+                <li><strong>FEAT-019/AC-026</strong> — e-017, e-018, e-019, e-020</li>
+              </ul>
+            </details>
+            <details>
+              <summary>Pipeline trace (12 dispatches)</summary>
+              <table class="story-card__pipeline-trace">
+                <thead>
+                  <tr>
+                    <th>role</th>
+                    <th>dispatch_id</th>
+                    <th>loop</th>
+                    <th>model</th>
+                    <th>effort</th>
+                    <th>duration</th>
+                    <th>tokens</th>
+                    <th>cost</th>
+                    <th>status</th>
+                  </tr>
+                </thead>
+                <tbody>
                   <tr>
                     <td>dev</td>
                     <td>d-T-008-dev-l1</td>
                     <td>1</td>
                     <td>—</td>
+                    <td>medium</td>
                     <td>—</td>
-                    <td>done</td>
-                  </tr>
-                  <tr>
-                    <td>dev</td>
-                    <td>d-T-009-dev-l1</td>
-                    <td>1</td>
                     <td>—</td>
                     <td>—</td>
                     <td>done</td>
@@ -1017,6 +1847,9 @@
                     <td>d-T-008-code-reviewer-l1</td>
                     <td>1</td>
                     <td>—</td>
+                    <td>high</td>
+                    <td>—</td>
+                    <td>—</td>
                     <td>—</td>
                     <td>needs_review</td>
                   </tr>
@@ -1025,21 +1858,8 @@
                     <td>d-T-008-logic-reviewer-…</td>
                     <td>1</td>
                     <td>—</td>
+                    <td>medium</td>
                     <td>—</td>
-                    <td>needs_review</td>
-                  </tr>
-                  <tr>
-                    <td>code-reviewer</td>
-                    <td>d-T-009-code-reviewer-l1</td>
-                    <td>1</td>
-                    <td>—</td>
-                    <td>—</td>
-                    <td>needs_review</td>
-                  </tr>
-                  <tr>
-                    <td>logic-reviewer</td>
-                    <td>d-T-009-logic-reviewer-…</td>
-                    <td>1</td>
                     <td>—</td>
                     <td>—</td>
                     <td>needs_review</td>
@@ -1049,13 +1869,8 @@
                     <td>d-T-008-dev-l2</td>
                     <td>2</td>
                     <td>—</td>
+                    <td>high</td>
                     <td>—</td>
-                    <td>done</td>
-                  </tr>
-                  <tr>
-                    <td>dev</td>
-                    <td>d-T-009-dev-l2</td>
-                    <td>2</td>
                     <td>—</td>
                     <td>—</td>
                     <td>done</td>
@@ -1065,6 +1880,9 @@
                     <td>d-T-008-code-reviewer-l2</td>
                     <td>2</td>
                     <td>—</td>
+                    <td>high</td>
+                    <td>—</td>
+                    <td>—</td>
                     <td>—</td>
                     <td>done</td>
                   </tr>
@@ -1073,21 +1891,8 @@
                     <td>d-T-008-logic-reviewer-…</td>
                     <td>2</td>
                     <td>—</td>
+                    <td>medium</td>
                     <td>—</td>
-                    <td>needs_review</td>
-                  </tr>
-                  <tr>
-                    <td>code-reviewer</td>
-                    <td>d-T-009-code-reviewer-l2</td>
-                    <td>2</td>
-                    <td>—</td>
-                    <td>—</td>
-                    <td>done</td>
-                  </tr>
-                  <tr>
-                    <td>logic-reviewer</td>
-                    <td>d-T-009-logic-reviewer-…</td>
-                    <td>2</td>
                     <td>—</td>
                     <td>—</td>
                     <td>needs_review</td>
@@ -1097,13 +1902,8 @@
                     <td>d-T-008-dev-l3</td>
                     <td>3</td>
                     <td>—</td>
+                    <td>high</td>
                     <td>—</td>
-                    <td>done</td>
-                  </tr>
-                  <tr>
-                    <td>dev</td>
-                    <td>d-T-009-dev-l3</td>
-                    <td>3</td>
                     <td>—</td>
                     <td>—</td>
                     <td>done</td>
@@ -1113,6 +1913,9 @@
                     <td>d-T-008-code-reviewer-l3</td>
                     <td>3</td>
                     <td>—</td>
+                    <td>high</td>
+                    <td>—</td>
+                    <td>—</td>
                     <td>—</td>
                     <td>needs_review</td>
                   </tr>
@@ -1121,21 +1924,8 @@
                     <td>d-T-008-logic-reviewer-…</td>
                     <td>3</td>
                     <td>—</td>
+                    <td>medium</td>
                     <td>—</td>
-                    <td>needs_review</td>
-                  </tr>
-                  <tr>
-                    <td>code-reviewer</td>
-                    <td>d-T-009-code-reviewer-l3</td>
-                    <td>3</td>
-                    <td>—</td>
-                    <td>—</td>
-                    <td>done</td>
-                  </tr>
-                  <tr>
-                    <td>logic-reviewer</td>
-                    <td>d-T-009-logic-reviewer-…</td>
-                    <td>3</td>
                     <td>—</td>
                     <td>—</td>
                     <td>needs_review</td>
@@ -1146,12 +1936,7 @@
                     <td>3</td>
                     <td>—</td>
                     <td>—</td>
-                    <td>done</td>
-                  </tr>
-                  <tr>
-                    <td>blocker-specialist</td>
-                    <td>d-T-009-blocker-1</td>
-                    <td>3</td>
+                    <td>—</td>
                     <td>—</td>
                     <td>—</td>
                     <td>done</td>
@@ -1162,12 +1947,7 @@
                     <td>3</td>
                     <td>—</td>
                     <td>—</td>
-                    <td>done</td>
-                  </tr>
-                  <tr>
-                    <td>dev</td>
-                    <td>d-T-009-dev-postblocker</td>
-                    <td>3</td>
+                    <td>—</td>
                     <td>—</td>
                     <td>—</td>
                     <td>done</td>
@@ -1177,6 +1957,281 @@
                     <td>d-T-008-qa-l1</td>
                     <td>3</td>
                     <td>—</td>
+                    <td>high</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>done</td>
+                  </tr>
+                </tbody>
+              </table>
+            </details>
+            <details>
+              <summary>PM note</summary>
+              <p class="story-card__pmnote">
+                14/14 ACs pass — 152 testes; AC-025/026 via DndContext spy confirmado
+              </p>
+            </details>
+          </div>
+        </article>
+        <article class="story-card story-card--done-retried" aria-label="batch T-009">
+          <header>
+            <h3>T-009</h3>
+            <span class="badge badge-warn" aria-label="status: done with retries"
+              >↻ done (retried)</span
+            >
+          </header>
+          <div class="story-card__stats">
+            <span class="story-card__stat"
+              ><span class="story-card__stat-label">time</span>
+              <span class="story-card__stat-value">7h15m</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">cost</span>
+              <span class="story-card__stat-value">—</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">tasks</span>
+              <span class="story-card__stat-value">1</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">ACs</span>
+              <span class="story-card__stat-value">14</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">files</span>
+              <span class="story-card__stat-value">8</span></span
+            ><span class="story-card__pipeline"
+              >dev → code-reviewer ‖ logic-reviewer → blocker-specialist → qa</span
+            >
+          </div>
+          <aside class="story-card__retry" role="status">
+            ⚠ dev retried 3× — loop 2: Loop L2 restart — split oversized files; AC-015 DnD proxy;
+            AC-024 focus; AC-025…; loop 3: Loop L3 restart — AC-025 value; AC-026 DndContext spy;
+            AC-015 real onDragEnd pa…; loop 3: Post-blocker dev done — 250 lines, exit 0, 112 tests;
+            onDragStart+onDragOver ad…
+          </aside>
+          <aside class="story-card__retry" role="status">
+            ⚠ code-reviewer retried 2× — loop 2: (no PM note); loop 3: (no PM note)
+          </aside>
+          <aside class="story-card__retry" role="status">
+            ⚠ logic-reviewer retried 2× — loop 2: Loop L3 — AC-026 tautological self-assertions (no
+            component rendered); AC-025 p…; loop 3: L3 finding: AC-026 onDragStart/onDragOver PT-BR
+            strings untested — DndContext s…
+          </aside>
+          <aside class="story-card__retry" role="status">
+            ⚠ blocker-specialist retried 1× — loop 3: Blocker resolved: task_continue — insert
+            11-line combined onDragStart+onDragOve…
+          </aside>
+          <aside class="story-card__retry" role="status">
+            ⚠ qa retried 1× — loop 3: 14/14 ACs pass — 112 testes; AC-015/025/026 confirmados
+          </aside>
+          <p class="story-card__summary">14/14 ACs pass — 112 testes; AC-015/025/026 confirmados</p>
+          <div class="story-card__drilldowns">
+            <details>
+              <summary>Files changed (8)</summary>
+              <table class="story-card__files">
+                <thead>
+                  <tr>
+                    <th>path</th>
+                    <th>action</th>
+                    <th>tasks</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>web/src/features/notes/hooks/__tests__/useNotes.mutations.t…</td>
+                    <td>changed</td>
+                    <td>T-009</td>
+                  </tr>
+                  <tr>
+                    <td>web/src/features/notes/components/__tests__/Notes.interacti…</td>
+                    <td>changed</td>
+                    <td>T-009</td>
+                  </tr>
+                  <tr>
+                    <td>web/src/features/notes/components/__tests__/Notes.keyboard.…</td>
+                    <td>changed</td>
+                    <td>T-009</td>
+                  </tr>
+                  <tr>
+                    <td>web/src/features/notes/hooks/__tests__/useNotes.reorder.tes…</td>
+                    <td>changed</td>
+                    <td>T-009</td>
+                  </tr>
+                  <tr>
+                    <td>web/src/features/notes/components/__tests__/NoteItem.reorde…</td>
+                    <td>changed</td>
+                    <td>T-009</td>
+                  </tr>
+                  <tr>
+                    <td>web/src/features/notes/components/__tests__/NoteItem.access…</td>
+                    <td>changed</td>
+                    <td>T-009</td>
+                  </tr>
+                  <tr>
+                    <td>web/src/features/notes/components/__tests__/Notes.taborder.…</td>
+                    <td>changed</td>
+                    <td>T-009</td>
+                  </tr>
+                  <tr>
+                    <td>web/src/features/notes/components/NoteItem.tsx</td>
+                    <td>changed</td>
+                    <td>T-009</td>
+                  </tr>
+                </tbody>
+              </table>
+            </details>
+            <details>
+              <summary>ACs covered (14)</summary>
+              <ul class="story-card__acs">
+                <li><strong>FEAT-019/AC-013</strong> — e-001, e-002</li>
+                <li><strong>FEAT-019/AC-014</strong> — e-001, e-002, e-003</li>
+                <li><strong>FEAT-019/AC-015</strong> — e-004, e-005</li>
+                <li><strong>FEAT-019/AC-016</strong> — e-006</li>
+                <li><strong>FEAT-019/AC-017</strong> — e-006, e-004</li>
+                <li><strong>FEAT-019/AC-018</strong> — e-007</li>
+                <li><strong>FEAT-019/AC-019</strong> — e-001</li>
+                <li><strong>FEAT-019/AC-020</strong> — e-001, e-002</li>
+                <li><strong>FEAT-019/AC-021</strong> — e-003</li>
+                <li><strong>FEAT-019/AC-022</strong> — e-001, e-002</li>
+                <li><strong>FEAT-019/AC-023</strong> — e-003</li>
+                <li><strong>FEAT-019/AC-024</strong> — e-003</li>
+                <li><strong>FEAT-019/AC-025</strong> — e-002, e-007</li>
+                <li><strong>FEAT-019/AC-026</strong> — e-002</li>
+              </ul>
+            </details>
+            <details>
+              <summary>Pipeline trace (12 dispatches)</summary>
+              <table class="story-card__pipeline-trace">
+                <thead>
+                  <tr>
+                    <th>role</th>
+                    <th>dispatch_id</th>
+                    <th>loop</th>
+                    <th>model</th>
+                    <th>effort</th>
+                    <th>duration</th>
+                    <th>tokens</th>
+                    <th>cost</th>
+                    <th>status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>dev</td>
+                    <td>d-T-009-dev-l1</td>
+                    <td>1</td>
+                    <td>—</td>
+                    <td>medium</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>done</td>
+                  </tr>
+                  <tr>
+                    <td>code-reviewer</td>
+                    <td>d-T-009-code-reviewer-l1</td>
+                    <td>1</td>
+                    <td>—</td>
+                    <td>high</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>needs_review</td>
+                  </tr>
+                  <tr>
+                    <td>logic-reviewer</td>
+                    <td>d-T-009-logic-reviewer-…</td>
+                    <td>1</td>
+                    <td>—</td>
+                    <td>medium</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>needs_review</td>
+                  </tr>
+                  <tr>
+                    <td>dev</td>
+                    <td>d-T-009-dev-l2</td>
+                    <td>2</td>
+                    <td>—</td>
+                    <td>high</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>done</td>
+                  </tr>
+                  <tr>
+                    <td>code-reviewer</td>
+                    <td>d-T-009-code-reviewer-l2</td>
+                    <td>2</td>
+                    <td>—</td>
+                    <td>high</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>done</td>
+                  </tr>
+                  <tr>
+                    <td>logic-reviewer</td>
+                    <td>d-T-009-logic-reviewer-…</td>
+                    <td>2</td>
+                    <td>—</td>
+                    <td>medium</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>needs_review</td>
+                  </tr>
+                  <tr>
+                    <td>dev</td>
+                    <td>d-T-009-dev-l3</td>
+                    <td>3</td>
+                    <td>—</td>
+                    <td>high</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>done</td>
+                  </tr>
+                  <tr>
+                    <td>code-reviewer</td>
+                    <td>d-T-009-code-reviewer-l3</td>
+                    <td>3</td>
+                    <td>—</td>
+                    <td>high</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>done</td>
+                  </tr>
+                  <tr>
+                    <td>logic-reviewer</td>
+                    <td>d-T-009-logic-reviewer-…</td>
+                    <td>3</td>
+                    <td>—</td>
+                    <td>medium</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>needs_review</td>
+                  </tr>
+                  <tr>
+                    <td>blocker-specialist</td>
+                    <td>d-T-009-blocker-1</td>
+                    <td>3</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>done</td>
+                  </tr>
+                  <tr>
+                    <td>dev</td>
+                    <td>d-T-009-dev-postblocker</td>
+                    <td>3</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
                     <td>—</td>
                     <td>done</td>
                   </tr>
@@ -1184,6 +2239,9 @@
                     <td>qa</td>
                     <td>d-T-009-qa-l1</td>
                     <td>3</td>
+                    <td>—</td>
+                    <td>high</td>
+                    <td>—</td>
                     <td>—</td>
                     <td>—</td>
                     <td>done</td>
@@ -1199,9 +2257,9 @@
             </details>
           </div>
         </article>
-        <article class="story-card story-card--done" aria-label="batch PM-ORCHESTRATOR">
+        <article class="story-card story-card--done" aria-label="batch pm-orchestrator">
           <header>
-            <h3>PM-ORCHESTRATOR</h3>
+            <h3>pm-orchestrator</h3>
             <span class="badge badge-pass" aria-label="status: done">✓ done</span>
           </header>
           <div class="story-card__stats">
@@ -1249,8 +2307,11 @@
                     <th>role</th>
                     <th>dispatch_id</th>
                     <th>loop</th>
+                    <th>model</th>
+                    <th>effort</th>
                     <th>duration</th>
                     <th>tokens</th>
+                    <th>cost</th>
                     <th>status</th>
                   </tr>
                 </thead>
@@ -1259,8 +2320,11 @@
                     <td>pm-orchestrator</td>
                     <td>pm-orchestrator-c76a225a</td>
                     <td>—</td>
+                    <td>sonnet-4-6</td>
+                    <td>—</td>
                     <td>2h54m</td>
                     <td>86517492</td>
+                    <td>$52.41</td>
                     <td>done</td>
                   </tr>
                 </tbody>
@@ -1272,12 +2336,10 @@
             </details>
           </div>
         </article>
-        <article class="story-card story-card--done-retried" aria-label="batch D-AUDIT">
+        <article class="story-card story-card--done" aria-label="batch audit-agent">
           <header>
-            <h3>D-AUDIT</h3>
-            <span class="badge badge-warn" aria-label="status: done with retries"
-              >↻ done (retried)</span
-            >
+            <h3>audit-agent</h3>
+            <span class="badge badge-pass" aria-label="status: done">✓ done</span>
           </header>
           <div class="story-card__stats">
             <span class="story-card__stat"
@@ -1288,7 +2350,7 @@
               <span class="story-card__stat-value">—</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">tasks</span>
-              <span class="story-card__stat-value">0</span></span
+              <span class="story-card__stat-value">1</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">ACs</span>
               <span class="story-card__stat-value">0</span></span
@@ -1326,8 +2388,11 @@
                     <th>role</th>
                     <th>dispatch_id</th>
                     <th>loop</th>
+                    <th>model</th>
+                    <th>effort</th>
                     <th>duration</th>
                     <th>tokens</th>
+                    <th>cost</th>
                     <th>status</th>
                   </tr>
                 </thead>
@@ -1336,6 +2401,9 @@
                     <td>audit-agent</td>
                     <td>d-audit-agent</td>
                     <td>1</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
                     <td>—</td>
                     <td>—</td>
                     <td>done</td>
@@ -1360,17 +2428,17 @@
         <div class="cost-grid">
           <div class="cost-card">
             <span class="cost-label">Total cost</span>
-            <span class="cost-value">$761.69</span>
-            <small>$761.6940</small>
+            <span class="cost-value">$123.5428</span>
+            <small>$123.5428</small>
           </div>
           <div class="cost-card">
             <span class="cost-label">$ / AC</span>
-            <span class="cost-value">$29.2959</span>
+            <span class="cost-value">$4.7516</span>
             <small>26 ACs</small>
           </div>
           <div class="cost-card">
             <span class="cost-label">$ / dispatch</span>
-            <span class="cost-value">$190.4235</span>
+            <span class="cost-value">$1.9007</span>
             <small>avg of 4</small>
           </div>
           <div class="cost-card">
@@ -1408,7 +2476,7 @@
               <td>193,984,975</td>
               <td>2h54m</td>
               <td>968</td>
-              <td>$761.6940</td>
+              <td>$123.5428</td>
               <td>100.0%</td>
             </tr>
           </tbody>
@@ -1428,28 +2496,28 @@
             </thead>
             <tbody>
               <tr>
+                <td><code>pm-orchestrator</code></td>
+                <td>1</td>
+                <td>86,517,492</td>
+                <td>2h54m</td>
+                <td>$52.4086</td>
+                <td>42.4%</td>
+              </tr>
+              <tr>
                 <td><code>code-reviewer</code></td>
                 <td>2</td>
                 <td>58,999,116</td>
                 <td>0ms</td>
-                <td>$389.3942</td>
-                <td>51.1%</td>
+                <td>$39.3571</td>
+                <td>31.9%</td>
               </tr>
               <tr>
                 <td><code>qa</code></td>
                 <td>1</td>
                 <td>48,468,367</td>
                 <td>0ms</td>
-                <td>$319.8912</td>
-                <td>42.0%</td>
-              </tr>
-              <tr>
-                <td><code>pm-orchestrator</code></td>
-                <td>1</td>
-                <td>86,517,492</td>
-                <td>2h54m</td>
-                <td>$52.4086</td>
-                <td>6.9%</td>
+                <td>$31.7772</td>
+                <td>25.7%</td>
               </tr>
             </tbody>
           </table>
@@ -1469,11 +2537,11 @@
             </thead>
             <tbody>
               <tr>
-                <td><code>unattributed</code></td>
+                <td><code>implementation</code></td>
                 <td>4</td>
                 <td>193,984,975</td>
                 <td>2h54m</td>
-                <td>$761.6940</td>
+                <td>$123.5428</td>
                 <td>100.0%</td>
               </tr>
             </tbody>
@@ -1509,13 +2577,13 @@
                 </tr>
                 <tr>
                   <td>AC-002</td>
-                  <td>missing</td>
+                  <td>pass</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-003</td>
-                  <td>missing</td>
+                  <td>pass</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
@@ -1551,7 +2619,7 @@
                 </tr>
                 <tr>
                   <td>AC-009</td>
-                  <td>missing</td>
+                  <td>pass</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
@@ -1563,13 +2631,13 @@
                 </tr>
                 <tr>
                   <td>AC-011</td>
-                  <td>missing</td>
+                  <td>pass</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-012</td>
-                  <td>missing</td>
+                  <td>pass</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
@@ -1581,13 +2649,13 @@
                 </tr>
                 <tr>
                   <td>AC-014</td>
-                  <td>missing</td>
+                  <td>pass</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-015</td>
-                  <td>missing</td>
+                  <td>pass</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
@@ -1623,7 +2691,7 @@
                 </tr>
                 <tr>
                   <td>AC-021</td>
-                  <td>missing</td>
+                  <td>pass</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
@@ -1635,25 +2703,25 @@
                 </tr>
                 <tr>
                   <td>AC-023</td>
-                  <td>missing</td>
+                  <td>pass</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-024</td>
-                  <td>missing</td>
+                  <td>pass</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-025</td>
-                  <td>missing</td>
+                  <td>pass</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-026</td>
-                  <td>missing</td>
+                  <td>pass</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
@@ -2269,7 +3337,7 @@
         <details>
           <summary>Repo health snapshot</summary>
           <div>
-            <p><em>Measured at: 2026-05-13</em></p>
+            <p><em>Measured at: 2026-05-14</em></p>
             <table>
               <thead>
                 <tr>
@@ -2314,7 +3382,28 @@
         </details>
         <details>
           <summary>Phase durations</summary>
-          <div><p>(no phase data available)</p></div>
+          <div>
+            <table>
+              <thead>
+                <tr>
+                  <th>Phase</th>
+                  <th>Started</th>
+                  <th>Completed</th>
+                  <th>Duration</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>implementation</td>
+                  <td>00:00:00</td>
+                  <td>2026-05-13 07:18:00</td>
+                  <td>438m</td>
+                  <td>done</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </details>
       </section>
       <section class="raw-data">
@@ -2328,7 +3417,7 @@
             <blockquote>
               <p>
                 Feature: drag-reorder — reordenação drag-and-drop + teclado em Prioridades e Notas
-                Task ID: FEAT-019 Phase: done Generated at: 2026-05-13T06:56:58.631Z
+                Task ID: FEAT-019 Phase: done Generated at: 2026-05-14T03:10:15.087Z
               </p>
             </blockquote>
             <h2>Insights</h2>
@@ -2358,15 +3447,15 @@
                   <li>Estimated output (30%): 58195493</li>
                 </ul>
               </li>
-              <li>Estimated cost USD total: $761.6940</li>
-              <li>Cost per AC: $29.2959</li>
-              <li>Cost per dispatch (avg): $190.4235</li>
+              <li>Estimated cost USD total: $123.5428</li>
+              <li>Cost per AC: $4.7516</li>
+              <li>Cost per dispatch (avg): $1.9007</li>
               <li>Wall-clock duration: 174m</li>
               <li>Tool uses total: 968</li>
               <li>Coverage: 4 of 65 dispatches included in cost calculation</li>
             </ul>
             <h2>Repo health snapshot</h2>
-            <p><em>Measured at: 2026-05-13</em></p>
+            <p><em>Measured at: 2026-05-14</em></p>
             <table>
               <thead>
                 <tr>
@@ -2434,7 +3523,7 @@
                   <td>done</td>
                   <td>1</td>
                   <td>26498341</td>
-                  <td>$174.8891</td>
+                  <td>$16.3541</td>
                   <td>0ms</td>
                   <td>—</td>
                 </tr>
@@ -2516,7 +3605,7 @@
                   <td>done</td>
                   <td>1</td>
                   <td>32500775</td>
-                  <td>$214.5051</td>
+                  <td>$23.0030</td>
                   <td>0ms</td>
                   <td>—</td>
                 </tr>
@@ -2786,7 +3875,7 @@
                   <td>done</td>
                   <td>2</td>
                   <td>48468367</td>
-                  <td>$319.8912</td>
+                  <td>$31.7772</td>
                   <td>0ms</td>
                   <td>AC-002/003/005/009/011/012/025/026 pass — 125/125 testes</td>
                 </tr>
@@ -2860,7 +3949,7 @@
                   <td>done</td>
                   <td>—</td>
                   <td>86517492</td>
-                  <td>$571.0154</td>
+                  <td>$52.4086</td>
                   <td>174m</td>
                   <td>PM/orchestrator session (Stop hook): 802 turns</td>
                 </tr>
@@ -3153,13 +4242,13 @@
                 </tr>
                 <tr>
                   <td>AC-002</td>
-                  <td>missing</td>
+                  <td>pass</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-003</td>
-                  <td>missing</td>
+                  <td>pass</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
@@ -3195,7 +4284,7 @@
                 </tr>
                 <tr>
                   <td>AC-009</td>
-                  <td>missing</td>
+                  <td>pass</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
@@ -3207,13 +4296,13 @@
                 </tr>
                 <tr>
                   <td>AC-011</td>
-                  <td>missing</td>
+                  <td>pass</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-012</td>
-                  <td>missing</td>
+                  <td>pass</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
@@ -3225,13 +4314,13 @@
                 </tr>
                 <tr>
                   <td>AC-014</td>
-                  <td>missing</td>
+                  <td>pass</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-015</td>
-                  <td>missing</td>
+                  <td>pass</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
@@ -3267,7 +4356,7 @@
                 </tr>
                 <tr>
                   <td>AC-021</td>
-                  <td>missing</td>
+                  <td>pass</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
@@ -3279,25 +4368,25 @@
                 </tr>
                 <tr>
                   <td>AC-023</td>
-                  <td>missing</td>
+                  <td>pass</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-024</td>
-                  <td>missing</td>
+                  <td>pass</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-025</td>
-                  <td>missing</td>
+                  <td>pass</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
                 <tr>
                   <td>AC-026</td>
-                  <td>missing</td>
+                  <td>pass</td>
                   <td>qa</td>
                   <td>—</td>
                 </tr>
@@ -3326,12 +4415,31 @@
                 </tr>
                 <tr>
                   <td>implementation</td>
-                  <td>—</td>
+                  <td>438 min</td>
                 </tr>
               </tbody>
             </table>
             <h2>Timeline</h2>
-            <p><em>(no phase data available)</em></p>
+            <table>
+              <thead>
+                <tr>
+                  <th>Phase</th>
+                  <th>Started</th>
+                  <th>Completed</th>
+                  <th>Duration</th>
+                  <th>Visual</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>implementation</td>
+                  <td>00:00:00</td>
+                  <td>07:18:00</td>
+                  <td>438m</td>
+                  <td>██████████</td>
+                </tr>
+              </tbody>
+            </table>
             <h2>Dispatches</h2>
             <table>
               <thead>
@@ -3419,7 +4527,7 @@
             <h2>Escalation rate</h2>
             <p>Escalation rate: 0.0% — below healthy band (&lt; 10%)</p>
             <h2>AC closure</h2>
-            <p>Total: 26 | Pass: 59 | Partial: 0 | Fail: 0 | Missing: 12</p>
+            <p>Total: 26 | Pass: 27 | Partial: 0 | Fail: 0 | Missing: 0</p>
             <h2>Reviewer findings density</h2>
             <table>
               <thead>
