@@ -196,12 +196,17 @@ describe('StickyPanel — close button (AC-033, AC-036)', () => {
     expect(screen.getByRole('button', { name: 'Fechar post-it' })).toBeInTheDocument();
   });
 
-  it('clicking close button calls onClose (AC-033)', async () => {
+  it('two clicks on close button confirm and call onClose (AC-033 + FEAT-022 AC-010/AC-011)', async () => {
     const user = userEvent.setup();
     const onClose = jest.fn();
     renderPanel({ color: 'r', onClose });
 
+    // First click → arms confirm (label flips), onClose NOT yet called.
     await user.click(screen.getByRole('button', { name: 'Fechar post-it' }));
+    expect(onClose).not.toHaveBeenCalled();
+
+    // Second click → confirms.
+    await user.click(screen.getByRole('button', { name: 'Confirmar fechamento do post-it' }));
     expect(onClose).toHaveBeenCalledTimes(1);
   });
 });

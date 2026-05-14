@@ -22,6 +22,7 @@ import { useCallback, useEffect, useRef } from 'react';
 import { NoteItem } from '@/features/notes';
 import type { Note, UseNotesReturn } from '@/features/notes';
 import type { RichTextEditorRef } from '@/features/rich-text-line';
+import { ConfirmDeleteButton } from '@/features/undo-delete';
 
 import type { StickyColor } from '../types.js';
 import { STICKY_COLOR_HEX } from '../types.js';
@@ -151,19 +152,18 @@ export function StickyPanel({
       {/* AC-019: drag handle — AC-020: dragHandleProps binds mousedown */}
       <div className={dragHandleClass} {...dragHandleProps}>
         <div className={styles.dragIndicator} />
-        {/* AC-033/036: close button only when onClose is defined (non-Yellow) */}
+        {/* AC-033/036: close button only when onClose is defined (non-Yellow).
+         *  FEAT-022 AC-010/AC-011: inline 2-click confirm — sem toast/undo queue. */}
         {onClose !== undefined && (
-          <button
-            type="button"
-            className={styles.closeButton}
-            onClick={(e) => {
-              e.stopPropagation();
-              onClose();
-            }}
-            aria-label="Fechar post-it"
+          <ConfirmDeleteButton
+            onConfirm={onClose}
+            idleAriaLabel="Fechar post-it"
+            confirmingAriaLabel="Confirmar fechamento do post-it"
+            confirmingLabel="Confirmar?"
+            {...(styles.closeButton !== undefined ? { className: styles.closeButton } : {})}
           >
             ✕
-          </button>
+          </ConfirmDeleteButton>
         )}
       </div>
 
