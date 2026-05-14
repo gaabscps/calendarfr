@@ -190,20 +190,25 @@ describe('Priorities dynamic — AC-011: add and remove wired', () => {
     expect(deleteBtns.length).toBeGreaterThanOrEqual(2);
   });
 
-  it('clicking delete reduces item count by 1', async () => {
+  it('clicking delete reduces item count by 1 (FEAT-022: 2-click confirm)', async () => {
     const spy = jest.fn();
     renderWithProviders(<Harness initial={[item(0), item(1), item(2)]} onChangeSpy={spy} />);
     await waitForEditors(3);
 
     const [firstDelete] = screen.getAllByRole('button', { name: /excluir prioridade/i });
+    // FEAT-022 T-012: ConfirmDeleteButton requires 2 clicks — first arms, second confirms.
     await userEvent.click(firstDelete as HTMLElement);
+    const armed = await screen.findByRole('button', {
+      name: /confirmar exclusão da prioridade/i,
+    });
+    await userEvent.click(armed);
 
     await waitFor(() => {
       expect(screen.getAllByRole('checkbox')).toHaveLength(2);
     });
   });
 
-  it('emits onChange with removed item filtered out', async () => {
+  it('emits onChange with removed item filtered out (FEAT-022: 2-click confirm)', async () => {
     const spy = jest.fn();
     const initial = [item(0), item(1), item(2)];
     renderWithProviders(<Harness initial={initial} onChangeSpy={spy} />);
@@ -211,6 +216,10 @@ describe('Priorities dynamic — AC-011: add and remove wired', () => {
 
     const [firstDelete] = screen.getAllByRole('button', { name: /excluir prioridade/i });
     await userEvent.click(firstDelete as HTMLElement);
+    const armed = await screen.findByRole('button', {
+      name: /confirmar exclusão da prioridade/i,
+    });
+    await userEvent.click(armed);
 
     await waitFor(() => expect(spy).toHaveBeenCalled());
     const emitted = spy.mock.calls.at(-1)?.[0] as Priority[];

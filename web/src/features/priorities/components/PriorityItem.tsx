@@ -14,8 +14,8 @@ import React from 'react';
 
 import { RichTextBlock } from '@/features/rich-text-line';
 import type { RichTextEditorRef } from '@/features/rich-text-line';
+import { ConfirmDeleteButton } from '@/features/undo-delete';
 import { Checkbox } from '@/shared/components/Checkbox';
-import { IconButton } from '@/shared/components/IconButton';
 
 import { placeholderForIndex } from '../lib/placeholders.js';
 import type { Priority } from '../types.js';
@@ -162,17 +162,19 @@ function PriorityItemBase({
         />
       </div>
 
-      {/* Delete IconButton — AC-004, AC-009: only rendered when onDelete is provided */}
+      {/* Delete button — FEAT-022 T-012: ConfirmDeleteButton substitui IconButton X.
+          Idle visual mantém o X icon (children); confirming mostra "Confirmar?".
+          AC-006, AC-007, AC-008, AC-009 (FEAT-022). Mantém AC-004, AC-009 (FEAT-008). */}
       {onDelete && (
-        <IconButton
-          variant="danger"
-          size="sm"
-          onClick={onDelete}
-          aria-label={`Excluir prioridade ${String(slotNumber)}`}
+        <ConfirmDeleteButton
+          onConfirm={onDelete}
+          idleAriaLabel={`Excluir prioridade ${String(slotNumber)}`}
+          confirmingAriaLabel={`Confirmar exclusão da prioridade ${String(slotNumber)}`}
+          confirmingLabel="Confirmar?"
           className={styles.deleteButton}
         >
           ×
-        </IconButton>
+        </ConfirmDeleteButton>
       )}
     </div>
   );
