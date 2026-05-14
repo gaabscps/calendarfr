@@ -17,6 +17,28 @@ import type { Priority } from '@/features/priorities';
 import type { SaveStatus } from '../types.js';
 
 // ---------------------------------------------------------------------------
+// Public args
+// ---------------------------------------------------------------------------
+
+/**
+ * Optional args for useDailyPage. FEAT-022 (undo-delete) T-007.
+ *
+ * `gateOpen`: when `false`, autosave debounce is gated (does NOT arm setTimeout)
+ * and any pending timer is cleared. When transitions `false → true` while
+ * `saveStatus === 'dirty'`, the debounce re-arms automatically. Default `true`
+ * (ungated, autosave runs normally — byte-equivalent to no-args behaviour).
+ *
+ * Naming rationale: chose boolean `gateOpen` over function-form `saveGate`
+ * (originally proposed in tasks.md) because (a) React data-flow is value-based
+ * not function-based, (b) dependency-tracking a boolean is reliable while a
+ * function reference requires an extra tick/version prop. Consumers needing
+ * function form can wrap (`gateOpen: queue.length === 0`). AC-003, AC-004.
+ */
+export interface UseDailyPageArgs {
+  gateOpen?: boolean;
+}
+
+// ---------------------------------------------------------------------------
 // Public return
 // ---------------------------------------------------------------------------
 

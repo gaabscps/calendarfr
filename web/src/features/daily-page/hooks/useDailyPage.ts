@@ -27,13 +27,14 @@ import {
   LIFE_RAFT_KEY_PREFIX,
 } from './useDailyPage.helpers.js';
 import { dailyPageReducer, INITIAL_STATE } from './useDailyPage.reducer.js';
-import type { UseDailyPageReturn } from './useDailyPage.types.js';
+import type { UseDailyPageArgs, UseDailyPageReturn } from './useDailyPage.types.js';
 
 export const AUTOSAVE_DEBOUNCE_MS = 800; // AC-007
 export const MAX_RETRY = 3; // AC-025
 export { LIFE_RAFT_KEY_PREFIX }; // AC-028 re-exported
 
-export function useDailyPage(date: string): UseDailyPageReturn {
+export function useDailyPage(date: string, args?: UseDailyPageArgs): UseDailyPageReturn {
+  const gateOpen = args?.gateOpen ?? true; // FEAT-022 AC-003/AC-004: default ungated
   const [state, dispatch] = useReducer(dailyPageReducer, INITIAL_STATE);
 
   // Stable refs — latest state/date accessible in async callbacks without stale closures
@@ -158,8 +159,11 @@ export function useDailyPage(date: string): UseDailyPageReturn {
   }, [date, loadGen]); // loadGen re-triggers on reload() (AC-030)
 
   // Effect 2: Autosave debounce on dirty (AC-007, AC-008, AC-011)
+  // FEAT-022 AC-003/AC-004: if gateOpen=false, do NOT arm timer. Transition
+  // gateOpen false→true re-runs effect; if still dirty, debounce re-arms.
   useEffect(() => {
     if (state.saveStatus !== 'dirty' || state.data === null) return;
+    if (!gateOpen) return; // gated — don't arm; cleanup below not needed (no timer set)
     const snapshot = { date: dateRef.current, body: state.data }; // snapshot-then-fire (AC-008)
     if (debounceTimerRef.current !== null) clearTimeout(debounceTimerRef.current);
     debounceTimerRef.current = setTimeout(() => {
@@ -172,7 +176,7 @@ export function useDailyPage(date: string): UseDailyPageReturn {
         debounceTimerRef.current = null;
       }
     };
-  }, [state.saveStatus, state.data, fireSave]);
+  }, [state.saveStatus, state.data, fireSave, gateOpen]);
 
   // Effect 3: beforeunload keepalive PUT (AC-031–AC-033)
   useEffect(() => {
