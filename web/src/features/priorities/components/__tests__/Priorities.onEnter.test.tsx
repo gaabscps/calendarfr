@@ -2,8 +2,7 @@
  * FEAT-018 T-002 — onEnter wiring tests for PriorityItem + Priorities
  *
  * Covers:
- *   AC-001: ENTER with items.length < 10 calls addPriority
- *   AC-002: ENTER with items.length === 10 — onEnter is undefined (no addPriority call)
+ *   AC-001: ENTER calls addPriority (no upper bound on items)
  *   AC-004: No onShiftEnter passed (SHIFT+ENTER uses Tiptap default)
  */
 
@@ -61,10 +60,10 @@ function getEditorFromDom(index: number) {
 }
 
 // ---------------------------------------------------------------------------
-// AC-001: onEnter = addPriority when items.length < 10
+// AC-001: onEnter = addPriority — always wired, no upper bound
 // ---------------------------------------------------------------------------
 
-describe('FEAT-018 AC-001 — ENTER creates new priority when items.length < 10', () => {
+describe('FEAT-018 AC-001 — ENTER creates new priority', () => {
   it('pressing ENTER in first slot (1 item) triggers onChange with 2 items', async () => {
     const spy = jest.fn();
     renderWithProviders(<Harness initial={[EMPTY_PRIORITY]} onChangeSpy={spy} />);
@@ -106,11 +105,11 @@ describe('FEAT-018 AC-001 — ENTER creates new priority when items.length < 10'
 });
 
 // ---------------------------------------------------------------------------
-// AC-002: onEnter is undefined when items.length === 10
+// ENTER continues to add items past the old 10-item bound (no upper limit).
 // ---------------------------------------------------------------------------
 
-describe('FEAT-018 AC-002 — ENTER does not call addPriority at the limit of 10', () => {
-  it('with 10 items, pressing ENTER does not add an 11th item', async () => {
+describe('FEAT-018 — ENTER keeps adding items past 10 (no upper limit)', () => {
+  it('with 10 items, pressing ENTER adds an 11th item', async () => {
     const spy = jest.fn();
     const ten = Array.from({ length: 10 }, (_, i) => item(i));
     renderWithProviders(<Harness initial={ten} onChangeSpy={spy} />);
@@ -121,21 +120,10 @@ describe('FEAT-018 AC-002 — ENTER does not call addPriority at the limit of 10
       act(() => {
         editor.commands.keyboardShortcut('Enter');
       });
-    }
-
-    // Give a tick for any potential state change to propagate
-    await act(async () => {
-      await new Promise((r) => setTimeout(r, 50));
-    });
-
-    // onChange should NOT have been called to add an item (10 is the limit)
-    // Either spy was never called, or if called, items count stays 10
-    if (spy.mock.calls.length > 0) {
+      await waitFor(() => expect(spy).toHaveBeenCalled());
       const emitted = spy.mock.calls.at(-1)?.[0] as Priority[];
-      expect(emitted.length).toBeLessThanOrEqual(10);
+      expect(emitted).toHaveLength(11);
     }
-    // Most important: still exactly 10 editors
-    expect(screen.getAllByRole('textbox')).toHaveLength(10);
   });
 });
 
@@ -187,22 +175,20 @@ describe('FEAT-018 AC-004 — PriorityItem accepts onEnter but not onShiftEnter 
 });
 
 // ---------------------------------------------------------------------------
-// Structural: Priorities passes onEnter=addPriority vs undefined based on count
+// Structural: Priorities always passes onEnter=addPriority (no upper bound)
 // ---------------------------------------------------------------------------
 
-describe('FEAT-018 — Priorities passes onEnter=addPriority below limit, undefined at limit', () => {
-  it('add button visible below limit (items.length < 10) — onEnter path active', async () => {
+describe('FEAT-018 — Priorities always wires onEnter=addPriority', () => {
+  it('add button visible with 1 item', async () => {
     renderWithProviders(<Harness initial={[EMPTY_PRIORITY]} />);
     await waitForEditors(1);
-    // Add button is visible when onEnter path is active (items.length < 10)
     expect(screen.getByRole('button', { name: /adicionar prioridade/i })).toBeInTheDocument();
   });
 
-  it('add button hidden at limit (items.length === 10) — onEnter=undefined path active', async () => {
+  it('add button still visible with 10 items', async () => {
     const ten = Array.from({ length: 10 }, (_, i) => item(i));
     renderWithProviders(<Harness initial={ten} />);
     await waitForEditors(10);
-    // Add button hidden when onEnter is undefined (items.length === 10)
-    expect(screen.queryByRole('button', { name: /adicionar prioridade/i })).toBeNull();
+    expect(screen.getByRole('button', { name: /adicionar prioridade/i })).toBeInTheDocument();
   });
 });

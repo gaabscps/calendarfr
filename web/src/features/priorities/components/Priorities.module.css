@@ -1,7 +1,7 @@
 /**
  * Priorities styles — CSS Module.
  *
- * Vertical list of 1–10 PriorityItem rows. Items carry their own row height
+ * Vertical list of PriorityItem rows. Items carry their own row height
  * (var(--baseline) = 24px) and the section uses gap=0 so the rows stack
  * contiguously on the Moleskine grid.
  *

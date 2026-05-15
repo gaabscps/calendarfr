@@ -1,8 +1,8 @@
 /**
  * Dynamic Priorities tests — T-009 AC coverage
  *
- * Covers: AC-008 (dynamic list from items[]), AC-010 (add button ≤10), AC-011 (add/remove wired),
- *         AC-014 (autoFocus on new item).
+ * Covers: AC-008 (dynamic list from items[]), AC-010 (add button always visible),
+ *         AC-011 (add/remove wired), AC-014 (autoFocus on new item).
  *
  * FEAT-018 AC-001/002/003 are covered by Priorities.onEnter.test.tsx.
  *
@@ -118,27 +118,27 @@ describe('Priorities dynamic — AC-008: renders from items array', () => {
 });
 
 // ---------------------------------------------------------------------------
-// AC-010: "+" button visible when items.length < 10, hidden at 10
+// AC-010: "+" button always visible (no upper limit on items)
 // ---------------------------------------------------------------------------
 
-describe('Priorities dynamic — AC-010: add button visibility', () => {
-  it('add button is visible when items.length < 10', async () => {
+describe('Priorities dynamic — AC-010: add button always visible', () => {
+  it('add button is visible with 1 item', async () => {
     renderWithProviders(<Harness initial={[EMPTY_PRIORITY]} />);
     await waitForEditors(1);
     expect(screen.getByRole('button', { name: /adicionar prioridade/i })).toBeInTheDocument();
   });
 
-  it('add button is hidden when items.length === 10', async () => {
+  it('add button is visible with 10 items', async () => {
     const ten = Array.from({ length: 10 }, (_, i) => item(i));
     renderWithProviders(<Harness initial={ten} />);
     await waitForEditors(10);
-    expect(screen.queryByRole('button', { name: /adicionar prioridade/i })).toBeNull();
+    expect(screen.getByRole('button', { name: /adicionar prioridade/i })).toBeInTheDocument();
   });
 
-  it('add button is visible when items.length === 9', async () => {
-    const nine = Array.from({ length: 9 }, (_, i) => item(i));
-    renderWithProviders(<Harness initial={nine} />);
-    await waitForEditors(9);
+  it('add button is visible with 25 items', async () => {
+    const many = Array.from({ length: 25 }, (_, i) => item(i));
+    renderWithProviders(<Harness initial={many} />);
+    await waitForEditors(25);
     expect(screen.getByRole('button', { name: /adicionar prioridade/i })).toBeInTheDocument();
   });
 });

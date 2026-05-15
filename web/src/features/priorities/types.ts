@@ -11,7 +11,7 @@ export type { Priority } from '@calendarfr/shared';
 import type { Priority } from '@calendarfr/shared';
 
 /**
- * A dynamic list of Priority items (1–10 items).
+ * A dynamic list of Priority items (≥1 item).
  * Covers AC-012, AC-015.
  */
 export type PrioritiesTuple = Priority[];

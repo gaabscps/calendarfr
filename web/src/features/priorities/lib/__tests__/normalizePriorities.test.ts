@@ -105,18 +105,26 @@ describe('normalizePriorities', () => {
     });
   });
 
-  // ── Array of 11 items → clamped to 10 ───────────────────────────────────
-  describe('array exceeding max (11 items)', () => {
-    it('clamps to 10 items and emits warn', () => {
+  // ── Large arrays → preserved as-is (no upper limit) ─────────────────────
+  describe('array with many items', () => {
+    it('returns all 11 items without truncation or warning', () => {
       const input = Array.from({ length: 11 }, (_, i) => validItem({ id: `item-${i}` }));
 
       const result = normalizePriorities(input);
 
-      expect(result).toHaveLength(10);
+      expect(result).toHaveLength(11);
       expect(result[0]?.id).toBe('item-0');
-      expect(result[9]?.id).toBe('item-9');
-      expect(warnSpy).toHaveBeenCalledTimes(1);
-      expect(warnSpy).toHaveBeenCalledWith(expect.stringContaining('truncating'));
+      expect(result[10]?.id).toBe('item-10');
+      expect(warnSpy).not.toHaveBeenCalled();
+    });
+
+    it('returns all 50 items without truncation or warning', () => {
+      const input = Array.from({ length: 50 }, (_, i) => validItem({ id: `item-${i}` }));
+
+      const result = normalizePriorities(input);
+
+      expect(result).toHaveLength(50);
+      expect(warnSpy).not.toHaveBeenCalled();
     });
   });
 

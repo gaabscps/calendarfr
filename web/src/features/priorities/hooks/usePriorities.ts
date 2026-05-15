@@ -1,6 +1,6 @@
 /**
  * usePriorities — thin hook managing id stability and immutable updates for
- * the dynamic priority list (1–10 items).
+ * the dynamic priority list (≥1 item).
  *
  * Covers: AC-001, AC-002, AC-004, AC-005, AC-007, AC-011, AC-020.
  *
@@ -44,8 +44,7 @@ export interface UsePrioritiesReturn {
    */
   onChangeItem: (index: number, partial: Partial<Priority>) => void;
   /**
-   * Append a new empty slot (id: "", text: "", done: false).
-   * No-op if items.length >= 10. Covers AC-011.
+   * Append a new empty slot (id: "", text: "", done: false). Covers AC-011.
    */
   addPriority: () => void;
   /**
@@ -109,7 +108,6 @@ export function usePriorities(
   );
 
   const addPriority = useCallback(() => {
-    if (items.length >= 10) return; // max 10
     // Assign ULID eagerly so the React key is stable from mount (AC-014).
     // Lazy assignment (id:'') would flip the key on first keystroke, remounting
     // the editor and losing focus mid-typing.

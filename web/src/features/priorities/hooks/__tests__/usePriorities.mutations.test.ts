@@ -209,7 +209,7 @@ describe('usePriorities — addPriority', () => {
     expect(isUlid(emitted[3]?.id ?? '')).toBe(true);
   });
 
-  it('no-op when items.length is already 10 (max guard)', () => {
+  it('adds past 10 items (no upper limit)', () => {
     const tenItems: Priority[] = Array.from({ length: 10 }, (_, i) => ({
       id: `id${i}`,
       text: `item ${i}`,
@@ -222,7 +222,11 @@ describe('usePriorities — addPriority', () => {
       result.current.addPriority();
     });
 
-    expect(onChange).not.toHaveBeenCalled();
+    expect(onChange).toHaveBeenCalledTimes(1);
+    const emitted = onChange.mock.calls[0]?.[0] as Priority[];
+    expect(emitted).toHaveLength(11);
+    expect(emitted[10]?.text).toBe('');
+    expect(emitted[10]?.done).toBe(false);
   });
 });
 

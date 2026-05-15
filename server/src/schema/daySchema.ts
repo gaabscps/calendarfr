@@ -51,7 +51,7 @@ export const daySchema = z.object({
   schemaVersion: z.literal(1),
   date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
   mood: moodSchema,
-  priorities: z.array(prioritySchema).min(1).max(10),
+  priorities: z.array(prioritySchema).min(1),
   agenda: z.tuple([
     agendaSlotSchema,
     agendaSlotSchema,

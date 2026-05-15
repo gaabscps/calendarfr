@@ -1,0 +1,173 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm test *)",
+      "Bash(git reset *)",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(git commit *)",
+      "Bash(python3 -c ' *)",
+      "Bash(npm run *)",
+      "Bash(npx eslint *)",
+      "Bash(gh run *)",
+      "Bash(gh auth *)",
+      "Bash(GITHUB_TOKEN=\"\" gh run *)",
+      "Bash(xargs ls -la)",
+      "Bash(GITHUB_TOKEN=\"\" git push *)",
+      "Bash(npm --version)",
+      "Bash(awk '/File.*Stmts.*Branch.*Funcs.*Lines/,/^$/')",
+      "Bash(awk -F'|' '{print $3, $1}')",
+      "Bash(awk -F'|' '{gsub\\(/ /,\"\",$3\\); gsub\\(/ /,\"\",$1\\); if \\($3+0 < 85\\) print $3, $1}')",
+      "Bash(awk -F'|' '{gsub\\(/ /,\"\",$3\\); gsub\\(/ /,\"\",$1\\); if \\($3+0 < 85\\) print $3, $4, $1}')",
+      "Bash(awk -F'|' '{gsub\\(/ /,\"\",$3\\); gsub\\(/ /,\"\",$1\\); gsub\\(/ /,\"\",$5\\); if \\($3+0 < 85\\) print $3, $5, $1}')",
+      "Bash(git *)",
+      "Bash(sort -t'|' -k5 -n)",
+      "Bash(gh pr *)",
+      "Bash(bash *)",
+      "Bash(npx jest *)",
+      "Bash(xargs ls -1)",
+      "Bash(npm --prefix /Users/gabrielandrade/Developer/calendarfr run dev)",
+      "Bash(echo \"PID: $!\")",
+      "Bash(curl -s http://localhost:3000)",
+      "Skill(orchestrator)",
+      "Bash(echo \"EXIT:$?\")",
+      "Bash(echo \"EXIT: $?\")",
+      "Bash(cat)",
+      "Bash(python /tmp/check_loops.py)",
+      "Bash(read task *)",
+      "Bash(awk '{ *)",
+      "Bash(npx agentops *)",
+      "Bash(npx tsc *)",
+      "Bash(echo \"exit: $?\")",
+      "Bash(echo \"LAST_EXIT:$?\")",
+      "Bash(echo \"EXITCODE:$?\")",
+      "Bash(chmod +x /Users/gabrielandrade/Developer/calendarfr/.agent-session/FEAT-015/qa/ac-012-015.sh)",
+      "Bash(/Users/gabrielandrade/Developer/calendarfr/.agent-session/FEAT-015/qa/ac-012-015.sh)",
+      "Bash(echo \"EXIT_TYPECHECK: $?\")",
+      "Bash(wait)",
+      "Bash(echo \"FULL_EXIT: $?\")",
+      "Bash(echo \"WEB_EXIT: $?\")",
+      "Bash(echo \"TSC_EXIT: $?\")",
+      "Bash(npm --workspaces --if-present run typecheck)",
+      "Bash(echo \"ROOT_TYPECHECK_EXIT: $?\")",
+      "Bash(python3 /tmp/audit.py)",
+      "Bash(python3 *)",
+      "Bash(chmod +x /tmp/check_tasks.sh)",
+      "Bash(/tmp/check_tasks.sh)",
+      "Bash(chmod +x /tmp/check_ac_coverage.sh)",
+      "Bash(/tmp/check_ac_coverage.sh)",
+      "Bash(chmod +x /tmp/audit_checks.sh)",
+      "Bash(/tmp/audit_checks.sh)",
+      "Bash(chmod +x /tmp/check_files.sh)",
+      "Bash(/tmp/check_files.sh)",
+      "Bash(chmod +x /tmp/check_all_dev.sh)",
+      "Bash(/tmp/check_all_dev.sh)",
+      "Bash(curl -s http://localhost:3000 -o /dev/null -w \"%{http_code}\")",
+      "Bash(curl -s http://localhost:3003/api/health)",
+      "WebSearch",
+      "Bash(xargs ls)",
+      "Bash(xargs cat)",
+      "Bash(xargs -I {} sh -c 'echo \"=== {} ===\" && head -100 {}')",
+      "Bash(grep *)",
+      "Bash(chmod +x /Users/gabrielandrade/Developer/calendarfr/.agent-session/FEAT-018/qa/ac-009-probe.sh)"
+    ]
+  },
+  "enableAllProjectMcpServers": true,
+  "enabledMcpjsonServers": [
+    "supabase"
+  ],
+  "hooks": {
+    "Stop": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "npx @ai-squad/agentops capture"
+          },
+          {
+            "type": "command",
+            "command": "[ -f \"$CLAUDE_PROJECT_DIR/.claude/hooks/verify-pm-handoff-clean.py\" ] || exit 0; python3 \"$CLAUDE_PROJECT_DIR/.claude/hooks/verify-pm-handoff-clean.py\""
+          },
+          {
+            "type": "command",
+            "command": "[ -f \"$CLAUDE_PROJECT_DIR/.claude/hooks/capture-pm-usage.py\" ] || exit 0; python3 \"$CLAUDE_PROJECT_DIR/.claude/hooks/capture-pm-usage.py\""
+          },
+          {
+            "type": "command",
+            "command": "[ -f \"$CLAUDE_PROJECT_DIR/.claude/hooks/verify-audit-dispatch.py\" ] || exit 0; python3 \"$CLAUDE_PROJECT_DIR/.claude/hooks/verify-audit-dispatch.py\""
+          }
+        ]
+      }
+    ],
+    "SubagentStop": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "[ -f \"$CLAUDE_PROJECT_DIR/.claude/hooks/capture-subagent-usage.py\" ] || exit 0; python3 \"$CLAUDE_PROJECT_DIR/.claude/hooks/capture-subagent-usage.py\""
+          },
+          {
+            "type": "command",
+            "command": "[ -f \"$CLAUDE_PROJECT_DIR/.claude/hooks/verify-output-packet.py\" ] || exit 0; python3 \"$CLAUDE_PROJECT_DIR/.claude/hooks/verify-output-packet.py\""
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "[ -f \"$CLAUDE_PROJECT_DIR/.claude/hooks/block-git-write.py\" ] || exit 0; python3 \"$CLAUDE_PROJECT_DIR/.claude/hooks/block-git-write.py\"",
+            "timeout": 5
+          }
+        ]
+      },
+      {
+        "matcher": "Edit|Write|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "[ -f \"$CLAUDE_PROJECT_DIR/.claude/hooks/guard-session-scope.py\" ] || exit 0; python3 \"$CLAUDE_PROJECT_DIR/.claude/hooks/guard-session-scope.py\"",
+            "timeout": 5
+          }
+        ]
+      },
+      {
+        "matcher": "Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "[ -f \"$CLAUDE_PROJECT_DIR/.claude/hooks/verify-reviewer-write-path.py\" ] || exit 0; python3 \"$CLAUDE_PROJECT_DIR/.claude/hooks/verify-reviewer-write-path.py\"",
+            "timeout": 5
+          }
+        ]
+      },
+      {
+        "matcher": "Task",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "[ -f \"$CLAUDE_PROJECT_DIR/.claude/hooks/verify-tier-calibration.py\" ] || exit 0; python3 \"$CLAUDE_PROJECT_DIR/.claude/hooks/verify-tier-calibration.py\"",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "[ -f \"$CLAUDE_PROJECT_DIR/.claude/hooks/stamp-session-id.py\" ] || exit 0; python3 \"$CLAUDE_PROJECT_DIR/.claude/hooks/stamp-session-id.py\"",
+            "timeout": 5
+          }
+        ]
+      }
+    ]
+  }
+}

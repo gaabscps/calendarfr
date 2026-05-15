@@ -92,7 +92,7 @@ it('readDay throws StorageCorruptError for invalid JSON syntax', async () => {
 // ---------------------------------------------------------------------------
 // Scenario 4: readDay throws StorageCorruptError for JSON that fails zod
 // (was skipped in BATCH-A — now un-skipped after T-008 real daySchema)
-// Schema changed to z.array(prioritySchema).min(1).max(10): 0 items is invalid.
+// Schema is z.array(prioritySchema).min(1): 0 items is invalid.
 // ---------------------------------------------------------------------------
 it('readDay throws StorageCorruptError for JSON valid but failing zod (e.g. priorities array of 0)', async () => {
   const badDay = {

@@ -8,8 +8,7 @@
  * - If value is not an array or is empty → return [EMPTY_PRIORITY] and warn.
  * - If an item does not match Priority shape, drop it and warn.
  * - After filtering, if the result is empty → return [EMPTY_PRIORITY].
- * - Clamp to max 10 items.
- * - Do NOT pad to any fixed size — return what's there (1–10 items).
+ * - Do NOT pad to any fixed size — return what's there (≥1 item).
  *
  * Pure function — no side effects beyond console.warn.
  */
@@ -27,8 +26,6 @@ function isPriority(v: unknown): v is Priority {
     typeof obj.id === 'string' && typeof obj.text === 'string' && typeof obj.done === 'boolean'
   );
 }
-
-const MAX_PRIORITIES = 10;
 
 /**
  * Normalises an unknown value to a valid Priority[].
@@ -73,18 +70,7 @@ export function normalizePriorities(value: unknown): Priority[] {
     return [{ ...EMPTY_PRIORITY, id: ulid() }];
   }
 
-  // Case 4: clamp to max 10.
-  // Intentional defensive behavior: corrupt/oversized local state is silently
-  // truncated so the UI stays functional. Items beyond MAX_PRIORITIES are dropped.
-  const clamped =
-    validated.length > MAX_PRIORITIES ? validated.slice(0, MAX_PRIORITIES) : validated;
-  if (validated.length > MAX_PRIORITIES) {
-    console.warn(
-      `[priorities] normalizePriorities: array length ${validated.length} exceeds max ${MAX_PRIORITIES} — truncating.`,
-    );
-  }
-
   // AC-014: every returned item must have a non-empty id so React keys are
   // stable from mount — prevents editor remount on first keystroke.
-  return clamped.map((p) => (p.id !== '' ? p : { ...p, id: ulid() }));
+  return validated.map((p) => (p.id !== '' ? p : { ...p, id: ulid() }));
 }

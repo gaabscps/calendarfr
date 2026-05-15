@@ -1,5 +1,5 @@
 /**
- * Priorities — controlled container for the dynamic priority list (1–10 items).
+ * Priorities — controlled container for the dynamic priority list (≥1 item).
  *
  * Purely controlled: receives value + onChange, no internal async, no fetch.
  * Delegates state management to usePriorities hook (id stability, toggle, edit,
@@ -36,9 +36,9 @@ export interface PrioritiesProps {
 }
 
 /**
- * Renders all PriorityItem slots dynamically from items[] (1–10 items).
+ * Renders all PriorityItem slots dynamically from items[] (≥1 item).
  *
- * Add button appears below the list when items.length < 10 (AC-010).
+ * Add button appears below the list (AC-010).
  * Delete button on each item is hidden when only 1 item remains (AC-011).
  * The last added item receives autoFocus via prevLengthRef tracking (AC-014).
  * DndContext + SortableContext enable drag-and-drop reorder (AC-002, AC-003).
@@ -180,7 +180,7 @@ export function Priorities({ value, onChange }: PrioritiesProps) {
         <SortableContext items={items.map((i) => i.id)} strategy={verticalListSortingStrategy}>
           {items.map((item, index) => {
             const canDelete = items.length > 1;
-            const enterHandler = items.length < 10 ? addPriority : undefined;
+            const enterHandler = addPriority;
             const backspaceHandler = canDelete
               ? () => {
                   const prevId = items[index - 1]?.id ?? items[index + 1]?.id ?? null;
@@ -227,17 +227,15 @@ export function Priorities({ value, onChange }: PrioritiesProps) {
         </SortableContext>
       </DndContext>
 
-      {items.length < 10 && (
-        <Button
-          variant="ghost"
-          size="sm"
-          onClick={addPriority}
-          className={styles.addButton}
-          aria-label="Adicionar prioridade"
-        >
-          + adicionar
-        </Button>
-      )}
+      <Button
+        variant="ghost"
+        size="sm"
+        onClick={addPriority}
+        className={styles.addButton}
+        aria-label="Adicionar prioridade"
+      >
+        + adicionar
+      </Button>
     </section>
   );
 }
