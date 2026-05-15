@@ -16,7 +16,7 @@ import { normalizeAgenda } from '../normalizeAgenda.js';
 // ── Fixtures ─────────────────────────────────────────────────────────────────
 
 /** Create a valid AgendaSlot. */
-const slot = (hour: number, text = ''): AgendaSlot => ({ hour, text });
+const slot = (hour: number, text = ''): AgendaSlot => ({ hour, text, energy: null });
 
 /** Create a full valid 18-slot array in canonical order (hours 6..23). */
 const makeValidAgenda = (textFn: (_h: number) => string = () => ''): AgendaSlot[] =>
@@ -89,7 +89,7 @@ describe('normalizeAgenda', () => {
       const result = normalizeAgenda(input);
       expect(result).toHaveLength(18);
       const hour14Slot = result.find((s) => s.hour === 14);
-      expect(hour14Slot).toEqual({ hour: 14, text: '' });
+      expect(hour14Slot).toEqual({ hour: 14, text: '', energy: null });
     });
 
     it('emits exactly one warn', () => {
@@ -305,6 +305,39 @@ describe('normalizeAgenda', () => {
       const expected = [6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23];
       const result = normalizeAgenda([]);
       expect(result.map((s) => s.hour)).toEqual(expected);
+    });
+  });
+
+  // ── energy field ─────────────────────────────────────────────────────────
+  describe('energy field', () => {
+    it('preserva energy válido', () => {
+      const input = Array.from({ length: 18 }, (_, i) => ({
+        hour: 6 + i,
+        text: '',
+        energy: i === 0 ? { emoji: '🔥' } : null,
+      }));
+      const out = normalizeAgenda(input);
+      expect(out[0]?.energy).toEqual({ emoji: '🔥' });
+      expect(out[1]?.energy).toBeNull();
+    });
+
+    it('default energy = null quando ausente', () => {
+      const input = Array.from({ length: 18 }, (_, i) => ({
+        hour: 6 + i,
+        text: '',
+      }));
+      const out = normalizeAgenda(input);
+      out.forEach((slot) => expect(slot.energy).toBeNull());
+    });
+
+    it('substitui energy inválido por null', () => {
+      const input = Array.from({ length: 18 }, (_, i) => ({
+        hour: 6 + i,
+        text: '',
+        energy: i === 0 ? { wrong: 'shape' } : null,
+      }));
+      const out = normalizeAgenda(input);
+      expect(out[0]?.energy).toBeNull();
     });
   });
 });
