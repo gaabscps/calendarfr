@@ -339,5 +339,17 @@ describe('normalizeAgenda', () => {
       const out = normalizeAgenda(input);
       expect(out[0]?.energy).toBeNull();
     });
+
+    it('preserva text quando energy está ausente (legacy data)', () => {
+      const input = Array.from({ length: 18 }, (_, i) => ({
+        hour: 6 + i,
+        text: `slot ${6 + i} content`,
+      }));
+      const out = normalizeAgenda(input);
+      out.forEach((s, i) => {
+        expect(s.text).toBe(`slot ${6 + i} content`);
+        expect(s.energy).toBeNull();
+      });
+    });
   });
 });
