@@ -30,6 +30,7 @@
     "@tiptap/extension-text": "^2.10",
     "@tiptap/extension-underline": "^2.10",
     "@tiptap/react": "^2.10",
+    "emoji-picker-react": "^4.19.1",
     "framer-motion": "^11.15",
     "isomorphic-dompurify": "^2.0.0",
     "react": "^19.0",

@@ -1,0 +1,40 @@
+.wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  font-size: 1rem;
+  background: transparent;
+  border: 1px dashed transparent;
+  border-radius: var(--radius-sm, 4px);
+  cursor: pointer;
+  color: var(--color-text-muted, #999);
+}
+
+.button:hover,
+.button:focus-visible {
+  background: var(--color-surface-hover, #f5f5f5);
+  border-color: var(--color-border, #e0e0e0);
+  outline: none;
+}
+
+.button[data-suggestion='true'] {
+  opacity: 0.4;
+}
+
+.button[data-suggestion='true']:hover {
+  opacity: 0.8;
+}
+
+.popover {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  z-index: 100;
+}
