@@ -38,9 +38,14 @@ const config = {
     '/e2e/',
     '/storybook-static/',
     '/.agent-session/',
+    '/.claude/',
     // Shared helper modules placed inside __tests__/ — not test suites themselves.
     '/__tests__/helpers\\.ts$',
   ],
+  // Worktrees em .claude/worktrees/ contém cópias do projeto — Jest precisa
+  // ignorar pra evitar Haste duplicates ('@calendarfr/shared' resolvendo dois
+  // package.json) e pra não escanear os testes da worktree no run principal.
+  modulePathIgnorePatterns: ['<rootDir>/.claude/'],
   collectCoverageFrom: [
     'web/src/shared/**/*.{ts,tsx}',
     'web/src/features/rich-text-line/**/*.{ts,tsx}',
