@@ -110,10 +110,14 @@ describe('AgendaSlot.module.css — AC-007 spacing tokens', () => {
 // ---------------------------------------------------------------------------
 
 describe('Agenda — no raw unlabelled buttons (AC-027)', () => {
-  it('renders zero role=button elements (agenda has no action buttons)', () => {
+  it('every button has an aria-label (no unlabelled buttons)', () => {
     renderWithProviders(<Harness initial={EMPTY_AGENDA} />);
-    // Agenda is a read-write timeline only — no add/remove/scroll buttons
+    // EnergyButton adds 18 labelled buttons (one per slot). All must have aria-label.
     const buttons = screen.queryAllByRole('button');
-    expect(buttons).toHaveLength(0);
+    // 18 EnergyButtons — one per slot (the only action buttons in agenda)
+    expect(buttons).toHaveLength(18);
+    buttons.forEach((btn) => {
+      expect(btn).toHaveAttribute('aria-label');
+    });
   });
 });
