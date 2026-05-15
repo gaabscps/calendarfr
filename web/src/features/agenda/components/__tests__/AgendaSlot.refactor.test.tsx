@@ -16,7 +16,7 @@
 import { screen } from '@testing-library/react';
 import React, { useState } from 'react';
 
-import { EMPTY_AGENDA } from '../../types.js';
+import { AGENDA_HOURS, EMPTY_AGENDA } from '../../types.js';
 import type { AgendaSlots } from '../../types.js';
 import { Agenda } from '../Agenda.js';
 
@@ -114,8 +114,8 @@ describe('Agenda — no raw unlabelled buttons (AC-027)', () => {
     renderWithProviders(<Harness initial={EMPTY_AGENDA} />);
     // EnergyButton adds 18 labelled buttons (one per slot). All must have aria-label.
     const buttons = screen.queryAllByRole('button');
-    // 18 EnergyButtons — one per slot (the only action buttons in agenda)
-    expect(buttons).toHaveLength(18);
+    // One EnergyButton per slot — the only action buttons in agenda
+    expect(buttons).toHaveLength(AGENDA_HOURS.length);
     buttons.forEach((btn) => {
       expect(btn).toHaveAttribute('aria-label');
     });

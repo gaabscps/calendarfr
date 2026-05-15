@@ -84,6 +84,10 @@ export function useAgenda(
   const onChangeEnergy = useCallback((hour: number, energy: Energy | null) => {
     const current = valueRef.current;
 
+    // Guard: silently ignore out-of-range hours (no spurious onChange).
+    const matches = current.some((s) => s.hour === hour);
+    if (!matches) return;
+
     // map preserves identity for unchanged slots (NFR-002):
     //   - slots where s.hour !== hour: return `s` (same reference)
     //   - the matching slot: return a new object with updated energy
