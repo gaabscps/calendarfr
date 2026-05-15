@@ -14,7 +14,7 @@ describe('useEnergySuggestion', () => {
     expect(result.current).toBe('🤝');
   });
 
-  it('memoiza por texto — não re-computa se text não mudar', () => {
+  it('retorna o mesmo resultado para a mesma entrada', () => {
     const { result, rerender } = renderHook(({ text }) => useEnergySuggestion(text), {
       initialProps: { text: 'foco' },
     });

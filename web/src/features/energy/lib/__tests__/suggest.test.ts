@@ -41,4 +41,12 @@ describe('suggestEnergy', () => {
   it('first-match wins', () => {
     expect(suggestEnergy('Reunião e almoço')).toBe('🤝');
   });
+
+  it.each([
+    ['cafezinho expresso', null],
+    ['debugger session', null],
+    ['implementation details', null],
+  ])('texto "%s" não casa por boundary correto', (text, expected) => {
+    expect(suggestEnergy(text)).toBe(expected);
+  });
 });

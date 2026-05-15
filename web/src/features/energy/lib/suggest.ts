@@ -22,10 +22,17 @@ const RULES: readonly Rule[] = [
   // antes de caractere acentuado. Para "reunião", o \b antes de 'r' é OK.
   { match: /\b(reuni[ãa]o|meeting|call|1:1|daily|standup)\b/i, emoji: '🤝' },
   {
-    match: /\b(foc[ao]|deep ?work|coding|implement|debug|refator)/i,
+    // Cada alternative tem \b trailing EXCETO 'refator', que fica como prefixo
+    // deliberado para casar "refatorar", "refatoração" etc.
+    match: /\b(?:foc[ao]\b|deep ?work\b|coding\b|implement\b|debug\b|refator)/i,
     emoji: '🎯',
   },
-  { match: /\b(almo[çc]o|jantar|caf[ée]|lanche)/i, emoji: '🍕' },
+  {
+    // 'caf[ée]' não usa \b trailing pois 'é' não é word-char em JS regex;
+    // usa lookahead negativo para evitar false positives como "cafezinho".
+    match: /\b(?:almo[çc]o\b|jantar\b|caf[ée](?![a-zA-ZÀ-ÖØ-öø-ÿ])|lanche\b)/i,
+    emoji: '🍕',
+  },
   { match: /\b(exerc[íi]cio|gym|corrida|treino|yoga|muscula[çc][ãa]o)\b/i, emoji: '💪' },
   { match: /\b(cansad[oa]|exausto|sono|sonolent[oa])\b/i, emoji: '😴' },
   { match: /\b(pausa|descanso|break|relax)\b/i, emoji: '☕' },
