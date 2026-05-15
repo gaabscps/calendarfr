@@ -11,8 +11,8 @@ export interface EnergyPaletteProps {
 /**
  * Grid 4x3 com a paleta curada + botão "+" para o full picker.
  *
- * Acessibilidade: role="menu" no container, role="menuitem" + aria-checked
- * nas opções. Navegação por Tab via foco nativo HTML.
+ * Acessibilidade: role="menu" no container, role="menuitemradio" + aria-checked
+ * nas opções. "+" usa role="menuitem". Navegação por Tab via foco nativo HTML.
  */
 export function EnergyPalette({ current, onPick, onOpenFullPicker }: EnergyPaletteProps) {
   return (
@@ -21,7 +21,7 @@ export function EnergyPalette({ current, onPick, onOpenFullPicker }: EnergyPalet
         <button
           key={entry.emoji}
           type="button"
-          role="menuitem"
+          role="menuitemradio"
           className={styles.item}
           aria-label={entry.label}
           aria-checked={current === entry.emoji}

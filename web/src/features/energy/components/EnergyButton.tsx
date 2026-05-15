@@ -30,10 +30,12 @@ export function EnergyButton({ energy, suggestion, onChange, hour }: EnergyButto
   const [open, setOpen] = useState(false);
   const [showFullPicker, setShowFullPicker] = useState(false);
   const wrapperRef = useRef<HTMLDivElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
 
   const close = useCallback(() => {
     setOpen(false);
     setShowFullPicker(false);
+    buttonRef.current?.focus();
   }, []);
 
   useEffect(() => {
@@ -41,8 +43,15 @@ export function EnergyButton({ energy, suggestion, onChange, hour }: EnergyButto
     const onDocClick = (e: MouseEvent) => {
       if (!wrapperRef.current?.contains(e.target as Node)) close();
     };
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') close();
+    };
     document.addEventListener('mousedown', onDocClick);
-    return () => document.removeEventListener('mousedown', onDocClick);
+    document.addEventListener('keydown', onKeyDown);
+    return () => {
+      document.removeEventListener('mousedown', onDocClick);
+      document.removeEventListener('keydown', onKeyDown);
+    };
   }, [open, close]);
 
   const handleButtonClick = () => {
@@ -58,7 +67,7 @@ export function EnergyButton({ energy, suggestion, onChange, hour }: EnergyButto
     close();
   };
 
-  const handleContextMenu = (e: React.MouseEvent) => {
+  const handleContextMenu = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     onChange(null);
     close();
@@ -72,12 +81,12 @@ export function EnergyButton({ energy, suggestion, onChange, hour }: EnergyButto
   return (
     <div ref={wrapperRef} className={styles.wrapper}>
       <button
+        ref={buttonRef}
         type="button"
         className={styles.button}
         aria-label={ariaLabel}
-        aria-haspopup="menu"
+        {...(isSuggestion ? { 'data-suggestion': 'true' } : { 'aria-haspopup': 'menu' as const })}
         aria-expanded={open}
-        {...(isSuggestion ? { 'data-suggestion': 'true' } : {})}
         onClick={handleButtonClick}
         onContextMenu={handleContextMenu}
       >

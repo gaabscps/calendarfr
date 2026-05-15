@@ -52,7 +52,33 @@ describe('EnergyButton', () => {
     const onChange = jest.fn();
     render(<EnergyButton energy={null} suggestion={null} onChange={onChange} hour={14} />);
     await userEvent.click(screen.getByRole('button', { name: /definir energy.*14/i }));
-    await userEvent.click(screen.getByRole('menuitem', { name: /em chamas/i }));
+    await userEvent.click(screen.getByRole('menuitemradio', { name: /em chamas/i }));
     expect(onChange).toHaveBeenCalledWith({ emoji: '🔥' });
+    expect(screen.queryByRole('menu', { name: /paleta/i })).not.toBeInTheDocument();
+  });
+
+  it('clique fora do wrapper fecha o popover', async () => {
+    render(
+      <div>
+        <EnergyButton energy={{ emoji: '🔥' }} suggestion={null} onChange={jest.fn()} hour={14} />
+        <button type="button">outside</button>
+      </div>,
+    );
+    // Abre popover
+    await userEvent.click(screen.getByRole('button', { name: /energy da hora 14/i }));
+    expect(screen.getByRole('menu', { name: /paleta/i })).toBeInTheDocument();
+    // Click outside
+    await userEvent.click(screen.getByRole('button', { name: 'outside' }));
+    expect(screen.queryByRole('menu', { name: /paleta/i })).not.toBeInTheDocument();
+  });
+
+  it('ESC fecha o popover', async () => {
+    render(
+      <EnergyButton energy={{ emoji: '🔥' }} suggestion={null} onChange={jest.fn()} hour={14} />,
+    );
+    await userEvent.click(screen.getByRole('button', { name: /energy da hora 14/i }));
+    expect(screen.getByRole('menu', { name: /paleta/i })).toBeInTheDocument();
+    await userEvent.keyboard('{Escape}');
+    expect(screen.queryByRole('menu', { name: /paleta/i })).not.toBeInTheDocument();
   });
 });
