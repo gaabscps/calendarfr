@@ -31,9 +31,17 @@ export const prioritySchema = z.object({
 });
 
 /* istanbul ignore next */
+export const energySchema = z
+  .object({
+    emoji: z.string().min(1).max(16),
+  })
+  .nullable();
+
+/* istanbul ignore next */
 export const agendaSlotSchema = z.object({
   hour: z.number().int().min(6).max(23),
   text: z.string(),
+  energy: energySchema.optional().default(null),
 });
 
 /* istanbul ignore next */
@@ -75,4 +83,4 @@ export const daySchema = z.object({
   notes: z.array(noteSchema),
   createdAt: z.string().datetime().nullable(),
   updatedAt: z.string().datetime().nullable(),
-}) satisfies z.ZodType<DailyPageData>;
+}) satisfies z.ZodType<DailyPageData, z.ZodTypeDef, unknown>;

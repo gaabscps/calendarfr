@@ -253,3 +253,45 @@ it('noteSchema accepts valid prefix from the allowed enum', () => {
   expect(noteSchema.safeParse({ id: 'n1', prefix: '•', text: 'x' }).success).toBe(true);
   expect(noteSchema.safeParse({ id: 'n1', prefix: 'z', text: 'x' }).success).toBe(false);
 });
+
+// ---------------------------------------------------------------------------
+// Energy field — agendaSlotSchema
+// ---------------------------------------------------------------------------
+
+describe('agendaSlotSchema — energy field', () => {
+  it('aceita slot sem campo energy (default null)', () => {
+    const parsed = agendaSlotSchema.parse({ hour: 14, text: '' });
+    expect(parsed.energy).toBeNull();
+  });
+
+  it('aceita slot com energy null', () => {
+    const parsed = agendaSlotSchema.parse({ hour: 14, text: '', energy: null });
+    expect(parsed.energy).toBeNull();
+  });
+
+  it('aceita slot com energy.emoji', () => {
+    const parsed = agendaSlotSchema.parse({
+      hour: 14,
+      text: '',
+      energy: { emoji: '🔥' },
+    });
+    expect(parsed.energy).toEqual({ emoji: '🔥' });
+  });
+
+  it('rejeita energy sem emoji', () => {
+    expect(() => agendaSlotSchema.parse({ hour: 14, text: '', energy: {} })).toThrow();
+  });
+
+  it('aceita emoji composto (ZWJ sequence) até 16 chars', () => {
+    const parsed = agendaSlotSchema.parse({
+      hour: 14,
+      text: '',
+      energy: { emoji: '👨‍💻' },
+    });
+    expect(parsed.energy?.emoji).toBe('👨‍💻');
+  });
+
+  it('rejeita emoji vazio', () => {
+    expect(() => agendaSlotSchema.parse({ hour: 14, text: '', energy: { emoji: '' } })).toThrow();
+  });
+});

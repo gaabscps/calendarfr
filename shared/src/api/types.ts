@@ -41,8 +41,8 @@ export interface Energy {
 export interface AgendaSlot {
   hour: number;
   text: string;
-  /** Emoji opcional indicando como a hora "foi". null = não definido. */
-  energy: Energy | null;
+  /** Emoji opcional indicando como a hora "foi". null = não definido. Ausente em arquivos legados. */
+  energy?: Energy | null;
 }
 
 /**
