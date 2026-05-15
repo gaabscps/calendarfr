@@ -122,6 +122,7 @@ Para detalhes de arquitetura, fluxos e modelo de dados, ver o [macro spec](docs/
 - `mood` (FEAT-010) — em desenvolvimento
 - `notes` (FEAT-011) — em desenvolvimento
 - `daily-page` (FEAT-012) — em desenvolvimento
+- `energy` (FEAT-023) — em desenvolvimento
 
 ---
 
