@@ -314,6 +314,25 @@ describe('useAgenda', () => {
     );
   });
 
+  // ── Guard: onChangeEnergy out-of-range is a silent no-op ──────────────
+  describe('onChangeEnergy out-of-range hour', () => {
+    it.each([0, 5, 24, 99, -1])('hora %s fora do range não emite onChange', (badHour) => {
+      const initial = Array.from({ length: 18 }, (_, i) => ({
+        hour: 6 + i,
+        text: '',
+        energy: null,
+      })) as unknown as AgendaSlots;
+      const onChange = jest.fn();
+      const { result } = renderHook(() => useAgenda(initial, onChange));
+
+      act(() => {
+        result.current.onChangeEnergy(badHour, { emoji: '🔥' });
+      });
+
+      expect(onChange).not.toHaveBeenCalled();
+    });
+  });
+
   // ── onChangeEnergy ───────────────────────────────────────────────────────
   describe('onChangeEnergy', () => {
     it('atualiza energy de um slot e preserva os outros', () => {

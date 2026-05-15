@@ -85,8 +85,9 @@ export function EnergyButton({ energy, suggestion, onChange, hour }: EnergyButto
         type="button"
         className={styles.button}
         aria-label={ariaLabel}
-        {...(isSuggestion ? { 'data-suggestion': 'true' } : { 'aria-haspopup': 'menu' as const })}
-        aria-expanded={open}
+        {...(isSuggestion
+          ? { 'data-suggestion': 'true' }
+          : { 'aria-haspopup': 'menu' as const, 'aria-expanded': open })}
         onClick={handleButtonClick}
         onContextMenu={handleContextMenu}
       >
