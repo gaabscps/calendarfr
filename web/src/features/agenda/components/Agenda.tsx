@@ -9,6 +9,7 @@
  *         AC-019, AC-022, AC-027, NFR-001, NFR-002.
  */
 
+import type { Energy } from '@calendarfr/shared';
 import { useMemo } from 'react';
 
 import type { RichTextEditorRef } from '@/features/rich-text-line';
@@ -50,7 +51,7 @@ export interface AgendaProps {
  *   aria-hidden so it is skipped; only the RichTextLine editors are tab stops.
  */
 export function Agenda({ value, onChange, now }: AgendaProps) {
-  const { onChangeText } = useAgenda(value, onChange);
+  const { onChangeText, onChangeEnergy } = useAgenda(value, onChange);
 
   // Normalise defensively — corrupted payloads (AC-008) still render 18 slots.
   const slots = useMemo(() => normalizeAgenda(value), [value]);
@@ -68,6 +69,17 @@ export function Agenda({ value, onChange, now }: AgendaProps) {
     }
     return map;
   }, [onChangeText]);
+
+  // Per-hour energy wrappers — same stable pattern as slotHandlers.
+  // React.memo on AgendaSlot remains effective because onChangeEnergy
+  // has permanent identity (useCallback with no deps).
+  const slotEnergyHandlers = useMemo(() => {
+    const map = new Map<number, (energy: Energy | null) => void>();
+    for (const hour of AGENDA_HOURS) {
+      map.set(hour, (energy) => onChangeEnergy(hour, energy));
+    }
+    return map;
+  }, [onChangeEnergy]);
 
   // Stable refs map — created once (no deps). Each ref holds the Tiptap Editor
   // instance for that hour slot, populated by RichTextBlock via editorRef prop.
@@ -105,6 +117,7 @@ export function Agenda({ value, onChange, now }: AgendaProps) {
           // slotHandlers is keyed by AGENDA_HOURS, slots is normalised to the
           // same set, so .get is always defined. `!` is sound here.
           onChange={slotHandlers.get(slot.hour)!}
+          onEnergyChange={slotEnergyHandlers.get(slot.hour)!}
           isCurrentHour={slot.hour === currentHour}
           onShiftEnter={slotShiftEnterHandlers.get(slot.hour)!}
           editorRef={editorRefs.get(slot.hour)!}

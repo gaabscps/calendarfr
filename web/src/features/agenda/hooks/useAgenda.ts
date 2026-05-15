@@ -6,7 +6,7 @@
  *
  * Contract:
  * - Receives (value: AgendaSlots, onChange: (next: AgendaSlots) => void).
- * - Returns { onChangeText }.
+ * - Returns { onChangeText, onChangeEnergy }.
  * - No internal state, no async effects, no fetch.
  *
  * NFR-002 (referential preservation):
@@ -21,8 +21,10 @@
  *   so it remains referentially stable across re-renders driven by `value`
  *   changes — eliminating the deferred-effect race that arises with the
  *   "latest-ref" pattern around batched updates in React 19.
+ *   `onChangeEnergy` follows the same pattern.
  */
 
+import type { Energy } from '@calendarfr/shared';
 import { useCallback, useRef } from 'react';
 
 import type { AgendaSlots } from '../types.js';
@@ -35,10 +37,17 @@ export interface UseAgendaReturn {
    * Covers AC-001, AC-003, AC-004, NFR-002.
    */
   onChangeText: (hour: number, html: string) => void;
+  /**
+   * Update the energy of a slot identified by `hour`.
+   * Emits onChange with the updated AgendaSlots; the 17 other slots are
+   * referencially identical to the input (for React.memo compatibility).
+   * Pass null to clear the energy.
+   */
+  onChangeEnergy: (hour: number, energy: Energy | null) => void;
 }
 
 /**
- * Hook for agenda slot text updates.
+ * Hook for agenda slot text and energy updates.
  *
  * @param value - Current controlled agenda slots (18-tuple).
  * @param onChange - Called with the next AgendaSlots when a slot changes.
@@ -72,5 +81,21 @@ export function useAgenda(
     onChangeRef.current(next);
   }, []);
 
-  return { onChangeText };
+  const onChangeEnergy = useCallback((hour: number, energy: Energy | null) => {
+    const current = valueRef.current;
+
+    // Guard: silently ignore out-of-range hours (no spurious onChange).
+    const matches = current.some((s) => s.hour === hour);
+    if (!matches) return;
+
+    // map preserves identity for unchanged slots (NFR-002):
+    //   - slots where s.hour !== hour: return `s` (same reference)
+    //   - the matching slot: return a new object with updated energy
+    const next = current.map((s) =>
+      s.hour === hour ? { ...s, energy } : s,
+    ) as unknown as AgendaSlots;
+    onChangeRef.current(next);
+  }, []);
+
+  return { onChangeText, onChangeEnergy };
 }

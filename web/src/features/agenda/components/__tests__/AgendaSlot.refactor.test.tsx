@@ -16,7 +16,7 @@
 import { screen } from '@testing-library/react';
 import React, { useState } from 'react';
 
-import { EMPTY_AGENDA } from '../../types.js';
+import { AGENDA_HOURS, EMPTY_AGENDA } from '../../types.js';
 import type { AgendaSlots } from '../../types.js';
 import { Agenda } from '../Agenda.js';
 
@@ -110,10 +110,14 @@ describe('AgendaSlot.module.css — AC-007 spacing tokens', () => {
 // ---------------------------------------------------------------------------
 
 describe('Agenda — no raw unlabelled buttons (AC-027)', () => {
-  it('renders zero role=button elements (agenda has no action buttons)', () => {
+  it('every button has an aria-label (no unlabelled buttons)', () => {
     renderWithProviders(<Harness initial={EMPTY_AGENDA} />);
-    // Agenda is a read-write timeline only — no add/remove/scroll buttons
+    // EnergyButton adds 18 labelled buttons (one per slot). All must have aria-label.
     const buttons = screen.queryAllByRole('button');
-    expect(buttons).toHaveLength(0);
+    // One EnergyButton per slot — the only action buttons in agenda
+    expect(buttons).toHaveLength(AGENDA_HOURS.length);
+    buttons.forEach((btn) => {
+      expect(btn).toHaveAttribute('aria-label');
+    });
   });
 });

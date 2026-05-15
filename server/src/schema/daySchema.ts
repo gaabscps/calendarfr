@@ -1,9 +1,13 @@
 /**
  * Zod schema for DailyPageData — the root document stored in data/days/.
  *
- * `daySchema satisfies z.ZodType<DailyPageData>` (TS 4.9+):
+ * `daySchema satisfies z.ZodType<DailyPageData, z.ZodTypeDef, unknown>` (TS 4.9+):
  * if any field in shared/src/api/types.ts diverges without updating this
  * schema, `npm run typecheck` fails in the server workspace. (AC-016)
+ *
+ * The 3-param form `ZodType<Output, Def, Input>` is required here because the
+ * input is `unknown` (legacy JSON files on disk may lack the `energy` field),
+ * while the output type alignment with DailyPageData is still enforced.
  *
  * Covers: AC-009, AC-011, AC-012, AC-016, AC-027.
  */
@@ -31,9 +35,17 @@ export const prioritySchema = z.object({
 });
 
 /* istanbul ignore next */
+export const energySchema = z
+  .object({
+    emoji: z.string().min(1).max(16),
+  })
+  .nullable();
+
+/* istanbul ignore next */
 export const agendaSlotSchema = z.object({
   hour: z.number().int().min(6).max(23),
   text: z.string(),
+  energy: energySchema.optional().default(null),
 });
 
 /* istanbul ignore next */
@@ -75,4 +87,4 @@ export const daySchema = z.object({
   notes: z.array(noteSchema),
   createdAt: z.string().datetime().nullable(),
   updatedAt: z.string().datetime().nullable(),
-}) satisfies z.ZodType<DailyPageData>;
+}) satisfies z.ZodType<DailyPageData, z.ZodTypeDef, unknown>;

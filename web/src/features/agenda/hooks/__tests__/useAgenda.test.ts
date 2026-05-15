@@ -314,6 +314,81 @@ describe('useAgenda', () => {
     );
   });
 
+  // ── Guard: onChangeEnergy out-of-range is a silent no-op ──────────────
+  describe('onChangeEnergy out-of-range hour', () => {
+    it.each([0, 5, 24, 99, -1])('hora %s fora do range não emite onChange', (badHour) => {
+      const initial = Array.from({ length: 18 }, (_, i) => ({
+        hour: 6 + i,
+        text: '',
+        energy: null,
+      })) as unknown as AgendaSlots;
+      const onChange = jest.fn();
+      const { result } = renderHook(() => useAgenda(initial, onChange));
+
+      act(() => {
+        result.current.onChangeEnergy(badHour, { emoji: '🔥' });
+      });
+
+      expect(onChange).not.toHaveBeenCalled();
+    });
+  });
+
+  // ── onChangeEnergy ───────────────────────────────────────────────────────
+  describe('onChangeEnergy', () => {
+    it('atualiza energy de um slot e preserva os outros', () => {
+      const initial = Array.from({ length: 18 }, (_, i) => ({
+        hour: 6 + i,
+        text: `slot ${6 + i}`,
+        energy: null,
+      })) as unknown as AgendaSlots;
+      const onChange = jest.fn();
+      const { result } = renderHook(() => useAgenda(initial, onChange));
+
+      act(() => {
+        result.current.onChangeEnergy(14, { emoji: '🔥' });
+      });
+
+      expect(onChange).toHaveBeenCalledTimes(1);
+      const next = onChange.mock.calls[0]![0] as AgendaSlots;
+      const slot14 = next.find((s) => s.hour === 14);
+      expect(slot14?.energy).toEqual({ emoji: '🔥' });
+      // Slot 6 deve ser referencialmente idêntico (untouched)
+      expect(next[0]).toBe(initial[0]);
+    });
+
+    it('aceita null para limpar energy', () => {
+      const initial = Array.from({ length: 18 }, (_, i) => ({
+        hour: 6 + i,
+        text: '',
+        energy: i === 8 ? { emoji: '🔥' } : null,
+      })) as unknown as AgendaSlots;
+      const onChange = jest.fn();
+      const { result } = renderHook(() => useAgenda(initial, onChange));
+
+      act(() => {
+        result.current.onChangeEnergy(14, null);
+      });
+
+      const next = onChange.mock.calls[0]![0] as AgendaSlots;
+      expect(next.find((s) => s.hour === 14)?.energy).toBeNull();
+    });
+
+    it('onChangeEnergy é referencialmente estável entre renders', () => {
+      const initial = Array.from({ length: 18 }, (_, i) => ({
+        hour: 6 + i,
+        text: '',
+        energy: null,
+      })) as unknown as AgendaSlots;
+      const { result, rerender } = renderHook(({ value }) => useAgenda(value, jest.fn()), {
+        initialProps: { value: initial },
+      });
+      const first = result.current.onChangeEnergy;
+      const updated = [...initial] as unknown as AgendaSlots;
+      rerender({ value: updated });
+      expect(result.current.onChangeEnergy).toBe(first);
+    });
+  });
+
   // ── EMPTY_AGENDA constant sanity ─────────────────────────────────────────
   describe('EMPTY_AGENDA', () => {
     it('has 18 slots', () => {

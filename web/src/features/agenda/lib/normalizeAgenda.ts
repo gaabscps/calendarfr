@@ -16,21 +16,33 @@
  * Pure function — no side effects beyond console.warn.
  */
 
-import type { AgendaSlot } from '@calendarfr/shared';
+import type { AgendaSlot, Energy } from '@calendarfr/shared';
 
 import { AGENDA_HOURS, EMPTY_AGENDA, type AgendaSlots } from '../types.js';
 
-/** Type-guard: checks whether a value has the AgendaSlot shape with valid hour. */
+/** Type-guard: checks whether a value is a valid Energy object or null. */
+function isEnergy(v: unknown): v is Energy | null {
+  if (v === null) return true;
+  if (typeof v !== 'object') return false;
+  const obj = v as Record<string, unknown>;
+  return typeof obj.emoji === 'string' && obj.emoji.length > 0;
+}
+
+/** Type-guard: checks whether a value has the AgendaSlot shape with valid hour and energy. */
 function isAgendaSlot(v: unknown): v is AgendaSlot {
   if (v === null || typeof v !== 'object') return false;
   const obj = v as Record<string, unknown>;
-  return (
-    typeof obj.hour === 'number' &&
-    Number.isInteger(obj.hour) &&
-    obj.hour >= 6 &&
-    obj.hour <= 23 &&
-    typeof obj.text === 'string'
-  );
+  if (
+    typeof obj.hour !== 'number' ||
+    !Number.isInteger(obj.hour) ||
+    obj.hour < 6 ||
+    obj.hour > 23 ||
+    typeof obj.text !== 'string'
+  ) {
+    return false;
+  }
+  // absent energy → valid (defaulted to null later); present but invalid → not-a-slot
+  return !('energy' in obj) || isEnergy(obj.energy);
 }
 
 /**
@@ -57,6 +69,8 @@ export function normalizeAgenda(value: unknown): AgendaSlots {
   const validSlots: AgendaSlot[] = [];
   for (const item of value as unknown[]) {
     if (isAgendaSlot(item)) {
+      // If energy is absent, the slow path will default it to null.
+      if (!('energy' in (item as unknown as Record<string, unknown>))) needsNormalization = true;
       validSlots.push(item);
     } else {
       // Invalid item — needs normalization
@@ -97,9 +111,11 @@ export function normalizeAgenda(value: unknown): AgendaSlots {
     const existing = byHour.get(hour);
     if (existing !== undefined) {
       // Preserve text; coerce to string if somehow not (defensive)
-      return { hour, text: typeof existing.text === 'string' ? existing.text : '' };
+      const rawEnergy = (existing as unknown as Record<string, unknown>).energy;
+      const energy = isEnergy(rawEnergy) ? rawEnergy : null;
+      return { hour, text: typeof existing.text === 'string' ? existing.text : '', energy };
     }
-    return { hour, text: '' };
+    return { hour, text: '', energy: null };
   });
 
   return result as unknown as AgendaSlots;
