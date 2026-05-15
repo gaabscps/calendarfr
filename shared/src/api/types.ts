@@ -26,6 +26,14 @@ export interface Priority {
 }
 
 /**
+ * Energy de uma hora — emoji curto sinalizando produtividade/disposição.
+ * null = sem energy registrada (estado padrão, não é "ruim").
+ */
+export interface Energy {
+  emoji: string;
+}
+
+/**
  * A single agenda slot.
  * hour: integer in range [6, 23] — 18 slots per day.
  * text: HTML restricted to <b><i><u><s>.
@@ -33,6 +41,8 @@ export interface Priority {
 export interface AgendaSlot {
   hour: number;
   text: string;
+  /** Emoji opcional indicando como a hora "foi". null = não definido. */
+  energy: Energy | null;
 }
 
 /**
