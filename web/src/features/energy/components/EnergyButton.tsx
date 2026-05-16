@@ -75,6 +75,7 @@ export function EnergyButton({ energy, suggestion, onChange, hour }: EnergyButto
 
   const display = energy?.emoji ?? suggestion ?? '+';
   const isSuggestion = energy === null && suggestion !== null;
+  const isSet = energy !== null;
   const ariaLabel =
     energy !== null ? `Energy da hora ${hour}: ${energy.emoji}` : `Definir energy da hora ${hour}`;
 
@@ -88,6 +89,7 @@ export function EnergyButton({ energy, suggestion, onChange, hour }: EnergyButto
         {...(isSuggestion
           ? { 'data-suggestion': 'true' }
           : { 'aria-haspopup': 'menu' as const, 'aria-expanded': open })}
+        {...(isSet ? { 'data-state': 'set' as const } : {})}
         onClick={handleButtonClick}
         onContextMenu={handleContextMenu}
       >
