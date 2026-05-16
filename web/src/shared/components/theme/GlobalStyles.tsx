@@ -19,21 +19,45 @@ const css = `
 
   html, body, #root {
     margin: 0;
-    padding: 0;
     min-height: 100vh;
+  }
+
+  html, #root {
+    padding: 0;
+  }
+
+  #root {
+    display: flex;
+    flex-direction: column;
   }
 
   body {
     font-family: var(--font-body);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background: var(--color-paper);
     color: var(--color-ink);
+    /* "Mesa" — superfície sob a página. Tom couro/madeira clara com fibra
+       sutil. O padding cria o espaço onde a mesa aparece em torno do papel. */
+    background-color: var(--color-desk);
+    background-image: var(--paper-desk-fiber);
+    background-attachment: fixed;
+    padding: var(--spacing-lg);
+  }
+
+  @media (max-width: 767px) {
+    body {
+      /* Mobile: papel ocupa quase toda tela; mesa aparece só como halo fino. */
+      padding: var(--spacing-sm);
+    }
   }
 
   :root {
     --color-paper: ${colors.paper};
     --color-paper-line: ${colors.paperLine};
+    --color-paper-line-soft: ${colors.paperLineSoft};
+    --color-paper-margin: ${colors.paperMargin};
+    --color-paper-vignette: ${colors.paperVignette};
+    --color-desk: ${colors.desk};
     --color-ink: ${colors.ink};
     --color-ink-secondary: ${colors.inkSecondary};
     --color-ink-muted: ${colors.inkMuted};
@@ -42,6 +66,8 @@ const css = `
     --color-danger: ${colors.danger};
     --color-success: ${colors.success};
     --paper-rule: ${paper.rule};
+    --paper-fiber: ${paper.fiber};
+    --paper-desk-fiber: ${paper.deskFiber};
     --font-hand: ${fonts.hand};
     --font-body: ${fonts.body};
     --font-mono: ${fonts.mono};

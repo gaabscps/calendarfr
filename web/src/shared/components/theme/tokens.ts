@@ -1,6 +1,11 @@
 export const colors = {
   paper: '#fff9f0',
   paperLine: '#e8e0d0',
+  paperLineSoft: '#ede5d2',
+  paperMargin: 'rgba(192,57,43,0.32)',
+  paperVignette: 'rgba(60,40,20,0.08)',
+  /** Cor da "mesa" sob a página — tom de couro/madeira clara para contraste suave com o papel. */
+  desk: '#d8c9ad',
   ink: '#2c2416',
   inkSecondary: '#5a4a32',
   inkMuted: '#9a8a72',
@@ -16,6 +21,17 @@ export const fonts = {
   mono: "'Courier New', Courier, monospace",
 } as const;
 
+/**
+ * Fibra de papel — SVG noise inline (feTurbulence). Tile 160x160 com opacidade
+ * muito baixa (5%) para imitar grão do Moleskine sem virar ruído visual.
+ */
+const paperFiberSvg =
+  "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.18 0 0 0 0 0.14 0 0 0 0 0.08 0 0 0 0.5 0'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.18'/></svg>";
+
+/** Textura de fibra mais densa para a "mesa" — tom amarelado mais saturado. */
+const deskFiberSvg =
+  "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.22 0 0 0 0 0.16 0 0 0 0 0.08 0 0 0 0.55 0'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.28'/></svg>";
+
 export const paper = {
   rule: `repeating-linear-gradient(
     to bottom,
@@ -24,6 +40,8 @@ export const paper = {
     #e8e0d0 23px,
     #e8e0d0 24px
   )`,
+  fiber: `url("${paperFiberSvg}")`,
+  deskFiber: `url("${deskFiberSvg}")`,
 } as const;
 
 export const spacing = {

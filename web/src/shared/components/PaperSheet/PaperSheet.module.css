@@ -1,8 +1,17 @@
 .sheet {
   position: relative; /* FEAT-017 D4: anchor for absolute SaveIndicator overlay */
-  background: var(--color-paper);
-  box-shadow: var(--shadow-paper);
+  background-color: var(--color-paper);
+  background-image: var(--paper-fiber);
+  /* "Página levantada da mesa": camada fina ambiente + sombra média próxima +
+     drop shadow larga + vinheta inset (substitui o ::before + overflow:hidden
+     anterior, para permitir que tabs de post-it saiam pra fora da página). */
+  box-shadow:
+    0 1px 0 rgba(60, 40, 20, 0.08),
+    0 2px 6px rgba(60, 40, 20, 0.08),
+    0 14px 36px rgba(60, 40, 20, 0.18),
+    inset 0 0 60px var(--color-paper-vignette);
   border-radius: var(--radius-md);
+  flex: 1;
 }
 
 .padded {
@@ -10,6 +19,41 @@
 }
 
 .ruled {
-  background-image: var(--paper-rule);
-  background-size: 100% 24px;
+  /* Camadas (topo → fundo):
+     1) Margem vertical vermelha desbotada (caderno escolar) — não repete.
+     2) Fibra do papel — repete em tile 160x160.
+     3) Linhas pautadas a cada 24px (alinhadas ao baseline). */
+  background-image:
+    linear-gradient(
+      to right,
+      transparent 32px,
+      var(--color-paper-margin) 32px,
+      var(--color-paper-margin) 33px,
+      transparent 33px
+    ),
+    var(--paper-fiber), var(--paper-rule);
+  background-size:
+    100% 100%,
+    160px 160px,
+    100% 24px;
+  background-repeat: no-repeat, repeat, repeat;
+  background-position:
+    0 0,
+    0 0,
+    0 0;
+}
+
+@media (max-width: 767px) {
+  .ruled {
+    /* Mobile: margem mais próxima da borda — papel menor. */
+    background-image:
+      linear-gradient(
+        to right,
+        transparent 20px,
+        var(--color-paper-margin) 20px,
+        var(--color-paper-margin) 21px,
+        transparent 21px
+      ),
+      var(--paper-fiber), var(--paper-rule);
+  }
 }

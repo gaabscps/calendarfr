@@ -37,7 +37,13 @@ export function StickyColorPicker({
   if (availableColors.length === 0) return null;
 
   const rect = anchorRef.current?.getBoundingClientRect();
-  const style = rect ? { left: rect.right + 4, top: rect.top } : { left: 24, top: 16 };
+  // Add button vive na borda DIREITA da página. Abrir o picker pra direita
+  // jogava ele fora do viewport. Posiciona à esquerda do botão.
+  // Largura aproximada do picker: 4 círculos × 20px + 3 gaps × 8 + padding 16 = 116px.
+  const PICKER_WIDTH = 120;
+  const style = rect
+    ? { left: Math.max(8, rect.left - PICKER_WIDTH - 8), top: rect.top }
+    : { left: 24, top: 16 };
 
   return (
     <div ref={containerRef} className={styles.picker} style={style}>

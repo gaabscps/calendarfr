@@ -1,30 +1,36 @@
-/* Tab container — fixed left edge, stacked vertically */
+/* Tab container — marcadores de post-it ancorados na borda DIREITA da
+   página (PaperSheet). Saem ~10px pra fora, como flags reais coladas no
+   miolo do caderno. position:absolute para escalar com a página. */
 .tabContainer {
-  position: fixed;
-  left: 0;
-  top: 16px;
+  position: absolute;
+  right: -10px;
+  top: 96px; /* abaixo do PageNavigator (24 padding + 72 navigator) */
   display: flex;
   flex-direction: column;
   gap: 6px;
-  z-index: var(--z-modal, 1000);
+  z-index: var(--z-dropdown, 100);
 }
 
-/* Add color button — below tabs */
+/* Add color button — pequeno tab translúcido logo abaixo dos coloridos */
 .addButton {
   display: block;
-  width: 16px;
-  height: 20px;
-  border-radius: 0 4px 4px 0;
-  background: var(--color-surface-raised, #1e293b);
-  color: var(--color-text-primary, #f8fafc);
-  border: none;
+  width: 22px;
+  height: 22px;
+  /* Cantos arredondados à ESQUERDA — o tab sai do papel pra direita */
+  border-radius: 4px 0 0 4px;
+  background: var(--color-paper);
+  color: var(--color-ink-muted);
+  border: 1px dashed var(--color-paper-line);
+  border-right: none;
   cursor: pointer;
   font-size: 14px;
   line-height: 1;
   padding: 0;
-  opacity: 0.7;
+  opacity: 0.6;
+  transition: opacity var(--motion-fast, 120ms);
 }
 
 .addButton:hover {
   opacity: 1;
+  color: var(--color-ink);
 }
