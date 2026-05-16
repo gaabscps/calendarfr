@@ -37,6 +37,8 @@ function makeDay(date = '2099-01-01'): DailyPageData {
       text: '',
     })) as unknown as DailyPageData['agenda'],
     notes: [],
+    intention: null,
+    gratitude: [],
     createdAt: null,
     updatedAt: null,
   };

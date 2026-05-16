@@ -35,6 +35,8 @@ export function validPayload(date = '2026-05-09'): DailyPageData {
       text: '',
     })) as unknown as DailyPageData['agenda'],
     notes: [],
+    intention: null,
+    gratitude: [],
     createdAt: null,
     updatedAt: null,
   };

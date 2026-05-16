@@ -158,7 +158,7 @@ export function dailyPageReducer(state: DailyPageState, action: DailyPageAction)
 
 function applySliceEdit(
   data: NonNullable<DailyPageState['data']>,
-  slice: 'priorities' | 'mood' | 'agenda' | 'notes',
+  slice: 'priorities' | 'mood' | 'agenda' | 'notes' | 'intention' | 'gratitude',
   value: unknown,
 ): NonNullable<DailyPageState['data']> {
   switch (slice) {
@@ -170,5 +170,9 @@ function applySliceEdit(
       return { ...data, agenda: value as typeof data.agenda };
     case 'notes':
       return { ...data, notes: value as typeof data.notes };
+    case 'intention':
+      return { ...data, intention: value as string | null };
+    case 'gratitude':
+      return { ...data, gratitude: value as typeof data.gratitude };
   }
 }

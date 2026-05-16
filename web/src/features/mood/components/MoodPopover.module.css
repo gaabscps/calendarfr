@@ -1,0 +1,96 @@
+.wrapper {
+  position: relative;
+  display: inline-flex;
+}
+
+/* Trigger — chip arredondado em formato de pílula, vibe handwritten. */
+.trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-xs, 4px);
+  height: 32px;
+  padding: 0 12px 0 8px;
+  border-radius: var(--radius-full, 9999px);
+  border: 1.5px dashed var(--color-ink-muted, #9a8a72);
+  background: transparent;
+  font-family: var(--font-hand, 'Caveat', cursive);
+  font-size: var(--font-size-base, 1rem);
+  color: var(--color-ink, #2c2416);
+  cursor: pointer;
+  transition:
+    border-color var(--motion-fast, 120ms),
+    background-color var(--motion-fast, 120ms),
+    transform var(--motion-fast, 120ms);
+}
+
+.trigger:hover {
+  transform: translateY(-1px);
+}
+
+.trigger[data-selected='true'] {
+  /* Quando há humor selecionado, borda vira sólida e fundo é colorido (inline). */
+  border-style: solid;
+  border-color: rgba(60, 40, 20, 0.18);
+}
+
+.trigger[aria-expanded='true'] {
+  border-color: var(--color-ink, #2c2416);
+}
+
+.trigger:focus-visible {
+  outline: var(--focus-ring, 2px solid #c0392b);
+  outline-offset: var(--focus-ring-offset, 2px);
+}
+
+.emoji {
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+.label {
+  font-size: var(--font-size-base, 1rem);
+  line-height: 1;
+}
+
+.placeholder {
+  font-size: var(--font-size-sm, 0.875rem);
+  color: var(--color-ink-muted, #9a8a72);
+  line-height: 1;
+}
+
+/* Popover — papel cremes flutuante abaixo do trigger. */
+.popover {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  z-index: var(--z-dropdown, 100);
+  min-width: 280px;
+  padding: var(--spacing-md, 12px) var(--spacing-base, 16px);
+  background: var(--color-paper, #fff9f0);
+  border: 1px solid var(--color-paper-line, #e8e0d0);
+  border-radius: var(--radius-md, 4px);
+  box-shadow: var(--shadow-floating, 0 8px 32px rgba(60, 40, 20, 0.18));
+  /* Pequena entrada — opacidade + leve subida */
+  animation: moodPopoverIn var(--motion-fast, 120ms) ease-out;
+}
+
+@keyframes moodPopoverIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .popover {
+    animation: none;
+  }
+  .trigger,
+  .trigger:hover {
+    transform: none;
+  }
+}

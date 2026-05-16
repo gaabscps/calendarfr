@@ -31,6 +31,9 @@ jest.mock('@/features/mood', () => ({
   MoodPicker: ({ value }: { value: unknown }) => (
     <div data-testid="mood-picker" data-value={JSON.stringify(value)} />
   ),
+  MoodPopover: ({ value }: { value: unknown }) => (
+    <div data-testid="mood-picker" data-value={JSON.stringify(value)} />
+  ),
 }));
 
 jest.mock('@/features/agenda', () => ({
@@ -112,6 +115,8 @@ function makeData(date: string): DailyPageData {
       text: '',
     })) as unknown as DailyPageData['agenda'],
     notes: [],
+    intention: null,
+    gratitude: [],
     createdAt: null,
     updatedAt: null,
   };
@@ -139,6 +144,8 @@ function makeDefaultDailyReturn(date: string = DATE, overrides = {}) {
     setMood: jest.fn(),
     setAgenda: jest.fn(),
     setNotes: jest.fn(),
+    setIntention: jest.fn(),
+    setGratitude: jest.fn(),
     retrySave: jest.fn(),
     flushSavePending: jest.fn().mockResolvedValue(undefined),
     reload: jest.fn(),

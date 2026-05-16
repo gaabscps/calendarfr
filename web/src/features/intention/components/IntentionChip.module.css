@@ -1,0 +1,192 @@
+.wrapper {
+  display: inline-flex;
+  align-items: center;
+}
+
+/* Trigger — handwritten, sem borda quando preenchido (parece escrito no papel).
+   Tracejado quando vazio (placeholder convidativo). */
+.trigger {
+  display: inline-flex;
+  align-items: center;
+  height: 32px;
+  padding: 0 10px;
+  border-radius: var(--radius-md, 4px);
+  border: none;
+  background: transparent;
+  font-family: var(--font-hand, 'Caveat', cursive);
+  font-size: 1.35rem;
+  line-height: 1;
+  color: var(--color-ink, #2c2416);
+  cursor: pointer;
+  transition:
+    background-color var(--motion-fast, 120ms),
+    color var(--motion-fast, 120ms),
+    transform var(--motion-fast, 120ms);
+  max-width: 220px;
+  overflow: visible; /* sparkles do estado preenchido podem sair do box */
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  position: relative;
+}
+
+.trigger[data-empty='true'] {
+  font-size: var(--font-size-sm, 0.875rem);
+  font-family: var(--font-body, sans-serif);
+  color: var(--color-ink-muted, #9a8a72);
+  border: 1.5px dashed var(--color-ink-muted, #9a8a72);
+  font-style: italic;
+}
+
+.trigger:hover {
+  background: rgba(60, 40, 20, 0.04);
+}
+
+.trigger[data-empty='true']:hover {
+  color: var(--color-ink, #2c2416);
+  border-color: var(--color-ink, #2c2416);
+}
+
+.trigger:focus-visible {
+  outline: var(--focus-ring, 2px solid #c0392b);
+  outline-offset: var(--focus-ring-offset, 2px);
+}
+
+/* ── Estado PREENCHIDO — visualmente enfeitado ─────────────────────────────
+   Quando o usuário escreve a palavra do dia, ela ganha:
+   - Caveat MAIOR e mais bold (parece escrito com carinho)
+   - Cor accent (tinta vermelha de caderno escolar)
+   - Sublinhado ondulado (text-decoration wavy)
+   - Sparkles ✦ envolvendo (::before + ::after)
+   - Leve rotação organic (-0.8deg)
+   - Animação de "entrada" quando muda de empty → filled
+*/
+.trigger[data-empty='false'] {
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: var(--color-accent, #c0392b);
+  padding: 0 22px; /* espaço pros sparkles */
+  transform: rotate(-0.8deg);
+  text-decoration: underline wavy var(--color-accent, #c0392b);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+  letter-spacing: 0.01em;
+  animation: intentionWrite var(--motion-slow, 320ms) ease-out;
+}
+
+.trigger[data-empty='false']::before,
+.trigger[data-empty='false']::after {
+  content: '✦';
+  position: absolute;
+  top: 50%;
+  font-size: 0.7em;
+  color: var(--color-accent, #c0392b);
+  opacity: 0.7;
+  pointer-events: none;
+  /* Sparkles em rotação contrária pro chip pra parecer estrelinhas reais */
+}
+
+.trigger[data-empty='false']::before {
+  left: 4px;
+  transform: translateY(-50%) rotate(8deg);
+}
+
+.trigger[data-empty='false']::after {
+  right: 4px;
+  transform: translateY(-50%) rotate(-12deg);
+}
+
+.trigger[data-empty='false']:hover {
+  background: transparent; /* não cobrir o sublinhado */
+  transform: rotate(-0.8deg) translateY(-1px);
+}
+
+.trigger[data-empty='false']:hover::before {
+  /* Sparkle frente pulsa sutil no hover */
+  animation: sparkleTwinkle 1.2s ease-in-out infinite;
+}
+
+.trigger[data-empty='false']:hover::after {
+  animation: sparkleTwinkle 1.2s ease-in-out 0.4s infinite;
+}
+
+@keyframes intentionWrite {
+  /* Simula o "ato de escrever": começa transparente sem rotação,
+     ganha tinta, sublinhado vem depois. */
+  0% {
+    opacity: 0;
+    transform: rotate(0deg) scale(0.92);
+    text-decoration-color: transparent;
+  }
+  60% {
+    opacity: 1;
+    transform: rotate(-0.8deg) scale(1.02);
+    text-decoration-color: transparent;
+  }
+  100% {
+    opacity: 1;
+    transform: rotate(-0.8deg) scale(1);
+    text-decoration-color: var(--color-accent, #c0392b);
+  }
+}
+
+@keyframes sparkleTwinkle {
+  0%,
+  100% {
+    opacity: 0.7;
+    filter: brightness(1);
+  }
+  50% {
+    opacity: 1;
+    filter: brightness(1.4);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .trigger[data-empty='false'] {
+    animation: none;
+    transform: none;
+  }
+  .trigger[data-empty='false']:hover {
+    transform: none;
+  }
+  .trigger[data-empty='false']:hover::before,
+  .trigger[data-empty='false']:hover::after {
+    animation: none;
+  }
+}
+
+/* Input em edição — match visual do trigger preenchido (mesma altura, Caveat) */
+.input {
+  height: 32px;
+  padding: 0 10px;
+  border-radius: var(--radius-md, 4px);
+  border: 1.5px solid var(--color-ink, #2c2416);
+  background: var(--color-paper, #fff9f0);
+  font-family: var(--font-hand, 'Caveat', cursive);
+  font-size: 1.35rem;
+  line-height: 1;
+  color: var(--color-ink, #2c2416);
+  width: 220px;
+  outline: none;
+}
+
+.input::placeholder {
+  color: var(--color-ink-muted, #9a8a72);
+  font-style: italic;
+}
+
+.input:focus {
+  border-color: var(--color-accent, #c0392b);
+}
+
+.visuallyHidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

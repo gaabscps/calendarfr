@@ -1,0 +1,15 @@
+.tape {
+  position: absolute;
+  top: -6px;
+  pointer-events: none;
+}
+
+.left {
+  left: 8px;
+  transform-origin: center center;
+}
+
+.right {
+  right: 8px;
+  transform-origin: center center;
+}

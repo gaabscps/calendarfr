@@ -17,6 +17,8 @@
  * satisfies AC-038 and is safe for nested contexts.
  */
 
+import type { ReactNode } from 'react';
+
 import { IconButton } from '@/shared/components/IconButton';
 
 import { KEYBOARD_SHORTCUTS } from '../hooks/usePageNavigation.js';
@@ -33,6 +35,16 @@ export interface PageNavigatorProps {
   goToPrev: () => void | Promise<void>;
   goToNext: () => void | Promise<void>;
   onRetry: () => void;
+  /**
+   * Slot opcional renderizado ao lado da data — usado para o MoodPopover
+   * compacto. Mantém o picker visível mas sem ocupar uma linha inteira.
+   */
+  moodSlot?: ReactNode;
+  /**
+   * Slot opcional renderizado abaixo da data — usado pra IntentionChip
+   * (intenção do dia, manhã do daily ritual loop).
+   */
+  intentionSlot?: ReactNode;
 }
 
 export function PageNavigator({
@@ -42,6 +54,8 @@ export function PageNavigator({
   goToPrev,
   goToNext,
   onRetry,
+  moodSlot,
+  intentionSlot,
 }: PageNavigatorProps) {
   return (
     <>
@@ -63,11 +77,17 @@ export function PageNavigator({
           ‹
         </IconButton>
 
-        {/* AC-039: date heading announced on change */}
+        {/* AC-039: date heading announced on change.
+            Todos os tokens (data + mood + intention) ficam INLINE na mesma
+            row pra preservar o baseline 48px do header (= 2 × --baseline). */}
         <div className={styles.center}>
           <h1 className={styles.dateHeading} aria-live="polite">
             {formatDateLong(date)}
           </h1>
+          {moodSlot !== undefined && <div className={styles.moodSlot}>{moodSlot}</div>}
+          {intentionSlot !== undefined && (
+            <div className={styles.intentionSlot}>{intentionSlot}</div>
+          )}
         </div>
 
         <IconButton

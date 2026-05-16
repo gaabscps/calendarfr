@@ -35,6 +35,8 @@ function makeData(date: string): DailyPageData {
       text: '',
     })) as unknown as DailyPageData['agenda'],
     notes: [],
+    intention: null,
+    gratitude: [],
     createdAt: null,
     updatedAt: null,
   };

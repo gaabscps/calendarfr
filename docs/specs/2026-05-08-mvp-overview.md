@@ -18,6 +18,28 @@ Construir do zero um planner/agenda web cuja interface simule a experiência tá
 
 ---
 
+## Daily ritual loop (princípio de design de features)
+
+A página do dia é organizada em torno de um loop ritual de três momentos. Cada nova feature deve declarar a qual momento pertence e ser projetada para o atrito daquele momento (manhã quer 1 gesto rápido; meio quer escrita livre frequente; noite quer reflexão curta sem fricção).
+
+| Momento   | Mentalidade do usuário        | Feature âncora            | Features de apoio           |
+| --------- | ----------------------------- | ------------------------- | --------------------------- |
+| **Manhã** | "O que vai definir este dia?" | **Intention** (1 palavra) | Priorities, Mood (header)   |
+| **Meio**  | "Estou aqui, fazendo agora"   | **Agenda** (hora a hora)  | Energy, Notes, Sticky notes |
+| **Noite** | "O que valeu hoje?"           | **Gratitude** (3 linhas)  | revisitar Priorities (✓/—)  |
+
+**Regras derivadas:**
+
+1. **Footprint pequeno nas âncoras de Manhã/Noite.** Ritual diário tolera atrito ≈ 0. Intention = 1 input; Gratitude = 3 linhas curtas. Nada de modal, multi-step, ou config inicial.
+2. **Header carrega os "estados" do dia** (data + intention + mood). Body carrega as "ações" (priorities, agenda, notes, gratitude). Estados respondem em 1 click; ações comportam escrita longa.
+3. **Manhã ≠ Noite na hierarquia visual.** Intention vive na header (acompanha o título do dia). Gratitude vive no body (vira parte do registro escrito). Mood é estado, fica perto da intention.
+4. **Antes de adicionar feature nova, identificar o momento.** Se ela não encaixa em nenhum, ou duplica outra do mesmo momento, repensar antes de codar. Hábitos cross-day, hidratação, sleep tracking ficam fora do loop e foram **anti-recomendados** no benchmark (commodity ou off-vibe).
+5. **Notes é transversal.** Não pertence a um momento — captura livre que pode acontecer em qualquer hora. Por isso ocupa a coluna direita inteira da página.
+
+> Histórico da decisão: o loop emergiu do benchmarking 2026-05-16 (Sunsama, Stoic, Day One, Rosebud, Notion, Bullet Journal analógico). Detalhes em [a conversa do session "calendarfr"](#) — resumo: a maior parte dos planners modernos cobre manhã (intenção) e noite (gratidão/win) mal porque empurram pra modais; o diferencial aqui é manter os três momentos _visíveis na mesma página_, no estilo Moleskine.
+
+---
+
 ## Escopo do MVP (IN / OUT)
 
 **IN:**

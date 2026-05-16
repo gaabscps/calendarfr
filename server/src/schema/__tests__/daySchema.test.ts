@@ -295,3 +295,64 @@ describe('agendaSlotSchema — energy field', () => {
     expect(() => agendaSlotSchema.parse({ hour: 14, text: '', energy: { emoji: '' } })).toThrow();
   });
 });
+
+// ---------------------------------------------------------------------------
+// Intention + Gratitude (backward compat: legacy files sem os campos)
+// ---------------------------------------------------------------------------
+
+describe('intention + gratitude (backward compat)', () => {
+  it('legacy payload sem intention nem gratitude → defaults aplicados', () => {
+    const result = daySchema.safeParse(makeValidPayload());
+    expect(result.success).toBe(true);
+    if (result.success) {
+      expect(result.data.intention).toBeNull();
+      expect(result.data.gratitude).toEqual([]);
+    }
+  });
+
+  it('aceita intention string', () => {
+    const result = daySchema.safeParse({ ...makeValidPayload(), intention: 'foco' });
+    expect(result.success).toBe(true);
+    if (result.success) expect(result.data.intention).toBe('foco');
+  });
+
+  it('aceita intention null explícito', () => {
+    const result = daySchema.safeParse({ ...makeValidPayload(), intention: null });
+    expect(result.success).toBe(true);
+    if (result.success) expect(result.data.intention).toBeNull();
+  });
+
+  it('aceita gratitude com até 3 itens', () => {
+    const result = daySchema.safeParse({
+      ...makeValidPayload(),
+      gratitude: [
+        { id: 'g1', text: 'café' },
+        { id: 'g2', text: 'sol' },
+        { id: 'g3', text: 'pão fresco' },
+      ],
+    });
+    expect(result.success).toBe(true);
+    if (result.success) expect(result.data.gratitude).toHaveLength(3);
+  });
+
+  it('rejeita gratitude com mais de 3 itens', () => {
+    const result = daySchema.safeParse({
+      ...makeValidPayload(),
+      gratitude: [
+        { id: 'g1', text: '1' },
+        { id: 'g2', text: '2' },
+        { id: 'g3', text: '3' },
+        { id: 'g4', text: '4' },
+      ],
+    });
+    expect(result.success).toBe(false);
+  });
+
+  it('rejeita gratitude item sem id', () => {
+    const result = daySchema.safeParse({
+      ...makeValidPayload(),
+      gratitude: [{ text: 'no id' }],
+    });
+    expect(result.success).toBe(false);
+  });
+});

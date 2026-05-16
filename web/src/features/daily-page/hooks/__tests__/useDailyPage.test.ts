@@ -41,6 +41,8 @@ function makeData(date: string, overrides?: Partial<DailyPageData>): DailyPageDa
       text: '',
     })) as unknown as DailyPageData['agenda'],
     notes: [],
+    intention: null,
+    gratitude: [],
     createdAt: null,
     updatedAt: null,
     ...overrides,

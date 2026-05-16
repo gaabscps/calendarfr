@@ -31,6 +31,13 @@ const SANITIZE_OPTS = { ALLOWED_TAGS, ALLOWED_ATTR: [] as string[] };
 export const sanitizeText = (raw: string): string => DOMPurify.sanitize(raw, SANITIZE_OPTS);
 
 /**
+ * Strip ALL HTML — usado em campos plain-text (ex: intention).
+ * Mantém o texto, descarta qualquer tag.
+ */
+export const stripHtml = (raw: string): string =>
+  DOMPurify.sanitize(raw, { ALLOWED_TAGS: [], ALLOWED_ATTR: [] as string[] });
+
+/**
  * Sanitize all text fields in a DailyPageData object.
  * Returns a new object — does not mutate input.
  * mood and timestamps are not text-rich; they are left untouched.
@@ -48,5 +55,9 @@ export function sanitizeDayHtml(day: DailyPageData): DailyPageData {
       text: sanitizeText(s.text),
     })) as unknown as DailyPageData['agenda'],
     notes: day.notes.map((n) => ({ ...n, text: sanitizeText(n.text) })),
+    // intention é plain-text — strip todo HTML
+    intention: day.intention === null ? null : stripHtml(day.intention),
+    // gratitude permite as mesmas tags rich do resto
+    gratitude: day.gratitude.map((g) => ({ ...g, text: sanitizeText(g.text) })),
   };
 }

@@ -8,7 +8,7 @@
  *         AC-027, AC-028, AC-029, AC-030, AC-031, AC-032, AC-033.
  */
 
-import type { DailyPageData, Mood } from '@calendarfr/shared';
+import type { DailyPageData, GratitudeItem, Mood } from '@calendarfr/shared';
 
 import type { AgendaSlots } from '@/features/agenda';
 import type { NotesValue } from '@/features/notes';
@@ -52,6 +52,8 @@ export interface UseDailyPageReturn {
   setMood: (next: Mood | null) => void;
   setAgenda: (next: AgendaSlots) => void;
   setNotes: (next: NotesValue) => void;
+  setIntention: (next: string | null) => void;
+  setGratitude: (next: GratitudeItem[]) => void;
   /** Resets retry counter, re-arms debounce with current body. AC-027, AC-028. */
   retrySave: () => void;
   /**
@@ -95,7 +97,11 @@ export type DailyPageAction =
   | { type: 'LOAD_SUCCESS'; data: DailyPageData }
   | { type: 'LOAD_ERROR'; err: Error }
   /** Slice mutations. AC-006, AC-011. */
-  | { type: 'EDIT_SLICE'; slice: 'priorities' | 'mood' | 'agenda' | 'notes'; value: unknown }
+  | {
+      type: 'EDIT_SLICE';
+      slice: 'priorities' | 'mood' | 'agenda' | 'notes' | 'intention' | 'gratitude';
+      value: unknown;
+    }
   /** Save lifecycle. AC-008, AC-009, AC-010. */
   | { type: 'SAVE_START'; snapshot: { date: string; body: DailyPageData } }
   | { type: 'SAVE_SUCCESS' }

@@ -22,7 +22,9 @@ import { useEffect, useRef } from 'react';
 
 import { Agenda } from '@/features/agenda';
 import type { AgendaSlots } from '@/features/agenda';
-import { MoodPicker } from '@/features/mood';
+import { Gratitude } from '@/features/gratitude';
+import { IntentionChip } from '@/features/intention';
+import { MoodPopover } from '@/features/mood';
 import { Notes } from '@/features/notes';
 import { Priorities } from '@/features/priorities';
 import { StickyNote } from '@/features/sticky-note';
@@ -107,6 +109,8 @@ function DailyPageInner({ initialDate }: DailyPageProps = {}) {
     setMood,
     setAgenda,
     setNotes,
+    setIntention,
+    setGratitude,
     retrySave,
     flushSavePending,
     reload,
@@ -136,7 +140,9 @@ function DailyPageInner({ initialDate }: DailyPageProps = {}) {
   return (
     <>
       <PaperSheet as="article" ariaLabel="Planner do dia">
-        {/* AC-038: Header region with aria-label */}
+        {/* AC-038: Header region with aria-label.
+            MoodPopover renderizado como moodSlot — substitui o MoodPicker
+            grande da topRow por chip compacto ao lado da data. */}
         <PageNavigator
           date={date}
           saveStatus={saveStatus}
@@ -144,6 +150,10 @@ function DailyPageInner({ initialDate }: DailyPageProps = {}) {
           goToPrev={handlePrev}
           goToNext={handleNext}
           onRetry={retrySave}
+          moodSlot={data !== null ? <MoodPopover value={data.mood} onChange={setMood} /> : null}
+          intentionSlot={
+            data !== null ? <IntentionChip value={data.intention} onChange={setIntention} /> : null
+          }
         />
 
         {/* AC-034–AC-037: DayLayer manages animation layers.
@@ -162,15 +172,18 @@ function DailyPageInner({ initialDate }: DailyPageProps = {}) {
             <LoadingSkeleton />
           ) : (
             <div className={styles.grid}>
-              {/* Header row: priorities + mood — full width on desktop, stacked on mobile */}
+              {/* Header row: Priorities (manhã) + Gratitude (noite) lado a lado.
+                  Mood + Intention vivem no PageNavigator. */}
               <div className={styles.topRow}>
                 {/* AC-003: Priorities via barrel only */}
                 <div className={styles.prioritiesCol}>
                   <h2 className={styles.sectionLabel}>Prioridades</h2>
                   <Priorities value={data.priorities} onChange={setPriorities} />
                 </div>
-                {/* AC-003: MoodPicker via barrel only */}
-                <MoodPicker value={data.mood} onChange={setMood} />
+                <div className={styles.gratitudeCol}>
+                  <h2 className={styles.sectionLabel}>Gratidão</h2>
+                  <Gratitude value={data.gratitude} onChange={setGratitude} />
+                </div>
               </div>
 
               {/* Left column: Agenda */}
@@ -191,9 +204,11 @@ function DailyPageInner({ initialDate }: DailyPageProps = {}) {
             </div>
           )}
         </DayLayer>
+        {/* StickyNote tabs anchored INSIDE PaperSheet (absolute, right edge,
+            poke out ~10px) — fazem parte da página. Panels seguem position:fixed
+            por causa do drag persistido. */}
+        <StickyNote />
       </PaperSheet>
-      {/* AC-024: StickyNote is position:fixed — does not affect PaperSheet/grid layout */}
-      <StickyNote />
     </>
   );
 }

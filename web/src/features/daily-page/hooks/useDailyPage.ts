@@ -10,7 +10,7 @@
  * (AC-020–AC-022). reload: clears loadError, re-triggers GET (AC-030).
  */
 
-import type { DailyPageData, Mood } from '@calendarfr/shared';
+import type { DailyPageData, GratitudeItem, Mood } from '@calendarfr/shared';
 import { useReducer, useEffect, useRef, useCallback } from 'react';
 
 import type { AgendaSlots } from '@/features/agenda';
@@ -211,6 +211,12 @@ export function useDailyPage(date: string, args?: UseDailyPageArgs): UseDailyPag
   const setNotes = useCallback((next: NotesValue) => {
     dispatch({ type: 'EDIT_SLICE', slice: 'notes', value: next });
   }, []);
+  const setIntention = useCallback((next: string | null) => {
+    dispatch({ type: 'EDIT_SLICE', slice: 'intention', value: next });
+  }, []);
+  const setGratitude = useCallback((next: GratitudeItem[]) => {
+    dispatch({ type: 'EDIT_SLICE', slice: 'gratitude', value: next });
+  }, []);
 
   // retrySave — resets retry counter, re-arms debounce (AC-027, AC-028)
   const retrySave = useCallback(() => {
@@ -243,6 +249,8 @@ export function useDailyPage(date: string, args?: UseDailyPageArgs): UseDailyPag
     setMood,
     setAgenda,
     setNotes,
+    setIntention,
+    setGratitude,
     retrySave,
     flushSavePending,
     reload,

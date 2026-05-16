@@ -17,7 +17,7 @@
   align-items: center;
   justify-content: space-between;
   gap: var(--spacing-base, 16px);
-  height: 48px; /* 2 × --baseline */
+  height: 48px; /* 2 × --baseline — fixo. Mood + Intention vivem INLINE aqui. */
   margin-bottom: var(--baseline, 24px);
   background: transparent;
 }
@@ -29,7 +29,22 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: var(--spacing-md, 12px);
   min-width: 0;
+}
+
+/* Slot do humor — inline na header row, alinhado verticalmente com a data. */
+.moodSlot {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+/* Slot da intenção — inline na header row, ao lado de mood. */
+.intentionSlot {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
 }
 
 .dateHeading {

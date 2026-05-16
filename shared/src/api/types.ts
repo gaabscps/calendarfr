@@ -58,6 +58,15 @@ export interface Note {
 }
 
 /**
+ * Uma "razão de gratidão" do dia. Mesmo shape do Priority sem o `done` —
+ * 3 itens são padrão (inspirado no Five-Minute Journal). Sanitizado server-side.
+ */
+export interface GratitudeItem {
+  id: string;
+  text: string;
+}
+
+/**
  * Root document stored in data/days/YYYY-MM-DD.json.
  * schemaVersion: 1 — reserved for future migrations.
  * priorities: 1–10 items (enforced by zod schema server-side; min 1 max 10).
@@ -91,6 +100,18 @@ export interface DailyPageData {
     AgendaSlot,
   ];
   notes: Note[];
+  /**
+   * Palavra/frase curta de intenção do dia. null = não definida.
+   * Arquivos legados (sem o campo) caem em null via zod default — client SEMPRE
+   * recebe a chave preenchida. Limite ~40 chars na UI client-side.
+   */
+  intention: string | null;
+  /**
+   * Até 3 razões de gratidão. Array pode ter 0–3 itens.
+   * Arquivos legados → [] via zod default. Client renderiza 3 inputs vazios
+   * mesmo quando array < 3 (UX 3-linhas fixas).
+   */
+  gratitude: GratitudeItem[];
   createdAt: string | null;
   updatedAt: string | null;
 }

@@ -38,6 +38,11 @@ jest.mock('@/features/mood', () => ({
       <button onClick={() => onChange(value)}>mood-trigger</button>
     </div>
   ),
+  MoodPopover: ({ value, onChange }: { value: unknown; onChange: (_v: unknown) => void }) => (
+    <div data-testid="mood-picker" data-value={JSON.stringify(value)}>
+      <button onClick={() => onChange(value)}>mood-trigger</button>
+    </div>
+  ),
 }));
 
 jest.mock('@/features/agenda', () => ({
@@ -106,6 +111,8 @@ function makeData(date: string, overrides?: Partial<DailyPageData>): DailyPageDa
       text: '',
     })) as unknown as DailyPageData['agenda'],
     notes: [],
+    intention: null,
+    gratitude: [],
     createdAt: null,
     updatedAt: null,
     ...overrides,
@@ -136,6 +143,8 @@ function makeDefaultDailyReturn(overrides = {}) {
     setMood: jest.fn(),
     setAgenda: jest.fn(),
     setNotes: jest.fn(),
+    setIntention: jest.fn(),
+    setGratitude: jest.fn(),
     retrySave: jest.fn(),
     flushSavePending: jest.fn().mockResolvedValue(undefined),
     reload: jest.fn(),

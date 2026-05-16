@@ -24,3 +24,6 @@ export type { MoodPickerProps } from './components/MoodPicker.js';
 
 export { MoodChip } from './components/MoodChip.js';
 export type { MoodChipProps } from './components/MoodChip.js';
+
+export { MoodPopover } from './components/MoodPopover.js';
+export type { MoodPopoverProps } from './components/MoodPopover.js';

@@ -7,7 +7,7 @@
 
 import type { DailyPageData } from '@calendarfr/shared';
 
-import { sanitizeDayHtml, sanitizeText } from '../sanitize';
+import { sanitizeDayHtml, sanitizeText, stripHtml } from '../sanitize';
 
 // ---------------------------------------------------------------------------
 // Scenario 1: plain text preserved unchanged
@@ -107,6 +107,8 @@ it('sanitizeDayHtml sanitizes priorities, agenda, notes and leaves mood/timestam
       { id: 'n1', prefix: '•', text: '<style>.x{}</style>text' },
       { id: 'n2', prefix: '→', text: 'clean' },
     ],
+    intention: null,
+    gratitude: [],
     createdAt: '2026-05-09T10:00:00.000Z',
     updatedAt: '2026-05-09T10:01:00.000Z',
   };
@@ -135,4 +137,62 @@ it('sanitizeDayHtml sanitizes priorities, agenda, notes and leaves mood/timestam
 
   // all 18 agenda slots present
   expect(result.agenda).toHaveLength(18);
+});
+
+// ---------------------------------------------------------------------------
+// stripHtml + intention/gratitude sanitization
+// ---------------------------------------------------------------------------
+
+describe('stripHtml', () => {
+  it('remove todas as tags preservando texto', () => {
+    expect(stripHtml('<b>oi</b>')).toBe('oi');
+    expect(stripHtml('<p>linha</p><p>2</p>')).toBe('linha2');
+    expect(stripHtml('plain')).toBe('plain');
+  });
+
+  it('remove tags perigosas sem deixar resíduo executável', () => {
+    expect(stripHtml('<script>alert(1)</script>texto')).toBe('texto');
+  });
+});
+
+describe('sanitizeDayHtml — intention + gratitude', () => {
+  function baseDay(): DailyPageData {
+    return {
+      schemaVersion: 1,
+      date: '2026-05-16',
+      mood: null,
+      priorities: [{ id: 'p1', text: '', done: false }],
+      agenda: Array.from({ length: 18 }, (_, i) => ({
+        hour: i + 6,
+        text: '',
+      })) as unknown as DailyPageData['agenda'],
+      notes: [],
+      intention: null,
+      gratitude: [],
+      createdAt: null,
+      updatedAt: null,
+    };
+  }
+
+  it('intention: strip HTML preservando texto', () => {
+    const day: DailyPageData = { ...baseDay(), intention: '<b>foco</b>' };
+    expect(sanitizeDayHtml(day).intention).toBe('foco');
+  });
+
+  it('intention: null passa adiante sem erro', () => {
+    expect(sanitizeDayHtml(baseDay()).intention).toBeNull();
+  });
+
+  it('gratitude: aplica sanitizeText em cada item (mantém rich tags)', () => {
+    const day: DailyPageData = {
+      ...baseDay(),
+      gratitude: [
+        { id: 'g1', text: '<b>café</b>' },
+        { id: 'g2', text: '<script>x</script>sol' },
+      ],
+    };
+    const result = sanitizeDayHtml(day);
+    expect(result.gratitude[0]?.text).toBe('<b>café</b>');
+    expect(result.gratitude[1]?.text).toBe('sol');
+  });
 });

@@ -1,0 +1,6 @@
+.container {
+  position: relative;
+  /* Reserve vertical space for the unfolded card to prevent siblings from reflowing (NFR-002).
+     Calc: 1 label row (24) + 3 editor slots (72) + top/bottom padding (24) = 120px = 5 × --baseline. */
+  min-height: 120px;
+}

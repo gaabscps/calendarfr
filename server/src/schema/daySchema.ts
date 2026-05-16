@@ -55,6 +55,12 @@ export const noteSchema = z.object({
   text: z.string(),
 });
 
+/* istanbul ignore next */
+export const gratitudeItemSchema = z.object({
+  id: z.string().min(1),
+  text: z.string(),
+});
+
 // ---------------------------------------------------------------------------
 // Root schema — satisfies z.ZodType<DailyPageData> guards type alignment
 // ---------------------------------------------------------------------------
@@ -85,6 +91,17 @@ export const daySchema = z.object({
     agendaSlotSchema,
   ]),
   notes: z.array(noteSchema),
+  /**
+   * intention: palavra/frase curta de intenção do dia. Legacy files (sem o
+   * campo) caem em null via .optional().default(null). Sem limite server pra
+   * evitar rejeição silenciosa; client limita ~40 chars na UI.
+   */
+  intention: z.string().nullable().optional().default(null),
+  /**
+   * gratitude: até 3 razões de gratidão. Legacy → []. Client renderiza 3
+   * inputs vazios quando array < 3.
+   */
+  gratitude: z.array(gratitudeItemSchema).max(3).optional().default([]),
   createdAt: z.string().datetime().nullable(),
   updatedAt: z.string().datetime().nullable(),
 }) satisfies z.ZodType<DailyPageData, z.ZodTypeDef, unknown>;
