@@ -82,3 +82,24 @@ describe('EnergyButton', () => {
     expect(screen.queryByRole('menu', { name: /paleta/i })).not.toBeInTheDocument();
   });
 });
+
+describe('EnergyButton — data-state', () => {
+  it('data-state="set" quando energy presente', () => {
+    render(
+      <EnergyButton energy={{ emoji: '🔥' }} suggestion={null} onChange={jest.fn()} hour={14} />,
+    );
+    expect(screen.getByRole('button')).toHaveAttribute('data-state', 'set');
+  });
+
+  it('sem data-state quando energy null e sem sugestão', () => {
+    render(<EnergyButton energy={null} suggestion={null} onChange={jest.fn()} hour={14} />);
+    expect(screen.getByRole('button')).not.toHaveAttribute('data-state');
+  });
+
+  it('sem data-state quando suggestion presente (data-suggestion ainda dispara)', () => {
+    render(<EnergyButton energy={null} suggestion="🎯" onChange={jest.fn()} hour={14} />);
+    const btn = screen.getByRole('button');
+    expect(btn).not.toHaveAttribute('data-state');
+    expect(btn).toHaveAttribute('data-suggestion', 'true');
+  });
+});
