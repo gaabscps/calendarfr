@@ -4,7 +4,8 @@
   border-radius: 8px;
   box-shadow: var(--shadow-floating, 0 8px 32px rgba(60, 40, 20, 0.18));
   padding: 16px;
-  min-width: 280px;
+  /* 6 cols × 52px + 5 × 8px gap + 32px padding = 384px */
+  min-width: 384px;
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -19,8 +20,10 @@
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 12px;
+  /* 6 cols × 2 rows — popover fica mais baixo (cabe melhor em viewport
+     vertical apertada) e cada sticker fica menor mas ainda legível. */
+  grid-template-columns: repeat(6, 1fr);
+  gap: 8px;
   justify-items: center;
 }
 
@@ -31,8 +34,8 @@
   align-items: center;
   justify-content: center;
   gap: 2px;
-  width: 56px;
-  height: 68px;
+  width: 52px;
+  height: 64px;
   padding: 6px 4px;
   background: #ffffff;
   border: 1px solid var(--color-ink-muted, #9a8a72);
