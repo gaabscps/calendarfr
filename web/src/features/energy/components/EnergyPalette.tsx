@@ -55,7 +55,11 @@ export function EnergyPalette({ current, onPick, onOpenFullPicker }: EnergyPalet
       </div>
 
       <div className={styles.descriptionSlot} aria-live="polite">
-        {hoveredDescription ?? <span className={styles.placeholder}>{PLACEHOLDER}</span>}
+        {hoveredDescription !== null ? (
+          <span className={styles.descriptionText}>{hoveredDescription}</span>
+        ) : (
+          <span className={styles.placeholder}>{PLACEHOLDER}</span>
+        )}
       </div>
 
       <button type="button" role="menuitem" className={styles.moreLink} onClick={onOpenFullPicker}>

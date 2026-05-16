@@ -84,10 +84,14 @@
 }
 
 .descriptionSlot {
-  min-height: 36px;
+  /* Reserva altura fixa para 2 linhas — evita layout shift quando a
+     description tem 1 vs 2 linhas. line-height 1.35 × 13px × 2 ≈ 35px
+     + 12px padding vertical = 47px. Margem extra dá 52px. */
+  min-height: 52px;
   padding: 6px 8px;
   font-family: var(--font-body, 'Inter', sans-serif);
   font-size: 13px;
+  line-height: 1.35;
   font-style: italic;
   color: var(--color-ink-secondary, #5a4a32);
   text-align: center;
@@ -95,6 +99,16 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+/* Limita description e placeholder a 2 linhas (truncamento com reticências). */
+.descriptionText,
+.placeholder {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .placeholder {
