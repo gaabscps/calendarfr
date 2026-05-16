@@ -82,6 +82,10 @@ Para detalhes de arquitetura, fluxos e modelo de dados, ver o [macro spec](docs/
 1. Cada entrada de `actual_dispatches[]` no `dispatch-manifest.json` **deve** carregar `usage` (`total_tokens`, `tool_uses`, `duration_ms`, `model`) e `pm_note` (1 linha resumindo o `summary_for_reviewers` do Output Packet). Sem isso, o report consumidor mostra `—` para tokens/$ /duração e os AC closures viram `missing` — o relatório fica inconsistente (ver FEAT-006). Estimar por proxy é aceitável; deixar `null` não é.
 2. Ao encerrar a sessão de orchestrator (handoff emitido / `current_phase: done`), **rodar `npm run agentops:report`** e commitar `docs/agentops/*.{md,html}` no mesmo commit do handoff. O Stop hook tenta auto-disparar (best-effort); a obrigação de garantir o report atualizado é do PM.
 
+### Comunicação no GitHub
+
+1. **Sempre em inglês**: commits, mensagens de PR, título/descrição de issues, comments em PR. Conversas com o usuário, comentários no código (quando necessários) e docs internos seguem em PT-BR — só a superfície voltada ao GitHub é EN.
+
 ---
 
 ## Taxonomia de testes
