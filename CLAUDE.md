@@ -1,7 +1,8 @@
 # CalendárioFR — Planner Web
 
-**Última atualização:** 2026-05-09
+**Última atualização:** 2026-05-16
 **Macro spec:** [`docs/specs/2026-05-08-mvp-overview.md`](docs/specs/2026-05-08-mvp-overview.md)
+**Monetização:** [`docs/specs/2026-05-16-monetization-strategy.md`](docs/specs/2026-05-16-monetization-strategy.md)
 **Spec ativo:** [`.agent-session/FEAT-007/spec.md`](.agent-session/FEAT-007/spec.md)
 
 ---
