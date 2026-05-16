@@ -1,5 +1,6 @@
 import { useState } from 'react';
 
+import { emojiHolo } from '../lib/emojiHolo.js';
 import { ENERGY_PALETTE } from '../lib/palette.js';
 import { stickerRotation } from '../lib/stickerRotation.js';
 
@@ -33,25 +34,35 @@ export function EnergyPalette({ current, onPick, onOpenFullPicker }: EnergyPalet
       <div className={styles.title}>Como foi essa hora?</div>
 
       <div className={styles.grid}>
-        {ENERGY_PALETTE.map((entry, index) => (
-          <button
-            key={entry.emoji}
-            type="button"
-            role="menuitemradio"
-            className={styles.sticker}
-            style={{ '--rot': `${stickerRotation(index)}deg` } as React.CSSProperties}
-            aria-label={entry.label}
-            aria-checked={current === entry.emoji}
-            onClick={() => onPick(entry.emoji)}
-            onMouseEnter={() => setHoveredDescription(entry.description)}
-            onMouseLeave={() => setHoveredDescription(null)}
-            onFocus={() => setHoveredDescription(entry.description)}
-            onBlur={() => setHoveredDescription(null)}
-          >
-            <span className={styles.stickerEmoji}>{entry.emoji}</span>
-            <span className={styles.stickerLabel}>{entry.label}</span>
-          </button>
-        ))}
+        {ENERGY_PALETTE.map((entry, index) => {
+          const id = emojiHolo(entry.emoji);
+          return (
+            <button
+              key={entry.emoji}
+              type="button"
+              role="menuitemradio"
+              className={styles.sticker}
+              style={
+                {
+                  '--rot': `${stickerRotation(index)}deg`,
+                  '--sticker-base': id.base,
+                  '--sticker-accent': id.accent,
+                  '--holo-angle': String(id.angle),
+                } as React.CSSProperties
+              }
+              aria-label={entry.label}
+              aria-checked={current === entry.emoji}
+              onClick={() => onPick(entry.emoji)}
+              onMouseEnter={() => setHoveredDescription(entry.description)}
+              onMouseLeave={() => setHoveredDescription(null)}
+              onFocus={() => setHoveredDescription(entry.description)}
+              onBlur={() => setHoveredDescription(null)}
+            >
+              <span className={styles.stickerEmoji}>{entry.emoji}</span>
+              <span className={styles.stickerLabel}>{entry.label}</span>
+            </button>
+          );
+        })}
       </div>
 
       <div className={styles.descriptionSlot} aria-live="polite">

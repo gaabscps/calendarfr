@@ -172,12 +172,16 @@ describe('Agenda — tab order (AC-014, AC-016)', () => {
 
   it('hour labels have aria-hidden="true"', () => {
     renderWithProviders(<Harness initial={EMPTY_AGENDA} />);
-    // Labels are <span aria-hidden="true"> with text like "06".."23"
-    const hiddenSpans = document.querySelectorAll('[aria-hidden="true"]');
+    // Labels are <span aria-hidden="true"> with zero-padded hour text.
+    // Filter by text content to skip decorative aria-hidden elements
+    // owned by other slot subcomponents (e.g., EnergyButton sparkles).
+    const hiddenSpans = Array.from(document.querySelectorAll('span[aria-hidden="true"]')).filter(
+      (el) => /^\d{2}$/.test((el.textContent ?? '').trim()),
+    ) as HTMLElement[];
     // One per slot = 18 labels
-    expect(hiddenSpans.length).toBe(18);
+    expect(hiddenSpans).toHaveLength(18);
     // Each span shows the zero-padded hour
-    const labelTexts = Array.from(hiddenSpans).map((el) => el.textContent);
+    const labelTexts = hiddenSpans.map((el) => el.textContent);
     expect(labelTexts).toEqual([
       '06',
       '07',
