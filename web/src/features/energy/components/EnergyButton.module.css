@@ -67,6 +67,13 @@
   z-index: 100;
 }
 
+/* Aplicado quando a EnergyButton detecta que não há espaço abaixo —
+   popover abre pra cima, alinhado pelo bottom em vez do top. */
+.popoverTop {
+  top: auto;
+  bottom: calc(100% + 6px);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .button,
   .button[data-state='set'] {

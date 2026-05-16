@@ -1,4 +1,4 @@
-import { lazy, Suspense, useCallback, useEffect, useRef, useState } from 'react';
+import { lazy, Suspense, useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
 
 import type { Energy } from '../types.js';
 
@@ -15,6 +15,14 @@ export interface EnergyButtonProps {
 }
 
 /**
+ * Altura estimada do popover (paleta + título + slot descrição + link).
+ * Usada apenas para decidir flip up/down; não precisa ser exata — a
+ * paleta tem ~280px e o erro de algumas dezenas de pixels não muda
+ * a decisão (só importa quando o slot está perto da borda da viewport).
+ */
+const POPOVER_ESTIMATED_HEIGHT = 320;
+
+/**
  * Botão âncora + popover para escolher o emoji de energy de um slot.
  *
  * Estados:
@@ -29,6 +37,7 @@ export interface EnergyButtonProps {
 export function EnergyButton({ energy, suggestion, onChange, hour }: EnergyButtonProps) {
   const [open, setOpen] = useState(false);
   const [showFullPicker, setShowFullPicker] = useState(false);
+  const [placement, setPlacement] = useState<'bottom' | 'top'>('bottom');
   const wrapperRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
 
@@ -37,6 +46,23 @@ export function EnergyButton({ energy, suggestion, onChange, hour }: EnergyButto
     setShowFullPicker(false);
     buttonRef.current?.focus();
   }, []);
+
+  // Decide placement (top vs bottom) ao abrir, baseado no espaço disponível
+  // entre o botão e as bordas da viewport. Roda em useLayoutEffect para
+  // evitar flash do popover na posição errada.
+  useLayoutEffect(() => {
+    if (!open) return;
+    const btn = buttonRef.current;
+    if (!btn) return;
+    const rect = btn.getBoundingClientRect();
+    const spaceBelow = window.innerHeight - rect.bottom;
+    const spaceAbove = rect.top;
+    if (spaceBelow < POPOVER_ESTIMATED_HEIGHT && spaceAbove > spaceBelow) {
+      setPlacement('top');
+    } else {
+      setPlacement('bottom');
+    }
+  }, [open]);
 
   useEffect(() => {
     if (!open) return undefined;
@@ -96,7 +122,10 @@ export function EnergyButton({ energy, suggestion, onChange, hour }: EnergyButto
         {display}
       </button>
       {open && (
-        <div className={styles.popover}>
+        <div
+          className={`${styles.popover} ${placement === 'top' ? styles.popoverTop : ''}`.trim()}
+          data-placement={placement}
+        >
           {showFullPicker ? (
             <Suspense fallback={<div>Carregando…</div>}>
               <FullPicker onEmojiClick={(data) => handlePick(data.emoji)} />

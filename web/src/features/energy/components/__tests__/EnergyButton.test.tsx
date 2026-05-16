@@ -103,3 +103,94 @@ describe('EnergyButton — data-state', () => {
     expect(btn).toHaveAttribute('data-suggestion', 'true');
   });
 });
+
+describe('EnergyButton — popover placement (flip up/down)', () => {
+  function mockButtonRect(rect: { top?: number; bottom?: number }) {
+    const original = HTMLButtonElement.prototype.getBoundingClientRect;
+    HTMLButtonElement.prototype.getBoundingClientRect = function () {
+      return {
+        top: rect.top ?? 0,
+        bottom: rect.bottom ?? 0,
+        left: 0,
+        right: 0,
+        width: 28,
+        height: 28,
+        x: 0,
+        y: 0,
+        toJSON: () => ({}),
+      } as ReturnType<HTMLButtonElement['getBoundingClientRect']>;
+    };
+    return () => {
+      HTMLButtonElement.prototype.getBoundingClientRect = original;
+    };
+  }
+
+  function mockInnerHeight(height: number) {
+    const original = window.innerHeight;
+    Object.defineProperty(window, 'innerHeight', {
+      configurable: true,
+      writable: true,
+      value: height,
+    });
+    return () => {
+      Object.defineProperty(window, 'innerHeight', {
+        configurable: true,
+        writable: true,
+        value: original,
+      });
+    };
+  }
+
+  it('placement=bottom (default) quando há espaço abaixo', async () => {
+    const restoreH = mockInnerHeight(800);
+    const restoreRect = mockButtonRect({ top: 100, bottom: 128 });
+    try {
+      render(
+        <EnergyButton energy={{ emoji: '🔥' }} suggestion={null} onChange={jest.fn()} hour={14} />,
+      );
+      await userEvent.click(screen.getByRole('button', { name: /energy da hora 14/i }));
+      const menu = screen.getByRole('menu', { name: /paleta/i });
+      const popover = menu.parentElement;
+      expect(popover).toHaveAttribute('data-placement', 'bottom');
+    } finally {
+      restoreRect();
+      restoreH();
+    }
+  });
+
+  it('placement=top quando o botão está perto da borda inferior', async () => {
+    const restoreH = mockInnerHeight(800);
+    // Botão a 52px da borda inferior — sem espaço pra popover de 320px
+    const restoreRect = mockButtonRect({ top: 720, bottom: 748 });
+    try {
+      render(
+        <EnergyButton energy={{ emoji: '🔥' }} suggestion={null} onChange={jest.fn()} hour={14} />,
+      );
+      await userEvent.click(screen.getByRole('button', { name: /energy da hora 14/i }));
+      const menu = screen.getByRole('menu', { name: /paleta/i });
+      const popover = menu.parentElement;
+      expect(popover).toHaveAttribute('data-placement', 'top');
+    } finally {
+      restoreRect();
+      restoreH();
+    }
+  });
+
+  it('flips quando ambos lados estão apertados mas há mais espaço acima', async () => {
+    const restoreH = mockInnerHeight(400);
+    // spaceBelow=172, spaceAbove=200. Ambos < 320 mas espaço acima > abaixo → top.
+    const restoreRect = mockButtonRect({ top: 200, bottom: 228 });
+    try {
+      render(
+        <EnergyButton energy={{ emoji: '🔥' }} suggestion={null} onChange={jest.fn()} hour={14} />,
+      );
+      await userEvent.click(screen.getByRole('button', { name: /energy da hora 14/i }));
+      const menu = screen.getByRole('menu', { name: /paleta/i });
+      const popover = menu.parentElement;
+      expect(popover).toHaveAttribute('data-placement', 'top');
+    } finally {
+      restoreRect();
+      restoreH();
+    }
+  });
+});
