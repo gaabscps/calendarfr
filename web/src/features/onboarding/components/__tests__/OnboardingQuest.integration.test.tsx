@@ -26,8 +26,26 @@ import { OnboardingQuest } from '../OnboardingQuest.js';
 jest.mock('framer-motion', () => {
   const React = jest.requireActual<typeof import('react')>('react');
   const passthrough = (tag: string) =>
-    React.forwardRef(({ children, ...props }: any, ref: any) =>
-      React.createElement(tag, { ref, ...props }, children),
+    React.forwardRef(
+      (
+        {
+          children,
+          initial: _initial,
+          animate: _animate,
+          exit: _exit,
+          transition: _transition,
+          variants: _variants,
+          whileHover: _whileHover,
+          whileTap: _whileTap,
+          whileFocus: _whileFocus,
+          whileDrag: _whileDrag,
+          whileInView: _whileInView,
+          onAnimationStart: _onAnimationStart,
+          onAnimationComplete: _onAnimationComplete,
+          ...props
+        }: any,
+        ref: any,
+      ) => React.createElement(tag, { ref, ...props }, children),
     );
   return {
     AnimatePresence: ({ children }: { children: React.ReactNode }) => <>{children}</>,

@@ -102,9 +102,9 @@ export function MissionSealSlot({ date, data = null }: MissionSealSlotProps) {
           data-testid={isCompleteForDay ? 'golden-seal' : 'seal-placeholder'}
         >
           {isCompleteForDay ? (
-            <GoldenSeal />
+            <GoldenSeal size={48} />
           ) : (
-            <SealPlaceholder size={72} completed={completedCount} total={MISSION_IDS.length} />
+            <SealPlaceholder size={44} completed={completedCount} total={MISSION_IDS.length} />
           )}
         </motion.span>
         {showSparkle && (

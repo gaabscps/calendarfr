@@ -4,7 +4,7 @@ describe('sounds registry', () => {
   it('exposes the two expected sound ids', () => {
     const ids: SoundId[] = ['mission-complete', 'day-complete'];
     ids.forEach((id) => {
-      expect(SOUND_URLS[id]).toMatch(/^\/sounds\/.+\.ogg$/);
+      expect(SOUND_URLS[id]).toMatch(/^\/sounds\/.+\.ogg(\?v=\d+)?$/);
     });
   });
 

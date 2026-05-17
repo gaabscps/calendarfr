@@ -1,8 +1,8 @@
 import { SOUND_URLS, type SoundId } from './sounds.js';
 
 const STORAGE_KEY = 'calendarfr:sound:muted';
-const VOLUME_NORMAL = 0.4;
-const VOLUME_REDUCED = 0.25;
+const VOLUME_NORMAL = 0.7;
+const VOLUME_REDUCED = 0.4;
 
 export interface SoundController {
   play(id: SoundId): void;

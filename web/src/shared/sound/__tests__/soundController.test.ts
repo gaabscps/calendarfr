@@ -80,7 +80,7 @@ describe('soundController — audio playback', () => {
     const c = createSoundController();
     c.play('mission-complete');
     const playedClone = audioInstances[audioInstances.length - 1]!;
-    expect(playedClone.volume).toBeCloseTo(0.25, 2);
+    expect(playedClone.volume).toBeCloseTo(0.4, 2);
     window.matchMedia = originalMatchMedia;
   });
 });

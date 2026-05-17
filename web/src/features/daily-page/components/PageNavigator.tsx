@@ -46,10 +46,11 @@ export interface PageNavigatorProps {
    */
   intentionSlot?: ReactNode;
   /**
-   * Slot opcional renderizado após o SaveIndicator — usado para o HelpButton
-   * do onboarding. Mantém PageNavigator agnóstico ao feature consumidor.
+   * Slot opcional renderizado no centro do header (após intentionSlot) —
+   * usado pelo MissionSealSlot do onboarding pra ficar visualmente colado
+   * na data, em vez de flutuar num canto.
    */
-  helpSlot?: ReactNode;
+  sealSlot?: ReactNode;
 }
 
 export function PageNavigator({
@@ -61,14 +62,13 @@ export function PageNavigator({
   onRetry,
   moodSlot,
   intentionSlot,
-  helpSlot,
+  sealSlot,
 }: PageNavigatorProps) {
   return (
     <>
       {/* AC-007: SaveIndicator rendered as absolute overlay anchored on PaperSheet,
           outside the navigator flow so it does not steal a 24px row. */}
       <SaveIndicator saveStatus={saveStatus} onRetry={onRetry} />
-      {helpSlot}
 
       <section className={styles.header} role="region" aria-label="Cabeçalho do dia">
         <IconButton
@@ -95,6 +95,7 @@ export function PageNavigator({
           {intentionSlot !== undefined && (
             <div className={styles.intentionSlot}>{intentionSlot}</div>
           )}
+          {sealSlot !== undefined && <div className={styles.sealSlot}>{sealSlot}</div>}
         </div>
 
         <IconButton

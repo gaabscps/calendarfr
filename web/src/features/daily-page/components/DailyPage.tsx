@@ -155,6 +155,7 @@ function DailyPageInner({ initialDate }: DailyPageProps = {}) {
           intentionSlot={
             data !== null ? <IntentionChip value={data.intention} onChange={setIntention} /> : null
           }
+          sealSlot={<MissionSealSlot date={date} data={data} />}
         />
 
         {/* AC-034–AC-037: DayLayer manages animation layers.
@@ -213,7 +214,6 @@ function DailyPageInner({ initialDate }: DailyPageProps = {}) {
             por causa do drag persistido. */}
         <StickyNote />
         <OnboardingQuest data={data} date={date} saveStatus={saveStatus} />
-        <MissionSealSlot date={date} data={data} />
       </PaperSheet>
     </>
   );

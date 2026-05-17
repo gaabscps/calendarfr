@@ -47,6 +47,15 @@
   flex-shrink: 0;
 }
 
+/* Slot do selo — inline ao lado da data; overflow visible para o selo de 48px
+   poder protrusar levemente acima/abaixo da row de 48px sem ser cropado. */
+.sealSlot {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  overflow: visible;
+}
+
 .dateHeading {
   margin: 0;
   font-family: var(--font-hand, 'Caveat', cursive);

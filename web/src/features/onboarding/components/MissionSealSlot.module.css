@@ -1,11 +1,10 @@
 .slot {
-  position: absolute;
-  /* Below the navigator (24 padding + 48 nav row + 24 margin = 96) plus a 12px
-     breath, so the seal doesn't sit on top of the day-change chevron. */
-  top: calc(var(--spacing-lg, 24px) + var(--baseline, 24px) * 3 + 12px);
-  right: var(--spacing-lg, 24px);
-  /* z-index below the sticky so when the user opens it the sticky covers the seal. */
-  z-index: 150;
+  /* Renderiza inline no header (slot do PageNavigator), ao lado da data.
+     O .sealSlot do header tem overflow:visible, então o selo pode protrusar
+     levemente acima/abaixo da row de 48px sem ser cropado. */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .sealButton {
@@ -18,30 +17,31 @@
   border: none;
   cursor: pointer;
   color: var(--color-ink-muted, #9a8a72);
-  /* Rotação imita carimbo aplicado a mão; drop-shadow dá profundidade contra o papel. */
-  transform: rotate(-8deg);
+  /* Rotação leve imita carimbo aplicado a mão; reduzida (-4deg) pra ficar
+     elegante inline ao lado da data, sem destoar do header. */
+  transform: rotate(-4deg);
   transition:
     transform 0.18s ease,
     color 0.18s ease,
     filter 0.18s ease;
-  filter: drop-shadow(0 2px 3px rgba(60, 40, 20, 0.18));
+  filter: drop-shadow(0 1px 2px rgba(60, 40, 20, 0.18));
 }
 
 .sealButton:hover,
 .sealButton:focus-visible {
-  transform: rotate(-6deg) scale(1.04);
+  transform: rotate(-2deg) scale(1.06);
   color: var(--color-ink-secondary, #5a4a32);
-  filter: drop-shadow(0 3px 5px rgba(60, 40, 20, 0.28));
+  filter: drop-shadow(0 2px 4px rgba(60, 40, 20, 0.28));
 }
 
 .sealButton:focus-visible {
   outline: var(--focus-ring, 2px solid var(--color-accent, #c0392b));
-  outline-offset: 4px;
+  outline-offset: 3px;
   border-radius: 50%;
 }
 
 .sealButton:active {
-  transform: rotate(-8deg) scale(0.96);
+  transform: rotate(-4deg) scale(0.96);
 }
 
 .sealWrap {

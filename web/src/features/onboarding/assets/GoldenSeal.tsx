@@ -1,14 +1,18 @@
+export interface GoldenSealProps {
+  size?: number;
+}
+
 /**
  * Selo "happy sticker" do dia 7/7. Substitui o desenho dourado/metálico anterior por um
  * sticker chapado coral com borda branca die-cut e checkmark em tinta escura, alinhado ao
  * idioma dos energy stickers do app. Texto handwriting "Boa!" centralizado.
  */
-export function GoldenSeal() {
+export function GoldenSeal({ size = 72 }: GoldenSealProps = {}) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="72"
-      height="72"
+      width={size}
+      height={size}
       viewBox="0 0 72 72"
       aria-hidden="true"
       data-testid="goldenSeal-svg"
