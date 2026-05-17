@@ -1,0 +1,14 @@
+.root {
+  position: absolute;
+  pointer-events: none;
+  inset: 50% auto auto 50%;
+  transform: translate(-50%, -50%);
+  display: inline-block;
+}
+
+.particle {
+  position: absolute;
+  inset: 50% auto auto 50%;
+  transform: translate(-50%, -50%);
+  display: inline-block;
+}
