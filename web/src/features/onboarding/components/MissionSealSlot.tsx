@@ -42,11 +42,17 @@ export function MissionSealSlot({ date, data = null }: MissionSealSlotProps) {
   const playedDayCompleteRef = useRef(wasCompleteOnMountRef.current);
 
   useEffect(() => {
+    if (process.env.NODE_ENV !== 'production') {
+      // eslint-disable-next-line no-console
+      console.log(
+        `[MissionSealSlot] effect — date=${date} completed=${completedCount}/${MISSION_IDS.length} isCompleteForDay=${isCompleteForDay} alreadyPlayed=${playedDayCompleteRef.current}`,
+      );
+    }
     if (isCompleteForDay && !playedDayCompleteRef.current) {
       play('day-complete');
       playedDayCompleteRef.current = true;
     }
-  }, [isCompleteForDay, play]);
+  }, [isCompleteForDay, play, completedCount, date]);
 
   function handleClick(): void {
     if (state.status === 'dismissed' || state.status === 'pending') {

@@ -45,6 +45,11 @@ export function createSoundController(): SoundController {
   const listeners = new Set<() => void>();
   const cache = new Map<SoundId, HTMLAudioElement>();
 
+  if (process.env.NODE_ENV !== 'production') {
+    // eslint-disable-next-line no-console
+    console.log(`[sound] controller init — muted=${muted ? 'YES' : 'no'}`);
+  }
+
   function emit(): void {
     listeners.forEach((fn) => fn());
   }
@@ -63,7 +68,7 @@ export function createSoundController(): SoundController {
       if (muted) {
         if (process.env.NODE_ENV !== 'production') {
           // eslint-disable-next-line no-console
-          console.debug(`[sound] play('${id}') skipped — controller is muted`);
+          console.log(`[sound] play('${id}') skipped — controller is muted`);
         }
         return;
       }
@@ -76,13 +81,13 @@ export function createSoundController(): SoundController {
           .then(() => {
             if (process.env.NODE_ENV !== 'production') {
               // eslint-disable-next-line no-console
-              console.debug(`[sound] play('${id}') ✓ vol=${clone.volume.toFixed(2)}`);
+              console.log(`[sound] play('${id}') ✓ vol=${clone.volume.toFixed(2)}`);
             }
           })
           .catch((err: unknown) => {
             if (process.env.NODE_ENV !== 'production') {
               // eslint-disable-next-line no-console
-              console.debug(`[sound] play('${id}') ✗`, err);
+              console.log(`[sound] play('${id}') ✗`, err);
             }
           });
       }

@@ -25,6 +25,12 @@ function QuestSealInner({ completed, onAnimationComplete }: QuestSealProps) {
   // o SparkleBurst (key incrementa) para reanimar as partículas a cada novo "apply".
   useEffect(() => {
     const wasJustApplied = previousCompletedRef.current === false && completed === true;
+    if (process.env.NODE_ENV !== 'production') {
+      // eslint-disable-next-line no-console
+      console.log(
+        `[QuestSeal] effect — completed=${completed} prev=${previousCompletedRef.current} wasOnMount=${wasCompletedOnMount.current} → ${wasJustApplied && !wasCompletedOnMount.current ? 'WILL PLAY' : 'skip'}`,
+      );
+    }
     if (wasJustApplied && !wasCompletedOnMount.current) {
       play('mission-complete');
       setBurstKey((k) => k + 1);
