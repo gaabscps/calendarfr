@@ -64,9 +64,12 @@ export function createSoundController(): SoundController {
       const base = getOrCreateBase(id);
       const clone = base.cloneNode(true) as HTMLAudioElement;
       clone.volume = getVolume();
-      clone.play().catch(() => {
-        /* autoplay rejection — silent */
-      });
+      const result: unknown = clone.play();
+      if (result instanceof Promise) {
+        result.catch(() => {
+          /* autoplay rejection — silent */
+        });
+      }
     },
     isMuted: () => muted,
     setMuted(value: boolean): void {
