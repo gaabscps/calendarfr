@@ -7,14 +7,26 @@ export interface MuteToggleProps {
 }
 
 export function MuteToggle({ className }: MuteToggleProps) {
-  const { muted, toggleMute } = useSoundController();
+  const { muted, toggleMute, play } = useSoundController();
   const label = muted ? 'Ativar sons' : 'Silenciar sons';
+
+  function handleClick(): void {
+    const wasMuted = muted;
+    toggleMute();
+    // Quando o usuário (re)ativa sons, tocamos mission-complete imediatamente
+    // dentro do contexto do clique. Funciona como confirmação audível ("sim,
+    // áudio ligado") E como bypass garantido da política de autoplay do
+    // Chrome — esse play() está no gesture handler, então sempre é aceito.
+    if (wasMuted) {
+      play('mission-complete');
+    }
+  }
 
   return (
     <button
       type="button"
       aria-label={label}
-      onClick={toggleMute}
+      onClick={handleClick}
       className={[styles.button, className].filter(Boolean).join(' ')}
     >
       {muted ? (
