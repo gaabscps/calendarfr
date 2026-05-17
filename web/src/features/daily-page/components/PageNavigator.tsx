@@ -45,6 +45,11 @@ export interface PageNavigatorProps {
    * (intenção do dia, manhã do daily ritual loop).
    */
   intentionSlot?: ReactNode;
+  /**
+   * Slot opcional renderizado após o SaveIndicator — usado para o HelpButton
+   * do onboarding. Mantém PageNavigator agnóstico ao feature consumidor.
+   */
+  helpSlot?: ReactNode;
 }
 
 export function PageNavigator({
@@ -56,12 +61,14 @@ export function PageNavigator({
   onRetry,
   moodSlot,
   intentionSlot,
+  helpSlot,
 }: PageNavigatorProps) {
   return (
     <>
       {/* AC-007: SaveIndicator rendered as absolute overlay anchored on PaperSheet,
           outside the navigator flow so it does not steal a 24px row. */}
       <SaveIndicator saveStatus={saveStatus} onRetry={onRetry} />
+      {helpSlot}
 
       <section className={styles.header} role="region" aria-label="Cabeçalho do dia">
         <IconButton

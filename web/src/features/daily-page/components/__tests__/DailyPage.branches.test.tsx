@@ -127,6 +127,26 @@ function makeDefaultDailyReturn(overrides = {}) {
 }
 
 beforeEach(() => {
+  // Suppress OnboardingQuest sticky-note so it does not interfere with these tests.
+  localStorage.setItem(
+    'calendarfr.onboarding.state',
+    JSON.stringify({
+      schemaVersion: 1,
+      status: 'dismissed',
+      missionsCompleted: {
+        'M-INTENTION': null,
+        'M-MOOD': null,
+        'M-PRIORITY': null,
+        'M-FORMAT': null,
+        'M-CHECK': null,
+        'M-WRITE': null,
+        'M-GRATITUDE': null,
+        'M-NAVIGATE': null,
+      },
+      completedAt: null,
+      completedOnDate: null,
+    }),
+  );
   mockUseReducedMotion.mockReturnValue(false);
   mockUsePageNavigation.mockReturnValue(makeDefaultNavReturn());
   mockUseDailyPage.mockReturnValue(makeDefaultDailyReturn());
@@ -134,6 +154,7 @@ beforeEach(() => {
 
 afterEach(() => {
   jest.clearAllMocks();
+  localStorage.clear();
 });
 
 // ---------------------------------------------------------------------------

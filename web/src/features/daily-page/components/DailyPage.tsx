@@ -26,6 +26,11 @@ import { Gratitude } from '@/features/gratitude';
 import { IntentionChip } from '@/features/intention';
 import { MoodPopover } from '@/features/mood';
 import { Notes } from '@/features/notes';
+import {
+  CompletionStampContainer,
+  HelpButtonContainer,
+  OnboardingQuest,
+} from '@/features/onboarding';
 import { Priorities } from '@/features/priorities';
 import { StickyNote } from '@/features/sticky-note';
 import { UndoQueueProvider, UndoToastHost, useUndoQueueContext } from '@/features/undo-delete';
@@ -154,6 +159,7 @@ function DailyPageInner({ initialDate }: DailyPageProps = {}) {
           intentionSlot={
             data !== null ? <IntentionChip value={data.intention} onChange={setIntention} /> : null
           }
+          helpSlot={<HelpButtonContainer />}
         />
 
         {/* AC-034–AC-037: DayLayer manages animation layers.
@@ -171,43 +177,47 @@ function DailyPageInner({ initialDate }: DailyPageProps = {}) {
           ) : data === null ? (
             <LoadingSkeleton />
           ) : (
-            <div className={styles.grid}>
-              {/* Header row: Priorities (manhã) + Gratitude (noite) lado a lado.
+            <>
+              <div className={styles.grid}>
+                {/* Header row: Priorities (manhã) + Gratitude (noite) lado a lado.
                   Mood + Intention vivem no PageNavigator. */}
-              <div className={styles.topRow}>
-                {/* AC-003: Priorities via barrel only */}
-                <div className={styles.prioritiesCol}>
-                  <h2 className={styles.sectionLabel}>Prioridades</h2>
-                  <Priorities value={data.priorities} onChange={setPriorities} />
+                <div className={styles.topRow}>
+                  {/* AC-003: Priorities via barrel only */}
+                  <div className={styles.prioritiesCol}>
+                    <h2 className={styles.sectionLabel}>Prioridades</h2>
+                    <Priorities value={data.priorities} onChange={setPriorities} />
+                  </div>
+                  <div className={styles.gratitudeCol}>
+                    <h2 className={styles.sectionLabel}>Gratidão</h2>
+                    <Gratitude value={data.gratitude} onChange={setGratitude} />
+                  </div>
                 </div>
-                <div className={styles.gratitudeCol}>
-                  <h2 className={styles.sectionLabel}>Gratidão</h2>
-                  <Gratitude value={data.gratitude} onChange={setGratitude} />
+
+                {/* Left column: Agenda */}
+                <div className={styles.agendaCol}>
+                  {/* AC-023: visible section label */}
+                  <h2 className={styles.sectionLabel}>Agenda</h2>
+                  {/* AC-003: Agenda via barrel only */}
+                  <Agenda value={toAgendaSlots(data)} onChange={setAgenda} />
+                </div>
+
+                {/* Right column: Notes */}
+                <div className={styles.notesCol}>
+                  {/* AC-024: visible section label */}
+                  <h2 className={styles.sectionLabel}>Notas</h2>
+                  {/* AC-003: Notes via barrel only */}
+                  <Notes value={data.notes} onChange={setNotes} />
                 </div>
               </div>
-
-              {/* Left column: Agenda */}
-              <div className={styles.agendaCol}>
-                {/* AC-023: visible section label */}
-                <h2 className={styles.sectionLabel}>Agenda</h2>
-                {/* AC-003: Agenda via barrel only */}
-                <Agenda value={toAgendaSlots(data)} onChange={setAgenda} />
-              </div>
-
-              {/* Right column: Notes */}
-              <div className={styles.notesCol}>
-                {/* AC-024: visible section label */}
-                <h2 className={styles.sectionLabel}>Notas</h2>
-                {/* AC-003: Notes via barrel only */}
-                <Notes value={data.notes} onChange={setNotes} />
-              </div>
-            </div>
+            </>
           )}
         </DayLayer>
+        <CompletionStampContainer date={date} />
         {/* StickyNote tabs anchored INSIDE PaperSheet (absolute, right edge,
             poke out ~10px) — fazem parte da página. Panels seguem position:fixed
             por causa do drag persistido. */}
         <StickyNote />
+        <OnboardingQuest data={data} date={date} />
       </PaperSheet>
     </>
   );

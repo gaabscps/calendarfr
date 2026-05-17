@@ -1,0 +1,41 @@
+.item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--spacing-sm, 8px);
+  padding-top: var(--baseline-half, 12px);
+  padding-bottom: var(--baseline-half, 12px);
+  min-height: var(--baseline, 36px);
+}
+
+.icon {
+  display: inline-flex;
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+}
+
+.labelWrapper {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+}
+
+.label {
+  display: block;
+  font-family: var(--font-hand, 'Caveat', cursive);
+  font-size: var(--font-size-base, 1rem);
+  color: var(--color-ink, #2c2416);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.strikethrough {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}

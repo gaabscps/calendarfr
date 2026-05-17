@@ -1,0 +1,10 @@
+.header {
+  font-family: var(--font-hand, 'Caveat', cursive);
+  font-size: var(--font-size-sm, 0.875rem);
+  color: var(--color-ink-secondary, #5a4a32);
+  padding-top: var(--baseline-half, 12px);
+  padding-bottom: 0;
+  margin-bottom: 0;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+}

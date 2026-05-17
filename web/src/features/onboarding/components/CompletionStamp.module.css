@@ -1,0 +1,26 @@
+.container {
+  position: absolute;
+  bottom: var(--spacing-xl, 32px);
+  left: var(--spacing-xl, 32px);
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.shadow {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at center, rgba(60, 40, 20, 0.15) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.tagline {
+  margin-top: var(--baseline-half, 12px);
+  margin-bottom: 0;
+  font-family: var(--font-hand, 'Caveat', cursive);
+  font-size: var(--font-size-sm, 0.875rem);
+  color: var(--color-ink-secondary, #5a4a32);
+  text-align: center;
+}
