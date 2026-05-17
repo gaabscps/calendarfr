@@ -109,7 +109,7 @@ export function Agenda({ value, onChange, now }: AgendaProps) {
   }, [editorRefs]);
 
   return (
-    <section className={styles.section} aria-label="Agenda do dia">
+    <section className={styles.section} aria-label="Agenda do dia" data-onboarding-target="agenda">
       {slots.map((slot) => (
         <AgendaSlot
           key={slot.hour}

@@ -17,7 +17,7 @@ export const colors = {
 
 export const fonts = {
   hand: "'Caveat', cursive",
-  body: "'Inter', sans-serif",
+  body: "'Inter', system-ui, sans-serif",
   mono: "'Courier New', Courier, monospace",
 } as const;
 

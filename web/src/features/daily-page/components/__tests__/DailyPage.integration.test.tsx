@@ -157,20 +157,11 @@ beforeEach(() => {
   localStorage.setItem(
     'calendarfr.onboarding.state',
     JSON.stringify({
-      schemaVersion: 1,
-      status: 'dismissed',
-      missionsCompleted: {
-        'M-INTENTION': null,
-        'M-MOOD': null,
-        'M-PRIORITY': null,
-        'M-FORMAT': null,
-        'M-CHECK': null,
-        'M-WRITE': null,
-        'M-GRATITUDE': null,
-        'M-NAVIGATE': null,
-      },
+      schemaVersion: 2,
+      progressByDate: {},
       completedAt: null,
       completedOnDate: null,
+      status: 'dismissed',
     }),
   );
   mockUseReducedMotion.mockReturnValue(false);
@@ -655,6 +646,69 @@ describe('DailyPage — a11y (AC-038–AC-042)', () => {
     await user.tab();
     await user.tab();
     // No exception means tab order works without hacks
+  });
+});
+
+// ---------------------------------------------------------------------------
+// FEAT-028: CompletedDayDecor renders when progressByDate[date] has 7/7 (AC-031)
+// ---------------------------------------------------------------------------
+
+describe('DailyPage — CompletedDayDecor renders with 7/7 missions (AC-031)', () => {
+  it('renders washi-left testid when onboarding state has all 7 missions for current date', async () => {
+    // Pre-seed localStorage with v2 state: 7/7 missions for DATE
+    const allDone: Record<string, string> = {
+      'M-INTENTION': '2026-05-11T08:00:00.000Z',
+      'M-MOOD': '2026-05-11T08:05:00.000Z',
+      'M-PRIORITY': '2026-05-11T08:10:00.000Z',
+      'M-FORMAT': '2026-05-11T08:15:00.000Z',
+      'M-CHECK': '2026-05-11T08:20:00.000Z',
+      'M-WRITE': '2026-05-11T08:25:00.000Z',
+      'M-GRATITUDE': '2026-05-11T08:30:00.000Z',
+    };
+    localStorage.setItem(
+      'calendarfr.onboarding.state',
+      JSON.stringify({
+        schemaVersion: 2,
+        progressByDate: { [DATE]: allDone },
+        completedAt: '2026-05-11T08:30:00.000Z',
+        completedOnDate: DATE,
+        status: 'completed',
+      }),
+    );
+
+    render(<DailyPage />);
+
+    await waitFor(() => {
+      expect(document.querySelector('[data-testid="washi-left"]')).toBeInTheDocument();
+    });
+    expect(document.querySelector('[data-testid="washi-right"]')).toBeInTheDocument();
+    expect(document.querySelector('[data-testid="golden-seal"]')).toBeInTheDocument();
+  });
+
+  it('does NOT render CompletedDayDecor when only 6/7 missions done', () => {
+    const sixDone: Record<string, string | null> = {
+      'M-INTENTION': '2026-05-11T08:00:00.000Z',
+      'M-MOOD': '2026-05-11T08:05:00.000Z',
+      'M-PRIORITY': '2026-05-11T08:10:00.000Z',
+      'M-FORMAT': '2026-05-11T08:15:00.000Z',
+      'M-CHECK': '2026-05-11T08:20:00.000Z',
+      'M-WRITE': '2026-05-11T08:25:00.000Z',
+      'M-GRATITUDE': null,
+    };
+    localStorage.setItem(
+      'calendarfr.onboarding.state',
+      JSON.stringify({
+        schemaVersion: 2,
+        progressByDate: { [DATE]: sixDone },
+        completedAt: null,
+        completedOnDate: null,
+        status: 'in_progress',
+      }),
+    );
+
+    render(<DailyPage />);
+
+    expect(document.querySelector('[data-testid="washi-left"]')).not.toBeInTheDocument();
   });
 });
 

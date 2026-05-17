@@ -38,7 +38,6 @@ function makeAllNullHistory(): Record<MissionId, string | null> {
     'M-CHECK': null,
     'M-WRITE': null,
     'M-GRATITUDE': null,
-    'M-NAVIGATE': null,
   };
 }
 
@@ -50,14 +49,8 @@ describe('deriveMissionProgress', () => {
         'M-INTENTION': OLD_TS,
         'M-MOOD': OLD_TS,
       };
-      const result = deriveMissionProgress(null, history, true, NOW);
+      const result = deriveMissionProgress(null, history, NOW);
       expect(result).toBe(history);
-    });
-
-    it('does not mark M-NAVIGATE when data is null even if navOccurred=true', () => {
-      const history = makeAllNullHistory();
-      const result = deriveMissionProgress(null, history, true, NOW);
-      expect(result['M-NAVIGATE']).toBeNull();
     });
   });
 
@@ -65,20 +58,20 @@ describe('deriveMissionProgress', () => {
     it('preserves old timestamp when M-INTENTION was completed and intention is now empty', () => {
       const history = { ...makeAllNullHistory(), 'M-INTENTION': OLD_TS };
       const data = { ...makeEmptyData(), intention: '' };
-      const result = deriveMissionProgress(data, history, false, NOW);
+      const result = deriveMissionProgress(data, history, NOW);
       expect(result['M-INTENTION']).toBe(OLD_TS);
     });
 
     it('does not overwrite existing timestamp with nowIso', () => {
       const history = { ...makeAllNullHistory(), 'M-MOOD': OLD_TS };
       const data = { ...makeEmptyData(), mood: { emoji: '😊', label: 'Feliz', color: '#fff' } };
-      const result = deriveMissionProgress(data, history, false, NOW);
+      const result = deriveMissionProgress(data, history, NOW);
       expect(result['M-MOOD']).toBe(OLD_TS);
     });
   });
 
-  describe('all 8 conditions met simultaneously', () => {
-    it('marks all 8 missions with the same nowIso when all conditions are true', () => {
+  describe('all 7 conditions met simultaneously', () => {
+    it('marks all 7 missions with the same nowIso when all conditions are true', () => {
       const slots = makeAgendaSlots();
       (slots[0] as (typeof slots)[0]).text = '<b>standup</b>';
       const data: DailyPageData = {
@@ -93,7 +86,7 @@ describe('deriveMissionProgress', () => {
         createdAt: null,
         updatedAt: null,
       };
-      const result = deriveMissionProgress(data, makeAllNullHistory(), true, NOW);
+      const result = deriveMissionProgress(data, makeAllNullHistory(), NOW);
       const missionIds: MissionId[] = [
         'M-INTENTION',
         'M-MOOD',
@@ -102,11 +95,11 @@ describe('deriveMissionProgress', () => {
         'M-CHECK',
         'M-WRITE',
         'M-GRATITUDE',
-        'M-NAVIGATE',
       ];
       for (const id of missionIds) {
         expect(result[id]).toBe(NOW);
       }
+      expect(Object.keys(result)).not.toContain('M-NAVIGATE');
     });
   });
 
@@ -116,7 +109,7 @@ describe('deriveMissionProgress', () => {
         ...makeEmptyData(),
         priorities: [{ id: 'p1', text: '<b></b>', done: false }],
       };
-      const result = deriveMissionProgress(data, makeAllNullHistory(), false, NOW);
+      const result = deriveMissionProgress(data, makeAllNullHistory(), NOW);
       expect(result['M-FORMAT']).toBe(NOW);
       expect(result['M-PRIORITY']).toBeNull();
     });
@@ -128,7 +121,7 @@ describe('deriveMissionProgress', () => {
         ...makeEmptyData(),
         notes: [{ id: 'n1', prefix: '→' as const, text: '' }],
       };
-      const result = deriveMissionProgress(data, makeAllNullHistory(), false, NOW);
+      const result = deriveMissionProgress(data, makeAllNullHistory(), NOW);
       expect(result['M-WRITE']).toBe(NOW);
     });
 
@@ -136,7 +129,7 @@ describe('deriveMissionProgress', () => {
       const slots = makeAgendaSlots();
       (slots[0] as (typeof slots)[0]).text = '<b></b>';
       const data = { ...makeEmptyData(), agenda: slots };
-      const result = deriveMissionProgress(data, makeAllNullHistory(), false, NOW);
+      const result = deriveMissionProgress(data, makeAllNullHistory(), NOW);
       expect(result['M-WRITE']).toBeNull();
     });
   });

@@ -1,0 +1,24 @@
+.decor {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.washiLeft {
+  position: absolute;
+  top: 0;
+  left: 12px;
+}
+
+.washiRight {
+  position: absolute;
+  top: 0;
+  right: 12px;
+}
+
+.seal {
+  position: absolute;
+  bottom: var(--spacing-lg, 36px);
+  right: var(--spacing-lg, 36px);
+}

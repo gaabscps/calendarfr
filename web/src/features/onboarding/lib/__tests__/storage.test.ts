@@ -1,50 +1,36 @@
 import type { OnboardingState } from '../../types.js';
 import { CUSTOM_EVENT_NAME, STORAGE_KEY } from '../constants.js';
-import { readStorage, subscribeStorage, writeStorage } from '../storage.js';
-
-const ALL_NULL_MISSIONS: Record<string, null> = {
-  'M-INTENTION': null,
-  'M-MOOD': null,
-  'M-PRIORITY': null,
-  'M-FORMAT': null,
-  'M-CHECK': null,
-  'M-WRITE': null,
-  'M-GRATITUDE': null,
-  'M-NAVIGATE': null,
-};
+import {
+  buildEmptyMissionRecord,
+  readStorage,
+  subscribeStorage,
+  writeStorage,
+} from '../storage.js';
 
 const INITIAL_STATE: OnboardingState = {
-  schemaVersion: 1,
-  status: 'pending',
-  missionsCompleted: {
-    'M-INTENTION': null,
-    'M-MOOD': null,
-    'M-PRIORITY': null,
-    'M-FORMAT': null,
-    'M-CHECK': null,
-    'M-WRITE': null,
-    'M-GRATITUDE': null,
-    'M-NAVIGATE': null,
-  },
+  schemaVersion: 2,
+  progressByDate: {},
   completedAt: null,
   completedOnDate: null,
+  status: 'pending',
 };
 
 const VALID_STATE: OnboardingState = {
-  schemaVersion: 1,
-  status: 'in_progress',
-  missionsCompleted: {
-    'M-INTENTION': '2026-05-17T10:00:00.000Z',
-    'M-MOOD': null,
-    'M-PRIORITY': null,
-    'M-FORMAT': null,
-    'M-CHECK': null,
-    'M-WRITE': null,
-    'M-GRATITUDE': null,
-    'M-NAVIGATE': null,
+  schemaVersion: 2,
+  progressByDate: {
+    '2026-05-17': {
+      'M-INTENTION': '2026-05-17T10:00:00.000Z',
+      'M-MOOD': null,
+      'M-PRIORITY': null,
+      'M-FORMAT': null,
+      'M-CHECK': null,
+      'M-WRITE': null,
+      'M-GRATITUDE': null,
+    },
   },
   completedAt: null,
   completedOnDate: null,
+  status: 'in_progress',
 };
 
 beforeEach(() => {
@@ -52,12 +38,24 @@ beforeEach(() => {
   jest.restoreAllMocks();
 });
 
+describe('buildEmptyMissionRecord', () => {
+  it('returns a record with all 7 mission IDs set to null', () => {
+    const record = buildEmptyMissionRecord();
+    const keys = Object.keys(record);
+    expect(keys).toHaveLength(7);
+    expect(keys).not.toContain('M-NAVIGATE');
+    for (const val of Object.values(record)) {
+      expect(val).toBeNull();
+    }
+  });
+});
+
 describe('readStorage', () => {
-  it('returns initial state when key is absent', () => {
+  it('returns initial v2 state when key is absent', () => {
     const result = readStorage();
     expect(result).toEqual(INITIAL_STATE);
-    expect(Object.keys(result.missionsCompleted)).toHaveLength(8);
-    expect(Object.keys(result.missionsCompleted)).toEqual(Object.keys(ALL_NULL_MISSIONS));
+    expect(result.schemaVersion).toBe(2);
+    expect(result.progressByDate).toEqual({});
   });
 
   it('returns initial state when JSON is invalid', () => {
@@ -66,10 +64,30 @@ describe('readStorage', () => {
     expect(result).toEqual(INITIAL_STATE);
   });
 
-  it('returns initial state when schemaVersion is not 1', () => {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify({ ...VALID_STATE, schemaVersion: 2 }));
+  it('silently discards v1 schema (AC-022, NFR-010)', () => {
+    const v1State = {
+      schemaVersion: 1,
+      status: 'in_progress',
+      missionsCompleted: {
+        'M-INTENTION': '2026-05-17T10:00:00.000Z',
+        'M-MOOD': null,
+        'M-PRIORITY': null,
+        'M-FORMAT': null,
+        'M-CHECK': null,
+        'M-WRITE': null,
+        'M-GRATITUDE': null,
+        'M-NAVIGATE': null,
+      },
+      completedAt: null,
+      completedOnDate: null,
+    };
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(v1State));
+    const errorSpy = jest.spyOn(console, 'error');
+    const warnSpy = jest.spyOn(console, 'warn');
     const result = readStorage();
     expect(result).toEqual(INITIAL_STATE);
+    expect(errorSpy).not.toHaveBeenCalled();
+    expect(warnSpy).not.toHaveBeenCalled();
   });
 
   it('returns initial state when status is invalid', () => {
@@ -78,37 +96,48 @@ describe('readStorage', () => {
     expect(result).toEqual(INITIAL_STATE);
   });
 
-  it('returns initial state when missionsCompleted is missing keys', () => {
-    const partial = {
-      ...VALID_STATE,
-      missionsCompleted: { 'M-INTENTION': null },
-    };
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(partial));
+  it('returns initial state when progressByDate is an array (AC-020)', () => {
+    localStorage.setItem(
+      STORAGE_KEY,
+      JSON.stringify({ ...VALID_STATE, progressByDate: [1, 2, 3] }),
+    );
     const result = readStorage();
     expect(result).toEqual(INITIAL_STATE);
   });
 
-  it('returns initial state when a mission value is an empty string', () => {
+  it('returns initial state when progressByDate is a number (AC-020)', () => {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({ ...VALID_STATE, progressByDate: 42 }));
+    const result = readStorage();
+    expect(result).toEqual(INITIAL_STATE);
+  });
+
+  it('returns initial state when progressByDate is a string (AC-020)', () => {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({ ...VALID_STATE, progressByDate: 'bad' }));
+    const result = readStorage();
+    expect(result).toEqual(INITIAL_STATE);
+  });
+
+  it('returns initial state when a date entry mission value is empty string (AC-020)', () => {
     const withEmpty = {
       ...VALID_STATE,
-      missionsCompleted: { ...ALL_NULL_MISSIONS, 'M-INTENTION': '' },
+      progressByDate: {
+        '2026-05-17': {
+          'M-INTENTION': '',
+          'M-MOOD': null,
+          'M-PRIORITY': null,
+          'M-FORMAT': null,
+          'M-CHECK': null,
+          'M-WRITE': null,
+          'M-GRATITUDE': null,
+        },
+      },
     };
     localStorage.setItem(STORAGE_KEY, JSON.stringify(withEmpty));
     const result = readStorage();
     expect(result).toEqual(INITIAL_STATE);
   });
 
-  it('returns initial state when a mission value is a non-string type', () => {
-    const withNumber = {
-      ...VALID_STATE,
-      missionsCompleted: { ...ALL_NULL_MISSIONS, 'M-MOOD': 42 },
-    };
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(withNumber));
-    const result = readStorage();
-    expect(result).toEqual(INITIAL_STATE);
-  });
-
-  it('returns intact state when valid', () => {
+  it('returns intact state when valid v2 data', () => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(VALID_STATE));
     const result = readStorage();
     expect(result).toEqual(VALID_STATE);
@@ -123,7 +152,7 @@ describe('readStorage', () => {
 });
 
 describe('writeStorage', () => {
-  it('writes state to localStorage', () => {
+  it('writes v2 state to localStorage', () => {
     writeStorage(VALID_STATE);
     const raw = localStorage.getItem(STORAGE_KEY);
     expect(raw).not.toBeNull();

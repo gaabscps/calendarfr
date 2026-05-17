@@ -175,7 +175,11 @@ export function Priorities({ value, onChange }: PrioritiesProps) {
   });
 
   return (
-    <section className={styles.section} aria-label="Prioridades do dia">
+    <section
+      className={styles.section}
+      aria-label="Prioridades do dia"
+      data-onboarding-target="priorities"
+    >
       <DndContext sensors={sensors} accessibility={{ announcements }} onDragEnd={handleDragEnd}>
         <SortableContext items={items.map((i) => i.id)} strategy={verticalListSortingStrategy}>
           {items.map((item, index) => {

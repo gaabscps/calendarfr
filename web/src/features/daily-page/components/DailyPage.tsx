@@ -27,6 +27,7 @@ import { IntentionChip } from '@/features/intention';
 import { MoodPopover } from '@/features/mood';
 import { Notes } from '@/features/notes';
 import {
+  CompletedDayDecor,
   CompletionStampContainer,
   HelpButtonContainer,
   OnboardingQuest,
@@ -217,7 +218,8 @@ function DailyPageInner({ initialDate }: DailyPageProps = {}) {
             poke out ~10px) — fazem parte da página. Panels seguem position:fixed
             por causa do drag persistido. */}
         <StickyNote />
-        <OnboardingQuest data={data} date={date} />
+        <OnboardingQuest data={data} date={date} saveStatus={saveStatus} />
+        <CompletedDayDecor date={date} />
       </PaperSheet>
     </>
   );

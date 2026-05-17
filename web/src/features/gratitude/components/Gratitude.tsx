@@ -62,7 +62,7 @@ export function Gratitude({ value, onChange }: GratitudeProps) {
   }, [state, onAnimationOpenComplete, onAnimationCloseComplete]);
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} data-onboarding-target="gratitude">
       {showUnfolded && (
         <GratitudeCardUnfolded
           value={value}

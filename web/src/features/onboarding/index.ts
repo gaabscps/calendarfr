@@ -13,3 +13,4 @@ export { CompletionStampContainer } from './components/CompletionStampContainer.
 export { OnboardingQuest } from './components/OnboardingQuest.js';
 export { useOnboardingState } from './hooks/useOnboardingState.js';
 export { setReadonlyVisible } from './lib/readonlyController.js';
+export { CompletedDayDecor } from './components/CompletedDayDecor.js';

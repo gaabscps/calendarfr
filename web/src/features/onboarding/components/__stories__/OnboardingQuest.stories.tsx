@@ -1,7 +1,8 @@
 /**
  * Storybook stories for OnboardingQuest — CSF3 format.
  *
- * Covers SC-002: 4 states — Pending, InProgressPartial, CompletedActive, CompletedReadonly.
+ * Covers SC-002: 5 states — Pending, InProgressPartial, CompletedActive, CompletedReadonly,
+ * CompletedDay (with CompletedDayDecor skin).
  *
  * Each story seeds localStorage synchronously in a decorator before the component
  * mounts, so that useOnboardingState (useSyncExternalStore) reads the correct
@@ -11,17 +12,19 @@
  */
 
 import type { Decorator, Meta, StoryObj } from '@storybook/react';
+import { useEffect } from 'react';
 
-import { STORAGE_KEY } from '../../lib/constants.js';
+import { CUSTOM_EVENT_NAME, STORAGE_KEY } from '../../lib/constants.js';
 import { setReadonlyVisible } from '../../lib/readonlyController.js';
-import type { OnboardingState } from '../../types.js';
+import type { MissionId, OnboardingState } from '../../types.js';
+import { CompletedDayDecor } from '../CompletedDayDecor.js';
 import { OnboardingQuest } from '../OnboardingQuest.js';
 
 // ── Fixture data ─────────────────────────────────────────────────────────────
 
 const TODAY = '2026-05-17';
 
-const PARTIAL_MISSIONS: OnboardingState['missionsCompleted'] = {
+const PARTIAL_MISSIONS: Record<MissionId, string | null> = {
   'M-INTENTION': '2026-05-17T08:00:00.000Z',
   'M-MOOD': '2026-05-17T08:05:00.000Z',
   'M-PRIORITY': '2026-05-17T08:10:00.000Z',
@@ -29,10 +32,9 @@ const PARTIAL_MISSIONS: OnboardingState['missionsCompleted'] = {
   'M-CHECK': null,
   'M-WRITE': null,
   'M-GRATITUDE': null,
-  'M-NAVIGATE': null,
 };
 
-const ALL_MISSIONS_DONE: OnboardingState['missionsCompleted'] = {
+const ALL_MISSIONS_DONE: Record<MissionId, string> = {
   'M-INTENTION': '2026-05-17T08:00:00.000Z',
   'M-MOOD': '2026-05-17T08:05:00.000Z',
   'M-PRIORITY': '2026-05-17T08:10:00.000Z',
@@ -40,27 +42,31 @@ const ALL_MISSIONS_DONE: OnboardingState['missionsCompleted'] = {
   'M-CHECK': '2026-05-17T08:20:00.000Z',
   'M-WRITE': '2026-05-17T08:25:00.000Z',
   'M-GRATITUDE': '2026-05-17T08:30:00.000Z',
-  'M-NAVIGATE': '2026-05-17T08:35:00.000Z',
 };
 
-// 7 of 8 missions done — sticky-note renders with 7 selos + 1 pending.
-const SEVEN_MISSIONS_DONE: OnboardingState['missionsCompleted'] = {
+// 6 of 7 missions done — sticky-note renders with 6 selos + 1 pending.
+const SIX_MISSIONS_DONE: Record<MissionId, string | null> = {
   'M-INTENTION': '2026-05-17T08:00:00.000Z',
   'M-MOOD': '2026-05-17T08:05:00.000Z',
   'M-PRIORITY': '2026-05-17T08:10:00.000Z',
   'M-FORMAT': '2026-05-17T08:15:00.000Z',
   'M-CHECK': '2026-05-17T08:20:00.000Z',
   'M-WRITE': '2026-05-17T08:25:00.000Z',
-  'M-GRATITUDE': '2026-05-17T08:30:00.000Z',
-  'M-NAVIGATE': null,
+  'M-GRATITUDE': null,
 };
 
 // ── Decorator helpers ─────────────────────────────────────────────────────────
 
 function withOnboardingState(stateOverride: OnboardingState): Decorator {
   const decorator: Decorator = function WithState(Story) {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(stateOverride));
-    window.dispatchEvent(new Event('calendarfr.onboarding.changed'));
+    useEffect(() => {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(stateOverride));
+      window.dispatchEvent(new Event(CUSTOM_EVENT_NAME));
+      return () => {
+        localStorage.removeItem(STORAGE_KEY);
+        window.dispatchEvent(new Event(CUSTOM_EVENT_NAME));
+      };
+    }, []);
     return <Story />;
   };
   return decorator;
@@ -68,8 +74,14 @@ function withOnboardingState(stateOverride: OnboardingState): Decorator {
 
 function clearOnboardingState(): Decorator {
   const decorator: Decorator = function ClearState(Story) {
-    localStorage.removeItem(STORAGE_KEY);
-    window.dispatchEvent(new Event('calendarfr.onboarding.changed'));
+    useEffect(() => {
+      localStorage.removeItem(STORAGE_KEY);
+      window.dispatchEvent(new Event(CUSTOM_EVENT_NAME));
+      return () => {
+        localStorage.removeItem(STORAGE_KEY);
+        window.dispatchEvent(new Event(CUSTOM_EVENT_NAME));
+      };
+    }, []);
     return <Story />;
   };
   return decorator;
@@ -111,6 +123,7 @@ const meta = {
   args: {
     data: null,
     date: TODAY,
+    saveStatus: 'saved' as const,
   },
 } satisfies Meta<typeof OnboardingQuest>;
 
@@ -122,7 +135,7 @@ type Story = StoryObj<typeof meta>;
 /**
  * Pending — fresh state (no localStorage key).
  *
- * Auto-transitions pending → in_progress on mount; all 8 missions show pending
+ * Auto-transitions pending → in_progress on mount; all 7 missions show pending
  * seals (dotted outlines). data=null simulates loading state (AC-013b).
  */
 export const Pending: Story = {
@@ -130,6 +143,7 @@ export const Pending: Story = {
   args: {
     data: null,
     date: TODAY,
+    saveStatus: 'saved',
   },
 };
 
@@ -140,15 +154,17 @@ export const Pending: Story = {
  *
  * localStorage pre-seeded with status=in_progress and 3 timestamps.
  * data=null so no further derivation runs; the 3 selos show completed state
- * (filled circle + strikethrough), 5 pending (dotted outlines).
+ * (filled circle + strikethrough), 4 pending (dotted outlines).
  * Demonstrates AC-013b (loading) + AC-013a (latching from persistence).
  */
 export const InProgressPartial: Story = {
   decorators: [
     withOnboardingState({
-      schemaVersion: 1,
+      schemaVersion: 2,
       status: 'in_progress',
-      missionsCompleted: PARTIAL_MISSIONS,
+      progressByDate: {
+        [TODAY]: PARTIAL_MISSIONS,
+      },
       completedAt: null,
       completedOnDate: null,
     }),
@@ -156,24 +172,27 @@ export const InProgressPartial: Story = {
   args: {
     data: null,
     date: TODAY,
+    saveStatus: 'saved',
   },
 };
 
 // ── Story: CompletedActive ────────────────────────────────────────────────────
 
 /**
- * CompletedActive — pre-completion state: 7 missions done, 1 pending (M-NAVIGATE).
+ * CompletedActive — pre-completion state: 6 missions done, 1 pending (M-GRATITUDE).
  *
- * status=in_progress so the sticky-note renders with 7 selos + 1 pending seal.
+ * status=in_progress so the sticky-note renders with 6 selos + 1 pending seal.
  * This gives a visually meaningful sticky-note state for review — one mission away
  * from the carimbo cerimonial.
  */
 export const CompletedActive: Story = {
   decorators: [
     withOnboardingState({
-      schemaVersion: 1,
+      schemaVersion: 2,
       status: 'in_progress',
-      missionsCompleted: SEVEN_MISSIONS_DONE,
+      progressByDate: {
+        [TODAY]: SIX_MISSIONS_DONE,
+      },
       completedAt: null,
       completedOnDate: null,
     }),
@@ -181,6 +200,7 @@ export const CompletedActive: Story = {
   args: {
     data: null,
     date: TODAY,
+    saveStatus: 'saved',
   },
 };
 
@@ -191,16 +211,18 @@ export const CompletedActive: Story = {
  *
  * setReadonlyVisible(true) is called in the decorator before mount to simulate
  * the user clicking HelpButton on a completed state. The sticky-note renders in
- * readonly mode with header "Roteiro concluído ✓" and all 8 selos filled (AC-021).
+ * readonly mode with header "Roteiro concluído ✓" and all 7 selos filled (AC-021).
  * Clicking "ocultar roteiro" hides the sticky without mutating persisted state.
  */
 export const CompletedReadonly: Story = {
   decorators: [
     withOnboardingState({
-      schemaVersion: 1,
+      schemaVersion: 2,
       status: 'completed',
-      missionsCompleted: ALL_MISSIONS_DONE,
-      completedAt: '2026-05-17T08:35:00.000Z',
+      progressByDate: {
+        [TODAY]: ALL_MISSIONS_DONE,
+      },
+      completedAt: '2026-05-17T08:30:00.000Z',
       completedOnDate: TODAY,
     }),
     withReadonlyVisible(),
@@ -208,5 +230,43 @@ export const CompletedReadonly: Story = {
   args: {
     data: null,
     date: TODAY,
+    saveStatus: 'saved',
+  },
+};
+
+// ── Story: CompletedDay ───────────────────────────────────────────────────────
+
+/**
+ * CompletedDay — 7/7 missions done + CompletedDayDecor skin (washi + golden seal).
+ *
+ * Pre-seeds localStorage with 7/7 today so both OnboardingQuest (via readonly)
+ * and CompletedDayDecor render together, demonstrating the full completed-day skin.
+ * The sticky-note is hidden (status=completed, no readonly) so CompletedDayDecor
+ * is the visible reward visible on the paper.
+ */
+export const CompletedDay: Story = {
+  decorators: [
+    withOnboardingState({
+      schemaVersion: 2,
+      status: 'completed',
+      progressByDate: {
+        [TODAY]: ALL_MISSIONS_DONE,
+      },
+      completedAt: '2026-05-17T08:30:00.000Z',
+      completedOnDate: TODAY,
+    }),
+    function WithDecor(Story) {
+      return (
+        <>
+          <Story />
+          <CompletedDayDecor date={TODAY} />
+        </>
+      );
+    },
+  ] satisfies Decorator[],
+  args: {
+    data: null,
+    date: TODAY,
+    saveStatus: 'saved',
   },
 };

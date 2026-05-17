@@ -1,10 +1,10 @@
 import { act, renderHook } from '@testing-library/react';
 
 import { CUSTOM_EVENT_NAME, STORAGE_KEY } from '../../lib/constants.js';
-import type { OnboardingState } from '../../types.js';
+import type { MissionId, OnboardingState } from '../../types.js';
 import { useOnboardingState } from '../useOnboardingState.js';
 
-const MISSION_IDS = [
+const MISSION_IDS: readonly MissionId[] = [
   'M-INTENTION',
   'M-MOOD',
   'M-PRIORITY',
@@ -12,28 +12,10 @@ const MISSION_IDS = [
   'M-CHECK',
   'M-WRITE',
   'M-GRATITUDE',
-  'M-NAVIGATE',
-] as const;
+];
 
-function makeAllNull(): Record<string, null> {
-  return Object.fromEntries(MISSION_IDS.map((id) => [id, null]));
-}
-
-function makeAllTimestamped(ts = '2026-05-17T10:00:00.000Z'): Record<string, string> {
-  return Object.fromEntries(MISSION_IDS.map((id) => [id, ts]));
-}
-
-function setStorageState(state: Partial<OnboardingState>) {
-  const full: OnboardingState = {
-    schemaVersion: 1,
-    status: 'pending',
-    missionsCompleted: makeAllNull() as OnboardingState['missionsCompleted'],
-    completedAt: null,
-    completedOnDate: null,
-    ...state,
-  };
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(full));
-}
+const DATE_A = '2026-05-17';
+const DATE_B = '2026-05-18';
 
 beforeEach(() => {
   localStorage.clear();
@@ -45,101 +27,125 @@ describe('useOnboardingState — markMission latching', () => {
     const before = Date.now();
     const { result } = renderHook(() => useOnboardingState());
     act(() => {
-      result.current.markMission('M-MOOD');
+      result.current.markMission('M-MOOD', DATE_A);
     });
-    const ts = result.current.state.missionsCompleted['M-MOOD'];
+    const ts = result.current.state.progressByDate[DATE_A]?.['M-MOOD'];
     expect(ts).not.toBeNull();
     const parsed = new Date(ts!).getTime();
     expect(parsed).toBeGreaterThanOrEqual(before);
     expect(parsed).toBeLessThanOrEqual(Date.now());
   });
 
-  it('markMission latches — second call for same mission preserves first timestamp', () => {
+  it('markMission latches per-date — second call for same (date, mission) preserves first timestamp', () => {
     const { result } = renderHook(() => useOnboardingState());
     act(() => {
-      result.current.markMission('M-INTENTION', '2026-05-17T10:00:00.000Z');
+      result.current.markMission('M-INTENTION', DATE_A, '2026-05-17T10:00:00.000Z');
     });
     act(() => {
-      result.current.markMission('M-INTENTION', '2026-05-17T12:00:00.000Z');
+      result.current.markMission('M-INTENTION', DATE_A, '2026-05-17T12:00:00.000Z');
     });
-    expect(result.current.state.missionsCompleted['M-INTENTION']).toBe('2026-05-17T10:00:00.000Z');
+    expect(result.current.state.progressByDate[DATE_A]?.['M-INTENTION']).toBe(
+      '2026-05-17T10:00:00.000Z',
+    );
+  });
+
+  it('markMission for same mission on different dates stores independently', () => {
+    const { result } = renderHook(() => useOnboardingState());
+    act(() => {
+      result.current.markMission('M-INTENTION', DATE_A, '2026-05-17T10:00:00.000Z');
+      result.current.markMission('M-INTENTION', DATE_B, '2026-05-18T10:00:00.000Z');
+    });
+    expect(result.current.state.progressByDate[DATE_A]?.['M-INTENTION']).toBe(
+      '2026-05-17T10:00:00.000Z',
+    );
+    expect(result.current.state.progressByDate[DATE_B]?.['M-INTENTION']).toBe(
+      '2026-05-18T10:00:00.000Z',
+    );
   });
 
   it('intra-tab mutations are serialized last-write-wins', () => {
     const { result } = renderHook(() => useOnboardingState());
     act(() => {
-      result.current.markMission('M-INTENTION', '2026-05-17T10:00:00.000Z');
-      result.current.markMission('M-MOOD', '2026-05-17T10:01:00.000Z');
+      result.current.markMission('M-INTENTION', DATE_A, '2026-05-17T10:00:00.000Z');
+      result.current.markMission('M-MOOD', DATE_A, '2026-05-17T10:01:00.000Z');
     });
-    expect(result.current.state.missionsCompleted['M-INTENTION']).toBe('2026-05-17T10:00:00.000Z');
-    expect(result.current.state.missionsCompleted['M-MOOD']).toBe('2026-05-17T10:01:00.000Z');
+    expect(result.current.state.progressByDate[DATE_A]?.['M-INTENTION']).toBe(
+      '2026-05-17T10:00:00.000Z',
+    );
+    expect(result.current.state.progressByDate[DATE_A]?.['M-MOOD']).toBe(
+      '2026-05-17T10:01:00.000Z',
+    );
   });
 });
 
-describe('useOnboardingState — markAllMissionsCompleted', () => {
-  it('is a no-op when any mission is null', () => {
-    const { result } = renderHook(() => useOnboardingState());
-    act(() => {
-      result.current.setStatus('in_progress');
-    });
-    const statusBefore = result.current.state.status;
-    act(() => {
-      result.current.markAllMissionsCompleted('2026-05-17');
-    });
-    expect(result.current.state.status).toBe(statusBefore);
-    expect(result.current.state.completedAt).toBeNull();
-    expect(result.current.state.completedOnDate).toBeNull();
-  });
-
-  it('flips status to completed when all 8 missions have timestamps', () => {
-    setStorageState({
-      status: 'in_progress',
-      missionsCompleted: makeAllTimestamped() as OnboardingState['missionsCompleted'],
-    });
-    const { result } = renderHook(() => useOnboardingState());
-    act(() => {
-      result.current.markAllMissionsCompleted('2026-05-17');
-    });
-    expect(result.current.state.status).toBe('completed');
-    expect(result.current.state.completedOnDate).toBe('2026-05-17');
-    expect(result.current.state.completedAt).not.toBeNull();
-  });
-
-  it('flips status when all 8 missions set via markMission calls', () => {
+describe('useOnboardingState — auto-promotion (AC-018)', () => {
+  it('marking all 7 missions for dateA auto-flips status to completed with completedOnDate=dateA', () => {
     const { result } = renderHook(() => useOnboardingState());
     act(() => {
       MISSION_IDS.forEach((id, i) => {
-        result.current.markMission(id, `2026-05-17T10:0${i}:00.000Z`);
+        result.current.markMission(id, DATE_A, `2026-05-17T10:0${i}:00.000Z`);
       });
     });
+    expect(result.current.state.status).toBe('completed');
+    expect(result.current.state.completedOnDate).toBe(DATE_A);
+    expect(result.current.state.completedAt).not.toBeNull();
+  });
+
+  it('after completing dateA, marking all 7 missions for dateB keeps status completed (carimbo one-time)', () => {
+    const { result } = renderHook(() => useOnboardingState());
     act(() => {
-      result.current.markAllMissionsCompleted('2026-05-17');
+      MISSION_IDS.forEach((id, i) => {
+        result.current.markMission(id, DATE_A, `2026-05-17T10:0${i}:00.000Z`);
+      });
     });
     expect(result.current.state.status).toBe('completed');
-    expect(result.current.state.completedOnDate).toBe('2026-05-17');
+    expect(result.current.state.completedOnDate).toBe(DATE_A);
+    act(() => {
+      MISSION_IDS.forEach((id, i) => {
+        result.current.markMission(id, DATE_B, `2026-05-18T10:0${i}:00.000Z`);
+      });
+    });
+    expect(result.current.state.status).toBe('completed');
+    expect(result.current.state.completedOnDate).toBe(DATE_A);
+    expect(result.current.state.progressByDate[DATE_B]).toBeDefined();
+    MISSION_IDS.forEach((id) => {
+      expect(result.current.state.progressByDate[DATE_B]?.[id]).not.toBeNull();
+    });
+  });
+
+  it('marking 6 of 7 missions does NOT auto-promote', () => {
+    const { result } = renderHook(() => useOnboardingState());
+    act(() => {
+      MISSION_IDS.slice(0, 6).forEach((id, i) => {
+        result.current.markMission(id, DATE_A, `2026-05-17T10:0${i}:00.000Z`);
+      });
+    });
+    expect(result.current.state.status).not.toBe('completed');
+    expect(result.current.state.completedOnDate).toBeNull();
   });
 });
 
-describe('useOnboardingState — multi-tab sync', () => {
-  it('syncs state via storage event from another tab', () => {
+describe('useOnboardingState — multi-tab sync (AC-021)', () => {
+  it('syncs v2 state via storage event from another tab', () => {
     const { result } = renderHook(() => useOnboardingState());
     expect(result.current.state.status).toBe('pending');
 
     const newState: OnboardingState = {
-      schemaVersion: 1,
-      status: 'in_progress',
-      missionsCompleted: {
-        'M-INTENTION': '2026-05-17T10:00:00.000Z',
-        'M-MOOD': null,
-        'M-PRIORITY': null,
-        'M-FORMAT': null,
-        'M-CHECK': null,
-        'M-WRITE': null,
-        'M-GRATITUDE': null,
-        'M-NAVIGATE': null,
+      schemaVersion: 2,
+      progressByDate: {
+        [DATE_A]: {
+          'M-INTENTION': '2026-05-17T10:00:00.000Z',
+          'M-MOOD': null,
+          'M-PRIORITY': null,
+          'M-FORMAT': null,
+          'M-CHECK': null,
+          'M-WRITE': null,
+          'M-GRATITUDE': null,
+        },
       },
       completedAt: null,
       completedOnDate: null,
+      status: 'in_progress',
     };
     act(() => {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(newState));
@@ -147,27 +153,20 @@ describe('useOnboardingState — multi-tab sync', () => {
     });
 
     expect(result.current.state.status).toBe('in_progress');
-    expect(result.current.state.missionsCompleted['M-INTENTION']).toBe('2026-05-17T10:00:00.000Z');
+    expect(result.current.state.progressByDate[DATE_A]?.['M-INTENTION']).toBe(
+      '2026-05-17T10:00:00.000Z',
+    );
   });
 
-  it('syncs state via custom event (same-tab)', () => {
+  it('syncs v2 state via custom event (same-tab)', () => {
     const { result } = renderHook(() => useOnboardingState());
 
     const newState: OnboardingState = {
-      schemaVersion: 1,
-      status: 'dismissed',
-      missionsCompleted: {
-        'M-INTENTION': null,
-        'M-MOOD': null,
-        'M-PRIORITY': null,
-        'M-FORMAT': null,
-        'M-CHECK': null,
-        'M-WRITE': null,
-        'M-GRATITUDE': null,
-        'M-NAVIGATE': null,
-      },
+      schemaVersion: 2,
+      progressByDate: {},
       completedAt: null,
       completedOnDate: null,
+      status: 'dismissed',
     };
     act(() => {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(newState));

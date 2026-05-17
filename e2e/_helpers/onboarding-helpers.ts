@@ -30,6 +30,22 @@ export interface PartialOnboardingState {
   completedOnDate?: string | null;
 }
 
+export type MissionIdV2 =
+  | 'M-INTENTION'
+  | 'M-MOOD'
+  | 'M-PRIORITY'
+  | 'M-FORMAT'
+  | 'M-CHECK'
+  | 'M-WRITE'
+  | 'M-GRATITUDE';
+
+export interface PartialOnboardingStateV2 {
+  status?: 'pending' | 'in_progress' | 'completed' | 'dismissed';
+  progressByDate?: Partial<Record<string, Partial<Record<MissionIdV2, string | null>>>>;
+  completedAt?: string | null;
+  completedOnDate?: string | null;
+}
+
 // ── State helpers ─────────────────────────────────────────────────────────────
 
 const ALL_MISSION_IDS: MissionId[] = [
@@ -99,6 +115,56 @@ export async function setOnboardingState(
   await page.reload();
 }
 
+/**
+ * Sets a v2 onboarding state in localStorage and reloads the page.
+ *
+ * Use for FEAT-028 E2E tests that need per-date progress.
+ */
+export async function setOnboardingStateV2(
+  page: Page,
+  partial: PartialOnboardingStateV2,
+): Promise<void> {
+  await page.evaluate(
+    ({ key, partialStr }) => {
+      const store = globalThis.localStorage;
+      const partialState = JSON.parse(partialStr) as Record<string, unknown>;
+      const base = {
+        schemaVersion: 2,
+        status: 'in_progress',
+        progressByDate: {},
+        completedAt: null,
+        completedOnDate: null,
+      };
+      let existing: Record<string, unknown> = {};
+      try {
+        const raw = store.getItem(key);
+        if (raw) existing = JSON.parse(raw) as Record<string, unknown>;
+      } catch {
+        existing = {};
+      }
+      const merged = {
+        ...base,
+        ...existing,
+        ...partialState,
+        progressByDate: {
+          ...(typeof (existing.progressByDate ?? null) === 'object' &&
+          existing.progressByDate != null
+            ? (existing.progressByDate as Record<string, unknown>)
+            : {}),
+          ...(typeof (partialState.progressByDate ?? null) === 'object' &&
+          partialState.progressByDate != null
+            ? (partialState.progressByDate as Record<string, unknown>)
+            : {}),
+        },
+        schemaVersion: 2,
+      };
+      store.setItem(key, JSON.stringify(merged));
+    },
+    { key: STORAGE_KEY, partialStr: JSON.stringify(partial) },
+  );
+  await page.reload();
+}
+
 // ── Locators ──────────────────────────────────────────────────────────────────
 
 /**
@@ -149,4 +215,14 @@ export function getMissionSeal(page: Page, missionId: MissionId): Locator {
  */
 export function getCompletionStamp(page: Page): Locator {
   return page.locator('[data-testid="completion-stamp"], [data-testid="stamp-reduced-wrapper"]');
+}
+
+/**
+ * Returns the Locator for the CompletedDayDecor component.
+ *
+ * Primary: data-testid="washi-left" (rendered by WashiTape inside CompletedDayDecor).
+ * The decor wrapper itself is aria-hidden; using a child testid is more stable.
+ */
+export function getCompletedDayDecor(page: Page): Locator {
+  return page.locator('[data-testid="washi-left"]');
 }

@@ -95,7 +95,7 @@ export function IntentionChip({ value, onChange }: IntentionChipProps) {
   if (isEditing) {
     const placeholder = `ex: ${INTENTION_EXAMPLES[exampleIndex] ?? 'foco'}`;
     return (
-      <div className={styles.wrapper}>
+      <div className={styles.wrapper} data-onboarding-target="intention">
         <label htmlFor={inputId} className={styles.visuallyHidden}>
           Palavra do dia
         </label>
@@ -121,7 +121,7 @@ export function IntentionChip({ value, onChange }: IntentionChipProps) {
     value !== null ? `Palavra do dia: ${value}. Clique para editar.` : 'Adicionar palavra do dia';
 
   return (
-    <div className={styles.wrapper}>
+    <div className={styles.wrapper} data-onboarding-target="intention">
       <button
         type="button"
         className={styles.trigger}

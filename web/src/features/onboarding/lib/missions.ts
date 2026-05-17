@@ -1,4 +1,4 @@
-import type { MissionDef } from '../types.js';
+import type { MissionDef, MissionId } from '../types.js';
 
 export const MISSIONS: readonly MissionDef[] = [
   {
@@ -43,13 +43,9 @@ export const MISSIONS: readonly MissionDef[] = [
     label: 'Registre uma linha de gratidão',
     emoji: '🌙',
   },
-  {
-    id: 'M-NAVIGATE',
-    group: 'Noite',
-    label: 'Vire a página (vá a outro dia)',
-    emoji: '🌙',
-  },
 ];
+
+export const MISSION_IDS: readonly MissionId[] = MISSIONS.map((m) => m.id);
 
 export function getMissionsByGroup(group: 'Manhã' | 'Meio' | 'Noite'): MissionDef[] {
   return MISSIONS.filter((m) => m.group === group);

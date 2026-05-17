@@ -68,7 +68,7 @@ export function MoodPopover({ value, onChange }: MoodPopoverProps) {
       : 'Definir humor do dia';
 
   return (
-    <div className={styles.wrapper}>
+    <div className={styles.wrapper} data-onboarding-target="mood">
       <button
         ref={triggerRef}
         type="button"

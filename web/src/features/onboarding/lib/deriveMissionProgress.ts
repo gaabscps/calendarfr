@@ -2,6 +2,7 @@ import type { DailyPageData } from '@calendarfr/shared';
 
 import type { MissionId } from '../types.js';
 
+import { MISSION_IDS } from './missions.js';
 import { stripHtml } from './stripHtml.js';
 
 const FORMAT_REGEX = /<(b|i|u|s)>/i;
@@ -14,7 +15,7 @@ function buildRichTextAggregate(data: DailyPageData): string {
   return priorities + agenda + notes + gratitude;
 }
 
-function evaluateCondition(id: MissionId, data: DailyPageData, navOccurred: boolean): boolean {
+function evaluateCondition(id: MissionId, data: DailyPageData): boolean {
   switch (id) {
     case 'M-INTENTION':
       return (data.intention?.trim().length ?? 0) > 0;
@@ -30,40 +31,26 @@ function evaluateCondition(id: MissionId, data: DailyPageData, navOccurred: bool
       return data.agenda.some((s) => stripHtml(s.text).trim() !== '') || data.notes.length > 0;
     case 'M-GRATITUDE':
       return data.gratitude.some((g) => stripHtml(g.text).trim().length > 0);
-    case 'M-NAVIGATE':
-      return navOccurred;
   }
 }
 
 export function deriveMissionProgress(
   data: DailyPageData | null,
   persistedHistory: Record<MissionId, string | null>,
-  navOccurred: boolean,
   nowIso: string = new Date().toISOString(),
 ): Record<MissionId, string | null> {
   if (data === null) {
     return persistedHistory;
   }
 
-  const missionIds: MissionId[] = [
-    'M-INTENTION',
-    'M-MOOD',
-    'M-PRIORITY',
-    'M-FORMAT',
-    'M-CHECK',
-    'M-WRITE',
-    'M-GRATITUDE',
-    'M-NAVIGATE',
-  ];
-
   const result = {} as Record<MissionId, string | null>;
 
-  for (const id of missionIds) {
+  for (const id of MISSION_IDS) {
     const existing = persistedHistory[id];
     if (existing !== null) {
       result[id] = existing;
     } else {
-      result[id] = evaluateCondition(id, data, navOccurred) ? nowIso : null;
+      result[id] = evaluateCondition(id, data) ? nowIso : null;
     }
   }
 

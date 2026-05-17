@@ -1,43 +1,28 @@
 import { useSyncExternalStore } from 'react';
 
-import { readStorage, subscribeStorage, writeStorage } from '../lib/storage.js';
+import { MISSION_IDS } from '../lib/missions.js';
+import {
+  buildEmptyMissionRecord,
+  readStorage,
+  subscribeStorage,
+  writeStorage,
+} from '../lib/storage.js';
 import type { MissionId, OnboardingState, OnboardingStatus } from '../types.js';
-
-const MISSION_IDS: readonly MissionId[] = [
-  'M-INTENTION',
-  'M-MOOD',
-  'M-PRIORITY',
-  'M-FORMAT',
-  'M-CHECK',
-  'M-WRITE',
-  'M-GRATITUDE',
-  'M-NAVIGATE',
-];
 
 function getServerSnapshot(): OnboardingState {
   return {
-    schemaVersion: 1,
-    status: 'pending',
-    missionsCompleted: {
-      'M-INTENTION': null,
-      'M-MOOD': null,
-      'M-PRIORITY': null,
-      'M-FORMAT': null,
-      'M-CHECK': null,
-      'M-WRITE': null,
-      'M-GRATITUDE': null,
-      'M-NAVIGATE': null,
-    },
+    schemaVersion: 2,
+    progressByDate: {},
     completedAt: null,
     completedOnDate: null,
+    status: 'pending',
   };
 }
 
 export interface OnboardingActions {
   state: OnboardingState;
   setStatus: (status: OnboardingStatus) => void;
-  markMission: (id: MissionId, completedAt?: string) => void;
-  markAllMissionsCompleted: (date: string) => void;
+  markMission: (id: MissionId, dateIso: string, completedAt?: string) => void;
   dismiss: () => void;
   reopen: () => void;
 }
@@ -50,28 +35,33 @@ export function useOnboardingState(): OnboardingActions {
     writeStorage({ ...current, status });
   }
 
-  function markMission(id: MissionId, completedAt?: string): void {
+  function markMission(id: MissionId, dateIso: string, completedAt?: string): void {
     const current = readStorage();
-    if (current.missionsCompleted[id] !== null) return;
-    const timestamp = completedAt ?? new Date().toISOString();
-    const newStatus: OnboardingStatus =
-      current.status === 'pending' ? 'in_progress' : current.status;
+    const existing = current.progressByDate[dateIso] ?? buildEmptyMissionRecord();
+    if (existing[id] !== null && existing[id] !== undefined) return;
+    const nowIso = new Date().toISOString();
+    const timestamp = completedAt ?? nowIso;
+    const updatedDay = { ...existing, [id]: timestamp };
+    const updatedProgressByDate = { ...current.progressByDate, [dateIso]: updatedDay };
+    let newStatus = current.status;
+    let newCompletedAt = current.completedAt;
+    let newCompletedOnDate = current.completedOnDate;
+    const allDone = MISSION_IDS.every((mid) => updatedDay[mid] !== null);
+    if (
+      allDone &&
+      (current.status === 'pending' || current.status === 'in_progress') &&
+      current.completedOnDate === null
+    ) {
+      newStatus = 'completed';
+      newCompletedAt = nowIso;
+      newCompletedOnDate = dateIso;
+    }
     writeStorage({
       ...current,
+      progressByDate: updatedProgressByDate,
       status: newStatus,
-      missionsCompleted: { ...current.missionsCompleted, [id]: timestamp },
-    });
-  }
-
-  function markAllMissionsCompleted(date: string): void {
-    const current = readStorage();
-    const allDone = MISSION_IDS.every((id) => current.missionsCompleted[id] !== null);
-    if (!allDone) return;
-    writeStorage({
-      ...current,
-      status: 'completed',
-      completedAt: new Date().toISOString(),
-      completedOnDate: date,
+      completedAt: newCompletedAt,
+      completedOnDate: newCompletedOnDate,
     });
   }
 
@@ -87,5 +77,5 @@ export function useOnboardingState(): OnboardingActions {
     }
   }
 
-  return { state, setStatus, markMission, markAllMissionsCompleted, dismiss, reopen };
+  return { state, setStatus, markMission, dismiss, reopen };
 }

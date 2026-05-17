@@ -1,17 +1,12 @@
 import type { MissionId, OnboardingState, OnboardingStatus } from '../types.js';
 
-import { CUSTOM_EVENT_NAME, MISSION_COUNT, STORAGE_KEY } from './constants.js';
-
-const MISSION_IDS: readonly MissionId[] = [
-  'M-INTENTION',
-  'M-MOOD',
-  'M-PRIORITY',
-  'M-FORMAT',
-  'M-CHECK',
-  'M-WRITE',
-  'M-GRATITUDE',
-  'M-NAVIGATE',
-];
+import {
+  CUSTOM_EVENT_NAME,
+  MISSION_COUNT,
+  STORAGE_KEY,
+  STORAGE_SCHEMA_VERSION,
+} from './constants.js';
+import { MISSION_IDS } from './missions.js';
 
 const VALID_STATUSES = new Set<OnboardingStatus>([
   'pending',
@@ -20,35 +15,46 @@ const VALID_STATUSES = new Set<OnboardingStatus>([
   'dismissed',
 ]);
 
+const DATE_REGEX = /^\d{4}-\d{2}-\d{2}$/;
+
+export function buildEmptyMissionRecord(): Record<MissionId, string | null> {
+  return MISSION_IDS.reduce(
+    (acc, id) => ({ ...acc, [id]: null }),
+    {} as Record<MissionId, string | null>,
+  );
+}
+
 function buildInitialState(): OnboardingState {
-  const missionsCompleted = Object.fromEntries(MISSION_IDS.map((id) => [id, null])) as Record<
-    MissionId,
-    string | null
-  >;
   return {
-    schemaVersion: 1,
-    status: 'pending',
-    missionsCompleted,
+    schemaVersion: 2,
+    progressByDate: {},
     completedAt: null,
     completedOnDate: null,
+    status: 'pending',
   };
 }
 
 function isValidState(raw: unknown): raw is OnboardingState {
   if (!raw || typeof raw !== 'object') return false;
   const obj = raw as Record<string, unknown>;
-  if (obj.schemaVersion !== 1) return false;
+  if (obj.schemaVersion !== STORAGE_SCHEMA_VERSION) return false;
   if (!VALID_STATUSES.has(obj.status as OnboardingStatus)) return false;
-  const mc = obj.missionsCompleted;
-  if (!mc || typeof mc !== 'object') return false;
-  const mcRecord = mc as Record<string, unknown>;
-  const keys = Object.keys(mcRecord);
-  if (keys.length !== MISSION_COUNT) return false;
-  return MISSION_IDS.every((id) => {
-    if (!(id in mcRecord)) return false;
-    const val = mcRecord[id];
-    return val === null || (typeof val === 'string' && val.length > 0);
-  });
+  const pbd = obj.progressByDate;
+  if (!pbd || typeof pbd !== 'object' || Array.isArray(pbd)) return false;
+  const pbdRecord = pbd as Record<string, unknown>;
+  for (const [dateKey, dayValue] of Object.entries(pbdRecord)) {
+    if (!DATE_REGEX.test(dateKey)) return false;
+    if (!dayValue || typeof dayValue !== 'object' || Array.isArray(dayValue)) return false;
+    const dayRecord = dayValue as Record<string, unknown>;
+    if (Object.keys(dayRecord).length !== MISSION_COUNT) return false;
+    const allValid = MISSION_IDS.every((id) => {
+      if (!(id in dayRecord)) return false;
+      const val = dayRecord[id];
+      return val === null || (typeof val === 'string' && val.length > 0);
+    });
+    if (!allValid) return false;
+  }
+  return true;
 }
 
 let cachedRaw: string | null = undefined as unknown as string | null;
@@ -65,6 +71,7 @@ export function readStorage(): OnboardingState {
     }
     const parsed: unknown = JSON.parse(raw);
     if (!isValidState(parsed)) {
+      // v1 or invalid schema — silent discard per AC-022/NFR-010
       cachedState = buildInitialState();
       return cachedState;
     }
@@ -81,7 +88,7 @@ export function writeStorage(state: OnboardingState): void {
     globalThis.localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
     window.dispatchEvent(new Event(CUSTOM_EVENT_NAME));
   } catch {
-    /* quota or storage unavailable — degrade silently (AC-026) */
+    /* quota or storage unavailable — degrade silently */
   }
 }
 

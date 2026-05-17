@@ -18,14 +18,17 @@ const GROUPS: ('Manhã' | 'Meio' | 'Noite')[] = ['Manhã', 'Meio', 'Noite'];
 export interface QuestListProps {
   missionsCompleted: Record<MissionId, string | null>;
   ariaLiveMessage?: string;
+  onActionClick?: (missionId: MissionId) => void;
 }
 
 function QuestGroup({
   group,
   missionsCompleted,
+  onActionClick,
 }: {
   group: 'Manhã' | 'Meio' | 'Noite';
   missionsCompleted: Record<MissionId, string | null>;
+  onActionClick?: (missionId: MissionId) => void;
 }) {
   const headerId = useId();
   return (
@@ -36,13 +39,14 @@ function QuestGroup({
           key={mission.id}
           mission={mission}
           completed={missionsCompleted[mission.id] !== null}
+          {...(onActionClick !== undefined ? { onActionClick } : {})}
         />
       ))}
     </div>
   );
 }
 
-export function QuestList({ missionsCompleted, ariaLiveMessage }: QuestListProps) {
+export function QuestList({ missionsCompleted, ariaLiveMessage, onActionClick }: QuestListProps) {
   return (
     <div className={styles.wrapper}>
       <div role="status" aria-live="polite" className={styles.visuallyHidden}>
@@ -51,7 +55,12 @@ export function QuestList({ missionsCompleted, ariaLiveMessage }: QuestListProps
 
       <div role="list" className={styles.list}>
         {GROUPS.map((group) => (
-          <QuestGroup key={group} group={group} missionsCompleted={missionsCompleted} />
+          <QuestGroup
+            key={group}
+            group={group}
+            missionsCompleted={missionsCompleted}
+            {...(onActionClick !== undefined ? { onActionClick } : {})}
+          />
         ))}
       </div>
     </div>

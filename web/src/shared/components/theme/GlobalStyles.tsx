@@ -108,6 +108,51 @@ const css = `
   }
 `;
 
+// Cross-cutting onboarding pulse — box-shadow so :focus-visible outline coexists (NFR-004).
+// Target widgets live in domain features (priorities, agenda, etc) per FEAT-028 AC-024.
+const pulseCSS = `
+  @keyframes onboarding-pulse-keyframes {
+    0%   { box-shadow: 0 0 0 2px transparent; }
+    25%  { box-shadow: 0 0 0 2px var(--color-accent); }
+    75%  { box-shadow: 0 0 0 2px var(--color-accent); }
+    100% { box-shadow: 0 0 0 2px transparent; }
+  }
+  .onboarding-pulse {
+    box-shadow: 0 0 0 2px transparent;
+    animation: onboarding-pulse-keyframes 800ms ease-out forwards;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .onboarding-pulse {
+      animation: none;
+      box-shadow: 0 0 0 2px var(--color-accent);
+    }
+  }
+  .onboarding-pulse-format {
+    position: relative;
+  }
+  .onboarding-pulse-format::after {
+    content: 'Selecione texto e use a barra flutuante';
+    position: absolute;
+    bottom: -28px;
+    left: 0;
+    font-family: var(--font-hand);
+    font-size: var(--font-size-sm);
+    color: var(--color-accent);
+    pointer-events: none;
+    animation: onboarding-pulse-keyframes 800ms ease-out forwards;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .onboarding-pulse-format::after {
+      animation: none;
+    }
+  }
+`;
+
 export function GlobalStyles() {
-  return <style dangerouslySetInnerHTML={{ __html: css }} />;
+  return (
+    <>
+      <style dangerouslySetInnerHTML={{ __html: css }} />
+      <style dangerouslySetInnerHTML={{ __html: pulseCSS }} />
+    </>
+  );
 }

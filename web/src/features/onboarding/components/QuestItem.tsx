@@ -1,8 +1,9 @@
 import { motion, useReducedMotion } from 'framer-motion';
 import { memo } from 'react';
 
-import type { MissionDef } from '../types.js';
+import type { MissionDef, MissionId } from '../types.js';
 
+import { QuestActionButton } from './QuestActionButton.js';
 import styles from './QuestItem.module.css';
 import { QuestSeal } from './QuestSeal.js';
 
@@ -10,9 +11,15 @@ export interface QuestItemProps {
   mission: MissionDef;
   completed: boolean;
   onCompletedAnimation?: () => void;
+  onActionClick?: (missionId: MissionId) => void;
 }
 
-function QuestItemInner({ mission, completed, onCompletedAnimation }: QuestItemProps) {
+function QuestItemInner({
+  mission,
+  completed,
+  onCompletedAnimation,
+  onActionClick,
+}: QuestItemProps) {
   const prefersReducedMotion = useReducedMotion();
   const statusLabel = completed ? 'concluída' : 'pendente';
   const ariaLabel = `${mission.label}, ${statusLabel}`;
@@ -95,6 +102,12 @@ function QuestItemInner({ mission, completed, onCompletedAnimation }: QuestItemP
         )}
       </span>
 
+      <QuestActionButton
+        missionId={mission.id}
+        missionLabel={mission.label}
+        onClick={() => onActionClick?.(mission.id)}
+      />
+
       <QuestSeal
         completed={completed}
         {...(onCompletedAnimation ? { onAnimationComplete: onCompletedAnimation } : {})}
@@ -104,5 +117,9 @@ function QuestItemInner({ mission, completed, onCompletedAnimation }: QuestItemP
 }
 
 export const QuestItem = memo(QuestItemInner, (prev, next) => {
-  return prev.mission.id === next.mission.id && prev.completed === next.completed;
+  return (
+    prev.mission.id === next.mission.id &&
+    prev.completed === next.completed &&
+    prev.onActionClick === next.onActionClick
+  );
 });

@@ -23,8 +23,9 @@
 
 .label {
   display: block;
-  font-family: var(--font-hand, 'Caveat', cursive);
-  font-size: var(--font-size-base, 1rem);
+  font-family: var(--font-body, 'Inter', system-ui, sans-serif);
+  font-size: var(--font-size-sm, 0.875rem);
+  line-height: 1.5;
   color: var(--color-ink, #2c2416);
   white-space: nowrap;
   overflow: hidden;

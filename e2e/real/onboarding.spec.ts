@@ -1,5 +1,5 @@
 /**
- * onboarding.spec.ts — FEAT-027 onboarding "Roteiro do Diário" E2E real tests.
+ * onboarding.spec.ts — FEAT-028 onboarding "Roteiro do Diário" E2E real tests.
  *
  * Prerequisites (start before running):
  *   Terminal 1: npm run dev:web    (Vite on localhost:3000)
@@ -11,8 +11,9 @@
  *
  * Fixture date: 2099-12-31 — far in the future, no collision with real data.
  *
- * AC covered: AC-001, AC-012, AC-017, AC-019, AC-023, AC-029 (multi-tab),
- * plus E2E validation of SC-001 walkthrough.
+ * AC covered: AC-001, AC-007, AC-012, AC-016, AC-017, AC-019, AC-023, AC-024,
+ *             AC-029 (multi-tab), AC-031, plus E2E validation of SC-001 walkthrough.
+ * FEAT-028: 7 missions (M-NAVIGATE removed); per-date progress; CompletedDayDecor.
  */
 
 import { expect, test } from '@playwright/test';
@@ -21,10 +22,11 @@ import { attachConsoleErrorCapture } from '../_helpers/console-errors.js';
 import { waitForCompanion } from '../_helpers/server-ready.js';
 import {
   clearOnboardingState,
+  getCompletedDayDecor,
   getCompletionStamp,
   getMissionSeal,
   getQuestSticky,
-  setOnboardingState,
+  setOnboardingStateV2,
 } from '../_helpers/onboarding-helpers.js';
 
 const TEST_DATE = '2099-12-31';
@@ -68,7 +70,7 @@ test.describe('Onboarding "Roteiro do Diário"', () => {
     const questSticky = getQuestSticky(page);
     await expect(questSticky).toBeVisible({ timeout: 5_000 });
 
-    // All 8 mission seals start in pending state (data-completed="false").
+    // All 7 mission seals start in pending state (data-completed="false"). M-NAVIGATE removed.
     const missionIds = [
       'M-INTENTION',
       'M-MOOD',
@@ -77,7 +79,6 @@ test.describe('Onboarding "Roteiro do Diário"', () => {
       'M-CHECK',
       'M-WRITE',
       'M-GRATITUDE',
-      'M-NAVIGATE',
     ] as const;
 
     for (const id of missionIds) {
@@ -111,19 +112,20 @@ test.describe('Onboarding "Roteiro do Diário"', () => {
 
     const consoleErrors = attachConsoleErrorCapture(page);
 
-    // Pre-seed 3 missions completed via helper.
+    // Pre-seed 3 missions completed via v2 helper (schemaVersion:2, progressByDate).
     await page.goto(BASE_URL);
-    await setOnboardingState(page, {
+    await setOnboardingStateV2(page, {
       status: 'in_progress',
-      missionsCompleted: {
-        'M-INTENTION': '2099-12-31T08:00:00.000Z',
-        'M-MOOD': '2099-12-31T08:05:00.000Z',
-        'M-PRIORITY': '2099-12-31T08:10:00.000Z',
-        'M-FORMAT': null,
-        'M-CHECK': null,
-        'M-WRITE': null,
-        'M-GRATITUDE': null,
-        'M-NAVIGATE': null,
+      progressByDate: {
+        [TEST_DATE]: {
+          'M-INTENTION': '2099-12-31T08:00:00.000Z',
+          'M-MOOD': '2099-12-31T08:05:00.000Z',
+          'M-PRIORITY': '2099-12-31T08:10:00.000Z',
+          'M-FORMAT': null,
+          'M-CHECK': null,
+          'M-WRITE': null,
+          'M-GRATITUDE': null,
+        },
       },
     });
 
@@ -158,19 +160,20 @@ test.describe('Onboarding "Roteiro do Diário"', () => {
 
     const consoleErrors = attachConsoleErrorCapture(page);
 
-    // Pre-seed 1 mission completed, status=dismissed.
+    // Pre-seed 1 mission completed, status=dismissed via v2 helper.
     await page.goto(BASE_URL);
-    await setOnboardingState(page, {
+    await setOnboardingStateV2(page, {
       status: 'dismissed',
-      missionsCompleted: {
-        'M-INTENTION': '2099-12-31T08:00:00.000Z',
-        'M-MOOD': null,
-        'M-PRIORITY': null,
-        'M-FORMAT': null,
-        'M-CHECK': null,
-        'M-WRITE': null,
-        'M-GRATITUDE': null,
-        'M-NAVIGATE': null,
+      progressByDate: {
+        [TEST_DATE]: {
+          'M-INTENTION': '2099-12-31T08:00:00.000Z',
+          'M-MOOD': null,
+          'M-PRIORITY': null,
+          'M-FORMAT': null,
+          'M-CHECK': null,
+          'M-WRITE': null,
+          'M-GRATITUDE': null,
+        },
       },
     });
 
@@ -279,19 +282,20 @@ test.describe('Onboarding "Roteiro do Diário"', () => {
     const consoleErrors = attachConsoleErrorCapture(page);
 
     await page.goto(BASE_URL);
-    await setOnboardingState(page, {
+    await setOnboardingStateV2(page, {
       status: 'completed',
-      missionsCompleted: {
-        'M-INTENTION': '2099-12-31T08:00:00.000Z',
-        'M-MOOD': '2099-12-31T08:05:00.000Z',
-        'M-PRIORITY': '2099-12-31T08:10:00.000Z',
-        'M-FORMAT': '2099-12-31T08:15:00.000Z',
-        'M-CHECK': '2099-12-31T08:20:00.000Z',
-        'M-WRITE': '2099-12-31T08:25:00.000Z',
-        'M-GRATITUDE': '2099-12-31T08:30:00.000Z',
-        'M-NAVIGATE': '2099-12-31T08:35:00.000Z',
+      progressByDate: {
+        [TEST_DATE]: {
+          'M-INTENTION': '2099-12-31T08:00:00.000Z',
+          'M-MOOD': '2099-12-31T08:05:00.000Z',
+          'M-PRIORITY': '2099-12-31T08:10:00.000Z',
+          'M-FORMAT': '2099-12-31T08:15:00.000Z',
+          'M-CHECK': '2099-12-31T08:20:00.000Z',
+          'M-WRITE': '2099-12-31T08:25:00.000Z',
+          'M-GRATITUDE': '2099-12-31T08:30:00.000Z',
+        },
       },
-      completedAt: '2099-12-31T08:35:00.000Z',
+      completedAt: '2099-12-31T08:30:00.000Z',
       completedOnDate: TEST_DATE,
     });
 
@@ -320,19 +324,20 @@ test.describe('Onboarding "Roteiro do Diário"', () => {
     const consoleErrors = attachConsoleErrorCapture(page);
 
     await page.goto(BASE_URL);
-    await setOnboardingState(page, {
+    await setOnboardingStateV2(page, {
       status: 'completed',
-      missionsCompleted: {
-        'M-INTENTION': '2099-12-31T08:00:00.000Z',
-        'M-MOOD': '2099-12-31T08:05:00.000Z',
-        'M-PRIORITY': '2099-12-31T08:10:00.000Z',
-        'M-FORMAT': '2099-12-31T08:15:00.000Z',
-        'M-CHECK': '2099-12-31T08:20:00.000Z',
-        'M-WRITE': '2099-12-31T08:25:00.000Z',
-        'M-GRATITUDE': '2099-12-31T08:30:00.000Z',
-        'M-NAVIGATE': '2099-12-31T08:35:00.000Z',
+      progressByDate: {
+        [TEST_DATE]: {
+          'M-INTENTION': '2099-12-31T08:00:00.000Z',
+          'M-MOOD': '2099-12-31T08:05:00.000Z',
+          'M-PRIORITY': '2099-12-31T08:10:00.000Z',
+          'M-FORMAT': '2099-12-31T08:15:00.000Z',
+          'M-CHECK': '2099-12-31T08:20:00.000Z',
+          'M-WRITE': '2099-12-31T08:25:00.000Z',
+          'M-GRATITUDE': '2099-12-31T08:30:00.000Z',
+        },
       },
-      completedAt: '2099-12-31T08:35:00.000Z',
+      completedAt: '2099-12-31T08:30:00.000Z',
       completedOnDate: TEST_DATE,
     });
 
@@ -346,7 +351,7 @@ test.describe('Onboarding "Roteiro do Diário"', () => {
     await expect(questSticky).toBeVisible({ timeout: 3_000 });
     await expect(questSticky).toContainText('Roteiro concluído ✓');
 
-    // All 8 seals are completed.
+    // All 7 seals are completed (M-NAVIGATE removed in FEAT-028).
     for (const id of [
       'M-INTENTION',
       'M-MOOD',
@@ -355,7 +360,6 @@ test.describe('Onboarding "Roteiro do Diário"', () => {
       'M-CHECK',
       'M-WRITE',
       'M-GRATITUDE',
-      'M-NAVIGATE',
     ] as const) {
       await expect(getMissionSeal(page, id)).toHaveAttribute('data-completed', 'true', {
         timeout: 3_000,
@@ -368,18 +372,20 @@ test.describe('Onboarding "Roteiro do Diário"', () => {
     ).toHaveLength(0);
   });
 
-  // ── SC-001 + AC-012 + AC-017: complete 8-mission live walkthrough ──────────
+  // ── SC-001 + AC-012 + AC-017: complete 7-mission live walkthrough ──────────
 
   /**
-   * Drives through all 8 missions via real user actions and asserts:
+   * Drives through all 7 missions via real user actions and asserts:
    * - each seal appears after its corresponding action
-   * - sticky-note exits after mission 8
+   * - sticky-note exits after mission 7
    * - CompletionStamp appears (AC-017)
+   * - CompletedDayDecor visible (washi + golden seal) after 7/7 (AC-031)
    * - reload: sticky absent, stamp present (AC-012 persistence)
    *
-   * Satisfies SC-001, AC-012, AC-017 live chain.
+   * Satisfies SC-001, AC-012, AC-017, AC-031 live chain.
+   * M-NAVIGATE removed in FEAT-028 (AC-014).
    */
-  test('SC-001 + AC-012 + AC-017: complete 8-mission live walkthrough', async ({ page }) => {
+  test('SC-001 + AC-012 + AC-017: complete 7-mission live walkthrough', async ({ page }) => {
     if (!companionReady) {
       test.skip(true, 'companion not up on localhost:3003');
       return;
@@ -515,23 +521,15 @@ test.describe('Onboarding "Roteiro do Diário"', () => {
       timeout: 5_000,
     });
 
-    // ── M-NAVIGATE: click next-day arrow ────────────────────────────────────
-    const nextButton = page
-      .getByRole('button', { name: /próximo|next|→/i })
-      .or(page.locator('[data-testid="nav-next"]'))
-      .first();
-    await nextButton.click();
-    // After navigation, M-NAVIGATE seal completes.
-    await expect(getMissionSeal(page, 'M-NAVIGATE')).toHaveAttribute('data-completed', 'true', {
-      timeout: 5_000,
-    });
-
-    // ── All 8 done: sticky exits, CompletionStamp appears (AC-012, AC-017) ──
+    // ── All 7 done: sticky exits, CompletionStamp + CompletedDayDecor appear ──
     await expect(questSticky).not.toBeVisible({ timeout: 5_000 });
-    // Navigate back to TEST_DATE to see the CompletionStamp on the correct date.
+    // Navigate back to TEST_DATE to see CompletionStamp + CompletedDayDecor.
     await page.goto(BASE_URL);
     const stamp = getCompletionStamp(page);
     await expect(stamp).toBeVisible({ timeout: 5_000 });
+    // CompletedDayDecor (washi tape + golden seal) must be visible (AC-031).
+    const decor = getCompletedDayDecor(page);
+    await expect(decor).toBeVisible({ timeout: 5_000 });
 
     // ── Reload: sticky still gone, stamp still visible ───────────────────────
     await page.reload();
@@ -541,6 +539,197 @@ test.describe('Onboarding "Roteiro do Diário"', () => {
     expect(
       consoleErrors,
       `walkthrough FAIL: console.error(s):\n${consoleErrors.join('\n')}`,
+    ).toHaveLength(0);
+  });
+
+  // ── FEAT-028: CompletedDayDecor on 7/7 completion (AC-031) ────────────────
+
+  test('AC-031: 7/7 missions → CompletedDayDecor visible (washi + golden seal)', async ({
+    page,
+  }) => {
+    if (!companionReady) {
+      test.skip(true, 'companion not up on localhost:3003');
+      return;
+    }
+
+    const consoleErrors = attachConsoleErrorCapture(page);
+
+    await page.goto(BASE_URL);
+    await setOnboardingStateV2(page, {
+      status: 'completed',
+      progressByDate: {
+        [TEST_DATE]: {
+          'M-INTENTION': '2099-12-31T08:00:00.000Z',
+          'M-MOOD': '2099-12-31T08:05:00.000Z',
+          'M-PRIORITY': '2099-12-31T08:10:00.000Z',
+          'M-FORMAT': '2099-12-31T08:15:00.000Z',
+          'M-CHECK': '2099-12-31T08:20:00.000Z',
+          'M-WRITE': '2099-12-31T08:25:00.000Z',
+          'M-GRATITUDE': '2099-12-31T08:30:00.000Z',
+        },
+      },
+      completedAt: '2099-12-31T08:30:00.000Z',
+      completedOnDate: TEST_DATE,
+    });
+
+    const decor = getCompletedDayDecor(page);
+    await expect(decor).toBeVisible({ timeout: 5_000 });
+    await expect(page.locator('[data-testid="washi-right"]')).toBeVisible({ timeout: 3_000 });
+    await expect(page.locator('[data-testid="golden-seal"]')).toBeVisible({ timeout: 3_000 });
+
+    expect(
+      consoleErrors,
+      `CompletedDayDecor FAIL: console.error(s):\n${consoleErrors.join('\n')}`,
+    ).toHaveLength(0);
+  });
+
+  // ── FEAT-028: per-date progress independence (AC-016/AC-017) ──────────────
+
+  test('AC-016: 3 missions in date=2099-12-31, navigate to 2099-12-30 → 0 marked; back → 3 preserved', async ({
+    page,
+  }) => {
+    if (!companionReady) {
+      test.skip(true, 'companion not up on localhost:3003');
+      return;
+    }
+
+    const consoleErrors = attachConsoleErrorCapture(page);
+    const DATE_ALT = '2099-12-30';
+
+    await page.goto(BASE_URL);
+    await setOnboardingStateV2(page, {
+      status: 'in_progress',
+      progressByDate: {
+        [TEST_DATE]: {
+          'M-INTENTION': '2099-12-31T08:00:00.000Z',
+          'M-MOOD': '2099-12-31T08:05:00.000Z',
+          'M-PRIORITY': '2099-12-31T08:10:00.000Z',
+          'M-FORMAT': null,
+          'M-CHECK': null,
+          'M-WRITE': null,
+          'M-GRATITUDE': null,
+        },
+        [DATE_ALT]: {
+          'M-INTENTION': null,
+          'M-MOOD': null,
+          'M-PRIORITY': null,
+          'M-FORMAT': null,
+          'M-CHECK': null,
+          'M-WRITE': null,
+          'M-GRATITUDE': null,
+        },
+      },
+    });
+
+    const questSticky = getQuestSticky(page);
+    await expect(questSticky).toBeVisible({ timeout: 5_000 });
+    // 3 sealed in TEST_DATE
+    await expect(getMissionSeal(page, 'M-INTENTION')).toHaveAttribute('data-completed', 'true', {
+      timeout: 3_000,
+    });
+
+    // Navigate to DATE_ALT
+    await page.goto(`/?date=${DATE_ALT}`);
+    await expect(questSticky).toBeVisible({ timeout: 5_000 });
+    await expect(getMissionSeal(page, 'M-INTENTION')).toHaveAttribute('data-completed', 'false', {
+      timeout: 3_000,
+    });
+
+    // Navigate back to TEST_DATE — 3 preserved
+    await page.goto(BASE_URL);
+    await expect(questSticky).toBeVisible({ timeout: 5_000 });
+    await expect(getMissionSeal(page, 'M-INTENTION')).toHaveAttribute('data-completed', 'true', {
+      timeout: 3_000,
+    });
+
+    expect(
+      consoleErrors,
+      `per-date FAIL: console.error(s):\n${consoleErrors.join('\n')}`,
+    ).toHaveLength(0);
+  });
+
+  // ── FEAT-028: autosave gate — mission marks after save (AC-007) ───────────
+
+  test('AC-007: typing intention without waiting → mission not marked; wait 2s → marks', async ({
+    page,
+  }) => {
+    if (!companionReady) {
+      test.skip(true, 'companion not up on localhost:3003');
+      return;
+    }
+
+    const consoleErrors = attachConsoleErrorCapture(page);
+
+    await freshPage(page);
+
+    const questSticky = getQuestSticky(page);
+    await expect(questSticky).toBeVisible({ timeout: 5_000 });
+
+    const saveIndicator = page
+      .getByRole('region', { name: /Cabeçalho do dia/i })
+      .getByRole('status');
+    await expect(saveIndicator).toHaveText('Salvo', { timeout: 8_000 });
+
+    // Type into intention — do NOT wait for save
+    const intentionEditor = page.getByPlaceholder(/Defina sua intenção/i);
+    await intentionEditor.click();
+    await intentionEditor.fill('Testando autosave gate');
+
+    // Immediately after typing, M-INTENTION should still be pending
+    await expect(getMissionSeal(page, 'M-INTENTION')).toHaveAttribute('data-completed', 'false', {
+      timeout: 1_000,
+    });
+
+    // Wait for autosave to commit
+    await expect(saveIndicator).toHaveText('Salvo', { timeout: 8_000 });
+
+    // Now M-INTENTION should be marked
+    await expect(getMissionSeal(page, 'M-INTENTION')).toHaveAttribute('data-completed', 'true', {
+      timeout: 5_000,
+    });
+
+    expect(
+      consoleErrors,
+      `autosave gate FAIL: console.error(s):\n${consoleErrors.join('\n')}`,
+    ).toHaveLength(0);
+  });
+
+  // ── FEAT-028: QuestActionButton scrolls + focuses target (AC-024) ──────────
+
+  test('AC-024: click QuestActionButton M-INTENTION → page scrolls + focuses intention input', async ({
+    page,
+  }) => {
+    if (!companionReady) {
+      test.skip(true, 'companion not up on localhost:3003');
+      return;
+    }
+
+    const consoleErrors = attachConsoleErrorCapture(page);
+
+    await freshPage(page);
+
+    const questSticky = getQuestSticky(page);
+    await expect(questSticky).toBeVisible({ timeout: 5_000 });
+
+    const saveIndicator = page
+      .getByRole('region', { name: /Cabeçalho do dia/i })
+      .getByRole('status');
+    await expect(saveIndicator).toHaveText('Salvo', { timeout: 8_000 });
+
+    // Click the QuestActionButton for M-INTENTION
+    const actionBtn = page.getByRole('button', {
+      name: /ir para missão: defina a intenção do dia/i,
+    });
+    await expect(actionBtn).toBeVisible({ timeout: 3_000 });
+    await actionBtn.click();
+
+    // The intention input should receive focus (or at least be in viewport)
+    const intentionInput = page.getByPlaceholder(/Defina sua intenção/i);
+    await expect(intentionInput).toBeInViewport({ timeout: 3_000 });
+
+    expect(
+      consoleErrors,
+      `QuestActionButton FAIL: console.error(s):\n${consoleErrors.join('\n')}`,
     ).toHaveLength(0);
   });
 
