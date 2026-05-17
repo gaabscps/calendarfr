@@ -1,0 +1,54 @@
+.slot {
+  position: absolute;
+  top: var(--spacing-lg, 24px);
+  right: var(--spacing-lg, 24px);
+  /* z-index below the sticky so when the user opens it the sticky covers the seal. */
+  z-index: 150;
+}
+
+.sealButton {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--color-ink-muted, #9a8a72);
+  /* Rotação imita carimbo aplicado a mão; drop-shadow dá profundidade contra o papel. */
+  transform: rotate(-8deg);
+  transition:
+    transform 0.18s ease,
+    color 0.18s ease,
+    filter 0.18s ease;
+  filter: drop-shadow(0 2px 3px rgba(60, 40, 20, 0.18));
+}
+
+.sealButton:hover,
+.sealButton:focus-visible {
+  transform: rotate(-6deg) scale(1.04);
+  color: var(--color-ink-secondary, #5a4a32);
+  filter: drop-shadow(0 3px 5px rgba(60, 40, 20, 0.28));
+}
+
+.sealButton:focus-visible {
+  outline: var(--focus-ring, 2px solid var(--color-accent, #c0392b));
+  outline-offset: 4px;
+  border-radius: 50%;
+}
+
+.sealButton:active {
+  transform: rotate(-8deg) scale(0.96);
+}
+
+.sealWrap {
+  display: inline-flex;
+  transform-origin: center;
+}
+
+.sparkleAnchor {
+  position: absolute;
+  inset: 50% auto auto 50%;
+  pointer-events: none;
+}

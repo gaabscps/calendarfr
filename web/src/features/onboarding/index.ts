@@ -6,11 +6,9 @@ export {
   MISSION_COUNT,
   CUSTOM_EVENT_NAME,
 } from './lib/constants.js';
-export { HelpButton } from './components/HelpButton.js';
-export { HelpButtonContainer } from './components/HelpButtonContainer.js';
 export { CompletionStamp } from './components/CompletionStamp.js';
 export { CompletionStampContainer } from './components/CompletionStampContainer.js';
 export { OnboardingQuest } from './components/OnboardingQuest.js';
 export { useOnboardingState } from './hooks/useOnboardingState.js';
 export { setReadonlyVisible } from './lib/readonlyController.js';
-export { CompletedDayDecor } from './components/CompletedDayDecor.js';
+export { MissionSealSlot } from './components/MissionSealSlot.js';

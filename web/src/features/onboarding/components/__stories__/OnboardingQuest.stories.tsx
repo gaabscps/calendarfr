@@ -17,7 +17,7 @@ import { useEffect } from 'react';
 import { CUSTOM_EVENT_NAME, STORAGE_KEY } from '../../lib/constants.js';
 import { setReadonlyVisible } from '../../lib/readonlyController.js';
 import type { MissionId, OnboardingState } from '../../types.js';
-import { CompletedDayDecor } from '../CompletedDayDecor.js';
+import { MissionSealSlot } from '../MissionSealSlot.js';
 import { OnboardingQuest } from '../OnboardingQuest.js';
 
 // ── Fixture data ─────────────────────────────────────────────────────────────
@@ -259,7 +259,7 @@ export const CompletedDay: Story = {
       return (
         <>
           <Story />
-          <CompletedDayDecor date={TODAY} />
+          <MissionSealSlot date={TODAY} />
         </>
       );
     },

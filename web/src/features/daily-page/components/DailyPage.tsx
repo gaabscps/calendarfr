@@ -26,12 +26,7 @@ import { Gratitude } from '@/features/gratitude';
 import { IntentionChip } from '@/features/intention';
 import { MoodPopover } from '@/features/mood';
 import { Notes } from '@/features/notes';
-import {
-  CompletedDayDecor,
-  CompletionStampContainer,
-  HelpButtonContainer,
-  OnboardingQuest,
-} from '@/features/onboarding';
+import { CompletionStampContainer, MissionSealSlot, OnboardingQuest } from '@/features/onboarding';
 import { Priorities } from '@/features/priorities';
 import { StickyNote } from '@/features/sticky-note';
 import { UndoQueueProvider, UndoToastHost, useUndoQueueContext } from '@/features/undo-delete';
@@ -160,7 +155,6 @@ function DailyPageInner({ initialDate }: DailyPageProps = {}) {
           intentionSlot={
             data !== null ? <IntentionChip value={data.intention} onChange={setIntention} /> : null
           }
-          helpSlot={<HelpButtonContainer />}
         />
 
         {/* AC-034–AC-037: DayLayer manages animation layers.
@@ -219,7 +213,7 @@ function DailyPageInner({ initialDate }: DailyPageProps = {}) {
             por causa do drag persistido. */}
         <StickyNote />
         <OnboardingQuest data={data} date={date} saveStatus={saveStatus} />
-        <CompletedDayDecor date={date} data={data} />
+        <MissionSealSlot date={date} data={data} />
       </PaperSheet>
     </>
   );
