@@ -1,4 +1,4 @@
-import { motion, useReducedMotion } from 'framer-motion';
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { memo } from 'react';
 
 import type { MissionDef, MissionId } from '../types.js';
@@ -74,32 +74,37 @@ function QuestItemInner({
 
       <span className={styles.labelWrapper}>
         <span className={styles.label}>{mission.label}</span>
-        {completed && (
-          <svg
-            className={styles.strikethrough}
-            aria-hidden="true"
-            width="100%"
-            height="2"
-            preserveAspectRatio="none"
-          >
-            <motion.line
-              x1="0"
-              y1="50%"
-              x2="100%"
-              y2="50%"
-              stroke="var(--color-accent, #c0392b)"
-              strokeWidth="1.5"
-              strokeOpacity="0.7"
-              strokeLinecap="round"
-              data-testid="strike-line"
-              initial={{ pathLength: 0 }}
-              animate={{ pathLength: 1 }}
-              transition={
-                prefersReducedMotion ? { duration: 0 } : { duration: 0.32, ease: 'easeOut' }
-              }
-            />
-          </svg>
-        )}
+        <AnimatePresence>
+          {completed && (
+            <motion.svg
+              className={styles.strikethrough}
+              aria-hidden="true"
+              width="100%"
+              height="2"
+              viewBox="0 0 100 2"
+              preserveAspectRatio="none"
+              initial={false}
+            >
+              <motion.path
+                d="M 2 1 Q 25 0.2, 50 1 T 98 0.8"
+                stroke="var(--color-accent, #c0392b)"
+                strokeWidth="1.5"
+                strokeOpacity="0.7"
+                strokeLinecap="round"
+                fill="none"
+                data-testid="strike-line"
+                initial={{ pathLength: 0 }}
+                animate={{ pathLength: 1 }}
+                exit={{ pathLength: 0 }}
+                transition={
+                  prefersReducedMotion
+                    ? { duration: 0 }
+                    : { duration: 0.45, ease: 'easeOut', delay: 0.1 }
+                }
+              />
+            </motion.svg>
+          )}
+        </AnimatePresence>
       </span>
 
       <QuestActionButton

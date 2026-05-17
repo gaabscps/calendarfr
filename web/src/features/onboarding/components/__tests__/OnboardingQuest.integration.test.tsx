@@ -36,6 +36,7 @@ jest.mock('framer-motion', () => {
       svg: passthrough('svg'),
       span: passthrough('span'),
       line: passthrough('line'),
+      path: passthrough('path'),
       p: passthrough('p'),
     },
     useReducedMotion: () => false,

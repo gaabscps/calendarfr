@@ -79,3 +79,23 @@ describe('QuestItem', () => {
     }
   });
 });
+
+describe('QuestItem strikethrough (FEAT-029)', () => {
+  it('renders no strike path when pending', () => {
+    render(<QuestItem mission={mission} completed={false} />);
+    expect(screen.queryByTestId('strike-line')).toBeNull();
+  });
+
+  it('renders a wavy Bezier path (with Q or T command) when completed', () => {
+    render(<QuestItem mission={mission} completed={true} />);
+    const path = screen.getByTestId('strike-line');
+    const d = path.getAttribute('d') ?? '';
+    expect(d).toMatch(/[QT]/);
+  });
+
+  it('uses a path element (not a straight line)', () => {
+    render(<QuestItem mission={mission} completed={true} />);
+    const el = screen.getByTestId('strike-line');
+    expect(el.tagName.toLowerCase()).toBe('path');
+  });
+});
