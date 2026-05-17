@@ -1,8 +1,8 @@
-# ui-v1-consistente — redesign de interface e UX do planner — DISC-001
+# Auth + Supabase backend migration — FEAT-026
 
-> Feature: ui-v1-consistente — redesign de interface e UX do planner
-> Task ID: DISC-001
-> Phase: done
+> Feature: Auth + Supabase backend migration
+> Task ID: FEAT-026
+> Phase: implementation
 > Generated at: 2026-05-17T06:06:21.064Z
 
 ## Insights

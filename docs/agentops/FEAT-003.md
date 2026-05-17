@@ -5,7 +5,7 @@
 > Feature: Quality baseline + cost telemetry + AgentOps dashboard enrichment
 > Task ID: FEAT-003
 > Phase: done
-> Generated at: 2026-05-14T06:01:46.252Z
+> Generated at: 2026-05-17T06:06:21.064Z
 
 ## Insights
 
@@ -28,7 +28,7 @@ _70/30 input/output split assumed; harness reports only total_tokens; 6 of 10 di
 
 ## Repo health snapshot
 
-_Measured at: 2026-05-14_
+_Measured at: 2026-05-17_
 
 | Métrica        | Valor | Threshold | Status |
 | -------------- | ----- | --------- | ------ |

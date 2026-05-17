@@ -3,7 +3,7 @@
 > Feature: daily-page — orquestrador do dia (composição, navegação, autosave)
 > Task ID: FEAT-012
 > Phase: done
-> Generated at: 2026-05-14T06:01:46.252Z
+> Generated at: 2026-05-17T06:06:21.064Z
 
 ## Insights
 
@@ -26,7 +26,7 @@ _70/30 input/output split assumed; harness reports only total_tokens; 38 of 38 d
 
 ## Repo health snapshot
 
-_Measured at: 2026-05-14_
+_Measured at: 2026-05-17_
 
 | Métrica        | Valor | Threshold | Status |
 | -------------- | ----- | --------- | ------ |

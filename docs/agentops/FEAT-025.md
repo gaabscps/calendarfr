@@ -3,31 +3,31 @@
 > Feature: Folded gratitude — private paper that unfolds for writing
 > Task ID: FEAT-025
 > Phase: implementation
-> Generated at: 2026-05-16T09:00:52.104Z
+> Generated at: 2026-05-17T06:06:21.064Z
 
 ## Insights
 
 - ℹ Escalation rate 0.0% is below the Galileo healthy band (< 10%) — low escalation, agents resolving autonomously. _(Galileo healthy band)_
 - ℹ Dev task success rate 85.7% is at or above 80% — healthy first-try rate.
-- ⚠ Loop rate 100.0% exceeds 50% — more than half of dispatches needed loops. Consider strengthening the preflight contract.
+- ⚠ Loop rate 76.7% exceeds 50% — more than half of dispatches needed loops. Consider strengthening the preflight contract.
 
 ## Cost breakdown
 
-_70/30 input/output split assumed; harness reports only total_tokens; 5 of 23 dispatches included in cost_
+_70/30 input/output split assumed; harness reports only total_tokens; 11 of 30 dispatches included in cost_
 
-- Total tokens: 62187238
-  - Estimated input (70%): 43531067
-  - Estimated output (30%): 18656171
-- Estimated cost USD total: $67.3901
-- Cost per AC: $6.1264
-- Cost per dispatch (avg): $2.9300
-- Wall-clock duration: n/a
-- Tool uses total: 366
-- Coverage: 5 of 23 dispatches included in cost calculation
+- Total tokens: 231935272
+  - Estimated input (70%): 162354690
+  - Estimated output (30%): 69580582
+- Estimated cost USD total: $222.5277
+- Cost per AC: $20.2298
+- Cost per dispatch (avg): $7.4176
+- Wall-clock duration: 651m 41s
+- Tool uses total: 929
+- Coverage: 11 of 30 dispatches included in cost calculation
 
 ## Repo health snapshot
 
-_Measured at: 2026-05-16_
+_Measured at: 2026-05-17_
 
 | Métrica        | Valor | Threshold | Status |
 | -------------- | ----- | --------- | ------ |
@@ -40,6 +40,7 @@ _Measured at: 2026-05-16_
 
 | ID           | Role               | Status       | Loop | Tokens   | $        | Duration | PM note                                                                          |
 | ------------ | ------------------ | ------------ | ---- | -------- | -------- | -------- | -------------------------------------------------------------------------------- |
+| pm-orches... | pm-orchestrator    | done         | —    | 24432278 | $24.6527 | 109m 9s  | PM/orchestrator session (Stop hook): 174 turns                                   |
 | d-T-001-d... | dev                | done         | 1    | 7306670  | $8.2966  | 0ms      | —                                                                                |
 | d-T-001-c... | code-reviewer      | done         | 1    | —        | —        | 1m 30s   | —                                                                                |
 | d-T-001-l... | logic-reviewer     | needs_review | 1    | 8449784  | $9.2444  | 0ms      | Loop 1 restart — 4 findings                                                      |
@@ -63,6 +64,12 @@ _Measured at: 2026-05-16_
 | d-T-002-l... | logic-reviewer     | done         | 3    | —        | —        | 1m 30s   | Both L2 criticals closed — onAnimationComplete is sole non-reduced-motion tri... |
 | d-T-002-qa   | qa                 | done         | 1    | —        | —        | 3m 30s   | All 4 ACs validated; 60 gratitude + 1555 full suite passing                      |
 | d-audit-1    | audit-agent        | blocked      | 1    | —        | —        | 1m       | First audit pass flagged manifest bookkeeping gaps; orchestrator patching        |
+| pm-orches... | pm-orchestrator    | done         | —    | 98834726 | $78.8261 | 186m 55s | PM/orchestrator session (Stop hook): 382 turns                                   |
+| pm-orches... | pm-orchestrator    | done         | —    | 0        | —        | 0ms      | PM/orchestrator session (Stop hook): 1 turns                                     |
+| pm-orches... | pm-orchestrator    | done         | —    | 7909734  | $13.8580 | 263m 45s | PM/orchestrator session (Stop hook): 70 turns                                    |
+| pm-orches... | pm-orchestrator    | done         | —    | 2808689  | $2.3061  | 7m 40s   | PM/orchestrator session (Stop hook): 45 turns                                    |
+| pm-orches... | pm-orchestrator    | done         | —    | 34939931 | $33.6180 | 32m 23s  | PM/orchestrator session (Stop hook): 261 turns                                   |
+| pm-orches... | pm-orchestrator    | done         | —    | 822676   | $1.8767  | 51m 48s  | PM/orchestrator session (Stop hook): 16 turns                                    |
 
 ## Per-AC closure detail
 
@@ -104,9 +111,9 @@ _Measured at: 2026-05-16_
 | code-reviewer      | 6          |
 | dev                | 7          |
 | logic-reviewer     | 6          |
-| pm-orchestrator    | 0          |
+| pm-orchestrator    | 7          |
 | qa                 | 2          |
-| **Total**          | 23         |
+| **Total**          | 30         |
 
 ## Task success rate
 
@@ -117,12 +124,12 @@ _Measured at: 2026-05-16_
 | code-reviewer      | 83.3%             |
 | dev                | 85.7%             |
 | logic-reviewer     | 33.3%             |
-| pm-orchestrator    | n/a               |
+| pm-orchestrator    | 100.0%            |
 | qa                 | 100.0%            |
 
 ## Loop rate
 
-Loop rate: 100.0%
+Loop rate: 76.7%
 
 ## Escalation rate
 
@@ -142,6 +149,7 @@ Total: 11 | Pass: 0 | Partial: 0 | Fail: 0 | Missing: 11
 
 ## PM notes log
 
+- [2026-05-16 07:11 pm-orchestrator] PM/orchestrator session (Stop hook): 174 turns
 - [2026-05-16 07:32 logic-reviewer] Loop 1 restart — 4 findings
 - [2026-05-16 07:34 dev] Loop 2 — addresses 4 LR findings
 - [2026-05-16 07:40 logic-reviewer] Loop 2 restart — 1 residual finding
@@ -160,9 +168,13 @@ Total: 11 | Pass: 0 | Partial: 0 | Fail: 0 | Missing: 11
 - [2026-05-16 08:51 logic-reviewer] Both L2 criticals closed — onAnimationComplete is sole non-reduced-motion trigger
 - [2026-05-16 08:53 qa] All 4 ACs validated; 60 gratitude + 1555 full suite passing
 - [2026-05-16 08:57 audit-agent] First audit pass flagged manifest bookkeeping gaps; orchestrator patching
+- [2026-05-16 16:25 pm-orchestrator] PM/orchestrator session (Stop hook): 382 turns
+- [2026-05-16 17:21 pm-orchestrator] PM/orchestrator session (Stop hook): 1 turns
+- [2026-05-16 19:30 pm-orchestrator] PM/orchestrator session (Stop hook): 70 turns
+- [2026-05-16 23:54 pm-orchestrator] PM/orchestrator session (Stop hook): 45 turns
+- [2026-05-17 00:03 pm-orchestrator] PM/orchestrator session (Stop hook): 261 turns
+- [2026-05-17 00:44 pm-orchestrator] PM/orchestrator session (Stop hook): 16 turns
 
 ## Token cost
 
-Token cost not available — using dispatch count as cost proxy: 23 dispatches
-
-⚠ pm-orchestrator Stop hook did not run — re-run agentops install-hooks (worktree-aware)
+Token cost not available — using dispatch count as cost proxy: 30 dispatches

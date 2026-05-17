@@ -3,7 +3,7 @@
 > Feature: undo-delete — confirmação anti-misclick para exclusões em Priorities, Notes e Sticky Note
 > Task ID: FEAT-022
 > Phase: done
-> Generated at: 2026-05-14T06:01:46.252Z
+> Generated at: 2026-05-17T06:06:21.064Z
 
 ## Insights
 
@@ -27,7 +27,7 @@ _70/30 input/output split assumed; harness reports only total_tokens; 22 of 23 d
 
 ## Repo health snapshot
 
-_Measured at: 2026-05-14_
+_Measured at: 2026-05-17_
 
 | Métrica        | Valor | Threshold | Status |
 | -------------- | ----- | --------- | ------ |

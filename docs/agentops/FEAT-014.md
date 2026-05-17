@@ -3,7 +3,7 @@
 > Feature: ux-mvp-polish — alinhamento de linhas, notas multi-linha e polimento visual
 > Task ID: FEAT-014
 > Phase: done
-> Generated at: 2026-05-14T06:01:46.252Z
+> Generated at: 2026-05-17T06:06:21.064Z
 
 ## Insights
 
@@ -27,7 +27,7 @@ _no usage data available — dispatch count fallback: 68 dispatches_
 
 ## Repo health snapshot
 
-_Measured at: 2026-05-14_
+_Measured at: 2026-05-17_
 
 | Métrica        | Valor | Threshold | Status |
 | -------------- | ----- | --------- | ------ |

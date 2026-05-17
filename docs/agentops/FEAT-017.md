@@ -3,7 +3,7 @@
 > Feature: baseline-grid-alignment — rítmica vertical 24px como contrato do design system
 > Task ID: FEAT-017
 > Phase: escalated
-> Generated at: 2026-05-14T06:01:46.252Z
+> Generated at: 2026-05-17T06:06:21.064Z
 
 ## Insights
 
@@ -11,21 +11,21 @@
 
 ## Cost breakdown
 
-_70/30 input/output split assumed; harness reports only total_tokens; 16 of 17 dispatches included in cost_
+_70/30 input/output split assumed; harness reports only total_tokens; 17 of 18 dispatches included in cost_
 
-- Total tokens: 270892876
-  - Estimated input (70%): 189625013
-  - Estimated output (30%): 81267863
-- Estimated cost USD total: $189.7745
-- Cost per AC: $3.6495
-- Cost per dispatch (avg): $11.1632
-- Wall-clock duration: 1288m 9s
-- Tool uses total: 1048
-- Coverage: 16 of 17 dispatches included in cost calculation
+- Total tokens: 271102340
+  - Estimated input (70%): 189771638
+  - Estimated output (30%): 81330702
+- Estimated cost USD total: $189.9252
+- Cost per AC: $3.6524
+- Cost per dispatch (avg): $10.5514
+- Wall-clock duration: 1288m 20s
+- Tool uses total: 1049
+- Coverage: 17 of 18 dispatches included in cost calculation
 
 ## Repo health snapshot
 
-_Measured at: 2026-05-14_
+_Measured at: 2026-05-17_
 
 | Métrica        | Valor | Threshold | Status |
 | -------------- | ----- | --------- | ------ |
@@ -55,6 +55,7 @@ _Measured at: 2026-05-14_
 | pm-orches... | pm-orchestrator | done    | —    | 951863    | $1.3884  | 2m 53s   | PM/orchestrator session (Stop hook): 21 turns                                    |
 | pm-orches... | pm-orchestrator | done    | —    | 2441149   | $2.4291  | 17m 9s   | PM/orchestrator session (Stop hook): 46 turns                                    |
 | pm-orches... | pm-orchestrator | done    | —    | 0         | —        | 0ms      | PM/orchestrator session (Stop hook): 1 turns                                     |
+| pm-orches... | pm-orchestrator | done    | —    | 209464    | $0.1508  | 12s      | PM/orchestrator session (Stop hook): 4 turns                                     |
 
 ## Per-AC closure detail
 
@@ -137,9 +138,9 @@ _Measured at: 2026-05-14_
 | code-reviewer      | 0          |
 | dev                | 0          |
 | logic-reviewer     | 0          |
-| pm-orchestrator    | 16         |
+| pm-orchestrator    | 17         |
 | qa                 | 0          |
-| **Total**          | 17         |
+| **Total**          | 18         |
 
 ## Task success rate
 
@@ -155,7 +156,7 @@ _Measured at: 2026-05-14_
 
 ## Loop rate
 
-Loop rate: 5.9%
+Loop rate: 5.6%
 
 ## Escalation rate
 
@@ -184,7 +185,8 @@ Total: 52 | Pass: 5 | Partial: 0 | Fail: 0 | Missing: 47
 - [2026-05-14 03:18 pm-orchestrator] PM/orchestrator session (Stop hook): 21 turns
 - [2026-05-14 03:26 pm-orchestrator] PM/orchestrator session (Stop hook): 46 turns
 - [2026-05-14 03:31 pm-orchestrator] PM/orchestrator session (Stop hook): 1 turns
+- [2026-05-16 06:03 pm-orchestrator] PM/orchestrator session (Stop hook): 4 turns
 
 ## Token cost
 
-Token cost not available — using dispatch count as cost proxy: 17 dispatches
+Token cost not available — using dispatch count as cost proxy: 18 dispatches
