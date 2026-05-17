@@ -60,15 +60,31 @@ export function createSoundController(): SoundController {
 
   return {
     play(id: SoundId): void {
-      if (muted) return;
+      if (muted) {
+        if (process.env.NODE_ENV !== 'production') {
+          // eslint-disable-next-line no-console
+          console.debug(`[sound] play('${id}') skipped — controller is muted`);
+        }
+        return;
+      }
       const base = getOrCreateBase(id);
       const clone = base.cloneNode(true) as HTMLAudioElement;
       clone.volume = getVolume();
       const result: unknown = clone.play();
       if (result instanceof Promise) {
-        result.catch(() => {
-          /* autoplay rejection — silent */
-        });
+        result
+          .then(() => {
+            if (process.env.NODE_ENV !== 'production') {
+              // eslint-disable-next-line no-console
+              console.debug(`[sound] play('${id}') ✓ vol=${clone.volume.toFixed(2)}`);
+            }
+          })
+          .catch((err: unknown) => {
+            if (process.env.NODE_ENV !== 'production') {
+              // eslint-disable-next-line no-console
+              console.debug(`[sound] play('${id}') ✗`, err);
+            }
+          });
       }
     },
     isMuted: () => muted,

@@ -2,7 +2,7 @@ export type SoundId = 'mission-complete' | 'day-complete';
 
 // Cache-buster bumped whenever the underlying ogg assets are regenerated, so
 // browsers don't keep serving the prior (silent) build from HTTP cache.
-const ASSET_VERSION = 3;
+const ASSET_VERSION = 4;
 
 export const SOUND_URLS: Record<SoundId, string> = {
   'mission-complete': `/sounds/mission-complete.ogg?v=${ASSET_VERSION}`,
