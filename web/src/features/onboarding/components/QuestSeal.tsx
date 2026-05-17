@@ -1,5 +1,10 @@
-import { motion, useReducedMotion } from 'framer-motion';
-import { memo, useId, useMemo, useRef } from 'react';
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
+import { memo, useEffect, useMemo, useRef, useState } from 'react';
+
+import { SparkleBurst } from '@/shared/components/SparkleBurst';
+import { useSoundController } from '@/shared/sound/useSoundController';
+
+import { QuestSealSticker } from '../assets/QuestSealSticker.js';
 
 import styles from './QuestSeal.module.css';
 
@@ -10,90 +15,45 @@ export interface QuestSealProps {
 
 function QuestSealInner({ completed, onAnimationComplete }: QuestSealProps) {
   const prefersReducedMotion = useReducedMotion();
-  const uid = useId();
-
+  const { play } = useSoundController();
   const randomRotate = useMemo(() => Math.random() * 10 - 5, []);
-
-  // Track whether this seal was already completed when it mounted.
-  // Only missions that transition pending→completed during the current lifecycle animate (AC-018).
   const wasCompletedOnMount = useRef(completed);
+  const previousCompletedRef = useRef(completed);
+  const [burstKey, setBurstKey] = useState(0);
 
-  const filterId = `seal-filter-${uid}`;
-  const strokeColor = completed
-    ? 'var(--color-accent, #c0392b)'
-    : 'var(--color-ink-muted, #9a8a72)';
-  const fillColor = completed ? 'var(--color-accent, #c0392b)' : 'none';
-  const strokeDasharray = completed ? 'none' : '3 3';
+  // pending → completed durante este ciclo (NÃO no mount inicial) dispara o som e remonta
+  // o SparkleBurst (key incrementa) para reanimar as partículas a cada novo "apply".
+  useEffect(() => {
+    const wasJustApplied = previousCompletedRef.current === false && completed === true;
+    if (wasJustApplied && !wasCompletedOnMount.current) {
+      play('mission-complete');
+      setBurstKey((k) => k + 1);
+    }
+    previousCompletedRef.current = completed;
+  }, [completed, play]);
 
-  const inner = (
-    <>
-      <defs>
-        <filter id={filterId} x="-10%" y="-10%" width="120%" height="120%">
-          <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="2" result="noise" />
-          <feDisplacementMap
-            in="SourceGraphic"
-            in2="noise"
-            scale="1.2"
-            xChannelSelector="R"
-            yChannelSelector="G"
-          />
-        </filter>
-      </defs>
-      <circle
-        cx="14"
-        cy="14"
-        r="11"
-        fill={fillColor}
-        stroke={strokeColor}
-        strokeWidth="1.5"
-        strokeDasharray={strokeDasharray}
-        filter={`url(#${filterId})`}
-        opacity={completed ? 0.9 : 1}
-      />
-    </>
-  );
+  const applyVariant = prefersReducedMotion
+    ? { opacity: 1 }
+    : {
+        scale: [0, 1.2, 0.95, 1] as number[],
+        rotate: [12, randomRotate] as number[],
+        y: 0,
+        opacity: 1,
+      };
 
-  if (prefersReducedMotion) {
-    // Already completed on mount: render static at opacity 1, no entrance fade.
-    const reducedInitial = wasCompletedOnMount.current ? { opacity: 1 } : { opacity: 0 };
-    const reducedAnimate = { opacity: completed ? 1 : 0 };
-    return (
-      <span
-        className={styles.seal}
-        aria-hidden="true"
-        data-testid="quest-seal"
-        data-completed={String(completed)}
-      >
-        <motion.svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="28"
-          height="28"
-          viewBox="0 0 28 28"
-          aria-hidden="true"
-          data-testid="quest-seal-motion"
-          initial={reducedInitial}
-          animate={reducedAnimate}
-          transition={{ duration: 0.08 }}
-          {...(onAnimationComplete ? { onAnimationComplete } : {})}
-        >
-          {inner}
-        </motion.svg>
-      </span>
-    );
-  }
+  const initialVariant = wasCompletedOnMount.current
+    ? prefersReducedMotion
+      ? { opacity: 1 }
+      : { scale: 1, rotate: randomRotate, y: 0, opacity: 1 }
+    : prefersReducedMotion
+      ? { opacity: 0 }
+      : { scale: 0, rotate: 12, y: -8, opacity: 0 };
 
-  // Seal already completed on mount: use scalar animate target with stable initial so
-  // framer-motion sees no change and does not drive an entrance animation (AC-018).
-  // Seal transitioning pending→completed during this lifecycle: keyframe array for spring overshoot.
-  const animateTarget = wasCompletedOnMount.current
-    ? { scale: 1, rotate: randomRotate }
-    : completed
-      ? { scale: [0, 1.15, 1] as number[], rotate: [0, randomRotate] as number[] }
-      : { scale: 0, rotate: 0 };
+  const peelExit = prefersReducedMotion ? { opacity: 0 } : { rotate: 15, x: 4, y: 6, opacity: 0 };
 
-  const initialValue = wasCompletedOnMount.current
-    ? { scale: 1, rotate: randomRotate }
-    : { scale: 0, rotate: 0 };
+  const transition = prefersReducedMotion
+    ? { duration: 0.15 }
+    : { type: 'spring', stiffness: 240, damping: 14, duration: 0.5 };
 
   return (
     <span
@@ -102,20 +62,25 @@ function QuestSealInner({ completed, onAnimationComplete }: QuestSealProps) {
       data-testid="quest-seal"
       data-completed={String(completed)}
     >
-      <motion.svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="28"
-        height="28"
-        viewBox="0 0 28 28"
-        aria-hidden="true"
-        data-testid="quest-seal-motion"
-        initial={initialValue}
-        animate={animateTarget}
-        transition={{ type: 'spring', stiffness: 220, damping: 18, duration: 0.48 }}
-        {...(onAnimationComplete ? { onAnimationComplete } : {})}
-      >
-        {inner}
-      </motion.svg>
+      <AnimatePresence>
+        {completed && (
+          <motion.span
+            className={styles.stickerWrap}
+            data-testid="quest-seal-motion"
+            initial={initialVariant}
+            animate={applyVariant}
+            exit={peelExit}
+            transition={transition}
+            {...(onAnimationComplete ? { onAnimationComplete } : {})}
+          >
+            <QuestSealSticker size={28} />
+          </motion.span>
+        )}
+      </AnimatePresence>
+
+      {burstKey > 0 && completed && !prefersReducedMotion && (
+        <SparkleBurst key={burstKey} count={4} size={44} />
+      )}
     </span>
   );
 }
