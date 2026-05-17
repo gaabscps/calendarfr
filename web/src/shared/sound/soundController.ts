@@ -1,6 +1,8 @@
-import type { SoundId } from './sounds.js';
+import { SOUND_URLS, type SoundId } from './sounds.js';
 
 const STORAGE_KEY = 'calendarfr:sound:muted';
+const VOLUME_NORMAL = 0.4;
+const VOLUME_REDUCED = 0.25;
 
 export interface SoundController {
   play(id: SoundId): void;
@@ -25,18 +27,46 @@ function writeMutedToStorage(value: boolean): void {
   }
 }
 
+function getVolume(): number {
+  try {
+    if (typeof window !== 'undefined' && window.matchMedia) {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        return VOLUME_REDUCED;
+      }
+    }
+  } catch {
+    /* matchMedia missing or threw */
+  }
+  return VOLUME_NORMAL;
+}
+
 export function createSoundController(): SoundController {
   let muted = readMutedFromStorage();
   const listeners = new Set<() => void>();
+  const cache = new Map<SoundId, HTMLAudioElement>();
 
   function emit(): void {
     listeners.forEach((fn) => fn());
   }
 
+  function getOrCreateBase(id: SoundId): HTMLAudioElement {
+    const cached = cache.get(id);
+    if (cached) return cached;
+    const audio = new Audio(SOUND_URLS[id]);
+    audio.preload = 'auto';
+    cache.set(id, audio);
+    return audio;
+  }
+
   return {
     play(id: SoundId): void {
-      void id;
-      // Audio playback wired in Task 3.
+      if (muted) return;
+      const base = getOrCreateBase(id);
+      const clone = base.cloneNode(true) as HTMLAudioElement;
+      clone.volume = getVolume();
+      clone.play().catch(() => {
+        /* autoplay rejection — silent */
+      });
     },
     isMuted: () => muted,
     setMuted(value: boolean): void {
