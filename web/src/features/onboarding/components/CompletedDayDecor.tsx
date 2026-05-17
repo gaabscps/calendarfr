@@ -1,6 +1,9 @@
 import type { DailyPageData } from '@calendarfr/shared';
 import { motion, useReducedMotion } from 'framer-motion';
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
+
+import { SparkleBurst } from '@/shared/components/SparkleBurst';
+import { useSoundController } from '@/shared/sound/useSoundController';
 
 import { GoldenSeal } from '../assets/GoldenSeal.js';
 import { WashiTape } from '../assets/WashiTape.js';
@@ -27,10 +30,20 @@ export function CompletedDayDecor({ date, data = null }: CompletedDayDecorProps)
 
   const wasCompleteOnMountRef = useRef(isCompleteForDay);
   const prefersReducedMotion = useReducedMotion();
+  const { play } = useSoundController();
+  const playedDayCompleteRef = useRef(wasCompleteOnMountRef.current);
+
+  useEffect(() => {
+    if (isCompleteForDay && !playedDayCompleteRef.current) {
+      play('day-complete');
+      playedDayCompleteRef.current = true;
+    }
+  }, [isCompleteForDay, play]);
 
   if (!isCompleteForDay) return null;
 
   const skipEntrance = wasCompleteOnMountRef.current;
+  const showSparkle = !wasCompleteOnMountRef.current && !prefersReducedMotion;
 
   if (prefersReducedMotion) {
     return (
@@ -94,6 +107,11 @@ export function CompletedDayDecor({ date, data = null }: CompletedDayDecorProps)
         data-testid="golden-seal"
       >
         <GoldenSeal />
+        {showSparkle && (
+          <span className={styles.sparkleAnchor}>
+            <SparkleBurst count={6} size={96} color="#f5854b" />
+          </span>
+        )}
       </motion.div>
     </div>
   );

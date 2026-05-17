@@ -23,6 +23,12 @@
    above-the-fold (PaperSheet costuma ter ~1200px e o viewport médio fica abaixo disso).
    FEAT-028 AC-033 originalmente pedia "bottom right", mas isso ficava abaixo do fold
    em qualquer viewport padrão e o usuário perdia o feedback. */
+.sparkleAnchor {
+  position: absolute;
+  inset: 50% auto auto 50%;
+  pointer-events: none;
+}
+
 .seal {
   position: absolute;
   top: var(--spacing-lg, 24px);
