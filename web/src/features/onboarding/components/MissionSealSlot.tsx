@@ -33,7 +33,8 @@ export function MissionSealSlot({ date, data = null }: MissionSealSlotProps) {
   const dateSlice: Record<MissionId, string | null> =
     state.progressByDate[date] ?? ({} as Record<MissionId, string | null>);
   const visibleSlice = selectVisibleMissionCompletion(data, dateSlice);
-  const isCompleteForDay = MISSION_IDS.every((id) => visibleSlice[id] != null);
+  const completedCount = MISSION_IDS.filter((id) => visibleSlice[id] != null).length;
+  const isCompleteForDay = completedCount === MISSION_IDS.length;
 
   const wasCompleteOnMountRef = useRef(isCompleteForDay);
   const prefersReducedMotion = useReducedMotion();
@@ -60,7 +61,7 @@ export function MissionSealSlot({ date, data = null }: MissionSealSlotProps) {
 
   const ariaLabel = isCompleteForDay
     ? 'Roteiro concluído — abrir para revisar'
-    : 'Abrir roteiro de missões';
+    : `Abrir roteiro de missões (${completedCount} de ${MISSION_IDS.length})`;
 
   const sealInitial = isCompleteForDay
     ? prefersReducedMotion
@@ -100,7 +101,11 @@ export function MissionSealSlot({ date, data = null }: MissionSealSlotProps) {
           transition={sealTransition}
           data-testid={isCompleteForDay ? 'golden-seal' : 'seal-placeholder'}
         >
-          {isCompleteForDay ? <GoldenSeal /> : <SealPlaceholder size={72} />}
+          {isCompleteForDay ? (
+            <GoldenSeal />
+          ) : (
+            <SealPlaceholder size={72} completed={completedCount} total={MISSION_IDS.length} />
+          )}
         </motion.span>
         {showSparkle && (
           <span className={styles.sparkleAnchor}>

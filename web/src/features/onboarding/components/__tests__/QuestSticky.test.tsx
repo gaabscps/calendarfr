@@ -63,18 +63,18 @@ describe('QuestSticky — FEAT-029 sound + mute toggle', () => {
     soundController.setMuted(false);
   });
 
-  it('plays sticky-attach when first rendered visible', () => {
+  it('does NOT play any sound on visible mount (sticky paper sounds dropped)', () => {
     const playSpy = jest.spyOn(soundController, 'play');
     render(
       <QuestSticky visible={true} ariaLabel="x" headerLabel="Roteiro">
         <div>body</div>
       </QuestSticky>,
     );
-    expect(playSpy).toHaveBeenCalledWith('sticky-attach');
+    expect(playSpy).not.toHaveBeenCalled();
     playSpy.mockRestore();
   });
 
-  it('plays sticky-peel when transitioning visible → hidden', () => {
+  it('does NOT play any sound on visible → hidden transition', () => {
     const playSpy = jest.spyOn(soundController, 'play');
     const { rerender } = render(
       <QuestSticky visible={true} ariaLabel="x" headerLabel="Roteiro">
@@ -87,7 +87,7 @@ describe('QuestSticky — FEAT-029 sound + mute toggle', () => {
         <div>body</div>
       </QuestSticky>,
     );
-    expect(playSpy).toHaveBeenCalledWith('sticky-peel');
+    expect(playSpy).not.toHaveBeenCalled();
     playSpy.mockRestore();
   });
 

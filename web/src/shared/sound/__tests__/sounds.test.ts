@@ -1,14 +1,14 @@
 import { SOUND_URLS, type SoundId } from '../sounds.js';
 
 describe('sounds registry', () => {
-  it('exposes the four expected sound ids', () => {
-    const ids: SoundId[] = ['mission-complete', 'day-complete', 'sticky-attach', 'sticky-peel'];
+  it('exposes the two expected sound ids', () => {
+    const ids: SoundId[] = ['mission-complete', 'day-complete'];
     ids.forEach((id) => {
       expect(SOUND_URLS[id]).toMatch(/^\/sounds\/.+\.ogg$/);
     });
   });
 
-  it('has exactly four entries', () => {
-    expect(Object.keys(SOUND_URLS)).toHaveLength(4);
+  it('has exactly two entries', () => {
+    expect(Object.keys(SOUND_URLS)).toHaveLength(2);
   });
 });

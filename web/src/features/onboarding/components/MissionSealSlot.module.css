@@ -1,6 +1,8 @@
 .slot {
   position: absolute;
-  top: var(--spacing-lg, 24px);
+  /* Below the navigator (24 padding + 48 nav row + 24 margin = 96) plus a 12px
+     breath, so the seal doesn't sit on top of the day-change chevron. */
+  top: calc(var(--spacing-lg, 24px) + var(--baseline, 24px) * 3 + 12px);
   right: var(--spacing-lg, 24px);
   /* z-index below the sticky so when the user opens it the sticky covers the seal. */
   z-index: 150;

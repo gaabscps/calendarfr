@@ -1,8 +1,7 @@
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
-import { useEffect, useRef, type ReactNode } from 'react';
+import { type ReactNode } from 'react';
 
 import { MuteToggle } from '@/shared/components/MuteToggle';
-import { useSoundController } from '@/shared/sound/useSoundController';
 
 import styles from './QuestSticky.module.css';
 
@@ -23,18 +22,6 @@ export function QuestSticky({
   visible = true,
 }: QuestStickyProps) {
   const prefersReducedMotion = useReducedMotion();
-  const { play } = useSoundController();
-  // wasVisibleRef começa false para que o primeiro paint com visible=true dispare attach.
-  const wasVisibleRef = useRef(false);
-
-  useEffect(() => {
-    if (visible && !wasVisibleRef.current) {
-      play('sticky-attach');
-    } else if (!visible && wasVisibleRef.current) {
-      play('sticky-peel');
-    }
-    wasVisibleRef.current = visible;
-  }, [visible, play]);
 
   const enter = prefersReducedMotion
     ? {
