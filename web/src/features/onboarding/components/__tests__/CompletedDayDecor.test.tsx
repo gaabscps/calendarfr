@@ -179,11 +179,9 @@ describe('CompletedDayDecor — conditional render', () => {
     expect(container.firstChild).toBeNull();
   });
 
-  it('renders 3 SVG elements when all 7 missions are completed', () => {
+  it('renders the golden-seal when all 7 missions are completed', () => {
     setStorageState({ progressByDate: { [DATE]: makeAllCompleted() } });
     const { container } = render(<CompletedDayDecor date={DATE} />);
-    expect(container.querySelector('[data-testid="washi-left"]')).toBeInTheDocument();
-    expect(container.querySelector('[data-testid="washi-right"]')).toBeInTheDocument();
     expect(container.querySelector('[data-testid="golden-seal"]')).toBeInTheDocument();
   });
 
@@ -208,26 +206,12 @@ describe('CompletedDayDecor — conditional render', () => {
     const { container } = render(
       <CompletedDayDecor date={DATE} data={makeFullyConditionMetData()} />,
     );
-    expect(container.querySelector('[data-testid="washi-left"]')).toBeInTheDocument();
     expect(container.querySelector('[data-testid="golden-seal"]')).toBeInTheDocument();
   });
 });
 
 describe('CompletedDayDecor — animation choreography (normal motion)', () => {
-  it('AC-034: washi-left has correct animate and transition when complete on mount', () => {
-    setStorageState({ progressByDate: { [DATE]: makeAllCompleted() } });
-    const { container } = render(<CompletedDayDecor date={DATE} />);
-
-    const washiLeftSvg = container.querySelector('[data-testid="washi-left"]');
-    expect(washiLeftSvg).toBeInTheDocument();
-    const animate = JSON.parse(washiLeftSvg!.getAttribute('data-motion-animate') ?? 'null');
-    const transition = JSON.parse(washiLeftSvg!.getAttribute('data-motion-transition') ?? 'null');
-
-    expect(animate).toMatchObject({ scale: 1, opacity: 1 });
-    expect(transition).toMatchObject({ type: 'spring', stiffness: 200, damping: 18 });
-  });
-
-  it('AC-034: golden-seal has scale+rotate animation with delay 0.3s (not complete on mount)', () => {
+  it('golden-seal has scale+rotate animation with delay 0.3s (not complete on mount)', () => {
     const { container, rerender } = render(<CompletedDayDecor date={DATE} />);
     expect(container.firstChild).toBeNull();
 
@@ -246,22 +230,6 @@ describe('CompletedDayDecor — animation choreography (normal motion)', () => {
     expect(animate).toMatchObject({ scale: 1 });
     expect(transition).toMatchObject({ type: 'spring', stiffness: 220, damping: 16, delay: 0.3 });
   });
-
-  it('AC-034: washi-right has delay 0.1s (not complete on mount)', () => {
-    const { container, rerender } = render(<CompletedDayDecor date={DATE} />);
-    expect(container.firstChild).toBeNull();
-
-    setStorageState({ progressByDate: { [DATE]: makeAllCompleted() } });
-    act(() => {
-      dispatchStorageEvent();
-    });
-    rerender(<CompletedDayDecor date={DATE} />);
-
-    const washiRightEl = container.querySelector('[data-testid="washi-right"]');
-    expect(washiRightEl).toBeInTheDocument();
-    const transition = JSON.parse(washiRightEl!.getAttribute('data-motion-transition') ?? 'null');
-    expect(transition).toMatchObject({ delay: 0.1 });
-  });
 });
 
 describe('CompletedDayDecor — reduced-motion (AC-035)', () => {
@@ -270,12 +238,12 @@ describe('CompletedDayDecor — reduced-motion (AC-035)', () => {
     setStorageState({ progressByDate: { [DATE]: makeAllCompleted() } });
     const { container } = render(<CompletedDayDecor date={DATE} />);
 
-    const washiLeftEl = container.querySelector('[data-testid="washi-left"]');
-    expect(washiLeftEl).toBeInTheDocument();
+    const sealEl = container.querySelector('[data-testid="golden-seal"]');
+    expect(sealEl).toBeInTheDocument();
 
-    const initial = JSON.parse(washiLeftEl!.getAttribute('data-motion-initial') ?? 'null');
-    const animate = JSON.parse(washiLeftEl!.getAttribute('data-motion-animate') ?? 'null');
-    const transition = JSON.parse(washiLeftEl!.getAttribute('data-motion-transition') ?? 'null');
+    const initial = JSON.parse(sealEl!.getAttribute('data-motion-initial') ?? 'null');
+    const animate = JSON.parse(sealEl!.getAttribute('data-motion-animate') ?? 'null');
+    const transition = JSON.parse(sealEl!.getAttribute('data-motion-transition') ?? 'null');
 
     expect(initial).toBe(false);
     expect(animate).toMatchObject({ opacity: 1 });
@@ -293,37 +261,35 @@ describe('CompletedDayDecor — reduced-motion (AC-035)', () => {
     });
     rerender(<CompletedDayDecor date={DATE} />);
 
-    const washiLeftEl = container.querySelector('[data-testid="washi-left"]');
-    expect(washiLeftEl).toBeInTheDocument();
+    const sealEl = container.querySelector('[data-testid="golden-seal"]');
+    expect(sealEl).toBeInTheDocument();
 
-    const initial = JSON.parse(washiLeftEl!.getAttribute('data-motion-initial') ?? 'null');
-    const animate = JSON.parse(washiLeftEl!.getAttribute('data-motion-animate') ?? 'null');
-    const transition = JSON.parse(washiLeftEl!.getAttribute('data-motion-transition') ?? 'null');
+    const initial = JSON.parse(sealEl!.getAttribute('data-motion-initial') ?? 'null');
+    const animate = JSON.parse(sealEl!.getAttribute('data-motion-animate') ?? 'null');
+    const transition = JSON.parse(sealEl!.getAttribute('data-motion-transition') ?? 'null');
 
     expect(initial).toMatchObject({ opacity: 0 });
     expect(animate).toMatchObject({ opacity: 1 });
     expect(transition.duration).toBeLessThanOrEqual(0.2);
   });
 
-  it('reduced-motion: still renders all 3 SVG children', () => {
+  it('reduced-motion: still renders the seal', () => {
     mockReducedMotion = true;
     setStorageState({ progressByDate: { [DATE]: makeAllCompleted() } });
     const { container } = render(<CompletedDayDecor date={DATE} />);
 
-    expect(container.querySelector('[data-testid="washi-left"]')).toBeInTheDocument();
-    expect(container.querySelector('[data-testid="washi-right"]')).toBeInTheDocument();
     expect(container.querySelector('[data-testid="golden-seal"]')).toBeInTheDocument();
   });
 });
 
 describe('CompletedDayDecor — idempotência (AC-036)', () => {
-  it('when already complete on mount, washi-left motion element has initial={false}', () => {
+  it('when already complete on mount, seal motion element has initial={false}', () => {
     setStorageState({ progressByDate: { [DATE]: makeAllCompleted() } });
     const { container } = render(<CompletedDayDecor date={DATE} />);
 
-    const washiLeftSvg = container.querySelector('[data-testid="washi-left"]');
-    expect(washiLeftSvg).toBeInTheDocument();
-    const initial = JSON.parse(washiLeftSvg!.getAttribute('data-motion-initial') ?? 'null');
+    const sealEl = container.querySelector('[data-testid="golden-seal"]');
+    expect(sealEl).toBeInTheDocument();
+    const initial = JSON.parse(sealEl!.getAttribute('data-motion-initial') ?? 'null');
 
     expect(initial).toBe(false);
   });
@@ -338,11 +304,11 @@ describe('CompletedDayDecor — idempotência (AC-036)', () => {
     });
     rerender(<CompletedDayDecor date={DATE} />);
 
-    const washiLeftEl = container.querySelector('[data-testid="washi-left"]');
-    expect(washiLeftEl).toBeInTheDocument();
-    const initial = JSON.parse(washiLeftEl!.getAttribute('data-motion-initial') ?? 'null');
+    const sealEl = container.querySelector('[data-testid="golden-seal"]');
+    expect(sealEl).toBeInTheDocument();
+    const initial = JSON.parse(sealEl!.getAttribute('data-motion-initial') ?? 'null');
     expect(initial).not.toBe(false);
-    expect(initial).toMatchObject({ scale: 0.6, opacity: 0 });
+    expect(initial).toMatchObject({ scale: 0, rotate: 0 });
   });
 });
 

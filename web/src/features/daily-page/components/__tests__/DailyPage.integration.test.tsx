@@ -654,7 +654,7 @@ describe('DailyPage — a11y (AC-038–AC-042)', () => {
 // ---------------------------------------------------------------------------
 
 describe('DailyPage — CompletedDayDecor renders with 7/7 missions (AC-031)', () => {
-  it('renders washi-left testid when onboarding state has all 7 missions for current date', async () => {
+  it('renders the golden-seal when onboarding state has all 7 missions for current date', async () => {
     // Pre-seed localStorage with v2 state: 7/7 missions for DATE
     const allDone: Record<string, string> = {
       'M-INTENTION': '2026-05-11T08:00:00.000Z',
@@ -699,10 +699,8 @@ describe('DailyPage — CompletedDayDecor renders with 7/7 missions (AC-031)', (
     render(<DailyPage />);
 
     await waitFor(() => {
-      expect(document.querySelector('[data-testid="washi-left"]')).toBeInTheDocument();
+      expect(document.querySelector('[data-testid="golden-seal"]')).toBeInTheDocument();
     });
-    expect(document.querySelector('[data-testid="washi-right"]')).toBeInTheDocument();
-    expect(document.querySelector('[data-testid="golden-seal"]')).toBeInTheDocument();
   });
 
   it('does NOT render CompletedDayDecor when only 6/7 missions done', () => {
@@ -728,7 +726,7 @@ describe('DailyPage — CompletedDayDecor renders with 7/7 missions (AC-031)', (
 
     render(<DailyPage />);
 
-    expect(document.querySelector('[data-testid="washi-left"]')).not.toBeInTheDocument();
+    expect(document.querySelector('[data-testid="golden-seal"]')).not.toBeInTheDocument();
   });
 });
 

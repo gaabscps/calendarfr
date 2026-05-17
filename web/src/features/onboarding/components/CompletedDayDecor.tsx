@@ -6,7 +6,6 @@ import { SparkleBurst } from '@/shared/components/SparkleBurst';
 import { useSoundController } from '@/shared/sound/useSoundController';
 
 import { GoldenSeal } from '../assets/GoldenSeal.js';
-import { WashiTape } from '../assets/WashiTape.js';
 import { useOnboardingState } from '../hooks/useOnboardingState.js';
 import { selectVisibleMissionCompletion } from '../lib/deriveMissionProgress.js';
 import { MISSION_IDS } from '../lib/missions.js';
@@ -49,24 +48,6 @@ export function CompletedDayDecor({ date, data = null }: CompletedDayDecorProps)
     return (
       <div className={styles.decor} aria-hidden="true">
         <motion.div
-          className={styles.washiLeft}
-          initial={skipEntrance ? false : { opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.2 }}
-          data-testid="washi-left"
-        >
-          <WashiTape position="topLeft" />
-        </motion.div>
-        <motion.div
-          className={styles.washiRight}
-          initial={skipEntrance ? false : { opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.2 }}
-          data-testid="washi-right"
-        >
-          <WashiTape position="topRight" />
-        </motion.div>
-        <motion.div
           className={styles.seal}
           initial={skipEntrance ? false : { opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -81,24 +62,6 @@ export function CompletedDayDecor({ date, data = null }: CompletedDayDecorProps)
 
   return (
     <div className={styles.decor} aria-hidden="true">
-      <motion.div
-        className={styles.washiLeft}
-        initial={skipEntrance ? false : { scale: 0.6, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        transition={{ type: 'spring', stiffness: 200, damping: 18 }}
-        data-testid="washi-left"
-      >
-        <WashiTape position="topLeft" />
-      </motion.div>
-      <motion.div
-        className={styles.washiRight}
-        initial={skipEntrance ? false : { scale: 0.6, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        transition={{ type: 'spring', stiffness: 200, damping: 18, delay: 0.1 }}
-        data-testid="washi-right"
-      >
-        <WashiTape position="topRight" />
-      </motion.div>
       <motion.div
         className={styles.seal}
         initial={skipEntrance ? false : { scale: 0, rotate: 0 }}

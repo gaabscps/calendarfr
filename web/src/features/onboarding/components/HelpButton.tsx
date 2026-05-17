@@ -1,6 +1,6 @@
 import { IconButton } from '@/shared/components/IconButton';
 
-import { HelpGlyph } from '../assets/HelpGlyph.js';
+import { SealPlaceholder } from '../assets/SealPlaceholder.js';
 
 import styles from './HelpButton.module.css';
 
@@ -18,7 +18,7 @@ export function HelpButton({ onClick, ariaLabel = 'Abrir roteiro do diário' }: 
       onClick={onClick}
       className={styles.button}
     >
-      <HelpGlyph />
+      <SealPlaceholder />
     </IconButton>
   );
 }

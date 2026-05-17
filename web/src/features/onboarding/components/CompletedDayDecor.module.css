@@ -5,19 +5,7 @@
   z-index: 1;
 }
 
-.washiLeft {
-  position: absolute;
-  top: 0;
-  left: 12px;
-}
-
-.washiRight {
-  position: absolute;
-  top: 0;
-  right: 12px;
-}
-
-/* Selo dourado: posicionado no canto superior direito, no mesmo slot onde o sticky-note
+/* Selo: posicionado no canto superior direito, no mesmo slot onde o sticky-note
    morava enquanto havia missões pendentes. Narrativa: quando o dia chega a 7/7 a sticky
    sai com a exit-anim, e o selo entra ocupando o mesmo cantinho — sinalização imediata
    above-the-fold (PaperSheet costuma ter ~1200px e o viewport médio fica abaixo disso).
