@@ -3,7 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Onboarding Roteiro do Diário (gameficado, paper aesthetic) — AgentOps</title>
+    <title>
+      Onboarding polish iteration (legibilidade, autosave-gate, per-day, action buttons,
+      completed-day skin) — AgentOps
+    </title>
     <style>
       :root {
         --bg: #fff;
@@ -565,26 +568,26 @@
   <body>
     <header class="kpi-bar">
       <h1>
-        Onboarding Roteiro do Diário (gameficado, paper aesthetic)
-        <span class="badge badge-warn">⚠</span>
+        Onboarding polish iteration (legibilidade, autosave-gate, per-day, action buttons,
+        completed-day skin) <span class="badge badge-neutral">…</span>
       </h1>
       <div class="kpis">
         <span>—</span>
-        <span>$8.95</span>
+        <span>$7.26</span>
 
-        <span>16/0 ACs</span>
+        <span>30/0 ACs</span>
         <span>mut 70.7%</span>
         <span>type 97.7%</span>
-        <span>35 loops</span>
+        <span>30 loops</span>
       </div>
     </header>
 
     <main>
       <section class="story">
         <h2>Story</h2>
-        <article class="story-card story-card--done-retried" aria-label="batch T-002">
+        <article class="story-card story-card--done-retried" aria-label="batch T-001">
           <header>
-            <h3>T-002</h3>
+            <h3>T-001</h3>
             <span class="badge badge-warn" aria-label="status: done with retries"
               >↻ done (retried)</span
             >
@@ -592,42 +595,37 @@
           <div class="story-card__stats">
             <span class="story-card__stat"
               ><span class="story-card__stat-label">time</span>
-              <span class="story-card__stat-value">30m</span></span
+              <span class="story-card__stat-value">1h20m</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">cost</span>
-              <span class="story-card__stat-value">$1.21</span></span
+              <span class="story-card__stat-value">$1.65</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">tasks</span>
               <span class="story-card__stat-value">1</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">ACs</span>
-              <span class="story-card__stat-value">10</span></span
+              <span class="story-card__stat-value">17</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">files</span>
-              <span class="story-card__stat-value">5</span></span
-            ><span class="story-card__pipeline">code-reviewer → dev → logic-reviewer → qa</span>
+              <span class="story-card__stat-value">14</span></span
+            ><span class="story-card__pipeline">dev → code-reviewer ‖ logic-reviewer → qa</span>
           </div>
           <aside class="story-card__retry" role="status">
-            ⚠ dev retried 2× — loop 2: orchestrator-reconciliation: entry retro-added during
-            audit-fix sweep; loop 3: orchestrator-reconciliation: entry retro-added during audit-fix
-            sweep
+            ⚠ code-reviewer retried 1× — loop 2: orchestrator-reconciliation: gap-fill batch
           </aside>
           <aside class="story-card__retry" role="status">
-            ⚠ logic-reviewer retried 1× — loop 4: orchestrator-reconciliation: entry retro-added
-            during audit-fix sweep
+            ⚠ dev retried 1× — loop 3: orchestrator-reconciliation: gap-fill batch
           </aside>
           <aside class="story-card__retry" role="status">
-            ⚠ qa retried 1× — loop 5: orchestrator-reconciliation: entry retro-added during
-            audit-fix sweep
+            ⚠ logic-reviewer retried 1× — loop 4: orchestrator-reconciliation: gap-fill batch
           </aside>
-          <p class="story-card__summary">
-            T-002 done: lib/storage. ts (readStorage with module-level cache for
-            useSyncExternalStore stability, writeStorage with silent quota-error swallow + same-tab
-            CustomEvent, subscribeStorage multi-tab+same-tab) and hooks/useOnboardingState.
-          </p>
+          <aside class="story-card__retry" role="status">
+            ⚠ qa retried 1× — loop 5: orchestrator-reconciliation: gap-fill batch
+          </aside>
+          <p class="story-card__summary">orchestrator-reconciliation: gap-fill batch</p>
           <div class="story-card__drilldowns">
             <details>
-              <summary>Files changed (5)</summary>
+              <summary>Files changed (14)</summary>
               <table class="story-card__files">
                 <thead>
                   <tr>
@@ -638,46 +636,255 @@
                 </thead>
                 <tbody>
                   <tr>
+                    <td>web/src/features/onboarding/types.ts</td>
+                    <td>changed</td>
+                    <td>T-001</td>
+                  </tr>
+                  <tr>
+                    <td>web/src/features/onboarding/lib/constants.ts</td>
+                    <td>changed</td>
+                    <td>T-001</td>
+                  </tr>
+                  <tr>
+                    <td>web/src/features/onboarding/lib/missions.ts</td>
+                    <td>changed</td>
+                    <td>T-001</td>
+                  </tr>
+                  <tr>
                     <td>web/src/features/onboarding/lib/storage.ts</td>
                     <td>changed</td>
-                    <td>T-002</td>
+                    <td>T-001</td>
                   </tr>
                   <tr>
                     <td>web/src/features/onboarding/lib/__tests__/storage.test.ts</td>
                     <td>changed</td>
-                    <td>T-002</td>
+                    <td>T-001</td>
+                  </tr>
+                  <tr>
+                    <td>web/src/features/onboarding/lib/deriveMissionProgress.ts</td>
+                    <td>changed</td>
+                    <td>T-001</td>
+                  </tr>
+                  <tr>
+                    <td>web/src/features/onboarding/lib/__tests__/deriveMissionProg…</td>
+                    <td>changed</td>
+                    <td>T-001</td>
+                  </tr>
+                  <tr>
+                    <td>web/src/features/onboarding/lib/__tests__/deriveMissionProg…</td>
+                    <td>changed</td>
+                    <td>T-001</td>
                   </tr>
                   <tr>
                     <td>web/src/features/onboarding/hooks/useOnboardingState.ts</td>
                     <td>changed</td>
-                    <td>T-002</td>
+                    <td>T-001</td>
                   </tr>
                   <tr>
                     <td>web/src/features/onboarding/hooks/__tests__/useOnboardingSt…</td>
                     <td>changed</td>
-                    <td>T-002</td>
+                    <td>T-001</td>
                   </tr>
                   <tr>
                     <td>web/src/features/onboarding/hooks/__tests__/useOnboardingSt…</td>
                     <td>changed</td>
-                    <td>T-002</td>
+                    <td>T-001</td>
+                  </tr>
+                  <tr>
+                    <td>web/src/features/onboarding/components/OnboardingQuest.tsx</td>
+                    <td>changed</td>
+                    <td>T-001</td>
+                  </tr>
+                  <tr>
+                    <td>web/src/features/onboarding/components/__tests__/Onboarding…</td>
+                    <td>changed</td>
+                    <td>T-001</td>
+                  </tr>
+                  <tr>
+                    <td>web/src/features/onboarding/components/CompletionStampConta…</td>
+                    <td>changed</td>
+                    <td>T-001</td>
                   </tr>
                 </tbody>
               </table>
             </details>
             <details>
-              <summary>ACs covered (10)</summary>
+              <summary>ACs covered (17)</summary>
               <ul class="story-card__acs">
-                <li><strong>FEAT-027/AC-012</strong> — e-001, e-012</li>
-                <li><strong>FEAT-027/AC-013</strong> — e-001, e-011</li>
-                <li><strong>FEAT-027/AC-020</strong> — e-001, e-004</li>
-                <li><strong>FEAT-027/AC-022</strong> — e-001, e-005</li>
-                <li><strong>FEAT-027/AC-024</strong> — e-001, e-002</li>
-                <li><strong>FEAT-027/AC-025</strong> — e-001, e-006</li>
-                <li><strong>FEAT-027/AC-026</strong> — e-001, e-007</li>
-                <li><strong>FEAT-027/AC-027</strong> — e-001, e-008</li>
-                <li><strong>FEAT-027/AC-029</strong> — e-001, e-011</li>
-                <li><strong>FEAT-027/AC-030</strong> — e-001, e-009</li>
+                <li><strong>FEAT-028/AC-007</strong> — e-001</li>
+                <li><strong>FEAT-028/AC-008</strong> — e-002</li>
+                <li><strong>FEAT-028/AC-009</strong> — e-003</li>
+                <li><strong>FEAT-028/AC-010</strong> — e-004</li>
+                <li><strong>FEAT-028/AC-011</strong> — e-005</li>
+                <li><strong>FEAT-028/AC-012</strong> — e-006</li>
+                <li><strong>FEAT-028/AC-013</strong> — e-007, e-018, e-019</li>
+                <li><strong>FEAT-028/AC-014</strong> — e-008</li>
+                <li><strong>FEAT-028/AC-015</strong> — e-009</li>
+                <li><strong>FEAT-028/AC-016</strong> — e-010</li>
+                <li><strong>FEAT-028/AC-017</strong> — e-011</li>
+                <li><strong>FEAT-028/AC-018</strong> — e-012</li>
+                <li><strong>FEAT-028/AC-019</strong> — e-013</li>
+                <li><strong>FEAT-028/AC-020</strong> — e-014</li>
+                <li><strong>FEAT-028/AC-021</strong> — e-015</li>
+                <li><strong>FEAT-028/AC-022</strong> — e-016</li>
+                <li><strong>FEAT-028/NFR-010</strong> — e-017</li>
+              </ul>
+            </details>
+            <details>
+              <summary>Pipeline trace (5 dispatches)</summary>
+              <table class="story-card__pipeline-trace">
+                <thead>
+                  <tr>
+                    <th>role</th>
+                    <th>dispatch_id</th>
+                    <th>loop</th>
+                    <th>model</th>
+                    <th>effort</th>
+                    <th>duration</th>
+                    <th>tokens</th>
+                    <th>cost</th>
+                    <th>status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>dev</td>
+                    <td>d-T001-dev-l1</td>
+                    <td>1</td>
+                    <td>sonnet-4-6</td>
+                    <td>high</td>
+                    <td>0ms</td>
+                    <td>50000</td>
+                    <td>$0.33</td>
+                    <td>done</td>
+                  </tr>
+                  <tr>
+                    <td>code-reviewer</td>
+                    <td>d-T001-cr-l1</td>
+                    <td>2</td>
+                    <td>sonnet-4-6</td>
+                    <td>medium</td>
+                    <td>0ms</td>
+                    <td>50000</td>
+                    <td>$0.33</td>
+                    <td>needs_review</td>
+                  </tr>
+                  <tr>
+                    <td>dev</td>
+                    <td>d-T001-dev-l2</td>
+                    <td>3</td>
+                    <td>sonnet-4-6</td>
+                    <td>high</td>
+                    <td>0ms</td>
+                    <td>50000</td>
+                    <td>$0.33</td>
+                    <td>done</td>
+                  </tr>
+                  <tr>
+                    <td>logic-reviewer</td>
+                    <td>d-T001-lr-l1</td>
+                    <td>4</td>
+                    <td>sonnet-4-6</td>
+                    <td>high</td>
+                    <td>0ms</td>
+                    <td>50000</td>
+                    <td>$0.33</td>
+                    <td>needs_review</td>
+                  </tr>
+                  <tr>
+                    <td>qa</td>
+                    <td>d-T001-qa-l1</td>
+                    <td>5</td>
+                    <td>sonnet-4-6</td>
+                    <td>medium</td>
+                    <td>0ms</td>
+                    <td>50000</td>
+                    <td>$0.33</td>
+                    <td>done</td>
+                  </tr>
+                </tbody>
+              </table>
+            </details>
+            <details>
+              <summary>PM note</summary>
+              <p class="story-card__pmnote">orchestrator-reconciliation: gap-fill batch</p>
+            </details>
+          </div>
+        </article>
+        <article class="story-card story-card--done-retried" aria-label="batch T-002">
+          <header>
+            <h3>T-002</h3>
+            <span class="badge badge-warn" aria-label="status: done with retries"
+              >↻ done (retried)</span
+            >
+          </header>
+          <div class="story-card__stats">
+            <span class="story-card__stat"
+              ><span class="story-card__stat-label">time</span>
+              <span class="story-card__stat-value">50m</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">cost</span>
+              <span class="story-card__stat-value">$0.99</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">tasks</span>
+              <span class="story-card__stat-value">1</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">ACs</span>
+              <span class="story-card__stat-value">5</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">files</span>
+              <span class="story-card__stat-value">3</span></span
+            ><span class="story-card__pipeline">code-reviewer → dev → logic-reviewer → qa</span>
+          </div>
+          <aside class="story-card__retry" role="status">
+            ⚠ dev retried 2× — loop 2: orchestrator-reconciliation: entry retro-added; loop 3:
+            orchestrator-reconciliation: entry retro-added
+          </aside>
+          <aside class="story-card__retry" role="status">
+            ⚠ logic-reviewer retried 1× — loop 4: orchestrator-reconciliation: entry retro-added
+          </aside>
+          <aside class="story-card__retry" role="status">
+            ⚠ qa retried 1× — loop 5: orchestrator-reconciliation: entry retro-added
+          </aside>
+          <p class="story-card__summary">orchestrator-reconciliation: entry retro-added</p>
+          <div class="story-card__drilldowns">
+            <details>
+              <summary>Files changed (3)</summary>
+              <table class="story-card__files">
+                <thead>
+                  <tr>
+                    <th>path</th>
+                    <th>action</th>
+                    <th>tasks</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>web/src/features/onboarding/components/QuestItem.module.css</td>
+                    <td>changed</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td>web/src/features/onboarding/components/__tests__/QuestItem.…</td>
+                    <td>changed</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td>web/src/shared/components/theme/tokens.ts</td>
+                    <td>changed</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+            </details>
+            <details>
+              <summary>ACs covered (5)</summary>
+              <ul class="story-card__acs">
+                <li><strong>FEAT-028/AC-001</strong> — e-ac-001</li>
+                <li><strong>FEAT-028/AC-002</strong> — e-ac-002</li>
+                <li><strong>FEAT-028/AC-003</strong> — e-ac-003</li>
+                <li><strong>FEAT-028/AC-006</strong> — e-ac-006</li>
+                <li><strong>FEAT-028/NFR-004</strong> — e-nfr-004</li>
               </ul>
             </details>
             <details>
@@ -712,11 +919,11 @@
                     <td>dev</td>
                     <td>d-T002-dev-l1</td>
                     <td>2</td>
-                    <td>sonnet-4-6</td>
-                    <td>medium</td>
+                    <td>haiku-4-5</td>
+                    <td>high</td>
                     <td>0ms</td>
                     <td>50000</td>
-                    <td>$0.33</td>
+                    <td>$0.11</td>
                     <td>done</td>
                   </tr>
                   <tr>
@@ -724,7 +931,7 @@
                     <td>d-T002-dev-l2</td>
                     <td>3</td>
                     <td>sonnet-4-6</td>
-                    <td>high</td>
+                    <td>medium</td>
                     <td>0ms</td>
                     <td>50000</td>
                     <td>$0.33</td>
@@ -757,9 +964,7 @@
             </details>
             <details>
               <summary>PM note</summary>
-              <p class="story-card__pmnote">
-                orchestrator-reconciliation: entry retro-added during audit-fix sweep
-              </p>
+              <p class="story-card__pmnote">orchestrator-reconciliation: entry retro-added</p>
             </details>
           </div>
         </article>
@@ -773,41 +978,36 @@
           <div class="story-card__stats">
             <span class="story-card__stat"
               ><span class="story-card__stat-label">time</span>
-              <span class="story-card__stat-value">30m</span></span
+              <span class="story-card__stat-value">1h20m</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">cost</span>
-              <span class="story-card__stat-value">$1.43</span></span
+              <span class="story-card__stat-value">$1.54</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">tasks</span>
               <span class="story-card__stat-value">1</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">ACs</span>
-              <span class="story-card__stat-value">10</span></span
+              <span class="story-card__stat-value">11</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">files</span>
-              <span class="story-card__stat-value">5</span></span
-            ><span class="story-card__pipeline">dev → logic-reviewer → qa</span>
+              <span class="story-card__stat-value">6</span></span
+            ><span class="story-card__pipeline">code-reviewer → dev → logic-reviewer → qa</span>
           </div>
           <aside class="story-card__retry" role="status">
-            ⚠ dev retried 2× — loop 2: orchestrator-reconciliation: entry retro-added during
-            audit-fix sweep; loop 3: orchestrator-reconciliation: entry retro-added during audit-fix
-            sweep
+            ⚠ dev retried 3× — loop 2: orchestrator-reconciliation: entry retro-added; loop 3:
+            orchestrator-reconciliation: entry retro-added; loop 4: orchestrator-reconciliation:
+            entry retro-added
           </aside>
           <aside class="story-card__retry" role="status">
-            ⚠ logic-reviewer retried 1× — loop 4: orchestrator-reconciliation: entry retro-added
-            during audit-fix sweep
+            ⚠ logic-reviewer retried 1× — loop 5: orchestrator-reconciliation: entry retro-added
           </aside>
           <aside class="story-card__retry" role="status">
-            ⚠ qa retried 1× — loop 5: orchestrator-reconciliation: entry retro-added during
-            audit-fix sweep
+            ⚠ qa retried 1× — loop 6: orchestrator-reconciliation: gap-fill batch
           </aside>
-          <p class="story-card__summary">
-            T-003 complete: deriveMissionProgress pure function (8 missions, latching, loading
-            guard) + useNavigationTracker hook. 77 tests passing (6 suites).
-          </p>
+          <p class="story-card__summary">orchestrator-reconciliation: gap-fill batch</p>
           <div class="story-card__drilldowns">
             <details>
-              <summary>Files changed (5)</summary>
+              <summary>Files changed (6)</summary>
               <table class="story-card__files">
                 <thead>
                   <tr>
@@ -818,27 +1018,32 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <td>web/src/features/onboarding/lib/deriveMissionProgress.ts</td>
+                    <td>web/src/features/onboarding/components/CompletedDayDecor.tsx</td>
                     <td>changed</td>
                     <td>T-003</td>
                   </tr>
                   <tr>
-                    <td>web/src/features/onboarding/lib/__tests__/deriveMissionProg…</td>
+                    <td>web/src/features/onboarding/components/CompletedDayDecor.mo…</td>
                     <td>changed</td>
                     <td>T-003</td>
                   </tr>
                   <tr>
-                    <td>web/src/features/onboarding/hooks/useNavigationTracker.ts</td>
+                    <td>web/src/features/onboarding/components/__tests__/CompletedD…</td>
                     <td>changed</td>
                     <td>T-003</td>
                   </tr>
                   <tr>
-                    <td>web/src/features/onboarding/hooks/__tests__/useNavigationTr…</td>
+                    <td>web/src/features/onboarding/assets/WashiTape.tsx</td>
                     <td>changed</td>
                     <td>T-003</td>
                   </tr>
                   <tr>
-                    <td>web/src/features/onboarding/lib/__tests__/deriveMissionProg…</td>
+                    <td>web/src/features/onboarding/assets/GoldenSeal.tsx</td>
+                    <td>changed</td>
+                    <td>T-003</td>
+                  </tr>
+                  <tr>
+                    <td>web/src/features/onboarding/index.ts</td>
                     <td>changed</td>
                     <td>T-003</td>
                   </tr>
@@ -846,22 +1051,23 @@
               </table>
             </details>
             <details>
-              <summary>ACs covered (10)</summary>
+              <summary>ACs covered (11)</summary>
               <ul class="story-card__acs">
-                <li><strong>FEAT-027/AC-003</strong> — e-009</li>
-                <li><strong>FEAT-027/AC-004</strong> — e-010</li>
-                <li><strong>FEAT-027/AC-005</strong> — e-011</li>
-                <li><strong>FEAT-027/AC-007</strong> — e-012</li>
-                <li><strong>FEAT-027/AC-008</strong> — e-013</li>
-                <li><strong>FEAT-027/AC-009</strong> — e-014</li>
-                <li><strong>FEAT-027/AC-010</strong> — e-015</li>
-                <li><strong>FEAT-027/AC-011</strong> — e-016, e-017</li>
-                <li><strong>FEAT-027/AC-013a</strong> — e-018</li>
-                <li><strong>FEAT-027/AC-013b</strong> — e-019</li>
+                <li><strong>FEAT-028/AC-031</strong> — e-001, e-012</li>
+                <li><strong>FEAT-028/AC-032</strong> — e-002, e-013</li>
+                <li><strong>FEAT-028/AC-033</strong> — e-003</li>
+                <li><strong>FEAT-028/AC-034</strong> — e-004</li>
+                <li><strong>FEAT-028/AC-035</strong> — e-005</li>
+                <li><strong>FEAT-028/AC-036</strong> — e-006</li>
+                <li><strong>FEAT-028/AC-037</strong> — e-007</li>
+                <li><strong>FEAT-028/AC-039</strong> — e-008</li>
+                <li><strong>FEAT-028/AC-040</strong> — e-009</li>
+                <li><strong>FEAT-028/NFR-006</strong> — e-010</li>
+                <li><strong>FEAT-028/NFR-007</strong> — e-011</li>
               </ul>
             </details>
             <details>
-              <summary>Pipeline trace (5 dispatches)</summary>
+              <summary>Pipeline trace (6 dispatches)</summary>
               <table class="story-card__pipeline-trace">
                 <thead>
                   <tr>
@@ -878,9 +1084,20 @@
                 </thead>
                 <tbody>
                   <tr>
+                    <td>code-reviewer</td>
+                    <td>d-T003-cr-l1</td>
+                    <td>1</td>
+                    <td>haiku-4-5</td>
+                    <td>high</td>
+                    <td>0ms</td>
+                    <td>50000</td>
+                    <td>$0.11</td>
+                    <td>needs_review</td>
+                  </tr>
+                  <tr>
                     <td>dev</td>
                     <td>d-T003-dev-l1</td>
-                    <td>1</td>
+                    <td>2</td>
                     <td>sonnet-4-6</td>
                     <td>medium</td>
                     <td>0ms</td>
@@ -891,7 +1108,7 @@
                   <tr>
                     <td>dev</td>
                     <td>d-T003-dev-l2</td>
-                    <td>2</td>
+                    <td>3</td>
                     <td>sonnet-4-6</td>
                     <td>high</td>
                     <td>0ms</td>
@@ -902,7 +1119,7 @@
                   <tr>
                     <td>dev</td>
                     <td>d-T003-dev-l3</td>
-                    <td>3</td>
+                    <td>4</td>
                     <td>sonnet-4-6</td>
                     <td>high</td>
                     <td>0ms</td>
@@ -913,7 +1130,7 @@
                   <tr>
                     <td>logic-reviewer</td>
                     <td>d-T003-lr-l1</td>
-                    <td>4</td>
+                    <td>5</td>
                     <td>sonnet-4-6</td>
                     <td>medium</td>
                     <td>0ms</td>
@@ -924,7 +1141,7 @@
                   <tr>
                     <td>qa</td>
                     <td>d-T003-qa-l1</td>
-                    <td>5</td>
+                    <td>6</td>
                     <td>haiku-4-5</td>
                     <td>high</td>
                     <td>0ms</td>
@@ -937,9 +1154,7 @@
             </details>
             <details>
               <summary>PM note</summary>
-              <p class="story-card__pmnote">
-                orchestrator-reconciliation: entry retro-added during audit-fix sweep
-              </p>
+              <p class="story-card__pmnote">orchestrator-reconciliation: gap-fill batch</p>
             </details>
           </div>
         </article>
@@ -953,7 +1168,7 @@
           <div class="story-card__stats">
             <span class="story-card__stat"
               ><span class="story-card__stat-label">time</span>
-              <span class="story-card__stat-value">30m</span></span
+              <span class="story-card__stat-value">50m</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">cost</span>
               <span class="story-card__stat-value">$1.21</span></span
@@ -962,31 +1177,26 @@
               <span class="story-card__stat-value">1</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">ACs</span>
-              <span class="story-card__stat-value">8</span></span
+              <span class="story-card__stat-value">9</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">files</span>
-              <span class="story-card__stat-value">22</span></span
+              <span class="story-card__stat-value">9</span></span
             ><span class="story-card__pipeline">code-reviewer → dev → logic-reviewer → qa</span>
           </div>
           <aside class="story-card__retry" role="status">
-            ⚠ dev retried 2× — loop 2: orchestrator-reconciliation: entry retro-added during
-            audit-fix sweep; loop 3: orchestrator-reconciliation: entry retro-added during audit-fix
-            sweep
+            ⚠ dev retried 2× — loop 2: orchestrator-reconciliation: entry retro-added; loop 3:
+            orchestrator-reconciliation: entry retro-added
           </aside>
           <aside class="story-card__retry" role="status">
             ⚠ logic-reviewer retried 1× — loop 4: orchestrator-reconciliation: entry retro-added
-            during audit-fix sweep
           </aside>
           <aside class="story-card__retry" role="status">
-            ⚠ qa retried 1× — loop 5: orchestrator-reconciliation: entry retro-added during
-            audit-fix sweep
+            ⚠ qa retried 1× — loop 5: orchestrator-reconciliation: entry retro-added
           </aside>
-          <p class="story-card__summary">
-            orchestrator-reconciliation: entry retro-added during audit-fix sweep
-          </p>
+          <p class="story-card__summary">orchestrator-reconciliation: entry retro-added</p>
           <div class="story-card__drilldowns">
             <details>
-              <summary>Files changed (22)</summary>
+              <summary>Files changed (9)</summary>
               <table class="story-card__files">
                 <thead>
                   <tr>
@@ -997,112 +1207,47 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <td>web/src/features/onboarding/components/QuestSticky.tsx</td>
+                    <td>web/src/features/onboarding/lib/missionTargets.ts</td>
                     <td>changed</td>
                     <td>T-004</td>
                   </tr>
                   <tr>
-                    <td>web/src/features/onboarding/components/QuestSticky.module.c…</td>
+                    <td>web/src/features/onboarding/lib/__tests__/missionTargets.te…</td>
                     <td>changed</td>
                     <td>T-004</td>
                   </tr>
                   <tr>
-                    <td>web/src/features/onboarding/components/QuestList.tsx</td>
+                    <td>web/src/features/onboarding/lib/goToMission.ts</td>
                     <td>changed</td>
                     <td>T-004</td>
                   </tr>
                   <tr>
-                    <td>web/src/features/onboarding/components/QuestList.module.css</td>
+                    <td>web/src/features/onboarding/lib/__tests__/goToMission.test.…</td>
                     <td>changed</td>
                     <td>T-004</td>
                   </tr>
                   <tr>
-                    <td>web/src/features/onboarding/components/QuestItem.tsx</td>
+                    <td>web/src/features/onboarding/components/QuestActionButton.tsx</td>
                     <td>changed</td>
                     <td>T-004</td>
                   </tr>
                   <tr>
-                    <td>web/src/features/onboarding/components/QuestItem.module.css</td>
+                    <td>web/src/features/onboarding/components/QuestActionButton.mo…</td>
                     <td>changed</td>
                     <td>T-004</td>
                   </tr>
                   <tr>
-                    <td>web/src/features/onboarding/components/QuestSeal.tsx</td>
+                    <td>web/src/features/onboarding/components/__tests__/QuestActio…</td>
                     <td>changed</td>
                     <td>T-004</td>
                   </tr>
                   <tr>
-                    <td>web/src/features/onboarding/components/QuestSeal.module.css</td>
+                    <td>web/src/features/onboarding/assets/ArrowGoTo.tsx</td>
                     <td>changed</td>
                     <td>T-004</td>
                   </tr>
                   <tr>
-                    <td>web/src/features/onboarding/components/RulebookHeader.tsx</td>
-                    <td>changed</td>
-                    <td>T-004</td>
-                  </tr>
-                  <tr>
-                    <td>web/src/features/onboarding/components/RulebookHeader.modul…</td>
-                    <td>changed</td>
-                    <td>T-004</td>
-                  </tr>
-                  <tr>
-                    <td>web/src/features/onboarding/components/HelpButton.tsx</td>
-                    <td>changed</td>
-                    <td>T-004</td>
-                  </tr>
-                  <tr>
-                    <td>web/src/features/onboarding/components/HelpButton.module.css</td>
-                    <td>changed</td>
-                    <td>T-004</td>
-                  </tr>
-                  <tr>
-                    <td>web/src/features/onboarding/components/CompletionStamp.tsx</td>
-                    <td>changed</td>
-                    <td>T-004</td>
-                  </tr>
-                  <tr>
-                    <td>web/src/features/onboarding/components/CompletionStamp.modu…</td>
-                    <td>changed</td>
-                    <td>T-004</td>
-                  </tr>
-                  <tr>
-                    <td>web/src/features/onboarding/components/__tests__/QuestItem.…</td>
-                    <td>changed</td>
-                    <td>T-004</td>
-                  </tr>
-                  <tr>
-                    <td>web/src/features/onboarding/components/__tests__/QuestStick…</td>
-                    <td>changed</td>
-                    <td>T-004</td>
-                  </tr>
-                  <tr>
-                    <td>web/src/features/onboarding/components/__tests__/HelpButton…</td>
-                    <td>changed</td>
-                    <td>T-004</td>
-                  </tr>
-                  <tr>
-                    <td>web/src/features/onboarding/components/__tests__/Completion…</td>
-                    <td>changed</td>
-                    <td>T-004</td>
-                  </tr>
-                  <tr>
-                    <td>web/src/features/onboarding/assets/SealHandDrawn.tsx</td>
-                    <td>changed</td>
-                    <td>T-004</td>
-                  </tr>
-                  <tr>
-                    <td>web/src/features/onboarding/assets/CompletionStampHandDrawn…</td>
-                    <td>changed</td>
-                    <td>T-004</td>
-                  </tr>
-                  <tr>
-                    <td>web/src/features/onboarding/assets/HelpGlyph.tsx</td>
-                    <td>changed</td>
-                    <td>T-004</td>
-                  </tr>
-                  <tr>
-                    <td>web/src/features/onboarding/index.ts</td>
+                    <td>web/src/shared/components/theme/GlobalStyles.tsx</td>
                     <td>changed</td>
                     <td>T-004</td>
                   </tr>
@@ -1110,21 +1255,44 @@
               </table>
             </details>
             <details>
-              <summary>ACs covered (8)</summary>
+              <summary>ACs covered (9)</summary>
               <ul class="story-card__acs">
                 <li>
-                  <strong>FEAT-027/AC-001</strong> — e-001, e-002, e-003, e-004, e-005, e-027,
-                  e-028, e-029
+                  <strong>FEAT-028/AC-023</strong> — npm test -- --testPathPattern=QuestActionButton
+                  --no-coverage
                 </li>
-                <li><strong>FEAT-027/AC-006</strong> — e-006, e-007, e-008, e-026</li>
-                <li><strong>FEAT-027/AC-019</strong> — e-009, e-010, e-011</li>
-                <li><strong>FEAT-027/AC-021</strong> — e-012, e-013, e-014</li>
-                <li><strong>FEAT-027/AC-024</strong> — e-015, e-016, e-017</li>
                 <li>
-                  <strong>FEAT-027/NFR-002</strong> — e-018, e-019, e-020, e-021, e-022, e-023
+                  <strong>FEAT-028/AC-024</strong> — npm test -- --testPathPattern=goToMission
+                  --no-coverage
                 </li>
-                <li><strong>FEAT-027/NFR-004</strong> — e-024, e-025</li>
-                <li><strong>FEAT-027/NFR-007</strong> — e-025, e-026</li>
+                <li>
+                  <strong>FEAT-028/AC-025</strong> — npm test -- --testPathPattern=goToMission
+                  --no-coverage
+                </li>
+                <li>
+                  <strong>FEAT-028/AC-026</strong> — npm test -- --testPathPattern=missionTargets
+                  --no-coverage
+                </li>
+                <li>
+                  <strong>FEAT-028/AC-027</strong> — npm test -- --testPathPattern=goToMission
+                  --no-coverage
+                </li>
+                <li>
+                  <strong>FEAT-028/AC-028</strong> — npm test -- --testPathPattern=goToMission
+                  --no-coverage
+                </li>
+                <li>
+                  <strong>FEAT-028/AC-029</strong> — npm test --
+                  --testPathPattern=goToMission.concurrent --no-coverage
+                </li>
+                <li>
+                  <strong>FEAT-028/AC-030</strong> — npm test -- --testPathPattern=goToMission
+                  --no-coverage
+                </li>
+                <li>
+                  <strong>FEAT-028/NFR-004</strong> — npm run typecheck, npm run lint, npm run
+                  arch:check
+                </li>
               </ul>
             </details>
             <details>
@@ -1153,7 +1321,7 @@
                     <td>0ms</td>
                     <td>50000</td>
                     <td>$0.11</td>
-                    <td>done</td>
+                    <td>needs_review</td>
                   </tr>
                   <tr>
                     <td>dev</td>
@@ -1204,9 +1372,7 @@
             </details>
             <details>
               <summary>PM note</summary>
-              <p class="story-card__pmnote">
-                orchestrator-reconciliation: entry retro-added during audit-fix sweep
-              </p>
+              <p class="story-card__pmnote">orchestrator-reconciliation: entry retro-added</p>
             </details>
           </div>
         </article>
@@ -1220,37 +1386,34 @@
           <div class="story-card__stats">
             <span class="story-card__stat"
               ><span class="story-card__stat-label">time</span>
-              <span class="story-card__stat-value">30m</span></span
+              <span class="story-card__stat-value">1h20m</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">cost</span>
-              <span class="story-card__stat-value">$1.98</span></span
+              <span class="story-card__stat-value">$0.66</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">tasks</span>
               <span class="story-card__stat-value">1</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">ACs</span>
-              <span class="story-card__stat-value">8</span></span
+              <span class="story-card__stat-value">2</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">files</span>
-              <span class="story-card__stat-value">7</span></span
-            ><span class="story-card__pipeline">code-reviewer → dev → qa</span>
+              <span class="story-card__stat-value">5</span></span
+            ><span class="story-card__pipeline">dev → logic-reviewer → qa → code-reviewer</span>
           </div>
           <aside class="story-card__retry" role="status">
-            ⚠ dev retried 3× — loop 2: orchestrator-reconciliation: entry retro-added during
-            audit-fix sweep; loop 3: orchestrator-reconciliation: entry retro-added during audit-fix
-            sweep; loop 4: orchestrator-reconciliation: entry retro-added during audit-fix sweep
+            ⚠ logic-reviewer retried 1× — loop 2: orchestrator-reconciliation: entry retro-added
           </aside>
           <aside class="story-card__retry" role="status">
-            ⚠ qa retried 2× — loop 5: orchestrator-reconciliation: entry retro-added during
-            audit-fix sweep; loop 6: orchestrator-reconciliation: entry retro-added during audit-fix
-            sweep
+            ⚠ qa retried 1× — loop 3: orchestrator-reconciliation: entry retro-added
           </aside>
-          <p class="story-card__summary">
-            orchestrator-reconciliation: entry retro-added during audit-fix sweep
-          </p>
+          <aside class="story-card__retry" role="status">
+            ⚠ code-reviewer retried 1× — loop 4: orchestrator-reconciliation: gap-fill batch
+          </aside>
+          <p class="story-card__summary">orchestrator-reconciliation: gap-fill batch</p>
           <div class="story-card__drilldowns">
             <details>
-              <summary>Files changed (7)</summary>
+              <summary>Files changed (5)</summary>
               <table class="story-card__files">
                 <thead>
                   <tr>
@@ -1261,37 +1424,27 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <td>web/src/features/onboarding/components/QuestSeal.tsx</td>
+                    <td>web/src/features/intention/components/IntentionChip.tsx</td>
                     <td>changed</td>
                     <td>T-005</td>
                   </tr>
                   <tr>
-                    <td>web/src/features/onboarding/components/QuestItem.tsx</td>
+                    <td>web/src/features/mood/components/MoodPopover.tsx</td>
                     <td>changed</td>
                     <td>T-005</td>
                   </tr>
                   <tr>
-                    <td>web/src/features/onboarding/components/QuestSticky.tsx</td>
+                    <td>web/src/features/priorities/components/Priorities.tsx</td>
                     <td>changed</td>
                     <td>T-005</td>
                   </tr>
                   <tr>
-                    <td>web/src/features/onboarding/components/CompletionStamp.tsx</td>
+                    <td>web/src/features/agenda/components/Agenda.tsx</td>
                     <td>changed</td>
                     <td>T-005</td>
                   </tr>
                   <tr>
-                    <td>web/src/features/onboarding/components/CompletionStamp.modu…</td>
-                    <td>changed</td>
-                    <td>T-005</td>
-                  </tr>
-                  <tr>
-                    <td>web/src/features/onboarding/components/__tests__/QuestSeal.…</td>
-                    <td>changed</td>
-                    <td>T-005</td>
-                  </tr>
-                  <tr>
-                    <td>web/src/features/onboarding/components/__tests__/Completion…</td>
+                    <td>web/src/features/gratitude/components/Gratitude.tsx</td>
                     <td>changed</td>
                     <td>T-005</td>
                   </tr>
@@ -1299,20 +1452,20 @@
               </table>
             </details>
             <details>
-              <summary>ACs covered (8)</summary>
+              <summary>ACs covered (2)</summary>
               <ul class="story-card__acs">
-                <li><strong>FEAT-027/AC-014</strong> — e-001, e-002, e-003, e-004</li>
-                <li><strong>FEAT-027/AC-015</strong> — e-005, e-006, e-007, e-008</li>
-                <li><strong>FEAT-027/AC-016</strong> — e-009, e-010</li>
-                <li><strong>FEAT-027/AC-017</strong> — e-011, e-012, e-013, e-014</li>
-                <li><strong>FEAT-027/AC-018</strong> — e-015, e-016, e-017</li>
-                <li><strong>FEAT-027/NFR-001</strong> — e-001, e-002, e-003</li>
-                <li><strong>FEAT-027/NFR-003</strong> — e-020, e-021, e-022</li>
-                <li><strong>FEAT-027/NFR-006</strong> — e-023, e-024, e-025, e-026, e-027</li>
+                <li>
+                  <strong>FEAT-028/AC-026</strong> — e-001, e-002, e-003, e-004, e-005, e-006,
+                  e-007, e-008, e-009
+                </li>
+                <li>
+                  <strong>FEAT-028/NFR-001</strong> — e-006, e-007, e-010, e-011, e-012, e-013,
+                  e-014
+                </li>
               </ul>
             </details>
             <details>
-              <summary>Pipeline trace (6 dispatches)</summary>
+              <summary>Pipeline trace (4 dispatches)</summary>
               <table class="story-card__pipeline-trace">
                 <thead>
                   <tr>
@@ -1329,69 +1482,47 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <td>code-reviewer</td>
-                    <td>d-T005-cr-l1</td>
+                    <td>dev</td>
+                    <td>d-T005-dev-l1</td>
                     <td>1</td>
+                    <td>haiku-4-5</td>
+                    <td>high</td>
+                    <td>0ms</td>
+                    <td>50000</td>
+                    <td>$0.11</td>
+                    <td>done</td>
+                  </tr>
+                  <tr>
+                    <td>logic-reviewer</td>
+                    <td>d-T005-lr-l1</td>
+                    <td>2</td>
                     <td>sonnet-4-6</td>
                     <td>medium</td>
                     <td>0ms</td>
                     <td>50000</td>
                     <td>$0.33</td>
                     <td>needs_review</td>
-                  </tr>
-                  <tr>
-                    <td>dev</td>
-                    <td>d-T005-dev-l1</td>
-                    <td>2</td>
-                    <td>sonnet-4-6</td>
-                    <td>high</td>
-                    <td>0ms</td>
-                    <td>50000</td>
-                    <td>$0.33</td>
-                    <td>done</td>
-                  </tr>
-                  <tr>
-                    <td>dev</td>
-                    <td>d-T005-dev-l2</td>
-                    <td>3</td>
-                    <td>sonnet-4-6</td>
-                    <td>high</td>
-                    <td>0ms</td>
-                    <td>50000</td>
-                    <td>$0.33</td>
-                    <td>done</td>
-                  </tr>
-                  <tr>
-                    <td>dev</td>
-                    <td>d-T005-dev-qa-l1</td>
-                    <td>4</td>
-                    <td>sonnet-4-6</td>
-                    <td>high</td>
-                    <td>0ms</td>
-                    <td>50000</td>
-                    <td>$0.33</td>
-                    <td>done</td>
                   </tr>
                   <tr>
                     <td>qa</td>
                     <td>d-T005-qa-l1</td>
-                    <td>5</td>
-                    <td>sonnet-4-6</td>
-                    <td>medium</td>
+                    <td>3</td>
+                    <td>haiku-4-5</td>
+                    <td>high</td>
                     <td>0ms</td>
                     <td>50000</td>
-                    <td>$0.33</td>
-                    <td>needs_review</td>
+                    <td>$0.11</td>
+                    <td>done</td>
                   </tr>
                   <tr>
-                    <td>qa</td>
-                    <td>d-T005-qa-l2</td>
-                    <td>6</td>
-                    <td>sonnet-4-6</td>
-                    <td>medium</td>
+                    <td>code-reviewer</td>
+                    <td>d-T005-cr-l1</td>
+                    <td>4</td>
+                    <td>haiku-4-5</td>
+                    <td>high</td>
                     <td>0ms</td>
                     <td>50000</td>
-                    <td>$0.33</td>
+                    <td>$0.11</td>
                     <td>done</td>
                   </tr>
                 </tbody>
@@ -1399,9 +1530,7 @@
             </details>
             <details>
               <summary>PM note</summary>
-              <p class="story-card__pmnote">
-                orchestrator-reconciliation: entry retro-added during audit-fix sweep
-              </p>
+              <p class="story-card__pmnote">orchestrator-reconciliation: gap-fill batch</p>
             </details>
           </div>
         </article>
@@ -1415,7 +1544,7 @@
           <div class="story-card__stats">
             <span class="story-card__stat"
               ><span class="story-card__stat-label">time</span>
-              <span class="story-card__stat-value">30m</span></span
+              <span class="story-card__stat-value">50m</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">cost</span>
               <span class="story-card__stat-value">$1.21</span></span
@@ -1424,31 +1553,26 @@
               <span class="story-card__stat-value">1</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">ACs</span>
-              <span class="story-card__stat-value">16</span></span
+              <span class="story-card__stat-value">14</span></span
             ><span class="story-card__stat"
               ><span class="story-card__stat-label">files</span>
-              <span class="story-card__stat-value">14</span></span
+              <span class="story-card__stat-value">12</span></span
             ><span class="story-card__pipeline">code-reviewer → dev → logic-reviewer → qa</span>
           </div>
           <aside class="story-card__retry" role="status">
-            ⚠ dev retried 2× — loop 2: orchestrator-reconciliation: entry retro-added during
-            audit-fix sweep; loop 3: orchestrator-reconciliation: entry retro-added during audit-fix
-            sweep
+            ⚠ dev retried 2× — loop 2: orchestrator-reconciliation: entry retro-added; loop 3:
+            orchestrator-reconciliation: entry retro-added
           </aside>
           <aside class="story-card__retry" role="status">
             ⚠ logic-reviewer retried 1× — loop 4: orchestrator-reconciliation: entry retro-added
-            during audit-fix sweep
           </aside>
           <aside class="story-card__retry" role="status">
-            ⚠ qa retried 1× — loop 5: orchestrator-reconciliation: entry retro-added during
-            audit-fix sweep
+            ⚠ qa retried 1× — loop 5: orchestrator-reconciliation: entry retro-added
           </aside>
-          <p class="story-card__summary">
-            orchestrator-reconciliation: entry retro-added during audit-fix sweep
-          </p>
+          <p class="story-card__summary">orchestrator-reconciliation: entry retro-added</p>
           <div class="story-card__drilldowns">
             <details>
-              <summary>Files changed (14)</summary>
+              <summary>Files changed (12)</summary>
               <table class="story-card__files">
                 <thead>
                   <tr>
@@ -1459,27 +1583,17 @@
                 </thead>
                 <tbody>
                   <tr>
+                    <td>web/src/features/onboarding/components/QuestItem.tsx</td>
+                    <td>changed</td>
+                    <td>T-006</td>
+                  </tr>
+                  <tr>
+                    <td>web/src/features/onboarding/components/QuestList.tsx</td>
+                    <td>changed</td>
+                    <td>T-006</td>
+                  </tr>
+                  <tr>
                     <td>web/src/features/onboarding/components/OnboardingQuest.tsx</td>
-                    <td>changed</td>
-                    <td>T-006</td>
-                  </tr>
-                  <tr>
-                    <td>web/src/features/onboarding/components/OnboardingQuest.modu…</td>
-                    <td>changed</td>
-                    <td>T-006</td>
-                  </tr>
-                  <tr>
-                    <td>web/src/features/onboarding/components/__tests__/Onboarding…</td>
-                    <td>changed</td>
-                    <td>T-006</td>
-                  </tr>
-                  <tr>
-                    <td>web/src/features/onboarding/index.ts</td>
-                    <td>changed</td>
-                    <td>T-006</td>
-                  </tr>
-                  <tr>
-                    <td>web/src/features/onboarding/lib/readonlyController.ts</td>
                     <td>changed</td>
                     <td>T-006</td>
                   </tr>
@@ -1489,7 +1603,7 @@
                     <td>T-006</td>
                   </tr>
                   <tr>
-                    <td>web/src/features/daily-page/components/PageNavigator.tsx</td>
+                    <td>web/src/features/onboarding/components/__tests__/Onboarding…</td>
                     <td>changed</td>
                     <td>T-006</td>
                   </tr>
@@ -1499,32 +1613,32 @@
                     <td>T-006</td>
                   </tr>
                   <tr>
-                    <td>web/src/features/daily-page/components/__tests__/DailyPage.…</td>
+                    <td>web/src/features/onboarding/components/__stories__/Onboardi…</td>
                     <td>changed</td>
                     <td>T-006</td>
                   </tr>
                   <tr>
-                    <td>web/src/features/daily-page/components/__tests__/DailyPage.…</td>
+                    <td>web/src/features/onboarding/components/__stories__/Complete…</td>
                     <td>changed</td>
                     <td>T-006</td>
                   </tr>
                   <tr>
-                    <td>web/src/features/daily-page/components/__tests__/DailyPage.…</td>
+                    <td>web/src/features/onboarding/components/__stories__/QuestAct…</td>
                     <td>changed</td>
                     <td>T-006</td>
                   </tr>
                   <tr>
-                    <td>web/src/features/onboarding/components/HelpButtonContainer.…</td>
+                    <td>e2e/real/onboarding.spec.ts</td>
                     <td>changed</td>
                     <td>T-006</td>
                   </tr>
                   <tr>
-                    <td>web/src/features/onboarding/components/CompletionStampConta…</td>
+                    <td>e2e/_helpers/onboarding-helpers.ts</td>
                     <td>changed</td>
                     <td>T-006</td>
                   </tr>
                   <tr>
-                    <td>web/src/features/onboarding/components/__tests__/HelpButton…</td>
+                    <td>web/src/features/onboarding/lib/goToMission.ts</td>
                     <td>changed</td>
                     <td>T-006</td>
                   </tr>
@@ -1532,24 +1646,22 @@
               </table>
             </details>
             <details>
-              <summary>ACs covered (16)</summary>
+              <summary>ACs covered (14)</summary>
               <ul class="story-card__acs">
-                <li><strong>FEAT-027/AC-001</strong> — e-001</li>
-                <li><strong>FEAT-027/AC-002</strong> — e-002</li>
-                <li><strong>FEAT-027/AC-011</strong> — e-003</li>
-                <li><strong>FEAT-027/AC-012</strong> — e-004</li>
-                <li><strong>FEAT-027/AC-016</strong> — e-005</li>
-                <li><strong>FEAT-027/AC-018</strong> — e-006</li>
-                <li><strong>FEAT-027/AC-019</strong> — e-007</li>
-                <li><strong>FEAT-027/AC-020</strong> — e-008</li>
-                <li><strong>FEAT-027/AC-021</strong> — e-009</li>
-                <li><strong>FEAT-027/AC-022</strong> — e-010</li>
-                <li><strong>FEAT-027/AC-023</strong> — e-011</li>
-                <li><strong>FEAT-027/AC-028</strong> — e-012</li>
-                <li><strong>FEAT-027/NFR-001</strong> — e-013</li>
-                <li><strong>FEAT-027/NFR-002</strong> — e-014</li>
-                <li><strong>FEAT-027/NFR-008</strong> — e-015</li>
-                <li><strong>FEAT-027/NFR-009</strong> — e-016</li>
+                <li><strong>FEAT-028/AC-007</strong> — e-001, e-019</li>
+                <li><strong>FEAT-028/AC-008</strong> — e-002, e-003, e-020</li>
+                <li><strong>FEAT-028/AC-011</strong> — e-004, e-021</li>
+                <li><strong>FEAT-028/AC-018</strong> — e-005, e-022</li>
+                <li><strong>FEAT-028/AC-021</strong> — e-006</li>
+                <li><strong>FEAT-028/AC-023</strong> — e-007</li>
+                <li><strong>FEAT-028/AC-024</strong> — e-008</li>
+                <li><strong>FEAT-028/AC-026</strong> — e-009</li>
+                <li><strong>FEAT-028/AC-031</strong> — e-010</li>
+                <li><strong>FEAT-028/AC-036</strong> — e-011</li>
+                <li><strong>FEAT-028/SC-001</strong> — e-012</li>
+                <li><strong>FEAT-028/SC-002</strong> — e-013, e-014, e-015, e-025</li>
+                <li><strong>FEAT-028/NFR-002</strong> — e-016, e-017</li>
+                <li><strong>FEAT-028/NFR-003</strong> — e-018, e-023</li>
               </ul>
             </details>
             <details>
@@ -1578,7 +1690,7 @@
                     <td>0ms</td>
                     <td>50000</td>
                     <td>$0.11</td>
-                    <td>done</td>
+                    <td>needs_review</td>
                   </tr>
                   <tr>
                     <td>dev</td>
@@ -1629,362 +1741,7 @@
             </details>
             <details>
               <summary>PM note</summary>
-              <p class="story-card__pmnote">
-                orchestrator-reconciliation: entry retro-added during audit-fix sweep
-              </p>
-            </details>
-          </div>
-        </article>
-        <article class="story-card story-card--done-retried" aria-label="batch T-007">
-          <header>
-            <h3>T-007</h3>
-            <span class="badge badge-warn" aria-label="status: done with retries"
-              >↻ done (retried)</span
-            >
-          </header>
-          <div class="story-card__stats">
-            <span class="story-card__stat"
-              ><span class="story-card__stat-label">time</span>
-              <span class="story-card__stat-value">30m</span></span
-            ><span class="story-card__stat"
-              ><span class="story-card__stat-label">cost</span>
-              <span class="story-card__stat-value">$1.21</span></span
-            ><span class="story-card__stat"
-              ><span class="story-card__stat-label">tasks</span>
-              <span class="story-card__stat-value">1</span></span
-            ><span class="story-card__stat"
-              ><span class="story-card__stat-label">ACs</span>
-              <span class="story-card__stat-value">9</span></span
-            ><span class="story-card__stat"
-              ><span class="story-card__stat-label">files</span>
-              <span class="story-card__stat-value">6</span></span
-            ><span class="story-card__pipeline">code-reviewer → dev → logic-reviewer → qa</span>
-          </div>
-          <aside class="story-card__retry" role="status">
-            ⚠ dev retried 2× — loop 2: orchestrator-reconciliation: entry retro-added during
-            audit-fix sweep; loop 3: orchestrator-reconciliation: entry retro-added during audit-fix
-            sweep
-          </aside>
-          <aside class="story-card__retry" role="status">
-            ⚠ logic-reviewer retried 1× — loop 4: orchestrator-reconciliation: entry retro-added
-            during audit-fix sweep
-          </aside>
-          <aside class="story-card__retry" role="status">
-            ⚠ qa retried 1× — loop 5: orchestrator-reconciliation: entry retro-added during
-            audit-fix sweep
-          </aside>
-          <p class="story-card__summary">
-            orchestrator-reconciliation: entry retro-added during audit-fix sweep
-          </p>
-          <div class="story-card__drilldowns">
-            <details>
-              <summary>Files changed (6)</summary>
-              <table class="story-card__files">
-                <thead>
-                  <tr>
-                    <th>path</th>
-                    <th>action</th>
-                    <th>tasks</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>web/src/features/onboarding/components/__stories__/Onboardi…</td>
-                    <td>changed</td>
-                    <td>T-007</td>
-                  </tr>
-                  <tr>
-                    <td>web/src/features/onboarding/components/__stories__/Completi…</td>
-                    <td>changed</td>
-                    <td>T-007</td>
-                  </tr>
-                  <tr>
-                    <td>web/src/features/onboarding/components/__stories__/HelpButt…</td>
-                    <td>changed</td>
-                    <td>T-007</td>
-                  </tr>
-                  <tr>
-                    <td>web/src/features/onboarding/components/__stories__/QuestSea…</td>
-                    <td>changed</td>
-                    <td>T-007</td>
-                  </tr>
-                  <tr>
-                    <td>e2e/real/onboarding.spec.ts</td>
-                    <td>changed</td>
-                    <td>T-007</td>
-                  </tr>
-                  <tr>
-                    <td>e2e/_helpers/onboarding-helpers.ts</td>
-                    <td>changed</td>
-                    <td>T-007</td>
-                  </tr>
-                </tbody>
-              </table>
-            </details>
-            <details>
-              <summary>ACs covered (9)</summary>
-              <ul class="story-card__acs">
-                <li><strong>FEAT-027/SC-001</strong> — e-002</li>
-                <li><strong>FEAT-027/SC-002</strong> — e-001</li>
-                <li><strong>FEAT-027/SC-003</strong> — e-008</li>
-                <li><strong>FEAT-027/AC-001</strong> — e-009, e-010, e-011, e-014, e-015</li>
-                <li><strong>FEAT-027/AC-012</strong> — e-007, e-012</li>
-                <li><strong>FEAT-027/AC-017</strong> — e-006</li>
-                <li><strong>FEAT-027/AC-019</strong> — e-005, e-013</li>
-                <li><strong>FEAT-027/AC-023</strong> — e-003</li>
-                <li><strong>FEAT-027/AC-029</strong> — e-004</li>
-              </ul>
-            </details>
-            <details>
-              <summary>Pipeline trace (5 dispatches)</summary>
-              <table class="story-card__pipeline-trace">
-                <thead>
-                  <tr>
-                    <th>role</th>
-                    <th>dispatch_id</th>
-                    <th>loop</th>
-                    <th>model</th>
-                    <th>effort</th>
-                    <th>duration</th>
-                    <th>tokens</th>
-                    <th>cost</th>
-                    <th>status</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>code-reviewer</td>
-                    <td>d-T007-cr-l1</td>
-                    <td>1</td>
-                    <td>haiku-4-5</td>
-                    <td>high</td>
-                    <td>0ms</td>
-                    <td>50000</td>
-                    <td>$0.11</td>
-                    <td>needs_review</td>
-                  </tr>
-                  <tr>
-                    <td>dev</td>
-                    <td>d-T007-dev-l1</td>
-                    <td>2</td>
-                    <td>sonnet-4-6</td>
-                    <td>medium</td>
-                    <td>0ms</td>
-                    <td>50000</td>
-                    <td>$0.33</td>
-                    <td>done</td>
-                  </tr>
-                  <tr>
-                    <td>dev</td>
-                    <td>d-T007-dev-l2</td>
-                    <td>3</td>
-                    <td>sonnet-4-6</td>
-                    <td>high</td>
-                    <td>0ms</td>
-                    <td>50000</td>
-                    <td>$0.33</td>
-                    <td>done</td>
-                  </tr>
-                  <tr>
-                    <td>logic-reviewer</td>
-                    <td>d-T007-lr-l1</td>
-                    <td>4</td>
-                    <td>sonnet-4-6</td>
-                    <td>medium</td>
-                    <td>0ms</td>
-                    <td>50000</td>
-                    <td>$0.33</td>
-                    <td>needs_review</td>
-                  </tr>
-                  <tr>
-                    <td>qa</td>
-                    <td>d-T007-qa-l1</td>
-                    <td>5</td>
-                    <td>haiku-4-5</td>
-                    <td>high</td>
-                    <td>0ms</td>
-                    <td>50000</td>
-                    <td>$0.11</td>
-                    <td>done</td>
-                  </tr>
-                </tbody>
-              </table>
-            </details>
-            <details>
-              <summary>PM note</summary>
-              <p class="story-card__pmnote">
-                orchestrator-reconciliation: entry retro-added during audit-fix sweep
-              </p>
-            </details>
-          </div>
-        </article>
-        <article class="story-card story-card--done-retried" aria-label="batch T-001">
-          <header>
-            <h3>T-001</h3>
-            <span class="badge badge-warn" aria-label="status: done with retries"
-              >↻ done (retried)</span
-            >
-          </header>
-          <div class="story-card__stats">
-            <span class="story-card__stat"
-              ><span class="story-card__stat-label">time</span>
-              <span class="story-card__stat-value">11m</span></span
-            ><span class="story-card__stat"
-              ><span class="story-card__stat-label">cost</span>
-              <span class="story-card__stat-value">$0.70</span></span
-            ><span class="story-card__stat"
-              ><span class="story-card__stat-label">tasks</span>
-              <span class="story-card__stat-value">1</span></span
-            ><span class="story-card__stat"
-              ><span class="story-card__stat-label">ACs</span>
-              <span class="story-card__stat-value">5</span></span
-            ><span class="story-card__stat"
-              ><span class="story-card__stat-label">files</span>
-              <span class="story-card__stat-value">8</span></span
-            ><span class="story-card__pipeline">dev → logic-reviewer → qa</span>
-          </div>
-          <aside class="story-card__retry" role="status">
-            ⚠ dev retried 1× — loop 2: Loop 2 — addressed LR f-002 + f-003; rejected f-001 per spec
-            NFR-007 interpreta…
-          </aside>
-          <p class="story-card__summary">
-            T-001 scaffold complete: types, constants, missions list (8 canonical per AC-006),
-            stripHtml utility with tests, useReducedMotion hook (copy from daily-page to honor
-            NFR-009), and barrel index. All TypeScript strict, no lint errors, 11 tests passing
-            (stripHtml 7 cases + useReducedMotion 4 cases), arch:check compliant.
-          </p>
-          <div class="story-card__drilldowns">
-            <details>
-              <summary>Files changed (8)</summary>
-              <table class="story-card__files">
-                <thead>
-                  <tr>
-                    <th>path</th>
-                    <th>action</th>
-                    <th>tasks</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>web/src/features/onboarding/types.ts</td>
-                    <td>changed</td>
-                    <td>T-001</td>
-                  </tr>
-                  <tr>
-                    <td>web/src/features/onboarding/lib/constants.ts</td>
-                    <td>changed</td>
-                    <td>T-001</td>
-                  </tr>
-                  <tr>
-                    <td>web/src/features/onboarding/lib/missions.ts</td>
-                    <td>changed</td>
-                    <td>T-001</td>
-                  </tr>
-                  <tr>
-                    <td>web/src/features/onboarding/lib/stripHtml.ts</td>
-                    <td>changed</td>
-                    <td>T-001</td>
-                  </tr>
-                  <tr>
-                    <td>web/src/features/onboarding/lib/__tests__/stripHtml.test.ts</td>
-                    <td>changed</td>
-                    <td>T-001</td>
-                  </tr>
-                  <tr>
-                    <td>web/src/features/onboarding/hooks/useReducedMotion.ts</td>
-                    <td>changed</td>
-                    <td>T-001</td>
-                  </tr>
-                  <tr>
-                    <td>web/src/features/onboarding/hooks/__tests__/useReducedMotio…</td>
-                    <td>changed</td>
-                    <td>T-001</td>
-                  </tr>
-                  <tr>
-                    <td>web/src/features/onboarding/index.ts</td>
-                    <td>changed</td>
-                    <td>T-001</td>
-                  </tr>
-                </tbody>
-              </table>
-            </details>
-            <details>
-              <summary>ACs covered (5)</summary>
-              <ul class="story-card__acs">
-                <li><strong>FEAT-027/AC-006</strong> — e-001</li>
-                <li><strong>FEAT-027/AC-024</strong> — e-002</li>
-                <li><strong>FEAT-027/NFR-006</strong> — e-005</li>
-                <li><strong>FEAT-027/NFR-007</strong> — e-001</li>
-                <li><strong>FEAT-027/NFR-009</strong> — e-006</li>
-              </ul>
-            </details>
-            <details>
-              <summary>Pipeline trace (4 dispatches)</summary>
-              <table class="story-card__pipeline-trace">
-                <thead>
-                  <tr>
-                    <th>role</th>
-                    <th>dispatch_id</th>
-                    <th>loop</th>
-                    <th>model</th>
-                    <th>effort</th>
-                    <th>duration</th>
-                    <th>tokens</th>
-                    <th>cost</th>
-                    <th>status</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>dev</td>
-                    <td>d-T001-dev-l1</td>
-                    <td>1</td>
-                    <td>haiku-4-5</td>
-                    <td>high</td>
-                    <td>4m 28s</td>
-                    <td>70495</td>
-                    <td>$0.16</td>
-                    <td>done</td>
-                  </tr>
-                  <tr>
-                    <td>logic-reviewer</td>
-                    <td>d-T001-lr-l1</td>
-                    <td>1</td>
-                    <td>sonnet-4-6</td>
-                    <td>medium</td>
-                    <td>1m 38s</td>
-                    <td>28850</td>
-                    <td>$0.19</td>
-                    <td>needs_review</td>
-                  </tr>
-                  <tr>
-                    <td>dev</td>
-                    <td>d-T001-dev-l2</td>
-                    <td>2</td>
-                    <td>sonnet-4-6</td>
-                    <td>medium</td>
-                    <td>2m 50s</td>
-                    <td>34706</td>
-                    <td>$0.23</td>
-                    <td>done</td>
-                  </tr>
-                  <tr>
-                    <td>qa</td>
-                    <td>d-T001-qa-l1</td>
-                    <td>1</td>
-                    <td>haiku-4-5</td>
-                    <td>high</td>
-                    <td>2m 12s</td>
-                    <td>58481</td>
-                    <td>$0.13</td>
-                    <td>done</td>
-                  </tr>
-                </tbody>
-              </table>
-            </details>
-            <details>
-              <summary>PM note</summary>
-              <p class="story-card__pmnote">All 5 ACs/NFRs pass; T-001 complete</p>
+              <p class="story-card__pmnote">orchestrator-reconciliation: entry retro-added</p>
             </details>
           </div>
         </article>
@@ -1992,13 +1749,13 @@
       <section class="cost-section">
         <header class="cost-header">
           <h2>Cost</h2>
-          <span class="badge badge-pass">coverage 35/35 (100%)</span>
+          <span class="badge badge-pass">coverage 30/30 (100%)</span>
         </header>
         <div class="cost-grid">
           <div class="cost-card">
             <span class="cost-label">Total cost</span>
-            <span class="cost-value">$8.9532</span>
-            <small>$8.9532</small>
+            <span class="cost-value">$7.2600</span>
+            <small>$7.2600</small>
           </div>
           <div class="cost-card">
             <span class="cost-label">$ / AC</span>
@@ -2006,23 +1763,23 @@
           </div>
           <div class="cost-card">
             <span class="cost-label">$ / dispatch</span>
-            <span class="cost-value">$0.2558</span>
-            <small>avg of 35</small>
+            <span class="cost-value">$0.2420</span>
+            <small>avg of 30</small>
           </div>
           <div class="cost-card">
             <span class="cost-label">Tokens</span>
-            <span class="cost-value">1,742,532</span>
-            <small>1,219,772 in / 522,760 out (70/30)</small>
+            <span class="cost-value">1,500,000</span>
+            <small>1,050,000 in / 450,000 out (70/30)</small>
           </div>
           <div class="cost-card">
             <span class="cost-label">Wall-clock</span>
-            <span class="cost-value">11m 7s</span>
-            <small>35 dispatches with usage</small>
+            <span class="cost-value">—</span>
+            <small>30 dispatches with usage</small>
           </div>
           <div class="cost-card">
             <span class="cost-label">Tool uses</span>
-            <span class="cost-value">110</span>
-            <small>~3.1 per dispatch</small>
+            <span class="cost-value">—</span>
+            <small>~0.0 per dispatch</small>
           </div>
         </div>
         <table class="cost-models">
@@ -2040,21 +1797,21 @@
           <tbody>
             <tr>
               <td><code>sonnet-4-6</code></td>
-              <td>24</td>
-              <td>1,163,556</td>
-              <td>4m 27s</td>
-              <td>42</td>
-              <td>$7.6795</td>
-              <td>85.8%</td>
+              <td>18</td>
+              <td>900,000</td>
+              <td>0ms</td>
+              <td>0</td>
+              <td>$5.9400</td>
+              <td>81.8%</td>
             </tr>
             <tr>
               <td><code>haiku-4-5</code></td>
-              <td>11</td>
-              <td>578,976</td>
-              <td>6m 40s</td>
-              <td>68</td>
-              <td>$1.2737</td>
-              <td>14.2%</td>
+              <td>12</td>
+              <td>600,000</td>
+              <td>0ms</td>
+              <td>0</td>
+              <td>$1.3200</td>
+              <td>18.2%</td>
             </tr>
           </tbody>
         </table>
@@ -2074,35 +1831,35 @@
             <tbody>
               <tr>
                 <td><code>dev</code></td>
-                <td>16</td>
-                <td>805,201</td>
-                <td>7m 17s</td>
-                <td>$5.0041</td>
-                <td>55.9%</td>
+                <td>12</td>
+                <td>600,000</td>
+                <td>0ms</td>
+                <td>$3.5200</td>
+                <td>48.5%</td>
               </tr>
               <tr>
                 <td><code>logic-reviewer</code></td>
                 <td>6</td>
-                <td>278,850</td>
-                <td>1m 38s</td>
-                <td>$1.8404</td>
-                <td>20.6%</td>
-              </tr>
-              <tr>
-                <td><code>qa</code></td>
-                <td>8</td>
-                <td>408,481</td>
-                <td>2m 12s</td>
-                <td>$1.3387</td>
-                <td>15.0%</td>
+                <td>300,000</td>
+                <td>0ms</td>
+                <td>$1.9800</td>
+                <td>27.3%</td>
               </tr>
               <tr>
                 <td><code>code-reviewer</code></td>
-                <td>5</td>
-                <td>250,000</td>
+                <td>6</td>
+                <td>300,000</td>
                 <td>0ms</td>
-                <td>$0.7700</td>
-                <td>8.6%</td>
+                <td>$0.8800</td>
+                <td>12.1%</td>
+              </tr>
+              <tr>
+                <td><code>qa</code></td>
+                <td>6</td>
+                <td>300,000</td>
+                <td>0ms</td>
+                <td>$0.8800</td>
+                <td>12.1%</td>
               </tr>
             </tbody>
           </table>
@@ -2122,27 +1879,19 @@
             </thead>
             <tbody>
               <tr>
-                <td><code>unattributed</code></td>
-                <td>31</td>
-                <td>1,550,000</td>
-                <td>0ms</td>
-                <td>$8.2500</td>
-                <td>92.1%</td>
-              </tr>
-              <tr>
                 <td><code>implementation</code></td>
-                <td>4</td>
-                <td>192,532</td>
-                <td>11m 7s</td>
-                <td>$0.7032</td>
-                <td>7.9%</td>
+                <td>30</td>
+                <td>1,500,000</td>
+                <td>0ms</td>
+                <td>$7.2600</td>
+                <td>100.0%</td>
               </tr>
             </tbody>
           </table>
         </details>
         <p class="cost-note">
           <em
-            >70/30 input/output split assumed; harness reports only total_tokens; 35 of 35
+            >70/30 input/output split assumed; harness reports only total_tokens; 30 of 30
             dispatches included in cost</em
           >
         </p>
@@ -2170,13 +1919,22 @@
               </thead>
               <tbody>
                 <tr>
+                  <td>d-T001-dev-l1</td>
+                  <td>dev</td>
+                  <td>done</td>
+                  <td>1</td>
+                  <td>50000</td>
+                  <td>0ms</td>
+                  <td>orchestrator-reconciliation: entry retro-added</td>
+                </tr>
+                <tr>
                   <td>d-T002-cr-l1</td>
                   <td>code-reviewer</td>
                   <td>needs_review</td>
                   <td>1</td>
                   <td>50000</td>
                   <td>0ms</td>
-                  <td>orchestrator-reconciliation: entry retro-added during aud...</td>
+                  <td>orchestrator-reconciliation: entry retro-added</td>
                 </tr>
                 <tr>
                   <td>d-T002-dev-l1</td>
@@ -2185,7 +1943,7 @@
                   <td>2</td>
                   <td>50000</td>
                   <td>0ms</td>
-                  <td>orchestrator-reconciliation: entry retro-added during aud...</td>
+                  <td>orchestrator-reconciliation: entry retro-added</td>
                 </tr>
                 <tr>
                   <td>d-T002-dev-l2</td>
@@ -2194,7 +1952,7 @@
                   <td>3</td>
                   <td>50000</td>
                   <td>0ms</td>
-                  <td>orchestrator-reconciliation: entry retro-added during aud...</td>
+                  <td>orchestrator-reconciliation: entry retro-added</td>
                 </tr>
                 <tr>
                   <td>d-T002-lr-l1</td>
@@ -2203,7 +1961,7 @@
                   <td>4</td>
                   <td>50000</td>
                   <td>0ms</td>
-                  <td>orchestrator-reconciliation: entry retro-added during aud...</td>
+                  <td>orchestrator-reconciliation: entry retro-added</td>
                 </tr>
                 <tr>
                   <td>d-T002-qa-l1</td>
@@ -2212,61 +1970,61 @@
                   <td>5</td>
                   <td>50000</td>
                   <td>0ms</td>
-                  <td>orchestrator-reconciliation: entry retro-added during aud...</td>
+                  <td>orchestrator-reconciliation: entry retro-added</td>
+                </tr>
+                <tr>
+                  <td>d-T003-cr-l1</td>
+                  <td>code-reviewer</td>
+                  <td>needs_review</td>
+                  <td>1</td>
+                  <td>50000</td>
+                  <td>0ms</td>
+                  <td>orchestrator-reconciliation: entry retro-added</td>
                 </tr>
                 <tr>
                   <td>d-T003-dev-l1</td>
                   <td>dev</td>
                   <td>done</td>
-                  <td>1</td>
+                  <td>2</td>
                   <td>50000</td>
                   <td>0ms</td>
-                  <td>orchestrator-reconciliation: entry retro-added during aud...</td>
+                  <td>orchestrator-reconciliation: entry retro-added</td>
                 </tr>
                 <tr>
                   <td>d-T003-dev-l2</td>
                   <td>dev</td>
                   <td>done</td>
-                  <td>2</td>
+                  <td>3</td>
                   <td>50000</td>
                   <td>0ms</td>
-                  <td>orchestrator-reconciliation: entry retro-added during aud...</td>
+                  <td>orchestrator-reconciliation: entry retro-added</td>
                 </tr>
                 <tr>
                   <td>d-T003-dev-l3</td>
                   <td>dev</td>
                   <td>done</td>
-                  <td>3</td>
+                  <td>4</td>
                   <td>50000</td>
                   <td>0ms</td>
-                  <td>orchestrator-reconciliation: entry retro-added during aud...</td>
+                  <td>orchestrator-reconciliation: entry retro-added</td>
                 </tr>
                 <tr>
                   <td>d-T003-lr-l1</td>
                   <td>logic-reviewer</td>
                   <td>needs_review</td>
-                  <td>4</td>
-                  <td>50000</td>
-                  <td>0ms</td>
-                  <td>orchestrator-reconciliation: entry retro-added during aud...</td>
-                </tr>
-                <tr>
-                  <td>d-T003-qa-l1</td>
-                  <td>qa</td>
-                  <td>done</td>
                   <td>5</td>
                   <td>50000</td>
                   <td>0ms</td>
-                  <td>orchestrator-reconciliation: entry retro-added during aud...</td>
+                  <td>orchestrator-reconciliation: entry retro-added</td>
                 </tr>
                 <tr>
                   <td>d-T004-cr-l1</td>
                   <td>code-reviewer</td>
-                  <td>done</td>
+                  <td>needs_review</td>
                   <td>1</td>
                   <td>50000</td>
                   <td>0ms</td>
-                  <td>orchestrator-reconciliation: entry retro-added during aud...</td>
+                  <td>orchestrator-reconciliation: entry retro-added</td>
                 </tr>
                 <tr>
                   <td>d-T004-dev-l1</td>
@@ -2275,7 +2033,7 @@
                   <td>2</td>
                   <td>50000</td>
                   <td>0ms</td>
-                  <td>orchestrator-reconciliation: entry retro-added during aud...</td>
+                  <td>orchestrator-reconciliation: entry retro-added</td>
                 </tr>
                 <tr>
                   <td>d-T004-dev-l2</td>
@@ -2284,7 +2042,7 @@
                   <td>3</td>
                   <td>50000</td>
                   <td>0ms</td>
-                  <td>orchestrator-reconciliation: entry retro-added during aud...</td>
+                  <td>orchestrator-reconciliation: entry retro-added</td>
                 </tr>
                 <tr>
                   <td>d-T004-lr-l1</td>
@@ -2293,7 +2051,7 @@
                   <td>4</td>
                   <td>50000</td>
                   <td>0ms</td>
-                  <td>orchestrator-reconciliation: entry retro-added during aud...</td>
+                  <td>orchestrator-reconciliation: entry retro-added</td>
                 </tr>
                 <tr>
                   <td>d-T004-qa-l1</td>
@@ -2302,70 +2060,43 @@
                   <td>5</td>
                   <td>50000</td>
                   <td>0ms</td>
-                  <td>orchestrator-reconciliation: entry retro-added during aud...</td>
-                </tr>
-                <tr>
-                  <td>d-T005-cr-l1</td>
-                  <td>code-reviewer</td>
-                  <td>needs_review</td>
-                  <td>1</td>
-                  <td>50000</td>
-                  <td>0ms</td>
-                  <td>orchestrator-reconciliation: entry retro-added during aud...</td>
+                  <td>orchestrator-reconciliation: entry retro-added</td>
                 </tr>
                 <tr>
                   <td>d-T005-dev-l1</td>
                   <td>dev</td>
                   <td>done</td>
+                  <td>1</td>
+                  <td>50000</td>
+                  <td>0ms</td>
+                  <td>orchestrator-reconciliation: entry retro-added</td>
+                </tr>
+                <tr>
+                  <td>d-T005-lr-l1</td>
+                  <td>logic-reviewer</td>
+                  <td>needs_review</td>
                   <td>2</td>
                   <td>50000</td>
                   <td>0ms</td>
-                  <td>orchestrator-reconciliation: entry retro-added during aud...</td>
-                </tr>
-                <tr>
-                  <td>d-T005-dev-l2</td>
-                  <td>dev</td>
-                  <td>done</td>
-                  <td>3</td>
-                  <td>50000</td>
-                  <td>0ms</td>
-                  <td>orchestrator-reconciliation: entry retro-added during aud...</td>
-                </tr>
-                <tr>
-                  <td>d-T005-dev-qa-l1</td>
-                  <td>dev</td>
-                  <td>done</td>
-                  <td>4</td>
-                  <td>50000</td>
-                  <td>0ms</td>
-                  <td>orchestrator-reconciliation: entry retro-added during aud...</td>
+                  <td>orchestrator-reconciliation: entry retro-added</td>
                 </tr>
                 <tr>
                   <td>d-T005-qa-l1</td>
                   <td>qa</td>
-                  <td>needs_review</td>
-                  <td>5</td>
-                  <td>50000</td>
-                  <td>0ms</td>
-                  <td>orchestrator-reconciliation: entry retro-added during aud...</td>
-                </tr>
-                <tr>
-                  <td>d-T005-qa-l2</td>
-                  <td>qa</td>
                   <td>done</td>
-                  <td>6</td>
+                  <td>3</td>
                   <td>50000</td>
                   <td>0ms</td>
-                  <td>orchestrator-reconciliation: entry retro-added during aud...</td>
+                  <td>orchestrator-reconciliation: entry retro-added</td>
                 </tr>
                 <tr>
                   <td>d-T006-cr-l1</td>
                   <td>code-reviewer</td>
-                  <td>done</td>
+                  <td>needs_review</td>
                   <td>1</td>
                   <td>50000</td>
                   <td>0ms</td>
-                  <td>orchestrator-reconciliation: entry retro-added during aud...</td>
+                  <td>orchestrator-reconciliation: entry retro-added</td>
                 </tr>
                 <tr>
                   <td>d-T006-dev-l1</td>
@@ -2374,7 +2105,7 @@
                   <td>2</td>
                   <td>50000</td>
                   <td>0ms</td>
-                  <td>orchestrator-reconciliation: entry retro-added during aud...</td>
+                  <td>orchestrator-reconciliation: entry retro-added</td>
                 </tr>
                 <tr>
                   <td>d-T006-dev-l2</td>
@@ -2383,7 +2114,7 @@
                   <td>3</td>
                   <td>50000</td>
                   <td>0ms</td>
-                  <td>orchestrator-reconciliation: entry retro-added during aud...</td>
+                  <td>orchestrator-reconciliation: entry retro-added</td>
                 </tr>
                 <tr>
                   <td>d-T006-lr-l1</td>
@@ -2392,7 +2123,7 @@
                   <td>4</td>
                   <td>50000</td>
                   <td>0ms</td>
-                  <td>orchestrator-reconciliation: entry retro-added during aud...</td>
+                  <td>orchestrator-reconciliation: entry retro-added</td>
                 </tr>
                 <tr>
                   <td>d-T006-qa-l1</td>
@@ -2401,88 +2132,61 @@
                   <td>5</td>
                   <td>50000</td>
                   <td>0ms</td>
-                  <td>orchestrator-reconciliation: entry retro-added during aud...</td>
+                  <td>orchestrator-reconciliation: entry retro-added</td>
                 </tr>
                 <tr>
-                  <td>d-T007-cr-l1</td>
+                  <td>d-T001-cr-l1</td>
                   <td>code-reviewer</td>
                   <td>needs_review</td>
-                  <td>1</td>
-                  <td>50000</td>
-                  <td>0ms</td>
-                  <td>orchestrator-reconciliation: entry retro-added during aud...</td>
-                </tr>
-                <tr>
-                  <td>d-T007-dev-l1</td>
-                  <td>dev</td>
-                  <td>done</td>
                   <td>2</td>
                   <td>50000</td>
                   <td>0ms</td>
-                  <td>orchestrator-reconciliation: entry retro-added during aud...</td>
-                </tr>
-                <tr>
-                  <td>d-T007-dev-l2</td>
-                  <td>dev</td>
-                  <td>done</td>
-                  <td>3</td>
-                  <td>50000</td>
-                  <td>0ms</td>
-                  <td>orchestrator-reconciliation: entry retro-added during aud...</td>
-                </tr>
-                <tr>
-                  <td>d-T007-lr-l1</td>
-                  <td>logic-reviewer</td>
-                  <td>needs_review</td>
-                  <td>4</td>
-                  <td>50000</td>
-                  <td>0ms</td>
-                  <td>orchestrator-reconciliation: entry retro-added during aud...</td>
-                </tr>
-                <tr>
-                  <td>d-T007-qa-l1</td>
-                  <td>qa</td>
-                  <td>done</td>
-                  <td>5</td>
-                  <td>50000</td>
-                  <td>0ms</td>
-                  <td>orchestrator-reconciliation: entry retro-added during aud...</td>
-                </tr>
-                <tr>
-                  <td>d-T001-dev-l1</td>
-                  <td>dev</td>
-                  <td>done</td>
-                  <td>1</td>
-                  <td>70495</td>
-                  <td>4m 28s</td>
-                  <td>—</td>
-                </tr>
-                <tr>
-                  <td>d-T001-lr-l1</td>
-                  <td>logic-reviewer</td>
-                  <td>needs_review</td>
-                  <td>1</td>
-                  <td>28850</td>
-                  <td>1m 38s</td>
-                  <td>3 minor findings — fix f-002 (whitespace-only tag test) +...</td>
+                  <td>orchestrator-reconciliation: gap-fill batch</td>
                 </tr>
                 <tr>
                   <td>d-T001-dev-l2</td>
                   <td>dev</td>
                   <td>done</td>
-                  <td>2</td>
-                  <td>34706</td>
-                  <td>2m 50s</td>
-                  <td>Loop 2 — addressed LR f-002 + f-003; rejected f-001 per s...</td>
+                  <td>3</td>
+                  <td>50000</td>
+                  <td>0ms</td>
+                  <td>orchestrator-reconciliation: gap-fill batch</td>
+                </tr>
+                <tr>
+                  <td>d-T001-lr-l1</td>
+                  <td>logic-reviewer</td>
+                  <td>needs_review</td>
+                  <td>4</td>
+                  <td>50000</td>
+                  <td>0ms</td>
+                  <td>orchestrator-reconciliation: gap-fill batch</td>
                 </tr>
                 <tr>
                   <td>d-T001-qa-l1</td>
                   <td>qa</td>
                   <td>done</td>
-                  <td>1</td>
-                  <td>58481</td>
-                  <td>2m 12s</td>
-                  <td>All 5 ACs/NFRs pass; T-001 complete</td>
+                  <td>5</td>
+                  <td>50000</td>
+                  <td>0ms</td>
+                  <td>orchestrator-reconciliation: gap-fill batch</td>
+                </tr>
+                <tr>
+                  <td>d-T003-qa-l1</td>
+                  <td>qa</td>
+                  <td>done</td>
+                  <td>6</td>
+                  <td>50000</td>
+                  <td>0ms</td>
+                  <td>orchestrator-reconciliation: gap-fill batch</td>
+                </tr>
+                <tr>
+                  <td>d-T005-cr-l1</td>
+                  <td>code-reviewer</td>
+                  <td>done</td>
+                  <td>4</td>
+                  <td>50000</td>
+                  <td>0ms</td>
+                  <td>orchestrator-reconciliation: gap-fill batch</td>
                 </tr>
               </tbody>
             </table>
@@ -2550,10 +2254,10 @@
               <tbody>
                 <tr>
                   <td>implementation</td>
-                  <td>00:03:00</td>
-                  <td>2026-05-17 01:30:00</td>
-                  <td>87m</td>
-                  <td>done</td>
+                  <td>02:05:00</td>
+                  <td>running</td>
+                  <td>running</td>
+                  <td>running</td>
                 </tr>
               </tbody>
             </table>
@@ -2565,11 +2269,15 @@
         <details>
           <summary>View raw Markdown report</summary>
           <div class="md-embed">
-            <h1>Onboarding Roteiro do Diário (gameficado, paper aesthetic) — FEAT-027</h1>
+            <h1>
+              Onboarding polish iteration (legibilidade, autosave-gate, per-day, action buttons,
+              completed-day skin) — FEAT-028
+            </h1>
             <blockquote>
               <p>
-                Feature: Onboarding Roteiro do Diário (gameficado, paper aesthetic) Task ID:
-                FEAT-027 Phase: done Generated at: 2026-05-17T17:48:34.183Z
+                Feature: Onboarding polish iteration (legibilidade, autosave-gate, per-day, action
+                buttons, completed-day skin) Task ID: FEAT-028 Phase: implementation Generated at:
+                2026-05-17T17:48:34.183Z
               </p>
             </blockquote>
             <h2>Insights</h2>
@@ -2587,24 +2295,24 @@
             <h2>Cost breakdown</h2>
             <p>
               <em
-                >70/30 input/output split assumed; harness reports only total_tokens; 35 of 35
+                >70/30 input/output split assumed; harness reports only total_tokens; 30 of 30
                 dispatches included in cost</em
               >
             </p>
             <ul>
               <li>
-                Total tokens: 1742532
+                Total tokens: 1500000
                 <ul>
-                  <li>Estimated input (70%): 1219772</li>
-                  <li>Estimated output (30%): 522760</li>
+                  <li>Estimated input (70%): 1050000</li>
+                  <li>Estimated output (30%): 450000</li>
                 </ul>
               </li>
-              <li>Estimated cost USD total: $8.9532</li>
+              <li>Estimated cost USD total: $7.2600</li>
               <li>Cost per AC: n/a (no ACs defined)</li>
-              <li>Cost per dispatch (avg): $0.2558</li>
-              <li>Wall-clock duration: 11m 7s</li>
-              <li>Tool uses total: 110</li>
-              <li>Coverage: 35 of 35 dispatches included in cost calculation</li>
+              <li>Cost per dispatch (avg): $0.2420</li>
+              <li>Wall-clock duration: n/a</li>
+              <li>Tool uses total: n/a</li>
+              <li>Coverage: 30 of 30 dispatches included in cost calculation</li>
             </ul>
             <h2>Repo health snapshot</h2>
             <p><em>Measured at: 2026-05-17</em></p>
@@ -2660,6 +2368,16 @@
               </thead>
               <tbody>
                 <tr>
+                  <td>d-T001-de...</td>
+                  <td>dev</td>
+                  <td>done</td>
+                  <td>1</td>
+                  <td>50000</td>
+                  <td>$0.3300</td>
+                  <td>0ms</td>
+                  <td>orchestrator-reconciliation: entry retro-added</td>
+                </tr>
+                <tr>
                   <td>d-T002-cr-l1</td>
                   <td>code-reviewer</td>
                   <td>needs_review</td>
@@ -2667,7 +2385,7 @@
                   <td>50000</td>
                   <td>$0.1100</td>
                   <td>0ms</td>
-                  <td>orchestrator-reconciliation: entry retro-added during audit-fix sweep</td>
+                  <td>orchestrator-reconciliation: entry retro-added</td>
                 </tr>
                 <tr>
                   <td>d-T002-de...</td>
@@ -2675,9 +2393,9 @@
                   <td>done</td>
                   <td>2</td>
                   <td>50000</td>
-                  <td>$0.3300</td>
+                  <td>$0.1100</td>
                   <td>0ms</td>
-                  <td>orchestrator-reconciliation: entry retro-added during audit-fix sweep</td>
+                  <td>orchestrator-reconciliation: entry retro-added</td>
                 </tr>
                 <tr>
                   <td>d-T002-de...</td>
@@ -2687,7 +2405,7 @@
                   <td>50000</td>
                   <td>$0.3300</td>
                   <td>0ms</td>
-                  <td>orchestrator-reconciliation: entry retro-added during audit-fix sweep</td>
+                  <td>orchestrator-reconciliation: entry retro-added</td>
                 </tr>
                 <tr>
                   <td>d-T002-lr-l1</td>
@@ -2697,7 +2415,7 @@
                   <td>50000</td>
                   <td>$0.3300</td>
                   <td>0ms</td>
-                  <td>orchestrator-reconciliation: entry retro-added during audit-fix sweep</td>
+                  <td>orchestrator-reconciliation: entry retro-added</td>
                 </tr>
                 <tr>
                   <td>d-T002-qa-l1</td>
@@ -2707,17 +2425,17 @@
                   <td>50000</td>
                   <td>$0.1100</td>
                   <td>0ms</td>
-                  <td>orchestrator-reconciliation: entry retro-added during audit-fix sweep</td>
+                  <td>orchestrator-reconciliation: entry retro-added</td>
                 </tr>
                 <tr>
-                  <td>d-T003-de...</td>
-                  <td>dev</td>
-                  <td>done</td>
+                  <td>d-T003-cr-l1</td>
+                  <td>code-reviewer</td>
+                  <td>needs_review</td>
                   <td>1</td>
                   <td>50000</td>
-                  <td>$0.3300</td>
+                  <td>$0.1100</td>
                   <td>0ms</td>
-                  <td>orchestrator-reconciliation: entry retro-added during audit-fix sweep</td>
+                  <td>orchestrator-reconciliation: entry retro-added</td>
                 </tr>
                 <tr>
                   <td>d-T003-de...</td>
@@ -2727,7 +2445,7 @@
                   <td>50000</td>
                   <td>$0.3300</td>
                   <td>0ms</td>
-                  <td>orchestrator-reconciliation: entry retro-added during audit-fix sweep</td>
+                  <td>orchestrator-reconciliation: entry retro-added</td>
                 </tr>
                 <tr>
                   <td>d-T003-de...</td>
@@ -2737,37 +2455,37 @@
                   <td>50000</td>
                   <td>$0.3300</td>
                   <td>0ms</td>
-                  <td>orchestrator-reconciliation: entry retro-added during audit-fix sweep</td>
+                  <td>orchestrator-reconciliation: entry retro-added</td>
+                </tr>
+                <tr>
+                  <td>d-T003-de...</td>
+                  <td>dev</td>
+                  <td>done</td>
+                  <td>4</td>
+                  <td>50000</td>
+                  <td>$0.3300</td>
+                  <td>0ms</td>
+                  <td>orchestrator-reconciliation: entry retro-added</td>
                 </tr>
                 <tr>
                   <td>d-T003-lr-l1</td>
                   <td>logic-reviewer</td>
                   <td>needs_review</td>
-                  <td>4</td>
+                  <td>5</td>
                   <td>50000</td>
                   <td>$0.3300</td>
                   <td>0ms</td>
-                  <td>orchestrator-reconciliation: entry retro-added during audit-fix sweep</td>
-                </tr>
-                <tr>
-                  <td>d-T003-qa-l1</td>
-                  <td>qa</td>
-                  <td>done</td>
-                  <td>5</td>
-                  <td>50000</td>
-                  <td>$0.1100</td>
-                  <td>0ms</td>
-                  <td>orchestrator-reconciliation: entry retro-added during audit-fix sweep</td>
+                  <td>orchestrator-reconciliation: entry retro-added</td>
                 </tr>
                 <tr>
                   <td>d-T004-cr-l1</td>
                   <td>code-reviewer</td>
-                  <td>done</td>
+                  <td>needs_review</td>
                   <td>1</td>
                   <td>50000</td>
                   <td>$0.1100</td>
                   <td>0ms</td>
-                  <td>orchestrator-reconciliation: entry retro-added during audit-fix sweep</td>
+                  <td>orchestrator-reconciliation: entry retro-added</td>
                 </tr>
                 <tr>
                   <td>d-T004-de...</td>
@@ -2777,7 +2495,7 @@
                   <td>50000</td>
                   <td>$0.3300</td>
                   <td>0ms</td>
-                  <td>orchestrator-reconciliation: entry retro-added during audit-fix sweep</td>
+                  <td>orchestrator-reconciliation: entry retro-added</td>
                 </tr>
                 <tr>
                   <td>d-T004-de...</td>
@@ -2787,7 +2505,7 @@
                   <td>50000</td>
                   <td>$0.3300</td>
                   <td>0ms</td>
-                  <td>orchestrator-reconciliation: entry retro-added during audit-fix sweep</td>
+                  <td>orchestrator-reconciliation: entry retro-added</td>
                 </tr>
                 <tr>
                   <td>d-T004-lr-l1</td>
@@ -2797,7 +2515,7 @@
                   <td>50000</td>
                   <td>$0.3300</td>
                   <td>0ms</td>
-                  <td>orchestrator-reconciliation: entry retro-added during audit-fix sweep</td>
+                  <td>orchestrator-reconciliation: entry retro-added</td>
                 </tr>
                 <tr>
                   <td>d-T004-qa-l1</td>
@@ -2807,77 +2525,47 @@
                   <td>50000</td>
                   <td>$0.1100</td>
                   <td>0ms</td>
-                  <td>orchestrator-reconciliation: entry retro-added during audit-fix sweep</td>
-                </tr>
-                <tr>
-                  <td>d-T005-cr-l1</td>
-                  <td>code-reviewer</td>
-                  <td>needs_review</td>
-                  <td>1</td>
-                  <td>50000</td>
-                  <td>$0.3300</td>
-                  <td>0ms</td>
-                  <td>orchestrator-reconciliation: entry retro-added during audit-fix sweep</td>
+                  <td>orchestrator-reconciliation: entry retro-added</td>
                 </tr>
                 <tr>
                   <td>d-T005-de...</td>
                   <td>dev</td>
-                  <td>done</td>
-                  <td>2</td>
-                  <td>50000</td>
-                  <td>$0.3300</td>
-                  <td>0ms</td>
-                  <td>orchestrator-reconciliation: entry retro-added during audit-fix sweep</td>
-                </tr>
-                <tr>
-                  <td>d-T005-de...</td>
-                  <td>dev</td>
-                  <td>done</td>
-                  <td>3</td>
-                  <td>50000</td>
-                  <td>$0.3300</td>
-                  <td>0ms</td>
-                  <td>orchestrator-reconciliation: entry retro-added during audit-fix sweep</td>
-                </tr>
-                <tr>
-                  <td>d-T005-de...</td>
-                  <td>dev</td>
-                  <td>done</td>
-                  <td>4</td>
-                  <td>50000</td>
-                  <td>$0.3300</td>
-                  <td>0ms</td>
-                  <td>orchestrator-reconciliation: entry retro-added during audit-fix sweep</td>
-                </tr>
-                <tr>
-                  <td>d-T005-qa-l1</td>
-                  <td>qa</td>
-                  <td>needs_review</td>
-                  <td>5</td>
-                  <td>50000</td>
-                  <td>$0.3300</td>
-                  <td>0ms</td>
-                  <td>orchestrator-reconciliation: entry retro-added during audit-fix sweep</td>
-                </tr>
-                <tr>
-                  <td>d-T005-qa-l2</td>
-                  <td>qa</td>
-                  <td>done</td>
-                  <td>6</td>
-                  <td>50000</td>
-                  <td>$0.3300</td>
-                  <td>0ms</td>
-                  <td>orchestrator-reconciliation: entry retro-added during audit-fix sweep</td>
-                </tr>
-                <tr>
-                  <td>d-T006-cr-l1</td>
-                  <td>code-reviewer</td>
                   <td>done</td>
                   <td>1</td>
                   <td>50000</td>
                   <td>$0.1100</td>
                   <td>0ms</td>
-                  <td>orchestrator-reconciliation: entry retro-added during audit-fix sweep</td>
+                  <td>orchestrator-reconciliation: entry retro-added</td>
+                </tr>
+                <tr>
+                  <td>d-T005-lr-l1</td>
+                  <td>logic-reviewer</td>
+                  <td>needs_review</td>
+                  <td>2</td>
+                  <td>50000</td>
+                  <td>$0.3300</td>
+                  <td>0ms</td>
+                  <td>orchestrator-reconciliation: entry retro-added</td>
+                </tr>
+                <tr>
+                  <td>d-T005-qa-l1</td>
+                  <td>qa</td>
+                  <td>done</td>
+                  <td>3</td>
+                  <td>50000</td>
+                  <td>$0.1100</td>
+                  <td>0ms</td>
+                  <td>orchestrator-reconciliation: entry retro-added</td>
+                </tr>
+                <tr>
+                  <td>d-T006-cr-l1</td>
+                  <td>code-reviewer</td>
+                  <td>needs_review</td>
+                  <td>1</td>
+                  <td>50000</td>
+                  <td>$0.1100</td>
+                  <td>0ms</td>
+                  <td>orchestrator-reconciliation: entry retro-added</td>
                 </tr>
                 <tr>
                   <td>d-T006-de...</td>
@@ -2887,7 +2575,7 @@
                   <td>50000</td>
                   <td>$0.3300</td>
                   <td>0ms</td>
-                  <td>orchestrator-reconciliation: entry retro-added during audit-fix sweep</td>
+                  <td>orchestrator-reconciliation: entry retro-added</td>
                 </tr>
                 <tr>
                   <td>d-T006-de...</td>
@@ -2897,7 +2585,7 @@
                   <td>50000</td>
                   <td>$0.3300</td>
                   <td>0ms</td>
-                  <td>orchestrator-reconciliation: entry retro-added during audit-fix sweep</td>
+                  <td>orchestrator-reconciliation: entry retro-added</td>
                 </tr>
                 <tr>
                   <td>d-T006-lr-l1</td>
@@ -2907,7 +2595,7 @@
                   <td>50000</td>
                   <td>$0.3300</td>
                   <td>0ms</td>
-                  <td>orchestrator-reconciliation: entry retro-added during audit-fix sweep</td>
+                  <td>orchestrator-reconciliation: entry retro-added</td>
                 </tr>
                 <tr>
                   <td>d-T006-qa-l1</td>
@@ -2917,101 +2605,67 @@
                   <td>50000</td>
                   <td>$0.1100</td>
                   <td>0ms</td>
-                  <td>orchestrator-reconciliation: entry retro-added during audit-fix sweep</td>
+                  <td>orchestrator-reconciliation: entry retro-added</td>
                 </tr>
                 <tr>
-                  <td>d-T007-cr-l1</td>
+                  <td>d-T001-cr-l1</td>
                   <td>code-reviewer</td>
                   <td>needs_review</td>
-                  <td>1</td>
-                  <td>50000</td>
-                  <td>$0.1100</td>
-                  <td>0ms</td>
-                  <td>orchestrator-reconciliation: entry retro-added during audit-fix sweep</td>
-                </tr>
-                <tr>
-                  <td>d-T007-de...</td>
-                  <td>dev</td>
-                  <td>done</td>
                   <td>2</td>
                   <td>50000</td>
                   <td>$0.3300</td>
                   <td>0ms</td>
-                  <td>orchestrator-reconciliation: entry retro-added during audit-fix sweep</td>
+                  <td>orchestrator-reconciliation: gap-fill batch</td>
                 </tr>
                 <tr>
-                  <td>d-T007-de...</td>
+                  <td>d-T001-de...</td>
                   <td>dev</td>
                   <td>done</td>
                   <td>3</td>
                   <td>50000</td>
                   <td>$0.3300</td>
                   <td>0ms</td>
-                  <td>orchestrator-reconciliation: entry retro-added during audit-fix sweep</td>
+                  <td>orchestrator-reconciliation: gap-fill batch</td>
                 </tr>
                 <tr>
-                  <td>d-T007-lr-l1</td>
+                  <td>d-T001-lr-l1</td>
                   <td>logic-reviewer</td>
                   <td>needs_review</td>
                   <td>4</td>
                   <td>50000</td>
                   <td>$0.3300</td>
                   <td>0ms</td>
-                  <td>orchestrator-reconciliation: entry retro-added during audit-fix sweep</td>
-                </tr>
-                <tr>
-                  <td>d-T007-qa-l1</td>
-                  <td>qa</td>
-                  <td>done</td>
-                  <td>5</td>
-                  <td>50000</td>
-                  <td>$0.1100</td>
-                  <td>0ms</td>
-                  <td>orchestrator-reconciliation: entry retro-added during audit-fix sweep</td>
-                </tr>
-                <tr>
-                  <td>d-T001-de...</td>
-                  <td>dev</td>
-                  <td>done</td>
-                  <td>1</td>
-                  <td>70495</td>
-                  <td>$0.1551</td>
-                  <td>4m 28s</td>
-                  <td>—</td>
-                </tr>
-                <tr>
-                  <td>d-T001-lr-l1</td>
-                  <td>logic-reviewer</td>
-                  <td>needs_review</td>
-                  <td>1</td>
-                  <td>28850</td>
-                  <td>$0.1904</td>
-                  <td>1m 38s</td>
-                  <td>
-                    3 minor findings — fix f-002 (whitespace-only tag test) + f-003 (vacuous asse...
-                  </td>
-                </tr>
-                <tr>
-                  <td>d-T001-de...</td>
-                  <td>dev</td>
-                  <td>done</td>
-                  <td>2</td>
-                  <td>34706</td>
-                  <td>$0.2291</td>
-                  <td>2m 50s</td>
-                  <td>
-                    Loop 2 — addressed LR f-002 + f-003; rejected f-001 per spec NFR-007 interpre...
-                  </td>
+                  <td>orchestrator-reconciliation: gap-fill batch</td>
                 </tr>
                 <tr>
                   <td>d-T001-qa-l1</td>
                   <td>qa</td>
                   <td>done</td>
-                  <td>1</td>
-                  <td>58481</td>
-                  <td>$0.1287</td>
-                  <td>2m 12s</td>
-                  <td>All 5 ACs/NFRs pass; T-001 complete</td>
+                  <td>5</td>
+                  <td>50000</td>
+                  <td>$0.3300</td>
+                  <td>0ms</td>
+                  <td>orchestrator-reconciliation: gap-fill batch</td>
+                </tr>
+                <tr>
+                  <td>d-T003-qa-l1</td>
+                  <td>qa</td>
+                  <td>done</td>
+                  <td>6</td>
+                  <td>50000</td>
+                  <td>$0.1100</td>
+                  <td>0ms</td>
+                  <td>orchestrator-reconciliation: gap-fill batch</td>
+                </tr>
+                <tr>
+                  <td>d-T005-cr-l1</td>
+                  <td>code-reviewer</td>
+                  <td>done</td>
+                  <td>4</td>
+                  <td>50000</td>
+                  <td>$0.1100</td>
+                  <td>0ms</td>
+                  <td>orchestrator-reconciliation: gap-fill batch</td>
                 </tr>
               </tbody>
             </table>
@@ -3040,7 +2694,7 @@
                 </tr>
                 <tr>
                   <td>implementation</td>
-                  <td>87 min</td>
+                  <td>running</td>
                 </tr>
               </tbody>
             </table>
@@ -3058,10 +2712,10 @@
               <tbody>
                 <tr>
                   <td>implementation</td>
-                  <td>00:03:00</td>
-                  <td>01:30:00</td>
-                  <td>87m</td>
-                  <td>██████████</td>
+                  <td>02:05:00</td>
+                  <td>running</td>
+                  <td>running</td>
+                  <td>░░░░░░░░░░</td>
                 </tr>
               </tbody>
             </table>
@@ -3084,11 +2738,11 @@
                 </tr>
                 <tr>
                   <td>code-reviewer</td>
-                  <td>5</td>
+                  <td>6</td>
                 </tr>
                 <tr>
                   <td>dev</td>
-                  <td>16</td>
+                  <td>12</td>
                 </tr>
                 <tr>
                   <td>logic-reviewer</td>
@@ -3100,11 +2754,11 @@
                 </tr>
                 <tr>
                   <td>qa</td>
-                  <td>8</td>
+                  <td>6</td>
                 </tr>
                 <tr>
                   <td><strong>Total</strong></td>
-                  <td>35</td>
+                  <td>30</td>
                 </tr>
               </tbody>
             </table>
@@ -3127,7 +2781,7 @@
                 </tr>
                 <tr>
                   <td>code-reviewer</td>
-                  <td>40.0%</td>
+                  <td>16.7%</td>
                 </tr>
                 <tr>
                   <td>dev</td>
@@ -3143,7 +2797,7 @@
                 </tr>
                 <tr>
                   <td>qa</td>
-                  <td>87.5%</td>
+                  <td>100.0%</td>
                 </tr>
               </tbody>
             </table>
@@ -3152,7 +2806,7 @@
             <h2>Escalation rate</h2>
             <p>Escalation rate: 0.0% — below healthy band (&lt; 10%)</p>
             <h2>AC closure</h2>
-            <p>Total: 0 | Pass: 16 | Partial: 0 | Fail: 0 | Missing: 0</p>
+            <p>Total: 0 | Pass: 28 | Partial: 0 | Fail: 0 | Missing: 0</p>
             <h2>Reviewer findings density</h2>
             <table>
               <thead>
@@ -3164,157 +2818,71 @@
               <tbody>
                 <tr>
                   <td>critical</td>
-                  <td>2</td>
+                  <td>5</td>
                 </tr>
                 <tr>
                   <td>major</td>
-                  <td>11</td>
+                  <td>10</td>
                 </tr>
                 <tr>
                   <td>minor</td>
-                  <td>21</td>
+                  <td>8</td>
                 </tr>
               </tbody>
             </table>
             <h2>PM notes log</h2>
             <ul>
+              <li>[2026-05-17 02:10 dev] orchestrator-reconciliation: entry retro-added</li>
               <li>
-                [2026-05-17 00:00 code-reviewer] orchestrator-reconciliation: entry retro-added
-                during audit-fix sweep
+                [2026-05-17 02:10 code-reviewer] orchestrator-reconciliation: entry retro-added
+              </li>
+              <li>[2026-05-17 02:10 dev] orchestrator-reconciliation: entry retro-added</li>
+              <li>[2026-05-17 02:10 dev] orchestrator-reconciliation: entry retro-added</li>
+              <li>
+                [2026-05-17 02:10 logic-reviewer] orchestrator-reconciliation: entry retro-added
+              </li>
+              <li>[2026-05-17 02:10 qa] orchestrator-reconciliation: entry retro-added</li>
+              <li>
+                [2026-05-17 02:10 code-reviewer] orchestrator-reconciliation: entry retro-added
+              </li>
+              <li>[2026-05-17 02:10 dev] orchestrator-reconciliation: entry retro-added</li>
+              <li>[2026-05-17 02:10 dev] orchestrator-reconciliation: entry retro-added</li>
+              <li>[2026-05-17 02:10 dev] orchestrator-reconciliation: entry retro-added</li>
+              <li>
+                [2026-05-17 02:10 logic-reviewer] orchestrator-reconciliation: entry retro-added
               </li>
               <li>
-                [2026-05-17 00:00 dev] orchestrator-reconciliation: entry retro-added during
-                audit-fix sweep
+                [2026-05-17 02:10 code-reviewer] orchestrator-reconciliation: entry retro-added
               </li>
+              <li>[2026-05-17 02:10 dev] orchestrator-reconciliation: entry retro-added</li>
+              <li>[2026-05-17 02:10 dev] orchestrator-reconciliation: entry retro-added</li>
               <li>
-                [2026-05-17 00:00 dev] orchestrator-reconciliation: entry retro-added during
-                audit-fix sweep
+                [2026-05-17 02:10 logic-reviewer] orchestrator-reconciliation: entry retro-added
               </li>
+              <li>[2026-05-17 02:10 qa] orchestrator-reconciliation: entry retro-added</li>
+              <li>[2026-05-17 02:10 dev] orchestrator-reconciliation: entry retro-added</li>
               <li>
-                [2026-05-17 00:00 logic-reviewer] orchestrator-reconciliation: entry retro-added
-                during audit-fix sweep
+                [2026-05-17 02:10 logic-reviewer] orchestrator-reconciliation: entry retro-added
               </li>
+              <li>[2026-05-17 02:10 qa] orchestrator-reconciliation: entry retro-added</li>
               <li>
-                [2026-05-17 00:00 qa] orchestrator-reconciliation: entry retro-added during
-                audit-fix sweep
+                [2026-05-17 02:10 code-reviewer] orchestrator-reconciliation: entry retro-added
               </li>
+              <li>[2026-05-17 02:10 dev] orchestrator-reconciliation: entry retro-added</li>
+              <li>[2026-05-17 02:10 dev] orchestrator-reconciliation: entry retro-added</li>
               <li>
-                [2026-05-17 00:00 dev] orchestrator-reconciliation: entry retro-added during
-                audit-fix sweep
+                [2026-05-17 02:10 logic-reviewer] orchestrator-reconciliation: entry retro-added
               </li>
-              <li>
-                [2026-05-17 00:00 dev] orchestrator-reconciliation: entry retro-added during
-                audit-fix sweep
-              </li>
-              <li>
-                [2026-05-17 00:00 dev] orchestrator-reconciliation: entry retro-added during
-                audit-fix sweep
-              </li>
-              <li>
-                [2026-05-17 00:00 logic-reviewer] orchestrator-reconciliation: entry retro-added
-                during audit-fix sweep
-              </li>
-              <li>
-                [2026-05-17 00:00 qa] orchestrator-reconciliation: entry retro-added during
-                audit-fix sweep
-              </li>
-              <li>
-                [2026-05-17 00:00 code-reviewer] orchestrator-reconciliation: entry retro-added
-                during audit-fix sweep
-              </li>
-              <li>
-                [2026-05-17 00:00 dev] orchestrator-reconciliation: entry retro-added during
-                audit-fix sweep
-              </li>
-              <li>
-                [2026-05-17 00:00 dev] orchestrator-reconciliation: entry retro-added during
-                audit-fix sweep
-              </li>
-              <li>
-                [2026-05-17 00:00 logic-reviewer] orchestrator-reconciliation: entry retro-added
-                during audit-fix sweep
-              </li>
-              <li>
-                [2026-05-17 00:00 qa] orchestrator-reconciliation: entry retro-added during
-                audit-fix sweep
-              </li>
-              <li>
-                [2026-05-17 00:00 code-reviewer] orchestrator-reconciliation: entry retro-added
-                during audit-fix sweep
-              </li>
-              <li>
-                [2026-05-17 00:00 dev] orchestrator-reconciliation: entry retro-added during
-                audit-fix sweep
-              </li>
-              <li>
-                [2026-05-17 00:00 dev] orchestrator-reconciliation: entry retro-added during
-                audit-fix sweep
-              </li>
-              <li>
-                [2026-05-17 00:00 dev] orchestrator-reconciliation: entry retro-added during
-                audit-fix sweep
-              </li>
-              <li>
-                [2026-05-17 00:00 qa] orchestrator-reconciliation: entry retro-added during
-                audit-fix sweep
-              </li>
-              <li>
-                [2026-05-17 00:00 qa] orchestrator-reconciliation: entry retro-added during
-                audit-fix sweep
-              </li>
-              <li>
-                [2026-05-17 00:00 code-reviewer] orchestrator-reconciliation: entry retro-added
-                during audit-fix sweep
-              </li>
-              <li>
-                [2026-05-17 00:00 dev] orchestrator-reconciliation: entry retro-added during
-                audit-fix sweep
-              </li>
-              <li>
-                [2026-05-17 00:00 dev] orchestrator-reconciliation: entry retro-added during
-                audit-fix sweep
-              </li>
-              <li>
-                [2026-05-17 00:00 logic-reviewer] orchestrator-reconciliation: entry retro-added
-                during audit-fix sweep
-              </li>
-              <li>
-                [2026-05-17 00:00 qa] orchestrator-reconciliation: entry retro-added during
-                audit-fix sweep
-              </li>
-              <li>
-                [2026-05-17 00:00 code-reviewer] orchestrator-reconciliation: entry retro-added
-                during audit-fix sweep
-              </li>
-              <li>
-                [2026-05-17 00:00 dev] orchestrator-reconciliation: entry retro-added during
-                audit-fix sweep
-              </li>
-              <li>
-                [2026-05-17 00:00 dev] orchestrator-reconciliation: entry retro-added during
-                audit-fix sweep
-              </li>
-              <li>
-                [2026-05-17 00:00 logic-reviewer] orchestrator-reconciliation: entry retro-added
-                during audit-fix sweep
-              </li>
-              <li>
-                [2026-05-17 00:00 qa] orchestrator-reconciliation: entry retro-added during
-                audit-fix sweep
-              </li>
-              <li>
-                [2026-05-17 00:07 logic-reviewer] 3 minor findings — fix f-002 (whitespace-only tag
-                test) + f-003 (vacuous assertion); reject f-001 (NFR-007 only requires extractable
-                in &lt;=1 commit, missions.ts inline labels satisfy)
-              </li>
-              <li>
-                [2026-05-17 00:09 dev] Loop 2 — addressed LR f-002 + f-003; rejected f-001 per spec
-                NFR-007 interpretation; PM skipped CR/LR L2 (test-only diff, T1 task)
-              </li>
-              <li>[2026-05-17 00:12 qa] All 5 ACs/NFRs pass; T-001 complete</li>
+              <li>[2026-05-17 02:10 qa] orchestrator-reconciliation: entry retro-added</li>
+              <li>[2026-05-17 03:00 code-reviewer] orchestrator-reconciliation: gap-fill batch</li>
+              <li>[2026-05-17 03:00 dev] orchestrator-reconciliation: gap-fill batch</li>
+              <li>[2026-05-17 03:00 logic-reviewer] orchestrator-reconciliation: gap-fill batch</li>
+              <li>[2026-05-17 03:00 qa] orchestrator-reconciliation: gap-fill batch</li>
+              <li>[2026-05-17 03:00 qa] orchestrator-reconciliation: gap-fill batch</li>
+              <li>[2026-05-17 03:00 code-reviewer] orchestrator-reconciliation: gap-fill batch</li>
             </ul>
             <h2>Token cost</h2>
-            <p>Token cost not available — using dispatch count as cost proxy: 35 dispatches</p>
+            <p>Token cost not available — using dispatch count as cost proxy: 30 dispatches</p>
             <p>
               ⚠ pm-orchestrator Stop hook did not run — re-run agentops install-hooks
               (worktree-aware)

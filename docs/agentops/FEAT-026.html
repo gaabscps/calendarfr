@@ -567,28 +567,204 @@
       <h1>Auth + Supabase backend migration <span class="badge badge-neutral">…</span></h1>
       <div class="kpis">
         <span>—</span>
-        <span>—</span>
+        <span>$99.71</span>
 
         <span>0/0 ACs</span>
         <span>mut 70.7%</span>
         <span>type 97.7%</span>
-        <span>0 loops</span>
+        <span>1 loop</span>
       </div>
     </header>
 
     <main>
       <section class="story">
         <h2>Story</h2>
+        <article class="story-card story-card--blocked" aria-label="batch FEAT-026">
+          <header>
+            <h3>FEAT-026</h3>
+            <span class="badge badge-fail" aria-label="status: blocked">⏸ blocked</span>
+          </header>
+          <div class="story-card__stats">
+            <span class="story-card__stat"
+              ><span class="story-card__stat-label">time</span>
+              <span class="story-card__stat-value">0ms</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">cost</span>
+              <span class="story-card__stat-value">$0.08</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">tasks</span>
+              <span class="story-card__stat-value">1</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">ACs</span>
+              <span class="story-card__stat-value">0</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">files</span>
+              <span class="story-card__stat-value">0</span></span
+            ><span class="story-card__pipeline">audit-agent</span>
+          </div>
+          <p class="story-card__summary">
+            Pre-dispatch pause audit — expected blocker (ac_not_validated) because actual_dispatches
+            was empty by design
+          </p>
+          <div class="story-card__drilldowns">
+            <details>
+              <summary>Files changed (0)</summary>
+              <table class="story-card__files">
+                <thead>
+                  <tr>
+                    <th>path</th>
+                    <th>action</th>
+                    <th>tasks</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </details>
+            <details>
+              <summary>ACs covered (0)</summary>
+              <ul class="story-card__acs"></ul>
+            </details>
+            <details>
+              <summary>Pipeline trace (1 dispatches)</summary>
+              <table class="story-card__pipeline-trace">
+                <thead>
+                  <tr>
+                    <th>role</th>
+                    <th>dispatch_id</th>
+                    <th>loop</th>
+                    <th>model</th>
+                    <th>effort</th>
+                    <th>duration</th>
+                    <th>tokens</th>
+                    <th>cost</th>
+                    <th>status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>audit-agent</td>
+                    <td>audit-FEAT-026-pause-001</td>
+                    <td>1</td>
+                    <td>haiku-4-5</td>
+                    <td>medium</td>
+                    <td>1m</td>
+                    <td>35297</td>
+                    <td>$0.08</td>
+                    <td>blocked</td>
+                  </tr>
+                </tbody>
+              </table>
+            </details>
+            <details>
+              <summary>PM note</summary>
+              <p class="story-card__pmnote">
+                Pre-dispatch pause audit — expected blocker (ac_not_validated) because
+                actual_dispatches was empty by design
+              </p>
+            </details>
+          </div>
+        </article>
+        <article class="story-card story-card--done" aria-label="batch pm-orchestrator">
+          <header>
+            <h3>pm-orchestrator</h3>
+            <span class="badge badge-pass" aria-label="status: done">✓ done</span>
+          </header>
+          <div class="story-card__stats">
+            <span class="story-card__stat"
+              ><span class="story-card__stat-label">time</span>
+              <span class="story-card__stat-value">6h9m</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">cost</span>
+              <span class="story-card__stat-value">$99.63</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">tasks</span>
+              <span class="story-card__stat-value">0</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">ACs</span>
+              <span class="story-card__stat-value">0</span></span
+            ><span class="story-card__stat"
+              ><span class="story-card__stat-label">files</span>
+              <span class="story-card__stat-value">0</span></span
+            ><span class="story-card__pipeline">pm-orchestrator</span>
+          </div>
+          <p class="story-card__summary">PM/orchestrator session (Stop hook): 269 turns</p>
+          <div class="story-card__drilldowns">
+            <details>
+              <summary>Files changed (0)</summary>
+              <table class="story-card__files">
+                <thead>
+                  <tr>
+                    <th>path</th>
+                    <th>action</th>
+                    <th>tasks</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </details>
+            <details>
+              <summary>ACs covered (0)</summary>
+              <ul class="story-card__acs"></ul>
+            </details>
+            <details>
+              <summary>Pipeline trace (2 dispatches)</summary>
+              <table class="story-card__pipeline-trace">
+                <thead>
+                  <tr>
+                    <th>role</th>
+                    <th>dispatch_id</th>
+                    <th>loop</th>
+                    <th>model</th>
+                    <th>effort</th>
+                    <th>duration</th>
+                    <th>tokens</th>
+                    <th>cost</th>
+                    <th>status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>pm-orchestrator</td>
+                    <td>pm-orchestrator-a387fe56</td>
+                    <td>—</td>
+                    <td>opus-4-7</td>
+                    <td>—</td>
+                    <td>5h29m</td>
+                    <td>23537636</td>
+                    <td>$39.86</td>
+                    <td>done</td>
+                  </tr>
+                  <tr>
+                    <td>pm-orchestrator</td>
+                    <td>pm-orchestrator-6200e96a</td>
+                    <td>—</td>
+                    <td>opus-4-7</td>
+                    <td>—</td>
+                    <td>3h46m</td>
+                    <td>60040132</td>
+                    <td>$59.77</td>
+                    <td>done</td>
+                  </tr>
+                </tbody>
+              </table>
+            </details>
+            <details>
+              <summary>PM note</summary>
+              <p class="story-card__pmnote">PM/orchestrator session (Stop hook): 269 turns</p>
+            </details>
+          </div>
+        </article>
       </section>
       <section class="cost-section">
         <header class="cost-header">
           <h2>Cost</h2>
-          <span class="badge badge-fail">coverage 0/0 (0%)</span>
+          <span class="badge badge-pass">coverage 3/3 (100%)</span>
         </header>
         <div class="cost-grid">
           <div class="cost-card">
             <span class="cost-label">Total cost</span>
-            <span class="cost-value">—</span>
+            <span class="cost-value">$99.7077</span>
+            <small>$99.7077</small>
           </div>
           <div class="cost-card">
             <span class="cost-label">$ / AC</span>
@@ -596,26 +772,121 @@
           </div>
           <div class="cost-card">
             <span class="cost-label">$ / dispatch</span>
-            <span class="cost-value">—</span>
-            <small>avg of 0</small>
+            <span class="cost-value">$33.2359</span>
+            <small>avg of 3</small>
           </div>
           <div class="cost-card">
             <span class="cost-label">Tokens</span>
-            <span class="cost-value">—</span>
+            <span class="cost-value">83,613,065</span>
+            <small>58,529,146 in / 25,083,920 out (70/30)</small>
           </div>
           <div class="cost-card">
             <span class="cost-label">Wall-clock</span>
-            <span class="cost-value">—</span>
-            <small>0 dispatches with usage</small>
+            <span class="cost-value">9h16m</span>
+            <small>3 dispatches with usage</small>
           </div>
           <div class="cost-card">
             <span class="cost-label">Tool uses</span>
-            <span class="cost-value">—</span>
+            <span class="cost-value">232</span>
+            <small>~77.3 per dispatch</small>
           </div>
         </div>
-
+        <table class="cost-models">
+          <thead>
+            <tr>
+              <th>Model</th>
+              <th>Dispatches</th>
+              <th>Tokens</th>
+              <th>Duration</th>
+              <th>Tool uses</th>
+              <th>USD</th>
+              <th>Share</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>opus-4-7</code></td>
+              <td>2</td>
+              <td>83,577,768</td>
+              <td>9h15m</td>
+              <td>221</td>
+              <td>$99.6301</td>
+              <td>99.9%</td>
+            </tr>
+            <tr>
+              <td><code>haiku-4-5</code></td>
+              <td>1</td>
+              <td>35,297</td>
+              <td>1m</td>
+              <td>11</td>
+              <td>$0.0777</td>
+              <td>0.1%</td>
+            </tr>
+          </tbody>
+        </table>
+        <details class="cost-breakdown">
+          <summary>Cost by role (subagent type)</summary>
+          <table class="cost-models">
+            <thead>
+              <tr>
+                <th>Role</th>
+                <th>Dispatches</th>
+                <th>Tokens</th>
+                <th>Duration</th>
+                <th>USD</th>
+                <th>Share</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>pm-orchestrator</code></td>
+                <td>2</td>
+                <td>83,577,768</td>
+                <td>9h15m</td>
+                <td>$99.6301</td>
+                <td>99.9%</td>
+              </tr>
+              <tr>
+                <td><code>audit-agent</code></td>
+                <td>1</td>
+                <td>35,297</td>
+                <td>1m</td>
+                <td>$0.0777</td>
+                <td>0.1%</td>
+              </tr>
+            </tbody>
+          </table>
+        </details>
+        <details class="cost-breakdown">
+          <summary>Cost by SDD phase</summary>
+          <table class="cost-models">
+            <thead>
+              <tr>
+                <th>Phase</th>
+                <th>Dispatches</th>
+                <th>Tokens</th>
+                <th>Duration</th>
+                <th>USD</th>
+                <th>Share</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>unattributed</code></td>
+                <td>3</td>
+                <td>83,613,065</td>
+                <td>9h16m</td>
+                <td>$99.7077</td>
+                <td>100.0%</td>
+              </tr>
+            </tbody>
+          </table>
+        </details>
         <p class="cost-note">
-          <em>no usage data available — dispatch count fallback: 0 dispatches</em>
+          <em
+            >70/30 input/output split assumed; harness reports only total_tokens; 3 of 3 dispatches
+            included in cost</em
+          >
         </p>
       </section>
       <section class="drilldown">
@@ -626,7 +897,50 @@
         </details>
         <details>
           <summary>Per-dispatch breakdown</summary>
-          <div><p>(no dispatches)</p></div>
+          <div>
+            <table>
+              <thead>
+                <tr>
+                  <th>Dispatch ID</th>
+                  <th>Role</th>
+                  <th>Status</th>
+                  <th>Loop</th>
+                  <th>Tokens</th>
+                  <th>Duration</th>
+                  <th>PM note</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>audit-FEAT-026-pa...</td>
+                  <td>audit-agent</td>
+                  <td>blocked</td>
+                  <td>1</td>
+                  <td>35297</td>
+                  <td>1m</td>
+                  <td>Pre-dispatch pause audit — expected blocker (ac_not_valid...</td>
+                </tr>
+                <tr>
+                  <td>pm-orchestrator-a...</td>
+                  <td>pm-orchestrator</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>23537636</td>
+                  <td>329m 35s</td>
+                  <td>PM/orchestrator session (Stop hook): 137 turns</td>
+                </tr>
+                <tr>
+                  <td>pm-orchestrator-6...</td>
+                  <td>pm-orchestrator</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>60040132</td>
+                  <td>226m 17s</td>
+                  <td>PM/orchestrator session (Stop hook): 269 turns</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </details>
         <details>
           <summary>Repo health snapshot</summary>
@@ -687,8 +1001,8 @@
             <h1>Auth + Supabase backend migration — FEAT-026</h1>
             <blockquote>
               <p>
-                Feature: Auth + Supabase backend migration Task ID: FEAT-026 Phase: implementation
-                Generated at: 2026-05-17T06:06:21.064Z
+                Feature: Auth + Supabase backend migration Task ID: FEAT-026 Phase: escalated
+                Generated at: 2026-05-17T17:48:34.183Z
               </p>
             </blockquote>
             <h2>Insights</h2>
@@ -699,21 +1013,26 @@
               </li>
             </ul>
             <h2>Cost breakdown</h2>
-            <p><em>no usage data available — dispatch count fallback: 0 dispatches</em></p>
+            <p>
+              <em
+                >70/30 input/output split assumed; harness reports only total_tokens; 3 of 3
+                dispatches included in cost</em
+              >
+            </p>
             <ul>
               <li>
-                Total tokens: n/a
+                Total tokens: 83613065
                 <ul>
-                  <li>Estimated input (70%): n/a</li>
-                  <li>Estimated output (30%): n/a</li>
+                  <li>Estimated input (70%): 58529146</li>
+                  <li>Estimated output (30%): 25083920</li>
                 </ul>
               </li>
-              <li>Estimated cost USD: n/a</li>
-              <li>Cost per AC: n/a</li>
-              <li>Cost per dispatch (avg): n/a</li>
-              <li>Wall-clock duration: n/a</li>
-              <li>Tool uses total: n/a</li>
-              <li>Coverage: 0 of 0 dispatches included in cost calculation</li>
+              <li>Estimated cost USD total: $99.7077</li>
+              <li>Cost per AC: n/a (no ACs defined)</li>
+              <li>Cost per dispatch (avg): $33.2359</li>
+              <li>Wall-clock duration: 556m 52s</li>
+              <li>Tool uses total: 232</li>
+              <li>Coverage: 3 of 3 dispatches included in cost calculation</li>
             </ul>
             <h2>Repo health snapshot</h2>
             <p><em>Measured at: 2026-05-17</em></p>
@@ -754,7 +1073,54 @@
               </tbody>
             </table>
             <h2>Per-dispatch breakdown</h2>
-            <p><em>(no dispatches)</em></p>
+            <table>
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Role</th>
+                  <th>Status</th>
+                  <th>Loop</th>
+                  <th>Tokens</th>
+                  <th>$</th>
+                  <th>Duration</th>
+                  <th>PM note</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>audit-FEA...</td>
+                  <td>audit-agent</td>
+                  <td>blocked</td>
+                  <td>1</td>
+                  <td>35297</td>
+                  <td>$0.0777</td>
+                  <td>1m</td>
+                  <td>
+                    Pre-dispatch pause audit — expected blocker (ac_not_validated) because actual...
+                  </td>
+                </tr>
+                <tr>
+                  <td>pm-orches...</td>
+                  <td>pm-orchestrator</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>23537636</td>
+                  <td>$39.8602</td>
+                  <td>329m 35s</td>
+                  <td>PM/orchestrator session (Stop hook): 137 turns</td>
+                </tr>
+                <tr>
+                  <td>pm-orches...</td>
+                  <td>pm-orchestrator</td>
+                  <td>done</td>
+                  <td>—</td>
+                  <td>60040132</td>
+                  <td>$59.7698</td>
+                  <td>226m 17s</td>
+                  <td>PM/orchestrator session (Stop hook): 269 turns</td>
+                </tr>
+              </tbody>
+            </table>
             <h2>Per-AC closure detail</h2>
             <p><em>(no ACs defined)</em></p>
             <h2>Phase durations</h2>
@@ -797,7 +1163,7 @@
               <tbody>
                 <tr>
                   <td>audit-agent</td>
-                  <td>0</td>
+                  <td>1</td>
                 </tr>
                 <tr>
                   <td>blocker-specialist</td>
@@ -817,7 +1183,7 @@
                 </tr>
                 <tr>
                   <td>pm-orchestrator</td>
-                  <td>0</td>
+                  <td>2</td>
                 </tr>
                 <tr>
                   <td>qa</td>
@@ -825,7 +1191,7 @@
                 </tr>
                 <tr>
                   <td><strong>Total</strong></td>
-                  <td>0</td>
+                  <td>3</td>
                 </tr>
               </tbody>
             </table>
@@ -840,7 +1206,7 @@
               <tbody>
                 <tr>
                   <td>audit-agent</td>
-                  <td>n/a</td>
+                  <td>0.0%</td>
                 </tr>
                 <tr>
                   <td>blocker-specialist</td>
@@ -860,7 +1226,7 @@
                 </tr>
                 <tr>
                   <td>pm-orchestrator</td>
-                  <td>n/a</td>
+                  <td>100.0%</td>
                 </tr>
                 <tr>
                   <td>qa</td>
@@ -869,19 +1235,26 @@
               </tbody>
             </table>
             <h2>Loop rate</h2>
-            <p>Loop rate: 0.0%</p>
+            <p>Loop rate: 33.3%</p>
             <h2>Escalation rate</h2>
             <p>Escalation rate: 0.0% — below healthy band (&lt; 10%)</p>
             <h2>AC closure</h2>
             <p>Total: 0 | Pass: 0 | Partial: 0 | Fail: 0 | Missing: 0</p>
             <h2>PM notes log</h2>
-            <p><em>(no PM notes recorded)</em></p>
+            <ul>
+              <li>
+                [2026-05-17 00:00 audit-agent] Pre-dispatch pause audit — expected blocker
+                (ac_not_validated) because actual_dispatches was empty by design
+              </li>
+              <li>
+                [2026-05-17 00:44 pm-orchestrator] PM/orchestrator session (Stop hook): 137 turns
+              </li>
+              <li>
+                [2026-05-17 03:07 pm-orchestrator] PM/orchestrator session (Stop hook): 269 turns
+              </li>
+            </ul>
             <h2>Token cost</h2>
-            <p>Token cost not available — using dispatch count as cost proxy: 0 dispatches</p>
-            <p>
-              ⚠ pm-orchestrator Stop hook did not run — re-run agentops install-hooks
-              (worktree-aware)
-            </p>
+            <p>Token cost not available — using dispatch count as cost proxy: 3 dispatches</p>
           </div>
         </details>
       </section>
