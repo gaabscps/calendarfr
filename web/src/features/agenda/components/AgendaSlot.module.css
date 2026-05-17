@@ -12,12 +12,21 @@
 .slot {
   display: flex;
   flex-direction: row;
+  /* flex-start preserva alinhamento com a 1ª linha em slots multi-linha. */
   align-items: flex-start;
   gap: var(--spacing-sm);
   width: 100%;
   padding: var(--spacing-none);
+  min-height: var(--baseline);
   border-left: 3px solid transparent;
   transition: border-color var(--motion-fast) ease;
+}
+
+/* Sticker (EnergyButton) tem 24×24 mas o slot é 48 → margin-top centraliza
+   verticalmente na 1ª linha sem afetar editor multi-line.
+   (48 - 24) / 2 = 12px. :first-child = wrapper do EnergyButton. */
+.slot > :first-child {
+  margin-top: calc((var(--baseline) - 24px) / 2);
 }
 
 /* Current-hour highlight: subtle accent border-left (AC-010, AC-013).

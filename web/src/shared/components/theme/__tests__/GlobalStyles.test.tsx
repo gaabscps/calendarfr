@@ -48,12 +48,12 @@ describe('GlobalStyles', () => {
     }
   });
 
-  it('exposes --baseline=24px and --baseline-half=12px in :root (FEAT-017)', () => {
+  it('exposes --baseline=36px and --baseline-half=12px in :root (FEAT-017 + tuned)', () => {
     render(<GlobalStyles />);
     const styleTag = document.querySelector('style');
     const css = styleTag?.innerHTML ?? '';
 
-    expect(css).toMatch(/--baseline:\s*24px/);
+    expect(css).toMatch(/--baseline:\s*36px/);
     expect(css).toMatch(/--baseline-half:\s*12px/);
   });
 });

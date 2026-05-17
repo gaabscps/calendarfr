@@ -8,6 +8,8 @@
 .section {
   display: flex;
   flex-direction: column;
-  gap: 0; /* AC-004: no gap between slot rows */
+  /* Sem gap: cada slot já ocupa 1 linha pautada (48px) — respiro vem
+     da altura maior da rule line, não de espaço vazio entre items. */
+  gap: 0;
   width: 100%;
 }

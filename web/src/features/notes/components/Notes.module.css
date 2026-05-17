@@ -22,7 +22,8 @@
 .list {
   display: flex;
   flex-direction: column;
-  gap: 0; /* AC-014: no gap between note rows */
+  /* Sem gap: respiro vem da altura maior da rule line. */
+  gap: 0;
   width: 100%;
 }
 

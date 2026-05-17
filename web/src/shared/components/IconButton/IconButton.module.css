@@ -24,24 +24,24 @@
   pointer-events: none;
 }
 
-/* ----- Sizes (FEAT-017 Decision 5: snap a múltiplos de --baseline = 24px) -----
- * sm = 24×24 (1×baseline) — WCAG 2.5.5 AA min touch target (24×24)
- * md = 48×48 (2×baseline) — generoso para hit target em chevrons / superfícies primárias
+/* ----- Sizes (FEAT-017 Decision 5: snap a múltiplos de --baseline) -----
+ * sm = baseline×baseline (1×baseline) — WCAG 2.5.5 AA min touch target
+ * md = 2×baseline — generoso para hit target em chevrons / superfícies primárias
  */
 
 .sm {
-  width: 24px;
-  height: 24px;
-  min-width: 24px;
-  min-height: 24px;
+  width: var(--baseline);
+  height: var(--baseline);
+  min-width: var(--baseline);
+  min-height: var(--baseline);
   font-size: var(--font-size-sm);
 }
 
 .md {
-  width: 48px;
-  height: 48px;
-  min-width: 48px;
-  min-height: 48px;
+  width: calc(var(--baseline) * 2);
+  height: calc(var(--baseline) * 2);
+  min-width: calc(var(--baseline) * 2);
+  min-height: calc(var(--baseline) * 2);
   font-size: var(--font-size-base);
 }
 

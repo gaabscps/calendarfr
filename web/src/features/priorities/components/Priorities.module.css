@@ -14,7 +14,8 @@
 .section {
   display: flex;
   flex-direction: column;
-  gap: 0; /* items carry their own row height; no extra row gap */
+  /* Sem gap: respiro vem da altura maior da rule line. */
+  gap: 0;
   width: 100%;
 }
 

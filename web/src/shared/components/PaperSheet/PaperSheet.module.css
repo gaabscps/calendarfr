@@ -15,27 +15,27 @@
 }
 
 .padded {
-  padding: 24px;
+  padding: 36px;
 }
 
 .ruled {
   /* Camadas (topo → fundo):
      1) Margem vertical vermelha desbotada (caderno escolar) — não repete.
      2) Fibra do papel — repete em tile 160x160.
-     3) Linhas pautadas a cada 24px (alinhadas ao baseline). */
+     3) Linhas pautadas a cada 36px (alinhadas ao baseline). */
   background-image:
     linear-gradient(
       to right,
-      transparent 32px,
-      var(--color-paper-margin) 32px,
-      var(--color-paper-margin) 33px,
-      transparent 33px
+      transparent 44px,
+      var(--color-paper-margin) 44px,
+      var(--color-paper-margin) 45px,
+      transparent 45px
     ),
     var(--paper-fiber), var(--paper-rule);
   background-size:
     100% 100%,
     160px 160px,
-    100% 24px;
+    100% 36px;
   background-repeat: no-repeat, repeat, repeat;
   background-position:
     0 0,
@@ -44,15 +44,18 @@
 }
 
 @media (max-width: 767px) {
+  .padded {
+    padding: 24px;
+  }
   .ruled {
     /* Mobile: margem mais próxima da borda — papel menor. */
     background-image:
       linear-gradient(
         to right,
-        transparent 20px,
-        var(--color-paper-margin) 20px,
-        var(--color-paper-margin) 21px,
-        transparent 21px
+        transparent 24px,
+        var(--color-paper-margin) 24px,
+        var(--color-paper-margin) 25px,
+        transparent 25px
       ),
       var(--paper-fiber), var(--paper-rule);
   }

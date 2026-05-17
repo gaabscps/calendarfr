@@ -23,7 +23,7 @@ export const ROOT = new URL('..', import.meta.url).pathname;
 // ---------------------------------------------------------------------------
 
 export const TOKEN_MAP = {
-  '--baseline': 24,
+  '--baseline': 36,
   '--baseline-half': 12,
   '--spacing-none': 0,
   '--spacing-xs': 4,
@@ -119,7 +119,7 @@ export function classifyValue(rawVal) {
       const n = TOKEN_MAP[tok];
       if (n === 0) return 'compliant';
       if (n <= 4) return 'compliant';
-      if (n % 24 === 0 || n % 12 === 0) return 'compliant';
+      if (n % 32 === 0 || n % 16 === 0 || n % 24 === 0 || n % 12 === 0) return 'compliant';
       return 'violation';
     }
     return 'ignore';
@@ -132,7 +132,7 @@ export function classifyValue(rawVal) {
     const n = Math.abs(Number((pxMatch || numMatch)[1]));
     if (n === 0) return 'compliant';
     if (n <= 4) return 'compliant'; // border-like tolerance
-    if (n % 24 === 0 || n % 12 === 0) return 'compliant';
+    if (n % 32 === 0 || n % 16 === 0 || n % 24 === 0 || n % 12 === 0) return 'compliant';
     return 'violation';
   }
 

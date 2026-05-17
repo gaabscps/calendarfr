@@ -4,7 +4,8 @@
 .tabContainer {
   position: absolute;
   right: -10px;
-  top: 96px; /* abaixo do PageNavigator (24 padding + 72 navigator) */
+  /* Abaixo do PageNavigator: padding (32) + header (64) + margin-bottom (32) = 128. */
+  top: calc(var(--baseline) * 4);
   display: flex;
   flex-direction: column;
   gap: 6px;

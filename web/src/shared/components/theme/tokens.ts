@@ -36,9 +36,9 @@ export const paper = {
   rule: `repeating-linear-gradient(
     to bottom,
     transparent,
-    transparent 23px,
-    #e8e0d0 23px,
-    #e8e0d0 24px
+    transparent 35px,
+    #e8e0d0 35px,
+    #e8e0d0 36px
   )`,
   fiber: `url("${paperFiberSvg}")`,
   deskFiber: `url("${deskFiberSvg}")`,
@@ -78,16 +78,16 @@ export const motion = {
 } as const;
 
 /**
- * Vertical rhythm contract (FEAT-017):
+ * Vertical rhythm contract (FEAT-017, ampliado pós-FEAT-025):
  * - height, min-height, max-height, padding-top, padding-bottom,
  *   margin-top, margin-bottom, gap em flex-column => múltiplos de
- *   24 (--baseline) ou 12 (--baseline-half). Sem outros valores.
+ *   32 (--baseline) ou 16 (--baseline-half). Sem outros valores.
  * - horizontals (width, padding-left/right, margin-left/right,
  *   gap em flex-row) => livres, mas preferir --spacing-* tokens.
  * Verificado por scripts/rhythm-check.mjs (CI).
  */
 export const baseline = {
-  base: 24,
+  base: 36,
   half: 12,
 } as const;
 

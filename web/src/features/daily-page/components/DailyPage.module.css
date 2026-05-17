@@ -13,6 +13,7 @@
 .grid {
   display: flex;
   flex-direction: column;
+  /* 1 rule line (48) de respiro entre seções — baseline já é generoso. */
   gap: var(--baseline);
   padding: var(--baseline);
 }
@@ -41,7 +42,9 @@
     grid-template-areas:
       'top-row top-row'
       'agenda  notes';
-    gap: var(--baseline);
+    /* row-gap = 1 rule line; column-gap horizontal não impacta rítmo vertical. */
+    row-gap: var(--baseline);
+    column-gap: var(--spacing-2xl);
     padding: var(--baseline);
   }
 
@@ -49,7 +52,7 @@
     grid-area: top-row;
     flex-direction: row;
     align-items: flex-start;
-    gap: var(--spacing-lg);
+    gap: var(--spacing-2xl);
   }
 
   .agendaCol {

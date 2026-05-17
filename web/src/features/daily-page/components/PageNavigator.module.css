@@ -17,8 +17,8 @@
   align-items: center;
   justify-content: space-between;
   gap: var(--spacing-base, 16px);
-  height: 48px; /* 2 × --baseline — fixo. Mood + Intention vivem INLINE aqui. */
-  margin-bottom: var(--baseline, 24px);
+  height: calc(var(--baseline) * 2); /* 2 × --baseline. Mood + Intention vivem INLINE aqui. */
+  margin-bottom: var(--baseline);
   background: transparent;
 }
 
@@ -52,9 +52,9 @@
   font-family: var(--font-hand, 'Caveat', cursive);
   font-size: var(--font-size-xl, 1.5rem);
   font-weight: 600;
-  /* AC-006: explicit line-height = 2 × --baseline (24 × 2 = 48) — overrides
+  /* AC-006: explicit line-height = 2 × --baseline — overrides
      UA-default `normal` which would render ~30px and break the rhythm. */
-  line-height: 48px;
+  line-height: calc(var(--baseline) * 2);
   color: var(--color-ink, #2c2416);
   text-align: center;
   white-space: nowrap;
