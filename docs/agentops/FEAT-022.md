@@ -3,7 +3,7 @@
 > Feature: undo-delete — confirmação anti-misclick para exclusões em Priorities, Notes e Sticky Note
 > Task ID: FEAT-022
 > Phase: done
-> Generated at: 2026-05-17T17:48:34.183Z
+> Generated at: 2026-05-17T22:32:03.162Z
 
 ## Insights
 

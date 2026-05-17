@@ -5,7 +5,7 @@
 > Feature: AgentOps observability extractor — relatórios Markdown a partir de .agent-session/\*
 > Task ID: FEAT-002
 > Phase: done
-> Generated at: 2026-05-17T17:48:34.183Z
+> Generated at: 2026-05-17T22:32:03.162Z
 
 ## Insights
 

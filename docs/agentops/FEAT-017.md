@@ -3,7 +3,7 @@
 > Feature: baseline-grid-alignment — rítmica vertical 24px como contrato do design system
 > Task ID: FEAT-017
 > Phase: escalated
-> Generated at: 2026-05-17T17:48:34.183Z
+> Generated at: 2026-05-17T22:32:03.162Z
 
 ## Insights
 

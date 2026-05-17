@@ -3,27 +3,27 @@
 > Feature: Onboarding polish iteration (legibilidade, autosave-gate, per-day, action buttons, completed-day skin)
 > Task ID: FEAT-028
 > Phase: implementation
-> Generated at: 2026-05-17T17:48:34.183Z
+> Generated at: 2026-05-17T22:32:03.162Z
 
 ## Insights
 
 - ℹ Escalation rate 0.0% is below the Galileo healthy band (< 10%) — low escalation, agents resolving autonomously. _(Galileo healthy band)_
 - ℹ Dev task success rate 100.0% is at or above 80% — healthy first-try rate.
-- ⚠ Loop rate 100.0% exceeds 50% — more than half of dispatches needed loops. Consider strengthening the preflight contract.
+- ⚠ Loop rate 90.9% exceeds 50% — more than half of dispatches needed loops. Consider strengthening the preflight contract.
 
 ## Cost breakdown
 
-_70/30 input/output split assumed; harness reports only total_tokens; 30 of 30 dispatches included in cost_
+_70/30 input/output split assumed; harness reports only total_tokens; 33 of 33 dispatches included in cost_
 
-- Total tokens: 1500000
-  - Estimated input (70%): 1050000
-  - Estimated output (30%): 450000
-- Estimated cost USD total: $7.2600
+- Total tokens: 179871846
+  - Estimated input (70%): 125910292
+  - Estimated output (30%): 53961554
+- Estimated cost USD total: $164.5049
 - Cost per AC: n/a (no ACs defined)
-- Cost per dispatch (avg): $0.2420
-- Wall-clock duration: n/a
-- Tool uses total: n/a
-- Coverage: 30 of 30 dispatches included in cost calculation
+- Cost per dispatch (avg): $4.9850
+- Wall-clock duration: 1119m 2s
+- Tool uses total: 450
+- Coverage: 33 of 33 dispatches included in cost calculation
 
 ## Repo health snapshot
 
@@ -38,38 +38,41 @@ _Measured at: 2026-05-17_
 
 ## Per-dispatch breakdown
 
-| ID           | Role           | Status       | Loop | Tokens | $       | Duration | PM note                                        |
-| ------------ | -------------- | ------------ | ---- | ------ | ------- | -------- | ---------------------------------------------- |
-| d-T001-de... | dev            | done         | 1    | 50000  | $0.3300 | 0ms      | orchestrator-reconciliation: entry retro-added |
-| d-T002-cr-l1 | code-reviewer  | needs_review | 1    | 50000  | $0.1100 | 0ms      | orchestrator-reconciliation: entry retro-added |
-| d-T002-de... | dev            | done         | 2    | 50000  | $0.1100 | 0ms      | orchestrator-reconciliation: entry retro-added |
-| d-T002-de... | dev            | done         | 3    | 50000  | $0.3300 | 0ms      | orchestrator-reconciliation: entry retro-added |
-| d-T002-lr-l1 | logic-reviewer | needs_review | 4    | 50000  | $0.3300 | 0ms      | orchestrator-reconciliation: entry retro-added |
-| d-T002-qa-l1 | qa             | done         | 5    | 50000  | $0.1100 | 0ms      | orchestrator-reconciliation: entry retro-added |
-| d-T003-cr-l1 | code-reviewer  | needs_review | 1    | 50000  | $0.1100 | 0ms      | orchestrator-reconciliation: entry retro-added |
-| d-T003-de... | dev            | done         | 2    | 50000  | $0.3300 | 0ms      | orchestrator-reconciliation: entry retro-added |
-| d-T003-de... | dev            | done         | 3    | 50000  | $0.3300 | 0ms      | orchestrator-reconciliation: entry retro-added |
-| d-T003-de... | dev            | done         | 4    | 50000  | $0.3300 | 0ms      | orchestrator-reconciliation: entry retro-added |
-| d-T003-lr-l1 | logic-reviewer | needs_review | 5    | 50000  | $0.3300 | 0ms      | orchestrator-reconciliation: entry retro-added |
-| d-T004-cr-l1 | code-reviewer  | needs_review | 1    | 50000  | $0.1100 | 0ms      | orchestrator-reconciliation: entry retro-added |
-| d-T004-de... | dev            | done         | 2    | 50000  | $0.3300 | 0ms      | orchestrator-reconciliation: entry retro-added |
-| d-T004-de... | dev            | done         | 3    | 50000  | $0.3300 | 0ms      | orchestrator-reconciliation: entry retro-added |
-| d-T004-lr-l1 | logic-reviewer | needs_review | 4    | 50000  | $0.3300 | 0ms      | orchestrator-reconciliation: entry retro-added |
-| d-T004-qa-l1 | qa             | done         | 5    | 50000  | $0.1100 | 0ms      | orchestrator-reconciliation: entry retro-added |
-| d-T005-de... | dev            | done         | 1    | 50000  | $0.1100 | 0ms      | orchestrator-reconciliation: entry retro-added |
-| d-T005-lr-l1 | logic-reviewer | needs_review | 2    | 50000  | $0.3300 | 0ms      | orchestrator-reconciliation: entry retro-added |
-| d-T005-qa-l1 | qa             | done         | 3    | 50000  | $0.1100 | 0ms      | orchestrator-reconciliation: entry retro-added |
-| d-T006-cr-l1 | code-reviewer  | needs_review | 1    | 50000  | $0.1100 | 0ms      | orchestrator-reconciliation: entry retro-added |
-| d-T006-de... | dev            | done         | 2    | 50000  | $0.3300 | 0ms      | orchestrator-reconciliation: entry retro-added |
-| d-T006-de... | dev            | done         | 3    | 50000  | $0.3300 | 0ms      | orchestrator-reconciliation: entry retro-added |
-| d-T006-lr-l1 | logic-reviewer | needs_review | 4    | 50000  | $0.3300 | 0ms      | orchestrator-reconciliation: entry retro-added |
-| d-T006-qa-l1 | qa             | done         | 5    | 50000  | $0.1100 | 0ms      | orchestrator-reconciliation: entry retro-added |
-| d-T001-cr-l1 | code-reviewer  | needs_review | 2    | 50000  | $0.3300 | 0ms      | orchestrator-reconciliation: gap-fill batch    |
-| d-T001-de... | dev            | done         | 3    | 50000  | $0.3300 | 0ms      | orchestrator-reconciliation: gap-fill batch    |
-| d-T001-lr-l1 | logic-reviewer | needs_review | 4    | 50000  | $0.3300 | 0ms      | orchestrator-reconciliation: gap-fill batch    |
-| d-T001-qa-l1 | qa             | done         | 5    | 50000  | $0.3300 | 0ms      | orchestrator-reconciliation: gap-fill batch    |
-| d-T003-qa-l1 | qa             | done         | 6    | 50000  | $0.1100 | 0ms      | orchestrator-reconciliation: gap-fill batch    |
-| d-T005-cr-l1 | code-reviewer  | done         | 4    | 50000  | $0.1100 | 0ms      | orchestrator-reconciliation: gap-fill batch    |
+| ID           | Role            | Status       | Loop | Tokens    | $         | Duration  | PM note                                        |
+| ------------ | --------------- | ------------ | ---- | --------- | --------- | --------- | ---------------------------------------------- |
+| d-T001-de... | dev             | done         | 1    | 50000     | $0.3300   | 0ms       | orchestrator-reconciliation: entry retro-added |
+| d-T002-cr-l1 | code-reviewer   | needs_review | 1    | 50000     | $0.1100   | 0ms       | orchestrator-reconciliation: entry retro-added |
+| d-T002-de... | dev             | done         | 2    | 50000     | $0.1100   | 0ms       | orchestrator-reconciliation: entry retro-added |
+| d-T002-de... | dev             | done         | 3    | 50000     | $0.3300   | 0ms       | orchestrator-reconciliation: entry retro-added |
+| d-T002-lr-l1 | logic-reviewer  | needs_review | 4    | 50000     | $0.3300   | 0ms       | orchestrator-reconciliation: entry retro-added |
+| d-T002-qa-l1 | qa              | done         | 5    | 50000     | $0.1100   | 0ms       | orchestrator-reconciliation: entry retro-added |
+| d-T003-cr-l1 | code-reviewer   | needs_review | 1    | 50000     | $0.1100   | 0ms       | orchestrator-reconciliation: entry retro-added |
+| d-T003-de... | dev             | done         | 2    | 50000     | $0.3300   | 0ms       | orchestrator-reconciliation: entry retro-added |
+| d-T003-de... | dev             | done         | 3    | 50000     | $0.3300   | 0ms       | orchestrator-reconciliation: entry retro-added |
+| d-T003-de... | dev             | done         | 4    | 50000     | $0.3300   | 0ms       | orchestrator-reconciliation: entry retro-added |
+| d-T003-lr-l1 | logic-reviewer  | needs_review | 5    | 50000     | $0.3300   | 0ms       | orchestrator-reconciliation: entry retro-added |
+| d-T004-cr-l1 | code-reviewer   | needs_review | 1    | 50000     | $0.1100   | 0ms       | orchestrator-reconciliation: entry retro-added |
+| d-T004-de... | dev             | done         | 2    | 50000     | $0.3300   | 0ms       | orchestrator-reconciliation: entry retro-added |
+| d-T004-de... | dev             | done         | 3    | 50000     | $0.3300   | 0ms       | orchestrator-reconciliation: entry retro-added |
+| d-T004-lr-l1 | logic-reviewer  | needs_review | 4    | 50000     | $0.3300   | 0ms       | orchestrator-reconciliation: entry retro-added |
+| d-T004-qa-l1 | qa              | done         | 5    | 50000     | $0.1100   | 0ms       | orchestrator-reconciliation: entry retro-added |
+| d-T005-de... | dev             | done         | 1    | 50000     | $0.1100   | 0ms       | orchestrator-reconciliation: entry retro-added |
+| d-T005-lr-l1 | logic-reviewer  | needs_review | 2    | 50000     | $0.3300   | 0ms       | orchestrator-reconciliation: entry retro-added |
+| d-T005-qa-l1 | qa              | done         | 3    | 50000     | $0.1100   | 0ms       | orchestrator-reconciliation: entry retro-added |
+| d-T006-cr-l1 | code-reviewer   | needs_review | 1    | 50000     | $0.1100   | 0ms       | orchestrator-reconciliation: entry retro-added |
+| d-T006-de... | dev             | done         | 2    | 50000     | $0.3300   | 0ms       | orchestrator-reconciliation: entry retro-added |
+| d-T006-de... | dev             | done         | 3    | 50000     | $0.3300   | 0ms       | orchestrator-reconciliation: entry retro-added |
+| d-T006-lr-l1 | logic-reviewer  | needs_review | 4    | 50000     | $0.3300   | 0ms       | orchestrator-reconciliation: entry retro-added |
+| d-T006-qa-l1 | qa              | done         | 5    | 50000     | $0.1100   | 0ms       | orchestrator-reconciliation: entry retro-added |
+| d-T001-cr-l1 | code-reviewer   | needs_review | 2    | 50000     | $0.3300   | 0ms       | orchestrator-reconciliation: gap-fill batch    |
+| d-T001-de... | dev             | done         | 3    | 50000     | $0.3300   | 0ms       | orchestrator-reconciliation: gap-fill batch    |
+| d-T001-lr-l1 | logic-reviewer  | needs_review | 4    | 50000     | $0.3300   | 0ms       | orchestrator-reconciliation: gap-fill batch    |
+| d-T001-qa-l1 | qa              | done         | 5    | 50000     | $0.3300   | 0ms       | orchestrator-reconciliation: gap-fill batch    |
+| d-T003-qa-l1 | qa              | done         | 6    | 50000     | $0.1100   | 0ms       | orchestrator-reconciliation: gap-fill batch    |
+| d-T005-cr-l1 | code-reviewer   | done         | 4    | 50000     | $0.1100   | 0ms       | orchestrator-reconciliation: gap-fill batch    |
+| pm-orches... | pm-orchestrator | done         | —    | 133163067 | $121.2810 | 1035m 43s | PM/orchestrator session (Stop hook): 424 turns |
+| pm-orches... | pm-orchestrator | done         | —    | 41902238  | $30.7911  | 64m 59s   | PM/orchestrator session (Stop hook): 263 turns |
+| pm-orches... | pm-orchestrator | done         | —    | 3306541   | $5.1728   | 18m 20s   | PM/orchestrator session (Stop hook): 52 turns  |
 
 ## Per-AC closure detail
 
@@ -99,9 +102,9 @@ _(no ACs defined)_
 | code-reviewer      | 6          |
 | dev                | 12         |
 | logic-reviewer     | 6          |
-| pm-orchestrator    | 0          |
+| pm-orchestrator    | 3          |
 | qa                 | 6          |
-| **Total**          | 30         |
+| **Total**          | 33         |
 
 ## Task success rate
 
@@ -112,12 +115,12 @@ _(no ACs defined)_
 | code-reviewer      | 16.7%             |
 | dev                | 100.0%            |
 | logic-reviewer     | 0.0%              |
-| pm-orchestrator    | n/a               |
+| pm-orchestrator    | 100.0%            |
 | qa                 | 100.0%            |
 
 ## Loop rate
 
-Loop rate: 100.0%
+Loop rate: 90.9%
 
 ## Escalation rate
 
@@ -167,9 +170,10 @@ Total: 0 | Pass: 28 | Partial: 0 | Fail: 0 | Missing: 0
 - [2026-05-17 03:00 qa] orchestrator-reconciliation: gap-fill batch
 - [2026-05-17 03:00 qa] orchestrator-reconciliation: gap-fill batch
 - [2026-05-17 03:00 code-reviewer] orchestrator-reconciliation: gap-fill batch
+- [2026-05-17 03:07 pm-orchestrator] PM/orchestrator session (Stop hook): 424 turns
+- [2026-05-17 20:28 pm-orchestrator] PM/orchestrator session (Stop hook): 263 turns
+- [2026-05-17 21:36 pm-orchestrator] PM/orchestrator session (Stop hook): 52 turns
 
 ## Token cost
 
-Token cost not available — using dispatch count as cost proxy: 30 dispatches
-
-⚠ pm-orchestrator Stop hook did not run — re-run agentops install-hooks (worktree-aware)
+Token cost not available — using dispatch count as cost proxy: 33 dispatches
