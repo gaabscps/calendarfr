@@ -15,6 +15,10 @@ function buildRichTextAggregate(data: DailyPageData): string {
   return priorities + agenda + notes + gratitude;
 }
 
+export function evaluateMissionCondition(id: MissionId, data: DailyPageData): boolean {
+  return evaluateCondition(id, data);
+}
+
 function evaluateCondition(id: MissionId, data: DailyPageData): boolean {
   switch (id) {
     case 'M-INTENTION':
@@ -54,5 +58,30 @@ export function deriveMissionProgress(
     }
   }
 
+  return result;
+}
+
+/**
+ * Returns the slice of missions that are visually "completed right now" for a given date.
+ *
+ * Definition: a mission is visually completed iff its persisted timestamp is non-null
+ * AND the current `data` still satisfies the mission's condition. This makes the sticky
+ * track real content state — if the user deletes their gratitude entry, M-GRATITUDE
+ * reverts to pending in the UI even though storage keeps the original timestamp
+ * (history is preserved; only the visible reading flips).
+ *
+ * Storage stays append-only (AC-017 latch): we never erase timestamps. This is a
+ * read-side projection only.
+ */
+export function selectVisibleMissionCompletion(
+  data: DailyPageData | null,
+  persistedHistory: Record<MissionId, string | null>,
+): Record<MissionId, string | null> {
+  if (data === null) return persistedHistory;
+  const result = {} as Record<MissionId, string | null>;
+  for (const id of MISSION_IDS) {
+    const existing = persistedHistory[id];
+    result[id] = existing !== null && evaluateCondition(id, data) ? existing : null;
+  }
   return result;
 }

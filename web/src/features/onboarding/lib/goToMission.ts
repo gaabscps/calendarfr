@@ -6,41 +6,69 @@ export function goToMission(missionId: MissionId, prefersReducedMotion: boolean)
   const target = MISSION_TARGETS[missionId];
   // querySelector returns Element|null; cast to HTMLElement needed for focus/classList.
   // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
-  const el = document.querySelector(target.selector) as HTMLElement | null;
-  if (!el) return;
+  const container = document.querySelector(target.selector) as HTMLElement | null;
+  if (!container) return;
 
   try {
-    el.scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth', block: 'center' });
+    container.scrollIntoView({
+      behavior: prefersReducedMotion ? 'auto' : 'smooth',
+      block: 'center',
+    });
   } catch {
     /* silent — AC-028 */
   }
 
+  const focusEl = resolveFocusTarget(container, target.focus);
   try {
-    resolveFocusTarget(el, target.focus)?.focus();
+    focusEl?.focus();
   } catch {
     /* silent — AC-028 */
   }
 
+  // Pulse goes on the focus target (small element), not the container. When the container is a
+  // whole feature column (priorities, agenda…), pulsing the box-shadow on it produces a giant
+  // red rectangle covering hundreds of pixels — the user feedback was unambiguous on this.
+  // Fallback to container only when no inner focus target was resolved (e.g. focus:self).
+  const pulseEl: HTMLElement = resolvePulseTarget(focusEl) ?? container;
   try {
-    el.classList.add('onboarding-pulse');
+    pulseEl.classList.add('onboarding-pulse');
   } catch {
     /* silent — AC-028 */
   }
+  // The "format" hint label is anchored to the same element as the pulse so the
+  // "Selecione texto e use a barra flutuante" caption sits next to the rich-text editor.
   if (target.hint === 'format') {
     try {
-      el.classList.add('onboarding-pulse-format');
+      pulseEl.classList.add('onboarding-pulse-format');
     } catch {
       /* silent — AC-028 */
     }
   }
   setTimeout(() => {
     try {
-      el.classList.remove('onboarding-pulse');
-      el.classList.remove('onboarding-pulse-format');
+      pulseEl.classList.remove('onboarding-pulse');
+      pulseEl.classList.remove('onboarding-pulse-format');
     } catch {
       /* silent — AC-028 */
     }
   }, 800);
+}
+
+/**
+ * When the resolved focus element is a sr-only input (typical for custom-styled checkboxes
+ * like the shared Checkbox atom — 1×1px input hidden inside a 24×24 label hit-area), pulsing
+ * on the input is invisible. Prefer the closest visible ancestor that owns the visual hit
+ * area: <label> for native form controls. For everything else, the focus element itself is
+ * the right place to pulse.
+ */
+function resolvePulseTarget(focusEl: HTMLElement | null): HTMLElement | null {
+  if (!focusEl) return null;
+  if (focusEl instanceof HTMLInputElement && focusEl.type === 'checkbox') {
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
+    const label = focusEl.closest('label') as HTMLLabelElement | null;
+    if (label) return label;
+  }
+  return focusEl;
 }
 
 function resolveFocusTarget(

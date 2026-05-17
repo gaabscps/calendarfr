@@ -1,27 +1,38 @@
 import type { MissionId } from '../../types.js';
 import { goToMission } from '../goToMission.js';
 
-function makeElement(overrides?: Partial<HTMLElement>): HTMLElement {
-  const classList = {
-    _classes: new Set<string>(),
+function makeClassList() {
+  const classes = new Set<string>();
+  return {
     add(cls: string) {
-      this._classes.add(cls);
+      classes.add(cls);
     },
     remove(cls: string) {
-      this._classes.delete(cls);
+      classes.delete(cls);
     },
     contains(cls: string) {
-      return this._classes.has(cls);
+      return classes.has(cls);
     },
   };
+}
+
+function makeElement(overrides?: Partial<HTMLElement>): HTMLElement {
   const el = {
     scrollIntoView: jest.fn(),
     focus: jest.fn(),
-    classList,
+    classList: makeClassList(),
     querySelector: jest.fn().mockReturnValue(null),
     ...overrides,
   } as unknown as HTMLElement;
   return el;
+}
+
+function makeFocusable(overrides?: Partial<HTMLElement>): HTMLElement {
+  return {
+    focus: jest.fn(),
+    classList: makeClassList(),
+    ...overrides,
+  } as unknown as HTMLElement;
 }
 
 describe('goToMission', () => {
@@ -80,7 +91,7 @@ describe('goToMission', () => {
   });
 
   it('AC-024: M-INTENTION (focus:input) queries for input/textarea/contenteditable', () => {
-    const input = { focus: jest.fn() } as unknown as HTMLElement;
+    const input = makeFocusable();
     (element.querySelector as jest.Mock).mockReturnValue(input);
     goToMission('M-INTENTION', false);
     expect(element.querySelector).toHaveBeenCalledWith('input, textarea, [contenteditable="true"]');
@@ -88,7 +99,7 @@ describe('goToMission', () => {
   });
 
   it('AC-024: M-PRIORITY (focus:firstRichText) queries for textbox/contenteditable', () => {
-    const richText = { focus: jest.fn() } as unknown as HTMLElement;
+    const richText = makeFocusable();
     (element.querySelector as jest.Mock).mockReturnValue(richText);
     goToMission('M-PRIORITY', false);
     expect(element.querySelector).toHaveBeenCalledWith(
@@ -98,7 +109,7 @@ describe('goToMission', () => {
   });
 
   it('AC-024: M-CHECK (focus:firstCheckbox) queries for checkbox role or native checkbox', () => {
-    const checkbox = { focus: jest.fn() } as unknown as HTMLElement;
+    const checkbox = makeFocusable();
     (element.querySelector as jest.Mock).mockReturnValue(checkbox);
     goToMission('M-CHECK', false);
     expect(element.querySelector).toHaveBeenCalledWith('input[type="checkbox"], [role="checkbox"]');
@@ -106,7 +117,7 @@ describe('goToMission', () => {
   });
 
   it('AC-024: M-GRATITUDE (focus:firstRichTextOrButton) queries for textbox/button/role=button', () => {
-    const btn = { focus: jest.fn() } as unknown as HTMLElement;
+    const btn = makeFocusable();
     (element.querySelector as jest.Mock).mockReturnValue(btn);
     goToMission('M-GRATITUDE', false);
     expect(element.querySelector).toHaveBeenCalledWith(
@@ -160,17 +171,109 @@ describe('goToMission', () => {
   });
 
   describe('AC-028: granular try/catch — pulse always runs', () => {
-    it('adds onboarding-pulse even when focus() throws', () => {
+    it('adds onboarding-pulse on the focus target even when focus() throws', () => {
       jest.useFakeTimers();
       (element.scrollIntoView as jest.Mock).mockImplementation(() => {});
-      const focusEl = {
+      const focusEl = makeFocusable({
         focus: jest.fn().mockImplementation(() => {
           throw new Error('focus error');
-        }),
-      } as unknown as HTMLElement;
+        }) as unknown as HTMLElement['focus'],
+      });
       (element.querySelector as jest.Mock).mockReturnValue(focusEl);
       expect(() => goToMission('M-INTENTION', false)).not.toThrow();
+      expect(focusEl.classList.contains('onboarding-pulse')).toBe(true);
+      // Pulse went on the inner focus element, NOT on the container.
+      expect(element.classList.contains('onboarding-pulse')).toBe(false);
+    });
+  });
+
+  describe('bug-fix: pulse targets the focused element, not the giant container', () => {
+    it('applies onboarding-pulse on the resolved focus target (M-PRIORITY)', () => {
+      jest.useFakeTimers();
+      const richText = makeFocusable();
+      (element.querySelector as jest.Mock).mockReturnValue(richText);
+      goToMission('M-PRIORITY', false);
+      expect(richText.classList.contains('onboarding-pulse')).toBe(true);
+      expect(element.classList.contains('onboarding-pulse')).toBe(false);
+    });
+
+    it('falls back to the container when no inner focus target resolves (M-INTENTION display mode)', () => {
+      jest.useFakeTimers();
+      // querySelector returns null for input AND for button → resolveFocusTarget returns null.
+      (element.querySelector as jest.Mock).mockReturnValue(null);
+      goToMission('M-INTENTION', false);
       expect(element.classList.contains('onboarding-pulse')).toBe(true);
+    });
+
+    it('applies onboarding-pulse on the container when focus mode is self (M-MOOD)', () => {
+      jest.useFakeTimers();
+      // focus:self → focusEl === container → pulse on container is intentional (it IS small).
+      goToMission('M-MOOD', false);
+      expect(element.classList.contains('onboarding-pulse')).toBe(true);
+    });
+
+    it('M-FORMAT: pulse and pulse-format both go on the rich-text editor, not the column', () => {
+      jest.useFakeTimers();
+      const richText = makeFocusable();
+      (element.querySelector as jest.Mock).mockReturnValue(richText);
+      goToMission('M-FORMAT', false);
+      expect(richText.classList.contains('onboarding-pulse')).toBe(true);
+      expect(richText.classList.contains('onboarding-pulse-format')).toBe(true);
+      expect(element.classList.contains('onboarding-pulse')).toBe(false);
+      expect(element.classList.contains('onboarding-pulse-format')).toBe(false);
+    });
+  });
+
+  describe('M-CHECK: pulse lifts from sr-only checkbox input to visible label hit-area', () => {
+    it('applies pulse on the closest <label> ancestor of an input[type=checkbox]', () => {
+      jest.useFakeTimers();
+      // Build a real <label><input type="checkbox"/></label> structure so closest() works.
+      const label = document.createElement('label');
+      const checkbox = document.createElement('input');
+      checkbox.type = 'checkbox';
+      label.appendChild(checkbox);
+      document.body.appendChild(label);
+      try {
+        (element.querySelector as jest.Mock).mockReturnValue(checkbox);
+        goToMission('M-CHECK', false);
+        expect(label.classList.contains('onboarding-pulse')).toBe(true);
+        expect(checkbox.classList.contains('onboarding-pulse')).toBe(false);
+        expect(element.classList.contains('onboarding-pulse')).toBe(false);
+      } finally {
+        document.body.removeChild(label);
+      }
+    });
+
+    it('falls back to the input itself when no <label> ancestor exists', () => {
+      jest.useFakeTimers();
+      const checkbox = document.createElement('input');
+      checkbox.type = 'checkbox';
+      document.body.appendChild(checkbox);
+      try {
+        (element.querySelector as jest.Mock).mockReturnValue(checkbox);
+        goToMission('M-CHECK', false);
+        expect(checkbox.classList.contains('onboarding-pulse')).toBe(true);
+      } finally {
+        document.body.removeChild(checkbox);
+      }
+    });
+
+    it('does NOT lift to label for non-checkbox inputs (e.g. text inputs from M-INTENTION)', () => {
+      jest.useFakeTimers();
+      const label = document.createElement('label');
+      const textInput = document.createElement('input');
+      textInput.type = 'text';
+      label.appendChild(textInput);
+      document.body.appendChild(label);
+      try {
+        (element.querySelector as jest.Mock).mockReturnValue(textInput);
+        goToMission('M-INTENTION', false);
+        // Text inputs are visible themselves — pulse stays on the input, not lifted.
+        expect(textInput.classList.contains('onboarding-pulse')).toBe(true);
+        expect(label.classList.contains('onboarding-pulse')).toBe(false);
+      } finally {
+        document.body.removeChild(label);
+      }
     });
   });
 

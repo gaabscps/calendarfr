@@ -1,8 +1,50 @@
+import type { DailyPageData } from '@calendarfr/shared';
 import { act, render } from '@testing-library/react';
 
 import { STORAGE_KEY } from '../../lib/constants.js';
 import type { MissionId, OnboardingState } from '../../types.js';
 import { CompletedDayDecor } from '../CompletedDayDecor.js';
+
+function makeFullyConditionMetData(): DailyPageData {
+  return {
+    schemaVersion: 1,
+    date: '2026-05-17',
+    mood: { emoji: '😊', label: 'Feliz', color: '#fff' },
+    intention: 'foco',
+    priorities: [
+      { id: 'a', text: '<u>uma prioridade</u>', done: true },
+      { id: 'b', text: '', done: false },
+      { id: 'c', text: '', done: false },
+    ] as DailyPageData['priorities'],
+    agenda: [{ hour: 6, text: 'algo' }] as unknown as DailyPageData['agenda'],
+    notes: [],
+    gratitude: [{ id: 'g1', text: 'agradeço' }] as unknown as DailyPageData['gratitude'],
+    createdAt: null,
+    updatedAt: null,
+  };
+}
+
+function makeEmptyData(): DailyPageData {
+  return {
+    schemaVersion: 1,
+    date: '2026-05-17',
+    mood: null,
+    intention: null,
+    priorities: [
+      { id: 'a', text: '', done: false },
+      { id: 'b', text: '', done: false },
+      { id: 'c', text: '', done: false },
+    ] as DailyPageData['priorities'],
+    agenda: Array.from({ length: 18 }, (_, i) => ({
+      hour: i + 6,
+      text: '',
+    })) as unknown as DailyPageData['agenda'],
+    notes: [],
+    gratitude: [],
+    createdAt: null,
+    updatedAt: null,
+  };
+}
 
 // ─── Framer Motion mock ───────────────────────────────────────────────────────
 let mockReducedMotion = false;
@@ -130,6 +172,23 @@ describe('CompletedDayDecor — conditional render', () => {
     });
     const { container } = render(<CompletedDayDecor date={DATE} />);
     expect(container.firstChild).toBeNull();
+  });
+
+  it('bug-7: does NOT render when persisted=7/7 but current data no longer satisfies conditions', () => {
+    // Latch left timestamps for a day whose content was later cleared. The visual intersection
+    // (persisted ∧ current condition) flips back to incomplete — decor should disappear.
+    setStorageState({ progressByDate: { [DATE]: makeAllCompleted() } });
+    const { container } = render(<CompletedDayDecor date={DATE} data={makeEmptyData()} />);
+    expect(container.firstChild).toBeNull();
+  });
+
+  it('bug-7: DOES render when persisted=7/7 AND current data still satisfies every condition', () => {
+    setStorageState({ progressByDate: { [DATE]: makeAllCompleted() } });
+    const { container } = render(
+      <CompletedDayDecor date={DATE} data={makeFullyConditionMetData()} />,
+    );
+    expect(container.querySelector('[data-testid="washi-left"]')).toBeInTheDocument();
+    expect(container.querySelector('[data-testid="golden-seal"]')).toBeInTheDocument();
   });
 });
 

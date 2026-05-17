@@ -17,8 +17,21 @@
   right: 12px;
 }
 
+/* Selo dourado: posicionado no canto superior direito, no mesmo slot onde o sticky-note
+   morava enquanto havia missões pendentes. Narrativa: quando o dia chega a 7/7 a sticky
+   sai com a exit-anim, e o selo entra ocupando o mesmo cantinho — sinalização imediata
+   above-the-fold (PaperSheet costuma ter ~1200px e o viewport médio fica abaixo disso).
+   FEAT-028 AC-033 originalmente pedia "bottom right", mas isso ficava abaixo do fold
+   em qualquer viewport padrão e o usuário perdia o feedback. */
 .seal {
   position: absolute;
-  bottom: var(--spacing-lg, 36px);
-  right: var(--spacing-lg, 36px);
+  top: var(--spacing-lg, 24px);
+  right: var(--spacing-lg, 24px);
+  /* z-index abaixo do sticky-note (var(--z-toolbar)=200) para que, quando o usuário abre
+     o roteiro em readonly via "?", o sticky cubra o selo temporariamente. */
+  z-index: 150;
+  /* Rotação fixa imita carimbo aplicado a mão; drop-shadow dá profundidade de relevo
+     metálico contra o fundo papel. */
+  transform: rotate(-8deg);
+  filter: drop-shadow(0 2px 3px rgba(60, 40, 20, 0.25)) drop-shadow(0 1px 0 rgba(212, 167, 44, 0.4));
 }

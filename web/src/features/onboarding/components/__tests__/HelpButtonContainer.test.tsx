@@ -55,14 +55,18 @@ describe('HelpButtonContainer', () => {
     expect(stored.status).toBe('in_progress');
   });
 
-  it('AC-020: click when status=in_progress is a no-op (no state change)', async () => {
+  it('click when status=in_progress sets readonly visible (bug-fix: works even when global status never reached completed)', async () => {
     const user = userEvent.setup();
     setStorageState({ status: 'in_progress' });
     render(<HelpButtonContainer />);
     const before = localStorage.getItem(STORAGE_KEY);
     await user.click(screen.getByRole('button', { name: /abrir roteiro do diário/i }));
+    // Persisted state must NOT mutate (no reopen on in_progress).
     const after = localStorage.getItem(STORAGE_KEY);
     expect(after).toBe(before);
+    // But readonly toggle must flip on so the sticky shows even when the current day is 7/7.
+    const { getReadonlyVisible } = await import('../../lib/readonlyController.js');
+    expect(getReadonlyVisible()).toBe(true);
   });
 
   it('AC-021: click when status=completed calls setReadonlyVisible(true)', async () => {

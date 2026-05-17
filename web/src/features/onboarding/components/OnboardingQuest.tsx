@@ -5,7 +5,10 @@ import { useCallback, useEffect, useRef, useState, useSyncExternalStore } from '
 import type { SaveStatus } from '@/features/daily-page';
 
 import { useOnboardingState } from '../hooks/useOnboardingState.js';
-import { deriveMissionProgress } from '../lib/deriveMissionProgress.js';
+import {
+  deriveMissionProgress,
+  selectVisibleMissionCompletion,
+} from '../lib/deriveMissionProgress.js';
 import { goToMission } from '../lib/goToMission.js';
 import { MISSION_IDS, MISSIONS } from '../lib/missions.js';
 import {
@@ -86,10 +89,22 @@ export function OnboardingQuest({ data, date, saveStatus = 'saved' }: Onboarding
     prevSaveStatusRef.current = saveStatus;
   }, [data, saveStatus, date, state.progressByDate, markMission, announceAriaMessage]);
 
+  const dateSlice = state.progressByDate[date] ?? buildEmptyMissionRecord();
+  // Visible (per-mission) completion = persisted timestamp AND current content still satisfies
+  // the mission condition. Storage stays append-only (AC-017); this is a read-side projection
+  // so the sticky reflects real content state — e.g. if the user deletes their gratitude
+  // entry, M-GRATITUDE flips back to pending in the UI.
+  const visibleSlice = selectVisibleMissionCompletion(data, dateSlice);
+  const currentDayComplete = MISSION_IDS.every((id) => visibleSlice[id] !== null);
+  const countCompleted = MISSION_IDS.filter((id) => visibleSlice[id] !== null).length;
+
+  // Per-day visibility: sticky auto-shows whenever today is not 7/7, regardless of the global
+  // `status` flag (which latches to 'completed' on the user's first 7/7 day and never reverts).
+  // Hidden when: user explicitly dismissed, OR today is fully complete (unless reopened readonly).
+  const isMounted = state.status !== 'dismissed' && (!currentDayComplete || showCompletedReadonly);
+
   useEffect(() => {
-    const isVisible =
-      state.status === 'in_progress' || (state.status === 'completed' && showCompletedReadonly);
-    if (!isVisible) return;
+    if (!isMounted) return;
 
     function handler(e: KeyboardEvent): void {
       if (e.key !== 'Escape') return;
@@ -97,8 +112,11 @@ export function OnboardingQuest({ data, date, saveStatus = 'saved' }: Onboarding
       if (target?.isContentEditable) return;
       const tag = target?.tagName;
       if (tag === 'INPUT' || tag === 'TEXTAREA') return;
-      if (state.status === 'completed') {
+      if (showCompletedReadonly) {
         setReadonlyVisible(false);
+      } else if (currentDayComplete) {
+        // safety net: should not happen since hidden when complete + !readonly
+        return;
       } else {
         dismiss();
       }
@@ -108,7 +126,7 @@ export function OnboardingQuest({ data, date, saveStatus = 'saved' }: Onboarding
     return () => {
       window.removeEventListener('keydown', handler);
     };
-  }, [state.status, showCompletedReadonly, dismiss]);
+  }, [isMounted, showCompletedReadonly, currentDayComplete, dismiss]);
 
   useEffect(() => {
     return () => {
@@ -118,15 +136,10 @@ export function OnboardingQuest({ data, date, saveStatus = 'saved' }: Onboarding
     };
   }, []);
 
-  const isMounted =
-    state.status === 'in_progress' || (state.status === 'completed' && showCompletedReadonly);
-
-  const dateSlice = state.progressByDate[date] ?? buildEmptyMissionRecord();
-  const countCompleted = MISSION_IDS.filter((id) => dateSlice[id] !== null).length;
-  const headerLabel = state.status === 'completed' ? 'Roteiro concluído ✓' : 'Roteiro do diário';
+  const headerLabel = currentDayComplete ? 'Roteiro concluído ✓' : 'Roteiro do diário';
 
   function handleDismiss(): void {
-    if (state.status === 'completed') {
+    if (showCompletedReadonly) {
       setReadonlyVisible(false);
     } else {
       dismiss();
@@ -141,7 +154,7 @@ export function OnboardingQuest({ data, date, saveStatus = 'saved' }: Onboarding
       onDismiss={handleDismiss}
     >
       <QuestList
-        missionsCompleted={dateSlice}
+        missionsCompleted={visibleSlice}
         ariaLiveMessage={ariaLiveMessage}
         onActionClick={handleActionClick}
       />

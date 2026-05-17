@@ -219,7 +219,7 @@ function DailyPageInner({ initialDate }: DailyPageProps = {}) {
             por causa do drag persistido. */}
         <StickyNote />
         <OnboardingQuest data={data} date={date} saveStatus={saveStatus} />
-        <CompletedDayDecor date={date} />
+        <CompletedDayDecor date={date} data={data} />
       </PaperSheet>
     </>
   );

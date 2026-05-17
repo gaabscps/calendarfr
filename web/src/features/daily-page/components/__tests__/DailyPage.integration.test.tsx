@@ -675,6 +675,26 @@ describe('DailyPage — CompletedDayDecor renders with 7/7 missions (AC-031)', (
         status: 'completed',
       }),
     );
+    // Bug-7 fix: CompletedDayDecor now also requires current data to satisfy every condition
+    // (read-side intersection). Provide a fully-populated `data` so the decor still renders.
+    mockUseDailyPage.mockReturnValue(
+      makeDefaultDailyReturn({
+        data: makeData(DATE, {
+          intention: 'foco',
+          mood: { emoji: '😊', label: 'Feliz', color: '#fff' },
+          priorities: [
+            { id: 'a', text: '<u>uma prioridade</u>', done: true },
+            { id: 'b', text: '', done: false },
+            { id: 'c', text: '', done: false },
+          ] as DailyPageData['priorities'],
+          agenda: Array.from({ length: 18 }, (_, i) => ({
+            hour: i + 6,
+            text: i === 0 ? 'algo' : '',
+          })) as unknown as DailyPageData['agenda'],
+          gratitude: [{ id: 'g1', text: 'agradeço' }] as unknown as DailyPageData['gratitude'],
+        }),
+      }),
+    );
 
     render(<DailyPage />);
 

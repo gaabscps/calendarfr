@@ -110,6 +110,33 @@ function makeEmptyData(): DailyPageData {
   };
 }
 
+/**
+ * `data` payload where every mission's condition is satisfied. Use this for tests that
+ * assert "completed state" UI — the visibility projection now requires both persisted
+ * timestamps AND current data conditions to align (bug-7).
+ */
+function makeFullData(): DailyPageData {
+  return {
+    schemaVersion: 1,
+    date: DATE,
+    mood: { emoji: '😊', label: 'Feliz', color: '#fff' },
+    intention: 'foco',
+    priorities: [
+      { id: 'a', text: '<u>uma prioridade</u>', done: true },
+      { id: 'b', text: '', done: false },
+      { id: 'c', text: '', done: false },
+    ] as DailyPageData['priorities'],
+    agenda: Array.from({ length: 18 }, (_, i) => ({
+      hour: i + 6,
+      text: i === 0 ? 'algo' : '',
+    })) as unknown as DailyPageData['agenda'],
+    notes: [],
+    gratitude: [{ id: 'g1', text: 'agradeço' }] as unknown as DailyPageData['gratitude'],
+    createdAt: null,
+    updatedAt: null,
+  };
+}
+
 // ---------------------------------------------------------------------------
 // Setup
 // ---------------------------------------------------------------------------
@@ -155,14 +182,14 @@ describe('OnboardingQuest — status dismissed', () => {
     expect(screen.queryByRole('region', { name: /roteiro do diário/i })).not.toBeInTheDocument();
   });
 
-  it('completed state (no readonly) → no sticky-note region', () => {
+  it('completed state with full data (no readonly) → no sticky-note region', () => {
     setStorageState({
       status: 'completed',
       progressByDate: { [DATE]: makeAllCompleted() },
       completedAt: '2026-05-17T10:00:00.000Z',
       completedOnDate: DATE,
     });
-    render(<OnboardingQuest data={makeEmptyData()} date={DATE} saveStatus="saved" />);
+    render(<OnboardingQuest data={makeFullData()} date={DATE} saveStatus="saved" />);
     expect(screen.queryByRole('region', { name: /roteiro do diário/i })).not.toBeInTheDocument();
   });
 });
@@ -354,21 +381,39 @@ describe('OnboardingQuest — batch marking on autosave commit (AC-011)', () => 
 
 describe('OnboardingQuest — per-date progress independence (AC-016/AC-017)', () => {
   it('switching date resets visible missions to that date progress', async () => {
+    // DATE seeded as partial (3/7 persisted). Data satisfies ONLY those same 3 conditions
+    // (intention/mood/priority text) — so initial reconciliation finds nothing new to mark,
+    // and the intersection visible = 3/7 keeps the sticky mounted with 3 marked.
+    const ts = '2026-05-17T09:00:00.000Z';
     setStorageState({
       status: 'in_progress',
       progressByDate: {
-        [DATE]: makeAllCompleted(),
+        [DATE]: {
+          ...makeAllNull(),
+          'M-INTENTION': ts,
+          'M-MOOD': ts,
+          'M-PRIORITY': ts,
+        },
         [DATE_B]: makeAllNull(),
       },
-      completedOnDate: DATE,
-      completedAt: '2026-05-17T10:00:00.000Z',
     });
+    const partialData: DailyPageData = {
+      ...makeEmptyData(),
+      intention: 'foco',
+      mood: { emoji: '😊', label: 'Feliz', color: '#fff' },
+      priorities: [
+        { id: 'a', text: 'uma prioridade', done: false },
+        { id: 'b', text: '', done: false },
+        { id: 'c', text: '', done: false },
+      ] as DailyPageData['priorities'],
+    };
     const { rerender } = render(
-      <OnboardingQuest data={makeEmptyData()} date={DATE} saveStatus="saved" />,
+      <OnboardingQuest data={partialData} date={DATE} saveStatus="saved" />,
     );
     await waitFor(() => {
       expect(screen.getByRole('region', { name: /roteiro do diário/i })).toBeInTheDocument();
     });
+    expect(screen.getByRole('region', { name: /3 de 7/i })).toBeInTheDocument();
     // Navigate to DATE_B which has 0 missions
     act(() => {
       rerender(
@@ -389,6 +434,78 @@ describe('OnboardingQuest — per-date progress independence (AC-016/AC-017)', (
 });
 
 // ---------------------------------------------------------------------------
+// Bug-fix: visibility is per-day, not gated on the global `status` flag.
+// Once a user completes their first 7/7, `status` latches to 'completed' forever;
+// the sticky must still auto-show on later days whose own progress is < 7/7.
+// ---------------------------------------------------------------------------
+
+describe('OnboardingQuest — per-day visibility (post-completion regression)', () => {
+  it('global status=completed but current date has 0/7 → sticky auto-shows', async () => {
+    setStorageState({
+      status: 'completed',
+      progressByDate: { [DATE]: makeAllCompleted() },
+      completedAt: '2026-05-17T10:00:00.000Z',
+      completedOnDate: DATE,
+    });
+    render(<OnboardingQuest data={makeEmptyData()} date={DATE_B} saveStatus="saved" />);
+    await waitFor(() => {
+      expect(screen.getByRole('region', { name: /0 de 7/i })).toBeInTheDocument();
+    });
+    expect(screen.getByText('Roteiro do diário')).toBeInTheDocument();
+  });
+
+  it('global status=completed AND current date has 7/7 (data still satisfies) → sticky hidden', () => {
+    setStorageState({
+      status: 'completed',
+      progressByDate: {
+        [DATE]: makeAllCompleted(),
+        [DATE_B]: makeAllCompleted('2026-05-18T10:00:00.000Z'),
+      },
+      completedAt: '2026-05-17T10:00:00.000Z',
+      completedOnDate: DATE,
+    });
+    render(<OnboardingQuest data={makeFullData()} date={DATE_B} saveStatus="saved" />);
+    expect(screen.queryByRole('region', { name: /roteiro do diário/i })).not.toBeInTheDocument();
+  });
+
+  it('global status=completed AND current date partial → headerLabel reflects today (not global)', async () => {
+    setStorageState({
+      status: 'completed',
+      progressByDate: {
+        [DATE]: makeAllCompleted(),
+        [DATE_B]: { ...makeAllNull(), 'M-INTENTION': '2026-05-18T09:00:00.000Z' },
+      },
+      completedAt: '2026-05-17T10:00:00.000Z',
+      completedOnDate: DATE,
+    });
+    render(<OnboardingQuest data={makeEmptyData()} date={DATE_B} saveStatus="saved" />);
+    await waitFor(() => {
+      expect(screen.getByText('Roteiro do diário')).toBeInTheDocument();
+    });
+    expect(screen.queryByText('Roteiro concluído ✓')).not.toBeInTheDocument();
+  });
+
+  it('bug-7: persisted=7/7 but data is empty → sticky still shows with header "Roteiro do diário" (0/7 visible)', async () => {
+    // Reproduces the user-reported regression: they cleared content from a day where they had
+    // previously completed all 7 missions. With pure persisted-state gating the sticky stayed
+    // hidden and headerLabel said "concluído ✓". Intersection projection (persisted ∧ current
+    // content condition) flips today back to 0/7 visible → sticky reappears.
+    setStorageState({
+      status: 'completed',
+      progressByDate: { [DATE]: makeAllCompleted() },
+      completedAt: '2026-05-17T10:00:00.000Z',
+      completedOnDate: DATE,
+    });
+    render(<OnboardingQuest data={makeEmptyData()} date={DATE} saveStatus="saved" />);
+    await waitFor(() => {
+      expect(screen.getByRole('region', { name: /0 de 7/i })).toBeInTheDocument();
+    });
+    expect(screen.getByText('Roteiro do diário')).toBeInTheDocument();
+    expect(screen.queryByText('Roteiro concluído ✓')).not.toBeInTheDocument();
+  });
+});
+
+// ---------------------------------------------------------------------------
 // AC-018: completing all 7 missions auto-promotes to completed
 // ---------------------------------------------------------------------------
 
@@ -403,7 +520,7 @@ describe('OnboardingQuest — auto-completion (AC-018)', () => {
     act(() => {
       setReadonlyVisible(true);
     });
-    render(<OnboardingQuest data={makeEmptyData()} date={DATE} saveStatus="saved" />);
+    render(<OnboardingQuest data={makeFullData()} date={DATE} saveStatus="saved" />);
     await waitFor(() => {
       expect(screen.getByText('Roteiro concluído ✓')).toBeInTheDocument();
     });
@@ -461,7 +578,7 @@ describe('OnboardingQuest — Esc key closes sticky', () => {
     act(() => {
       setReadonlyVisible(true);
     });
-    render(<OnboardingQuest data={makeEmptyData()} date={DATE} saveStatus="saved" />);
+    render(<OnboardingQuest data={makeFullData()} date={DATE} saveStatus="saved" />);
     await waitFor(() => {
       expect(screen.getByRole('region', { name: /roteiro do diário/i })).toBeInTheDocument();
     });
@@ -580,7 +697,7 @@ describe('OnboardingQuest — completed-readonly mode', () => {
       completedAt: '2026-05-17T10:00:00.000Z',
       completedOnDate: DATE,
     });
-    render(<OnboardingQuest data={makeEmptyData()} date={DATE} saveStatus="saved" />);
+    render(<OnboardingQuest data={makeFullData()} date={DATE} saveStatus="saved" />);
 
     expect(screen.queryByRole('region', { name: /roteiro do diário/i })).not.toBeInTheDocument();
 

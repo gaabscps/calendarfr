@@ -1,9 +1,11 @@
+import type { DailyPageData } from '@calendarfr/shared';
 import { motion, useReducedMotion } from 'framer-motion';
 import { useRef } from 'react';
 
 import { GoldenSeal } from '../assets/GoldenSeal.js';
 import { WashiTape } from '../assets/WashiTape.js';
 import { useOnboardingState } from '../hooks/useOnboardingState.js';
+import { selectVisibleMissionCompletion } from '../lib/deriveMissionProgress.js';
 import { MISSION_IDS } from '../lib/missions.js';
 import type { MissionId } from '../types.js';
 
@@ -11,13 +13,17 @@ import styles from './CompletedDayDecor.module.css';
 
 interface CompletedDayDecorProps {
   date: string;
+  data?: DailyPageData | null;
 }
 
-export function CompletedDayDecor({ date }: CompletedDayDecorProps) {
+export function CompletedDayDecor({ date, data = null }: CompletedDayDecorProps) {
   const { state } = useOnboardingState();
   const dateSlice: Record<MissionId, string | null> =
     state.progressByDate[date] ?? ({} as Record<MissionId, string | null>);
-  const isCompleteForDay = MISSION_IDS.every((id) => dateSlice[id] != null);
+  // Same intersection logic as OnboardingQuest: a day is decoratively "complete" only when
+  // every mission's persisted timestamp AND current content condition still hold.
+  const visibleSlice = selectVisibleMissionCompletion(data, dateSlice);
+  const isCompleteForDay = MISSION_IDS.every((id) => visibleSlice[id] != null);
 
   const wasCompleteOnMountRef = useRef(isCompleteForDay);
   const prefersReducedMotion = useReducedMotion();
