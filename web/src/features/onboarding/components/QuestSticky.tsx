@@ -75,7 +75,7 @@ export function QuestSticky({
         >
           <div className={styles.header}>
             <span className={styles.headerLabel}>{headerLabel ?? 'Roteiro do diário'}</span>
-            <MuteToggle className={styles.muteToggle} />
+            <MuteToggle {...(styles.muteToggle ? { className: styles.muteToggle } : {})} />
           </div>
 
           <div className={styles.body}>{children}</div>

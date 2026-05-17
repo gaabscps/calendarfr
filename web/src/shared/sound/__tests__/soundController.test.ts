@@ -72,12 +72,11 @@ describe('soundController — audio playback', () => {
 
   it('respects prefers-reduced-motion by lowering volume', () => {
     const originalMatchMedia = window.matchMedia;
-    // @ts-expect-error — jsdom doesn't always set matchMedia
     window.matchMedia = jest.fn().mockReturnValue({
       matches: true,
       addEventListener: jest.fn(),
       removeEventListener: jest.fn(),
-    });
+    }) as unknown as typeof window.matchMedia;
     const c = createSoundController();
     c.play('mission-complete');
     const playedClone = audioInstances[audioInstances.length - 1]!;
