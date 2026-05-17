@@ -1,4 +1,4 @@
-import { SOUND_URLS, type SoundId } from './sounds.js';
+import { SOUND_IDS, SOUND_URLS, type SoundId } from './sounds.js';
 
 const STORAGE_KEY = 'calendarfr:sound:muted';
 const VOLUME_NORMAL = 0.7;
@@ -42,6 +42,7 @@ function getVolume(): number {
 
 export function createSoundController(): SoundController {
   let muted = readMutedFromStorage();
+  let unlocked = false;
   const listeners = new Set<() => void>();
   const cache = new Map<SoundId, HTMLAudioElement>();
 
@@ -61,6 +62,45 @@ export function createSoundController(): SoundController {
     audio.preload = 'auto';
     cache.set(id, audio);
     return audio;
+  }
+
+  /**
+   * Chrome (and most modern browsers) block Audio.play() until the user has
+   * interacted with the page. The mission-complete / day-complete sounds fire
+   * from React effects (async callbacks), NOT from inside the click handler —
+   * so by the time play() runs, the gesture context is gone and the browser
+   * silently rejects. We unlock by playing each cached audio muted during the
+   * first real pointerdown/keydown, which DOES happen inside a gesture context.
+   * Subsequent unmuted plays then succeed normally.
+   */
+  function unlockAudio(): void {
+    if (unlocked) return;
+    unlocked = true;
+    if (process.env.NODE_ENV !== 'production') {
+      // eslint-disable-next-line no-console
+      console.log('[sound] unlock — priming audio on first user gesture');
+    }
+    for (const id of SOUND_IDS) {
+      const audio = getOrCreateBase(id);
+      audio.muted = true;
+      const p = audio.play();
+      if (p instanceof Promise) {
+        p.then(() => {
+          audio.pause();
+          audio.currentTime = 0;
+          audio.muted = false;
+        }).catch(() => {
+          audio.muted = false;
+        });
+      }
+    }
+  }
+
+  if (typeof document !== 'undefined') {
+    const opts = { once: true, capture: true } as AddEventListenerOptions;
+    document.addEventListener('pointerdown', unlockAudio, opts);
+    document.addEventListener('keydown', unlockAudio, opts);
+    document.addEventListener('touchstart', unlockAudio, opts);
   }
 
   return {
