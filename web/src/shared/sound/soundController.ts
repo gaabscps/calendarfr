@@ -1,4 +1,4 @@
-import { SOUND_IDS, SOUND_URLS, type SoundId } from './sounds.js';
+import { SOUND_URLS, type SoundId } from './sounds.js';
 
 const STORAGE_KEY = 'calendarfr:sound:muted';
 const VOLUME_NORMAL = 0.7;
@@ -44,7 +44,6 @@ export function createSoundController(): SoundController {
   let muted = readMutedFromStorage();
   let unlocked = false;
   const listeners = new Set<() => void>();
-  const cache = new Map<SoundId, HTMLAudioElement>();
 
   if (process.env.NODE_ENV !== 'production') {
     // eslint-disable-next-line no-console
@@ -55,24 +54,20 @@ export function createSoundController(): SoundController {
     listeners.forEach((fn) => fn());
   }
 
-  function getOrCreateBase(id: SoundId): HTMLAudioElement {
-    const cached = cache.get(id);
-    if (cached) return cached;
-    const audio = new Audio(SOUND_URLS[id]);
-    audio.preload = 'auto';
-    cache.set(id, audio);
-    return audio;
-  }
-
   /**
-   * Chrome (and most modern browsers) block Audio.play() until the user has
-   * interacted with the page. The mission-complete / day-complete sounds fire
-   * from React effects (async callbacks), NOT from inside the click handler —
-   * so by the time play() runs, the gesture context is gone and the browser
-   * silently rejects. We unlock by playing each cached audio at volume 0
-   * during the first real pointerdown/keydown, which DOES happen inside a
-   * gesture context. Volume (not muted) is set synchronously and prevents any
-   * audible bleed; the audio is then paused and reset for future plays.
+   * Chrome (e most browsers) block Audio.play() até a primeira interação do
+   * usuário. play() é chamado de useEffect (callback async), fora do gesture
+   * context, então o browser silenciosamente rejeita.
+   *
+   * Solução: na primeira pointerdown/keydown/touchstart (que ESTÁ no gesture
+   * context), tocamos um audio silencioso. Depois disso o documento fica
+   * "audio-activated" e qualquer `new Audio().play()` posterior funciona,
+   * incluindo de contextos async.
+   *
+   * Importante: usamos um Audio descartável só pra unlock — NÃO compartilha
+   * estado com os Audios reais de play(). Cada play() cria um Audio fresco
+   * pra evitar race conditions (unlock pausando audio legítimo, currentTime
+   * inconsistente, etc).
    */
   function unlockAudio(): void {
     if (unlocked) return;
@@ -81,18 +76,13 @@ export function createSoundController(): SoundController {
       // eslint-disable-next-line no-console
       console.log('[sound] unlock — priming audio on first user gesture');
     }
-    for (const id of SOUND_IDS) {
-      const audio = getOrCreateBase(id);
-      audio.volume = 0;
-      const p = audio.play();
-      if (p instanceof Promise) {
-        p.then(() => {
-          audio.pause();
-          audio.currentTime = 0;
-        }).catch(() => {
-          /* unlock failed for this id — play() will retry later */
-        });
-      }
+    const dummy = new Audio(SOUND_URLS['mission-complete']);
+    dummy.volume = 0;
+    const p = dummy.play();
+    if (p instanceof Promise) {
+      p.catch(() => {
+        /* unlock failed — subsequent plays will retry */
+      });
     }
   }
 
@@ -112,19 +102,10 @@ export function createSoundController(): SoundController {
         }
         return;
       }
-      // Play the cached base directly (no cloneNode). Cloning copies whatever
-      // transient state the base has — including muted/volume set by unlock —
-      // and clones don't share the loaded audio buffer, so each new clone has
-      // to re-fetch. Our sounds are 150–700ms and never need to overlap, so
-      // resetting currentTime and replaying the base is simpler and reliable.
-      const audio = getOrCreateBase(id);
-      audio.muted = false;
+      // Fresh Audio per call. Browser HTTP cache makes subsequent fetches
+      // instant. No shared state, no race with unlock, no clone leaks.
+      const audio = new Audio(SOUND_URLS[id]);
       audio.volume = getVolume();
-      try {
-        audio.currentTime = 0;
-      } catch {
-        /* setting currentTime before metadata loads throws InvalidStateError */
-      }
       const result: unknown = audio.play();
       if (result instanceof Promise) {
         result
