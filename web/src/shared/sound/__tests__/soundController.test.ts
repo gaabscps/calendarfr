@@ -34,13 +34,15 @@ describe('soundController — audio playback', () => {
     globalThis.Audio = originalAudio;
   });
 
-  it('lazy-loads an Audio instance on first play() per id', () => {
+  it('lazy-creates a single Audio instance on first play() per id, reuses it on repeat', () => {
     const c = createSoundController();
     expect(audioInstances).toHaveLength(0);
     c.play('mission-complete');
-    expect(audioInstances).toHaveLength(2);
+    expect(audioInstances).toHaveLength(1);
     c.play('mission-complete');
-    expect(audioInstances).toHaveLength(3);
+    expect(audioInstances).toHaveLength(1);
+    c.play('day-complete');
+    expect(audioInstances).toHaveLength(2);
   });
 
   it('does not play when muted', () => {

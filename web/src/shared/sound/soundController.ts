@@ -69,9 +69,10 @@ export function createSoundController(): SoundController {
    * interacted with the page. The mission-complete / day-complete sounds fire
    * from React effects (async callbacks), NOT from inside the click handler —
    * so by the time play() runs, the gesture context is gone and the browser
-   * silently rejects. We unlock by playing each cached audio muted during the
-   * first real pointerdown/keydown, which DOES happen inside a gesture context.
-   * Subsequent unmuted plays then succeed normally.
+   * silently rejects. We unlock by playing each cached audio at volume 0
+   * during the first real pointerdown/keydown, which DOES happen inside a
+   * gesture context. Volume (not muted) is set synchronously and prevents any
+   * audible bleed; the audio is then paused and reset for future plays.
    */
   function unlockAudio(): void {
     if (unlocked) return;
@@ -82,15 +83,14 @@ export function createSoundController(): SoundController {
     }
     for (const id of SOUND_IDS) {
       const audio = getOrCreateBase(id);
-      audio.muted = true;
+      audio.volume = 0;
       const p = audio.play();
       if (p instanceof Promise) {
         p.then(() => {
           audio.pause();
           audio.currentTime = 0;
-          audio.muted = false;
         }).catch(() => {
-          audio.muted = false;
+          /* unlock failed for this id — play() will retry later */
         });
       }
     }
@@ -112,16 +112,26 @@ export function createSoundController(): SoundController {
         }
         return;
       }
-      const base = getOrCreateBase(id);
-      const clone = base.cloneNode(true) as HTMLAudioElement;
-      clone.volume = getVolume();
-      const result: unknown = clone.play();
+      // Play the cached base directly (no cloneNode). Cloning copies whatever
+      // transient state the base has — including muted/volume set by unlock —
+      // and clones don't share the loaded audio buffer, so each new clone has
+      // to re-fetch. Our sounds are 150–700ms and never need to overlap, so
+      // resetting currentTime and replaying the base is simpler and reliable.
+      const audio = getOrCreateBase(id);
+      audio.muted = false;
+      audio.volume = getVolume();
+      try {
+        audio.currentTime = 0;
+      } catch {
+        /* setting currentTime before metadata loads throws InvalidStateError */
+      }
+      const result: unknown = audio.play();
       if (result instanceof Promise) {
         result
           .then(() => {
             if (process.env.NODE_ENV !== 'production') {
               // eslint-disable-next-line no-console
-              console.log(`[sound] play('${id}') ✓ vol=${clone.volume.toFixed(2)}`);
+              console.log(`[sound] play('${id}') ✓ vol=${audio.volume.toFixed(2)}`);
             }
           })
           .catch((err: unknown) => {
