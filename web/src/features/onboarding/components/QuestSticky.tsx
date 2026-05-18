@@ -1,8 +1,6 @@
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { type ReactNode } from 'react';
 
-import { MuteToggle } from '@/shared/components/MuteToggle';
-
 import styles from './QuestSticky.module.css';
 
 export interface QuestStickyProps {
@@ -62,7 +60,6 @@ export function QuestSticky({
         >
           <div className={styles.header}>
             <span className={styles.headerLabel}>{headerLabel ?? 'Roteiro do diário'}</span>
-            <MuteToggle {...(styles.muteToggle ? { className: styles.muteToggle } : {})} />
           </div>
 
           <div className={styles.body}>{children}</div>

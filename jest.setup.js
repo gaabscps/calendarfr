@@ -1,18 +1,5 @@
 require('@testing-library/jest-dom');
 
-// ─── HTMLMediaElement stubs ────────────────────────────────────────────────
-//
-// jsdom does not implement HTMLMediaElement.prototype.play/pause — calling them
-// logs "Not implemented" via console.error and breaks tests that spy on it.
-// Stub them with no-ops so the sound system can fire safely under jsdom.
-if (typeof window !== 'undefined' && window.HTMLMediaElement) {
-  window.HTMLMediaElement.prototype.play = function () {
-    return Promise.resolve();
-  };
-  window.HTMLMediaElement.prototype.pause = function () {};
-  window.HTMLMediaElement.prototype.load = function () {};
-}
-
 // ─── console.error interceptor ───────────────────────────────────────────────
 //
 // React warnings (prop forwarding, act, hooks, key) viram falha de teste.

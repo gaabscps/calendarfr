@@ -3,8 +3,6 @@ import userEvent from '@testing-library/user-event';
 
 import { QuestSticky } from '../QuestSticky.js';
 
-import { soundController } from '@/shared/sound/soundController';
-
 describe('QuestSticky', () => {
   it('renders children inside a region with the given aria-label', () => {
     render(
@@ -54,61 +52,5 @@ describe('QuestSticky', () => {
       </QuestSticky>,
     );
     expect(screen.getByText('Roteiro concluído ✓')).toBeInTheDocument();
-  });
-});
-
-describe('QuestSticky — FEAT-029 sound + mute toggle', () => {
-  beforeEach(() => {
-    localStorage.clear();
-    soundController.setMuted(false);
-  });
-
-  it('does NOT play any sound on visible mount (sticky paper sounds dropped)', () => {
-    const playSpy = jest.spyOn(soundController, 'play');
-    render(
-      <QuestSticky visible={true} ariaLabel="x" headerLabel="Roteiro">
-        <div>body</div>
-      </QuestSticky>,
-    );
-    expect(playSpy).not.toHaveBeenCalled();
-    playSpy.mockRestore();
-  });
-
-  it('does NOT play any sound on visible → hidden transition', () => {
-    const playSpy = jest.spyOn(soundController, 'play');
-    const { rerender } = render(
-      <QuestSticky visible={true} ariaLabel="x" headerLabel="Roteiro">
-        <div>body</div>
-      </QuestSticky>,
-    );
-    playSpy.mockClear();
-    rerender(
-      <QuestSticky visible={false} ariaLabel="x" headerLabel="Roteiro">
-        <div>body</div>
-      </QuestSticky>,
-    );
-    expect(playSpy).not.toHaveBeenCalled();
-    playSpy.mockRestore();
-  });
-
-  it('renders the MuteToggle in the header', () => {
-    render(
-      <QuestSticky visible={true} ariaLabel="x" headerLabel="Roteiro">
-        <div>body</div>
-      </QuestSticky>,
-    );
-    expect(screen.getByRole('button', { name: /silenciar sons/i })).toBeInTheDocument();
-  });
-
-  it('clicking the MuteToggle does not invoke onDismiss', async () => {
-    const onDismiss = jest.fn();
-    const user = userEvent.setup();
-    render(
-      <QuestSticky visible={true} ariaLabel="x" headerLabel="Roteiro" onDismiss={onDismiss}>
-        <div>body</div>
-      </QuestSticky>,
-    );
-    await user.click(screen.getByRole('button', { name: /silenciar sons/i }));
-    expect(onDismiss).not.toHaveBeenCalled();
   });
 });

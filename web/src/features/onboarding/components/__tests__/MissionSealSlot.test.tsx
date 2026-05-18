@@ -3,8 +3,6 @@ import type { DailyPageData } from '@calendarfr/shared';
 import { act, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { soundController } from '@/shared/sound/soundController';
-
 import { STORAGE_KEY } from '../../lib/constants.js';
 import type { MissionId, OnboardingState } from '../../types.js';
 
@@ -100,7 +98,6 @@ function makeFullyConditionMetData(): DailyPageData {
 beforeEach(() => {
   localStorage.clear();
   mockReducedMotion = false;
-  soundController.setMuted(false);
 });
 
 afterEach(() => {
@@ -168,30 +165,7 @@ describe('MissionSealSlot — click behaviour', () => {
   });
 });
 
-describe('MissionSealSlot — day-complete sound + sparkle', () => {
-  it('plays day-complete when the day transitions to 7/7', () => {
-    const playSpy = jest.spyOn(soundController, 'play');
-    const { rerender } = render(<MissionSealSlot date={DATE} />);
-    expect(playSpy).not.toHaveBeenCalledWith('day-complete');
-
-    setStorageState({ progressByDate: { [DATE]: makeAllCompleted() } });
-    act(() => {
-      dispatchStorageEvent();
-    });
-    rerender(<MissionSealSlot date={DATE} data={makeFullyConditionMetData()} />);
-
-    expect(playSpy).toHaveBeenCalledWith('day-complete');
-    playSpy.mockRestore();
-  });
-
-  it('does NOT play day-complete when 7/7 was already true on mount', () => {
-    setStorageState({ progressByDate: { [DATE]: makeAllCompleted() } });
-    const playSpy = jest.spyOn(soundController, 'play');
-    render(<MissionSealSlot date={DATE} data={makeFullyConditionMetData()} />);
-    expect(playSpy).not.toHaveBeenCalledWith('day-complete');
-    playSpy.mockRestore();
-  });
-
+describe('MissionSealSlot — day-complete sparkle', () => {
   it('renders SparkleBurst when transitioning to 7/7 (not when 7/7 on mount)', () => {
     const { rerender } = render(<MissionSealSlot date={DATE} />);
     expect(screen.queryByTestId('sparkleBurst-root')).toBeNull();

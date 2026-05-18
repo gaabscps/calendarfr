@@ -1,8 +1,5 @@
-/* eslint-disable import/order */
 import { render, screen } from '@testing-library/react';
 import React from 'react';
-
-import { soundController } from '@/shared/sound/soundController';
 
 // Mock framer-motion to render synchronously and support motion.span used by QuestSeal
 // and SparkleBurst particles.
@@ -53,31 +50,15 @@ jest.mock('framer-motion', () => {
 
 import { QuestSeal } from '../QuestSeal';
 
-describe('QuestSeal (FEAT-029)', () => {
-  beforeEach(() => {
-    localStorage.clear();
-    soundController.setMuted(false);
-  });
-
+describe('QuestSeal', () => {
   it('renders the sticker asset (die + check) when completed', () => {
     render(<QuestSeal completed={true} />);
     expect(screen.getByTestId('questSealSticker-svg')).toBeInTheDocument();
   });
 
-  it('mounts in completed state without playing sound (no transition occurred)', () => {
-    const playSpy = jest.spyOn(soundController, 'play');
-    render(<QuestSeal completed={true} />);
-    expect(playSpy).not.toHaveBeenCalled();
-    playSpy.mockRestore();
-  });
-
-  it('plays mission-complete when transitioning pending → completed', () => {
-    const playSpy = jest.spyOn(soundController, 'play');
-    const { rerender } = render(<QuestSeal completed={false} />);
-    expect(playSpy).not.toHaveBeenCalled();
-    rerender(<QuestSeal completed={true} />);
-    expect(playSpy).toHaveBeenCalledWith('mission-complete');
-    playSpy.mockRestore();
+  it('does not render the sticker when pending', () => {
+    render(<QuestSeal completed={false} />);
+    expect(screen.queryByTestId('questSealSticker-svg')).toBeNull();
   });
 
   it('renders a SparkleBurst when transitioning pending → completed', () => {
@@ -87,13 +68,9 @@ describe('QuestSeal (FEAT-029)', () => {
     expect(screen.getByTestId('sparkleBurst-root')).toBeInTheDocument();
   });
 
-  it('does not play sound on regression (completed → pending)', () => {
-    const playSpy = jest.spyOn(soundController, 'play');
-    const { rerender } = render(<QuestSeal completed={true} />);
-    playSpy.mockClear();
-    rerender(<QuestSeal completed={false} />);
-    expect(playSpy).not.toHaveBeenCalled();
-    playSpy.mockRestore();
+  it('does NOT render SparkleBurst when mounted already-completed', () => {
+    render(<QuestSeal completed={true} />);
+    expect(screen.queryByTestId('sparkleBurst-root')).toBeNull();
   });
 
   it('sets data-completed attribute to reflect prop', () => {

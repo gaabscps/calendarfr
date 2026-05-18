@@ -3,7 +3,6 @@ import { motion, useReducedMotion } from 'framer-motion';
 import { useEffect, useRef } from 'react';
 
 import { SparkleBurst } from '@/shared/components/SparkleBurst';
-import { useSoundController } from '@/shared/sound/useSoundController';
 
 import { GoldenSeal } from '../assets/GoldenSeal.js';
 import { SealPlaceholder } from '../assets/SealPlaceholder.js';
@@ -22,11 +21,11 @@ interface MissionSealSlotProps {
 
 /**
  * Único ponto de entrada visual+clicável para o roteiro de missões.
- * - Dia incompleto: placeholder tracejado clicável (abre a sticky de missões).
+ * - Dia incompleto: placeholder tracejado com progresso N/total (abre sticky).
  * - Dia 7/7: GoldenSeal "Boa!" clicável (abre a sticky em modo readonly).
  *
  * Substitui o antigo HelpButton (no PageNavigator) e o CompletedDayDecor
- * (que só aparecia no 7/7) — o usuário pediu um único entry point unificado.
+ * (que só aparecia no 7/7).
  */
 export function MissionSealSlot({ date, data = null }: MissionSealSlotProps) {
   const { state, reopen } = useOnboardingState();
@@ -38,31 +37,17 @@ export function MissionSealSlot({ date, data = null }: MissionSealSlotProps) {
 
   const wasCompleteOnMountRef = useRef(isCompleteForDay);
   const prefersReducedMotion = useReducedMotion();
-  const { play } = useSoundController();
-  const playedDayCompleteRef = useRef(wasCompleteOnMountRef.current);
   const lastDateRef = useRef(date);
 
   useEffect(() => {
-    // Quando o usuário navega entre dias, MissionSealSlot fica montado
-    // (PageNavigator preserva a instância). Sem este reset, os refs do "já
-    // estava 7/7 no mount" capturam o estado do PRIMEIRO dia visto e
-    // silenciam day-complete em todos os outros dias seguintes.
+    // MissionSealSlot fica montado entre dias (PageNavigator preserva a
+    // instância). Sem este reset, o ref "já estava 7/7 no mount" captura o
+    // estado do primeiro dia e impede a animação/sparkle nos dias seguintes.
     if (lastDateRef.current !== date) {
       wasCompleteOnMountRef.current = isCompleteForDay;
-      playedDayCompleteRef.current = isCompleteForDay;
       lastDateRef.current = date;
     }
-    if (process.env.NODE_ENV !== 'production') {
-      // eslint-disable-next-line no-console
-      console.log(
-        `[MissionSealSlot] effect — date=${date} completed=${completedCount}/${MISSION_IDS.length} isCompleteForDay=${isCompleteForDay} alreadyPlayed=${playedDayCompleteRef.current}`,
-      );
-    }
-    if (isCompleteForDay && !playedDayCompleteRef.current) {
-      play('day-complete');
-      playedDayCompleteRef.current = true;
-    }
-  }, [isCompleteForDay, play, completedCount, date]);
+  }, [isCompleteForDay, date]);
 
   function handleClick(): void {
     if (state.status === 'dismissed' || state.status === 'pending') {

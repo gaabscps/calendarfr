@@ -2,7 +2,6 @@ import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { memo, useEffect, useMemo, useRef, useState } from 'react';
 
 import { SparkleBurst } from '@/shared/components/SparkleBurst';
-import { useSoundController } from '@/shared/sound/useSoundController';
 
 import { QuestSealSticker } from '../assets/QuestSealSticker.js';
 
@@ -15,28 +14,20 @@ export interface QuestSealProps {
 
 function QuestSealInner({ completed, onAnimationComplete }: QuestSealProps) {
   const prefersReducedMotion = useReducedMotion();
-  const { play } = useSoundController();
   const randomRotate = useMemo(() => Math.random() * 10 - 5, []);
   const wasCompletedOnMount = useRef(completed);
   const previousCompletedRef = useRef(completed);
   const [burstKey, setBurstKey] = useState(0);
 
-  // pending → completed durante este ciclo (NÃO no mount inicial) dispara o som e remonta
-  // o SparkleBurst (key incrementa) para reanimar as partículas a cada novo "apply".
+  // pending → completed durante este ciclo (NÃO no mount inicial) remonta o
+  // SparkleBurst (key incrementa) para reanimar as partículas a cada apply.
   useEffect(() => {
     const wasJustApplied = previousCompletedRef.current === false && completed === true;
-    if (process.env.NODE_ENV !== 'production') {
-      // eslint-disable-next-line no-console
-      console.log(
-        `[QuestSeal] effect — completed=${completed} prev=${previousCompletedRef.current} wasOnMount=${wasCompletedOnMount.current} → ${wasJustApplied && !wasCompletedOnMount.current ? 'WILL PLAY' : 'skip'}`,
-      );
-    }
     if (wasJustApplied && !wasCompletedOnMount.current) {
-      play('mission-complete');
       setBurstKey((k) => k + 1);
     }
     previousCompletedRef.current = completed;
-  }, [completed, play]);
+  }, [completed]);
 
   const applyVariant = prefersReducedMotion
     ? { opacity: 1 }
