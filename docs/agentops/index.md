@@ -1,10 +1,10 @@
 # AgentOps observability — overview
 
-> Generated at: 2026-05-17T22:32:03.162Z | Total flows: 24
+> Generated at: 2026-05-18T03:21:53.173Z | Total flows: 24
 
 ## Repo health snapshot
 
-_Measured at: 2026-05-17_
+_Measured at: 2026-05-18_
 
 | Métrica        | Valor | Threshold | Status |
 | -------------- | ----- | --------- | ------ |
@@ -40,7 +40,7 @@ _Measured at: 2026-05-17_
 | … FEAT-025 | ✓      | Folded gratitude — private paper that unfolds for writing                                              | implementation | running   | 30         | 11  | 2.73    | 0.0%  | $222.5277 | $20.2298 |            |
 | ⚠ FEAT-026 | ✓      | Auth + Supabase backend migration                                                                      | escalated      | escalated | 3          | 0   | —       | 0.0%  | $99.7077  | —        |            |
 | ✓ FEAT-027 | ✓      | Onboarding Roteiro do Diário (gameficado, paper aesthetic)                                             | done           | done      | 35         | 0   | —       | 0.0%  | $8.9532   | —        |            |
-| … FEAT-028 | ✓      | Onboarding polish iteration (legibilidade, autosave-gate, per-day, action buttons, completed-day skin) | implementation | running   | 33         | 0   | —       | 0.0%  | $164.5049 | —        |            |
+| … FEAT-028 | ✓      | Onboarding polish iteration (legibilidade, autosave-gate, per-day, action buttons, completed-day skin) | implementation | running   | 33         | 0   | —       | 0.0%  | $293.3401 | —        |            |
 
 _Compl. legend:_ ✓ standard · ◐ pré-padrão (excluído de trends/health) · ⊘ pm-bypass (excluído de trends/health)
 

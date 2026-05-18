@@ -3,7 +3,7 @@
 > Feature: Onboarding polish iteration (legibilidade, autosave-gate, per-day, action buttons, completed-day skin)
 > Task ID: FEAT-028
 > Phase: implementation
-> Generated at: 2026-05-17T22:32:03.162Z
+> Generated at: 2026-05-18T03:21:53.173Z
 
 ## Insights
 
@@ -15,19 +15,19 @@
 
 _70/30 input/output split assumed; harness reports only total_tokens; 33 of 33 dispatches included in cost_
 
-- Total tokens: 179871846
-  - Estimated input (70%): 125910292
-  - Estimated output (30%): 53961554
-- Estimated cost USD total: $164.5049
+- Total tokens: 363935914
+  - Estimated input (70%): 254755140
+  - Estimated output (30%): 109180774
+- Estimated cost USD total: $293.3401
 - Cost per AC: n/a (no ACs defined)
-- Cost per dispatch (avg): $4.9850
-- Wall-clock duration: 1119m 2s
-- Tool uses total: 450
+- Cost per dispatch (avg): $8.8891
+- Wall-clock duration: 1397m 50s
+- Tool uses total: 900
 - Coverage: 33 of 33 dispatches included in cost calculation
 
 ## Repo health snapshot
 
-_Measured at: 2026-05-17_
+_Measured at: 2026-05-18_
 
 | Métrica        | Valor | Threshold | Status |
 | -------------- | ----- | --------- | ------ |
@@ -72,7 +72,7 @@ _Measured at: 2026-05-17_
 | d-T005-cr-l1 | code-reviewer   | done         | 4    | 50000     | $0.1100   | 0ms       | orchestrator-reconciliation: gap-fill batch    |
 | pm-orches... | pm-orchestrator | done         | —    | 133163067 | $121.2810 | 1035m 43s | PM/orchestrator session (Stop hook): 424 turns |
 | pm-orches... | pm-orchestrator | done         | —    | 41902238  | $30.7911  | 64m 59s   | PM/orchestrator session (Stop hook): 263 turns |
-| pm-orches... | pm-orchestrator | done         | —    | 3306541   | $5.1728   | 18m 20s   | PM/orchestrator session (Stop hook): 52 turns  |
+| pm-orches... | pm-orchestrator | done         | —    | 187370609 | $134.0080 | 297m 8s   | PM/orchestrator session (Stop hook): 664 turns |
 
 ## Per-AC closure detail
 
@@ -172,7 +172,7 @@ Total: 0 | Pass: 28 | Partial: 0 | Fail: 0 | Missing: 0
 - [2026-05-17 03:00 code-reviewer] orchestrator-reconciliation: gap-fill batch
 - [2026-05-17 03:07 pm-orchestrator] PM/orchestrator session (Stop hook): 424 turns
 - [2026-05-17 20:28 pm-orchestrator] PM/orchestrator session (Stop hook): 263 turns
-- [2026-05-17 21:36 pm-orchestrator] PM/orchestrator session (Stop hook): 52 turns
+- [2026-05-17 21:36 pm-orchestrator] PM/orchestrator session (Stop hook): 664 turns
 
 ## Token cost
 

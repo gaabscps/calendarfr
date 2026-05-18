@@ -3,7 +3,7 @@
 > Feature: keyboard-ux-enter — ENTER/SHIFT+ENTER padrão da indústria em listas e agenda
 > Task ID: FEAT-018
 > Phase: done
-> Generated at: 2026-05-17T22:32:03.162Z
+> Generated at: 2026-05-18T03:21:53.173Z
 
 ## Insights
 
@@ -27,7 +27,7 @@ _70/30 input/output split assumed; harness reports only total_tokens; 49 of 53 d
 
 ## Repo health snapshot
 
-_Measured at: 2026-05-17_
+_Measured at: 2026-05-18_
 
 | Métrica        | Valor | Threshold | Status |
 | -------------- | ----- | --------- | ------ |

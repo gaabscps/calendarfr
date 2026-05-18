@@ -3,7 +3,7 @@
 > Feature: Auth + Supabase backend migration
 > Task ID: FEAT-026
 > Phase: escalated
-> Generated at: 2026-05-17T22:32:03.162Z
+> Generated at: 2026-05-18T03:21:53.173Z
 
 ## Insights
 
@@ -25,7 +25,7 @@ _70/30 input/output split assumed; harness reports only total_tokens; 3 of 3 dis
 
 ## Repo health snapshot
 
-_Measured at: 2026-05-17_
+_Measured at: 2026-05-18_
 
 | Métrica        | Valor | Threshold | Status |
 | -------------- | ----- | --------- | ------ |
