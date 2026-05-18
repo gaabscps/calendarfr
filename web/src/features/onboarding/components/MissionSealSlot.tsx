@@ -40,8 +40,18 @@ export function MissionSealSlot({ date, data = null }: MissionSealSlotProps) {
   const prefersReducedMotion = useReducedMotion();
   const { play } = useSoundController();
   const playedDayCompleteRef = useRef(wasCompleteOnMountRef.current);
+  const lastDateRef = useRef(date);
 
   useEffect(() => {
+    // Quando o usuário navega entre dias, MissionSealSlot fica montado
+    // (PageNavigator preserva a instância). Sem este reset, os refs do "já
+    // estava 7/7 no mount" capturam o estado do PRIMEIRO dia visto e
+    // silenciam day-complete em todos os outros dias seguintes.
+    if (lastDateRef.current !== date) {
+      wasCompleteOnMountRef.current = isCompleteForDay;
+      playedDayCompleteRef.current = isCompleteForDay;
+      lastDateRef.current = date;
+    }
     if (process.env.NODE_ENV !== 'production') {
       // eslint-disable-next-line no-console
       console.log(

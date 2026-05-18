@@ -153,7 +153,13 @@ export function OnboardingQuest({ data, date, saveStatus = 'saved' }: Onboarding
       headerLabel={headerLabel}
       onDismiss={handleDismiss}
     >
+      {/* key={date} força QuestList + descendentes (QuestSeal etc) a remontar
+          quando o usuário navega entre dias. Sem isso, os refs internos do
+          QuestSeal (wasCompletedOnMount, previousCompletedRef) capturam o
+          estado do PRIMEIRO dia montado e nunca resetam, silenciando
+          mission-complete em todos os dias seguintes. */}
       <QuestList
+        key={date}
         missionsCompleted={visibleSlice}
         ariaLiveMessage={ariaLiveMessage}
         onActionClick={handleActionClick}
