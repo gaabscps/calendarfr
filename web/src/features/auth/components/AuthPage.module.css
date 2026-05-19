@@ -14,11 +14,15 @@
 
 /* Inner spacer inside PaperSheet — PaperSheet's <div> isn't flex, so children
    need this layer for vertical rhythm. Also overrides the body-font tokens so
-   TextField label/input and Button cascade into the handwritten "paper" voice. */
+   TextField label/input and Button cascade into the handwritten "paper" voice.
+   padding-left clears the Moleskine red margin (paper has padding 36 + the
+   ruled-line at 44 from the sheet edge, so anything <= 8px of content overlaps
+   the red line — we push everything safely past it). */
 .inner {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-lg);
+  padding-left: var(--spacing-md);
   /* Handwritten paper voice — cascades to children (TextField, Button, toggle). */
   --font-body: var(--font-hand);
   --font-size-base: 1.4rem;
