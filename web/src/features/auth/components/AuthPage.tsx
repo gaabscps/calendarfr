@@ -66,47 +66,54 @@ export function AuthPage() {
     <div className={styles.container}>
       <div className={styles.sheet}>
         <PaperSheet ariaLabel={heading}>
-          <h1 className={styles.title}>CalendárioFR</h1>
-          <h2 className={styles.heading}>{heading}</h2>
-          <form
-            className={styles.form}
-            onSubmit={(event) => {
-              void handleSubmit(event);
-            }}
-            noValidate
-          >
-            <TextField
-              label="Email"
-              type="email"
-              value={email}
-              onChange={setEmail}
-              autoComplete="email"
-              disabled={submitting}
-              required
-              {...(emailError ? { error: emailError } : {})}
-            />
-            <TextField
-              label="Senha"
-              type="password"
-              value={password}
-              onChange={setPassword}
-              autoComplete={mode === 'login' ? 'current-password' : 'new-password'}
-              disabled={submitting}
-              required
-              {...(passwordError ? { error: passwordError } : {})}
-            />
-            <Button type="submit" variant="primary" disabled={submitting} className={styles.submit}>
-              {submitLabel}
-            </Button>
-            {formError ? (
-              <p className={styles.formError} role="alert" aria-live="polite">
-                {formError}
-              </p>
-            ) : null}
-          </form>
-          <button type="button" onClick={toggleMode} className={styles.toggle}>
-            {toggleLabel}
-          </button>
+          <div className={styles.inner}>
+            <h1 className={styles.title}>CalendárioFR</h1>
+            <h2 className={styles.heading}>{heading}</h2>
+            <form
+              className={styles.form}
+              onSubmit={(event) => {
+                void handleSubmit(event);
+              }}
+              noValidate
+            >
+              <TextField
+                label="Email"
+                type="email"
+                value={email}
+                onChange={setEmail}
+                autoComplete="email"
+                disabled={submitting}
+                required
+                {...(emailError ? { error: emailError } : {})}
+              />
+              <TextField
+                label="Senha"
+                type="password"
+                value={password}
+                onChange={setPassword}
+                autoComplete={mode === 'login' ? 'current-password' : 'new-password'}
+                disabled={submitting}
+                required
+                {...(passwordError ? { error: passwordError } : {})}
+              />
+              <Button
+                type="submit"
+                variant="primary"
+                disabled={submitting}
+                className={styles.submit}
+              >
+                {submitLabel}
+              </Button>
+              {formError ? (
+                <p className={styles.formError} role="alert" aria-live="polite">
+                  {formError}
+                </p>
+              ) : null}
+            </form>
+            <button type="button" onClick={toggleMode} className={styles.toggle}>
+              {toggleLabel}
+            </button>
+          </div>
         </PaperSheet>
       </div>
     </div>
