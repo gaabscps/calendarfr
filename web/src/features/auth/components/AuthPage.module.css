@@ -1,0 +1,73 @@
+.container {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-desk);
+}
+
+/* PaperSheet has no className prop — outer wrapper handles sizing and gap. */
+.sheet {
+  width: min(400px, 90vw);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.title {
+  font-family: var(--font-hand);
+  /* 2rem: brand title size — no dedicated token for hero/display type. */
+  font-size: 2rem;
+  color: var(--color-accent);
+  text-align: center;
+  margin: 0;
+}
+
+.heading {
+  font-family: var(--font-body);
+  font-size: var(--font-size-base);
+  color: var(--color-ink-secondary);
+  text-align: center;
+  margin: 0;
+  font-weight: 400;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.submit {
+  width: 100%;
+  justify-content: center;
+}
+
+.formError {
+  font-family: var(--font-body);
+  font-size: var(--font-size-sm);
+  color: var(--color-danger);
+  text-align: center;
+  margin: 0;
+}
+
+.toggle {
+  background: transparent;
+  border: none;
+  color: var(--color-ink-secondary);
+  font-family: var(--font-body);
+  font-size: var(--font-size-sm);
+  cursor: pointer;
+  text-decoration: underline;
+  align-self: center;
+}
+
+.toggle:hover {
+  color: var(--color-accent);
+}
+
+.toggle:focus-visible {
+  outline: var(--focus-ring);
+  outline-offset: var(--focus-ring-offset);
+}

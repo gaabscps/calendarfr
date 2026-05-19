@@ -1,0 +1,41 @@
+.container {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-desk);
+}
+
+/* PaperSheet wrapper: PaperSheet itself doesn't accept className,
+   so we constrain dimensions on this wrapping div. */
+.sheet {
+  width: 300px;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.spinner {
+  /* 32px / 3px: spinner geometry; intentional hardcoded values
+     since there's no dedicated token for circular indicator sizing. */
+  width: 32px;
+  height: 32px;
+  border: 3px solid var(--color-ink-muted);
+  border-top-color: var(--color-accent);
+  border-radius: var(--radius-full);
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spinner {
+    animation: none;
+  }
+}

@@ -1,0 +1,25 @@
+.dock {
+  position: fixed;
+  bottom: var(--spacing-base);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: var(--z-dropdown);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--radius-full);
+  /* Glass effect: paper color with alpha — rgba kept because tokens don't expose alpha variants. */
+  background: rgba(255, 249, 240, 0.7);
+  border: 1px solid rgba(60, 40, 20, 0.1);
+  box-shadow: var(--shadow-paper);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+@media (max-width: 768px) {
+  .dock {
+    /* 6px (between --spacing-xs=4 and --spacing-sm=8) intentional for mobile density. */
+    padding: var(--spacing-xs) var(--spacing-sm);
+  }
+}

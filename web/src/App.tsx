@@ -1,4 +1,6 @@
+import { AccountDockItem, AuthLoadingSplash, AuthPage, useSession } from '@/features/auth';
 import { DailyPage } from '@/features/daily-page';
+import { Dock } from '@/shared/components/Dock';
 
 const ISO_DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
 
@@ -18,6 +20,17 @@ function readInitialDateFromUrl(): string | undefined {
 }
 
 export function App() {
+  const { session, loading } = useSession();
+  if (loading) return <AuthLoadingSplash />;
+  if (!session) return <AuthPage />;
+
   const initialDate = readInitialDateFromUrl();
-  return <DailyPage {...(initialDate ? { initialDate } : {})} />;
+  return (
+    <>
+      <DailyPage {...(initialDate ? { initialDate } : {})} />
+      <Dock aria-label="Account dock">
+        <AccountDockItem />
+      </Dock>
+    </>
+  );
 }

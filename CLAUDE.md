@@ -82,10 +82,26 @@ Para detalhes de arquitetura, fluxos e modelo de dados, ver o [macro spec](docs/
 2. Toda factory MSW nova exige spec E2E correspondente no mesmo PR
 3. Coverage só sobe; nunca abaixar pra passar
 4. `console.error` em testes vira falha de teste (interceptor ativo no `jest.setup.js`)
+5. **Nunca enviesar testes pro happy path.** Pra cada comportamento testado, mapear as variáveis que influenciam o resultado (input vazio, malformado, no limite, fora do limite, concorrência, falha de rede, estado intermediário, cleanup, idempotência) e cobrir cada uma com um caso. Happy path sozinho não é teste — é demonstração. Test names devem descrever o comportamento variável ("returns X when Y is empty", não "works correctly"). Se o teste tem só assertion positiva, ainda falta caso.
 
 ### Comunicação no GitHub
 
 1. **Sempre em inglês**: commits, mensagens de PR, título/descrição de issues, comments em PR. Conversas com o usuário, comentários no código (quando necessários) e docs internos seguem em PT-BR — só a superfície voltada ao GitHub é EN.
+
+### Supabase auth config
+
+1. **`supabase/config.toml` é fonte de verdade** das configs de auth. Antes de sincronizar com o remoto, sempre `git diff supabase/config.toml` — só prossiga se o diff bater com a mudança pretendida.
+2. **Preferência: `supabase config push` via CLI** (atualmente `npx supabase@latest` — v2+). Aplica todo o `config.toml` no projeto remoto.
+3. **Fallback: free tier rejeita** alguns campos (`auth.hook.*`, `storage.image_transformation`) — push falha com 402. Quando isso acontecer, usar a Management API direto via curl com `SUPABASE_ACCESS_TOKEN`:
+   ```sh
+   curl -X PATCH \
+     -H "Authorization: Bearer $SUPABASE_ACCESS_TOKEN" \
+     -H "Content-Type: application/json" \
+     -d '{"password_min_length": 8, "mailer_autoconfirm": true}' \
+     "https://api.supabase.com/v1/projects/$SUPABASE_PROJECT_ID/config/auth"
+   ```
+   `mailer_autoconfirm=true` no Management API equivale a `enable_confirmations=false` no `config.toml`.
+4. **Nunca editar via Dashboard** sem refletir no `config.toml` — divergência local/remoto vira surpresa em onboarding e CI.
 
 ---
 

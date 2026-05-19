@@ -1,0 +1,54 @@
+.container {
+  position: relative;
+  display: inline-flex;
+}
+
+.avatar {
+  /* 36px: dock-item icon size — matches other dock entries. */
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-full);
+  border: 1px solid rgba(60, 40, 20, 0.15);
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-hand);
+  /* 1.1rem: hand-written initial — slightly above body baseline. */
+  font-size: 1.1rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform var(--motion-fast);
+}
+
+.avatar:hover {
+  transform: scale(1.05);
+}
+
+.avatar:focus-visible {
+  outline: var(--focus-ring);
+  outline-offset: var(--focus-ring-offset);
+}
+
+.popover {
+  position: absolute;
+  bottom: calc(100% + var(--spacing-sm));
+  right: 0;
+  min-width: 200px;
+  padding: var(--spacing-sm);
+  background: var(--color-paper);
+  border: 1px solid rgba(60, 40, 20, 0.15);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-paper);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+  z-index: var(--z-dropdown);
+}
+
+.email {
+  font-family: var(--font-body);
+  font-size: var(--font-size-sm);
+  color: var(--color-ink-secondary);
+  word-break: break-all;
+}

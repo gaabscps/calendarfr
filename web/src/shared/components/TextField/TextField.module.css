@@ -1,0 +1,43 @@
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+  width: 100%;
+}
+
+.label {
+  font-family: var(--font-body);
+  font-size: var(--font-size-sm);
+  color: var(--color-ink-secondary);
+}
+
+.input {
+  font-family: var(--font-body);
+  font-size: var(--font-size-base);
+  color: var(--color-ink);
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--color-ink-muted);
+  padding: var(--spacing-xs) 0;
+  outline: none;
+  transition: border-color var(--motion-fast);
+}
+
+.input:focus {
+  border-bottom-color: var(--color-accent);
+}
+
+.input:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.inputError {
+  border-bottom-color: var(--color-danger);
+}
+
+.error {
+  font-family: var(--font-body);
+  font-size: var(--font-size-sm);
+  color: var(--color-danger);
+}

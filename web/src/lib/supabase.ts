@@ -17,4 +17,9 @@ function readEnv(key: EnvKey): string {
 const url = readEnv('VITE_SUPABASE_URL');
 const anonKey = readEnv('VITE_SUPABASE_ANON_KEY');
 
+// Default options: persistSession=true, storage=localStorage. The session
+// access_token therefore lives in localStorage and is reachable by any
+// XSS-injected script. server/src/lib/sanitize.ts (the Tiptap HTML
+// allowlist) is the canonical XSS gate — relax it only with extreme care.
+// TODO(FEAT-032): when sanitize.ts migrates to web/, update this reference.
 export const supabase: SupabaseClient<Database> = createClient<Database>(url, anonKey);
