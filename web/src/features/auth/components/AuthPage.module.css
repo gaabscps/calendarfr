@@ -12,16 +12,17 @@
   width: min(580px, 92vw);
 }
 
-/* Inner spacer inside PaperSheet — PaperSheet's <div> isn't flex, so children
-   need this layer for vertical rhythm. Also overrides the body-font tokens so
-   TextField label/input and Button cascade into the handwritten "paper" voice.
-   padding-left clears the Moleskine red margin (paper has padding 36 + the
-   ruled-line at 44 from the sheet edge, so anything <= 8px of content overlaps
-   the red line — we push everything safely past it). */
+/* Inner spacer inside PaperSheet.
+   Two responsibilities:
+   (1) Snap every child to the paper's 36px ruled-line baseline so text sits ON
+       the lines instead of floating between them. Achieved by forcing
+       line-height: 36px on text rows and sizing rows in multiples of 36.
+   (2) Override the body-font tokens so TextField label/input and Button
+       cascade into the handwritten "paper" voice. */
 .inner {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-lg);
+  gap: 0;
   padding-left: var(--spacing-md);
   /* Handwritten paper voice — cascades to children (TextField, Button, toggle). */
   --font-body: var(--font-hand);
@@ -31,12 +32,13 @@
 
 .title {
   font-family: var(--font-hand);
-  /* 2.75rem: brand title size — no dedicated token for hero/display type. */
-  font-size: 2.75rem;
+  /* 2.5rem so the cap-height fits inside the 2-row (72px) slot without clipping. */
+  font-size: 2.5rem;
   color: var(--color-accent);
   text-align: center;
   margin: 0;
-  line-height: 1.1;
+  height: 72px;
+  line-height: 72px;
   letter-spacing: 0.01em;
 }
 
@@ -45,47 +47,64 @@
   font-size: 1.5rem;
   color: var(--color-ink-secondary);
   text-align: center;
-  margin: 0 0 var(--spacing-xs);
+  margin: 0;
+  height: 36px;
+  line-height: 36px;
   font-weight: 400;
   font-style: italic;
 }
 
+/* One blank ruled row between heading and form */
 .form {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-lg);
+  gap: 0;
+  margin-top: 36px;
 }
 
-.submit {
-  width: 100%;
-  justify-content: center;
-  margin-top: var(--spacing-sm);
-  /* Taller + larger type so the handwritten label keeps presence next to the
-     ruled-paper voice of the rest of the form. */
-  padding: 14px 20px;
-  font-size: 1.6rem;
-  letter-spacing: 0.02em;
+/* Snap TextField rows: label sits ON one rule, input sits ON the next.
+   Each field occupies exactly 72px (2 rows). */
+.inner :global(label) {
+  height: 36px;
+  line-height: 36px;
+  padding: 0;
+  margin: 0;
 }
 
-/* Remove the TextField underline inside this paper-ruled context — the paper's
-   own ruled line provides the visual underline; doubling it looks artificial. */
 .inner input {
+  height: 36px;
+  line-height: 36px;
+  padding: 0;
+  margin: 0;
   border-bottom: none;
 }
 
 .inner input:focus {
-  border-bottom: 1px solid var(--color-accent);
+  /* Keep accent feedback but stay within the 36px row — outline-style avoids
+     pushing the baseline. */
+  outline: 1px dashed var(--color-accent);
+  outline-offset: -2px;
 }
 
-/* Force sans-serif here — error message must stay legible, not stylish. */
-.formError {
-  font-family: 'Inter', system-ui, sans-serif;
-  font-size: 0.9rem;
-  color: var(--color-danger);
-  text-align: center;
-  margin: 0;
+/* Each TextField wrapper (label + input + optional error) — leave space below
+   for breathing while staying on the grid. */
+.form > div {
+  margin-bottom: 36px;
 }
 
+/* Submit button: 2 rule-rows tall (72px) so it sits ON a line and bottom-aligns
+   with the next line. Centered text uses line-height equal to height. */
+.submit {
+  width: 100%;
+  justify-content: center;
+  height: 72px;
+  padding: 0;
+  font-size: 1.6rem;
+  line-height: 72px;
+  letter-spacing: 0.02em;
+}
+
+/* One blank ruled row between submit and toggle */
 .toggle {
   background: transparent;
   border: none;
@@ -98,7 +117,10 @@
   text-decoration-thickness: 1px;
   text-underline-offset: 4px;
   align-self: center;
-  padding: var(--spacing-xs) var(--spacing-sm);
+  height: 36px;
+  line-height: 36px;
+  padding: 0 var(--spacing-sm);
+  margin-top: 36px;
   transition: color var(--motion-fast);
 }
 
@@ -109,4 +131,16 @@
 .toggle:focus-visible {
   outline: var(--focus-ring);
   outline-offset: var(--focus-ring-offset);
+}
+
+/* Force sans-serif here — error message must stay legible, not stylish.
+   Error sits in its own 36px row tucked under the field. */
+.formError {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 0.9rem;
+  color: var(--color-danger);
+  text-align: center;
+  margin: 0;
+  height: 36px;
+  line-height: 36px;
 }
