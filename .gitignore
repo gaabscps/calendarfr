@@ -64,3 +64,8 @@ yarn.lock
 # ai-squad per-repo hook install (managed by `ai-squad deploy`)
 .claude/hooks/
 docs/superpowers/
+
+# Supabase locals
+.supabase/
+supabase/.branches/
+supabase/.temp/

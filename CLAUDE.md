@@ -1,36 +1,40 @@
 # CalendárioFR — Planner Web
 
-**Última atualização:** 2026-05-16
+**Última atualização:** 2026-05-19
 **Macro spec:** [`docs/specs/2026-05-08-mvp-overview.md`](docs/specs/2026-05-08-mvp-overview.md)
 **Monetização:** [`docs/specs/2026-05-16-monetization-strategy.md`](docs/specs/2026-05-16-monetization-strategy.md)
+**Roadmap ativo:** [`docs/specs/2026-05-19-supabase-migration-roadmap.md`](docs/specs/2026-05-19-supabase-migration-roadmap.md) — migração Fastify→Supabase em 4 FEATs (030→033)
 **Spec ativo:** [`.agent-session/FEAT-007/spec.md`](.agent-session/FEAT-007/spec.md)
 
 ---
 
 ## Comandos
 
-| Script                    | O que faz                                                                                |
-| ------------------------- | ---------------------------------------------------------------------------------------- |
-| `npm run dev`             | Sobe Vite (porta 3000) + Fastify (porta 3003) em paralelo, logs prefixados por workspace |
-| `npm run dev:web`         | Apenas o Vite dev server (`web/`)                                                        |
-| `npm run dev:server`      | Apenas o companion Fastify (`server/`) com hot-reload via `tsx watch`                    |
-| `npm run typecheck`       | `tsc --noEmit` em ambos os workspaces (`strict: true`, `noUncheckedIndexedAccess`)       |
-| `npm run lint`            | ESLint flat config v9 sobre todo o repo (TS, TSX, arquivos de teste)                     |
-| `npm run format`          | Prettier `--write` — formata tudo in-place                                               |
-| `npm run format:check`    | Prettier `--check` — falha se houver diff (usado em CI)                                  |
-| `npm test`                | Jest com `@swc/jest`, ambiente jsdom, MSW ativo                                          |
-| `npm run test:watch`      | Jest em modo watch (desenvolvimento local)                                               |
-| `npm run test:coverage`   | Jest com relatório de cobertura em `coverage/` (text + html + lcov)                      |
-| `npm run test:e2e:real`   | Playwright `--project=real` — bate no companion real sem mocks                           |
-| `npm run test:e2e:smoke`  | Playwright `--project=smoke` — smoke do companion (`localhost:3003`)                     |
-| `npm run build`           | Build de produção do front (`web/`) via Vite                                             |
-| `npm run build-storybook` | Gera bundle estático do Storybook em `web/storybook-static/`                             |
-| `npm run storybook`       | Storybook 8 em `localhost:6006` — bancada do design system                               |
-| `npm run agentops:report` | Gera relatórios AgentOps em docs/agentops/ (overview cross-flow + 1 file por flow)       |
-| `npm run mutation`        | Stryker mutation testing contra server/src/ — emite reports/mutation/                    |
-| `npm run type-coverage`   | Verifica % de identificadores tipados (threshold 95%) — emite relatório em stdout        |
-| `npm run arch:check`      | dependency-cruiser: valida regras de boundary (no-circular, no-cross-feature, etc.)      |
-| `npm run arch:graph`      | dependency-cruiser: gera docs/architecture/dependency-graph.svg (ou .md se sem Graphviz) |
+| Script                     | O que faz                                                                                           |
+| -------------------------- | --------------------------------------------------------------------------------------------------- |
+| `npm run dev`              | Sobe Vite (porta 3000) + Fastify (porta 3003) em paralelo, logs prefixados por workspace            |
+| `npm run dev:web`          | Apenas o Vite dev server (`web/`)                                                                   |
+| `npm run dev:server`       | Apenas o companion Fastify (`server/`) com hot-reload via `tsx watch`                               |
+| `npm run typecheck`        | `tsc --noEmit` em ambos os workspaces (`strict: true`, `noUncheckedIndexedAccess`)                  |
+| `npm run lint`             | ESLint flat config v9 sobre todo o repo (TS, TSX, arquivos de teste)                                |
+| `npm run format`           | Prettier `--write` — formata tudo in-place                                                          |
+| `npm run format:check`     | Prettier `--check` — falha se houver diff (usado em CI)                                             |
+| `npm test`                 | Jest com `@swc/jest`, ambiente jsdom, MSW ativo                                                     |
+| `npm run test:watch`       | Jest em modo watch (desenvolvimento local)                                                          |
+| `npm run test:coverage`    | Jest com relatório de cobertura em `coverage/` (text + html + lcov)                                 |
+| `npm run test:e2e:real`    | Playwright `--project=real` — bate no companion real sem mocks                                      |
+| `npm run test:e2e:smoke`   | Playwright `--project=smoke` — smoke do companion (`localhost:3003`)                                |
+| `npm run build`            | Build de produção do front (`web/`) via Vite                                                        |
+| `npm run build-storybook`  | Gera bundle estático do Storybook em `web/storybook-static/`                                        |
+| `npm run storybook`        | Storybook 8 em `localhost:6006` — bancada do design system                                          |
+| `npm run agentops:report`  | Gera relatórios AgentOps em docs/agentops/ (overview cross-flow + 1 file por flow)                  |
+| `npm run db:push`          | Aplica migrations Supabase no projeto remoto via `supabase db push`                                 |
+| `npm run db:reset`         | Reseta o DB local Supabase via `supabase db reset` (uso dev local)                                  |
+| `npm run db:migrate-local` | Roda script one-shot que cria user owner e migra `server/data/days/*.json` para Supabase (FEAT-030) |
+| `npm run mutation`         | Stryker mutation testing contra server/src/ — emite reports/mutation/                               |
+| `npm run type-coverage`    | Verifica % de identificadores tipados (threshold 95%) — emite relatório em stdout                   |
+| `npm run arch:check`       | dependency-cruiser: valida regras de boundary (no-circular, no-cross-feature, etc.)                 |
+| `npm run arch:graph`       | dependency-cruiser: gera docs/architecture/dependency-graph.svg (ou .md se sem Graphviz)            |
 
 > **Primeiro run do Jest** é mais lento (SWC compila sem cache). Runs subsequentes < 5 s.
 > **Bypass de hooks:** `git commit --no-verify` é responsabilidade do dev — husky não bloqueia por design.
@@ -55,6 +59,8 @@ src/features/<feature>/
 Átomos reutilizáveis ficam em `src/shared/components/` (sem domínio: sem `Priority`, `Note` etc. no nome). Tokens de tema em `src/shared/components/theme/tokens.ts`.
 
 O companion server (FEAT-006) serve `GET /api/health`, `GET /api/days/:date` (lazy creation), e `PUT /api/days/:date` (autosave), armazenando JSON em `data/days/YYYY-MM-DD.json` (gitignored). Implementa escrita atômica via `server/src/storage/jsonStore.ts` (tmp + rename), validação zod em `server/src/schema/daySchema.ts`, sanitização HTML restrita às 4 tags (`<b><i><u><s>`) via `server/src/lib/sanitize.ts`, e tipos compartilhados via workspace `@calendarfr/shared`. Lazy creation: GET inexistente retorna esqueleto em-memória sem criar arquivo.
+
+A partir de FEAT-030, o repo introduz Supabase como backend de produção em 4 FEATs sequenciais: 030 (infra base + migração de dados do owner), 031 (auth email+senha), 032 (days persistence via Supabase), 033 (cleanup do Fastify). Schema canônico em `supabase/migrations/0001_init.sql`; cliente em `web/src/lib/supabase.ts`. Fastify companion permanece ativo até FEAT-033.
 
 Para detalhes de arquitetura, fluxos e modelo de dados, ver o [macro spec](docs/specs/2026-05-08-mvp-overview.md).
 
