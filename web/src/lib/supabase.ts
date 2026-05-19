@@ -2,20 +2,21 @@ import { createClient, type SupabaseClient } from '@supabase/supabase-js';
 
 import type { Database } from './supabase-types';
 
-type EnvKey = 'VITE_SUPABASE_URL' | 'VITE_SUPABASE_ANON_KEY';
-
-// process.env instead of import.meta.env: SWC CJS transform used by Jest does not
-// support import.meta syntax; process.env is the cross-environment fallback.
-function readEnv(key: EnvKey): string {
-  const value: string = process.env[key] ?? '';
-  if (value.length < 10 || value.includes('<') || value.includes('TODO')) {
-    throw new Error(`Missing ${key} — check .env`);
+// Env reads use LITERAL `process.env.VITE_*` accesses, not a dynamic key
+// lookup. Reason: Vite's `define` in vite.config.ts substitutes these literals
+// at build time (so the browser bundle never references `process`, which is
+// undefined there). A dynamic `process.env[key]` would not be rewritten and
+// would crash on first render. In Jest, the same literals resolve to real
+// process.env values at runtime — no special config needed.
+function readEnv(name: string, value: string): string {
+  if (!value || value.length < 10 || value.includes('<') || value.includes('TODO')) {
+    throw new Error(`Missing ${name} — check .env`);
   }
   return value;
 }
 
-const url = readEnv('VITE_SUPABASE_URL');
-const anonKey = readEnv('VITE_SUPABASE_ANON_KEY');
+const url = readEnv('VITE_SUPABASE_URL', process.env.VITE_SUPABASE_URL ?? '');
+const anonKey = readEnv('VITE_SUPABASE_ANON_KEY', process.env.VITE_SUPABASE_ANON_KEY ?? '');
 
 // Default options: persistSession=true, storage=localStorage. The session
 // access_token therefore lives in localStorage and is reachable by any
