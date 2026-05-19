@@ -27,7 +27,6 @@
 | `npm run build`            | Build de produção do front (`web/`) via Vite                                                        |
 | `npm run build-storybook`  | Gera bundle estático do Storybook em `web/storybook-static/`                                        |
 | `npm run storybook`        | Storybook 8 em `localhost:6006` — bancada do design system                                          |
-| `npm run agentops:report`  | Gera relatórios AgentOps em docs/agentops/ (overview cross-flow + 1 file por flow)                  |
 | `npm run db:push`          | Aplica migrations Supabase no projeto remoto via `supabase db push`                                 |
 | `npm run db:reset`         | Reseta o DB local Supabase via `supabase db reset` (uso dev local)                                  |
 | `npm run db:migrate-local` | Roda script one-shot que cria user owner e migra `server/data/days/*.json` para Supabase (FEAT-030) |
@@ -84,11 +83,6 @@ Para detalhes de arquitetura, fluxos e modelo de dados, ver o [macro spec](docs/
 3. Coverage só sobe; nunca abaixar pra passar
 4. `console.error` em testes vira falha de teste (interceptor ativo no `jest.setup.js`)
 
-### AgentOps (PM/orchestrator)
-
-1. Cada entrada de `actual_dispatches[]` no `dispatch-manifest.json` **deve** carregar `usage` (`total_tokens`, `tool_uses`, `duration_ms`, `model`) e `pm_note` (1 linha resumindo o `summary_for_reviewers` do Output Packet). Sem isso, o report consumidor mostra `—` para tokens/$ /duração e os AC closures viram `missing` — o relatório fica inconsistente (ver FEAT-006). Estimar por proxy é aceitável; deixar `null` não é.
-2. Ao encerrar a sessão de orchestrator (handoff emitido / `current_phase: done`), **rodar `npm run agentops:report`** e commitar `docs/agentops/*.{md,html}` no mesmo commit do handoff. O Stop hook tenta auto-disparar (best-effort); a obrigação de garantir o report atualizado é do PM.
-
 ### Comunicação no GitHub
 
 1. **Sempre em inglês**: commits, mensagens de PR, título/descrição de issues, comments em PR. Conversas com o usuário, comentários no código (quando necessários) e docs internos seguem em PT-BR — só a superfície voltada ao GitHub é EN.
@@ -123,9 +117,6 @@ Para detalhes de arquitetura, fluxos e modelo de dados, ver o [macro spec](docs/
 ## Features ativas
 
 - `foundation` (FEAT-001) — em desenvolvimento
-- `agentops` (FEAT-002) — em desenvolvimento
-- `agentops-quality` (FEAT-003) — em desenvolvimento
-- `agentops-dashboard` (FEAT-004) — em desenvolvimento
 - `server-companion` (FEAT-006) — em desenvolvimento
 - `rich-text-line` (FEAT-007) — em desenvolvimento
 - `priorities` (FEAT-008) — em desenvolvimento
@@ -134,23 +125,3 @@ Para detalhes de arquitetura, fluxos e modelo de dados, ver o [macro spec](docs/
 - `notes` (FEAT-011) — em desenvolvimento
 - `daily-page` (FEAT-012) — em desenvolvimento
 - `energy` (FEAT-023) — em desenvolvimento
-
----
-
-## AgentOps reports
-
-Os relatórios em `docs/agentops/` são versionados (não estão no `.gitignore`) e devem ser commitados junto com o código.
-Para regenerá-los após alterações em `.agent-session/`, execute `npm run agentops:report`.
-
-A partir de FEAT-004, o comando gera **duas views por flow**:
-
-- `.md` — fonte canônica de dados (audit trail, consumível por ferramentas, GitHub render); **NÃO remover**.
-- `.html` — view recomendada para leitura humana: KPIs sticky, story timeline, drilldown collapsed, dark mode automático, GitHub Pages-friendly. Abrir com `open docs/agentops/index.html`.
-
-Arquivos gerados: `docs/agentops/index.md`, `docs/agentops/index.html`, `docs/agentops/<FEAT-ID>.md`, `docs/agentops/<FEAT-ID>.html`.
-
-A partir de FEAT-003, os reports incluem: seção **"Repo health"** (mutation score, type coverage %, dep violations) no topo do index e em cada per-flow report; seção **"Cost"** com estimativa USD/AC por flow; e `docs/architecture/dependency-graph.svg` gerado por `npm run arch:graph`.
-Dados de repo health lidos de `reports/` (gitignored) — rodar `npm run mutation && npm run type-coverage:json && npm run arch:check` antes do report para dados atualizados.
-
-Override de diretório HTML: `AGENTOPS_HTML_DIR=<path> npm run agentops:report` (default: mesmo que `docs/agentops/`).
-Referência: [`docs/specs/2026-05-08-mvp-overview.md`](docs/specs/2026-05-08-mvp-overview.md) — seção "Frente 1 — AgentOps".
