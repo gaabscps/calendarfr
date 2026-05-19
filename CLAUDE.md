@@ -83,6 +83,7 @@ Para detalhes de arquitetura, fluxos e modelo de dados, ver o [macro spec](docs/
 3. Coverage só sobe; nunca abaixar pra passar
 4. `console.error` em testes vira falha de teste (interceptor ativo no `jest.setup.js`)
 5. **Nunca enviesar testes pro happy path.** Pra cada comportamento testado, mapear as variáveis que influenciam o resultado (input vazio, malformado, no limite, fora do limite, concorrência, falha de rede, estado intermediário, cleanup, idempotência) e cobrir cada uma com um caso. Happy path sozinho não é teste — é demonstração. Test names devem descrever o comportamento variável ("returns X when Y is empty", não "works correctly"). Se o teste tem só assertion positiva, ainda falta caso.
+6. **Validação visual via Chrome MCP é obrigatória antes de entregar qualquer mudança que afete UI.** Subir o dev server (`npm run dev:web`), abrir a feature no browser via `mcp__Claude_in_Chrome__*` tools, executar o golden path e os edge cases manualmente, ler console e network pra detectar regressões silenciosas. Typecheck e Jest verificam corretude de código, não corretude do produto — se você não consegue clicar e ver funcionando, declare isso explicitamente ao invés de afirmar sucesso. Aplica a toda task com componente, route, gate, layout, animação ou auto-save.
 
 ### Comunicação no GitHub
 
