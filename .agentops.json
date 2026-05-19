@@ -1,6 +1,0 @@
-{
-  "sessionPrefix": ["FEAT-", "DISC-"],
-  "priorFlows": ["FEAT-001", "FEAT-002", "FEAT-003", "FEAT-004", "FEAT-005", "FEAT-006"],
-  "bypassFlows": ["FEAT-008"],
-  "reportCommand": "npm run agentops:report"
-}

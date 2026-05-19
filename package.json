@@ -12,7 +12,9 @@
     "shared"
   ],
   "scripts": {
-    "agentops:report": "npx agentops report",
+    "db:migrate-local": "tsx scripts/migrate-to-supabase.ts",
+    "db:push": "supabase db push",
+    "db:reset": "supabase db reset --linked",
     "mutation": "STRYKER_RUN=1 stryker run",
     "type-coverage": "type-coverage --strict --detail --at-least 95 --reportSemanticError",
     "arch:check": "depcruise --config .dependency-cruiser.cjs --output-type err web/src/ server/src/ test-utils/",
@@ -45,7 +47,6 @@
     ]
   },
   "devDependencies": {
-    "@ai-squad/agentops": "^0.1.0",
     "@commitlint/cli": "^19.8",
     "@commitlint/config-conventional": "^19.8",
     "@eslint/js": "^9.16",
@@ -64,6 +65,7 @@
     "@types/node": "^20.17",
     "concurrently": "^9.2",
     "dependency-cruiser": "^16.6",
+    "dotenv": "^16.4",
     "eslint": "^9.16",
     "eslint-import-resolver-typescript": "^3.7",
     "eslint-plugin-import": "^2.31",
@@ -80,6 +82,7 @@
     "marked": "^14.1.4",
     "msw": "^2.7",
     "prettier": "^3.4",
+    "supabase": "^1.200",
     "ts-jest": "^29.2",
     "tsx": "^4.19",
     "type-coverage": "^2.29",
